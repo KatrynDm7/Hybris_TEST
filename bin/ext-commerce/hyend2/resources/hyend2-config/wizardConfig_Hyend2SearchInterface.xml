@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wizard-config showPrefilledValues="false" selectMode="true" createMode="true" createWithinPopup="false" createWithinEditor="false">
+	<displayed-properties>
+		<group qualifier="Hyend2SearchInterfaceGeneralWizard" visible="true" initially-opened="true">
+			<label key="cockpit.config.label.General" />
+			<property qualifier="Hyend2SearchInterface.name"></property>		
+		</group>
+		
+		<group qualifier="Hyend2SearchIFAttributesConfWizard" visible="true" initially-opened="true">
+			<label key="hyend2.attributes" />
+			<property qualifier="Hyend2SearchInterface.attributes"></property>		
+		</group>
+	
+	</displayed-properties>
+</wizard-config>

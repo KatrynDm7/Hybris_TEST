@@ -1,0 +1,29 @@
+$comp=wc2010
+
+#last16
+update Match;id[unique=true];homeGoals;guestGoals;homeTeam(isocode);guestTeam(isocode);group(code,competition(code[default=$comp]))[unique=true]
+;49;2;1;URU;KOR;LAST16
+;50;1;2;USA;GHA;LAST16
+;51;4;1;GER;GBR;LAST16
+;52;3;1;ARG;MEX;LAST16
+;53;2;1;NLD;SVK;LAST16
+;54;3;0;BRA;CHL;LAST16
+;55;0;0;PAR;JPN;LAST16
+;56;1;0;ESP;POR;LAST16
+
+#quarters
+update Match;id[unique=true];homeGoals;guestGoals;homeTeam(isocode);guestTeam(isocode);group(code,competition(code[default=$comp]))[unique=true]
+;57;2;1;NLD;BRA;QUARTER
+;58;1;1;URU;GHA;QUARTER
+;59;0;4;ARG;GER;QUARTER
+;60;0;1;PAR;ESP;QUARTER
+
+#semi
+update Match;id[unique=true];homeGoals;guestGoals;homeTeam(isocode);guestTeam(isocode);group(code,competition(code[default=$comp]))[unique=true]
+;61;2;3;URU;NLD;SEMI
+;62;0;1;GER;ESP;SEMI
+
+#finals
+update Match;id[unique=true];homeGoals;guestGoals;homeTeam(isocode);guestTeam(isocode);group(code,competition(code[default=$comp]))[unique=true]
+;63;2;3;URU;GER;THIRD
+;64;0;1;NLD;ESP;FINAL

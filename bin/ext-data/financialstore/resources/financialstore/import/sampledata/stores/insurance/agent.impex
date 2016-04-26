@@ -1,0 +1,95 @@
+$storeUid=insurance
+$productCatalog=financialProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$thumbnail=thumbnail(code, $catalogVersion)
+$siteResource=jar:de.hybris.platform.financialstore.constants.FinancialStoreConstants&/financialstore/import/sampledata/productCatalogs/$productCatalog
+
+$passwordEncoding=md5
+$defaultPassword=1234
+$setPassword=@password[translator=de.hybris.platform.impex.jalo.translators.ConvertPlaintextToEncodedUserPasswordTranslator][default='$passwordEncoding:$defaultPassword']
+
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpg'];$catalogVersion;folder(qualifier)[forceWrite=true]
+;96Wx96H;/96Wx96H/96_96px_agent_default_image.png;$siteResource/images/96Wx96H/96_96px_agent_default_image.png;;;images
+;96Wx96H;/96Wx96H/96_96px_agent_1_M.png;$siteResource/images/96Wx96H/96_96px_agent_1_M.png;;;images
+;96Wx96H;/96Wx96H/96_96px_agent_2_M.png;$siteResource/images/96Wx96H/96_96px_agent_2_M.png;;;images
+;96Wx96H;/96Wx96H/96_96px_agent_3_M.png;$siteResource/images/96Wx96H/96_96px_agent_3_M.png;;;images
+;96Wx96H;/96Wx96H/96_96px_agent_4_F.png;$siteResource/images/96Wx96H/96_96px_agent_4_F.png;;;images
+;96Wx96H;/96Wx96H/96_96px_agent_5_F.png;$siteResource/images/96Wx96H/96_96px_agent_5_F.png;;;images
+
+INSERT_UPDATE UserGroup;UID[unique=true]
+;asagentgroup
+
+INSERT_UPDATE Agent;uid[unique=true];categories(code, $catalogVersion);name;$thumbnail[default='/96Wx96H/96_96px_agent_default_image.png'];groups(uid);$setPassword;
+;michael.clarke@insurance.com;insurances_property_homeowners,insurances_life;Michael Clarke;/96Wx96H/96_96px_agent_1_M.png;asagentgroup
+;blossom.welch@insurance.com;insurances_property_homeowners,insurances_life;Blossom Welch;/96Wx96H/96_96px_agent_4_F.png;asagentgroup
+;carson.shepherd@insurance.com;insurances_property_homeowners,insurances_life;Carson Shepherd;/96Wx96H/96_96px_agent_2_M.png;asagentgroup
+;xaviera.crawford@insurance.com;insurances_property_homeowners;Xaviera Crawford;/96Wx96H/96_96px_agent_5_F.png;asagentgroup
+;abra.christensen@insurance.com;insurances_property_homeowners;Abra Christensen;/96Wx96H/96_96px_agent_4_F.png;asagentgroup
+;hedley.mayer@insurance.com;insurances_property_renters,insurances_property_homeowners;Hedley Mayer;/96Wx96H/96_96px_agent_5_F.png;asagentgroup
+;ulysses.head@insurance.com;insurances_property_renters,insurances_property_homeowners;Ulysses Head;/96Wx96H/96_96px_agent_3_M.png;asagentgroup
+;yuri.chandler@insurance.com;insurances_property_renters,insurances_property_homeowners;Yuri Chandler;/96Wx96H/96_96px_agent_1_M.png;asagentgroup
+;evangeline.jefferson@insurance.com;insurances_property_renters;Evangeline Jefferson;/96Wx96H/96_96px_agent_4_F.png;asagentgroup
+;dean.barton@insurance.com;insurances_property_renters;Dean Barton;/96Wx96H/96_96px_agent_2_M.png;asagentgroup
+;aubrey.baxter@insurance.com;insurances_property_renters;Aubrey Baxter;/96Wx96H/96_96px_agent_5_F.png;asagentgroup
+;tag.demph@insurance.com;insurances_travel,insurances_auto;Tag Demph;/96Wx96H/96_96px_agent_1_M.png;asagentgroup
+;kelsie.spencer@insurance.com;insurances_travel,insurances_auto;Kelsie Spencer;/96Wx96H/96_96px_agent_4_F.png;asagentgroup
+;diana.best@insurance.com;insurances_travel,insurances_auto;Diana Best;/96Wx96H/96_96px_agent_5_F.png;asagentgroup
+;colt.ford@insurance.com;insurances_travel;Colt Ford;/96Wx96H/96_96px_agent_2_M.png;asagentgroup
+;aladdin.gentry@insurance.com;insurances_travel,insurances_event;Aladdin Gentry;/96Wx96H/96_96px_agent_3_M.png;asagentgroup
+;kadeem.gamble@insurance.com;insurances_travel,insurances_event;Kadeem Gamble;/96Wx96H/96_96px_agent_1_M.png;asagentgroup
+;amos.adkins@insurance.com;insurances_event;Amos Adkins;/96Wx96H/96_96px_agent_2_M.png;asagentgroup
+;deacon.fuller@insurance.com;insurances_event;Deacon Fuller;/96Wx96H/96_96px_agent_3_M.png;asagentgroup
+;burton.franco@insurance.com;insurances_event;Burton Franco;/96Wx96H/96_96px_agent_1_M.png;asagentgroup
+;patricia.anderson@insurance.com;insurances_event;Patricia Anderson;/96Wx96H/96_96px_agent_4_F.png;asagentgroup
+;kai.ratliff@insurance.com;insurances_event;Kai Ratliff;/96Wx96H/96_96px_agent_2_M.png;asagentgroup
+;indira.duffy@insurance.com;insurances_event;Indira Duffy;/96Wx96H/96_96px_agent_5_F.png;asagentgroup
+
+INSERT_UPDATE Address;&addrID;firstname;lastname;streetname[unique=true];town;region(country(isocode),isocode);country(isocode);postalcode[unique=true];email;fax;phone1;owner(Agent.uid)
+;Michael.Clarke;Michael;Clarke;164 Habitant St.;Newark;US:US-DE;US;62129;michael.clarke@insurance.com;(929) 972-9712;(197) 661-2821;michael.clarke@insurance.com
+;Blossom.Welch;Blossom;Welch;273-9316 Enim. Rd.;Evansville;US:US-IN;US;53005;blossom.welch@insurance.com;(310) 977-6367;(401) 793-6222;blossom.welch@insurance.com
+;Carson.Shepherd;Carson;Shepherd;6576 Vehicula Rd.;Georgia;US:US-GA;US;93784;carson.shepherd@insurance.com;(246) 373-4882;(956) 772-6664;carson.shepherd@insurance.com
+;Xaviera.Crawford;Xaviera;Crawford;2883 Mauris Avenue;Kansas City;US:US-MO;US;43685;xaviera.crawford@insurance.com;(222) 421-1920;(557) 688-5691;xaviera.crawford@insurance.com
+;Abra.Christensen;Abra;Christensen;7356 Id Road;Bowling Green;US:US-KY;US;49013;abra.christensen@insurance.com;(372) 859-6070;(522) 709-4897;abra.christensen@insurance.com
+;Hedley.Mayer;Hedley;Mayer;8360 Luctus Rd.;New Haven;US:US-CT;US;61757;hedley.mayer@insurance.com;(576) 822-8574;(943) 681-9269;hedley.mayer@insurance.com
+;Ulysses.Head;Ulysses;Head;926-5246 Laoreet Rd.;Rochester;US:US-MN;US;98154;ulysses.head@insurance.com;(680) 501-8011;(766) 873-9904;ulysses.head@insurance.com
+;Yuri.Chandler;Yuri;Chandler;3321 Natoque Avenue;Tampa;US:US-FL;US;43007;yuri.chandler@insurance.com;(516) 475-5259;(811) 509-9806;yuri.chandler@insurance.com
+;Evangeline.Jefferson;Evangeline;Jefferson;128-8719 Egestas. St.;Bridgeport;US:US-CT;US;12167;evangeline.jefferson@insurance.com;(897) 721-0493;(912) 945-6738;evangeline.jefferson@insurance.com
+;Dean.Barton;Dean;Barton;P.O. Box 773, 9166 Sapien. Rd.;Montgomery;US:US-AL;US;35865;dean.barton@insurance.com;(517) 589-8789;(876) 896-2206;dean.barton@insurance.com
+;Aubrey.Baxter;Aubrey;Baxter;571-4788 Porttitor Street;Bloomington;US:US-MN;US;28713;aubrey.baxter@insurance.com;(526) 428-7726;(631) 935-7508;aubrey.baxter@insurance.com
+;Tag.Demph;Nevada;Webster;725-4081 Non Rd.;Iowa City;US:US-IA;US;18377;tag.demph@insurance.com;(769) 468-1824;(656) 511-7162;tag.demph@insurance.com
+;Kelsie.Spencer;Kelsie;Spencer;Ap #649-7503 Et St.;Great Falls;US:US-MT;US;44352;kelsie.spencer@insurance.com;(289) 711-0531;(396) 371-7582;kelsie.spencer@insurance.com
+;Diana.Best;Diana;Best;Ap #996-4978 Inceptos Ave;Boston;US:US-MA;US;69910;diana.best@insurance.com;(101) 269-0038;(273) 259-2085;diana.best@insurance.com
+;Colt.Ford;Colt;Ford;329-8196 Et, Rd.;Harrisburg;US:US-PA;US;24746;colt.ford@insurance.com;(517) 367-4935;(271) 678-5589;colt.ford@insurance.com
+;Aladdin.Gentry;Aladdin;Gentry;1104 Etiam Ave;Juneau;US:US-AK;US;99931;aladdin.gentry@insurance.com;(484) 213-4638;(542) 561-5341;aladdin.gentry@insurance.com
+;Kadeem.Gamble;Kadeem;Gamble;444-9721 Vitae Avenue;Detroit;US:US-MI;US;61033;kadeem.gamble@insurance.com;(440) 447-2045;(288) 490-8436;kadeem.gamble@insurance.com
+;Amos.Adkins;Amos;Adkins;Ap #237-9088 Odio. Av.;Lowell;US:US-MA;US;82073;amos.adkins@insurance.com;(213) 358-6205;(866) 369-2740;amos.adkins@insurance.com
+;Deacon.Fuller;Deacon;Fuller;913-9533 Arcu. Ave;Bozeman;US:US-MT;US;98859;deacon.fuller@insurance.com;(864) 224-3072;(867) 890-0047;deacon.fuller@insurance.com
+;Burton.Franco;Burton;Franco;Ap #349-6497 Morbi Rd.;Rutland;US:US-VT;US;78780;burton.franco@insurance.com;(432) 990-9547;(206) 979-4205;burton.franco@insurance.com
+;Patricia.Anderson;Patricia;Anderson;8738 Neque. St.;Metairie;US:US-LA;US;89674;patricia.anderson@insurance.com;(362) 921-5314;(526) 210-4705;patricia.anderson@insurance.com
+;Kai.Ratliff;Kai;Ratliff;871-8314 Metus Av.;Montpelier;US:US-VT;US;62044;kai.ratliff@insurance.com;(761) 968-0272;(513) 780-9068;kai.ratliff@insurance.com
+;Indira.Duffy;Indira;Duffy;329-6141 A Rd.;St. Petersburg;US:US-FL;US;96035;indira.duffy@insurance.com;(605) 281-5403;(189) 124-8794;indira.duffy@insurance.com
+
+INSERT_UPDATE Agent;uid[unique=true];enquiry(&addrID)
+;michael.clarke@insurance.com;Michael.Clarke;
+;blossom.welch@insurance.com;Blossom.Welch
+;carson.shepherd@insurance.com;Carson.Shepherd
+;xaviera.crawford@insurance.com;Xaviera.Crawford
+;abra.christensen@insurance.com;Abra.Christensen
+;hedley.mayer@insurance.com;Hedley.Mayer
+;ulysses.head@insurance.com;Ulysses.Head
+;yuri.chandler@insurance.com;Yuri.Chandler
+;evangeline.jefferson@insurance.com;Evangeline.Jefferson
+;dean.barton@insurance.com;Dean.Barton
+;aubrey.baxter@insurance.com;Aubrey.Baxter
+;tag.demph@insurance.com;Tag.Demph
+;kelsie.spencer@insurance.com;Kelsie.Spencer
+;diana.best@insurance.com;Diana.Best
+;colt.ford@insurance.com;Colt.Ford
+;aladdin.gentry@insurance.com;Aladdin.Gentry
+;kadeem.gamble@insurance.com;Kadeem.Gamble
+;amos.adkins@insurance.com;Amos.Adkins
+;deacon.fuller@insurance.com;Deacon.Fuller
+;burton.franco@insurance.com;Burton.Franco
+;patricia.anderson@insurance.com;Patricia.Anderson
+;kai.ratliff@insurance.com;Kai.Ratliff
+;indira.duffy@insurance.com;Indira.Duffy

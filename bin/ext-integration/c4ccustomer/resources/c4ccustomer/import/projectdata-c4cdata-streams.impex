@@ -1,0 +1,35 @@
+INSERT_UPDATE Y2YStreamConfigurationContainer;id[unique=true];catalogVersion(catalog(id),version);
+;c4cSyncCustomers;;
+
+INSERT_UPDATE Y2YStreamConfiguration;streamId[unique=true];container(id);itemTypeForStream(code);whereClause;catalogVersion(catalog(id),version);active[default=true];infoExpression[default=''];
+;c4cCustomerStream;c4cSyncCustomers;Customer;"TRUE";"";;;
+;c4cAddressStream;c4cSyncCustomers;Address;"EXISTS({{SELECT {customer.PK} FROM {Customer as customer} WHERE {item.owner}={customer.PK}}})";;;;
+INSERT_UPDATE Y2YColumnDefinition;position[unique=true];attributeDescriptor(enclosingType(code),qualifier);impexHeader;streamConfiguration(streamId)[unique=true];columnName;
+# Customer column definitions
+;0;Customer:uid;uid[unique=true];c4cCustomerStream;email;
+;1;Customer:customerID;customerID;c4cCustomerStream;customerId;
+;2;Customer:name;name;c4cCustomerStream;name;
+;3;Customer:addresses;addresses(Address.PK);c4cCustomerStream;addresses;
+;4;Customer:defaultShipmentAddress;defaultShipmentAddress;c4cCustomerStream;shippingAddressId;
+;5;Customer:defaultPaymentAddress;defaultPaymentAddress;c4cCustomerStream;billingAddressId;
+# Address column definitions
+;0;Address:town;town;c4cAddressStream;town;
+;1;Address:country;country(isocode);c4cAddressStream;country;
+;2;Address:postalcode;postalCode;c4cAddressStream;postalCode;
+;3;Address:owner;owner(Customer.customerID)[unique=true];c4cAddressStream;customerId;
+;4;Address:streetname;streetname;c4cAddressStream;streetName;
+;6;Address:pk;pk[unique=true];c4cAddressStream;addressId;
+;7;Address:email;email;c4cAddressStream;email;
+;8;Address:phone1;phone1;c4cAddressStream;phone1;
+;9;Address:phone2;phone2;c4cAddressStream;phone2;
+;10;Address:fax;fax;c4cAddressStream;fax;
+;11;Address:cellphone;cellphone;c4cAddressStream;cellphone;
+;12;Address:streetnumber;streetnumber;c4cAddressStream;streetNumber;
+;13;Address:pobox;pobox;c4cAddressStream;pobox;
+;14;Address:district;district;c4cAddressStream;district;
+
+INSERT_UPDATE Y2YSyncJob;code[unique=true];streamConfigurationContainer(id);springId;syncType(code)
+;c4cCustomerSyncJob;c4cSyncCustomers;c4cSyncMasterJobPerformable;DataHub
+
+INSERT_UPDATE Y2YSyncCronJob;code[unique=true];singleExecutable;job(code);sessionLanguage(isocode)
+;c4cSyncToDataHubCustomersCronJob;false;c4cCustomerSyncJob;en

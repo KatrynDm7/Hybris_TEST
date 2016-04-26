@@ -1,0 +1,240 @@
+*** Settings ***
+Library           de.hybris.platform.atddimpex.keywords.ImpexKeywordLibrary
+Library           de.hybris.platform.commerceservicesatddtests.keywords.CommerceServicesKeywordLibrary
+Library           de.hybris.platform.commercesearch.atdd.keywords.CommerceSearchKeywordLibrary
+Resource		  impex/Impex_Keywords.txt
+Resource		  commerce/CommerceServices_Keywords.txt
+Resource		  commercesearch/CommerceSearch_Keywords.txt
+Test Setup		  commercesearch suite setup
+Test Teardown	  commercesearch suite teardown
+
+
+*** Test Cases ***
+Should_Change_Facet_Order_By_Category
+	[Documentation]		Check that the facet order for a category can be changed without affecting other (non-child) categories
+	prepare session	electronics
+   create product "P1" in category "575,brand_1" with price "99,99 USD"
+   create product "P2" in category "575,brand_2" with price "109,99 USD"
+   create product "P3" in category "575,brand_5" with price "119,99 USD"
+   create product "P4" in category "574,brand_1" with price "99,99 USD"
+   create product "P5" in category "574,brand_2" with price "109,99 USD"
+   create product "P6" in category "574,brand_5" with price "119,99 USD"
+   update solr index
+	check that facet "brand" is at position 1 in category "574"
+	check that facet "price" is at position 2 in category "574"
+	check that facet "brand" is at position 1 in category "575"
+	check that facet "price" is at position 2 in category "575"
+
+	create guided navigation for category "575"
+	give facet "price" the priority 100000 in category "575"
+	give facet "brand" the priority 90000 in category "575"
+
+	check that facet "brand" is at position 1 in category "574"
+	check that facet "price" is at position 2 in category "574"
+	check that facet "price" is at position 1 in category "575"
+	check that facet "brand" is at position 2 in category "575"
+
+
+Should_Make_Facet_Invisible_For_Global_Configuration
+	[Documentation]		Check that facet can be make invisible
+	prepare session	electronics
+   create product "P1" in category "575,brand_1" with price "99,99 USD"
+   create product "P2" in category "575,brand_2" with price "109,99 USD"
+   create product "P3" in category "575,brand_5" with price "119,99 USD"
+   create product "P4" in category "574,brand_1" with price "99,99 USD"
+   create product "P5" in category "574,brand_2" with price "109,99 USD"
+   create product "P6" in category "574,brand_5" with price "119,99 USD"
+   update solr index
+	check that facet "brand" is visible for the global configuration
+
+	toggle facet "brand" visibility globally
+
+	check that facet "brand" is invisible for the global configuration
+
+
+Should_Make_Facet_Visible_For_Global_Configuration
+	[Documentation]		Check that facet can be make visible
+	prepare session	electronics
+   create product "P1" in category "575,brand_1" with price "99,99 USD"
+   create product "P2" in category "575,brand_2" with price "109,99 USD"
+   create product "P3" in category "575,brand_5" with price "119,99 USD"
+   create product "P4" in category "574,brand_1" with price "99,99 USD"
+   create product "P5" in category "574,brand_2" with price "109,99 USD"
+   create product "P6" in category "574,brand_5" with price "119,99 USD"
+   update solr index
+	check that facet "brand" is visible for the global configuration
+	toggle facet "brand" visibility globally
+	check that facet "brand" is invisible for the global configuration
+
+	toggle facet "brand" visibility globally
+
+	check that facet "brand" is visible for the global configuration
+
+
+Should_Make_Facet_Invisible_For_A_Given_Category
+   [Documentation]		Check that facet can be make invisible for a category
+	prepare session	electronics
+	create product "P1" in category "575,brand_1" with price "99,99 USD"
+	create product "P2" in category "575,brand_2" with price "109,99 USD"
+	create product "P3" in category "575,brand_5" with price "119,99 USD"
+	create product "P4" in category "574,brand_1" with price "99,99 USD"
+	create product "P5" in category "574,brand_2" with price "109,99 USD"
+	create product "P6" in category "574,brand_5" with price "119,99 USD"
+	update solr index
+	check that facet "brand" is visible for category "574"
+	check that facet "brand" is visible for category "575"
+
+	toggle facet "brand" visibility for category "574"
+
+	check that facet "brand" is invisible for category "574"
+	check that facet "brand" is visible for category "575"
+	check that facet "brand" is visible for the global configuration
+
+
+Should_Make_Facet_Visible_For_A_Given_Category
+   [Documentation]		Check that facet can be make visible for a category
+	prepare session	electronics
+	create product "P1" in category "575,brand_1" with price "99,99 USD"
+	create product "P2" in category "575,brand_2" with price "109,99 USD"
+	create product "P3" in category "575,brand_5" with price "119,99 USD"
+	create product "P4" in category "574,brand_1" with price "99,99 USD"
+	create product "P5" in category "574,brand_2" with price "109,99 USD"
+	create product "P6" in category "574,brand_5" with price "119,99 USD"
+	update solr index
+	check that facet "brand" is visible for category "574"
+	toggle facet "brand" visibility for category "574"
+	check that facet "brand" is invisible for category "574"
+
+	toggle facet "brand" visibility for category "574"
+
+	check that facet "brand" is visible for category "574"
+
+
+Should_Retain_Category_Order_Config_When_Global_Facet_Order_Changed
+	[Documentation]		Check that the facet order for a category is preserved when explicitly defined, even if the global order is changed
+	prepare session	electronics
+	create product "P1" in category "575,brand_1" with price "99,99 USD"
+   create product "P2" in category "575,brand_2" with price "109,99 USD"
+	create product "P3" in category "575,brand_5" with price "119,99 USD"
+	create product "P4" in category "574,brand_1" with price "99,99 USD"
+	create product "P5" in category "574,brand_2" with price "109,99 USD"
+	create product "P6" in category "574,brand_5" with price "119,99 USD"
+	update solr index
+	check that facet "brand" is at position 1 in category "574"
+	check that facet "price" is at position 2 in category "574"
+	check that facet "brand" is at position 1 in category "575"
+	check that facet "price" is at position 2 in category "575"
+
+	create guided navigation for category "575"
+	give facet "brand" the priority 100000 in category "575"
+	give facet "price" the priority 90000 in category "575"
+	give facet "price" the priority 100000 globally
+	give facet "brand" the priority 90000 globally
+
+	check that facet "price" is at position 1 in category "574"
+	check that facet "brand" is at position 2 in category "574"
+	check that facet "brand" is at position 1 in category "575"
+	check that facet "price" is at position 2 in category "575"
+	
+
+Should_Inherit_Category_Reconfiguration_From_Supercategory
+	[Documentation]		Check that the facet order for a category is inherited by subcategories
+	prepare session	electronics
+	create product "P1" in category "585,brand_1" with price "99,99 USD"
+   create product "P2" in category "585,brand_2" with price "109,99 USD"
+   create product "P3" in category "586,brand_5" with price "119,99 USD"
+   create product "P4" in category "586,brand_1" with price "99,99 USD"
+   update solr index
+   check that facet "category" is at position 1 in category "585"
+   check that facet "brand" is at position 2 in category "585"
+   check that facet "price" is at position 3 in category "585"
+   check that facet "brand" is at position 1 in category "586"
+   check that facet "price" is at position 2 in category "586"
+
+   move facet "price" above "brand" in category "585"
+
+   check that facet "price" is at position 2 in category "585"
+   check that facet "price" is at position 1 in category "586"
+
+
+Should_Overwrite_Inherited_Reconfigurations
+	[Documentation]		Check that the facet reorder can be overwritten in subcategories
+	prepare session	electronics
+   create product "P1" in category "585,brand_1" with price "99,99 USD"
+   create product "P2" in category "585,brand_2" with price "109,99 USD"
+   create product "P3" in category "586,brand_5" with price "119,99 USD"
+   create product "P4" in category "586,brand_1" with price "99,99 USD"
+   update solr index
+   check that facet "category" is at position 1 in category "585"
+	check that facet "brand" is at position 2 in category "585"
+	check that facet "price" is at position 3 in category "585"
+	check that facet "brand" is at position 1 in category "586"
+	check that facet "price" is at position 2 in category "586"
+
+	move facet "price" above "category" in category "585"
+	move facet "brand" above "price" in category "586"
+
+	check that facet "price" is at position 1 in category "585"
+	check that facet "brand" is at position 1 in category "586"
+	check that facet "price" is at position 2 in category "586"
+
+
+Should_Move_Facet_Below_Other_Facet_for_Category
+	[Documentation]		Check that the facet can be moved below other facet in category
+	prepare session	electronics
+	create product "P1" in category "575,brand_1" with price "99,99 USD"
+	create product "P2" in category "575,brand_2" with price "109,99 USD"
+	create product "P3" in category "575,brand_5" with price "119,99 USD"
+	create product "P4" in category "574,brand_1" with price "99,99 USD"
+	create product "P5" in category "574,brand_2" with price "109,99 USD"
+	create product "P6" in category "574,brand_5" with price "119,99 USD"
+   update solr index
+	check that facet "brand" is at position 1 in category "574"
+	check that facet "price" is at position 2 in category "574"
+
+	move facet "brand" below "price" in category "574"
+
+	check that facet "brand" is at position 2 in category "574"
+   check that facet "price" is at position 1 in category "574"
+
+
+Should_Move_Facet_Above_Other_Facet_for_Category
+	[Documentation]		Check that the facet can be moved above other facet in category
+	prepare session	electronics
+	create product "P1" in category "575,brand_1" with price "99,99 USD"
+   create product "P2" in category "575,brand_2" with price "109,99 USD"
+   create product "P3" in category "575,brand_5" with price "119,99 USD"
+   create product "P4" in category "574,brand_1" with price "99,99 USD"
+   create product "P5" in category "574,brand_2" with price "109,99 USD"
+   create product "P6" in category "574,brand_5" with price "119,99 USD"
+   update solr index
+	check that facet "brand" is at position 1 in category "574"
+	check that facet "price" is at position 2 in category "574"
+
+	move facet "price" above "brand" in category "574"
+
+	check that facet "brand" is at position 2 in category "574"
+   check that facet "price" is at position 1 in category "574"
+
+
+Should_Move_Facet_Above_Other_Facet_Globally
+	[Documentation]		Check that the facet can be moved above globally
+	prepare session	electronics
+	create product "P1" in category "571,brand_1" with price "99,99 USD"
+   create product "P2" in category "571,brand_2" with price "109,99 USD"
+   create product "P3" in category "571,brand_5" with price "119,99 USD"
+   create product "P4" in category "574,brand_1" with price "99,99 USD"
+   create product "P5" in category "574,brand_2" with price "109,99 USD"
+   create product "P6" in category "574,brand_5" with price "119,99 USD"
+   update solr index
+   check that facet "category" is at position 1 in category "571"
+   check that facet "brand" is at position 2 in category "571"
+   check that facet "price" is at position 3 in category "571"
+
+   move global facet "price" above "category"
+
+   check that facet "price" is at position 1 in category "571"
+   check that facet "category" is at position 2 in category "571"
+   check that facet "brand" is at position 3 in category "571"
+   check that facet "price" is at position 1 in category "574"
+   check that facet "brand" is at position 2 in category "574"

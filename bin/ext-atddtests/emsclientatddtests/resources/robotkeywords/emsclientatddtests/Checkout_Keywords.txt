@@ -1,0 +1,13 @@
+*** Settings ***
+Library    de.hybris.platform.emsclientatddtests.keywords.emsclient.CheckoutKeywordLibrary
+
+
+*** Keywords ***
+Set payment and delivery details for current customer
+    [Documentation]    Update credit card info and post address of currently logged in customer, so it is possible to do checkout
+	update user details
+
+Do checkout for current customer
+    [Documentation]    Perform checkout for customer who is currently logged in
+    do checkout
+

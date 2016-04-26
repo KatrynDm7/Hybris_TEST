@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<!--
+	file:	 gridtypes.xml
+-->
+<gridtypes>
+	<gridtype>
+		<id>1</id>
+		<name>7er Seite</name>
+	</gridtype>
+	<gridtype>
+		<id>2</id>
+		<name>9er Seite</name>
+	</gridtype>
+	<gridtype>
+		<id>3</id>
+		<name>Deckblatt</name>
+	</gridtype>
+	<gridtype>
+		<id>4</id>
+		<name>3x5</name>
+	</gridtype>
+</gridtypes>

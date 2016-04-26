@@ -1,0 +1,201 @@
+.guided-selling-headline {
+    font-size: 1.714em;
+    font-weight: 700;
+    margin-bottom: 45px;
+}
+/* facet Navigation */
+.facetNavigation {
+    margin-right: 30px;
+}
+.facetNavigation .headline {
+    font-size: 1em;
+    background-color: #f0efec;
+    border-bottom: none;
+    padding-left: 10px;
+}
+.facetNavigation .facet .facetHead {
+    border-bottom: 1px solid #dbdad7;
+}
+.facetNavigation .facet .facetHead .refinementToggle {
+    font-size: 1em;
+    text-transform: none;
+    line-height: 2.857em;
+}
+.facetNavigation .facetValues ul.facet_block li label, .facetNavigation .facetValues ul.facet_block li a {
+    font-size: .928em;
+    color: #484848;
+}
+.facetNavigation .facetValues ul.facet_block li:first-child {
+    padding-top: 10px;
+}
+.facetNavigation .facetValues ul.facet_block li .facetValueCount {
+    color: #999999;
+    font-size: .857em;
+    font-style: normal;
+}
+.facetNavigation .facetValues ul.facet_block .facet_block-label input {
+    margin: 2px 8px 3px 0;
+}
+.facetNavigation .facetValues ul.facet_block li.remove_item_left {
+    border-bottom: 1px solid #dbdad7;
+}
+.facetNavigation .facet_block .remove_item_left:last-child {
+    margin-bottom: 65px;
+}
+.facetNavigation .storesFacetSearchForm .storesFacetSearchSubmit {
+    background-image: url("../images/telco_sprite.png");
+    background-position: -28px -229px;
+    margin-top: 11px;
+}
+/* facet Navigation end */
+
+
+.span-18.last.searchlist-results {
+    width: 730px;
+}
+
+
+/* addon step - guided selling */
+.page-bundleselection-extra .span-20 {
+    width: 100%;
+}
+.prod_add_to_cart_box {
+    font-size: 1.143em;
+    line-height: 1.25em;
+    border: 1px solid #dbdad7;
+    padding: 15px 25px 0;
+}
+.prod_add_to_cart_box + .prod_add_to_cart_box,
+.prod_add_to_cart_box_buttons + .prod_add_to_cart_box {
+    margin-top: 25px;
+}
+.prod_add_to_cart_box h2 {
+    font-size: 1em;
+    font-weight: 700;
+    margin: 0;
+    padding-bottom: 15px;
+    color: #484848;
+}
+.prod_add_to_cart_box h2 .review_area {
+    float: right;
+    line-height: 1.5em;
+    margin: 0;
+    padding: 0;
+}
+.prod_add_to_cart_box .description {
+    color: #999;
+}
+/* expanded box */
+#box_expanded {
+    border: 1px solid #999;
+    padding-bottom: 15px;
+}
+#box_expanded  h2 {
+    border-bottom: 1px solid #dbdad7;
+    margin-bottom: 0.75em;
+}
+#box_expanded tr:first-child td {
+    border-top: none;
+}
+#box_expanded tr:last-child td {
+    padding-bottom: 15px;
+}
+/* table in the boxes */
+.prod_add_bundle-table {
+    width: 100%;
+    table-layout: fixed;
+}
+.prod_add_to_cart-table-td2 {
+    width: 10%;
+    text-align: right;
+}
+.prod_add_to_cart-table-td3 {
+    width: 16%;
+}
+.prod_add_bundle-table td {
+    border-top: 1px solid #dbdad7;
+    vertical-align: top;
+    padding: 25px 0;
+}
+.prod_add_bundle-table h3 {
+    font-size: 1em;
+    font-weight: 700;
+    line-height: 1.25em;
+    margin-bottom: 0;
+    color: #484848;
+}
+.prod_add_bundle-table p {
+    margin: 0;
+}
+.prod_add_bundle-table del {
+    color: #484848;
+}
+.prod_add_bundle-table .expand_price {
+    font-size: 1.125em;
+}
+.prod_add_bundle-table .frequency {
+    font-size: .8125em;
+    color: #999;
+}
+.prod_add_bundle-table .positive,
+.prod_add_bundle-table .negative {
+    margin: -3px 0 0;
+    float: right;
+}
+.prod_add_bundle-table .negative {
+    padding: 10px 25px 0 0;
+}
+.telco-tooltip-container {
+    position: relative;
+}
+.telco-tooltip-container:hover .telco-tooltip {
+    display: block;
+}
+.telco-tooltip {
+    font-size: .8125em;
+    color: #999;
+    background-color: #fff;
+    border: 1px solid #dbdad7;
+    box-shadow: 0 0 5px rgba(50, 50, 50, 0.4);
+    display: none;
+    max-width: 155px;
+    padding: 5px 10px;
+    position: absolute;
+    right: -140px;
+    top: 15px;
+    z-index: 100000;
+}
+/* huge buttons continue and im done*/
+.prod_add_to_cart_box_buttons {
+    border-right: 1px solid #999;
+    border-bottom: 1px solid #999;
+    border-left: 1px solid #999;
+    font-weight: 700;
+    text-align: center;
+    margin-top: -1px;
+}
+.imdone_step-container {
+    text-align: center;
+    font-weight: 700;
+    margin-top: 65px;
+}
+.prod_add_to_cart_box_buttons a,
+.imdone_step-container .imdone_step {
+    padding: 13px 0;
+    display: block;
+}
+.prod_add_to_cart_box_buttons a {
+    background-color: #0073e4;
+    color: #fff;
+}
+.prod_add_to_cart_box_buttons a:hover {
+    background-color: #177de3;
+}
+.imdone_step-container .imdone_step {
+    background-color: #ffb800;
+    color: #000;
+}
+.imdone_step-container .imdone_step:hover {
+    background-color: #ffcb47;
+    color: #000;
+}

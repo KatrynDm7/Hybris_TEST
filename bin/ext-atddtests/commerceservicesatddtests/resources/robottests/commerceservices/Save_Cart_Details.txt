@@ -1,0 +1,131 @@
+*** Settings ***
+Resource          commerce/CommerceServices_Keywords.txt
+Test Setup        import commerce sample data
+
+*** Variables ***
+
+### user and site:
+
+${customerId}=    testuser@saved-carts.com
+${customerId2}=    testuser2@saved-carts.com
+${saveCartName1}=    Saved Cart 1
+${saveCartDescription1}=    This is a saved cart
+${saveCartName2}=    Saved Cart 2
+${saveCartDescription2}=    This is an another saved cart
+${expirationDays}=    30
+
+*** Test Cases ***  
+
+Test_Save_Cart_Details_Retrieve_CartDetails_WrongCode
+ 	 Run Keyword And Expect Error    CommerceSaveCartException: Cannot find a cart for code*
+    ...    retrieve saved cart with code "wrongCode"
+    
+Test_Save_Cart_Details_Retrieve_CartDetails_EmptyCode
+ 	 Run Keyword And Expect Error    CommerceSaveCartException: Cart code cannot be empty*
+    ...    retrieve saved cart with code "${EMPTY}"
+    
+Test_Save_Cart_Details_Retrieve_CartDetails_SingleCart
+    create customer "${customerId}" with currency "USD"
+    ${sessionCart}=    get session cart
+    Should Be Equal    ${sessionCart.name}    ${null}
+	Should Be Equal    ${sessionCart.description}    ${null}
+	Should Be Equal    ${sessionCart.saveTime}    ${null}
+	Should Be Equal    ${sessionCart.savedBy}    ${null}
+	Should Be Equal    ${sessionCart.expirationTime}    ${null}
+    login customer with id "${customerId}"
+    ${savedCart}=    save cart with name "${saveCartName1}" and description "${saveCartDescription1}"
+    ${retrievedCart}=    retrieve saved cart with code "${savedCart.code}"
+    Should be Equal    ${retrievedCart.name}   ${saveCartName1}
+    Should be Equal    ${retrievedCart.description}   ${saveCartDescription1}
+	Should Not Be Equal    ${retrievedCart.saveTime}    ${null}
+	Should be Equal    ${retrievedCart.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${retrievedCart.expirationTime}    ${null}
+	verify that date "${retrievedCart.expirationTime}" is "${expirationDays}" days later than date "${retrievedCart.saveTime}"
+	Should be Equal    ${retrievedCart.saveTime}   ${savedCart.saveTime}
+	Should be Equal    ${retrievedCart.expirationTime}   ${savedCart.expirationTime}
+	
+Test_Save_Cart_Details_Retrieve_CartDetails_MultipleCarts
+	[Documentation]    Testing: 
+	create customer "${customerId}" with currency "USD"
+	${sessionCart1}=    get session cart
+	login customer with id "${customerId}"
+	${savedCart1}=    save cart with name "${saveCartName1}" and description "${saveCartDescription1}"
+	${sessionCart2}=    create new session cart
+	${savedCart2}=    save cart with name "${saveCartName2}" and description "${saveCartDescription2}"
+	${sessionCart3}=    create new session cart
+	${savedCart3}=    save cart with name "CartNameNo3" and description "CartNo3Description"
+	${sessionCart4}=    create new session cart
+	${savedCart4}=    save cart with name "${EMPTY}" and description "${EMPTY}"
+	# Retrieving Saved Carts Detail:
+    ${retrievedCart1}=    retrieve saved cart with code "${savedCart1.code}"
+    ${retrievedCart2}=    retrieve saved cart with code "${savedCart2.code}"
+    ${retrievedCart3}=    retrieve saved cart with code "${savedCart3.code}"
+    ${retrievedCart4}=    retrieve saved cart with code "${savedCart4.code}"	
+	# Verify Retrieve savedCart1:
+	Should be Equal    ${retrievedCart1.name}   ${saveCartName1}
+	Should be Equal    ${retrievedCart1.description}   ${saveCartDescription1}
+	Should be Equal    ${retrievedCart1.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${retrievedCart1.saveTime}    ${null}
+	Should Not Be Equal    ${retrievedCart1.expirationTime}    ${null}
+	verify that date "${retrievedCart1.expirationTime}" is "${expirationDays}" days later than date "${retrievedCart1.saveTime}"
+	Should be Equal    ${retrievedCart1.saveTime}   ${savedCart1.saveTime}
+	Should be Equal    ${retrievedCart1.expirationTime}   ${savedCart1.expirationTime}	
+	# Verify Retrieve savedCart2:
+	Should be Equal    ${retrievedCart2.name}   ${saveCartName2}
+	Should be Equal    ${retrievedCart2.description}   ${saveCartDescription2}
+	Should be Equal    ${retrievedCart2.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${retrievedCart2.saveTime}    ${null}
+	Should Not Be Equal    ${retrievedCart2.expirationTime}    ${null}
+	verify that date "${retrievedCart2.expirationTime}" is "${expirationDays}" days later than date "${retrievedCart2.saveTime}"
+	Should be Equal    ${retrievedCart2.saveTime}   ${savedCart2.saveTime}
+	Should be Equal    ${retrievedCart2.expirationTime}   ${savedCart2.expirationTime}	
+	# Verify Retrieve savedCart3:
+	Should be Equal    ${retrievedCart3.name}   CartNameNo3
+	Should be Equal    ${retrievedCart3.description}   CartNo3Description
+	Should be Equal    ${retrievedCart3.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${retrievedCart3.saveTime}    ${null}
+	Should Not Be Equal    ${retrievedCart3.expirationTime}    ${null}
+	verify that date "${retrievedCart3.expirationTime}" is "${expirationDays}" days later than date "${retrievedCart3.saveTime}"
+	Should be Equal    ${retrievedCart3.saveTime}   ${savedCart3.saveTime}
+	Should be Equal    ${retrievedCart3.expirationTime}   ${savedCart3.expirationTime}	
+	# Verify Retrieve savedCart4:
+	Should Match Regexp    ${retrievedCart4.name}   \\d{8}
+	Should be Equal    ${retrievedCart4.description}   -
+	Should be Equal    ${retrievedCart4.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${retrievedCart4.saveTime}    ${null}
+	Should Not Be Equal    ${retrievedCart4.expirationTime}    ${null}
+	verify that date "${retrievedCart4.expirationTime}" is "${expirationDays}" days later than date "${retrievedCart4.saveTime}"
+	Should be Equal    ${retrievedCart4.saveTime}   ${savedCart4.saveTime}
+	Should be Equal    ${retrievedCart4.expirationTime}   ${savedCart4.expirationTime}
+	
+Test_Save_Cart_Details_Retrieve_CartDetails_MultipleCustomers
+	[Documentation]    Testing: 
+	create customer "${customerId}" with currency "USD"
+	create customer "${customerId2}" with currency "USD"	
+	${sessionCart1}=    get session cart
+	login customer with id "${customerId}"
+	${savedCart1}=    save cart with name "${saveCartName1}" and description "${saveCartDescription1}"
+	login customer with id "${customerId2}"	
+	${sessionCart2}=    create new session cart
+	${savedCart2}=    save cart with name "${saveCartName2}" and description "${saveCartDescription2}"
+	# Retrieving Saved Carts Detail:
+    ${retrievedCart1}=    retrieve saved cart with code "${savedCart1.code}"
+    ${retrievedCart2}=    retrieve saved cart with code "${savedCart2.code}"
+	# Verify Retrieve savedCart1:
+	Should be Equal    ${retrievedCart1.name}   ${saveCartName1}
+	Should be Equal    ${retrievedCart1.description}   ${saveCartDescription1}
+	Should be Equal    ${retrievedCart1.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${retrievedCart1.saveTime}    ${null}
+	Should Not Be Equal    ${retrievedCart1.expirationTime}    ${null}
+	verify that date "${retrievedCart1.expirationTime}" is "${expirationDays}" days later than date "${retrievedCart1.saveTime}"
+	Should be Equal    ${retrievedCart1.saveTime}   ${savedCart1.saveTime}
+	Should be Equal    ${retrievedCart1.expirationTime}   ${savedCart1.expirationTime}	
+	# Verify Retrieve savedCart2:
+	Should be Equal    ${retrievedCart2.name}   ${saveCartName2}
+	Should be Equal    ${retrievedCart2.description}   ${saveCartDescription2}
+	Should be Equal    ${retrievedCart2.savedBy.uid}   ${customerId2}
+	Should Not Be Equal    ${retrievedCart2.saveTime}    ${null}
+	Should Not Be Equal    ${retrievedCart2.expirationTime}    ${null}
+	verify that date "${retrievedCart2.expirationTime}" is "${expirationDays}" days later than date "${retrievedCart2.saveTime}"
+	Should be Equal    ${retrievedCart2.saveTime}   ${savedCart2.saveTime}
+	Should be Equal    ${retrievedCart2.expirationTime}   ${savedCart2.expirationTime}

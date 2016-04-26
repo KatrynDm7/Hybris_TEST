@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd" >
+
+    <context:annotation-config />
+
+	<alias name="defaultGetYFormDefinitionsForProductStrategy" alias="getYFormDefinitionsForProductStrategy"/>
+	<bean name="defaultGetYFormDefinitionsForProductStrategy" class="de.hybris.platform.xyformsfacades.strategy.GetYFormDefinitionsForProductStrategy" />
+	
+	<alias name="defaultYFormFacade" alias="yFormFacade"/>
+	<bean name="defaultYFormFacade" class="de.hybris.platform.xyformsfacades.form.impl.DefaultYFormFacade">
+	</bean>
+
+   <alias name="defaultProxyFacade" alias="proxyFacade" />
+   <bean id="defaultProxyFacade" class="de.hybris.platform.xyformsfacades.proxy.impl.DefaultProxyFacade">
+   </bean>
+
+	<bean name="yFormDataData" class="de.hybris.platform.xyformsfacades.data.YFormDataData" scope="prototype"/>
+
+    <alias name="defaultYFormDataConverter" alias="yformDataConverter"/>
+    <bean id="defaultYFormDataConverter" parent="abstractPopulatingConverter">
+        <lookup-method name="createTarget" bean="yFormDataData"/>
+        <property name="populators">
+            <list>
+                <ref bean="yformDataPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultYFormDataPopulator" alias="yformDataPopulator"/>
+    <bean id="defaultYFormDataPopulator"
+          class="de.hybris.platform.xyformsfacades.form.converters.populator.YFormDataPopulator">
+    </bean>
+
+    <bean name="yFormDefinitionData" class="de.hybris.platform.xyformsfacades.data.YFormDefinitionData" scope="prototype"/>
+
+    <alias name="defaultYFormDefinitionConverter" alias="yformDefinitionConverter"/>
+    <bean id="defaultYFormDefinitionConverter" parent="abstractPopulatingConverter">
+        <lookup-method name="createTarget" bean="yFormDefinitionData"/>
+        <property name="populators">
+            <list>
+                <ref bean="yformDefinitionPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultYFormDefinitionPopulator" alias="yformDefinitionPopulator"/>
+    <bean id="defaultYFormDefinitionPopulator"
+          class="de.hybris.platform.xyformsfacades.form.converters.populator.YFormDefinitionPopulator">
+    </bean>
+    
+    <!-- Some useful definitions for Preprocessing -->
+    <alias name="defaultEmptyYFormPreprocessorStrategy" alias="emptyYFormPreprocessorStrategy"/>
+    <bean id="defaultEmptyYFormPreprocessorStrategy"
+          class="de.hybris.platform.xyformsfacades.strategy.preprocessor.EmptyYFormPreprocessorStrategy">
+    </bean>
+
+    <alias name="defaultEmptyTransformerYFormPreprocessorStrategy" alias="emptyTransformerYFormPreprocessorStrategy"/>
+    <bean id="defaultEmptyTransformerYFormPreprocessorStrategy"
+          class="de.hybris.platform.xyformsfacades.strategy.preprocessor.EmptyTransformerYFormPreprocessorStrategy">
+    </bean>
+
+    <alias name="defaultXsltTransformerYFormPreprocessorStrategy" alias="xsltTransformerYFormPreprocessorStrategy"/>
+    <bean id="defaultXsltTransformerYFormPreprocessorStrategy"
+          class="de.hybris.platform.xyformsfacades.strategy.preprocessor.XsltTransformerYFormPreprocessorStrategy">
+    </bean>
+
+    <alias name="defaultReferenceIdTransformerYFormPreprocessorStrategy" alias="referenceIdYFormTransformerPreprocessorStrategy"/>
+    <bean id="defaultReferenceIdTransformerYFormPreprocessorStrategy"
+          class="de.hybris.platform.xyformsfacades.strategy.preprocessor.ReferenceIdTransformerYFormPreprocessorStrategy">
+    </bean>
+</beans>

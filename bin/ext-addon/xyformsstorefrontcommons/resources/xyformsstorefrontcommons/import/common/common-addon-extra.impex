@@ -1,0 +1,5 @@
+### Essential Data for YForm ###
+INSERT_UPDATE ComponentTypeGroups2ComponentType;source(code)[unique=true];target(code)[unique=true]
+;wide;YFormCMSComponent
+;narrow;YFormCMSComponent
+;navigation;YFormCMSComponent

@@ -1,0 +1,12 @@
+*** Settings ***
+Library        	de.hybris.platform.atddrunner.keywords.AtddRunnerKeywordLibrary
+
+*** Keywords ***
+
+start server "${bean}"
+	[Documentation]    Start datahub server.
+	web server run     ${bean}
+	
+stop server "${bean}"
+	[Documentation]    Stop datahub server.
+	web server terminate    ${bean}

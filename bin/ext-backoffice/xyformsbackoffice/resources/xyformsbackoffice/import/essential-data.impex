@@ -1,0 +1,37 @@
+
+# We create a Backoffice Role for Managers
+INSERT_UPDATE BackofficeRole	;UID[unique=true]		;locname[lang=en]			;description					;groups(uid)	;readableLanguages(isocode)	;writeableLanguages(isocode)	;authorities
+										;yformsmanagergroup	;yForms Manager Group	;Group for yForms Managers	;					;en									;en									;yformsmanager_role
+										
+										
+# We add CRUD access to YFormDefinition
+$START_USERRIGHTS
+Type			;UID						;MemberOfGroups		;Password	;Target									;read	;change	;create	;delete	;change_perm
+UserGroup	;yformsmanagergroup	;employeegroup			;
+				;							;							;				;YFormDefinition						;+		;+			;+			;-			;-
+				;							;							;				;YFormDefinition.applicationId	;+		;+			;			;			;
+				;							;							;				;YFormDefinition.formId				;+		;+			;			;			;
+				;							;							;				;YFormDefinition.version			;+		;+			;			;			;
+				;							;							;				;YFormDefinition.title				;+		;+			;			;			;
+				;							;							;				;YFormDefinition.description		;+		;+			;			;			;
+				;							;							;				;YFormDefinition.content			;+		;-			;			;			;
+				;							;							;				;YFormDefinition.categories		;+		;-			;			;			;
+				;							;							;				;YFormDefinition.comments			;+		;-			;			;			;
+				;							;							;				;YFormDefinition.creationtime		;+		;-			;			;			;
+				;							;							;				;YFormDefinition.data				;+		;-			;			;			;
+				;							;							;				;YFormDefinition.documentId		;+		;-			;			;			;
+				;							;							;				;YFormDefinition.itemModelContext;+		;-			;			;			;
+				;							;							;				;YFormDefinition.itemType			;+		;-			;			;			;
+				;							;							;				;YFormDefinition.modifiedtime		;+		;-			;			;			;
+				;							;							;				;YFormDefinition.owner				;+		;-			;			;			;
+				;							;							;				;YFormDefinition.pk					;+		;-			;			;			;
+				;							;							;				;YFormDefinition.status				;+		;-			;			;			;
+				;							;							;				;YFormDefinition.latest				;+		;-			;			;			;
+				;							;							;				;YFormDefinition.tenantId			;+		;-			;			;			;
+$END_USERRIGHTS
+
+
+INSERT_UPDATE SearchRestriction	;code[unique=true]					;name[lang=en]							;principal(UID)		;restrictedType(code)	;generate	;active	;query
+											;YFormDefinition_Latest_Versions	;YFormDefinition Latest Versions	;yformsmanagergroup	;YFormDefinition			;true			;true		;{item:latest} = 1
+											;YFormDefinition_Enabled_Forms	;YFormDefinition Enabled Forms	;yformsmanagergroup	;YFormDefinition			;true			;true		;{item:status} IN ({{SELECT {s.pk} FROM {YFormDefinitionStatusEnum as s} WHERE {s.code}='ENABLED' }})
+											

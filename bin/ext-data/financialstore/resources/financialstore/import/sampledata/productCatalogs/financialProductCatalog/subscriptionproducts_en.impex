@@ -1,0 +1,81 @@
+#******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
+# ImpEx template for Importing all Localisations for Products in the Insurance Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=financialProductCatalog
+$productCatalogName=Financial Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+$lang=en
+
+# Insert Subscription Products
+UPDATE SubscriptionProduct;code[unique=true];name[lang=$lang];$catalogVersion
+;WED_2STAR					;Two Star Event Plan;
+;WED_3STAR					;Three Star Event Plan;
+;WED_4STAR					;Four Star Event Plan;
+;WED_5STAR					;Five Star Event Plan;
+;WED_EXCESSWAIVER			;Excess Waiver;
+;WED_PUBLICLIABILITY		;Increase supplier failure and public liability;
+;WED_VENUECOVER			    ;Venue Cover;
+
+#Subscription Products for Travel Insurance
+;TRA_SINGLE_BUDGET			;Single - Budget Plan;
+;TRA_SINGLE_SILVER			;Single - Silver Plan;			
+;TRA_SINGLE_GOLD			;Single - Gold Plan;		
+;TRA_ANNUAL_BUDGET			;Annual - Budget Plan			
+;TRA_ANNUAL_SILVER			;Annual - Silver Plan			
+;TRA_ANNUAL_GOLD			;Annual - Gold Plan			
+;TRA_BACKPACKERS_BUDGET		;Backpackers - Budget Plan		
+;TRA_BACKPACKERS_SILVER		;Backpackers - Silver Plan		
+;TRA_BACKPACKERS_GOLD		;Backpackers - Gold Plan		
+;TRA_WINTER					;Winter Sports Cover
+;TRA_GOLF					;Golf Cover	
+;TRA_BUSINESS				;Business Cover	
+;TRA_VALUABLES				;Valuables Extension
+;TRA_HAZARDOUS				;Hazardous Activities 
+;TRA_EXCESS					;Excess waiver
+
+#Subscription Products for Homeowners Property Insurance
+;PRO_PROPERTY_HOMEOWNERS	;Homeowners Annually;
+;PRO_FLOOD_COVER_HOMEOWNERS	;Flood Cover;
+;PRO_TEMP_ACCOM_HOMEOWNERS	;Temporary Accomodation Cover;
+;PRO_JEWELRY_COVER_HOMEOWNERS;Jewelry and Watches Cover;
+;PRO_BICYCLES_COVER_HOMEOWNERS;Bicycles Cover;
+
+#Subscription Products for Renters Property Insurance
+;PRO_PROPERTY_RENTERS		;Renters Annually;
+;PRO_TEMP_ACCOM_RENTERS		;Temporary Accomodation Cover;
+;PRO_JEWELRY_COVER_RENTERS	;Jewelry and Watches Cover;
+;PRO_BICYCLES_COVER_RENTERS	;Bicycles Cover;
+
+#Subscription Products for Homeowners Property Insurance
+;PRO_PROPERTY_HOMEOWNERS_MONTHLY		;Homeowners Monthly;
+;PRO_FLOOD_COVER_HOMEOWNERS_MONTHLY		;Flood Cover;
+;PRO_TEMP_ACCOM_HOMEOWNERS_MONTHLY		;Temporary Accomodation Cover;
+;PRO_JEWELRY_COVER_HOMEOWNERS_MONTHLY	;Jewelry and Watches Cover;
+;PRO_BICYCLES_COVER_HOMEOWNERS_MONTHLY	;Bicycles Cover;
+
+#Subscription Products for Renters Property Insurance
+;PRO_PROPERTY_RENTERS_MONTHLY		;Renters Monthly;
+;PRO_TEMP_ACCOM_RENTERS_MONTHLY		;Temporary Accomodation Cover;
+;PRO_JEWELRY_COVER_RENTERS_MONTHLY	;Jewelry and Watches Cover;
+;PRO_BICYCLES_COVER_RENTERS_MONTHLY	;Bicycles Cover;
+
+#Subscription Products for Auto Insurance
+;AUTO_ANNUALLY                ;Auto Insurance Annually;
+;AUTO_MONTHLY                 ;Auto Insurance Monthly;
+;AUTO_LEGAL_EXPENSE_COVER_ANNUALLY      ;Legal Expense Cover
+;AUTO_BREAKDOWN_COVER_ANNUALLY          ;Breakdown Cover
+;AUTO_KEY_PROTECTION_COVER_ANNUALLY     ;Key Protection Cover
+;AUTO_5_YEAR_GUARANTEE_ANNUALLY         ;"5 Year Guarantee"
+
+;AUTO_LEGAL_EXPENSE_COVER_MONTHLY       ;Legal Expense Cover
+;AUTO_BREAKDOWN_COVER_MONTHLY           ;Breakdown Cover
+;AUTO_KEY_PROTECTION_COVER_MONTHLY      ;Key Protection Cover
+;AUTO_5_YEAR_GUARANTEE_MONTHLY          ;"5 Year Guarantee"
+;AUTO_TELEMETRY_INSTALLATION_MONTHLY    ;Telemetry Installation (Mandatory)
+
+;LIFE           ;Life Insurance;
+;LIFE_PREMIUM_PROTECTION                ;Premium Protection
+;LIFE_RENEWAL_OPTION                    ;Renewal Option
+;LIFE_PAYMENT_PROTECTION_BENEFIT        ;Payment Protection Benefit

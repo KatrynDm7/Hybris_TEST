@@ -1,0 +1,10 @@
+#
+# Import the CMS Site configuration for the Powertools store
+#
+
+# Language
+$lang=zh
+
+# Create CMS Site
+UPDATE CMSSite;uid[unique=true];name[lang=$lang];locale[lang=$lang]
+ ;powertools;"电动工具站点";zh_CN

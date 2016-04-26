@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>	
+	<group qualifier="General" visible="true" initially-opened="true">
+		<label lang="en">Properties</label>
+		<property qualifier="Competition.code"/>
+		<property qualifier="Competition.name"/>
+		<property qualifier="Competition.type"/>
+		<property qualifier="Competition.groups"/>
+		<property qualifier="Competition.players"/>
+		<property qualifier="Competition.news"/>
+	</group>
+	
+	<group qualifier="admin" visible="true" initially-opened="false">
+		<label lang="de">Administration</label>
+		<label lang="en">Administration</label>
+		<property qualifier="Item.pk" />
+		<property qualifier="Item.creationTime" />
+		<property qualifier="Item.modifiedtime" />
+	</group>
+	
+	<custom-group 
+		class="de.hybris.platform.cockpit.services.config.impl.UnassignedEditorSectionConfiguration" 
+		qualifier="unassigned"
+		initially-opened="false">
+		<label lang="de">Andere</label>
+		<label lang="en">Other</label>
+	</custom-group>
+</editor>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+
+-->
+<configuration xmlns="hybris.de/schemas/hmc/generic"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="hybris.de/schemas/hmc/generic hmc.xsd">
+    <explorertree>
+        <group name="Y2YSync" expand="false" description="group.y2ysync.description">
+            <typeref type="Y2YStreamConfiguration" description="typeref.y2ystreamconfiguration.description" />
+            <typeref type="Y2YStreamConfigurationContainer" description="typeref.y2ystreamconfigurationcontainer.description" />
+            <typeref type="Y2YSyncCronJob" description="typeref.y2ysynccronjob.description" />
+            <typeref type="Y2YSyncJob" description="typeref.y2ysyncjob.description" />
+            <typeref type="SyncImpExMedia" description="typeref.syncimpexmedia.description" />
+        </group>
+    </explorertree>
+    
+    <type name="Y2YSyncJob" mode="append">
+        <organizer>
+            <editor>
+                <tab name="tab.y2ysyncjob.general">
+                    <section name="tab.y2ysyncjob.general.properties">
+                        <listlayout>
+                            <attribute name="syncType" />
+                            <attribute name="streamConfigurationContainer" />
+                            <attribute name="dataHubUrl" />
+                        </listlayout>
+                    </section>
+                    <section name="tab.y2ysyncjob.general.schedule">
+                        <listlayout>
+                            <attribute name="triggers" />
+                        </listlayout>
+                    </section>
+                    <section name="tab.y2ysyncjob.execution">
+                        <listlayout>
+                            <action classname="de.hybris.platform.y2ysync.action.StartSyncAction"
+                                    type="item" name="action.start.y2y.sync"
+                                    showtoolbarlabel="true"
+                                    toolbaricon="images/ext/catalog/media_publicate_blue.gif"
+                                    icon="images/ext/catalog/media_publicate.gif"/>
+                        </listlayout>
+                    </section>
+                </tab>
+            </editor>
+        </organizer>
+    </type>
+
+    <type name="Y2YSyncCronJob" mode="append">
+        <organizer>
+            <editor>
+                <tab name="tab.cronjob.protocol" mode="append">
+                    <section name="tab.y2ysynccronjob.zipoutput">
+                        <listlayout>
+                            <attribute name="impexZip" />
+                            <attribute name="mediasZip" />
+                        </listlayout>
+                    </section>
+                </tab>
+            </editor>
+        </organizer>
+    </type>
+    
+    <type name="Y2YStreamConfiguration" useselector="true" mode="append">
+        <organizer>
+            <search>
+                <condition attribute="streamId" />
+                <condition attribute="active" />
+                <condition attribute="container" />
+            </search>
+            <result mode="replace">
+                <listview>
+                    <itemlayout>
+                        <attribute name="streamId" width="300" />
+                        <attribute name="active"  width="50"/>
+                        <attribute name="itemTypeForStream" width="200"/>
+                        <attribute name="container" />
+                    </itemlayout>
+                </listview>
+            </result>
+            <editor>
+                <essentials mode="replace">
+                    <listlayout>
+                        <attribute name="streamId" />
+                        <attribute name="itemTypeForStream" />
+                        <attribute name="container" />
+                    </listlayout>
+                </essentials>
+                <tab name="tab.y2ystreamconfiguration.general">
+                    <section name="tab.y2ystreamconfiguration.general.optional">
+                        <listlayout>
+                            <attribute name="excludedTypes" />
+                        </listlayout>
+                    </section>
+                    <section name="tab.y2ystreamconfiguration.general.properties">
+                        <listlayout>
+                            <attribute name="active" />
+                            <attribute name="whereClause" />
+                            <attribute name="autoGenerateWhereClause" />
+                            <attribute name="versionSelectClause" />
+                            <attribute name="infoExpression" />
+                            <attribute name="catalogVersion" />
+                            <attribute name="columnDefinitions" editable="true" width="600"/>
+                        </listlayout>
+                    </section>
+                </tab>
+            </editor>
+        </organizer>
+        <defaultreference mode="replace">
+            <itemlayout>
+                <attribute name="streamId"/>
+            </itemlayout>
+        </defaultreference>
+    </type>
+    
+    <type name="Y2YColumnDefinition" mode="append">
+        <organizer>
+            <search>
+                <condition attribute="streamConfiguration" />
+                <condition attribute="columnName" />
+                <condition attribute="attributeDescriptor" />
+            </search>
+            <result mode="replace">
+                <listview>
+                    <itemlayout>
+                        <attribute name="columnName" />
+                        <attribute name="streamConfiguration" />
+                    </itemlayout>
+                </listview>
+            </result>
+            <editor>
+                <essentials>
+                    <listlayout>
+                        <attribute name="streamConfiguration" />
+                    </listlayout>
+                </essentials>
+                <tab name="tab.y2ycolumndefinition.general">
+                    <section name="tab.y2ycolumndefinition.general.properties">
+                        <listlayout>
+                            <attribute name="attributeDescriptor" />
+                            <attribute name="position" />
+                            <attribute name="columnName" />
+                            <attribute name="impexHeader" />
+                            <attribute name="language" />
+                        </listlayout>
+                    </section>
+                </tab>
+            </editor>
+        </organizer>
+    </type>
+
+    <type name="Y2YStreamConfigurationContainer" mode="append">
+        <organizer>
+            <search>
+                <condition attribute="id" />
+            </search>
+            <result mode="replace">
+                <listview>
+                    <itemlayout>
+                        <attribute name="id" width="300" />
+                    </itemlayout>
+                </listview>
+            </result>
+            <editor>
+                <essentials>
+                    <listlayout>
+                        <attribute name="id" />
+                    </listlayout>
+                </essentials>
+                <tab name="tab.y2ystreamconfigurationcontainer.general">
+                    <section name="tab.y2ystreamconfigurationcontainer.general.properties">
+                        <listlayout>
+                            <attribute name="catalogVersion" />
+                            <attribute name="configurations" />
+                        </listlayout>
+                    </section>
+                </tab>
+            </editor>
+        </organizer>
+        <defaultreference mode="replace">
+            <itemlayout>
+                <attribute name="id" />
+            </itemlayout>
+        </defaultreference>
+    </type>
+
+</configuration>

@@ -1,0 +1,5 @@
+#parse( "impex-templates/common-macros.impex.vm" )
+#[[
+INSERT PriceRow;productId[unique=true];unit(code[unique=true,default=pieces]);currency(isocode)[unique=true];price;$catalogversion
+]]#
+;${productCode};${unit};${currency};${price}

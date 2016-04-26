@@ -1,0 +1,275 @@
+# ImpEx for wsIntegrationTest Store
+#% impex.setLocale( Locale.GERMAN ); 
+
+$storeUid=wsIntegrationTest
+$productCatalog=wsTestProductCatalog
+
+
+$standardHours=wsIntegrationTest-japan-standard-hours
+$weekendHours=wsIntegrationTest-japan-weekend-hours
+
+INSERT_UPDATE OpeningSchedule;code[unique=true];
+;$standardHours;
+;$weekendHours;
+
+INSERT_UPDATE WeekdayOpeningDay;openingSchedule(code)[unique=true];dayOfWeek(code)[unique=true];openingTime[dateformat=hh:mm];closingTime[dateformat=hh:mm];
+;$standardHours;MONDAY   ; 09:00; 20:00
+;$standardHours;TUESDAY  ; 09:00; 20:00
+;$standardHours;WEDNESDAY; 09:00; 20:00
+;$standardHours;THURSDAY ; 09:00; 20:00
+;$standardHours;FRIDAY   ; 09:00; 20:00
+;$standardHours;SATURDAY ; 10:00; 20:00
+
+;$weekendHours;MONDAY   ; 09:00; 20:00
+;$weekendHours;TUESDAY  ; 09:00; 20:00
+;$weekendHours;WEDNESDAY; 09:00; 20:00
+;$weekendHours;THURSDAY ; 09:00; 20:00
+;$weekendHours;FRIDAY   ; 09:00; 20:00
+;$weekendHours;SATURDAY ; 10:00; 20:00
+;$weekendHours;SUNDAY   ; 10:00; 16:00
+
+
+INSERT_UPDATE SpecialOpeningDay;openingSchedule(code)[unique=true];date[unique=true,dateformat=dd.MM.yyyy];closed;openingTime[dateformat=hh:mm];closingTime[dateformat=hh:mm]
+;$standardHours; 01.01.2013 ;true
+;$standardHours; 14.01.2013 ;true
+;$standardHours; 11.02.2013 ;true
+;$standardHours; 20.03.2013 ;true
+;$standardHours; 29.04.2013 ;true
+;$standardHours; 03.05.2013 ;true
+;$standardHours; 04.05.2013 ;true
+;$standardHours; 05.05.2013 ;true
+;$standardHours; 15.07.2013 ;true
+;$standardHours; 16.09.2013 ;true
+;$standardHours; 23.09.2013 ;true
+;$standardHours; 14.10.2013 ;true
+;$standardHours; 03.11.2013 ;true
+;$standardHours; 23.11.2013 ;true
+;$standardHours; 23.12.2013 ;true
+
+;$weekendHours; 01.01.2013 ;true
+;$weekendHours; 14.01.2013 ;true
+;$weekendHours; 11.02.2013 ;true
+;$weekendHours; 20.03.2013 ;true
+;$weekendHours; 29.04.2013 ;true
+;$weekendHours; 03.05.2013 ;true
+;$weekendHours; 04.05.2013 ;true
+;$weekendHours; 05.05.2013 ;true
+;$weekendHours; 15.07.2013 ;true
+;$weekendHours; 16.09.2013 ;true
+;$weekendHours; 23.09.2013 ;true
+;$weekendHours; 14.10.2013 ;true
+;$weekendHours; 03.11.2013 ;true
+;$weekendHours; 23.11.2013 ;true
+;$weekendHours; 23.12.2013 ;true
+
+
+INSERT_UPDATE PointOfService;name[unique=true];type(code);address(&addrID);latitude;longitude;geocodeTimestamp[dateformat=dd-MM-yyyy];openingSchedule(code);basestore(uid)[default=$storeUid];features(code)
+;WSI-Nakano;STORE;WSI-Nakano;35,6894875;139,6917064;29-04-2011;$standardHours
+;WSI-Shinbashi;STORE;WSI-Shinbashi;35,6894875;139,6917064;29-04-2011;$standardHours
+;WSI-Koto;STORE;WSI-Koto;35,6894875;139,6917064;29-04-2011;$standardHours
+;WSI-Misato;STORE;WSI-Misato;35,6894875;139,6917064;29-04-2011;$weekendHours
+;WSI-Matsudo;STORE;WSI-Matsudo;35,6894875;139,6917064;29-04-2011;$standardHours
+;WSI-Ichikawa;STORE;WSI-Ichikawa;35,6894875;139,6917064;29-04-2011;$weekendHours
+;WSI-Choshi;STORE;WSI-Choshi;35,7409;140,8064;29-04-2011;$standardHours
+;WSI-Chiba;STORE;WSI-Chiba;35,617;140,1023;29-04-2011;$weekendHours
+;WSI-Yokosuka;STORE;WSI-Yokosuka;35,2853;139,664;29-04-2011;$standardHours
+;WSI-Tokio Cerulean Tower Tokyu Hotel;STORE;WSI-Tokio Cerulean Tower Tokyu Hotel;35,6894875;139,6917064;29-04-2011;$standardHours
+;WSI-Tokio Flexstay Nippori Inn;STORE;WSI-Tokio Flexstay Nippori Inn;35,6894875;139,6917064;29-04-2011;$standardHours
+;WSI-Tokio Hotel Metropolitan Tokyo;STORE;WSI-Tokio Hotel Metropolitan Tokyo;35,6894875;139,6917064;29-04-2011;$standardHours
+;WSI-Tokio Dormy Inn Tokyo Hatchobori;STORE;WSI-Tokio Dormy Inn Tokyo Hatchobori;35,6894875;139,6917064;29-04-2011;$weekendHours
+;WSI-Tokio Park Hotel Tokyo;STORE;WSI-Tokio Park Hotel Tokyo;35,6894875;139,6917064;29-04-2011;$standardHours
+;WSI-Yokohama Sakuragicho Washington Hotel;STORE;WSI-Yokohama Sakuragicho Washington Hotel;35,443708;139,638026;29-04-2011;$weekendHours
+;WSI-Yokohama Shin Yokohama Prince Hotel;STORE;WSI-Yokohama Shin Yokohama Prince Hotel;35,443708;139,638026;29-04-2011;$standardHours
+;WSI-Yokohama Comfort Hotel Yokohama Kannai;STORE;WSI-Yokohama Comfort Hotel Yokohama Kannai;35,443708;139,638026;29-04-2011;$weekendHours
+;WSI-Yokohama Hotel New Grand;STORE;WSI-Yokohama Hotel New Grand;35,443708;139,638026;29-04-2011;$standardHours
+;WSI-Yokohama Hotel JAL City Kannai Yokohama;STORE;WSI-Yokohama Hotel JAL City Kannai Yokohama;35,443708;139,638026;29-04-2011;$standardHours
+;WSI-Osaka Hilton Osaka Hotel;STORE;WSI-Osaka Hilton Osaka Hotel;34,698823;135,498235;29-04-2011;$standardHours
+;WSI-Osaka Crowne Plaza Hotel Ana Osaka;STORE;WSI-Osaka Crowne Plaza Hotel Ana Osaka;34,698823;135,498235;29-04-2011;$standardHours
+;WSI-Osaka Ramada Osaka;STORE;WSI-Osaka Ramada Osaka;34,698823;135,498235;29-04-2011;$weekendHours
+;WSI-Osaka Cross Hotel Osaka;STORE;WSI-Osaka Cross Hotel Osaka;34,698823;135,498235;29-04-2011;$standardHours
+;WSI-Osaka Best Western Hotel Fino Osaka Shinsaibashi;STORE;WSI-Osaka Best Western Hotel Fino Osaka Shinsaibashi;34,698823;135,498235;29-04-2011;$weekendHours
+;WSI-Nagoya Hilton Nagoya Hotel;STORE;WSI-Nagoya Hilton Nagoya Hotel;35,167306;136,896583;29-04-2011;$standardHours
+;WSI-Nagoya Marriott Nagoya;STORE;WSI-Nagoya Marriott Nagoya;35,167306;136,896583;29-04-2011;$weekendHours
+;WSI-Nagoya Crowne Plaza Ana Grand Court Nagoya;STORE;WSI-Nagoya Crowne Plaza Ana Grand Court Nagoya;35,167306;136,896583;29-04-2011;$standardHours
+;WSI-Nagoya The Westin Nagoya Castle;STORE;WSI-Nagoya The Westin Nagoya Castle;35,167306;136,896583;29-04-2011;$standardHours
+;WSI-Nagoya Royal Park Inn Nagoya;STORE;WSI-Nagoya Royal Park Inn Nagoya;35,167306;136,896583;29-04-2011;$standardHours
+;WSI-Sapporo Ana Hotel Sapporo;STORE;WSI-Sapporo Ana Hotel Sapporo;43,06356;141,340771;29-04-2011;$standardHours
+;WSI-Sapporo Best Western Hotel Sapporo Nakajima Koen;STORE;WSI-Sapporo Best Western Hotel Sapporo Nakajima Koen;43,06356;141,340771;29-04-2011;$weekendHours
+;WSI-Sapporo Sheraton Sapporo Hotel;STORE;WSI-Sapporo Sheraton Sapporo Hotel;43,06356;141,340771;29-04-2011;$standardHours
+;WSI-Sapporo Hotel Resol Trinity Sapporo;STORE;WSI-Sapporo Hotel Resol Trinity Sapporo;43,06356;141,340771;29-04-2011;$weekendHours
+;WSI-Sapporo Hotel Sunroute Sapporo;STORE;WSI-Sapporo Hotel Sunroute Sapporo;43,06356;141,340771;29-04-2011;$standardHours
+;WSI-Kobe Hotel Monterey Amalie;STORE;WSI-Kobe Hotel Monterey Amalie;34,694741;135,186095;29-04-2011;$weekendHours
+;WSI-Kobe Hotel Monterey Kobe;STORE;WSI-Kobe Hotel Monterey Kobe;34,694741;135,186095;29-04-2011;$standardHours
+;WSI-Kobe Sannomiya Terminal Hotel;STORE;WSI-Kobe Sannomiya Terminal Hotel;34,694741;135,186095;29-04-2011;$standardHours
+;WSI-Kobe Bay Sheraton Hotel and Towers;STORE;WSI-Kobe Bay Sheraton Hotel and Towers;34,694741;135,186095;29-04-2011;$standardHours
+;WSI-Kobe the b;STORE;WSI-Kobe the b;34,694741;135,186095;29-04-2011;$standardHours
+;WSI-Fukuoka Hotel Monterey La Soeur Fukuoka;STORE;WSI-Fukuoka Hotel Monterey La Soeur Fukuoka;33,590355;130,401716;29-04-2011;$weekendHours
+;WSI-Fukuoka Hilton Fukuoka Sea Hawk;STORE;WSI-Fukuoka Hilton Fukuoka Sea Hawk;33,590355;130,401716;29-04-2011;$standardHours
+;WSI-Fukuoka Best Western Fukuoka Nakasu Inn;STORE;WSI-Fukuoka Best Western Fukuoka Nakasu Inn;33,590355;130,401716;29-04-2011;$weekendHours
+;WSI-Fukuoka Canal City Fukuoka Washington Hotel;STORE;WSI-Fukuoka Canal City Fukuoka Washington Hotel;33,590355;130,401716;29-04-2011;$standardHours
+;WSI-Fukuoka Hotel Nikko Fukuoka;STORE;WSI-Fukuoka Hotel Nikko Fukuoka;33,590355;130,401716;29-04-2011;$weekendHours
+;WSI-Kawasaki Mets Kawasaki Hotel;STORE;WSI-Kawasaki Mets Kawasaki Hotel;35,531106;139,696071;29-04-2011;$standardHours
+;WSI-Kawasaki Mets Mizonokuchi Hotel;STORE;WSI-Kawasaki Mets Mizonokuchi Hotel;35,531106;139,696071;29-04-2011;$standardHours
+;WSI-Kawasaki Hotel Sunroute Kawasaki;STORE;WSI-Kawasaki Hotel Sunroute Kawasaki;35,531106;139,696071;29-04-2011;$standardHours
+;WSI-Kawasaki Pearl Hotel Kawasaki;STORE;WSI-Kawasaki Pearl Hotel Kawasaki;35,531106;139,696071;29-04-2011;$standardHours
+;WSI-Kawasaki Grand Hotel;STORE;WSI-Kawasaki Grand Hotel;35,531106;139,696071;29-04-2011;$weekendHours
+
+INSERT_UPDATE Address ;&addrID                                          ; streetname    ; streetnumber ; region(isocode) ; postalcode ; town     ; country(isocode) ; phone1     ; owner(PointOfService.name)[unique=true]          ; company
+                      ;WSI-Nakano                                           ; 1701 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Nakano                                         ; Nakano Company
+                      ;WSI-Shinbashi                                        ; 1702 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Shinbashi                                      ; Shinbashi Company
+                      ;WSI-Koto                                             ; 1703 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Koto                                           ; Koto Company
+                      ;WSI-Misato                                           ; 1704 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Misato                                         ; Misato Company
+                      ;WSI-Matsudo                                          ; 1705 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Matsudo                                        ; Matsudo Company
+                      ;WSI-Ichikawa                                         ; 1706 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Ichikawa                                       ; Ichikawa Company
+                      ;WSI-Choshi                                           ; 1707 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Choshi                                         ; Choshi Company
+                      ;WSI-Chiba                                            ; 1708 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Chiba                                          ; Chiba Company
+                      ;WSI-Yokosuka                                         ; 1709 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Yokosuka                                       ; Yokosuka Company
+                      ;WSI-Tokio Cerulean Tower Tokyu Hotel                 ; 1709 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Tokio Cerulean Tower Tokyu Hotel               ; Tokio Cerulean Tower Tokyu Hotel Company
+                      ;WSI-Tokio Flexstay Nippori Inn                       ; 1710 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Tokio Flexstay Nippori Inn                     ; Tokio Flexstay Nippori Inn Company
+                      ;WSI-Tokio Hotel Metropolitan Tokyo                   ; 1711 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Tokio Hotel Metropolitan Tokyo                 ; Tokio Hotel Metropolitan Tokyo Company
+                      ;WSI-Tokio Dormy Inn Tokyo Hatchobori                 ; 1712 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Tokio Dormy Inn Tokyo Hatchobori               ; Tokio Dormy Inn Tokyo Hatchobori Company
+                      ;WSI-Tokio Park Hotel Tokyo                           ; 1713 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Tokio Park Hotel Tokyo                         ; Tokio Park Hotel Tokyo Company
+                      ;WSI-Yokohama Sakuragicho Washington Hotel            ; 1714 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Yokohama Sakuragicho Washington Hotel          ; Yokohama Sakuragicho Washington Hotel Company
+                      ;WSI-Yokohama Shin Yokohama Prince Hotel              ; 1715 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Yokohama Shin Yokohama Prince Hotel            ; Yokohama Shin Yokohama Prince Hotel Company
+                      ;WSI-Yokohama Comfort Hotel Yokohama Kannai           ; 1716 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Yokohama Comfort Hotel Yokohama Kannai         ; Yokohama Comfort Hotel Yokohama Kannai Company
+                      ;WSI-Yokohama Hotel New Grand                         ; 1717 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Yokohama Hotel New Grand                       ; Yokohama Hotel New Grand Company
+                      ;WSI-Yokohama Hotel JAL City Kannai Yokohama          ; 1718 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Yokohama Hotel JAL City Kannai Yokohama        ; Yokohama Hotel JAL City Kannai Yokohama Company
+                      ;WSI-Osaka Hilton Osaka Hotel                         ; 1719 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Osaka Hilton Osaka Hotel                       ; Osaka Hilton Osaka Hotel Company
+                      ;WSI-Osaka Crowne Plaza Hotel Ana Osaka               ; 1719 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Osaka Crowne Plaza Hotel Ana Osaka             ; Osaka Crowne Plaza Hotel Ana Osaka Company
+                      ;WSI-Osaka Ramada Osaka                               ; 1720 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Osaka Ramada Osaka                             ; Osaka Ramada Osaka Company
+                      ;WSI-Osaka Cross Hotel Osaka                          ; 1721 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Osaka Cross Hotel Osaka                        ; Osaka Cross Hotel Osaka Company
+                      ;WSI-Osaka Best Western Hotel Fino Osaka Shinsaibashi ; 1722 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Osaka Best Western Hotel Fino Osaka Shinsaibashi; Osaka Best Western Hotel Fino Osaka Shinsaibashi Company
+                      ;WSI-Nagoya Hilton Nagoya Hotel                       ; 1723 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Nagoya Hilton Nagoya Hotel                     ; Nagoya Hilton Nagoya Hotel Company
+                      ;WSI-Nagoya Marriott Nagoya                           ; 1724 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Nagoya Marriott Nagoya                         ; Nagoya Marriott Nagoya Company
+                      ;WSI-Nagoya Crowne Plaza Ana Grand Court Nagoya       ; 1725 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Nagoya Crowne Plaza Ana Grand Court Nagoya     ; Nagoya Crowne Plaza Ana Grand Court Nagoya Company
+                      ;WSI-Nagoya The Westin Nagoya Castle                  ; 1726 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Nagoya The Westin Nagoya Castle                ; Nagoya The Westin Nagoya Castle Company
+                      ;WSI-Nagoya Royal Park Inn Nagoya                     ; 1727 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Nagoya Royal Park Inn Nagoya                   ; Nagoya Royal Park Inn Nagoya Company
+                      ;WSI-Sapporo Ana Hotel Sapporo                        ; 1728 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Sapporo Ana Hotel Sapporo                      ; Sapporo Ana Hotel Sapporo Company
+                      ;WSI-Sapporo Best Western Hotel Sapporo Nakajima Koen ; 1729 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Sapporo Best Western Hotel Sapporo Nakajima Koen; Sapporo Best Western Hotel Sapporo Nakajima Koen Company
+                      ;WSI-Sapporo Sheraton Sapporo Hotel                   ; 1730 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Sapporo Sheraton Sapporo Hotel                 ; Sapporo Sheraton Sapporo Hotel Company
+                      ;WSI-Sapporo Hotel Resol Trinity Sapporo              ; 1731 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Sapporo Hotel Resol Trinity Sapporo            ; Sapporo Hotel Resol Trinity Sapporo Company
+                      ;WSI-Sapporo Hotel Sunroute Sapporo                   ; 1732 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Sapporo Hotel Sunroute Sapporo                 ; Sapporo Hotel Sunroute Sapporo Company
+                      ;WSI-Kobe Hotel Monterey Amalie                       ; 1733 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Kobe Hotel Monterey Amalie                     ; Kobe Hotel Monterey Amalie Company
+                      ;WSI-Kobe Hotel Monterey Kobe                         ; 1734 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Kobe Hotel Monterey Kobe                       ; Kobe Hotel Monterey Kobe Company
+                      ;WSI-Kobe Sannomiya Terminal Hotel                    ; 1735 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Kobe Sannomiya Terminal Hotel                  ; Kobe Sannomiya Terminal Hotel Company
+                      ;WSI-Kobe Bay Sheraton Hotel and Towers               ; 1736 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Kobe Bay Sheraton Hotel and Towers             ; Kobe Bay Sheraton Hotel and Towers Company
+                      ;WSI-Kobe the b                                       ; 1737 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Kobe the b                                     ; Kobe the b Company
+                      ;WSI-Fukuoka Hotel Monterey La Soeur Fukuoka          ; 1738 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Fukuoka Hotel Monterey La Soeur Fukuoka        ; Fukuoka Hotel Monterey La Soeur Fukuoka Company
+                      ;WSI-Fukuoka Hilton Fukuoka Sea Hawk                  ; 1739 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Fukuoka Hilton Fukuoka Sea Hawk                ; Fukuoka Hilton Fukuoka Sea Hawk Company
+                      ;WSI-Fukuoka Best Western Fukuoka Nakasu Inn          ; 1740 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Fukuoka Best Western Fukuoka Nakasu Inn        ; Fukuoka Best Western Fukuoka Nakasu Inn Company
+                      ;WSI-Fukuoka Canal City Fukuoka Washington Hotel      ; 1741 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Fukuoka Canal City Fukuoka Washington Hotel    ; Fukuoka Canal City Fukuoka Washington Hotel Company
+                      ;WSI-Fukuoka Hotel Nikko Fukuoka                      ; 1742 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Fukuoka Hotel Nikko Fukuoka                    ; Fukuoka Hotel Nikko Fukuoka Company
+                      ;WSI-Kawasaki Mets Kawasaki Hotel                     ; 1743 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Kawasaki Mets Kawasaki Hotel                   ; Kawasaki Mets Kawasaki Hotel Company
+                      ;WSI-Kawasaki Mets Mizonokuchi Hotel                  ; 1744 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Kawasaki Mets Mizonokuchi Hotel                ; Kawasaki Mets Mizonokuchi Hotel Company
+                      ;WSI-Kawasaki Hotel Sunroute Kawasaki                 ; 1745 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Kawasaki Hotel Sunroute Kawasaki               ; Kawasaki Hotel Sunroute Kawasaki Company
+                      ;WSI-Kawasaki Pearl Hotel Kawasaki                    ; 1746 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Kawasaki Pearl Hotel Kawasaki                  ; Kawasaki Pearl Hotel Kawasaki Company
+                      ;WSI-Kawasaki Grand Hotel                             ; 1747 Broadway ;              ; US-NY           ; 10019      ; New York ; US               ; 2125551212 ;WSI-Kawasaki Grand Hotel                           ; Kawasaki Grand Hotel Company
+
+
+INSERT_UPDATE StoreLocatorFeature;code[unique=true]
+;wheelchair
+;creche
+;sundayWorkshops
+;buyOnlinePickupInStore
+
+UPDATE PointOfService;name[unique=true];features(code);
+;WSI-Nakano;wheelchair,creche,buyOnlinePickupInStore;
+;WSI-Shinbashi;wheelchair,creche,buyOnlinePickupInStore;
+;WSI-Koto;wheelchair,creche,buyOnlinePickupInStore;
+;WSI-Misato;wheelchair,buyOnlinePickupInStore;
+;WSI-Matsudo;creche,sundayWorkshops,buyOnlinePickupInStore;
+;WSI-Ichikawa;wheelchair,buyOnlinePickupInStore;
+;WSI-Choshi;creche,sundayWorkshops,buyOnlinePickupInStore;
+;WSI-Chiba;wheelchair,buyOnlinePickupInStore;
+;WSI-Yokosuka;creche,sundayWorkshops,buyOnlinePickupInStore;
+;WSI-Tokio Cerulean Tower Tokyu Hotel;wheelchair,creche,buyOnlinePickupInStore;
+;WSI-Tokio Flexstay Nippori Inn;wheelchair,creche,buyOnlinePickupInStore;
+;WSI-Tokio Hotel Metropolitan Tokyo;wheelchair,creche,buyOnlinePickupInStore;
+;WSI-Tokio Dormy Inn Tokyo Hatchobori;wheelchair,buyOnlinePickupInStore;
+;WSI-Tokio Park Hotel Tokyo;creche,sundayWorkshops,buyOnlinePickupInStore;
+;WSI-Yokohama Sakuragicho Washington Hotel;wheelchair,buyOnlinePickupInStore;
+;WSI-Yokohama Shin Yokohama Prince Hotel;creche,sundayWorkshops,buyOnlinePickupInStore;
+;WSI-Yokohama Comfort Hotel Yokohama Kannai;wheelchair,buyOnlinePickupInStore;
+;WSI-Yokohama Hotel New Grand;creche,sundayWorkshops,buyOnlinePickupInStore;
+;WSI-Yokohama Hotel JAL City Kannai Yokohama;wheelchair,creche,buyOnlinePickupInStore;
+;WSI-Osaka Hilton Osaka Hotel;wheelchair,creche,buyOnlinePickupInStore;
+;WSI-Osaka Crowne Plaza Hotel Ana Osaka;wheelchair,creche,buyOnlinePickupInStore;
+;WSI-Osaka Ramada Osaka;wheelchair,buyOnlinePickupInStore;
+;WSI-Osaka Cross Hotel Osaka;creche,sundayWorkshops,buyOnlinePickupInStore;
+;WSI-Osaka Best Western Hotel Fino Osaka Shinsaibashi;wheelchair,buyOnlinePickupInStore;
+;WSI-Nagoya Hilton Nagoya Hotel;creche,sundayWorkshops,buyOnlinePickupInStore;
+;WSI-Nagoya Marriott Nagoya;wheelchair,buyOnlinePickupInStore;
+;WSI-Nagoya Crowne Plaza Ana Grand Court Nagoya;creche,sundayWorkshops,buyOnlinePickupInStore;
+;WSI-Nagoya The Westin Nagoya Castle;wheelchair,creche,buyOnlinePickupInStore;
+;WSI-Nagoya Royal Park Inn Nagoya;wheelchair,creche,buyOnlinePickupInStore;
+;WSI-Sapporo Ana Hotel Sapporo;wheelchair,creche,buyOnlinePickupInStore;
+;WSI-Sapporo Best Western Hotel Sapporo Nakajima Koen;wheelchair,buyOnlinePickupInStore;
+;WSI-Sapporo Sheraton Sapporo Hotel;creche,sundayWorkshops,buyOnlinePickupInStore;
+;WSI-Sapporo Hotel Resol Trinity Sapporo;wheelchair,buyOnlinePickupInStore;
+;WSI-Sapporo Hotel Sunroute Sapporo;creche,sundayWorkshops,buyOnlinePickupInStore;
+;WSI-Kobe Hotel Monterey Amalie;wheelchair,buyOnlinePickupInStore;
+;WSI-Kobe Hotel Monterey Kobe;creche,sundayWorkshops,buyOnlinePickupInStore;
+;WSI-Kobe Sannomiya Terminal Hotel;wheelchair,creche,buyOnlinePickupInStore;
+;WSI-Kobe Bay Sheraton Hotel and Towers;wheelchair,creche,buyOnlinePickupInStore;
+;WSI-Kobe the b;wheelchair,creche,buyOnlinePickupInStore;
+;WSI-Fukuoka Hotel Monterey La Soeur Fukuoka;wheelchair,buyOnlinePickupInStore;
+;WSI-Fukuoka Hilton Fukuoka Sea Hawk;creche,sundayWorkshops,buyOnlinePickupInStore;
+;WSI-Fukuoka Best Western Fukuoka Nakasu Inn;wheelchair,buyOnlinePickupInStore;
+;WSI-Fukuoka Canal City Fukuoka Washington Hotel;creche,sundayWorkshops,buyOnlinePickupInStore;
+;WSI-Fukuoka Hotel Nikko Fukuoka;wheelchair,buyOnlinePickupInStore;
+;WSI-Kawasaki Mets Kawasaki Hotel;creche,sundayWorkshops,buyOnlinePickupInStore;
+;WSI-Kawasaki Mets Mizonokuchi Hotel;wheelchair,creche,buyOnlinePickupInStore;
+;WSI-Kawasaki Hotel Sunroute Kawasaki;wheelchair,creche,buyOnlinePickupInStore;
+;WSI-Kawasaki Pearl Hotel Kawasaki;wheelchair,creche,buyOnlinePickupInStore;
+;WSI-Kawasaki Grand Hotel;wheelchair,buyOnlinePickupInStore;
+
+INSERT_UPDATE PoS2WarehouseRel;source(name)[unique=true];target(code)[unique=true]
+;WSI-Nakano;WSI-Nakano
+;WSI-Shinbashi;WSI-Shinbashi
+;WSI-Koto;WSI-Koto
+;WSI-Misato;WSI-Misato
+;WSI-Matsudo;WSI-Matsudo
+;WSI-Ichikawa;WSI-Ichikawa
+;WSI-Choshi;WSI-Choshi
+;WSI-Chiba;WSI-Chiba
+;WSI-Yokosuka;WSI-Yokosuka
+;WSI-Tokio Cerulean Tower Tokyu Hotel;WSI-Tokio Cerulean Tower Tokyu Hotel
+;WSI-Tokio Flexstay Nippori Inn;WSI-Tokio Flexstay Nippori Inn
+;WSI-Tokio Hotel Metropolitan Tokyo;WSI-Tokio Hotel Metropolitan Tokyo
+;WSI-Tokio Dormy Inn Tokyo Hatchobori;WSI-Tokio Dormy Inn Tokyo Hatchobori
+;WSI-Tokio Park Hotel Tokyo;WSI-Tokio Park Hotel Tokyo
+;WSI-Yokohama Sakuragicho Washington Hotel;WSI-Yokohama Sakuragicho Washington Hotel
+;WSI-Yokohama Shin Yokohama Prince Hotel;WSI-Yokohama Shin Yokohama Prince Hotel
+;WSI-Yokohama Comfort Hotel Yokohama Kannai;WSI-Yokohama Comfort Hotel Yokohama Kannai
+;WSI-Yokohama Hotel New Grand;WSI-Yokohama Hotel New Grand
+;WSI-Yokohama Hotel JAL City Kannai Yokohama;WSI-Yokohama Hotel JAL City Kannai Yokohama
+;WSI-Osaka Hilton Osaka Hotel;WSI-Osaka Hilton Osaka Hotel
+;WSI-Osaka Crowne Plaza Hotel Ana Osaka;WSI-Osaka Crowne Plaza Hotel Ana Osaka
+;WSI-Osaka Ramada Osaka;WSI-Osaka Ramada Osaka
+;WSI-Osaka Cross Hotel Osaka;WSI-Osaka Cross Hotel Osaka
+;WSI-Osaka Best Western Hotel Fino Osaka Shinsaibashi;WSI-Osaka Best Western Hotel Fino Osaka Shinsaibashi
+;WSI-Nagoya Hilton Nagoya Hotel;WSI-Nagoya Hilton Nagoya Hotel
+;WSI-Nagoya Marriott Nagoya;WSI-Nagoya Marriott Nagoya
+;WSI-Nagoya Crowne Plaza Ana Grand Court Nagoya;WSI-Nagoya Crowne Plaza Ana Grand Court Nagoya
+;WSI-Nagoya The Westin Nagoya Castle;WSI-Nagoya The Westin Nagoya Castle
+;WSI-Nagoya Royal Park Inn Nagoya;WSI-Nagoya Royal Park Inn Nagoya
+;WSI-Sapporo Ana Hotel Sapporo;WSI-Sapporo Ana Hotel Sapporo
+;WSI-Sapporo Best Western Hotel Sapporo Nakajima Koen;WSI-Sapporo Best Western Hotel Sapporo Nakajima Koen
+;WSI-Sapporo Sheraton Sapporo Hotel;WSI-Sapporo Sheraton Sapporo Hotel
+;WSI-Sapporo Hotel Resol Trinity Sapporo;WSI-Sapporo Hotel Resol Trinity Sapporo
+;WSI-Sapporo Hotel Sunroute Sapporo;WSI-Sapporo Hotel Sunroute Sapporo
+;WSI-Kobe Hotel Monterey Amalie;WSI-Kobe Hotel Monterey Amalie
+;WSI-Kobe Hotel Monterey Kobe;WSI-Kobe Hotel Monterey Kobe
+;WSI-Kobe Sannomiya Terminal Hotel;WSI-Kobe Sannomiya Terminal Hotel
+;WSI-Kobe Bay Sheraton Hotel and Towers;WSI-Kobe Bay Sheraton Hotel and Towers
+;WSI-Kobe the b;WSI-Kobe the b
+;WSI-Fukuoka Hotel Monterey La Soeur Fukuoka;WSI-Fukuoka Hotel Monterey La Soeur Fukuoka
+;WSI-Fukuoka Hilton Fukuoka Sea Hawk;WSI-Fukuoka Hilton Fukuoka Sea Hawk
+;WSI-Fukuoka Best Western Fukuoka Nakasu Inn;WSI-Fukuoka Best Western Fukuoka Nakasu Inn
+;WSI-Fukuoka Canal City Fukuoka Washington Hotel;WSI-Fukuoka Canal City Fukuoka Washington Hotel
+;WSI-Fukuoka Hotel Nikko Fukuoka;WSI-Fukuoka Hotel Nikko Fukuoka
+;WSI-Kawasaki Mets Kawasaki Hotel;WSI-Kawasaki Mets Kawasaki Hotel
+;WSI-Kawasaki Mets Mizonokuchi Hotel;WSI-Kawasaki Mets Mizonokuchi Hotel
+;WSI-Kawasaki Hotel Sunroute Kawasaki;WSI-Kawasaki Hotel Sunroute Kawasaki
+;WSI-Kawasaki Pearl Hotel Kawasaki;WSI-Kawasaki Pearl Hotel Kawasaki
+;WSI-Kawasaki Grand Hotel;WSI-Kawasaki Grand Hotel

@@ -1,0 +1,34 @@
+*** Settings ***
+Library           de.hybris.platform.atddimpex.keywords.ImpexKeywordLibrary
+Library           de.hybris.platform.commerceservicesatddtests.keywords.CommerceServicesKeywordLibrary
+Library           de.hybris.platform.xyformsatddtests.yformfacade.keywords.YFormFacadeKeywordLibrary
+
+*** Keywords ***
+import sampledata
+    [Documentation]    Imports the yform test data
+    import impex from resource    /impex/testYFormDefinitionAutosave.csv
+
+############
+### Get, Create, Update and Create or update YFormData model
+############
+verify get y form data with "${formDataId:[^"]+}" and type "${formDataType:[^"]+}" exists
+    [Documentation]    Get the YFormData model with given formDataId and type
+    verify y form data with type exists   ${formDataId}   ${formDataType}
+
+verify not existed y form data "${formDataId:[^"]+}" with type "${formDataType:[^"]+}" expect exception "${exception:[^"]+}"
+    [Documentation]    verify throws exception if y form data with given type not existed
+    verify y form data with type not existed throws exception    ${formDataId}    ${formDataType}    ${exception}
+
+create or update y form data by "${applicationId:[^"]+}" and "${formId:[^"]+}" and "${formDataId:[^"]+}" with type "${type:[^"]+}" and content "${formDataContent:[^"]+}"
+    [Documentation]    Create or update a YFormData model with given formDataId and formDataContent, which is based on the YFormDefinition with given applicationId and formId
+    create or update y form data with type   ${applicationId}    ${formId}    ${formDataId}    ${type}    ${formDataContent}
+
+############
+### Keywords borrowed from YForm_Keywords.txt
+############
+get y form definition from template with "${applicationId:[^"]+}" and "${formId:[^"]+}" and "${content:[^"]+}"
+    [Documentation]    Get a YFormDefinition based on a template
+    ${body}=    get y form definition from template    ${applicationId}    ${formId}    ${content}
+    [Return]    ${body}
+
+    

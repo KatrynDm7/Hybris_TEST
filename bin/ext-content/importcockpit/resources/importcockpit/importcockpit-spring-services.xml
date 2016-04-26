@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-autowire="byName">
+
+	<alias alias="mappingLineConfigurationFactory" name="defaultMappingLineConfigurationFactory" />
+	<bean id="defaultMappingLineConfigurationFactory" class="de.hybris.platform.importcockpit.services.config.mapping.impl.MappingLineConfigurationFactory" scope="tenant" parent="jaxbBasedUIComponentConfigurationFactory">
+		<property name="jaxbClass" value="de.hybris.platform.importcockpit.services.config.mapping.jaxb.mappingline.MappingLine"/>
+		<property name="schemaResource" value="classpath:/mapping-line.xsd"/>
+	</bean>
+
+	<alias alias="targetsConfigurationFactory" name="defaultTargetsConfigurationFactory" />
+	<bean id="defaultTargetsConfigurationFactory" class="de.hybris.platform.importcockpit.services.config.mapping.impl.TargetsConfigurationFactory" scope="tenant" parent="jaxbBasedUIComponentConfigurationFactory">
+		<property name="jaxbClass" value="de.hybris.platform.importcockpit.services.config.mapping.jaxb.targets.Targets"/>
+		<property name="schemaResource" value="classpath:/targets.xsd"/>
+	</bean>
+
+	<alias alias="cockpitPropertyService" name="defaultImportCockpitPropertyService"/>
+	<bean id="defaultImportCockpitPropertyService" class="de.hybris.platform.importcockpit.services.meta.impl.DefaultImportCockpitPropertyService" scope="tenant"/>
+
+	<alias alias="loginService" name="defaultLoginService" />
+	<bean id="defaultLoginService" class="de.hybris.platform.importcockpit.services.login.impl.LoginServiceImpl" scope="tenant">
+		<property name="configurationService" ref="configurationService"/>
+	</bean>
+
+</beans>

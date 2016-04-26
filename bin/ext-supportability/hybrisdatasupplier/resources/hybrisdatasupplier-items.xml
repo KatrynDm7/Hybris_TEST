@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+<!-- ATTENTION: This is just an example file. You have to edit it according 
+	to your needs. -->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<itemtypes>
+
+		<itemtype generate="true" code="DataSupplierCronJob"
+			jaloclass="de.hybris.datasupplier.jalo.DataSupplierCronJob" extends="CronJob"
+			autocreate="true">
+			<attributes>
+				<attribute type="java.lang.Boolean" qualifier="savePayload">
+					<persistence type="property"></persistence>
+				</attribute>
+				<attribute type="CatalogUnawareMedia" qualifier="recentPayload">
+					<persistence type="property"></persistence>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="GenericDataSupplierGenerationWizard" extends="WizardBusinessItem"
+			jaloclass="de.hybris.datasupplier.jalo.GenericDataSupplierGenerationWizard"
+			autocreate="true" generate="true">
+			<attributes>
+				<attribute type="java.lang.Boolean" qualifier="dataHub"
+					autocreate="true" generate="true">
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.Boolean" qualifier="oms"
+					autocreate="true" generate="true">
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.Boolean" qualifier="ems"
+					autocreate="true" generate="true">
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.Boolean" qualifier="sbg"
+					autocreate="true" generate="true">
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.Boolean" qualifier="savePayload"
+					autocreate="true" generate="true">
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.Long" qualifier="supplyDelay"
+					autocreate="true" generate="true">
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="datahubPropertiesFile"
+					autocreate="true" generate="true">
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="datahubWebapp"
+					autocreate="true" generate="true">
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="datahubWebappXml"
+					autocreate="true" generate="true">
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="omsPropertiesFilename"
+					autocreate="true" generate="true">
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="omsPropertiesLocation"
+					autocreate="true" generate="true">
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="emsWebapp"
+					autocreate="true" generate="true">
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="emsPomFile"
+					autocreate="true" generate="true">
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="sbgWebapp"
+					autocreate="true" generate="true">
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="sbgPomFile"
+					autocreate="true" generate="true">
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="sldregLocation"
+					autocreate="true" generate="true">
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="sldregConfigLocation"
+					autocreate="true" generate="true">
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="systemId"
+					autocreate="true" generate="true">
+					<persistence type="property" />
+				</attribute>
+				<attribute type="Media" qualifier="generatedWar"
+					autocreate="true" generate="true">
+					<persistence type="property" />
+				</attribute>
+
+			</attributes>
+		</itemtype>
+
+	</itemtypes>
+</items>

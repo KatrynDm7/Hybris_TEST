@@ -1,0 +1,718 @@
+apply plugin: 'installer-platform-plugin'
+
+task setup << {
+
+  println 'hello! you are in choose scenario script'
+  
+  String scenario = readScenario() ;
+  println 'Scenario is: ' + scenario;
+  if( scenario == 'customization'){	
+	customizationScenario()
+  }
+  else{
+   patchScenario();
+
+ }
+  finishSuccessfully ();
+}
+
+String  readScenario() {
+ String workingDir = project["startDir"];
+ Properties props = readProperties( new File(workingDir), "project.properties" )	  
+ String scenario =  props.getProperty('cts.changepackage.use-case');
+ return scenario;
+}
+
+//-----------------------------------------------------------------------------------
+// patchScenario
+
+void patchScenario() {
+  println 'hello! you are in import patch scenario'
+  	
+	String workingDir = project["startDir"];
+	Properties props = readProperties( new File(workingDir), "project.properties" )	  
+
+  if(runMaintenace(props)){
+    runMaintenanceBefore(props);
+    println 'After maintenance before in patch scenario'
+  }
+ 
+  runCustomLogic(props)
+  println 'After custom logic in patch scenario'
+  
+   if(runMaintenace(props)){
+      runMaintenanceAfter(props);
+      println 'After maintenance after in patch scenario'
+   }
+}
+
+Properties readProperties() {
+ Properties props = new Properties();
+ props.load(new FileInputStream("project.properties"));
+ return props;
+}
+
+void runMaintenanceBefore(Properties props)  {
+ String fileName = beforeMaintenanceScriptName(props);
+ String path =  ppMaintenanceScriptsPath(props);
+ executeCustomScript(path,fileName);
+}
+
+void runCustomLogic(Properties props){
+ String fileName = customScriptName(props);
+ String path =  ppMaintenanceScriptsPath(props);
+ executeCustomScript(path,fileName);
+}
+
+void runMaintenanceAfter(Properties props)  {
+  String fileName = afterMaintenanceScriptName(props);
+  String path =  ppMaintenanceScriptsPath(props);
+  executeCustomScript(path,fileName);
+}
+
+boolean isLinuxOS(){
+if (System.getProperty("os.name").equalsIgnoreCase("linux"))
+{
+  return true
+}	
+return false;
+}
+
+
+void executeCustomScript(String path, String fileName) {
+  checkFileExistence(path,fileName);
+  def result = exec
+  {
+    workingDir path
+    ignoreExitValue true
+
+    if(isLinuxOS())
+    {
+       commandLine 'sh','./' + fileName;
+    }
+    else
+    {
+       commandLine 'cmd', '/c', fileName
+    }
+  }
+  println "script  result is: " +  result.exitValue + " however, it will be ignored"
+}
+
+
+boolean checkFileExistence(String path, String fileName){
+  File filetoTest = new File(path + File.separator + fileName);
+  if(!filetoTest .exists())
+  {
+     terminateGradleScript('cannot find a file: ' + filetoTest.toString()); 
+  }
+  else
+  {
+     println 'file exists: ' + filetoTest.toString();
+  }
+}
+
+void terminateGradleScript (String message) {
+  logError("8");
+  logMessage(message);
+  println 'Gradle script stopped! Reason is: ' + message;
+  throw new StopActionException (message);
+}
+
+void logError( String returnCode){
+  Writer codeWriter = new PrintWriter(deployFolderPath() + File.separator + "returncode.log", "UTF-8");
+  codeWriter.println(returnCode);
+  codeWriter.close();
+}
+
+void logMessage(String errorMessage){
+  Writer messageWriter  = new BufferedWriter(new FileWriter(deployFolderPath() + File.separator + "messages.log", true));
+  messageWriter.println(errorMessage);
+  messageWriter.close();
+}
+
+String getScriptExtension(){
+ 	if(isLinuxOS())
+    {
+       return '.sh';
+    }
+
+    return '.bat'
+}
+
+String beforeMaintenanceScriptName(Properties props) {
+  String extension = getScriptExtension();
+  return 'custom-pp-before-maintenance' + extension;
+}
+
+String afterMaintenanceScriptName(Properties props) {
+  String extension = getScriptExtension()
+  return 'custom-pp-after-maintenance' + extension;
+}
+
+String customScriptName(Properties props) {
+  String extension = getScriptExtension()
+  return 'custom-pp' + extension;
+}
+
+
+String ppMaintenanceScriptsPath(Properties props) { 
+	String path = props.getProperty('pp-scripts-path', calculateMaintenaceScriptsPath())
+	if( "".equals(path) ){
+		path = calculateMaintenaceScriptsPath()
+	}	
+	return path  
+}
+
+boolean runMaintenace(Properties props){
+  return props.getProperty('pp-run-patch-automatically','false').toBoolean()
+}
+
+String calculateMaintenaceScriptsPath() {
+  return deployFolderPath() + File.separator + 'other-scripts' + File.separator + 'deployScripts';
+} 
+
+void finishSuccessfully () {
+         logError("0");
+         logMessage("Gradle script finished successfully");
+         println 'Gradle script finished successfully';
+}
+
+// end of patchScenario
+//-----------------------------------------------------------------------------------
+
+
+// customizationScenario
+
+void customizationScenario () {
+	
+	def myPlatform = platformFactory.createPlatform()
+	String workingDir = project["startDir"];
+	Properties props = readProperties( new File(workingDir), "project.properties" )	
+	boolean runMaintenanceAut = runMaintenaceAutomatically( props )
+	
+	if( runMaintenanceAut ) {
+		runMaintenanceBeforeOC( props )
+		println 'After maintenance before'
+	}
+	
+	copyCustomExtensions()
+	copyLocalProperties()
+	copyLocalExtensions()
+	
+	if ( runImpexBeforeAutomatically(props) ) {
+		CharSequence keyWord = "before"
+		runImpexScripts( keyWord )	
+		println 'After import impex before'	
+	}
+
+	if( runDBScriptsBeforeAutomatically( props ) ) {
+		CharSequence keyWord = "before"
+		runDBScripts( keyWord  )
+		println 'After execute db scripts before'	
+	}
+	
+	executeAntCustomize()
+	
+	if ( runOCCustomLogicBeforeAutomatically(props) ) {
+		runOCCustomLogicBefore( props )
+		println 'After maintenance after '
+	}
+	
+	executeAntCleanAllOnPlatform()
+	
+	String updateType = typeOfUpdate( props )
+	
+	if ( "init".equalsIgnoreCase(updateType) ) {
+		runInit()
+	}
+	else if ( "update".equalsIgnoreCase(updateType) ) {
+		runUpdate()
+	}
+	
+	if ( runImpexAfterAutomatically(props) ) {
+		CharSequence keyWord = "after"
+		runImpexScripts( keyWord )
+		println 'After import impex after'
+	}
+	
+	if( runDBScriptsAfterAutomatically( props ) ) {
+		CharSequence keyWord = "after"
+		runDBScripts( keyWord  )	
+		println 'After execute db scripts after'		
+	}
+	
+	if ( runOCCustomLogicAfterAutomatically(props) ) {
+		runOCCustomLogicAfter( props )
+		println 'After custom logic after'
+	}	
+
+	if( runMaintenanceAut ) {
+		runMaintenanceAfterOC( props )
+		println 'After maintenance after'
+	}
+		
+}
+
+void executeAntCustomize() {
+	def myPlatform = platformFactory.createPlatform()
+	myPlatform.executeAntTarget( 'customize' )
+}
+
+void executeAntCleanAllOnPlatform() {
+	try {
+		def myPlatform = platformFactory.createPlatform()
+		myPlatform.build()		
+	}
+	catch ( IllegalStateException ise ) {
+		terminateGradleScript( "Exception running initialization") ;
+	}
+}
+
+void runInit()  {
+	try {
+		def myPlatform = platformFactory.createPlatform()		
+		myPlatform.initialize()
+	}
+	catch ( IllegalStateException ise ) {
+		terminateGradleScript( "Exception running initialization") ;
+	}
+}
+
+void runUpdate()  {
+	try {
+		def myPlatform = platformFactory.createPlatform()	
+		myPlatform.update()
+	}
+	catch ( IllegalStateException ise ) {
+		terminateGradleScript( "Exception running update" )
+	}	
+}
+
+void runImpexScripts( CharSequence keyWord ) {
+	def myPlatform = platformFactory.createPlatform()
+	File impexFolder = new File( calculateOtherScriptsPath() )
+	File[] listOfImpexFiles = impexFolder.listFiles()
+	List<File> impexToExecute = new ArrayList<File>()	
+	
+	String extension = ""
+	
+    for (File currentFile : listOfImpexFiles ) {
+		if ( !( currentFile.isFile() ) ) {
+			continue
+		}	
+		String fileName = currentFile.getName()	
+		int index = fileName.lastIndexOf('.')
+		if (index > 0) {
+			extension = fileName.substring(index+1)
+		}
+		
+		if ( !("impex".equals(extension) || "csv".equals(extension)) ) {
+			continue
+		}				
+		if ( !fileName.contains(keyWord) ) {
+			continue
+		}		
+		impexToExecute.add( currentFile )
+    }		
+			
+	try {
+		for (File currentFile : impexToExecute ) {
+			if ( isLinuxOS() ) {
+				myPlatform.executeAntTarget( 'importImpex', '-Dresource='+currentFile.getPath() )
+			}
+			else { 
+				myPlatform.executeAntTarget( 'importImpex', '-Dresource='+currentFile.getPath().replace(File.separator, "/") )
+			}			
+		}
+	}
+	catch ( IllegalStateException ise ) {
+		terminateGradleScript ( "Exception running impex scripts" )
+	}	
+	
+}
+
+Properties readProperties( File workingDir, String propertiesFile ) {
+
+	Properties props = new Properties()
+	
+	try {
+		props.load( new FileInputStream( workingDir.getPath() + File.separator + propertiesFile ) )
+	}
+	catch ( FileNotFoundException fnfe ) {
+		terminateGradleScript   ( "Attempt to open file: "+propertiesFile+" has failed" )
+	}
+	catch ( IOException iox ) {
+		terminateGradleScript  ( "I/O exception of some sort has occurred while trying to open:"+propertiesFile )
+	}	
+	
+	return props
+}
+
+Properties readProperties( File propertiesFile ) {
+
+	Properties props = new Properties()
+	
+	try {		
+		props.load( new FileInputStream( propertiesFile ) )
+	}
+	catch ( FileNotFoundException fnfe ) {
+		terminateGradleScript  ( "Attempt to open file: "+propertiesFile+" has failed" )
+	}
+	catch ( IOException iox ) {
+		terminateGradleScript  ( "I/O exception of some sort has occurred while trying to open:"+propertiesFile )
+	}		
+	
+	return props
+}
+
+boolean runMaintenaceAutomatically( Properties props ) {
+	return props.getProperty('oc-run-maintenance-automatically','false').toBoolean()
+}
+
+String typeOfUpdate( Properties props) {
+	return props.getProperty( "cts.changepackage.update-type", "none")
+}
+
+boolean runImpexBeforeAutomatically( Properties props ) {
+	return props.getProperty('oc-run-impex-scripts-before','false').toBoolean()
+}
+
+boolean runImpexAfterAutomatically( Properties props ) {
+	return props.getProperty('oc-run-impex-scripts-after','false').toBoolean()
+}
+
+boolean runDBScriptsBeforeAutomatically( Properties props ) {
+	return props.getProperty('oc-run-db-scripts-before','false').toBoolean()
+}
+
+boolean runOCCustomLogicBeforeAutomatically( Properties props ) {
+	return props.getProperty('oc-run-custom-logic-before','false').toBoolean()
+}
+
+boolean runOCCustomLogicAfterAutomatically( Properties props ) {
+	return props.getProperty('oc-run-custom-logic-after','false').toBoolean()
+}
+
+boolean runDBScriptsAfterAutomatically( Properties props ) {
+	return props.getProperty('oc-run-db-scripts-after','false').toBoolean()
+}
+
+String useCase( Properties props) {
+	return props.getProperty('cts.changepackage.use-case')	
+}
+
+void runMaintenanceBeforeOC( Properties props )  {
+	String fileName = beforeMaintenanceScriptNameOC( props )
+	String path = ocDeployScriptsPath( props )
+	
+	executeCustomScript(path,fileName);	
+	println 'After maintenance before'
+}
+
+void runMaintenanceAfterOC( Properties props )  {
+	String fileName = afterMaintenanceScriptNameOC( props )
+	String path = ocDeployScriptsPath( props )
+	
+	executeCustomScript(path,fileName);	
+	println 'After maintenance after'
+}
+
+void runOCCustomLogicBefore( Properties props )  {
+	String fileName = customLogicBeforeScriptName( props )
+	String path = ocDeployScriptsPath( props )
+	
+	executeCustomScript(path,fileName);	
+	println 'After custom logic before'
+}
+
+void runOCCustomLogicAfter( Properties props )  {
+	String fileName = customLogicAfterScriptName( props )
+	String path = ocDeployScriptsPath( props )	
+	
+	executeCustomScript(path,fileName);	
+	println 'After custom logic after'
+}
+
+String beforeMaintenanceScriptNameOC( Properties props ) {
+	String extension = getScriptExtension()
+	return 'custom-oc-before-maintenance' + extension
+}
+
+String afterMaintenanceScriptNameOC( Properties props ) {
+	String extension = getScriptExtension()
+	return 'custom-oc-after-maintenance' + extension
+}
+
+String customLogicBeforeScriptName( Properties props ) {
+	String extension = getScriptExtension()
+	return 'custom-oc-before-logic' + extension
+}
+
+String customLogicAfterScriptName(Properties props) {
+	String extension = getScriptExtension()
+	return 'custom-oc-after-logic' + extension
+}
+
+String ocDeployScriptsPath( Properties props ) {
+	String ocDeployScriptsPath = props.getProperty('oc-scripts-path', calculateDeployScriptsPath())
+	
+	if( "".equals(ocDeployScriptsPath) ){
+		ocDeployScriptsPath = calculateDeployScriptsPath()
+	}	
+	return ocDeployScriptsPath
+}
+
+void runDBScripts( CharSequence keyWord ) {
+	def myPlatform = platformFactory.createPlatform()
+
+	File dbFolder = new File( calculateDBScriptsPath() )
+	File[] listOfFiles = dbFolder.listFiles()
+	List<File> filesToExecute = new ArrayList<File>()	
+	
+    for (File currentFile : listOfFiles ) {
+		if ( !currentFile.isFile() ) {
+			continue
+		}
+		String fileName = currentFile.getName()
+		if ( !fileName.contains(keyWord) ) {
+			continue
+		}		
+		filesToExecute.add( currentFile )
+    }
+	
+	try {
+		for (File currentFile : filesToExecute ) {
+			myPlatform.executeAntTarget('executesql','-Dsql.file='+currentFile.getPath())
+		}
+	}
+	catch ( IllegalStateException ise ) {
+		terminateGradleScript  ( "Exception running DB scripts" )
+	}
+}
+
+
+
+String customFolderSourcePath() {	
+	String customFolderSourcePath = deployFolderPath() + File.separator + "hybris" + File.separator + "bin" + File.separator +"custom"	
+	return customFolderSourcePath
+}
+
+String customFolderTargetPath() {
+	String customFolderTargetPath = new File(platformHome).getParentFile().getParent()
+	return customFolderTargetPath + File.separator + "bin" +File.separator +"custom"	
+}
+
+
+String calculateDeployScriptsPath() {
+	String deployScriptsPath = deployFolderPath() + File.separator + "other-scripts" + File.separator + "deployScripts"	
+	return deployScriptsPath
+}
+
+String calculateOtherScriptsPath() {
+	String otherScriptsPath = deployFolderPath() + File.separator + "other-scripts"	
+	return otherScriptsPath
+}
+
+String calculateDBScriptsPath() {
+	String dbScriptsPath = deployFolderPath() + File.separator + "db-package"	
+	return dbScriptsPath
+}
+
+void copyCustomExtensions() {
+
+	try {
+		String customFolderSource = customFolderSourcePath()
+		String customFolderTarget = customFolderTargetPath()
+		
+		// Check if an extension is already on the customFolderTarget
+		// if it is, delete it and copy the one from customFolderSource
+		File customFS = new File( customFolderSource )
+		File[] listOfExtensionOnCustomSource = customFS.listFiles()
+		
+		File customFT = new File( customFolderTarget )
+		File[] listOfExtensionOnCustomTarget = customFT.listFiles()
+		List<String> listOfExtNamesCT = new ArrayList<String>()
+		
+		
+		for( File currentFile : listOfExtensionOnCustomTarget ) {
+			listOfExtNamesCT.add( currentFile.getName() )
+		}
+		
+		for( File currentFile : listOfExtensionOnCustomSource ) {
+			if ( currentFile.isFile() ) {
+				continue
+			}
+			String extName = currentFile.getName()
+			if ( listOfExtNamesCT.contains( extName ) ) {
+				String folderToDelete = customFolderTarget + File.separator + extName
+				deleteFolderWithContent( folderToDelete, true )
+			}		
+		}	
+			
+		copy {
+			from customFolderSource
+			into customFolderTarget
+		}	
+	}
+	catch( IOException iox ) {
+		terminateGradleScript  ( "I/O exception of some sort has occurred while trying to copy custom extensions" )
+	}
+	
+	println 'After copy custom extension'
+}
+
+boolean deleteFolderWithContent( String filePath, boolean recursive ) {
+	File file = new File( filePath )
+	if ( !file.exists() ) {
+		return true
+	}
+	
+	if ( !recursive || !file.isDirectory() ) {
+		return file.delete()
+	}
+
+	String[] list = file.list()
+	for (int i = 0; i < list.length; i++) {
+		if ( !deleteFolderWithContent(filePath + File.separator + list[i], true) ) {
+			return false
+		}
+	}
+	return file.delete()
+}
+
+void copyLocalProperties() {
+
+	BufferedReader readerT = null
+	BufferedWriter writer = null
+	File inputFileT = null
+	File outputFile = null
+	
+	try {
+
+		String workingDir = project["startDir"];
+		
+		Properties blackList = readProperties( new File(workingDir), "blacklist.properties" )
+		Set<String> blackListedProps = blackList.stringPropertyNames()
+				
+		File inputFileS = new File( sourceConfigFolder()+File.separator+"local.properties" )
+		Properties localPropertiesSource = readProperties( inputFileS )
+		Set<String> newProps = localPropertiesSource.stringPropertyNames()
+		
+		inputFileT = new File( platformConfig +File.separator+"local.properties" )
+		readerT = new BufferedReader( new FileReader( inputFileT ) )
+			
+		outputFile = new File( platformConfig +File.separator+"Newlocal.properties" )	
+		writer = new BufferedWriter( new FileWriter( outputFile ) )
+				
+		String currentLine = ""
+		
+		while( (currentLine = readerT.readLine()) != null ) {
+			
+			if ( "".equals(currentLine) ) {
+				writer.write( System.getProperty("line.separator") )
+				continue
+			}
+			
+			String[] keyValuePair = currentLine.split("=")
+			String key = keyValuePair[0]
+			
+			if ( blackListedProps.contains(key) ) {
+				writer.write(currentLine + System.getProperty("line.separator"))
+				continue
+			}
+			else {
+				if( newProps.contains(key) ) {
+					
+					String value = localPropertiesSource.getProperty( key )
+					currentLine = key+"="+value
+					writer.write( currentLine + System.getProperty("line.separator") )
+					newProps.remove( key )
+				}
+			}				
+			
+		}
+		
+		boolean firstLine = true
+		
+		for( String key : newProps ) {
+			
+			if ( key.matches("website.*.*") || key.matches("media.*.*") || key.matches("#.*") ) {
+				continue
+			}
+			if ( blackListedProps.contains(key) ) {
+				continue
+			}
+			if( firstLine ) {
+				writer.write( System.getProperty("line.separator") )
+				firstLine = false
+			}
+			String property = key +"="+ localPropertiesSource.getProperty( key )
+			writer.write(property + System.getProperty("line.separator"))
+		}
+		
+	}
+	catch( IOException iox ) {
+		terminateGradleScript  ( "I/O exception of some sort has occurred while trying to read/write local.properties" )
+	}
+	finally {
+		if(  writer != null ) {
+			writer.close()
+		}	
+		if (  readerT != null ) {
+			readerT.close()
+			
+			if( inputFileT != null ) {
+				deleteFile( inputFileT )
+			}
+			
+			File finalOutput = new File( platformConfig +File.separator+"local.properties" )
+			
+			if( outputFile!= null ) {
+				outputFile.renameTo( finalOutput )
+			}
+		}	
+	}	
+	println 'After copy local properties'
+}
+
+void deleteFile(File fileToDelete) {
+	try {
+		java.nio.file.Files.delete( fileToDelete.toPath() )
+	}
+	catch (IOException x) {
+		terminateGradleScript  ( "I/O exception of some sort has occurred while trying to read/write local.properties" )
+	}	
+}
+
+String sourceDBPackage() {
+	String sourceDBPackagePath = deployFolderPath()+File.separator+"db-package"	
+	return sourceDBPackagePath
+}
+
+String sourceConfigFolder() {
+	String sourceConfigFolderPath = deployFolderPath()+File.separator+"hybris"+File.separator+"config"	
+	return sourceConfigFolderPath
+}
+
+
+String deployFolderPath() {
+	return project["startDir"];
+}
+
+
+void copyLocalExtensions() {
+	
+	File localExtensionsFile = new File( sourceConfigFolder()+File.separator+"localextensions.xml" )	
+	
+	String sourceLocalExtensions = localExtensionsFile.getPath()
+	String targetPlatformConfig = platformConfig
+	
+	copy {
+		from sourceLocalExtensions
+		into targetPlatformConfig
+	}	
+	println 'After copy local extensions'
+}
+
+// end of customizationScenario
+//-----------------------------------------------------------------------------------

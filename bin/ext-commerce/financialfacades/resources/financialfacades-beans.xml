@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+    <enum class="de.hybris.platform.commercefacades.product.ProductOption">
+        <value>THUMBNAIL</value>
+    </enum>
+
+    <bean class="de.hybris.platform.commercefacades.order.data.OrderEntryData">
+        <property name="formDataData" type="java.util.Collection&lt;de.hybris.platform.xyformsfacades.data.YFormDataData>"/>        
+    </bean>
+
+    <bean class="de.hybris.platform.commercefacades.order.data.CartData">
+        <property name="hasSessionFormData" type="Boolean"/>       
+    </bean>
+
+    <bean class="de.hybris.platform.commercefacades.quotation.InsuranceQuoteData">
+        <property name="quoteId" type="String"/>
+        <property name="quoteType" type="de.hybris.platform.financialservices.enums.QuoteType" />
+        <property name="state" type="de.hybris.platform.financialservices.enums.QuoteBindingState"/>
+        <property name="quoteWorkflowStatus" type="de.hybris.platform.financialservices.enums.QuoteWorkflowStatus"/>
+        <property name="quoteTitle" type="String" />
+        <property name="expiryDate" type="java.util.Date"/>
+        <property name="startDate" type="java.util.Date"/>
+        <property name="formattedExpiryDate" type="String"/>
+        <property name="formattedStartDate" type="String"/>
+        <property name="tripDestination" type="String"/>
+        <property name="tripStartDate" type="String"/>
+        <property name="tripEndDate" type="String"/>
+        <property name="tripNoOfDays" type="Integer"/>
+        <property name="tripNoOfTravellers" type="Integer"/>
+        <property name="propertyAddressLine1" type="String"/>
+        <property name="propertyCoverRequired" type="String"/>
+        <property name="propertyStartDate" type="String"/>
+        <property name="propertyType" type="String"/>
+        <property name="propertyValue" type="String"/>
+        <property name="tripTravellersAge" type="java.util.List&lt;String>"/>
+        <property name="autoDetail" type="de.hybris.platform.commercefacades.insurance.data.AutoDetailData"/>
+        <property name="lifeDetail" type="de.hybris.platform.commercefacades.insurance.data.LifeDetailData"/>
+    </bean>
+
+    <bean class="de.hybris.platform.commercefacades.quotation.QuotationRequestData">
+        <property name="userId" type="String"/>
+        <property name="email" type="String"/>
+        <property name="store" type="String"/>
+        <property name="currency" type="String"/>
+        <property name="items" type="java.util.List&lt;de.hybris.platform.commercefacades.quotation.QuotationItemRequestData>"/>
+        <property name="properties" type="java.util.Map&lt;String, String>"/>
+        <property name="providerName" type="String"/>
+    </bean>
+    
+    <bean class="de.hybris.platform.commercefacades.quotation.QuotationItemRequestData">
+        <property name="id" type="String"/>
+        <property name="properties" type="java.util.Map&lt;String, String>"/>       
+    </bean>
+    
+    <bean class="de.hybris.platform.commercefacades.quotation.QuotationResponseData">
+        <property name="items" type="java.util.List&lt;de.hybris.platform.commercefacades.quotation.QuotationItemResponseData>"/>
+        <property name="status" type="de.hybris.platform.commercefacades.quotation.Status"/>
+        <property name="properties" type="java.util.Map&lt;String, String>"/>
+    </bean>
+    
+    <bean class="de.hybris.platform.commercefacades.quotation.QuotationItemResponseData">
+        <property name="id" type="String"/>
+        <property name="payNowPrice" type="String"/>
+        <property name="recurringPrice" type="String"/>
+        <property name="properties" type="java.util.Map&lt;String, String>"/>
+    </bean>
+   
+    <bean class="de.hybris.platform.commercefacades.quotation.Status">
+        <property name="reasonCode" type="String"/>
+        <property name="message" type="String"/>
+    </bean>   
+
+    <bean class="de.hybris.platform.commercefacades.insurance.data.InsuranceCoverageData">
+        <property name="coverageProduct" type="de.hybris.platform.commercefacades.product.data.ProductData"/>
+        <property name="benefits" type="java.util.List&lt;de.hybris.platform.commercefacades.insurance.data.InsuranceBenefitData>"/>
+    </bean>
+    
+    <bean class="de.hybris.platform.commercefacades.insurance.data.InsuranceBenefitData">
+        <property name="name" type="String"/>
+        <property name="description" type="String"/>
+        <property name="coverageValue" type="String"/>
+    </bean>
+
+    <bean class="de.hybris.platform.commercefacades.insurance.data.InsurancePolicyData">
+        <property name="policyNumber" type="String"/>
+        <property name="policyStartDate" type="String"/>
+        <property name="policyEndDate" type="String"/>
+        <property name="mainProduct" type="de.hybris.platform.commercefacades.insurance.data.InsuranceCoverageData"/>
+        <property name="optionalProducts"
+                  type="java.util.List&lt;de.hybris.platform.commercefacades.insurance.data.InsuranceCoverageData>"/>
+        <property name="categoryData" type="de.hybris.platform.commercefacades.product.data.CategoryData"/>
+        <property name="recurringPrice" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+        <property name="oneTimePrice" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+        <property name="periodRetrievedFrom" type="String"/>
+        <property name="durationRetrievedFrom" type="String"/>
+        <property name="policyHolderDetail" type="de.hybris.platform.commercefacades.insurance.data.PolicyHolderDetailData"/>
+        <property name="travellers"
+                  type="java.util.List&lt;de.hybris.platform.commercefacades.insurance.data.TravellerDetailData>"/>
+        <property name="addressLine1" type="String"/>
+        <property name="propertyCoverRequired" type="String"/>
+        <property name="propertyType" type="String"/>
+        <property name="propertyValue" type="String"/>
+        <property name="autoDetail" type="de.hybris.platform.commercefacades.insurance.data.AutoDetailData"/>
+        <property name="lifeDetail" type="de.hybris.platform.commercefacades.insurance.data.LifeDetailData"/>
+        <property name="workFlowType" type="String"/>
+        <property name="documentationStatus" type="String"/>
+    </bean>
+    
+    <bean class="de.hybris.platform.commercefacades.insurance.data.InsurancePolicyListingData">
+        <property name="policyNumber" type="String"/>
+        <property name="policyStartDate" type="String"/>
+        <property name="policyExpiryDate" type="String"/>
+        <property name="policyRawStartDate" type="java.util.Date"/>
+        <property name="policyRawExpiryDate" type="java.util.Date"/>
+        <property name="policyUrl" type="String"/>
+    	<property name="policyProduct" type="de.hybris.platform.commercefacades.product.data.ProductData"/>
+    	<property name="policyPrice" type="String"/>
+    	<property name="policyImages" type="java.util.Collection&lt;de.hybris.platform.commercefacades.product.data.ImageData>"/>
+    </bean>
+
+	<bean class="de.hybris.platform.commercefacades.insurance.data.InsurancePolicyResponseData">
+        <property name="policyNumber" type="String"/>
+        <property name="policyStartDate" type="String"/>
+        <property name="policyExpiryDate" type="String"/>
+        <property name="policyUrl" type="String"/>
+	</bean>
+
+    <!--Insurance Quote List Data use for display Quote List at My Accounts and Homepage -->
+    <bean class="de.hybris.platform.commercefacades.insurance.data.InsuranceQuoteListingData">
+        <property name="planName" type="String"/>
+        <property name="quoteNumber" type="String"/>
+        <property name="quoteExpiryDate" type="String"/>
+        <property name="quoteRawExpiryDate" type="java.util.Date"/>
+        <property name="quotePrice" type="String"/>
+        <property name="quoteImages" type="java.util.Collection&lt;de.hybris.platform.commercefacades.product.data.ImageData>"/>
+        <property name="quoteIsExpired" type="java.lang.Boolean"/>
+        <property name="quoteIsBind" type="java.lang.Boolean"/>
+        <property name="retrieveQuoteCartCode" type="String"/>
+        <property name="quoteStatus" type="String"/>
+        <property name="isMonthly" type="java.lang.Boolean"/>
+        <property name="currentCartCode" type="String"/>
+        <property name="quoteWorkflowStatus" type="de.hybris.platform.financialservices.enums.QuoteWorkflowStatus"/>
+    </bean>
+    <!--END Insurance Quote List Data use for display Quote List at My Accounts and Homepage -->
+
+    <bean class="de.hybris.platform.commercefacades.order.data.AbstractOrderData">
+        <property name="insurancePolicy" type="java.util.List&lt;de.hybris.platform.commercefacades.insurance.data.InsurancePolicyData>"/>
+        <property name="insurancePolicyResponses" type="java.util.List&lt;de.hybris.platform.commercefacades.insurance.data.InsurancePolicyResponseData>"/>
+        <property name="insuranceQuote" type="de.hybris.platform.commercefacades.quotation.InsuranceQuoteData"/>
+    </bean>
+
+    <bean class="de.hybris.platform.storefront.form.data.FormDetailData">
+        <property name="applicationId" type="String"/>
+        <property name="formId" type="String"/>
+        <property name="formDataId" type="String"/>
+        <property name="refId" type="String"/>
+        <property name="orderEntryNumber" type="Integer"/>
+    </bean>
+
+    <bean class="de.hybris.platform.commercefacades.insurance.data.InsuranceQuoteReviewData"
+            extends="de.hybris.platform.commercefacades.insurance.data.InsurancePolicyData">
+        <property name="quoteId" type="String"/>
+        <property name="quoteExpires" type="String"/>
+        <property name="validation" type="java.util.Map&lt;String,java.lang.Boolean>"/>
+    </bean>
+
+    <bean class="de.hybris.platform.commercefacades.insurance.data.PolicyHolderDetailData">
+        <property name="title" type="String"/>
+        <property name="firstName" type="String"/>
+        <property name="lastName" type="String"/>
+        <property name="maritalStatus" type="String"/>
+        <property name="emailAddress" type="String"/>
+		<property name="homePhoneNumber" type="String"/>
+		<property name="phoneNumber" type="String"/>
+        <property name="mobilePhoneNumber" type="String"/>
+        <property name="preferredContactNumber" type="String"/>
+        <property name="propertyCorrespondenceAddress" type="String"/>
+        <property name="addressLine1" type="String"/>
+        <property name="addressLine2" type="String"/>
+        <property name="addressCity" type="String"/>
+        <property name="postcode" type="String"/>
+        <property name="addressCountry" type="String"/>
+    </bean>
+
+    <bean class="de.hybris.platform.commercefacades.insurance.data.TravellerDetailData">
+        <property name="firstName" type="String"/>
+        <property name="lastName" type="String"/>
+        <property name="age" type="Integer"/>
+    </bean>
+    
+    <bean class="de.hybris.platform.commercefacades.insurance.data.AutoDetailData">
+        <property name="autoLicense" type="String"/>
+        <property name="autoMake" type="String"/>
+        <property name="autoModel" type="String"/>
+        <property name="autoYear" type="String"/>
+        <property name="autoPrice" type="String"/>
+        <property name="autoState" type="String"/>
+        <property name="autoDateOfBirth" type="java.util.Date"/>
+        <property name="autoFormattedDateOfBirth" type="String"/>
+        <property name="autoCoverStart" type="java.util.Date"/>
+        <property name="autoFormattedCoverStart" type="String"/>
+    </bean>
+    
+    <bean class="de.hybris.platform.commercefacades.insurance.data.LifeDetailData">
+        <property name="lifeWhoCovered" type="String"/>
+        <property name="lifeCoverageAmount" type="String"/>
+        <property name="lifeCoverageLast" type="String"/>
+        <property name="lifeCoverStartDate" type="String"/>
+        <property name="lifeMainDob" type="String"/>
+        <property name="lifeMainSmoke" type="String"/>
+        <property name="lifeSecondDob" type="String"/>
+        <property name="lifeSecondSmoke" type="String"/>
+        <property name="lifeRelationship" type="String"/>
+    </bean>
+
+    <bean class="de.hybris.platform.commercefacades.insurance.data.CustomerFormSessionData">
+        <property name="customerUid" type="String"/>
+        <property name="formSessionData" type="java.util.List&lt;de.hybris.platform.commercefacades.insurance.data.FormSessionData>"/>
+    </bean>
+    
+    <bean class="de.hybris.platform.commercefacades.insurance.data.FormSessionData">
+        <property name="yFormDataId" type="String"/>
+        <property name="yFormDefinition" type="de.hybris.platform.xyformsfacades.data.YFormDefinitionData"/>
+        <property name="yFormDataRefId" type="String"/>
+    </bean>
+
+    <bean class="de.hybris.platform.subscriptionfacades.data.BillingTimeData">
+        <property name="helpContent" type="String"/>
+    </bean>
+
+    <bean class="de.hybris.platform.commercefacades.product.data.ProductData">
+        <property name="defaultCategory" type="de.hybris.platform.commercefacades.product.data.CategoryData"/>
+        <property name="specifications" type="java.util.List&lt;String>"/>
+    </bean>
+
+    <bean class="de.hybris.platform.financialfacades.findagent.data.AgentData"
+          extends="de.hybris.platform.commercefacades.user.data.CustomerData">
+        <property name="categories" type="java.util.List&lt;de.hybris.platform.commercefacades.product.data.CategoryData&gt;"/>
+        <property name="enquiryData" type="de.hybris.platform.commercefacades.user.data.AddressData"/>
+        <property name="thumbnail" type="de.hybris.platform.commercefacades.product.data.ImageData"/>
+	</bean>
+	
+    <bean class="de.hybris.platform.commercefacades.insurance.data.PolicyRequestData">
+        <property name="items" type="java.util.List&lt;de.hybris.platform.commercefacades.insurance.data.PolicyItemRequestData>"/>
+    </bean>
+    
+    <bean class="de.hybris.platform.commercefacades.insurance.data.PolicyItemRequestData">
+        <property name="id" type="String"/>
+        <property name="properties" type="java.util.Map&lt;String, String>"/>
+    </bean>
+    
+    <bean class="de.hybris.platform.commercefacades.insurance.data.PolicyResponseData">
+        <property name="items" type="java.util.List&lt;de.hybris.platform.commercefacades.insurance.data.PolicyItemResponseData>"/>
+    </bean>
+    
+    <bean class="de.hybris.platform.commercefacades.insurance.data.PolicyItemResponseData">
+        <property name="id" type="String"/>
+        <property name="properties" type="java.util.Map&lt;String, String>"/>
+    </bean>
+
+    <!--DTO to access to the Quote Back-office Service-->
+    <bean class="de.hybris.platform.commercefacades.insurance.data.QuoteRequestData">
+        <property name="items" type="java.util.List&lt;de.hybris.platform.commercefacades.insurance.data.QuoteItemRequestData>"/>
+    </bean>
+
+    <bean class="de.hybris.platform.commercefacades.insurance.data.QuoteItemRequestData">
+        <property name="id" type="String"/>
+        <property name="properties" type="java.util.Map&lt;String, String>"/>
+    </bean>
+
+    <bean class="de.hybris.platform.commercefacades.insurance.data.QuoteResponseData">
+        <property name="items" type="java.util.List&lt;de.hybris.platform.commercefacades.insurance.data.QuoteItemResponseData>"/>
+    </bean>
+
+    <bean class="de.hybris.platform.commercefacades.insurance.data.QuoteItemResponseData">
+        <property name="id" type="String"/>
+        <property name="properties" type="java.util.Map&lt;String, String>"/>
+    </bean>
+    <!--END DTO to access to the Quote Back-office Service-->
+
+</beans>

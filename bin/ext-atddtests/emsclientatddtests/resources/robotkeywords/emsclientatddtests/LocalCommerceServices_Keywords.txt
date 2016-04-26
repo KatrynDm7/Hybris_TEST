@@ -1,0 +1,25 @@
+*** Settings ***
+Library           de.hybris.platform.atddimpex.keywords.ImpexKeywordLibrary
+Library           de.hybris.platform.emsclientatddtests.keywords.emsclient.LocalCommerceServicesKeywordLibrary
+Library           de.hybris.platform.emsclientatddtests.keywords.emsclient.LocalImpexKeywordLibrary
+Resource		  impex/Impex_Keywords.txt
+
+*** Keywords ***
+
+WITH_LOCAL_COMMERCESERVICES_WORKAROUND login customer with id "${userUID:[^"]+}"
+	[Documentation]    log in as the given user
+	login with workaround   ${userUID}
+
+USING_HYBRIS_API create customer "${userUID:[^"]+}"
+   [Documentation]    Creates a customer with the given unique ID. The default currency is set.
+   create customer with hybris api  ${userUID}   1234   mr   Test   User_${userUID}
+### The following keywords come from CommerceServices_Keywords/create customer
+   @{binding}    create list    userUID    ${userUID}    userPriceGroupCode    ${EMPTY}    currencyIsocode    ${EMPTY}
+   ${templateName}=    Set Variable    impex-templates/customer/customer-insert.impex.vm
+   ${impEx}=    generate impex from template    ${templateName}    @{binding}
+   import impex "${impEx}" use template "${templateName}"
+
+prepare emsclientatddtests test setup
+   [Documentation]    Prepares Test with essential/data data.
+   import impex from resource without failing if resource does not exist   /impex/testCommerceCart.csv
+   import impex from resource    /impex/prepare-for-checkout.csv

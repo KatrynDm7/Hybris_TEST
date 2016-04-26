@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="output" path="eclipsebin/notused"/>
+
+
+				
+				
+				
+				
+				
+				
+	<classpathentry exported="false" kind="src" path="/platform" />
+	<classpathentry exported="true" kind="lib" path="lib/spring-integration-event-4.1.2.RELEASE.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/spring-integration-feed-4.1.2.RELEASE.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/spring-integration-file-4.1.2.RELEASE.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/spring-integration-ftp-4.1.2.RELEASE.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/spring-integration-groovy-4.1.2.RELEASE.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/spring-integration-http-4.1.2.RELEASE.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/spring-integration-ip-4.1.2.RELEASE.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/spring-integration-jdbc-4.1.2.RELEASE.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/spring-integration-jms-4.1.2.RELEASE.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/spring-integration-jmx-4.1.2.RELEASE.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/spring-integration-mail-4.1.2.RELEASE.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/spring-integration-rmi-4.1.2.RELEASE.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/spring-integration-security-4.1.2.RELEASE.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/spring-integration-sftp-4.1.2.RELEASE.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/spring-integration-stream-4.1.2.RELEASE.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/spring-integration-test-4.1.2.RELEASE.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/spring-integration-twitter-4.1.2.RELEASE.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/spring-integration-ws-4.1.2.RELEASE.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/spring-integration-xml-4.1.2.RELEASE.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/spring-integration-xmpp-4.1.2.RELEASE.jar" />
+	<classpathentry exported="true" kind="lib" path="resources" />
+				
+</classpath>
+				

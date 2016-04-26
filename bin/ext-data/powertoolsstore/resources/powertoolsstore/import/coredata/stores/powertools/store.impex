@@ -1,0 +1,37 @@
+# 
+# Create the Powertools BaseStore
+#
+
+$productCatalog=powertoolsProductCatalog
+$classificationCatalog=PowertoolsClassification
+$currencies=USD
+$net=true
+$storeUid=powertools
+$defaultCurrency=USD
+$languages=ja,en,de,zh
+$defaultLanguage=en
+$unitedKingdom=GB,GG,IM,JE
+$europeNotUK=AD,AL,AT,BA,BE,BG,BY,CH,CY,CZ,DE,DK,EE,ES,FI,FO,FR,GI,GL,GR,HR,HU,IE,IS,IT,LI,LT,LU,LV,MC,MD,ME,MK,MT,NL,NO,PL,PT,RO,RS,RU,SE,SI,SK,SM,TR,UA,VA
+$asianCountries=CN,JP,VN,HK,KP,KR
+$deliveryCountries=$unitedKingdom,$europeNotUK,$asianCountries,US,CA
+$orderProcessCode=order-process
+$pickupInStoreMode=DISABLED
+$customerAllowedToIgnoreSuggestions=true
+$paymentProvider=Mockup
+$expressCheckoutEnabled=false
+$checkoutGroup=b2bCheckoutGroup
+
+INSERT_UPDATE PromotionGroup;Identifier[unique=true];
+;powertoolsPromoGrp;
+
+# Base Store
+INSERT_UPDATE BaseStore;uid[unique=true];catalogs(id);currencies(isocode);net;taxGroup(code);storelocatorDistanceUnit(code);defaultCurrency(isocode);languages(isocode);defaultLanguage(isocode);deliveryCountries(isocode);submitOrderProcessCode;paymentProvider;pickupInStoreMode(code);customerAllowedToIgnoreSuggestions;expressCheckoutEnabled;maxRadiusForPoSSearch;checkoutFlowGroup;
+;$storeUid;$productCatalog,$classificationCatalog;$currencies;$net;us-taxes;miles;$defaultCurrency;$languages;$defaultLanguage;$deliveryCountries;$orderProcessCode;$paymentProvider;$pickupInStoreMode;$customerAllowedToIgnoreSuggestions;$expressCheckoutEnabled;300;$checkoutGroup;
+
+INSERT_UPDATE BaseStore2DeliveryModeRel;source(uid)[unique=true];target(code)[unique=true]
+;powertools;premium-net
+;powertools;standard-net
+;powertools;premium-gross
+;powertools;standard-gross
+;powertools;free-standard-shipping
+

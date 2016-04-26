@@ -1,0 +1,3 @@
+
+INSERT_UPDATE SolrIndexedType;identifier[unique=true];groupLimit
+;testIndexedType${testId};1

@@ -1,0 +1,3 @@
+Found 1 Solr nodes:
+
+Solr process 1234 running on port 9991

@@ -1,0 +1,10 @@
+INSERT_UPDATE Language;isocode[unique=true];name[lang=de];name[lang=en];;;;;
+;cz;Czech;Czech
+;pl;Polish;Polish
+
+INSERT_UPDATE SolrSearchConfig;description[unique=true];pageSize
+;testSearchConfig${testId};10
+
+
+INSERT_UPDATE SolrFacetSearchConfig;name[unique=true];languages(isocode)
+;testFacetSearchConfig${testId};en,de;testSearchConfig${testId}

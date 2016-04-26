@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list-view unassigned-group-name="Other">
+	<group name="General">
+		<property qualifier="Hyend2RangeEntry.displayName" visible="true" />
+		<property qualifier="Hyend2RangeEntry.lowerBound" visible="true" />
+		<property qualifier="Hyend2RangeEntry.upperBound" visible="true" />
+		<property qualifier="Hyend2RangeEntry.range" visible="true" />
+	</group>
+</list-view>

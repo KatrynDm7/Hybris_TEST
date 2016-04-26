@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+           
+    <context:annotation-config/> 
+
+	<bean id="b2bacceleratoraddonCoreDataImportedEventListener" parent="abstractCoreDataImportedEventListener">
+		<property name="supportedChannels">
+			<list value-type="de.hybris.platform.commerceservices.enums.SiteChannel">
+				<value>B2C</value>
+				<!--
+								<value>B2B</value>
+				-->
+			</list>
+		</property>
+		<property name="addonExtensionMetadata">
+			<bean class="de.hybris.platform.addonsupport.data.AddonExtensionMetadata">
+				<property name="suffixChannel" value="false"/>
+				<property name="baseExtensionName" value="b2bacceleratoraddon"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="b2bacceleratoraddonSampleDataEventListener" parent="abstractGenericAddOnSampleDataEventListener"  >
+		<property name="extensionName" value="b2bacceleratoraddon" />
+	</bean>
+
+	<bean id="orderReplenishmentEmailContext"
+		  class="de.hybris.platform.b2bacceleratoraddon.proccess.email.context.OrderReplenishmentEmailContext"
+		  parent="abstractEmailContext" scope="prototype">
+		<property name="scheduledCartConverter" ref="scheduledCartConverter"/>
+	</bean>
+
+
+	<!-- Process resources definition -->
+	
+	<!-- APPROVAL PROCESS -->
+	<bean id="b2bAccApprovalProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/b2bacceleratoraddon/processes/b2bAccOrderApproval.xml"/>
+	</bean>
+	
+	<bean id="orderApprovalRejectionEmailProcessDefinitionResource"
+          class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+        <property name="resource" value="classpath:/b2bacceleratoraddon/processes/orderApprovalRejectionEmailProcess.xml"/>
+    </bean>
+	
+	<bean id="orderPendingApprovalEmailProcessDefinitionResource"
+          class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+        <property name="resource"
+                  value="classpath:/b2bacceleratoraddon/processes/orderPendingApprovalEmailProcess.xml"/>
+    </bean>
+	
+	<bean id="b2b-orderCPendingApprovalEventListener"
+          class="de.hybris.platform.b2bacceleratoraddon.event.OrderPendingApprovalEventListener" parent="abstractEventListener">
+        <property name="modelService" ref="modelService"/>
+        <property name="businessProcessService" ref="businessProcessService"/>
+    </bean>
+    
+	<bean id="b2b-orderApprovalRejectionEventListener" class="de.hybris.platform.b2bacceleratoraddon.event.OrderApprovalRejectionEventListener" parent="abstractEventListener">
+        <property name="modelService" ref="modelService"/>
+        <property name="businessProcessService" ref="businessProcessService"/>
+    </bean>
+    
+    <bean id="b2b-replenishmentOrderConfirmationEventListener"
+          class="de.hybris.platform.b2bacceleratoraddon.event.ReplenishmentOrderConfirmationEventListener" parent="abstractEventListener">
+        <property name="modelService" ref="modelService"/>
+        <property name="businessProcessService" ref="businessProcessService"/>
+    </bean>
+    
+    
+	<bean id="generateB2BOrderPendingApprovalEmail"
+          class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"
+          parent="abstractAction">
+        <property name="modelService" ref="modelService"/>
+        <property name="cmsEmailPageService" ref="cmsEmailPageService"/>
+        <property name="frontendTemplateName" value="OrderPendingApprovalEmailTemplate"/>
+        <property name="contextResolutionStrategy" ref="b2bProcessContextResolutionStrategy"/>
+        <property name="emailGenerationService" ref="emailGenerationService"/>
+    </bean>    
+    
+	<!-- SALES QUOTE ACC PROCESS -->
+	<bean id="quoteOrderApproveProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+        <property name="resource" value="classpath:/b2bacceleratoraddon/processes/quoteOrderApproveEmailProcess.xml"/>
+    </bean>
+
+    <bean id="quoteOrderRejectProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+        <property name="resource" value="classpath:/b2bacceleratoraddon/processes/quoteOrderRejectEmailProcess.xml"/>
+    </bean>
+       
+    
+	<bean id="abstractQuoteEventListener"
+          class="de.hybris.platform.b2bacceleratoraddon.event.AbstractQuoteEventListener"
+          abstract="true" parent="abstractOrderEventListener">
+        <property name="modelService" ref="modelService" />
+        <property name="orderHistoryService" ref="orderHistoryService" />
+    </bean>
+
+    <bean id="b2b-quoteApprovedEventListener"
+          class="de.hybris.platform.b2bacceleratoraddon.event.QuoteApprovedEventListener"
+          parent="abstractQuoteEventListener">
+        <property name="i18NService" ref="i18NService"/>
+        <property name="businessProcessService" ref="businessProcessService"/>
+    </bean>
+
+    <bean id="b2b-quoteRejectedEventListener"
+          class="de.hybris.platform.b2bacceleratoraddon.event.QuoteRejectedEventListener"
+          parent="abstractQuoteEventListener">
+        <property name="i18NService" ref="i18NService"/>
+        <property name="businessProcessService" ref="businessProcessService"/>
+    </bean>
+    
+    <bean id="salesQuoteProcess" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+        <property name="resource" value="classpath:/b2bacceleratoraddon/processes/b2bACCSalesquote.xml" />
+    </bean>
+    
+    
+    
+	<bean id="b2b-merchantApprovedEventListener"
+		  class="de.hybris.platform.b2bacceleratoraddon.event.MerchantApprovedEventListener"
+		  parent="abstractMerchantEventListener">
+		<property name="createSnapshot" value="true"/>
+	</bean>
+
+	<bean id="b2b-merchantRejectedEventListener"
+		  class="de.hybris.platform.b2bacceleratoraddon.event.MerchantRejectedEventListener"
+		  parent="abstractMerchantEventListener">
+		<property name="createSnapshot" value="true"/>
+	</bean>
+
+	<bean id="b2b-orderApprovedEventListener"
+		  class="de.hybris.platform.b2bacceleratoraddon.event.OrderApprovedEventListener"
+		  parent="abstractOrderEventListener">
+		<property name="createSnapshot" value="true"/>
+	</bean>
+
+	<bean id="b2b-orderRejectedEventListener"
+		  class="de.hybris.platform.b2bacceleratoraddon.event.OrderRejectedEventListener"
+		  parent="abstractOrderEventListener">
+		<property name="createSnapshot" value="true"/>
+	</bean>
+    
+    <!-- REPLENISHMENT PROCESSES -->
+    
+	<bean id="replenishmentOrderPlacedProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+        <property name="resource" value="classpath:/b2bacceleratoraddon/processes/replenishmentOrderPlacedEmailProcess.xml"/>
+    </bean>
+    
+	<bean id="b2b-replenishmentOrderPlacedEventListener"
+		class="de.hybris.platform.b2bacceleratoraddon.event.ReplenishmentOrderPlacedEventListener"
+		parent="abstractEventListener">
+		<property name="modelService" ref="modelService" />
+		<property name="businessProcessService" ref="businessProcessService" />
+	</bean>
+	
+	<bean id="sendReplenishmentOrderPlacedNotification"
+		class="de.hybris.platform.b2bacceleratoraddon.actions.SendReplenishmentOrderPlacedNotification">
+		<property name="eventService" ref="eventService" />
+	</bean>
+    
+    <bean id="replenishmentOrderProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+        <property name="resource" value="classpath:/b2bacceleratoraddon/processes/replenishmentOrderProcess.xml"/>
+	</bean>
+	
+	<bean id="replenishmentOrderConfirmationEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+        <property name="resource" value="classpath:/b2bacceleratoraddon/processes/replenishmentOrderConfirmationEmailProcess.xml"/>
+    </bean>
+	
+
+    <alias alias="b2bQuoteBusinessProcessStrategy" name="acceleratorQuoteBusinessProcessStrategy"/>
+    <bean id="acceleratorQuoteBusinessProcessStrategy"
+          class="de.hybris.platform.b2b.strategies.impl.DefaultB2BQuoteBusinessProcessStrategy"
+          parent="defaultB2BQuoteBusinessProcessStrategy" >
+        <property name="processCode" value="accSalesQuote" />
+        <property name="processName" value="PENDING_QUOTE" />
+    </bean>
+
+	<!-- Process actions-->
+	<bean id="checkCreditCardOrderAction"
+		  class="de.hybris.platform.b2bacceleratoraddon.actions.CheckCreditCardOrderAction"
+		  parent="abstractSimpleB2BApproveOrderDecisionAction">
+	</bean>
+
+	<bean id="checkOrderEntryCostCentersActive"
+		  class="de.hybris.platform.b2bacceleratoraddon.actions.CheckOrderEntryCostCentersActive"
+		  parent="abstractSimpleB2BApproveOrderDecisionAction"/>
+
+	<bean id="startFulfilmentProcessAction"
+		  class="de.hybris.platform.b2bacceleratoraddon.actions.StartFulfilmentProcessAction"
+		  parent="abstractProceduralB2BOrderApproveAction">
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+
+	<bean id="auditAutoApproval"
+		  class="de.hybris.platform.b2b.process.approval.actions.SystemAuditAction"
+		  parent="abstractProceduralB2BOrderApproveAuditAction">
+		<property name="permissionResultHelper" ref="permissionResultHelper"/>
+		<property name="messageKey" value="approval.process.orderapprovedautomatically"/>
+	</bean>
+
+	<bean id="auditStartOfApproval"
+		  class="de.hybris.platform.b2b.process.approval.actions.SystemAuditAction"
+		  parent="abstractProceduralB2BOrderApproveAuditAction">
+		<property name="permissionResultHelper" ref="permissionResultHelper"/>
+		<property name="messageKey" value="approval.process.ordersubmitted"/>
+	</bean>
+
+	<bean id="startWorkflowForAdmin"
+		  class="de.hybris.platform.b2bacceleratoraddon.actions.StartWorkFlowForAdmin"
+		  parent="abstractProceduralB2BOrderApproveAction">
+		<property name="b2bWorkflowIntegrationService" ref="b2bWorkflowIntegrationService"/>
+		<property name="permissionResultHelper" ref="permissionResultHelper"/>
+		<property name="workflowProcessingService" ref="workflowProcessingService"/>
+		<property name="workflowService" ref="newestWorkflowService"/>
+		<property name="b2bUnitService" ref="b2bUnitService"/>
+		<property name="userService" ref="userService"/>
+	</bean>
+
+	<bean id="sendOrderPendingApprovalNotification"
+		  class="de.hybris.platform.b2bacceleratoraddon.actions.SendOrderPendingApprovalNotification"
+		  parent="abstractAction">
+		<property name="eventService" ref="eventService"/>
+	</bean>
+
+	<bean id="auditSubmittedToMerchantForApproval"
+		  class="de.hybris.platform.b2b.process.approval.actions.SystemAuditAction"
+		  parent="abstractProceduralB2BOrderApproveAuditAction">
+		<property name="permissionResultHelper" ref="permissionResultHelper"/>
+		<property name="messageKey" value="approval.process.submittedtomerchant"/>
+	</bean>
+	    <bean id="generateB2BQuoteOrderApproveEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"  parent="abstractAction">
+        <property name="modelService" ref="modelService"/>
+        <property name="cmsEmailPageService" ref="cmsEmailPageService"/>
+        <property name="frontendTemplateName" value="QuoteOrderApproveEmailTemplate"/>
+        <property name="contextResolutionStrategy" ref="b2bProcessContextResolutionStrategy"/>
+        <property name="emailGenerationService" ref="emailGenerationService"/>
+    </bean>
+
+    <bean id="generateB2BQuoteOrderRejectEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"  parent="abstractAction">
+        <property name="modelService" ref="modelService"/>
+        <property name="cmsEmailPageService" ref="cmsEmailPageService"/>
+        <property name="frontendTemplateName" value="QuoteOrderRejectEmailTemplate"/>
+        <property name="contextResolutionStrategy" ref="b2bProcessContextResolutionStrategy"/>
+        <property name="emailGenerationService" ref="emailGenerationService"/>
+    </bean>
+    
+   <bean id="generateB2BReplenishmentOrderConfirmationEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"  parent="abstractAction">
+        <property name="modelService" ref="modelService"/>
+        <property name="cmsEmailPageService" ref="cmsEmailPageService"/>
+        <property name="frontendTemplateName" value="ReplenishmentOrderConfirmationEmailTemplate"/>
+        <property name="contextResolutionStrategy" ref="b2bProcessContextResolutionStrategy"/>
+        <property name="emailGenerationService" ref="emailGenerationService"/>
+    </bean>
+
+    
+	
+	<bean id="createQuoteOrderHistory"
+          class="de.hybris.platform.b2bacceleratoraddon.actions.CreateQuoteOrderHistory"
+          parent="abstractSimpleB2BApproveOrderDecisionAction" >
+        <property name="orderHistoryService" ref="orderHistoryService"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="userService" ref="userService"/>
+    </bean>
+
+	<!-- Send rejection notification -->
+	<bean id="sendOrderApprovalRejectionNotification"
+		  class="de.hybris.platform.b2bacceleratoraddon.actions.SendOrderApprovalRejectionNotification"
+		  parent="abstractAction">
+		<property name="eventService" ref="eventService"/>
+	</bean>
+	
+	<bean id="generateB2BOrderApprovalRejectionEmail"
+          class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"
+          parent="abstractAction">
+        <property name="modelService" ref="modelService"/>
+        <property name="cmsEmailPageService" ref="cmsEmailPageService"/>
+        <property name="frontendTemplateName" value="OrderApprovalRejectionEmailTemplate"/>
+        <property name="contextResolutionStrategy" ref="b2bProcessContextResolutionStrategy"/>
+        <property name="emailGenerationService" ref="emailGenerationService"/>
+    </bean>
+    
+	<bean id="generateB2BReplenishmentOrderPlacedEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"  parent="abstractAction">
+        <property name="modelService" ref="modelService"/>
+        <property name="cmsEmailPageService" ref="cmsEmailPageService"/>
+        <property name="frontendTemplateName" value="ReplenishmentOrderPlacedEmailTemplate"/>
+        <property name="contextResolutionStrategy" ref="b2bProcessContextResolutionStrategy"/>
+        <property name="emailGenerationService" ref="emailGenerationService"/>
+    </bean>
+
+	<bean id="informOfOrderApproval"
+		  class="de.hybris.platform.b2bacceleratoraddon.actions.B2BAcceleratorInformOfOrderApproval">
+		<property name="fromAddress" value="b2b@hybris.com"/>
+		<property name="b2bEmailService" ref="b2bEmailService"/>
+	</bean>
+
+	<bean id="b2bSendOrderPlacedNotificationAction"
+		  class="de.hybris.platform.b2bacceleratoraddon.actions.SendOrderPlacedNotificationAction"
+		  parent="abstractAction">
+		<property name="eventService" ref="eventService"/>
+	</bean>
+
+	<bean id="setBookingLineEntries"
+		  class="de.hybris.platform.b2bacceleratoraddon.actions.AcceleratorBookingLineEntries"
+		  parent="abstractSimpleB2BApproveOrderDecisionAction" />
+	
+	
+
+	<bean name="cloneCartAction"
+          class="de.hybris.platform.b2bacceleratoraddon.actions.replenishment.CloneCartAction"
+          parent="abstractAction" >
+        <property name="typeService" ref="typeService"/>
+        <property name="cartService" ref="cartService"/>
+        <property name="userService" ref="userService"/>
+        <property name="guidKeyGenerator" ref="guidKeyGenerator"/>
+    </bean>
+
+    <bean name="calculateCartAction"
+          class="de.hybris.platform.b2bacceleratoraddon.actions.replenishment.CalculateCartAction"
+          parent="abstractAction" >
+        <property name="commerceCartService" ref="commerceCartService"/>
+        <property name="impersonationService" ref="impersonationService"/>
+    </bean>
+
+    <bean name="authorizePaymentAction"
+          class="de.hybris.platform.b2bacceleratoraddon.actions.replenishment.AuthorizePaymentAction"
+          parent="abstractAction" >
+        <property name="commerceCheckoutService" ref="b2bCommerceCheckoutService"/>
+        <property name="impersonationService" ref="impersonationService"/>
+    </bean>
+
+    <bean name="placeOrderAction"
+          class="de.hybris.platform.b2bacceleratoraddon.actions.replenishment.PlaceOrderAction"
+          parent="abstractAction" >
+        <property name="commerceCheckoutService" ref="b2bCommerceCheckoutService"/>
+        <property name="impersonationService" ref="impersonationService"/>
+    </bean>
+    
+    <bean name="confirmationAction"
+          class="de.hybris.platform.b2bacceleratoraddon.actions.replenishment.ConfirmationAction"
+          parent="abstractAction" >
+        <property name="eventService" ref="eventService"/>
+    </bean>
+    
+	<!-- Email -->
+    <alias alias="emailContextFactory" name="acceleratorEmailContextFactory"/>
+	<bean id="acceleratorEmailContextFactory" parent="defaultEmailContextFactory">
+		<property name="contextResolutionStrategy" ref="b2bProcessContextResolutionStrategy"/>
+		<property name="emailContextVariables">
+			<map merge="true">
+				<entry key="themeResourceUrl-powertools" value="{baseUrl}/_ui/{theme}"/>
+			</map>
+		</property>
+	</bean>
+    
+    <!-- Organization reporting -->
+
+	<bean id="organizationOrdersReportingJob"
+          class="de.hybris.platform.b2bacceleratoraddon.btg.OrganizationOrdersReportingJob"
+          parent="abstractJobPerformable">
+        <property name="b2BUnitService" ref="b2bUnitService"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
+        <property name="catalogVersionService" ref="catalogVersionService"/>
+        <property name="currencies">
+            <list>
+                <value>USD</value>
+                <value>EUR</value>
+                <value>CAD</value>
+            </list>
+        </property>
+        <property name="catalog" value="powertoolsProductCatalog"/>
+    </bean>
+
+    <bean id="organizationCategoryPurchasedReportingJob"
+          class="de.hybris.platform.b2bacceleratoraddon.btg.OrganizationOrdersReportingJob"
+          parent="abstractJobPerformable">
+        <property name="b2BUnitService" ref="b2bUnitService"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
+        <property name="catalogVersionService" ref="catalogVersionService"/>
+        <property name="currencies">
+            <list>
+                <value>USD</value>
+                <value>EUR</value>
+                <value>CAD</value>
+            </list>
+        </property>
+        <property name="categories">
+            <list>
+                <value>1360</value>
+            </list>
+        </property>
+        <property name="catalog" value="powertoolsProductCatalog"/>
+    </bean>
+
+	<bean id="abstractTotalSpentByOrgOperandProvider" abstract="true"
+          class="de.hybris.platform.b2bacceleratoraddon.btg.condition.operand.valueproviders.AbstractTotalSpentByOrgOperandProvider"
+          parent="abstractOrderOperandValueProvider" />
+
+    <bean id="organizationTotalSpentInCurrencyLastYearOperandValueProvider"
+          class="de.hybris.platform.b2bacceleratoraddon.btg.condition.operand.valueproviders.OrganizationTotalSpentInCurrencyLastYearOperandValueProvider"
+          parent="abstractTotalSpentByOrgOperandProvider">
+        <property name="b2bUnitService" ref="b2bUnitService" />
+    </bean>
+
+    <bean id="organizationTotalSpentInCurrencyRelativeDateOperandValueProvider"
+          class="de.hybris.platform.b2bacceleratoraddon.btg.condition.operand.valueproviders.OrganizationTotalSpentInCurrencyRelativeDateOperandValueProvider"
+          parent="abstractTotalSpentByOrgOperandProvider">
+        <property name="b2bUnitService" ref="b2bUnitService" />
+    </bean>
+</beans>

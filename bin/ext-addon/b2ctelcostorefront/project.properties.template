@@ -1,0 +1,51 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform 
+# 
+# Copyright (c) 2000-2015 hybris AG
+# All rights reserved.
+#  
+# This software is the confidential and proprietary information of hybris 
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with hybris.
+#
+#  
+# -----------------------------------------------------------------------
+
+# you can put key/value pairs here.
+# Use Config.getParameter(..) to retrieve the values during runtime.
+
+b2ctelcostorefront.key=value
+
+# Specifies the location of the spring context file added automatically to the global platform application context.
+b2ctelcostorefront.application-context=b2ctelcostorefront-spring.xml
+
+yacceleratorstorefront.additionalWebSpringConfigs.b2ctelcostorefront=classpath:/b2ctelcostorefront/web/spring/b2ctelcostorefront-web-spring.xml
+yb2bacceleratorstorefront.additionalWebSpringConfigs.b2ctelcostorefront=classpath:/b2ctelcostorefront/web/spring/b2ctelcostorefront-web-spring.xml
+
+storefront.supportedUiExperienceLevels.electronics=DESKTOP,MOBILE
+storefront.supportedUiExperienceLevels.apparel-uk=DESKTOP,MOBILE
+storefront.supportedUiExperienceLevels.apparel-de=DESKTOP,MOBILE
+storefront.supportedUiExperienceLevels.powertools=DESKTOP
+
+
+b2ctelcostorefront.javascript.paths.desktop=/desktop/common/js/acc.product.js;/desktop/common/js/acc.producttocarttabs.js;/desktop/common/js/acc.detailPagePopup.js;/desktop/common/js/acc.cart.js;/desktop/common/js/acc.paymentdetails.js;/desktop/common/js/acc.paymentInfo.js;/desktop/common/js/acc.checkremovepaymentinfo.js;/desktop/common/js/acc.guidedSelling.js;
+b2ctelcostorefront.javascript.paths.mobile=/desktop/common/js/acc.product.js;/desktop/common/js/acc.producttocarttabs.js;/desktop/common/js/acc.detailPagePopup.js;/desktop/common/js/acc.cart.js;/desktop/common/js/acc.paymentdetails.js;/desktop/common/js/acc.paymentInfo.js;/desktop/common/js/acc.checkremovepaymentinfo.js;/desktop/common/js/acc.guidedSelling.js;
+b2ctelcostorefront.css.paths.desktop.blue=/desktop/common/css/telco_main.css;/desktop/common/css/telco_icons.css;/desktop/common/css/telco_header.css;/desktop/common/css/telco_siteSearch.css;/desktop/common/css/telco_navigation.css;/desktop/common/css/telco_footer.css;/desktop/common/css/telco_landingPage.css;/desktop/common/css/telco_productDetails.css;/desktop/common/css/telco_buttons.css;/desktop/common/css/telco_forms.css;/desktop/common/css/telco_colorBox.css;/desktop/common/css/telco_storefinder.css;/desktop/common/css/telco_carousel.css;/desktop/common/css/telco_productList.css;/desktop/common/css/telco_miniCart.css;/desktop/common/css/telco_cartItems.css;/desktop/common/css/telco_account.css;/desktop/common/css/telco_guidedSelling.css;/desktop/common/css/telco_searchPOS.css;
+b2ctelcostorefront.css.paths.mobile=/mobile/common/css/b2ctelcostorefront.css
+
+externaltax.fallbacktaxcode=PC040100
+
+website.b2ctelco.http=http://b2ctelco.local:9001/yacceleratorstorefront
+website.b2ctelco.https=https://b2ctelco.local:9002/yacceleratorstorefront
+
+# Google API key
+# For information on generating your API Key: https://developers.google.com/maps/documentation/javascript/tutorial#api_key
+#googleApiKey=
+
+#version of the google map api
+googleApiVersion=3.7
+
+# This is the (XML format) reverse geocoding URL for version 3 of the
+# Google Maps JavaScript API
+google.geocoding.reverse.url=https://maps.googleapis.com/maps/api/geocode/xml

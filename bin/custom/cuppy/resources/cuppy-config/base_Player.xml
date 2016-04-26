@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="Player.uid" />
+			<property qualifier="Player.name" />
+		</search-properties>
+		<sort-properties>
+			<property qualifier="Player.uid" />
+			<property qualifier="Player.name" />
+			<property qualifier="Player.confirmed" />
+		</sort-properties>
+	</search>
+	<label>
+		<property qualifier="Player.uid"/>
+		<property qualifier="Player.name"/>
+	</label>
+</base>

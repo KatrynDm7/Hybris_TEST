@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:schema xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://msiggi.de/Sportsdata/Webservices" elementFormDefault="qualified" targetNamespace="http://msiggi.de/Sportsdata/Webservices">
+      <s:element name="GetAvailLeagues">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAvailLeaguesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAvailLeaguesResult" type="tns:ArrayOfLeague" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfLeague">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="League" type="tns:League" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="League">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="leagueID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="leagueSportID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="leagueName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="leagueShortcut" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="leagueSaison" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetNextMatch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="leagueShortcut" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNextMatchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetNextMatchResult" type="tns:Matchdata" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Matchdata">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="matchID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="matchDateTime" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="TimeZoneID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="matchDateTimeUTC" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="groupID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="groupOrderID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="groupName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="leagueID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="leagueName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="leagueSaison" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nameTeam1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nameTeam2" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="idTeam1" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="idTeam2" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="iconUrlTeam1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="iconUrlTeam2" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="pointsTeam1" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="pointsTeam2" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="lastUpdate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="matchIsFinished" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="matchResults" type="tns:ArrayOfMatchResult" />
+          <s:element minOccurs="0" maxOccurs="1" name="goals" type="tns:ArrayOfGoal" />
+          <s:element minOccurs="1" maxOccurs="1" name="location" type="tns:Location" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumberOfViewers" nillable="true" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMatchResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="matchResult" type="tns:matchResult" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="matchResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="resultName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="pointsTeam1" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="pointsTeam2" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="resultOrderID" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfGoal">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Goal" type="tns:Goal" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Goal">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="goalID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="goalMachID" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="goalScoreTeam1" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="goalScoreTeam2" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="goalMatchMinute" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="goalGetterID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="goalGetterName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="goalPenalty" nillable="true" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="goalOwnGoal" nillable="true" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="goalOvertime" nillable="true" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="goalComment" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Location">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="locationID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="locationCity" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="locationStadium" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetLastMatch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="leagueShortcut" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLastMatchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetLastMatchResult" type="tns:Matchdata" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCurrentGroupOrderID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="leagueShortcut" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCurrentGroupOrderIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetCurrentGroupOrderIDResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMatchdataByGroupLeagueSaison">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="groupOrderID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="leagueShortcut" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="leagueSaison" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMatchdataByGroupLeagueSaisonResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMatchdataByGroupLeagueSaisonResult" type="tns:ArrayOfMatchdata" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfMatchdata">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Matchdata" type="tns:Matchdata" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetMatchdataByLeagueDateTime">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="fromDateTime" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="toDateTime" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="leagueShortcut" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMatchdataByLeagueDateTimeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMatchdataByLeagueDateTimeResult" type="tns:ArrayOfMatchdata" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMatchdataByTeams">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="teamID1" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="teamID2" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMatchdataByTeamsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMatchdataByTeamsResult" type="tns:ArrayOfMatchdata" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMatchdataByLeagueSaison">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="leagueShortcut" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="leagueSaison" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMatchdataByLeagueSaisonResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMatchdataByLeagueSaisonResult" type="tns:ArrayOfMatchdata" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMatchdataByGroupLeagueSaisonJSON">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="groupOrderID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="leagueShortcut" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="leagueSaison" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMatchdataByGroupLeagueSaisonJSONResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMatchdataByGroupLeagueSaisonJSONResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFusballdaten">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Spieltag" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Liga" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Saison" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Userkennung" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFusballdatenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFusballdatenResult" type="tns:ArrayOfFussballdaten" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfFussballdaten">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Fussballdaten" type="tns:Fussballdaten" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Fussballdaten">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="SpielID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Spieltag" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Spieldatum" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Team1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Team2" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ErgebnisTeam1" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ErgebnisTeam2" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="lastUpdate" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetMatchByMatchID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="MatchID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMatchByMatchIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetMatchByMatchIDResult" type="tns:Matchdata" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTeamsByLeagueSaison">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="leagueShortcut" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="leagueSaison" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTeamsByLeagueSaisonResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTeamsByLeagueSaisonResult" type="tns:ArrayOfTeam" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfTeam">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Team" type="tns:Team" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Team">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="teamID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="teamName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="teamIconURL" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAvailGroups">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="leagueShortcut" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="leagueSaison" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAvailGroupsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAvailGroupsResult" type="tns:ArrayOfGroup" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfGroup">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Group" type="tns:Group" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Group">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="groupName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="groupOrderID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="groupID" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAvailSports">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAvailSportsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAvailSportsResult" type="tns:ArrayOfSport" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSport">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Sport" nillable="true" type="tns:Sport" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Sport">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="sportsID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="sportsName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAvailLeaguesBySports">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="sportID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAvailLeaguesBySportsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAvailLeaguesBySportsResult" type="tns:ArrayOfLeague" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGoalsByMatch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="MatchID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGoalsByMatchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGoalsByMatchResult" type="tns:ArrayOfGoal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGoalsByLeagueSaison">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="leagueShortcut" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="leagueSaison" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGoalsByLeagueSaisonResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGoalsByLeagueSaisonResult" type="tns:ArrayOfGoal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGoalGettersByLeagueSaison">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="leagueShortcut" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="leagueSaison" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGoalGettersByLeagueSaisonResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGoalGettersByLeagueSaisonResult" type="tns:ArrayOfGoalGetter" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfGoalGetter">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="GoalGetter" type="tns:GoalGetter" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GoalGetter">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="goalGetterID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="goalGetterName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="goalGetterNationality" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="goalGetterBirthday" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="goalGetterGoalCount" nillable="true" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetLastChangeDateByLeagueSaison">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="leagueShortcut" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="leagueSaison" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLastChangeDateByLeagueSaisonResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetLastChangeDateByLeagueSaisonResult" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLastChangeDateByGroupLeagueSaison">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="groupOrderID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="leagueShortcut" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="leagueSaison" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLastChangeDateByGroupLeagueSaisonResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetLastChangeDateByGroupLeagueSaisonResult" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>

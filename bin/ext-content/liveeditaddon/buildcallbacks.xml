@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidentialcd wcms 
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<project name="liveeditaddon_buildcallbacks">
+    <property name="liveeditaddon.base.extension.name" value="liveeditaddon"/>
+
+
+	<macrodef name="liveeditaddon_after_build">
+		<sequential>
+            <if>
+                <isset property="ext.yacceleratorstorefront.path"/>
+                <then>
+                    <echo level="info" message="liveeditaddon - Copying custom csmtags to yacceleratorstorefront to same location as originals since tag uri must be unique"/>
+                    <copy todir="${ext.yacceleratorstorefront.path}/web/webroot/WEB-INF/common/tld" overwrite="true" verbose="true">
+                        <fileset dir="${ext.liveeditaddon.path}/acceleratoraddon/web/webroot/WEB-INF/tld/">
+                            <include name="**/**.*" />
+                        </fileset>
+                    </copy>
+                </then>
+            </if>
+			<if>
+				<isset property="ext.cmscockpit.path"/>
+				<then>
+					<echo level="info" message="liveeditaddon - Copying custom files to cmscockpit..."/>
+					 <copy todir="${ext.cmscockpit.path}/web/webroot/cmscockpit">
+						<fileset dir="${ext.liveeditaddon.path}/resources/liveeditaddon/cmscockpit/zul">
+							<include name="**/**.*" />
+						</fileset>
+					</copy>
+					<echo level="info" message="liveeditaddon - Copying custom css files to cmscockpit..."/>
+					<copy todir="${ext.cmscockpit.path}/web/webroot/cmscockpit/css">
+						<fileset dir="${ext.liveeditaddon.path}/resources/liveeditaddon/cmscockpit/css">
+							<include name="**/**.*" />
+						</fileset>
+					</copy>
+					<echo level="info" message="liveeditaddon - Copying custom js files to cmscockpit..."/>
+					<copy todir="${ext.cmscockpit.path}/web/webroot/cmscockpit/js">
+						<fileset dir="${ext.liveeditaddon.path}/resources/liveeditaddon/cmscockpit/js">
+							<include name="**/**.*" />
+						</fileset>
+					</copy>
+					<echo level="info" message="liveeditaddon - Copying custom image files to cmscockpit..."/>
+					<copy todir="${ext.cmscockpit.path}/web/webroot/cmscockpit/images">
+						<fileset dir="${ext.liveeditaddon.path}/resources/liveeditaddon/cmscockpit/images">
+							<include name="**/**.*" />
+						</fileset>
+					</copy>
+				</then>
+			</if>
+
+			<if>
+				<isset property="ext.btgcockpit.path"/>
+				<then>
+					<echo level="info" message="liveeditaddon - Copying custom files to btgcockpit..."/>
+					<copy todir="${ext.btgcockpit.path}/web/webroot/cmscockpit">
+						<fileset dir="${ext.liveeditaddon.path}/resources/liveeditaddon/cmscockpit/zul">
+							<include name="**/**.*" />
+						</fileset>
+					</copy>
+                    <echo level="info" message="liveeditaddon - Copying custom js files to btgcockpit..."/>
+                    <copy todir="${ext.btgcockpit.path}/web/webroot/cmscockpit/js">
+                        <fileset dir="${ext.liveeditaddon.path}/resources/liveeditaddon/cmscockpit/js">
+                            <include name="**/**.*" />
+                        </fileset>
+                    </copy>
+					<echo level="info" message="liveeditaddon - Copying custom css files to btgcockpit..."/>
+					<copy todir="${ext.btgcockpit.path}/web/webroot/cmscockpit/css">
+						<fileset dir="${ext.liveeditaddon.path}/resources/liveeditaddon/cmscockpit/css">
+							<include name="**/**.*" />
+						</fileset>
+					</copy>
+					<echo level="info" message="liveeditaddon - Copying custom image files to btgcockpit..."/>
+						<copy todir="${ext.btgcockpit.path}/web/webroot/cmscockpit/images">
+						<fileset dir="${ext.liveeditaddon.path}/resources/liveeditaddon/cmscockpit/images">
+							<include name="**/**.*" />
+						</fileset>
+					</copy>
+				</then>
+			</if>
+
+		</sequential>
+	</macrodef>
+	<macrodef name="liveeditaddon_before_ear">
+		<sequential>
+
+			<!-- you can do anything before the EAR file is being packed -->
+
+		</sequential>
+	</macrodef>
+
+</project>

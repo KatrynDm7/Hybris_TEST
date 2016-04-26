@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<enumtypes>	
+		<enumtype code="DeclineReason" generate="true" autocreate="true">
+			<value code="Damaged" />
+			<value code="OutOfOrder" />
+			<value code="OutOfStock" />
+			<value code="StoreClosed" />
+			<value code="TooBusy" />
+			<value code="Other" />
+		</enumtype>
+		<enumtype code="OrderStatus" generate="false" autocreate="false">
+			<value code="ON_HOLD_SOURCING_FAILED" />
+			<value code="READY" />
+		</enumtype>
+		<enumtype code="ConsignmentStatus" generate="false" autocreate="false">
+			<value code="READY_FOR_SHIPPING" />
+		</enumtype>
+		<enumtype code="ReturnStatus" autocreate="false" generate="false">
+			<value code="PAYMENT_CAPTURED" />
+			<value code="PAYMENT_FAILED" />
+			<value code="TAX_CAPTURED" />
+			<value code="TAX_FAILED" />
+			<value code="COMPLETED" />
+		</enumtype>
+    </enumtypes>
+	
+	<relations>
+		<relation code="CancellationConsignmentEntryEventConsignmentEntryRelation" autocreate="true" generate="true" localized="false">
+			<sourceElement type="CancellationConsignmentEntryEvent" qualifier="cancellationEntryEvents" collectiontype="set" cardinality="many" ordered="false">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement type="ConsignmentEntry" qualifier="consignmentEntry" cardinality="one">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+
+		<relation code="ShippedConsignmentEntryEventConsignmentEntryRelation"
+			autocreate="true" generate="true" localized="false">
+			<sourceElement type="ShippedConsignmentEntryEvent" qualifier="shippedEntryEvents" collectiontype="set" cardinality="many" ordered="false">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement type="ConsignmentEntry" qualifier="consignmentEntry" cardinality="one">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+		
+		<relation code="DeclineConsignmentEntryEventConsignmentEntryRelation" autocreate="true" generate="true" localized="false">
+			<sourceElement type="DeclineConsignmentEntryEvent" qualifier="declineEntryEvents" collectiontype="set" cardinality="many" ordered="false">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement type="ConsignmentEntry" qualifier="consignmentEntry" cardinality="one">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+		
+		<relation code="CancellationOrderEntryEventOrderEntryRelation" autocreate="true" generate="true" localized="false">
+			<sourceElement type="CancellationOrderEntryEvent" qualifier="cancellationEntryEvents" collectiontype="set" cardinality="many" ordered="false">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement type="AbstractOrderEntry" qualifier="orderEntry" cardinality="one">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+		
+		<relation code="Consignment2PackagingInfoRelation" autocreate="true"	generate="true" localized="false">
+			<sourceElement type="Consignment" qualifier="consignment" cardinality="one">
+				<modifiers read="true" write="false" initial="true" search="true" optional="false" />
+			</sourceElement>
+			<targetElement type="PackagingInfo" qualifier="packaginginfos" collectiontype="list" cardinality="many" ordered="true">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+		
+		<relation code="Warehouse2DeliveryModeRelation" autocreate="true" generate="true" localized="false">
+			<deployment table="warehouseDeliverymodeRel" typecode="3008"/>
+			<sourceElement type="Warehouse" qualifier="warehouses" collectiontype="set" cardinality="many" ordered="false">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement type="DeliveryMode" qualifier="deliveryModes" collectiontype="set" cardinality="many" ordered="false">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+
+		<relation code="StockLevel2InventoryEventRelation" autocreate="true"
+			generate="true" localized="false">
+			<sourceElement type="StockLevel" qualifier="stockLevel" cardinality="one">
+				<modifiers optional="false"/>
+			</sourceElement>
+			<targetElement type="InventoryEvent" qualifier="inventoryEvents" cardinality="many">
+				<modifiers/>
+			</targetElement>
+		</relation>
+		
+		<relation code="ConsignmentEntry2InventoryEventRelation" autocreate="true"
+			generate="true" localized="false">
+			<sourceElement type="ConsignmentEntry" qualifier="consignmentEntry" cardinality="one">
+				<modifiers optional="false"/>
+			</sourceElement>
+			<targetElement type="InventoryEvent" qualifier="inventoryEvents" cardinality="many">
+				<modifiers/>
+			</targetElement>
+		</relation>
+
+        <relation generate="true" localized="false" code="Return2ReturnProcess"
+                  autocreate="true">
+            <sourceElement type="ReturnRequest" cardinality="one"
+                           qualifier="returnRequest">
+                <modifiers initial="true" optional="true" />
+            </sourceElement>
+            <targetElement type="ReturnProcess" cardinality="many"
+                           qualifier="returnProcess">
+                <modifiers initial="true" optional="true" />
+            </targetElement>
+        </relation>
+    </relations>
+	
+	<itemtypes>
+
+		<!-- BEGIN: Newly defined types -->
+		<itemtype code="ConsignmentEntryEvent" extends="GenericItem" autocreate="true" generate="true" abstract="true">
+			<deployment table="ConsEntryEvent" typecode="3006" />
+			<attributes>
+				<attribute type="java.lang.Long" qualifier="quantity">
+					<modifiers optional="false" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="CancellationConsignmentEntryEvent" extends="ConsignmentEntryEvent" autocreate="true" generate="true" jaloclass="de.hybris.platform.warehousing.jalo.CancellationConsignmentEntryEvent">
+			<attributes>
+				<attribute type="java.lang.String" qualifier="reason">
+					<modifiers optional="false" />
+					<description>Specifies the reason for this cancellation.</description>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="ShippedConsignmentEntryEvent" extends="ConsignmentEntryEvent" autocreate="true" generate="true" jaloclass="de.hybris.platform.warehousing.jalo.ShippedConsignmentEntryEvent"/>
+
+		<itemtype code="DeclineConsignmentEntryEvent" extends="ConsignmentEntryEvent" autocreate="true" generate="true" jaloclass="de.hybris.platform.warehousing.jalo.DeclineConsignmentEntryEvent">
+			<attributes>
+				<attribute type="DeclineReason" qualifier="reason">
+					<modifiers optional="false" />
+					<description>Specifies the reason for this decline.</description>
+					<persistence type="property" />
+				</attribute>
+				<attribute type="Warehouse" qualifier="reallocatedWarehouse">
+					<modifiers optional="true" />
+					<description>Specifies the warehouse to where the consignment entry items are to be reallocated to.</description>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="OrderEntryEvent" extends="GenericItem" autocreate="true" generate="true" abstract="true" jaloclass="de.hybris.platform.warehousing.jalo.OrderEntryEvent">
+			<deployment table="OrderEntryEvent" typecode="3007" />
+			<attributes>
+				<attribute type="java.lang.Long" qualifier="quantity">
+					<modifiers optional="false" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="CancellationOrderEntryEvent" extends="OrderEntryEvent" autocreate="true" generate="true" jaloclass="de.hybris.platform.warehousing.jalo.CancellationOrderEntryEvent">
+			<attributes>
+				<attribute type="java.lang.String" qualifier="reason">
+					<modifiers optional="false" />
+					<description>Specifies the reason for this cancellation.</description>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		<!-- END: Newly defined types -->
+		
+		<typegroup name="PointOfService">
+
+			<itemtype code="PointOfService" autocreate="false" generate="false">
+				<description>Extending PointOfService type with additional index.</description>
+							
+				<indexes>
+					<index name="nameIdx" >
+					    <key attribute="name" />
+					</index>
+				</indexes>
+			</itemtype>
+
+		</typegroup>
+		
+		<typegroup name="Warehouse">
+		
+			<itemtype code="Warehouse" autocreate="false" generate="false">
+				<description>Extending Warehouse type with additional attributes.</description>
+				<attributes>
+					<attribute type="java.lang.Integer" qualifier="priority">
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+		
+		</typegroup>
+		
+		<typegroup name="Address">
+
+			<itemtype code="Address" autocreate="false" generate="false">
+				<description>Extending Address type with additional attributes.</description>
+				<attributes>
+					<attribute type="java.lang.Double" qualifier="latitude">
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.Double" qualifier="longitude">
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+		</typegroup>
+		
+		<typegroup name="StockLevel">
+		
+			<itemtype code="StockLevel" autocreate="false" generate="false">
+				<description>Extending StockLevel type with additional attributes and indexes.</description>
+				<attributes>
+					<attribute type="java.lang.String" qualifier="bin">
+						<modifiers read="true" write="true" search="true" unique="false" optional="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+				
+				<indexes>
+					<index name="binIndex">
+					    <key attribute="bin" />
+					</index>
+					<index name="productCodeBinWarehouseIndex">
+					   	<key attribute="productCode" />
+					   	<key attribute="bin" />
+						<key attribute="warehouse"/>
+					</index>
+					<index name="productCodeWarehouseAvailableIndex">
+					    <key attribute="productCode" />
+					    <key attribute="warehouse" />
+					    <key attribute="available" />
+					</index>
+				</indexes>
+			</itemtype>
+			
+			<itemtype code="InventoryEvent" autocreate="true" generate="true" 
+			jaloclass="de.hybris.platform.warehousing.jalo.InventoryEvent" abstract="true">
+				<description>Holds events that affect OMS Inventory and therefore ATP (Available To Promise)</description>
+				<deployment table="inventoryevents" typecode="6501"/>
+				<attributes>
+					<attribute type="long" qualifier="quantity">
+						<defaultvalue>Long.valueOf(0)</defaultvalue>
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="true" optional="false" />
+					</attribute>
+					<attribute type="java.util.Date" qualifier="eventDate">
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="true" optional="true" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="AllocationEvent" autocreate="true" generate="true" 
+			jaloclass="de.hybris.platform.warehousing.jalo.AllocationEvent" extends="InventoryEvent">
+				<description>An allocation event.</description>
+			</itemtype>
+
+            <itemtype code="CancellationEvent" autocreate="true" generate="true"
+                      jaloclass="de.hybris.platform.warehousing.jalo.CancellationEvent" extends="InventoryEvent">
+                <description>A cancellation inventory event.</description>
+            </itemtype>
+			
+			<itemtype code="ReservationEvent" autocreate="true" generate="true" 
+			jaloclass="de.hybris.platform.warehousing.jalo.ReservationEvent" extends="InventoryEvent">
+				<description>A reservation event.</description>
+			</itemtype>
+		</typegroup>
+				
+		<typegroup name="Consignment">			
+			<itemtype code="Consignment" autocreate="false" generate="false">
+				<description>Extending Consignment type with additional attributes.</description>
+				<attributes>
+					<attribute type="PackagingInfo" qualifier="packagingInfo">
+						<modifiers read="true" write="true" unique="false" optional="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="ConsignmentEntry" autocreate="false" generate="false">
+				<description>Extending ConsignmentEntry type with additional attributes.</description>
+				<attributes>
+					<attribute type="java.lang.Long" qualifier="quantityCancelled">
+						<modifiers read="true" write="false" />
+						<persistence type="dynamic" attributeHandler="consignmentEntryCancelledQuantityHandler"/>
+					</attribute>
+					<attribute type="java.lang.Long" qualifier="quantityDeclined">
+						<modifiers read="true" write="false" />
+						<persistence type="dynamic" attributeHandler="consignmentEntryDeclinedQuantityHandler"/>
+					</attribute>
+					<attribute type="java.lang.Long" qualifier="quantityPending">
+						<modifiers read="true" write="false" />
+						<persistence type="dynamic" attributeHandler="consignmentEntryPendingQuantityHandler"/>
+					</attribute>
+					<attribute type="java.lang.Long" qualifier="quantityShipped">
+						<modifiers read="true" write="false" />
+						<persistence type="dynamic" attributeHandler="consignmentEntryShippedQuantityHandler"/>
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+		
+		<typegroup name="PackagingInfo">
+			<itemtype code="PackagingInfo" autocreate="true" generate="true">
+				<description>Represents the attributes of packages in a consignment.</description>
+				<deployment table="packaginginfo" typecode="3005"/>
+				<attributes>
+					<attribute type="java.lang.String" qualifier="width">
+						<modifiers read="true" write="true" unique="false" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="height">
+						<modifiers read="true" write="true" unique="false" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="length">
+						<modifiers read="true" write="true" unique="false" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="grossWeight">
+						<modifiers read="true" write="true" unique="false" optional="true" />
+						<persistence type="property" />
+					</attribute>	
+					<attribute type="java.lang.String" qualifier="dimensionUnit">
+						<modifiers read="true" write="true" unique="false" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="weightUnit">
+						<modifiers read="true" write="true" unique="false" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="insuredValue">
+						<modifiers read="true" write="true" unique="false" optional="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+
+        <typegroup name="AbstractOrderEntry">
+
+            <itemtype code="AbstractOrderEntry" autocreate="false" generate="false">
+                <description>Extending OrderEntry type with additional attributes.</description>
+                <attributes>
+                    <attribute type="java.lang.Long" qualifier="quantityAllocated">
+                        <persistence type="dynamic" attributeHandler="orderEntryAllocatedQuantityHandler" />
+                        <modifiers read="true" write="false" />
+                    </attribute>
+                    <attribute type="java.lang.Long" qualifier="quantityCancelled">
+						<modifiers read="true" write="false" />
+						<persistence type="dynamic" attributeHandler="orderEntryCancelledQuantityHandler"/>
+					</attribute>
+					<attribute type="java.lang.Long" qualifier="quantityPending">
+						<modifiers read="true" write="false" />
+						<persistence type="dynamic" attributeHandler="orderEntryPendingQuantityHandler"/>
+					</attribute>
+					<attribute type="java.lang.Long" qualifier="quantityShipped">
+						<modifiers read="true" write="false" />
+						<persistence type="dynamic" attributeHandler="orderEntryShippedQuantityHandler" />
+					</attribute>
+					<attribute type="java.lang.Long" qualifier="quantityReturned">
+						<modifiers read="true" write="false" />
+						<persistence type="dynamic" attributeHandler="orderEntryReturnedQuantityHandler"/>
+					</attribute>
+                </attributes>
+            </itemtype>
+
+        </typegroup>
+
+        <!-- Returns -->
+		<typegroup name="ReturnRequest">
+			<itemtype code="ReturnRequest" autocreate="false" generate="false">
+				<description>Extending ReturnRequest type with additional attributes.</description>
+				<attributes>
+					<attribute type="java.math.BigDecimal" qualifier="customRefundAmount">
+						<description>User-specified amount to refund that is used instead of the original refund amount</description>
+						<modifiers read="true" write="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.math.BigDecimal" qualifier="originalRefundAmount">
+						<description>Amount to be refunded to the customer according to the value of the items</description>
+						<modifiers read="true" write="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="status" type="ReturnStatus">
+						<persistence type="property" />
+						<modifiers optional="true" />
+					</attribute>
+					<attribute qualifier="refundShippingCost" type="java.lang.Boolean">
+						<description>Include Shipping in the Refund Amount</description>
+						<persistence type="property" />
+						<defaultvalue>Boolean.FALSE</defaultvalue>
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="ReturnProcess" autocreate="true" generate="true"
+                  jaloclass="de.hybris.platform.warehousing.jalo.ReturnProcess"
+                  extends="BusinessProcess">
+			</itemtype>
+			
+			<itemtype code="BaseStore" autocreate="false" generate="false">
+            <description>Extending BaseStore type with additional attributes.</description>
+            <attributes>
+                <attribute type="java.lang.String" qualifier="createReturnProcessCode">
+                    <description>The process name for return business process.</description>
+                    <persistence type="property" />
+                </attribute>
+            </attributes>
+        </itemtype>
+        
+		</typegroup>
+		
+	</itemtypes>
+</items>

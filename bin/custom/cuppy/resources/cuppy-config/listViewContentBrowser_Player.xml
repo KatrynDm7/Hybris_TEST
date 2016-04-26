@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list-view unassigned-group-name="Other">
+  <group name="General">
+		<property qualifier="Player.uid" visible="true"/>
+		<property qualifier="Player.name" visible="true" width="150px"/>
+		<property qualifier="Player.eMail" visible="true"/>
+		<property qualifier="Player.confirmed" visible="true" editable="true"/>
+		<property qualifier="Player.profilePicture" editor="simpleMediaReferenceSelector" visible="true">
+			<renderer class="de.hybris.platform.cockpit.model.listview.impl.ImageCellRenderer"/>
+		</property>
+	</group>
+</list-view>

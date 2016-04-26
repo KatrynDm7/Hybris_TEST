@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:h="http://www.w3.org/1999/xhtml" 
+		xmlns:zk="http://www.zkoss.org/2005/zk"
+		xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd ">
+	<div style="text-align: left;">
+
+		<div height="20px"/>
+		<div style="margin: 30px; margin-top: 20px; font-size: 10px;" >
+			<hbox widths="80px,none">
+				<label value="${c:l('hyend2.exportwizard.schemaconfiguration')}"/>
+				<div id="schemaConfiguration" width="170px"	use="de.hybris.platform.cockpit.components.editor.CockpitEditorContainer" 
+						valueTypeCode="Hyend2IndexSchema" editorCode="single" editorValue='${wizardBean.schemaConfiguration}'
+						onValueChange='wizardBean.setSchemaConfiguration(self.getEditorValue()); exportLanguages.setEditorValue(wizardBean.getExportLanguages());  
+											exportLanguages.update(); controllerBean.checkShowNext(wizardBean, pageBean);' visible="true">
+					<custom-attributes allowCreate="false" displaySubtypes="true" allowActivate="true"/>
+				</div>
+			</hbox>
+		</div>
+		<div  style="margin: 30px; margin-top: 20px; font-size: 10px;" >
+			<hbox widths="80px,none">
+				<label value="${c:l('hyend2.exportwizard.exportlanguages')}"/>
+				<div id="exportLanguages" width="170px"	use="de.hybris.platform.cockpit.components.editor.CockpitEditorContainer" 
+						valueTypeCode="Language" editorCode="multi" editorValue='${wizardBean.exportLanguages}'
+						onValueChange='wizardBean.setExportLanguages(self.getEditorValue()); controllerBean.checkShowNext(wizardBean, pageBean);' visible="true">
+					<custom-attributes allowCreate="false" displaySubtypes="true" allowActivate="true"/>
+				</div>
+			</hbox>
+		</div>
+
+		<div style="margin: 30px; margin-top: 20px; font-size: 10px;" onCreate="indexOperation.setValue(wizardBean.getIndexOperation());" >
+			<hbox  widths="80px,none">
+				<label value="${c:l('hyend2.exportwizard.indexoperation')}"/>
+					<combobox id="indexOperation" width="150px" onSelect="wizardBean.setIndexOperation(self.getSelectedItem().getLabel());controllerBean.checkShowNext(wizardBean, pageBean);">
+					    <comboitem id="baseline" label="Baseline" />
+					    <comboitem id="partial" label="Partial" />
+					    <comboitem id="delete" label="Delete" />
+					</combobox>
+			</hbox>
+		</div>
+	</div>		
+</zk>

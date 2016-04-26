@@ -1,0 +1,6 @@
+#parse( "impex-templates/commercesearchatddtests-common-macros.impex.vm" )
+#[[
+#% impex.setLocale( Locale.ENGLISH );
+INSERT_UPDATE CategorySolrSearchProfile;categoryCode[unique=true];code;indexedType(identifier)[unique=true];
+]]#
+;${categoryCode};reconfig-${categoryCode};$solrIndexedTypeIdentifier;

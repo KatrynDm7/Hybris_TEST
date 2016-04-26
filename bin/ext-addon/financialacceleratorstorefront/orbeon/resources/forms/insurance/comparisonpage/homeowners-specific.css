@@ -1,0 +1,150 @@
+span.xforms-items, span.xforms-items span {
+    width: auto!important;
+}
+.orbeon .xforms-select1-appearance-full label,
+.orbeon .xforms-select-appearance-full .xforms-items label {
+    margin-right: 2em;
+}
+.orbeon .property-cover-required .xforms-items .radio > span,
+.orbeon .anyone-property-smoke .xforms-items .radio > span,
+.orbeon .exterior-construction-materials .xforms-items .checkbox > span,
+.orbeon .what-locks-are-in-place .xforms-items .checkbox > span {
+    width: 96px!important;
+}
+.orbeon .property-cover-required .xforms-items span:first-child .radio,
+.orbeon .anyone-property-smoke .xforms-items span:first-child .radio{
+    margin-left: 19px;
+}
+.orbeon .property-cover-required .xforms-items span:first-child .radio {
+    margin-right: 10px;
+}
+.orbeon .property-cover-required .xforms-items span:first-child .radio > span {
+    width: 140px!important;
+}
+.orbeon .property-cover-required .xforms-items label.radio input[type="radio"] + span,
+.orbeon .anyone-property-smoke .xforms-items label.radio input[type="radio"] + span,
+.orbeon .exterior-construction-materials .xforms-items label.radio input[type="checkbox"] + span,
+.orbeon .what-locks-are-in-place .xforms-items label.radio input[type="checkbox"] + span {
+    padding-left: 0;
+    margin-top: 9px;
+}
+.orbeon .property-cover-required .xforms-items span,
+.orbeon .anyone-property-smoke .xforms-items span {
+    display: inline-block;
+}
+.orbeon .property-cover-required .xforms-items .radio, .orbeon .anyone-property-smoke .xforms-items .radio{
+    padding: 0;
+}
+
+.orbeon .property-cover-required .xforms-items span span,
+.orbeon .anyone-property-smoke .xforms-items span span {
+    padding-top: 96px;
+    text-align: center;
+}
+
+.orbeon .property-cover-required .xforms-items label > input,
+.orbeon .anyone-property-smoke .xforms-items label > input {
+    visibility: hidden;
+    position: absolute;
+}
+
+.orbeon .property-cover-required .xforms-items span:first-child.xforms-selected span {
+    background: url(images/property_form_building_contents_clicked.png) center top no-repeat;
+}
+.orbeon .property-cover-required .xforms-items span:first-child.xforms-deselected span {
+    background: url(images/property_form_building_contents.png) center top no-repeat;
+}
+.orbeon .property-cover-required .xforms-items span:nth-child(2).xforms-selected span {
+    background: url(images/property_form_building_clicked.png) center top no-repeat;
+}
+.orbeon .property-cover-required .xforms-items span:nth-child(2).xforms-deselected span {
+    background: url(images/property_form_building.png) center top no-repeat;
+}
+
+.orbeon .property-cover-required .xforms-items span:nth-child(3).xforms-selected span {
+    background: url(images/property_form_contents_clicked.png) center top no-repeat;
+}
+.orbeon .property-cover-required .xforms-items span:nth-child(3).xforms-deselected span {
+    background: url(images/property_form_contents.png) center top no-repeat;
+}
+
+.orbeon .anyone-property-smoke .xforms-items span:first-child.xforms-selected span {
+    background: url(images/property_form_smoking_clicked.png) center top no-repeat;
+}
+.orbeon .anyone-property-smoke .xforms-items span:first-child.xforms-deselected span {
+    background: url(images/property_form_smoking.png) center top no-repeat;
+}
+
+.orbeon .anyone-property-smoke .xforms-items span:nth-child(2).xforms-selected span {
+    background: url(images/property_form_non_smoking_clicked.png) center top no-repeat;
+}
+.orbeon .anyone-property-smoke .xforms-items span:nth-child(2).xforms-deselected span {
+    background: url(images/property_form_non_smoking.png) center top no-repeat;
+}
+
+.orbeon .exterior-construction-materials .xforms-items span,
+.orbeon .what-locks-are-in-place .xforms-items span {
+    display: inline-block;
+}
+.orbeon .exterior-construction-materials .xforms-items > span:first-child,
+.orbeon .what-locks-are-in-place .xforms-items > span:first-child {
+    padding-left: 0;
+}
+.orbeon .exterior-construction-materials .xforms-items span span,
+.orbeon .what-locks-are-in-place .xforms-items span span {
+    padding-top: 96px;
+    text-align: center;
+}
+
+.orbeon .exterior-construction-materials .xforms-items label > input,
+.orbeon .what-locks-are-in-place .xforms-items label > input {
+    visibility: hidden;
+    position: absolute;
+}
+
+.orbeon .exterior-construction-materials .checkbox,
+.orbeon .what-locks-are-in-place .checkbox {
+    padding-left: 0;
+}
+
+.orbeon .exterior-construction-materials .xforms-items span:first-child.xforms-selected span {
+    background: url(images/property_form_wood_clicked.png) center top no-repeat;
+}
+.orbeon .exterior-construction-materials .xforms-items span:first-child.xforms-deselected span {
+    background: url(images/property_form_wood.png) center top no-repeat;
+}
+
+.orbeon .exterior-construction-materials .xforms-items span:nth-child(2).xforms-selected span {
+    background: url(images/property_form_brick_clicked.png) center top no-repeat;
+}
+.orbeon .exterior-construction-materials .xforms-items span:nth-child(2).xforms-deselected span {
+    background: url(images/property_form_brick.png) center top no-repeat;
+}
+
+.orbeon .what-locks-are-in-place .xforms-items span:first-child.xforms-selected span {
+    background: url(images/property_form_single_lock_clicked.png) center top no-repeat;
+}
+.orbeon .what-locks-are-in-place .xforms-items span:first-child.xforms-deselected span {
+    background: url(images/property_form_single_lock.png) center top no-repeat;
+}
+
+.orbeon .what-locks-are-in-place .xforms-items span:nth-child(2).xforms-selected span {
+    background: url(images/property_form_multi_lock_clicked.png) center top no-repeat;
+}
+.orbeon .what-locks-are-in-place .xforms-items span:nth-child(2).xforms-deselected span {
+    background: url(images/property_form_multi_lock.png) center top no-repeat;
+}
+
+.orbeon .fr-view .xbl-fr-box-select.exterior-construction-materials .xforms-select-appearance-full .xforms-items,
+.orbeon .fr-view .xbl-fr-box-select.what-locks-are-in-place .xforms-select-appearance-full .xforms-items {
+    padding-left: 0;
+}
+.orbeon .what-locks-are-in-place .xforms-items span:first-child .checkbox > span {
+    width: 110px!important;
+}
+.orbeon .what-locks-are-in-place .xforms-items span:last-child .checkbox > span {
+    width: 180px!important;
+}
+.orbeon .what-locks-are-in-place .xforms-items span:first-child .checkbox {
+    margin-right: 10px;
+}

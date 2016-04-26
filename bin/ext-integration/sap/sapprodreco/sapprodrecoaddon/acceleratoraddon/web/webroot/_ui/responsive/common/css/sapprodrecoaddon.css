@@ -1,0 +1,35 @@
+.sap-product-reco {
+    position: relative;
+    max-height: 292px;
+    min-height: 292px;
+    -webkit-transition: all 1s;
+    -moz-transition: all 1s;
+    -ms-transition: all 1s;
+    -o-transition: all 1s;
+    transition: all 1s;
+}
+
+.sap-product-reco  .carousel {
+    -webkit-transition: opacity 1s;
+    -moz-transition: opacity 1s;
+    -ms-transition: opacity 1s;
+    -o-transition: opacity 1s;
+    transition: opacity 1s;
+}
+
+.sap-product-reco.initialized {
+    max-height: 400px;
+    min-height: 0px;
+}
+
+.sap-product-reco.initialized .placeholder {
+    display: none;
+}
+
+.sap-product-reco .placeholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -16px;
+    margin-left: -16px;
+}

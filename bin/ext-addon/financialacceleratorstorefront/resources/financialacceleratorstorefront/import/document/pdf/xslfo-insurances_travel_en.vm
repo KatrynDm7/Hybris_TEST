@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xsl:stylesheet version="1.1"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:fo="http://www.w3.org/1999/XSL/Format"
+                exclude-result-prefixes="fo">
+
+<xsl:template match="root">
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:fox="http://xml.apache.org/fop/extensions">
+
+	<!-- Creator="html2fo" Version="0.4.2" -->
+
+	<fo:layout-master-set>
+
+		<fo:simple-page-master margin-right="2.0cm" margin-left="2.0cm" margin-bottom="1.0cm" margin-top="1.0cm" page-width="8.5in" page-height="11in" master-name="first">
+
+            <fo:region-body margin-bottom="0.5cm" margin-top="1.5cm"/>
+
+			<fo:region-before extent="1.0cm"/>
+
+			<fo:region-after extent="1.0cm"/>
+
+		</fo:simple-page-master>
+
+	</fo:layout-master-set>
+
+	<fo:page-sequence master-reference="first" language="en" hyphenate="true">
+        <fo:static-content flow-name="xsl-region-before">
+
+        <fo:block line-height="12pt" font-size="10pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt" >
+            <!-- Slot for the header/caption-->
+        </fo:block>
+        </fo:static-content>
+
+
+
+        <fo:static-content flow-name="xsl-region-after">
+
+        <fo:block font-size="10pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt" >
+            <!-- Slot for the footer -->
+        </fo:block>
+    </fo:static-content>
+
+<fo:flow flow-name="xsl-region-body">
+<!-- Cover page -->
+    #set ($mediaUrl = "${ctx.baseThemeUrl}/_ui/addons/financialacceleratorstorefront/desktop/theme-${ctx.theme}/images/pdf/${ctx.categoryCode}")
+    <fo:block-container absolute-position="absolute"
+                        top="-2.5cm" left="-2cm" width="8.5in" height="11in" margin="0cm" background-color="#1B4AA0">
+        <fo:block line-height="12pt" font-size="10pt" space-before.optimum="1.5pt" space-after.optimum="4cm" >
+            <fo:external-graphic src="url($mediaUrl/mock_pdf_cover_new.PNG)" width="8.5in" content-height="scale-to-fit" content-width="scale-to-fit" />
+        </fo:block>
+    </fo:block-container>
+    <fo:block-container margin-top="15.5cm" margin-bottom="0cm" color="white">
+        <fo:block font-weight="bold" line-height="25pt" font-size="35pt" >${ctx.categoryName} Insurance</fo:block>
+        <fo:block font-weight="bold" line-height="25pt" font-size="18pt" margin-top="10px" space-before.optimum="1.5pt" space-after.optimum="1.5pt" >Policy Description</fo:block>
+        <fo:block font-weight="bold" line-height="20pt" font-size="18pt" margin-top="50px" space-before.optimum="1.5pt" space-after.optimum="1.5pt" >All Product Coverages Described</fo:block>
+        <fo:block font-weight="bold" font-size="14pt" margin-top="50px" color="#58ACFA">Important! Please read this booklet carefully.</fo:block>
+    </fo:block-container>
+<!-- END Cover page -->
+
+<fo:block page-break-before="always"></fo:block>
+<!-- Table of Contents-->
+    <fo:block space-before.optimum="1.5pt" space-after.optimum="1.5pt"  line-height="32pt" font-weight="bold" font-size="20pt">Table of Contents</fo:block>
+    <fo:block>
+        <fo:table>
+            <fo:table-column column-width="60%"/>
+            <fo:table-column column-width="40%"/>
+            <fo:table-body>
+                <fo:table-row>
+                    <fo:table-cell>
+                        <fo:block font-size="12pt" line-height="20pt" >Key Facts</fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell>
+                        <fo:block font-size="12pt" >Page 2</fo:block>
+                    </fo:table-cell>
+                </fo:table-row>
+                <fo:table-row>
+                    <fo:table-cell>
+                        <fo:block font-size="12pt" line-height="20pt" >Medical Exclusions</fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell>
+                        <fo:block font-size="12pt" >Page 3</fo:block>
+                    </fo:table-cell>
+                </fo:table-row>
+                <fo:table-row>
+                    <fo:table-cell>
+                        <fo:block font-size="12pt" line-height="20pt" >Declaration of Medical Conditions</fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell>
+                        <fo:block font-size="12pt" >Page 3</fo:block>
+                    </fo:table-cell>
+                </fo:table-row>
+                <fo:table-row>
+                    <fo:table-cell>
+                        <fo:block font-size="12pt" line-height="20pt" >Policyholder Summary Information</fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell>
+                        <fo:block font-size="12pt" >Page 4</fo:block>
+                    </fo:table-cell>
+                </fo:table-row>
+                <fo:table-row>
+                    <fo:table-cell>
+                        <fo:block font-size="12pt" line-height="20pt" >Benefits</fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell>
+                        <fo:block font-size="12pt" >Page 4</fo:block>
+                    </fo:table-cell>
+                </fo:table-row>
+                <fo:table-row>
+                    <fo:table-cell>
+                        <fo:block font-size="12pt" line-height="20pt" >Frequently Asked Questions</fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell>
+                        <fo:block font-size="12pt" >Page 5</fo:block>
+                    </fo:table-cell>
+                </fo:table-row>
+                <fo:table-row>
+                    <fo:table-cell>
+                        <fo:block font-size="12pt" line-height="20pt" >Definitions</fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell>
+                        <fo:block font-size="12pt" >Page 6</fo:block>
+                    </fo:table-cell>
+                </fo:table-row>
+                <fo:table-row>
+                    <fo:table-cell>
+                        <fo:block font-size="12pt" line-height="20pt" >Claims</fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell>
+                        <fo:block font-size="12pt" >Page 7</fo:block>
+                    </fo:table-cell>
+                </fo:table-row>
+            </fo:table-body>
+        </fo:table>
+    </fo:block>
+<!-- END Table of Contents-->
+
+    <!-- Key Facts-->
+    <fo:block space-before.optimum="1.5pt" space-after.optimum="1.5pt"  line-height="32pt" font-weight="bold" font-size="20pt" margin-top="20px">Key Facts</fo:block>
+    <fo:block line-height="50pt" font-size="15pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt" >(y)surance Service Limited (An SAP Company)</fo:block>
+    <fo:block line-height="30px" font-size="14pt" font-weight="bold" space-before.optimum="1.5pt" space-after.optimum="1.5pt" >Who is our underwriter?</fo:block>
+    <fo:block line-height="12pt" font-size="10pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt">
+        Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penati- bus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.
+    </fo:block>
+    <fo:block line-height="30px" font-size="14pt" font-weight="bold" space-before.optimum="1.5pt" space-after.optimum="1.5pt" >Which service will we provide you with?</fo:block>
+    <fo:block line-height="12pt" font-size="10pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt" >Phasellus commodo imperdiet dolor, quis congue diam elementum et. Curabitur quis mattis purus. Integer iaculis mauris a enim scelerisque tempor. Mauris turpis velit, consectetur vitae</fo:block>
+    <fo:block line-height="12pt" font-size="10pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt" >ipsum vel, sodales scelerisque massa.</fo:block>
+
+    <fo:block line-height="30px" font-size="14pt" font-weight="bold" space-before.optimum="1.5pt" space-after.optimum="1.5pt" >What will you need to pay for our services?</fo:block>
+    <fo:block line-height="12pt" font-size="10pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt" >Nunc nec turpis eget ligula mollis egestas at nec erat. Vivamus at velit quam. Nullam sapien magna, dictum vitae mollis egestas, feugiat vel enim. Mauris eget dolor eget lorem rhoncus sollicitudin a consectetur diam. Quisque quis quam diam. Morbi sagittis, tellus nec elemen- tum suscipit, odio tellus eleifend velit, non imperdiet dolor eros eu sem.</fo:block>
+
+    <fo:block line-height="30px" font-size="14pt" font-weight="bold" space-before.optimum="1.5pt" space-after.optimum="1.5pt" >Who regulates us?</fo:block>
+    <fo:block line-height="12pt" font-size="10pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt" >Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</fo:block>
+
+    <fo:block line-height="30px" font-size="14pt" font-weight="bold" space-before.optimum="1.5pt" space-after.optimum="1.5pt" >What do you do if you have a complaint?</fo:block>
+    <fo:block line-height="12pt" font-size="10pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt" >Phasellus commodo imperdiet dolor, quis congue diam elementum et. Curabitur quis mattis purus. Integer iaculis mauris a enim scelerisque tempor. Mauris turpis velit, consectetur vitae ipsum vel, sodales scelerisque massa.</fo:block>
+    <!-- END Key Facts-->
+
+<fo:block page-break-before="always"></fo:block>
+    <!-- Medical Exclusions-->
+    <fo:block font-size="15pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt" >(y)surance Service Limited (An SAP Company)</fo:block>
+
+    <fo:block space-before.optimum="1.5pt" space-after.optimum="1.5pt"  line-height="32pt" font-weight="bold" font-size="20pt" margin-top="15px">Medical Exclusions</fo:block>
+    <fo:block space-before.optimum="1.5pt" space-after.optimum="1.5pt" >
+        <fo:block line-height="15pt" font-size="11pt" margin-bottom="10px">
+            Quisque pulvinar laoreet dui et vestibulum. Nulla pharetra lacus et felis pharetra, vel posuere tellus scelerisque. Vivamus placerat augue ut dolor ullamcorper, id preti- um felis posuere. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque ac purus non ipsum bibendum tristique. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam eu urna commodo, luctus tellus sit amet, rutrum nisl. Duis neque ante, dapibus nec iaculis et, tincid-unt non quam.
+        </fo:block>
+        <fo:block line-height="15pt" font-size="11pt" margin-bottom="10px">
+            Fusce a velit sit amet enim euismod lacinia et vel odio. Duis viverra quam vitae metus accumsan, sit amet vulputate nisi vestibulum. Donec viverra quis lacus nec mollis. Nulla ullamcorper ullamcorper enim at hendrerit. Quisque blandit libero ac mauris sollicitudin posuere. Etiam fermentum libero ut urna rhoncus, ut euismod augue accumsan.
+        </fo:block>
+    </fo:block>
+    <fo:block line-height="20px" font-size="12pt" font-weight="bold" space-before.optimum="1.5pt" space-after.optimum="1.5pt" >1. Fusce nec nisl venenatis, hendrerit lorem pellentesque, suscipit diam.</fo:block>
+    <fo:block line-height="20px" font-size="12pt" font-weight="bold" space-before.optimum="1.5pt" space-after.optimum="1.5pt" >2. Ut sed fermentum ipsum. Vivamus adipiscing scelerisque leo id ultricies.</fo:block>
+    <fo:block line-height="20px" font-size="12pt" font-weight="bold" space-before.optimum="1.5pt" space-after.optimum="1.5pt" margin-bottom="10px">3. Cum sociis natoque penatibus et magnis dis parturient montes.</fo:block>
+
+    <fo:block line-height="15pt" font-size="11pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt">
+        Fusce nec nisl venenatis, hendrerit lorem pellentesque, suscipit diam. Ut sed fer- mentum ipsum. Vivamus adipiscing scelerisque leo id ultricies. Sed id sem ornare ante facilisis varius ac at nibh. Cum sociis natoque penatibus et magnis dis parturi- ent montes, nascetur ridiculus mus.</fo:block>
+
+    <fo:block space-before.optimum="1.5pt" space-after.optimum="1.5pt"  line-height="32pt" font-weight="bold" font-size="20pt" margin-top="20px">Declaration of Medical Conditions</fo:block>
+    <fo:block space-before.optimum="1.5pt" space-after.optimum="1.5pt" >
+        <fo:block line-height="15pt" font-size="11pt" margin-bottom="10px">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibend- um laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturi- ent montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputa- te, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.
+        </fo:block>
+        <fo:block line-height="15pt" font-size="11pt" margin-bottom="10px">
+            Quisque pulvinar laoreet dui et vestibulum. Nulla pharetra lacus et felis pharetra, vel posuere tellus scelerisque. Vivamus placerat augue ut dolor ullamcorper, id preti- um felis posuere. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque ac purus non ipsum bibendum tristique. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam eu urna commodo, luctus tellus sit amet, rutrum nisl. Duis neque ante, dapibus nec iaculis et, tincid-
+            unt non quam. Fusce a velit sit amet enim euismod lacinia et vel odio. Duis viverra quam vitae metus accumsan, sit amet vulputate nisi vestibulum. Donec viverra quis lacus nec mollis. Nulla ullamcorper ullamcorper enim at hendrerit. Quisque blandit libero ac mauris sollicitudin posuere. Etiam fermentum libero ut urna rhoncus, ut euismod augue accumsan.
+        </fo:block>
+    </fo:block>
+    <!-- END Medical Exclusions-->
+
+<fo:block page-break-before="always"></fo:block>
+    <!--Policyholder Summary Information-->
+    <fo:block>
+        <fo:table>
+            <fo:table-column column-width="50%"/>
+            <fo:table-column column-width="50%"/>
+            <fo:table-header>
+                <fo:table-cell>
+                    <fo:block space-before.optimum="1.5pt" space-after.optimum="1.5pt"  line-height="32pt" font-weight="bold" font-size="20pt">Policy Holder</fo:block>
+                </fo:table-cell>
+                <fo:table-cell>
+                    <fo:block space-before.optimum="1.5pt" space-after.optimum="1.5pt"  line-height="32pt" font-weight="bold" font-size="20pt">Policy: #${ctx.policyNumber}</fo:block>
+                </fo:table-cell>
+            </fo:table-header>
+            <fo:table-body>
+                <fo:table-row>
+                    <fo:table-cell>
+                        <fo:block  line-height="15pt" font-size="11pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt">
+                            <fo:block>${ctx.firstName} ${ctx.lastName}</fo:block>
+                        </fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell>
+                        <fo:block  line-height="15pt" font-size="11pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt">
+                            <fo:block>Insurance type:   ${ctx.categoryName}</fo:block>
+                            <fo:block>Start Date:       ${ctx.startDate}</fo:block>
+                            <fo:block>End Date:         #if($ctx.endDate) ${ctx.endDate} #else 31 days from start date. #end</fo:block>
+                        </fo:block>
+                    </fo:table-cell>
+                </fo:table-row>
+            </fo:table-body>
+        </fo:table>
+        <fo:block line-height="20pt" font-size="12pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt" >Please find enclosed your ${ctx.categoryName} Policy - </fo:block>
+        <fo:block line-height="20pt" font-size="12pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt" font-weight="bold" >
+            #if($ctx.recurringPrice && $ctx.recurringPrice != '') The cost of your plan is ${ctx.recurringPrice} per ${ctx.periodRetrievedFrom} for a duration of ${ctx.durationRetrievedFrom} #end
+            #if($ctx.oneTimePrice && $ctx.oneTimePrice != '') The cost of your plan is ${ctx.oneTimePrice} from ${ctx.startDate} #if($ctx.endDate) to ${ctx.endDate}#end  #end
+        </fo:block>
+    </fo:block>
+    <!--END Policyholder Summary Information-->
+    <!-- Benefits-->
+    <fo:block space-before.optimum="1.5pt" space-after.optimum="1.5pt"  line-height="32pt" font-weight="bold" font-size="20pt" margin-top="20px">Benefits</fo:block>
+    <fo:block line-height="30px" font-size="15pt" space-before.optimum="1.5pt" font-weight="bold" space-after.optimum="1.5pt" >${ctx.categoryName} #if($ctx.mainProduct.coverageProduct.name)${ctx.mainProduct.coverageProduct.name}#end</fo:block>
+    <fo:block line-height="15pt" font-size="11pt" margin-bottom="10px">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Ut sed fermentum ipsum. Vivamus adipiscing scelerisque leo id ultricies. Sed id sem ornare ante facilisis varius ac at nibh.
+    </fo:block>
+    <fo:block line-height="30px" font-size="14pt" font-weight="bold" space-before.optimum="1.5pt" space-after.optimum="1.5pt" >Covered Benefits</fo:block>
+    <fo:block line-height="15pt" font-size="11pt" margin-bottom="10px">
+        #if($ctx.mainProduct.benefits)
+            #foreach($benefit in $ctx.mainProduct.benefits)
+                <fo:block>${benefit.name} up to ${benefit.coverageValue} ${benefit.description}</fo:block>
+            #end
+        #end
+    </fo:block>
+    #if($ctx.optionalProducts)
+    <fo:block line-height="30px" font-size="14pt" font-weight="bold" space-before.optimum="1.5pt" space-after.optimum="1.5pt" >Optional Benefits</fo:block>
+    <fo:block line-height="15pt" font-size="11pt" margin-bottom="10px">
+            #foreach($optional in $ctx.optionalProducts)
+                <fo:block>${optional.coverageProduct.name}</fo:block>
+            #end
+    </fo:block>
+    #end
+    <!-- END Benefits-->
+
+<fo:block page-break-before="always"></fo:block>
+    <!-- Frequently Asked Questions-->
+    <fo:block space-before.optimum="1.5pt" space-after.optimum="1.5pt"  line-height="32pt" font-weight="bold" font-size="20pt">Frequently Asked Questions</fo:block>
+    <fo:block line-height="20pt" font-size="14pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt" margin-bottom="15px">If you have any questions or concerns, please don‘t hesitate to call us on +44 20 36088011</fo:block>
+    <fo:block line-height="15pt" font-size="12pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt" margin-bottom="5px" font-weight="bold">Question: Lorem ipsum dolor sit amet, consectetur adipiscing elit?</fo:block>
+    <fo:block line-height="15pt" font-size="11pt" margin-bottom="10px"><fo:inline line-height="15pt" font-size="12pt" font-weight="bold">A:</fo:inline> Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Pro- in sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</fo:block>
+    <fo:block line-height="15pt" font-size="12pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt" margin-bottom="5px" font-weight="bold">Question: Integer a porta quam. Donec leo nulla, condimentum nec pretium vel, aliquet?</fo:block>
+    <fo:block line-height="15pt" font-size="11pt" margin-bottom="10px"><fo:inline line-height="15pt" font-size="12pt" font-weight="bold">A:</fo:inline> Phasellus commodo imperdiet dolor, quis congue diam elementum et. Curabitur quis mattis purus. Integer iacu- lis mauris a enim scelerisque tempor. Mauris turpis velit, consectetur vitae ipsum vel, sodales scelerisque massa.</fo:block>
+    <fo:block line-height="15pt" font-size="12pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt" margin-bottom="5px" font-weight="bold">Question: Vivamus at velit quam. Nullam sapien magna, dictum vitae mollis egestas?</fo:block>
+    <fo:block line-height="15pt" font-size="11pt" margin-bottom="10px"><fo:inline line-height="15pt" font-size="12pt" font-weight="bold">A:</fo:inline> Nunc nec turpis eget ligula mollis egestas at nec erat. Vivamus at velit quam. Nullam sapien magna, dictum vi- tae mollis egestas, feugiat vel enim. Mauris eget dolor eget lorem rhoncus sollicitudin a consectetur diam. Quisque quis quam diam. Morbi sagittis, tellus nec elementum suscipit, odio tellus eleifend velit, non imperdiet dolor eros eu sem.</fo:block>
+    <fo:block line-height="15pt" font-size="12pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt" margin-bottom="5px" font-weight="bold">Question: Lorem ipsum dolor sit amet, consectetur adipiscing elit?</fo:block>
+    <fo:block line-height="15pt" font-size="11pt" margin-bottom="10px"><fo:inline line-height="15pt" font-size="12pt" font-weight="bold">A:</fo:inline> Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.Pro- in sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</fo:block>
+    <fo:block line-height="15pt" font-size="12pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt" margin-bottom="5px" font-weight="bold">Question: Integer a porta quam. Donec leo nulla, condimentum nevel, aliquet ac nibh?</fo:block>
+    <fo:block line-height="15pt" font-size="11pt" margin-bottom="10px"><fo:inline line-height="15pt" font-size="12pt" font-weight="bold">A:</fo:inline> Phasellus commodo imperdiet dolor, quis congue diam elementum et. Curabitur quis mattis purus. Integer iacu- lis mauris a enim scelerisque tempor. Mauris turpis velit, consectetur vitae ipsum vel, sodales scelerisque massa.</fo:block>
+    <fo:block line-height="15pt" font-size="12pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt" margin-bottom="5px" font-weight="bold">Question: Vivamus at velit quam. Nullam sapien magna, dictum vitae mollis egestas?</fo:block>
+    <fo:block line-height="15pt" font-size="11pt" margin-bottom="10px"><fo:inline line-height="15pt" font-size="12pt" font-weight="bold">A:</fo:inline> Nunc nec turpis eget ligula mollis egestas at nec erat. Vivamus at velit quam. Nullam sapien magna, dictum vi- tae mollis egestas, feugiat vel enim. Mauris eget dolor eget lorem rhoncus sollicitudin a consectetur diam. Quisque quis quam diam. Morbi sagittis, tellus nec elementum suscipit, odio tellus eleifend velit, non imperdiet dolor eros eu sem.</fo:block>
+    <fo:block line-height="15pt" font-size="12pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt" margin-bottom="5px" font-weight="bold">Question: Lorem ipsum dolor sit amet, consectetur adipiscing elit?</fo:block>
+    <fo:block line-height="15pt" font-size="11pt" margin-bottom="10px" ><fo:inline line-height="15pt" font-size="12pt" font-weight="bold">A:</fo:inline> Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Pro- in sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</fo:block>
+    <!-- END Frequently Asked Questions-->
+
+<fo:block page-break-before="always"></fo:block>
+    <!-- Definitions-->
+    <fo:block space-before.optimum="1.5pt" space-after.optimum="1.5pt"  line-height="32pt" font-weight="bold" font-size="20pt">Definitions</fo:block>
+    <fo:block line-height="20pt" font-size="14pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt" margin-bottom="15px">Wherever the following words or phrases appear in this policy, they will always have these meanings.</fo:block>
+
+    <fo:block line-height="15pt" font-size="11pt" margin-bottom="10px">
+        <fo:table>
+            <fo:table-column column-width="50%" padding-right="10px"/>
+            <fo:table-column column-width="50%"/>
+            <fo:table-body>
+                <fo:table-row>
+                    <fo:table-cell padding-right="8px" padding-bottom="10px">
+                        <fo:block>
+                            <fo:block font-weight="bold">Civil partner</fo:block>
+                            Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.  Pro- in sodales pulvinar tempor. Cum sociis natoque penati- bus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.
+                        </fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell padding-bottom="10px">
+                        <fo:block>
+                            <fo:block font-weight="bold">Relative or relation</fo:block>
+                            Phasellus commodo imperdiet dolor, quis congue diam elementum et. Curabitur quis mattis purus. Integer iacu- lis mauris a enim scelerisque tempor. Mauris turpis velit, consectetur  vitae ipsum vel, sodales scelerisque massa.
+                        </fo:block>
+                    </fo:table-cell>
+                </fo:table-row>
+                <fo:table-row>
+                    <fo:table-cell padding-right="8px" padding-bottom="10px">
+                        <fo:block>
+                            <fo:block font-weight="bold">Family</fo:block>
+                            Nunc nec turpis eget ligula mollis egestas at nec erat. Vivamus at velit quam. Nullam sapien magna, dictum vitae mollis egestas, feugiat vel enim. Mauris eget dolor eget lorem rhoncus sollicitudin  a consectetur  diam. Quisque quis quam diam. Morbi sagittis, tellus nec ele- mentum suscipit, odio tellus eleifend velit, non imperdiet dolor eros eu sem.
+                        </fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell padding-bottom="10px">
+                        <fo:block>
+                            <fo:block font-weight="bold">Home area</fo:block>
+                            Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.  Proin sodales pulvinar tempor.
+                        </fo:block>
+                    </fo:table-cell>
+                </fo:table-row>
+                <fo:table-row>
+                    <fo:table-cell padding-right="8px" padding-bottom="10px">
+                        <fo:block>
+                            <fo:block font-weight="bold">Medical Condition</fo:block>
+                            Phasellus commodo imperdiet dolor, quis congue diam elementum et. Curabitur quis mattis purus. Integer iacu- lis mauris a enim scelerisque tempor. Mauris turpis velit, consectetur  vitae ipsum vel, sodales scelerisque massa.
+                        </fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell padding-bottom="10px">
+                        <fo:block>
+                            <fo:block font-weight="bold">Natural disaster(s)</fo:block>
+                            Nunc nec turpis eget ligula mollis egestas at nec erat. Vivamus at velit quam. Nullam sapien magna, dictum vitae mollis egestas, feugiat vel enim. Mauris eget dolor eget lorem rhoncus sollicitudin  a consectetur  diam. Quisque quis quam diam.
+                        </fo:block>
+                    </fo:table-cell>
+                </fo:table-row>
+                <fo:table-row>
+                    <fo:table-cell padding-right="8px" padding-bottom="10px">
+                        <fo:block>
+                            <fo:block font-weight="bold">Pre-existing Condition</fo:block>
+                            Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.  Pro- in sodales pulvinar tempor. Cum sociis natoque penati- bus et magnis dis parturient montes, nascetur ridiculus mus.
+                        </fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell padding-bottom="10px">
+                        <fo:block>
+                            <fo:block font-weight="bold">Property</fo:block>
+                            Nunc nec turpis eget ligula mollis egestas at nec erat. Vivamus at velit quam. Nullam sapien magna, dictum vitae mollis egestas, feugiat vel enim. Mauris eget dolor eget lorem rhoncus sollicitudin  a consectetur  diam. Quisque quis quam diam. Morbi sagittis, tellus nec ele- mentum suscipit, odio tellus eleifend velit, non imperdiet dolor eros eu sem.
+                        </fo:block>
+                    </fo:table-cell>
+                </fo:table-row>
+                <fo:table-row>
+                    <fo:table-cell padding-right="8px" padding-bottom="10px">
+                        <fo:block>
+                            <fo:block font-weight="bold">Pet</fo:block>
+                            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.
+                        </fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell padding-bottom="10px">
+                        <fo:block>
+                            <fo:block font-weight="bold">Investment</fo:block>
+                            Mauris eget dolor eget lorem rhoncus sollicitudin  a con- sectetur diam. Quisque quis quam diam. Morbi sagittis, tellus nec elementum suscipit, odio tellus eleifend velit, non imperdiet dolor eros eu sem.
+                        </fo:block>
+                    </fo:table-cell>
+                </fo:table-row>
+                <fo:table-row>
+                    <fo:table-cell padding-right="8px" padding-bottom="10px">
+                        <fo:block>
+                            <fo:block font-weight="bold">Vacation</fo:block>
+                            Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.  Proin sodales pulvinar tempor. Cum so- ciis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.
+                        </fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell padding-bottom="10px">
+                        <fo:block>
+                            <fo:block font-weight="bold">War</fo:block>
+                            Phasellus commodo imperdiet dolor, quis congue diam elementum et. Curabitur quis mattis purus. Integer iacu- lis mauris a enim scelerisque tempor. Mauris turpis velit, consectetur  vitae ipsum vel, sodales scelerisque massa.
+                        </fo:block>
+                    </fo:table-cell>
+                </fo:table-row>
+                <fo:table-row>
+                    <fo:table-cell padding-right="8px" padding-bottom="10px">
+                        <fo:block>
+                            <fo:block font-weight="bold">Valuables</fo:block>
+                            Nullam sapien magna, dictum vitae mollis egestas, feu- giat vel enim. Mauris eget dolor eget lorem rhoncus sol- licitudin a consectetur  diam. Quisque quis quam diam. Morbi sagittis, tellus nec elementum suscipit, odio tellus eleifend velit, non imperdiet dolor eros eu sem.
+                        </fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell padding-bottom="10px">
+                        <fo:block>
+                            <fo:block font-weight="bold">Trip</fo:block>
+                            Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vul- putate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.
+                        </fo:block>
+                    </fo:table-cell>
+                </fo:table-row>
+            </fo:table-body>
+        </fo:table>
+    </fo:block>
+
+
+
+<!-- END Definitions-->
+<fo:block page-break-before="always"></fo:block>
+    <!-- Claims-->
+    <fo:block space-before.optimum="1.5pt" space-after.optimum="1.5pt"  line-height="32pt" font-weight="bold" font-size="20pt">Claims</fo:block>
+    <fo:block line-height="20pt" font-size="14pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt" margin-bottom="15px">Wherever possible, follow these steps to submit a claim</fo:block>
+
+    <fo:block line-height="15pt" font-size="11pt" margin-bottom="20px">Nunc nec turpis eget ligula mollis egestas at nec erat. Vivamus at velit quam. Nullam sapien magna, dictum vitae mollis egestas, feugiat vel enim. Mauris eget dolor eget lorem rhoncus sollicitudin  a consectetur  diam. Quisque quis quam diam.</fo:block>
+    <fo:block line-height="15pt" font-size="11pt" margin-bottom="10px" font-weight="bold">1. Contact one of our offices</fo:block>
+    <fo:block line-height="15pt" font-size="11pt" margin-bottom="10px">Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum.</fo:block>
+
+    <fo:block line-height="15pt" font-size="11pt" margin-bottom="10px" font-weight="bold">
+        <fo:table>
+            <fo:table-column column-width="30%" padding-right="10px"/>
+            <fo:table-column column-width="70%"/>
+            <fo:table-body>
+                <fo:table-row>
+                    <fo:table-cell>
+                        <fo:block>Australia:</fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell>
+                        <fo:block>+61 2 9006 1301</fo:block>
+                    </fo:table-cell>
+                </fo:table-row>
+                <fo:table-row>
+                    <fo:table-cell>
+                        <fo:block>Canada:</fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell>
+                        <fo:block>+1 888 342 9457</fo:block>
+                    </fo:table-cell>
+                </fo:table-row>
+                <fo:table-row>
+                    <fo:table-cell>
+                        <fo:block>Germany:</fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell>
+                        <fo:block>+49 89 890 650</fo:block>
+                    </fo:table-cell>
+                </fo:table-row>
+                <fo:table-row>
+                    <fo:table-cell>
+                        <fo:block>USA:</fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell>
+                        <fo:block>+1 888 342 9457</fo:block>
+                    </fo:table-cell>
+                </fo:table-row>
+                <fo:table-row>
+                    <fo:table-cell>
+                        <fo:block>Brazil:</fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell>
+                        <fo:block>+55 11 3568 2108</fo:block>
+                    </fo:table-cell>
+                </fo:table-row>
+                <fo:table-row>
+                    <fo:table-cell>
+                        <fo:block>UK:</fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell>
+                        <fo:block>+44 20 36088011</fo:block>
+                    </fo:table-cell>
+                </fo:table-row>
+                <fo:table-row>
+                    <fo:table-cell>
+                        <fo:block>China::</fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell>
+                        <fo:block>+852 3965 3037</fo:block>
+                    </fo:table-cell>
+                </fo:table-row>
+                <fo:table-row>
+                    <fo:table-cell>
+                        <fo:block>Russia:</fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell>
+                        <fo:block>+7 495 225 85 21</fo:block>
+                    </fo:table-cell>
+                </fo:table-row>
+            </fo:table-body>
+        </fo:table>
+    </fo:block>
+    <fo:block line-height="15pt" font-size="11pt" margin-bottom="10px">Quisque quis quam diam. Morbi sagittis, tellus nec elementum suscipit, odio tellus eleifend velit, non imperdiet dolor eros eu sem.</fo:block>
+    <fo:block line-height="15pt" font-size="11pt" margin-bottom="10px" font-weight="bold">2. Identify relevant forms</fo:block>
+    <fo:block line-height="15pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt" margin-bottom="10px">
+        <fo:inline font-size="11pt">Phasellus commodo imperdiet dolor, quis congue diam elementum et. Curabitur quis mattis purus. Integer iaculis mauris a enim scelerisque tem- por. Mauris turpis velit, consectetur  vitae ipsum vel, sodales scelerisque massa.</fo:inline>
+    </fo:block>
+    <fo:block line-height="15pt" font-size="11pt" margin-bottom="10px" font-weight="bold">3. Sign up for Direct Deposit</fo:block>
+    <fo:block line-height="15pt" font-size="11pt" margin-bottom="10px">Nunc nec turpis eget ligula mollis egestas at nec erat. Vivamus at velit quam. Nullam sapien magna, dictum vitae mollis egestas, feugiat vel enim. Mauris eget dolor eget lorem rhoncus sollicitudin  a consectetur  diam.</fo:block>
+    <fo:block line-height="15pt" font-size="11pt" margin-bottom="10px" font-weight="bold">4. Sign forms</fo:block>
+    <fo:block line-height="15pt" font-size="11pt" margin-bottom="10px">Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.  Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridicu- lus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</fo:block>
+    <fo:block line-height="15pt" font-size="11pt" margin-bottom="10px" font-weight="bold">5. Mailing instructions</fo:block>
+    <fo:block line-height="15pt" font-size="11pt" margin-bottom="10px">Phasellus commodo imperdiet dolor, quis congue diam elementum et. Curabitur quis mattis purus. Integer iaculis mauris a enim scelerisque tem- por. Mauris turpis velit, consectetur  vitae ipsum vel, sodales scelerisque massa.</fo:block>
+    <fo:block line-height="15pt" font-size="11pt" margin-bottom="10px">NOTE - ORIGINAL RECEIPTS</fo:block>
+    <fo:block line-height="15pt" font-size="11pt" margin-bottom="10px">must be attached for all claims</fo:block>
+    <!-- END Claims-->
+
+<fo:block page-break-before="always"></fo:block>
+    <!--Back cover page-->
+    <fo:block-container absolute-position="absolute"
+                        top="-2.5cm" left="-2cm" width="8.5in" height="11in" margin="0cm" background-color="#1B4AA0">
+        <fo:block line-height="12pt" font-size="10pt" space-before.optimum="1.5pt" space-after.optimum="4cm" >
+            <fo:external-graphic src="url($mediaUrl/mock_pdf_back_cover_new.PNG)" width="8.5in" content-height="scale-to-fit" content-width="scale-to-fit" />
+        </fo:block>
+    </fo:block-container>
+    <fo:block-container margin-top="15cm"  margin-bottom="0cm" color="white">
+        <fo:block margin-bottom="20px">
+            <fo:table>
+                <fo:table-column column-width="50%" padding-right="10px"/>
+                <fo:table-column column-width="50%"/>
+                <fo:table-body>
+                    <fo:table-row>
+                        <fo:table-cell>
+                            <fo:block font-weight="bold" line-height="20pt" font-size="18pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt" >Customer Services</fo:block>
+                            <fo:block font-weight="bold" font-size="14pt" color="#58ACFA">+44 20 36088011</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                            <fo:block font-weight="bold" line-height="20pt" font-size="18pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt" >Claims Line</fo:block>
+                            <fo:block font-weight="bold" font-size="14pt" color="#58ACFA">+44 20 36088011</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                </fo:table-body>
+            </fo:table>
+        </fo:block>
+        <fo:block margin-bottom="20px">
+            <fo:block font-weight="bold" line-height="20pt" font-size="18pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt" >Phone</fo:block>
+            <fo:block font-weight="bold" font-size="14pt" color="#58ACFA">+44 20 36088011</fo:block>
+        </fo:block>
+        <fo:block margin-bottom="20px">
+            <fo:block font-weight="bold" line-height="20pt" font-size="18pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt" >Fax</fo:block>
+            <fo:block font-weight="bold" font-size="14pt" color="#58ACFA">+44 20 36088011</fo:block>
+        </fo:block>
+        <fo:block>
+            <fo:block font-weight="bold" line-height="20pt" font-size="18pt"  space-before.optimum="1.5pt" space-after.optimum="1.5pt" >Email</fo:block>
+            <fo:block font-weight="bold" font-size="14pt" color="#58ACFA">customer.services@ysurance.com</fo:block>
+            <fo:block font-weight="bold" font-size="14pt" color="#58ACFA">claims@ysurance.com</fo:block>
+        </fo:block>
+        <fo:block font-size="10pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt" margin-top="10px">© hybris software, 2015</fo:block>
+        <fo:block space-before.optimum="1.5pt" space-after.optimum="1.5pt"  id="LastPage" line-height="1pt" font-size="1pt">
+        </fo:block>
+    </fo:block-container>
+    <!--END Back cover page-->
+    </fo:flow>
+    </fo:page-sequence>
+</fo:root>
+
+</xsl:template>
+
+</xsl:stylesheet>

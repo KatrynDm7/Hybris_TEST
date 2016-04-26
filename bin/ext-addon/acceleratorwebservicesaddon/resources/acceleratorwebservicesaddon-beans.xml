@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<bean class="de.hybris.platform.commercefacades.storelocator.data.PointOfServiceDataList">
+		<property name="pointOfServices"
+					 type="java.util.List&lt;de.hybris.platform.commercefacades.storelocator.data.PointOfServiceData>"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercewebservicescommons.dto.store.PointOfServiceListWsDTO">
+		<property name="pointOfServices"
+					 type="java.util.List&lt;de.hybris.platform.commercewebservicescommons.dto.store.PointOfServiceWsDTO>"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercewebservicescommons.dto.payment.PaymentRequestWsDTO">
+		<property name="postUrl" type="String" />
+		<property name="parameters" type="java.util.Map&lt;String, String>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercewebservicescommons.dto.payment.SopPaymentDetailsWsDTO">
+		<property name="amount" type="String" />
+		<property name="billTo_city" type="String" />
+		<property name="billTo_country" type="String" />
+		<property name="billTo_customerID" type="String" />
+		<property name="billTo_email" type="String" />
+		<property name="billTo_firstName" type="String" />
+		<property name="billTo_lastName" type="String" />
+		<property name="billTo_phoneNumber" type="String" />
+		<property name="billTo_postalCode" type="String" />
+		<property name="billTo_state" type="String" />
+		<property name="billTo_street1" type="String" />
+		<property name="billTo_street2" type="String" />
+		<property name="card_accountNumber" type="String" />
+		<property name="card_cardType" type="String" />
+		<property name="card_startMonth" type="String" />
+		<property name="card_startYear" type="String" />
+		<property name="card_issueNumber" type="String" />
+		<property name="card_cvNumber" type="String" />
+		<property name="card_expirationMonth" type="String" />
+		<property name="card_expirationYear" type="String" />
+		<property name="comments" type="String" />
+		<property name="currency" type="String" />
+		<property name="shipTo_city" type="String" />
+		<property name="shipTo_country" type="String" />
+		<property name="shipTo_firstName" type="String" />
+		<property name="shipTo_lastName" type="String" />
+		<property name="shipTo_phoneNumber" type="String" />
+		<property name="shipTo_postalCode" type="String" />
+		<property name="shipTo_shippingMethod" type="String" />
+		<property name="shipTo_state" type="String" />
+		<property name="shipTo_street1" type="String" />
+		<property name="shipTo_street2" type="String" />
+		<property name="taxAmount" type="String" />
+		<property name="savePaymentInfo" type="boolean" />
+	</bean>
+</beans>

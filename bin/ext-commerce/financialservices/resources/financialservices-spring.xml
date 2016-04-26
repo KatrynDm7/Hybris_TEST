@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config />
+    <!--Define the insurance provider beans-->
+    <alias name="defaultTravelInsuranceProviderName" alias="travelInsuranceProviderName"/>
+    <bean id="defaultTravelInsuranceProviderName" class="java.lang.String">
+        <constructor-arg value="#{configurationService.configuration.getProperty('travel.quotation.provider.name')}"/>
+    </bean>
+    <alias name="defaultPropertyHomeownersInsuranceProviderName" alias="propertyHomeownersInsuranceProviderName"/>
+    <bean id="defaultPropertyHomeownersInsuranceProviderName" class="java.lang.String">
+        <constructor-arg value="#{configurationService.configuration.getProperty('property.homeowners.quotation.provider.name')}"/>
+    </bean>
+    <alias name="defaultPropertyRentersInsuranceProviderName" alias="propertyRentersInsuranceProviderName"/>
+    <bean id="defaultPropertyRentersInsuranceProviderName" class="java.lang.String">
+        <constructor-arg value="#{configurationService.configuration.getProperty('property.renters.quotation.provider.name')}"/>
+    </bean>
+    <alias name="defaultAutoInsuranceProviderName" alias="autoInsuranceProviderName"/>
+    <bean id="defaultAutoInsuranceProviderName" class="java.lang.String">
+        <constructor-arg value="#{configurationService.configuration.getProperty('auto.quotation.provider.name')}"/>
+    </bean>
+    <alias name="defaultLifeInsuranceProviderName" alias="lifeInsuranceProviderName"/>
+    <bean id="defaultLifeInsuranceProviderName" class="java.lang.String">
+        <constructor-arg value="#{configurationService.configuration.getProperty('life.quotation.provider.name')}"/>
+    </bean>
+    <!--End Define the insurance provider beans-->
+
+    <alias name="defaultQuotationServicesMap" alias="quotationServicesMap"/>
+    <util:map id="defaultQuotationServicesMap" key-type="java.lang.String"
+              value-type="de.hybris.platform.financialservices.services.QuotationService">
+        <entry key-ref="travelInsuranceProviderName" value-ref="travelQuotationService"/>
+        <entry key-ref="propertyHomeownersInsuranceProviderName" value-ref="propertyQuotationService"/>
+        <entry key-ref="propertyRentersInsuranceProviderName" value-ref="propertyQuotationService"/>
+        <entry key-ref="autoInsuranceProviderName" value-ref="autoQuotationService"/>
+        <entry key-ref="lifeInsuranceProviderName" value-ref="lifeQuotationService"/>
+    </util:map>
+
+    <alias name="insuranceSetupSyncJobService" alias="setupSyncJobService"/>
+    <bean id="insuranceSetupSyncJobService" parent="defaultSetupSyncJobService">
+        <property name="productCatalogEditSyncDescriptors" ref="financialProductCatalogEditSyncDescriptors"/>
+    </bean>
+
+    <bean id="financialProductCatalogEditSyncDescriptors" parent="productCatalogEditSyncDescriptors">
+        <property name="sourceMap">
+            <map merge="true">
+                <entry key="de.hybris.platform.jalo.product.Product">
+                    <list>
+                        <!-- Insurance configuration -->
+                        <bean class="de.hybris.platform.commerceservices.setup.data.EditSyncAttributeDescriptorData">
+                            <property name="includeInSync" value="false"/>
+                            <property name="qualifier" value="comparisonPanelCMSComponents"/>
+                        </bean>
+                        <!-- END - Insurance configuration -->
+                    </list>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <alias name="defaultAbstractQuotationService" alias="abstractQuotationService"/>
+    <bean id="defaultAbstractQuotationService" abstract="true"
+          class="de.hybris.platform.financialservices.services.impl.AbstractQuotationService">      
+       <property name="sessionService" ref="sessionService"/>
+       <property name="subscriptionCommercePriceService" ref="subscriptionCommercePriceService"/>
+       <property name="productService" ref="productService"/>
+       <property name="cartService" ref="cartService"/>
+    </bean>
+
+    <alias name="defaultTravelQuotationService" alias="travelQuotationService"/>
+    <bean id="defaultTravelQuotationService" parent="abstractQuotationService"
+          class="de.hybris.platform.financialservices.services.impl.DefaultTravelQuotationService">
+    </bean>
+    
+    <alias name="defaultAutoQuotationService" alias="autoQuotationService"/>
+    <bean id="defaultAutoQuotationService" parent="abstractQuotationService"
+          class="de.hybris.platform.financialservices.services.impl.DefaultAutoQuotationService">
+    </bean>
+
+    <alias name="defaultLifeQuotationService" alias="lifeQuotationService"/>
+    <bean id="defaultLifeQuotationService" parent="abstractQuotationService"
+          class="de.hybris.platform.financialservices.services.impl.DefaultLifeQuotationService">
+    </bean>
+    
+    <alias name="defaultPropertyQuotationService" alias="propertyQuotationService"/>
+    <bean id="defaultPropertyQuotationService" parent="abstractQuotationService"
+          class="de.hybris.platform.financialservices.services.impl.DefaultPropertyQuotationService">
+    </bean>	
+	
+    <alias name="geoDisableProductBundleRuleService" alias="bundleRuleService" />
+	<bean id="geoDisableProductBundleRuleService" class="de.hybris.platform.financialservices.bundle.impl.GeoDisableProductBundleRuleService" 
+		parent="defaultBundleRuleService">
+	    <property name="cartService" ref="cartService"/>
+	</bean>
+    
+    <alias name="geoDisableProductBundleRuleDao" alias="disableProductBundleRuleDao" />
+    <bean id="geoDisableProductBundleRuleDao"  parent="bundleRuleDao"
+    	class="de.hybris.platform.financialservices.bundle.impl.GeoDisableProductBundleRuleDao" />
+
+    <bean id="agentModel" class="de.hybris.platform.financialservices.jalo.Agent" scope="prototype"/>
+
+    <alias name="defaultAgentService" alias="agentService"/>
+    <bean id="defaultAgentService" class="de.hybris.platform.financialservices.services.impl.DefaultAgentService">
+        <property name="insuranceAgentDao" ref="insuranceAgentDao"/>
+    </bean>
+
+    <bean id="insuranceAgentDao" class="de.hybris.platform.financialservices.dao.impl.DefaultInsuranceAgentDao">
+        <property name="flexibleSearchService" ref="flexibleSearchService"/>
+        <property name="modelService" ref="modelService" />
+    </bean>
+
+	<!-- Does the following 2 need moving to facades due to visibility -->
+    <alias name="insuranceSubmitOrderStrategyList" alias="submitOrderStrategyList" />
+    <util:list id="insuranceSubmitOrderStrategyList">
+        <ref bean="eventPublishingSubmitOrderStrategy"/>
+        <ref bean="policyCreationSubmitOrderStrategy"/>
+    </util:list>
+
+    <alias alias="orderService" name="insuranceDefaultOrderService"/>
+	<bean id="insuranceDefaultOrderService" parent="defaultOrderService">
+		<property name="submitOrderStrategies" ref="submitOrderStrategyList" />
+	</bean>
+  	<!-- End -->
+  	
+  	<alias name="defaultExtensionSubstitutionService" alias="extensionSubstitutionService" />
+  	<bean id="defaultExtensionSubstitutionService" class="de.hybris.platform.financialservices.substitute.impl.DefaultExtensionSubsitutionService">
+  		<property name="extensionSubstitutionMap">
+  			<map>
+				<entry key="financialservices" value="financialacceleratorstorefront"/>
+  			</map>
+  		</property>
+  	</bean>
+  	
+    <import resource="financialservices-spring-int.xml"/>
+
+    <bean id="findAgentEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+        <property name="resource" value="classpath:/financialservices/processes/findAgentEmailProcess.xml"/>
+    </bean>
+
+    <bean id="generateEmail" parent="abstractGenerateEmailAction">
+        <property name="frontendTemplateName" value="FindAgentEmailTemplate"/>
+    </bean>
+    
+</beans>

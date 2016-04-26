@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content-elements>	
+							
+	<content-element type="NavigationBarCollectionComponent" name="type.NavigationBarCollectionComponent.name"
+							description="type.NavigationBarCollectionComponent.description"
+							image="cmscockpit/images/navigationbar_icon_34x34.gif"
+							refImage="cmscockpit/images/navigationbar_icon_34x34.gif"
+							imageSmall="cmscockpit/images/navigationbar_icon_20x20.gif"/>
+							
+</content-elements>	

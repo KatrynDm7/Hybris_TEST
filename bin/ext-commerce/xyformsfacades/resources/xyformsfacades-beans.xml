@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<bean class="de.hybris.platform.xyformsfacades.data.YFormDataData">
+		<property name="id" type="String"/>
+		<property name="content" type="String"/>
+		<property name="type" type="de.hybris.platform.xyformsservices.enums.YFormDataTypeEnum" />
+		<property name="refId" type="String"/>
+      <property name="formDefinition" type="de.hybris.platform.xyformsfacades.data.YFormDefinitionData"/>
+	</bean>
+
+	<bean class="de.hybris.platform.xyformsfacades.data.YFormDefinitionData">
+		<property name="applicationId" type="String"/>
+		<property name="formId" type="String"/>
+		<property name="version" type="int"/>
+      <property name="title" type="String"/>
+		<property name="description" type="String"/>
+      <property name="documentId" type="String" />
+		<property name="content" type="String"/>
+	</bean>
+
+</beans>

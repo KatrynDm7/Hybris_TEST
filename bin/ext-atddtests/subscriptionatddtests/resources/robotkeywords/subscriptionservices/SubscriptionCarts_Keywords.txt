@@ -1,0 +1,14 @@
+*** Settings ***
+Library         de.hybris.platform.subscriptionatddtests.keywords.commerce.SubscriptionCommerceKeywordLibrary
+Library         de.hybris.platform.atddimpex.keywords.ImpexKeywordLibrary
+Resource		impex/Impex_Keywords.txt
+
+*** Keywords ***
+import user carts sample data
+    [Documentation]    Imports test data
+    import impex from resource    /impex/testCartQuery.csv
+
+get carts for user with id "${uid:[^"]+}" and site "${site:[^"]+}"
+    [Documentation]    returns cart list for the specified user and site
+    ${userCarts}=    get carts for user and site    ${uid}    ${site}
+    [Return]    ${userCarts}

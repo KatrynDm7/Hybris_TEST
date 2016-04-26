@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config xmlns="http://www.hybris.com/cockpit/config">
+    <context merge-by="module" parent="auto" type="SAPConfiguration" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab xmlns="http://www.hybris.com/cockpitng/component/editorArea" name="tab.sapproductrecommendation">
+                <section name="section.sapproductrecommendation_configuration">
+                    <attribute qualifier="sapproductrecommendation_usertype"/>
+                </section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="module" parent="auto" type="SAPGlobalConfiguration" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab xmlns="http://www.hybris.com/cockpitng/component/editorArea" name="tab.sapproductrecommendation">
+                <section name="section.sapproductrecommendation_configuration">
+                    <attribute qualifier="sapproductrecommendation_httpdest"/>
+                    <attribute qualifier="sapproductrecommendation_rfcdest"/>
+                    <attribute qualifier="sapproductrecommendation_usage"/>
+                </section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+</config>

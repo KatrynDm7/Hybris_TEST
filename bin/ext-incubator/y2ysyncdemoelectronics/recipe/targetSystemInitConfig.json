@@ -1,0 +1,58 @@
+{
+  "init": "Go",
+  "initmethod": "init",
+  "clearhmc": "true",
+  "essential": "true",
+  "localizetypes": "true",
+  "droptables": "droptables",
+  "core_sample": "true",
+  "scripting_sample": "true",
+  "mediaweb_sample": "true",
+  "commons_sample": "true",
+  "processing_sample": "true",
+  "impex_sample": "true",
+  "validation_sample": "true",
+  "catalog_sample": "true",
+  "europe1_sample": "true",
+  "platformservices_sample": "true",
+  "workflow_sample": "true",
+  "comments_sample": "true",
+  "advancedsavedquery_sample": "true",
+  "ldap_sample": "true",
+  "solrfacetsearch_sample": "true",
+  "deltadetection_sample": "true",
+  "y2ysync_sample": "true",
+  "hmc_sample": "true",
+  "voucher_sample": "true",
+  "platformhmc_sample": "true",
+  "promotions_sample": "true",
+  "basecommerce_sample": "true",
+  "ticketsystem_sample": "true",
+  "payment_sample": "true",
+  "customerreview_sample": "true",
+  "cms2_sample": "true",
+  "cms2lib_sample": "true",
+  "solrfacetsearchhmc_sample": "true",
+  "commerceservices_sample": "true",
+  "acceleratorservices_sample": "true",
+  "acceleratorcms_sample": "true",
+  "yacceleratorfulfilmentprocess_sample": "true",
+  "yacceleratorcore_sample": "true",
+  "backoffice_sample": "true",
+  "datahubbackoffice_sample": "true",
+  "basecommerce_create geocoding cron job": [
+    "no"
+  ],
+  "yacceleratorcore_accessRights": [
+    "yes"
+  ],
+  "yacceleratorinitialdata_importCoreData": [
+    "yes"
+  ],
+  "yacceleratorinitialdata_importSampleData": [
+    "yes"
+  ],
+  "yacceleratorinitialdata_activateSolrCronJobs": [
+    "yes"
+  ]
+}

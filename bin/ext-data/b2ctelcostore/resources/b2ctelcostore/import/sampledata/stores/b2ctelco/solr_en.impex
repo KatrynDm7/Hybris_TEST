@@ -1,0 +1,61 @@
+#
+# ENGLISH LOCALIZATION
+#
+
+$version=Staged
+$lang=en
+$facetSearchConfigName=b2ctelcoIndex
+$productCatalog=b2ctelcoProductCatalog
+$catalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalog]),CatalogVersion.version[default=$version])[default=$productCatalog:$version]
+$contentCatalog=b2ctelcoContentCatalog
+$contentCatalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=$version])[default=$contentCatalog:$version]
+
+UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];displayName[lang=$lang]
+;b2ctelcoProductType;color;"Color"
+;b2ctelcoProductType;colorcompatibility;"Other Available Colors"
+;b2ctelcoProductType;displayresolution;"Display Resolution"
+;b2ctelcoProductType;gps;"GPS"
+;b2ctelcoProductType;camera;"Camera"
+;b2ctelcoProductType;keyboard;"KeyBoard"
+;b2ctelcoProductType;formfactor;"Form Factor"
+;b2ctelcoProductType;touchscreen;"Touch Screen"
+;b2ctelcoProductType;featurecompatibility;"Feature Compatibility"
+;b2ctelcoProductType;vendorcompatibility;"Vendor Compatibility"
+;b2ctelcoProductType;mobileplatform;"Operating System"
+;b2ctelcoProductType;bands;"Bands"
+;b2ctelcoProductType;includedminutes;"Minutes"
+;b2ctelcoProductType;includedtexts;"Texts"
+;b2ctelcoProductType;includeddata;"Data"
+
+
+#
+# Add additional sample solr index configuration
+#
+
+# Synonyms
+INSERT_UPDATE SolrSynonymConfig;facetSearchConfig(name)[unique=true];language(isocode)[unique=true, default=$lang];synonymFrom[unique=true];synonymTo
+;$facetSearchConfigName;;"Plan,Contract";
+;$facetSearchConfigName;;"Blutooth";"Bluetooth"
+;$facetSearchConfigName;;"Screen,Display";
+;$facetSearchConfigName;;"Internet,Data,Surf,Surfing";
+;$facetSearchConfigName;;"Abroad";"Roaming"
+
+# Keyword Redirects
+INSERT_UPDATE SolrFacetSearchKeywordRedirect;facetSearchConfig(name)[unique=true];language(isocode)[unique=true, default=$lang];keyword[unique=true];matchType(code)[unique=true];ignoreCase[default=true];redirect(&redirectRefID)
+;$facetSearchConfigName;;"cart";CONTAINS;;redirectRefID-cart
+;$facetSearchConfigName;;"basket";CONTAINS;;redirectRefID-cart
+;$facetSearchConfigName;;"store";EXACT;;redirectRefID-store
+;$facetSearchConfigName;;"hybris";EXACT;;redirectRefID-hybris
+;$facetSearchConfigName;;"ipad";CONTAINS;;redirectRefID-product-ipad
+;$facetSearchConfigName;;"kindle";CONTAINS;;redirectRefID-product-kindle
+;$facetSearchConfigName;;"charger";EXACT;;redirectRefID-category-charger
+
+INSERT_UPDATE SolrURIRedirect;url[unique=true];&redirectRefID
+;"/cart";redirectRefID-cart
+;"/store";redirectRefID-store
+;"http://www.hybris.com";redirectRefID-hybris
+;"/Open-Catalogue/Devices/Tablet/Apple-iPad-(64GB%2C-Wi-Fi%2C-White)/p/1976032";redirectRefID-product-ipad
+;"/Open-Catalogue/Devices/Tablet/Kindle-Fire/p/1974125";redirectRefID-product-kindle
+;"/Open-Catalogue/Accessories/Chargers-and-Docs/c/chargersanddocs";redirectRefID-category-charger
+
+INSERT_UPDATE SolrPageRedirect;redirectItem(uid,$contentCatalogVersion)[unique=true];&redirectRefID

@@ -1,0 +1,10 @@
+$contentCatalog=apparel-ukContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$jarResourceCms=jar:de.hybris.platform.hybrisanalyticsaddon.constants.HybrisanalyticsaddonConstants&/hybrisanalyticsaddon/import/cockpit/cmscockpit
+
+
+INSERT_UPDATE HybrisAnalyticsTagScriptComponent;$contentCV[unique=true];uid[unique=true];name;restrictions(uid,$contentCV)[default='MobileExperienceRestriction'];onlyOneRestrictionMustApply[default='false']
+;;MobileHybrisAnalyticsTagScriptComponent;Mobile Hybris analytics tag file;;
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(uid,$contentCV)[mode=append]
+;;MobilePlaceholderContentSlot;true;MobileHybrisAnalyticsTagScriptComponent

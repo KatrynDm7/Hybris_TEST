@@ -1,0 +1,49 @@
+#******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
+# ImpEx for Importing Categories into Electronics Store 
+
+# Macros / Replacement Parameter definitions
+$productCatalog=financialProductCatalog
+$productCatalogName=Electronics Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+
+# Language
+$lang=en
+
+
+# Create Categories
+UPDATE Category;code[unique=true];$catalogVersion;name[lang=$lang]
+ ;insurances;;Insurance Products
+ ;insurances_event;;Event
+ ;insurances_event_options;;Event Options
+ ;insurances_travel;;Travel
+ ;insurances_property;;Property
+ ;insurance_forms;;Insurance Forms
+ ;insurance_forms_event;;Event Insurance Form
+ ;insurance_forms_event_additional;;Additional Event Insurance Form
+ ;insurances_travel_annual;;Annual Trip
+ ;insurances_travel_single;;Single Trip
+ ;insurances_travel_backpackers;;Backpackers
+ ;insurances_travel_options;;Travel Options 
+ ;insurance_forms_travel_trip_details;;Trip Details Form
+ ;insurance_forms_travel_traveller_info;;Traveller Information Form
+ ;insurance-forms_homeowners_property_details;;Homeowners Property Insurance Details Form
+ ;insurance_forms_renters_property_details;;Renters Property Insurance Details Form
+ ;insurance_forms_property_personal_details;;Property Personal Details Form
+ ;insurance_forms_auto_personal_details;;Auto Personal Details Form
+ ;insurance_forms_auto_details;;Auto Details Form
+ ;insurance_forms_life_details;;Life Insurance Details Form
+ ;insurances_property_homeowners;;Homeowners
+ ;insurances_property_renters;;Rental
+ ;insurances_property_options;;Property Options
+ ;insurances_auto;;Auto
+ ;insurances_auto_options;;Auto Options
+ ;insurances_life;;Life Insurance
+ ;insurances_life_options;;Life Insurance Options
+
+ ;insurance_main_event                  ;;Event Main
+ ;insurance_main_travel					;;Travel Main
+ ;insurance_main_homeowners		        ;;Homeowners Main
+ ;insurance_main_renters			    ;;Renters Main
+
+ ;insurance_agents;;Insurance Agents

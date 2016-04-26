@@ -1,0 +1,51 @@
+*** Settings ***
+Library           de.hybris.platform.atddimpex.keywords.ImpexKeywordLibrary
+Library           de.hybris.platform.commerceservicesatddtests.keywords.CommerceServicesKeywordLibrary
+Library           de.hybris.platform.xyformsatddtests.yformfacade.keywords.YFormFacadeKeywordLibrary
+
+*** Keywords ***
+import sampledata
+    [Documentation]    Imports the yform test data
+    import impex from resource    /impex/testYFormDefinitionVersioning.csv
+
+############
+### Get, Create, Update and Create or update YFormData model
+############
+
+verify y form definition with "${applicationId:[^"]+}" and "${formId:[^"]+}" with version "${version:[^"]+}" exists
+    [Documentation]    Verify the YFormDefinition model existed with given applicationId, formId and version number
+    verify y form definition with version exists    ${applicationId}    ${formId}    ${version}
+
+verify not existed y form definition "${applicationId:[^"]+}" and "${formId:[^"]+}" with version "${version:[^"]+}" expect exception "${exception:[^"]+}"
+    [Documentation]    verify throws exception if y form definition not existed
+    verify y form definition with version not existed throws exception    ${applicationId}    ${formId}    ${version}    ${exception}
+
+verify y form definition "${applicationId:[^"]+}" and "${formId:[^"]+}" with version "${version:[^"]+}" has content "${content:[^"]+}"
+    [Documentation]    Verify the YFormDefinition model has been updated with given applicationId, formId, version and content
+    verify y form definition with version updated    ${applicationId}    ${formId}    ${version}    ${content}
+
+verify y form definition with form data id "${formDataId:[^"]+}" exists and has "${applicationId:[^"]+}" and "${formId:[^"]+}" with version "${version:[^"]+}" and content "${content:[^"]+}"
+    [Documentation]    Verify the YFormDefinition model exists with given applicationId, formId, version number and content
+    verify y form definition with form data id    ${formDataId}    ${applicationId}    ${formId}    ${version}    ${content}
+
+    
+############
+### Keywords borrowed from YForm_Keywords.txt
+############
+get y form definition from template with "${applicationId:[^"]+}" and "${formId:[^"]+}" and "${content:[^"]+}"
+    [Documentation]    Get a YFormDefinition based on a template
+    ${body}=    get y form definition from template    ${applicationId}    ${formId}    ${content}
+    [Return]    ${body}
+
+create y form definition by "${applicationId:[^"]+}" and "${formId:[^"]+}" and "${content:[^"]+}"
+    [Documentation]    Create a YFormDefinition model with given applicationId, formId and content
+    create y form definition    ${applicationId}    ${formId}    ${content}
+
+update y form definition by "${applicationId:[^"]+}" and "${formId:[^"]+}" and "${content:[^"]+}"
+    [Documentation]    Update the YFormDefinition model with given applicationId, formId and content
+    update y form definition    ${applicationId}    ${formId}    ${content}
+
+create y form data by "${applicationId:[^"]+}" and "${formId:[^"]+}" and "${formDataId:[^"]+}" and "${refId:[^"]+}" and "${formDataContent:[^"]+}"
+    [Documentation]    Create a YFormData model with given formDataId, refId and formDataContent, which is based on the YFormDefinition with given applicationId and formId
+    create y form data    ${applicationId}    ${formId}    ${formDataId}    ${refId}    ${formDataContent}
+    

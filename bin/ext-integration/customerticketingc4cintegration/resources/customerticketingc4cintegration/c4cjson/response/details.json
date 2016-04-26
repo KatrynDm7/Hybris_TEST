@@ -1,0 +1,124 @@
+{
+  "d": {
+    "results": [
+      {
+        "__metadata": {
+          "uri": "https://server:port/path/ServiceTicketCollection('00163E06551B1EE58DC16965CC0877D3')",
+          "type": "ZSERVICETICKET.ServiceTicket"
+        },
+        "CauseCategoryID": "",
+        "IncidentCategoryID": "",
+        "ResolutionCategoryID": "",
+        "ServiceCategoryID": "",
+        "ExternalKey": "",
+        "ObjectID": "00163E06B0301EE58C876B86EBFF2654",
+        "DataOriginTypeCode": "4",
+        "ID": "451",
+        "Name": "Ticket subject",
+        "CreationDateTime": "\\/Date(1438185786012)\\/",
+        "LastChangeDateTime": "\\/Date(1438185999939)\\/",
+        "ProcessingTypeCode": "SRRQ",
+        "ExternalCustomerID": "",
+        "CustomerID": "1001730",
+        "ExternalContactID": "",
+        "ContactID": "",
+        "StatusCode": "5",
+        "RelatedTransactions": [
+          
+        ],
+        "Notes": [
+          {
+            "__metadata": {
+              "uri": "https://server:port/path/NotesCollection('00163E06551B1EE58DC1697C3BA997D3')",
+              "type": "yServiceTicket.Notes"
+            },
+            "ParentObjectID": "00163E06551B1EE58DC16965CC0877D3",
+            "ObjectID": "00163E06551B1EE58DC1697C3BA997D3",
+            "TypeCode": "10004",
+            "LanguageCode": "",
+            "Text": "Hello,\r\n\r\n my second message \r\nThanks,\r\nUser",
+            "CreatedOn": "\\/Date(1438180002002)\\/",
+            "UpdatedOn": "\\/Date(1438180002002)\\/",
+            "CreatedBy": "User",
+            "LastUpdatedBy": "User",
+            "AuthorName": "",
+            "AuthorUUID": null,
+            "ServiceTicketExternalKey": ""
+          },
+          {
+            "__metadata": {
+              "uri": "https://server:port/path/NotesCollection('00163E0BCFA51ED58DC179621EB0EF2B')",
+              "type": "yServiceTicket.Notes"
+            },
+            "ParentObjectID": "00163E06551B1EE58DC16965CC0877D3",
+            "ObjectID": "00163E0BCFA51ED58DC179621EB0EF2B",
+            "TypeCode": "10007",
+            "LanguageCode": "",
+            "Text": "Cool, can you contact me within 10 minutes?",
+            "CreatedOn": "\\/Date(1438180006006)\\/",
+            "UpdatedOn": "\\/Date(1438180006006)\\/",
+            "CreatedBy": "User",
+            "LastUpdatedBy": "User",
+            "AuthorName": "",
+            "AuthorUUID": null,
+            "ServiceTicketExternalKey": ""
+          },
+          {
+            "__metadata": {
+              "uri": "https://server:port/path/NotesCollection('00163E06551B1EE58DC1697C3BA997D3')",
+              "type": "yServiceTicket.Notes"
+            },
+            "ParentObjectID": "00163E06551B1EE58DC16965CC0877D3",
+            "ObjectID": "00163E06551B1EE58DC1697C3BA997D3",
+            "TypeCode": "10004",
+            "LanguageCode": "",
+            "Text": "Hello,\r\n\r\n my third message \r\n\r\nThanks,\r\nUser",
+            "CreatedOn": "\\/Date(1438180003003)\\/",
+            "UpdatedOn": "\\/Date(1438180003003)\\/",
+            "CreatedBy": "User",
+            "LastUpdatedBy": "User",
+            "AuthorName": "",
+            "AuthorUUID": null,
+            "ServiceTicketExternalKey": ""
+          },
+          {
+            "__metadata": {
+              "uri": "https://server:port/path/NotesCollection('00163E06551B1EE58DC171356CE8F7DA')",
+              "type": "yServiceTicket.Notes"
+            },
+            "ParentObjectID": "00163E06551B1EE58DC16965CC0877D3",
+            "ObjectID": "00163E06551B1EE58DC171356CE8F7DA",
+            "TypeCode": "10007",
+            "LanguageCode": "",
+            "Text": "Dear User,\n\nLet me take a look at this product and i will call you within an hour.\n\nThanks,\nAgent",
+            "CreatedOn": "\\/Date(1438180005005)\\/",
+            "UpdatedOn": "\\/Date(1438180005005)\\/",
+            "CreatedBy": "Agent",
+            "LastUpdatedBy": "Agent",
+            "AuthorName": "",
+            "AuthorUUID": null,
+            "ServiceTicketExternalKey": ""
+          },
+          {
+            "__metadata": {
+              "uri": "https://server:port/path/NotesCollection('00163E06551B1EE58DC1697C3BA997D3')",
+              "type": "yServiceTicket.Notes"
+            },
+            "ParentObjectID": "00163E06551B1EE58DC16965CC0877D3",
+            "ObjectID": "00163E06551B1EE58DC1697C3BA997D3",
+            "TypeCode": "10004",
+            "LanguageCode": "",
+            "Text": "Hello,\r\n\r\nJust wanted to know more info about : https://localhost:9002/yacceleratorstorefront/electronics/en/Open-Catalogue/Cameras/Digital-Cameras/Digital-Compacts/EASYSHARE-Z730-Zoom-Digital-Camera/p/325414\r\n\r\nThanks,\r\nUser",
+            "CreatedOn": "\\/Date(1438180001001)\\/",
+            "UpdatedOn": "\\/Date(1438180001001)\\/",
+            "CreatedBy": "User",
+            "LastUpdatedBy": "User",
+            "AuthorName": "",
+            "AuthorUUID": null,
+            "ServiceTicketExternalKey": ""
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="items.xsd">
+
+
+	<collectiontypes>
+		<collectiontype code="Y2YStreamConfigurationCollection" elementtype="Y2YStreamConfiguration" autocreate="true" generate="false" type="list"/>
+	</collectiontypes>
+
+
+	<enumtypes>
+        <enumtype code="Y2YSyncType" autocreate="true" generate="true">
+            <value code="DataHub"/>
+            <value code="Zip"/>
+        </enumtype>
+    </enumtypes>
+
+    <relations>
+        <relation code="Y2YStreamConfiguration2ColumnDefinitions" localized="false">
+            <sourceElement type="Y2YStreamConfiguration" cardinality="one" qualifier="streamConfiguration">
+                <modifiers optional="false" write="false" initial="true" unique="true"/>
+            </sourceElement>
+            <targetElement type="Y2YColumnDefinition" cardinality="many" qualifier="columnDefinitions"
+                           collectiontype="set">
+                <modifiers partof="true"/>
+            </targetElement>
+        </relation>
+    </relations>
+
+    <itemtypes>
+        <itemtype code="SyncImpExMedia"
+                  jaloclass="de.hybris.y2ysync.jalo.media.SyncImpExMedia"
+                  extends="CatalogUnawareMedia"
+                  autocreate="true"
+                  generate="true">
+            <attributes>
+                <attribute qualifier="syncType" type="ComposedType">
+                    <persistence type="property"/>
+                    <modifiers initial="true" write="false" read="true" search="true" optional="false"/>
+                </attribute>
+                <attribute qualifier="impexHeader" type="java.lang.String">
+                    <persistence type="property">
+                        <columntype>
+                            <value>HYBRIS.LONG_STRING</value>
+                        </columntype>
+                    </persistence>
+                    <modifiers write="true" read="true" optional="false"/>
+                </attribute>
+                <attribute qualifier="dataHubColumns" type="java.lang.String">
+                    <persistence type="property">
+                        <columntype>
+                            <value>HYBRIS.LONG_STRING</value>
+                        </columntype>
+                    </persistence>
+                    <modifiers write="true" read="true"/>
+                </attribute>
+                <attribute qualifier="mediaArchive" type="Media">
+                    <persistence type="property"/>
+                    <modifiers write="true" read="true" optional="true"/>
+                </attribute>
+                <attribute qualifier="exportCronJob" type="Y2YSyncCronJob">
+                    <persistence type="property" />
+                    <modifiers write="true" read="true" />
+                </attribute>
+            </attributes>
+            <indexes>
+                <index name="exportCronJobIDX">
+                    <key attribute="exportCronJob" />
+                </index>
+            </indexes>
+        </itemtype>
+
+        <!-- TODO: Consider interceptor which would allow to delete SyncImpExMedias on Y2YSyncCronJob delete -->
+        <itemtype code="Y2YSyncCronJob" extends="CronJob" jaloclass="de.hybris.y2ysync.jalo.Y2YSyncCronJob"
+                  autocreate="true" generate="true">
+            <attributes>
+                <attribute qualifier="job" type="Y2YSyncJob" redeclare="true" >
+                    <modifiers read="true" write="false" initial="true" search="true"/>
+                </attribute>
+                <attribute qualifier="impexZip" type="CatalogUnawareMedia">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="mediasZip" type="CatalogUnawareMedia">
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="Y2YSyncJob"
+                  extends="ServicelayerJob"
+                  jaloclass="de.hybris.y2ysync.jalo.Y2YSyncJob"
+                  autocreate="true"
+                  generate="true">
+            <attributes>
+                <attribute qualifier="springId" type="java.lang.String" redeclare="true">
+                    <persistence type="property"/>
+                    <modifiers read="true" write="false" search="false" initial="true" optional="false"/>
+                    <defaultvalue>"y2ySyncMasterJobPerformable"</defaultvalue>
+                </attribute>
+                <attribute qualifier="streamConfigurationContainer" type="Y2YStreamConfigurationContainer">
+                    <modifiers read="true" write="false" initial="true" optional="false"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="syncType" type="Y2YSyncType">
+                    <modifiers read="true" write="false" initial="true" optional="false"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="dataHubUrl" type="java.lang.String">
+                    <modifiers read="true" write="true"/>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+
+        </itemtype>
+
+        <itemtype code="Y2YStreamConfiguration"
+                  jaloclass="de.hybris.y2ysync.jalo.Y2YStreamConfiguration"
+                  extends="StreamConfiguration"
+                  autocreate="true"
+                  generate="true">
+            <attributes>
+                <attribute qualifier="catalogVersion" type="CatalogVersion">
+                    <modifiers read="true" write="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="autoGenerateWhereClause" type="java.lang.Boolean">
+                    <persistence type="property" />
+                    <modifiers write="true" read="true" optional="false" />
+                    <defaultvalue>
+                        java.lang.Boolean.TRUE
+                    </defaultvalue>
+                </attribute>
+                <attribute qualifier="autoGenerateInfoExpression" type="java.lang.Boolean">
+                    <persistence type="property" />
+                    <modifiers write="true" read="true" optional="false" />
+                    <defaultvalue>
+                        java.lang.Boolean.TRUE
+                    </defaultvalue>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="Y2YColumnDefinition"
+                  jaloclass="de.hybris.y2ysync.jalo.Y2YColumnDefintion"
+                  autocreate="true"
+                  generate="true">
+            <deployment table="y2ycolumndefinitions" typecode="9501"/>
+            <attributes>
+                <attribute qualifier="position" type="java.lang.Integer">
+                    <persistence type="property" />
+                    <modifiers write="true" read="true" unique="true" />
+                </attribute>
+                <attribute qualifier="attributeDescriptor" type="AttributeDescriptor">
+                    <persistence type="property"/>
+                    <modifiers write="false" read="true" initial="true"/>
+                </attribute>
+                <attribute qualifier="language" type="Language">
+                    <persistence type="property"/>
+                    <modifiers write="true" read="true"/>
+                </attribute>
+                <attribute qualifier="columnName" type="java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers read="true" write="true"/>
+                </attribute>
+                <attribute qualifier="impexHeader" type="java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers write="true" read="true" optional="false"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+
+        <itemtype code="Y2YStreamConfigurationContainer"
+                  extends="StreamConfigurationContainer"
+                  jaloclass="de.hybris.y2ysync.jalo.Y2YStreamConfigurationContainer"
+                  autocreate="true"
+                  generate="true">
+            <attributes>
+                <attribute qualifier="catalogVersion" type="CatalogVersion">
+                    <modifiers read="true" write="true"/>
+                    <persistence type="property"/>
+                </attribute>
+				<attribute autocreate="true" redeclare="true" qualifier="configurations" type="Y2YStreamConfigurationCollection" />
+            </attributes>
+        </itemtype>
+
+    </itemtypes>
+</items>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<list-view unassigned-group-name="Other" allow-create-inline-items="true">
+	<group name="General">
+		<custom class="de.hybris.platform.cockpit.services.config.impl.LineNumberColumn" name="Line nr" visible="true" editable="false" />
+		<property qualifier="DiscountRow.discount" visible="true" editable="false" />
+		<property qualifier="DiscountRow.discount.name" visible="true" editable="false" />
+		<property qualifier="DiscountRow.discountString" visible="true" editable="false" />
+		<property qualifier="DiscountRow.user" visible="true" editable="false" />
+		<property qualifier="DiscountRow.ug" visible="true" editable="false" />
+	</group>
+</list-view>

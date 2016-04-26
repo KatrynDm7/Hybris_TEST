@@ -1,0 +1,44 @@
+#******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
+# ImpEx for Importing Classification Categories into Insurance Store 
+
+# Macros / Replacement Parameter definitions
+$productCatalog=financialProductCatalog
+$productCatalogName=Financial Product Catalog
+$classCatalogVersion=catalogversion(catalog(id[default='InsuranceClassification']),version[default='1.0'])[unique=true,default='InsuranceClassification:1.0']
+$classSystemVersion=systemVersion(catalog(id[default='InsuranceClassification']),version[default='1.0'])[unique=true]
+
+# Language
+$lang=en
+
+
+# Create Categories
+UPDATE ClassificationClass;code[unique=true];$classCatalogVersion;name[lang=$lang]
+
+
+
+# Create Categories
+UPDATE ClassificationAttribute;code[unique=true];$classSystemVersion;name[lang=$lang]
+
+
+# Update Classification Attributes
+UPDATE ClassificationAttribute;code[unique=true];name[lang=$lang]
+;cancellationRearrangementCoverage;Cancellation and Rearrangement Coverage	
+;eventclothingcoverage;Event Clothing Coverage
+;eventMoneyCoverage;Event Money Coverage
+;decorationssundriescoverage;	Decorations/Sundries Coverage
+;carsTransportCoverage;Cars and Transport Coverage	
+;photographyVideoCoverage;"Photography &amp; Video Coverage"
+;failureSuppliersCoverage;Failure of Suppliers Coverage	
+;personalLiabilityCoverage;Personal Liability Coverage
+;venueCover;Venue Cover
+;publicLiability;Public Liability
+;medicalscreening;Medical Screening
+;maxdayspertrip;Max days per trip
+;homevisits;Home Visits
+;wintersportsmaxdays;Winter Sports Max days covered
+ 
+ 
+ UPDATE ClassificationClass;code[unique=true];name[lang=$lang]
+;insuranceplanclassification;Event Plan
+;travelinsuranceclassification;Travel Plan
+

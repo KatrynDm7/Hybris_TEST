@@ -1,0 +1,85 @@
+# OMS velocity template for printing shipping label
+
+$lang=en
+INSERT_UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang, translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator];contextClass;rendererType(code)[default='velocity']
+ ;shipping-label-template;"shipping-label-template";jar:/warehousingbackoffice/import/shippingLayout.vm;de.hybris.platform.warehousingbackoffice.context.CommonPrintLabelContext
+ ;pick-slip-template;"pick-slip-template";jar:/warehousingbackoffice/import/pickLayout.vm;de.hybris.platform.warehousingbackoffice.context.PickSlipContext
+ ;pack-template;"pack-template";jar:/warehousingbackoffice/import/packLayout.vm;de.hybris.platform.warehousingbackoffice.context.PackContext
+ 
+$lang=de
+INSERT_UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang, translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator];
+ ;shipping-label-template;"shipping-label-template";jar:/warehousingbackoffice/import/shippingLayout.vm
+ ;pick-slip-template;"pick-slip-template";jar:/warehousingbackoffice/import/pickLayout.vm
+ ;pack-template;"pack-template";jar:/warehousingbackoffice/import/packLayout.vm
+ 
+$lang=es
+INSERT_UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang, translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator];
+ ;shipping-label-template;"shipping-label-template";jar:/warehousingbackoffice/import/shippingLayout.vm
+ ;pick-slip-template;"pick-slip-template";jar:/warehousingbackoffice/import/pickLayout.vm
+ ;pack-template;"pack-template";jar:/warehousingbackoffice/import/packLayout.vm
+ 
+$lang=es_CO
+INSERT_UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang, translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator];
+ ;shipping-label-template;"shipping-label-template";jar:/warehousingbackoffice/import/shippingLayout.vm
+ ;pick-slip-template;"pick-slip-template";jar:/warehousingbackoffice/import/pickLayout.vm
+ ;pack-template;"pack-template";jar:/warehousingbackoffice/import/packLayout.vm
+
+$lang=fr
+INSERT_UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang, translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator];
+ ;shipping-label-template;"shipping-label-template";jar:/warehousingbackoffice/import/shippingLayout.vm
+ ;pick-slip-template;"pick-slip-template";jar:/warehousingbackoffice/import/pickLayout.vm
+ ;pack-template;"pack-template";jar:/warehousingbackoffice/import/packLayout.vm
+ 
+$lang=it
+INSERT_UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang, translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator];
+ ;shipping-label-template;"shipping-label-template";jar:/warehousingbackoffice/import/shippingLayout.vm
+ ;pick-slip-template;"pick-slip-template";jar:/warehousingbackoffice/import/pickLayout.vm
+ ;pack-template;"pack-template";jar:/warehousingbackoffice/import/packLayout.vm
+ 
+$lang=ja
+INSERT_UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang, translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator];
+ ;shipping-label-template;"shipping-label-template";jar:/warehousingbackoffice/import/shippingLayout.vm
+ ;pick-slip-template;"pick-slip-template";jar:/warehousingbackoffice/import/pickLayout.vm
+ ;pack-template;"pack-template";jar:/warehousingbackoffice/import/packLayout.vm
+ 
+$lang=ko
+INSERT_UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang, translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator];
+ ;shipping-label-template;"shipping-label-template";jar:/warehousingbackoffice/import/shippingLayout.vm
+ ;pick-slip-template;"pick-slip-template";jar:/warehousingbackoffice/import/pickLayout.vm
+ ;pack-template;"pack-template";jar:/warehousingbackoffice/import/packLayout.vm
+ 
+$lang=pt
+INSERT_UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang, translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator];
+ ;shipping-label-template;"shipping-label-template";jar:/warehousingbackoffice/import/shippingLayout.vm
+ ;pick-slip-template;"pick-slip-template";jar:/warehousingbackoffice/import/pickLayout.vm
+ ;pack-template;"pack-template";jar:/warehousingbackoffice/import/packLayout.vm
+
+$lang=ru
+INSERT_UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang, translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator];
+ ;shipping-label-template;"shipping-label-template";jar:/warehousingbackoffice/import/shippingLayout.vm
+ ;pick-slip-template;"pick-slip-template";jar:/warehousingbackoffice/import/pickLayout.vm
+ ;pack-template;"pack-template";jar:/warehousingbackoffice/import/packLayout.vm
+
+$lang=zh
+INSERT_UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang, translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator];
+ ;shipping-label-template;"shipping-label-template";jar:/warehousingbackoffice/import/shippingLayout.vm
+ ;pick-slip-template;"pick-slip-template";jar:/warehousingbackoffice/import/pickLayout.vm
+ ;pack-template;"pack-template";jar:/warehousingbackoffice/import/packLayout.vm
+
+$lang=zh_TW
+INSERT_UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang, translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator];
+ ;shipping-label-template;"shipping-label-template";jar:/warehousingbackoffice/import/shippingLayout.vm;=
+ ;pick-slip-template;"pick-slip-template";jar:/warehousingbackoffice/import/pickLayout.vm
+ ;pack-template;"pack-template";jar:/warehousingbackoffice/import/packLayout.vm
+
+$lang=hi
+INSERT_UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang, translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator];
+ ;shipping-label-template;"shipping-label-template";jar:/warehousingbackoffice/import/shippingLayout.vm
+ ;pick-slip-template;"pick-slip-template";jar:/warehousingbackoffice/import/pickLayout.vm
+ ;pack-template;"pack-template";jar:/warehousingbackoffice/import/packLayout.vm
+
+$lang=id
+INSERT_UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang, translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator];
+ ;shipping-label-template;"shipping-label-template";jar:/warehousingbackoffice/import/shippingLayout.vm
+ ;pick-slip-template;"pick-slip-template";jar:/warehousingbackoffice/import/pickLayout.vm
+ ;pack-template;"pack-template";jar:/warehousingbackoffice/import/packLayout.vm

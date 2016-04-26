@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2015 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+
+<!-- WARNING: This is the Spring WEB configuration file. If you want to replace 
+	items or managers you have to do this from the extensions core configuration 
+	file (cmscockpit/resources/cmscockpit-application-context.xml) -->
+
+<!-- WARNING: This file is imported in cmscockpit-web-spring.xml therefore you don't need
+	to list it in your deployment descriptor -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/util 
+           http://www.springframework.org/schema/util/spring-util.xsd"
+           default-autowire="byName">
+
+
+    <bean id="listMergeBeanPostProcessor" class="de.hybris.platform.commerceservices.spring.config.ListMergeDirectiveBeanPostProcessor"/>
+    <bean id="mapMergeBeanPostProcessor" class="de.hybris.platform.commerceservices.spring.config.MapMergeDirectiveBeanPostProcessor"/>
+
+    <alias alias="productSynchronizationService" name="defaultProductSynchronizationService" />
+	<bean id="defaultProductSynchronizationService" class="de.hybris.platform.cockpit.services.sync.impl.SynchronizationServiceImpl" >
+		<property name="synchronizationServiceDao" ref="productSynchronizationServiceDao" />
+	</bean>
+	
+	<alias alias="productSynchronizationServiceDao" name="defaultProductSynchronizationServiceDao" />
+	<bean id="defaultProductSynchronizationServiceDao" class="de.hybris.platform.cockpit.daos.impl.DefaultSynchronizationServiceDao" >
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+	<bean id="productImageMediaService" class="de.hybris.liveeditaddon.cockpit.service.impl.DefaultProductImageMediaService" >
+		<property name="modelService" ref="modelService"/>
+		<property name="mediaService" ref="mediaService"/>
+		<property name="synchronizationService" ref="synchronizationService"/>
+	</bean>
+	
+	<bean id="uiExperienceValuesProvider" class="de.hybris.liveeditaddon.cockpit.service.config.UiExperienceValuesProvider"  >
+		<property name="siteConfigService" ref="siteConfigService" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="cmsAdminSiteService" ref="cmsAdminSiteService" />
+	</bean>
+
+    <bean id="viewportValuesProvider" class="de.hybris.liveeditaddon.cockpit.service.config.ViewportValuesProvider" >
+        <property name="variableViewportStrategy" ref="variableViewportStrategy" />
+        <property name="sessionService" ref="sessionService" />
+    </bean>
+
+    <bean id="deviceSupportValuesProvider" class="de.hybris.liveeditaddon.cockpit.service.config.DeviceSupportValuesProvider" >
+        <property name="sessionService" ref="sessionService" />
+        <property name="variableViewportStrategy" ref="variableViewportStrategy" />
+    </bean>
+
+    <bean id="deviceOrientationValuesProvider" class="de.hybris.liveeditaddon.cockpit.service.config.DeviceOrientationValuesProvider" >
+        <property name="sessionService" ref="sessionService" />
+        <property name="variableViewportStrategy" ref="variableViewportStrategy" />
+    </bean>
+
+    <bean id="abstractRefreshContentHandler" class="de.hybris.liveeditaddon.cockpit.service.AbstractViewportRefreshContentHandler"
+          abstract="true">
+        <property name="variableViewportStrategy" ref="variableViewportStrategy" />
+    </bean>
+
+
+    <alias alias="desktopRefreshContentHandler" name="defaultDesktopRefreshContentHandler"/>
+    <bean id="defaultDesktopRefreshContentHandler" class="de.hybris.liveeditaddon.cockpit.service.impl.DefaultDesktopRefreshContentHandler"/>
+
+    <alias alias="responsiveRefreshContentHandler" name="defaultResponsiveRefreshContentHandler" />
+    <bean id="defaultResponsiveRefreshContentHandler" parent="abstractRefreshContentHandler" class="de.hybris.liveeditaddon.cockpit.service.impl.DefaultResponsiveRefreshContentHandler" />
+
+    <alias alias="mobileRefreshContentHandler" name="defaultMobileViewportRefreshContentHandler" />
+    <bean id="defaultMobileViewportRefreshContentHandler" parent="abstractRefreshContentHandler" class="de.hybris.liveeditaddon.cockpit.service.impl.MobileViewportRefreshContentHandler" />
+
+    <bean depends-on="liveEditRefreshContentHandlersList" parent="listMergeDirective" >
+        <property name="add" ref="mobileRefreshContentHandler"/>
+    </bean>
+
+    <bean depends-on="liveEditRefreshContentHandlersList" parent="listMergeDirective" >
+        <property name="add" ref="responsiveRefreshContentHandler"/>
+    </bean>
+
+    <alias name="defaultResponsiveViewportSupportMap" alias="responsiveViewportSupportMap" />
+    <util:map id="defaultResponsiveViewportSupportMap" map-class="java.util.LinkedHashMap">
+        <entry key="le_320" value="320" />
+        <entry key="le_480" value="480" />
+        <entry key="le_640" value="640" />
+        <entry key="le_768" value="768" />
+        <entry key="le_920" value="920" />
+        <entry key="le_960" value="960" />
+        <entry key="le_1024" value="1024" />
+        <entry key="le_1280" value="1280" />
+        <entry key="le_1400" value="1400" />
+        <entry key="default" value="1600" />
+    </util:map>
+
+    <alias name="defaultMobileViewportSupportMap" alias="mobileViewportSupportMap" />
+    <util:map id="defaultMobileViewportSupportMap" map-class="java.util.LinkedHashMap">
+        <entry key="le_480" value="480" />
+        <entry key="default" value="320" />
+    </util:map>
+
+    <alias alias="viewportSupportedUiExperienceCodes" name="defaultViewportSupportedUiExperienceCodes" />
+    <util:list id="defaultViewportSupportedUiExperienceCodes" list-class="java.util.ArrayList">
+        <value>Desktop</value>
+        <value>Mobile</value>
+    </util:list>
+
+    <alias alias="variableViewportStrategy" name="defaultVariableViewportStrategy" />
+    <bean id="defaultVariableViewportStrategy" class="de.hybris.liveeditaddon.cockpit.strategies.impl.DefaultVariableViewportStrategy">
+        <property name="uiExperienceService" ref="uiExperienceService" />
+        <property name="supporteduiexperiencecodes" ref="viewportSupportedUiExperienceCodes" />
+        <property name="viewportSupportMap">
+            <map>
+                <entry key="Desktop" value-ref="responsiveViewportSupportMap" />
+                <entry key="Responsive" value-ref="responsiveViewportSupportMap" />
+                <entry key="Mobile" value-ref="mobileViewportSupportMap" />
+            </map>
+        </property>
+        <property name="deviceSupportService" ref="deviceSupportService" />
+    </bean>
+
+
+
+	<alias name="defaultNavigationEditorService" alias="navigationEditorService"/>
+	<bean id="defaultNavigationEditorService" class="de.hybris.liveeditaddon.cockpit.services.impl.DefaultNavigationEditorService">
+		<property name="cmsAdminSiteService" ref="cmsAdminSiteService"/>
+		<property name="baseSiteService" ref="baseSiteService"/>
+		<property name="cmsComponentService" ref="cmsComponentService"/>
+		<property name="cmsContentSlotService" ref="cmsContentSlotService"/>
+		<property name="catalogService" ref="catalogVersionService"/>
+		<property name="cmsNavigationService" ref="cmsNavigationService"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="userService" ref="userService"/>
+		<property name="sessionService" ref="sessionService"/>
+		<property name="synchronizationService" ref="synchronizationService"/>
+		<property name="mediaService" ref="mediaService"/>
+		<property name="enumerationService" ref="enumerationService"/>
+		<property name="categoryService" ref="categoryService"/>
+		<property name="pageService" ref="defaultCMSPageService"/>
+		<property name="counterpartProductCatalogVersionsStrategy" ref="counterpartProductCatalogVersionsStrategy"/>		
+		<property name="commonI18NService" ref="commonI18NService"/>
+	</bean>
+
+
+
+	<alias name="defaultFacetSearchDataService" alias="cmsFacetSearchDataService"/>
+	<bean id="defaultFacetSearchDataService" class="de.hybris.liveeditaddon.cockpit.services.impl.DefaultFacetSearchDataService">
+		<property name="counterpartProductCatalogVersionsStrategy" ref="counterpartProductCatalogVersionsStrategy"/>
+		<property name="sessionService" ref="sessionService"/>
+		<property name="catalogVersionService" ref="catalogVersionService"/>
+		<property name="baseSiteService" ref="baseSiteService"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
+		<property name="solrSearchQueryDecoder" ref="solrSearchQueryDecoder"/>
+		<property name="categoryUrlDecoder" ref="categoryFrontendUrlDecoder"/>
+		<property name="searchQueryPageableConverter" ref="commerceSearchQueryPageableConverter"/>
+		<property name="searchRequestConverter" ref="commerceSolrSearchRequestConverter"/>
+		<property name="searchResponseConverter" ref="commerceSolrSearchResponseConverter"/>
+		<property name="solrSearchStatePopulator" ref="solrSearchStatePopulator"/>
+	</bean>
+
+    <alias name="defaultNavigationStateViewModel" alias="navigationStateViewModel"/>
+    <bean id="defaultNavigationStateViewModel" class="de.hybris.liveeditaddon.cockpit.services.impl.DefaultNavigationStateViewModel" scope="prototype">
+        <constructor-arg ref="navigationEditorService"/>
+        <constructor-arg ref="cmsFacetSearchDataService"/>
+        <constructor-arg ref="cmsAdminSiteService"/>
+    </bean>
+
+</beans>
+

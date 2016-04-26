@@ -1,0 +1,1 @@
+﻿${ctx.messages.getMessage('emailSubject', ${ctx.order.insurancePolicy.get(0).policyNumber})}

@@ -1,0 +1,30 @@
+$productCatalog=financialProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$ruleType=ruleType(code)[default='ANY']
+
+# Disable Product rule
+INSERT_UPDATE DisableProductBundleRule;id[unique=true];name;$catalogVersion;bundleTemplate(id,version[default=1.0],$catalogVersion);conditionalProducts(code,$catalogVersion);targetProducts(code,$catalogVersion);$ruleType
+;publicliabilitydisablerule		;No Public liability for 2* Wedding;;STAR_PRODUCT	;WED_2STAR	;WED_PUBLICLIABILITY;
+;wintersportsdisablerule		;No Winter cover for annual travel;;TRA_OPTIONS	;TRA_ANNUAL_BUDGET,TRA_ANNUAL_SILVER,TRA_ANNUAL_GOLD														;TRA_WINTER;
+;golfcoverdisablerule			;No Golf cover for paupers;;TRA_OPTIONS	;TRA_SINGLE_BUDGET,TRA_ANNUAL_BUDGET,TRA_BACKPACKERS_BUDGET,TRA_BACKPACKERS_SILVER,TRA_BACKPACKERS_GOLD		;TRA_GOLF;
+;bussinesscoverdisablerule		;No Business cover for paupers;;TRA_OPTIONS	;TRA_SINGLE_BUDGET,TRA_ANNUAL_BUDGET,TRA_BACKPACKERS_BUDGET,TRA_BACKPACKERS_SILVER,TRA_BACKPACKERS_GOLD		;TRA_BUSINESS;
+;hazardousactivitiesdisablerule	;No Hazardous cover for Budget travel;;TRA_OPTIONS	;TRA_SINGLE_BUDGET,TRA_ANNUAL_BUDGET,TRA_BACKPACKERS_BUDGET													;TRA_HAZARDOUS;
+
+INSERT_UPDATE DisableRuleGeoArea;areaCode[unique=true];areaName;
+;XX1;Test Region Area 1;
+;XX2;Test Region Area 2;
+;XX3;Test Region Area 3;
+;XX4;Test Region Area 4;
+;XX5;Test Region Area 5;
+;XX1 1AA;Test specific address in area 1;
+;FLO00D;Test Area to restrict flood coverage
+
+# Disable product based on location
+INSERT_UPDATE DisableProductBundleRule;id[unique=true];name;$catalogVersion;bundleTemplate(id,version[default=1.0],$catalogVersion);conditionalGeoAreas(areaCode);targetProducts(code,$catalogVersion);$ruleType
+;homeownersGeodisablefloodrule			;No Flood Cover for one specific area for homeowners;;PRO_HOMEOWNERS_OPTIONS;FLO00D;PRO_FLOOD_COVER_HOMEOWNERS;;;
+
+$START_USERRIGHTS
+Type;UID;MemberOfGroups;Password;Target;read;change;create;delete;change_perm
+UserGroup;cockpitgroup;;
+;;;;DisableRuleGeoArea;+;+;+;+;-
+$END_USERRIGHTS

@@ -1,0 +1,137 @@
+#
+# ENGLISH LOCALIZATION
+#
+
+$lang=en
+
+#Billing Event updation.
+UPDATE BillingEvent;code[unique=true];nameInCart[lang=$lang];nameInOrder[lang=$lang];description[lang=$lang];
+;paynow                                     ;Pay On Checkout;Paid on order;Pay Now
+;cancellationcoverage                       ;Cancellation;;Cancellation Coverage;
+;eventclothingcoverage                      ;Event Clothing;;Event Clothing Coverage;
+;deductible;Deductible                      ;;Deductible
+;eventmoneycoverage                         ;Event Money;;Event Money;
+;rearrangementcoverage                      ;Rearrangement;;Rearrangement Coverage
+;decorationssundriescoverage                ;Decorations/Sundries;;Decorations/Sundries Coverage;
+;carstransportcoverage                      ;Cars and Transport;;Cars and Transport Coverage;
+;photographyvideocoverage                   ;"Photography &amp; Video";;"Photography &amp; Video Coverage";
+;failuresupplierscoverage                   ;Failure of Suppliers;;Failure of Suppliers Coverage
+;personalliabilitycoverage                  ;Personal Liability;Personal Liability;Personal Liability Coverage
+;excesswaivercoverage                       ;Excess Waiver;Excess Waiver;Excess Waiver Coverage
+;venueCoverage                              ;Venue;Venue;Venue Coverage;
+;publicliability                            ;Public Liability;;Public Liability
+;increaselimitfailuresupplierandpublicliability ;"Increased Limit Failure of Suppliers &amp; Public Liability";;"Increased Limit Failure of Suppliers &amp; Public Liability"
+;increaselimitfailuresupplier                   ;"Increased Limit Failure of Suppliers Cover";;"Increased Limit Failure of Suppliers Cover"
+
+#Travel Insurance BillingEvent
+;baggage            ;Baggage                ;;Baggage coverage
+;cancellation       ;Cancellation           ;;Cancellation coverage
+;medicalexpenses    ;Medical expenses       ;;Medical expenses coverage
+;repatriation       ;Repatriation           ;;Repatriation coverage
+;legalexpenses      ;Legal expenses         ;;Legal expenses coverage
+;curtailment        ;Curtailment            ;;Curtailment coverage
+;safi               ;Safi                   ;;Safi coverage
+;hospitalbenefit    ;Hospital benefit       ;;Hospital benefit coverage
+;accommodationcover ;Accommodation          ;;Accommodation coverage
+;delayeddeparture   ;Delayed departure      ;;Delayed departure coverage
+;supplierinsolvency ;Supplier insolvency    ;;Supplier insolvency coverage
+;misseddeparture    ;Missed departure       ;;Missed departure coverage
+;petcare            ;Pet care               ;;Pet care coverage
+;personalmoney      ;Personal money         ;;Personal money coverage
+;wintersports       ;Winter sports          ;;Winter sports coverage
+;abandonmentcover   ;Abandonment            ;;Abandonment coverage
+;hijack             ;Hijack                 ;;Hijack coverage
+;muggingbenefit     ;Mugging benefit        ;;Mugging benefit coverage
+;repaystudentloan   ;Repay student loan     ;;Repay student loan coverage
+;businesscover      ;Business               ;;Business coverage
+;valuablesextensioncover    ;Valuable extension     ;;Valuable extension coverage
+;hazardousactivitiescover   ;Hazardous activities   ;;Hazardous activities coverage
+;golfcover          ;Golf                   ;;Golf coverage
+;personalaccident   ;Personal accident      ;;Personal accident coverage
+
+;terminalillness    ;Terminal Illness       ;;Terminal Illness
+;travellingabroad   ;Travelling Abroad      ;;Travelling Abroad
+
+;homeemergencycover	;Home Emergency Cover	;;Home Emergency Cover
+;depositreturnassistance;Deposit Return Assistance;;Deposit Return Assistance
+
+#Property Insurance BillingEvent
+;homeowners					;Homeowners									;;Homeowners Insurance
+;liabilitycover				;Liability Cover							;;Liability Cover
+;medicalpayments			;Medical Payments							;;Medical Payments
+;deductible					;Deductible									;;Deductible
+;windhaildeductible			;Wind/Hail Deductible						;;Wind/Hail Deductible
+;homeprotectorplus			;Home Protector Plus						;;Home Protector Plus
+;waterbackupcover			;Water Backup and Sump Pump Overflow Cover	;;Water Backup and Sump Pump Overflow Cover
+;floodcoverage				;Flood Coverage								;;Flood Coverage
+;identityfraudcoverage		;Identity Fraud Expense Coverage			;;Identity Fraud Expense Coverage
+;homecomputerandphonecoverage;Home computer and smart phone coverage	;;Home computer and smart phone coverage
+;tempaccomodationcover		;Temporary Accomondation Cover				;;Temporary Accomodation Coverage
+;jewelrycoverage			;Jewelry and Watches Coverage				;;Jewelry and Watches Coverage
+;bicyclescover				;Bicycles									;;Bicycles
+
+# Auto insurance billing event
+;courtesycover              ;Courtesy Cover                             ;;Courtesy Cover
+;breakdowncare              ;Breakdown Care                             ;;Breakdown Care
+;emergencyhelplineappraisal ;Emergency Helpline Appraisal               ;;Emergency Helpline Appraisal
+;uninsureddriverpromise     ;Uninsured Driver Promise                   ;;Uninsured Driver Promise
+;legalexpensecover          ;Legal Expense Cover                        ;;Legal Expense Cover
+;keyprotectioncover         ;Key Protection Cover                       ;;Key Protection Cover
+;5yearguarantee             ;"5 Year Guarantee"                         ;;"5 Year Guarantee"
+;telemetryinstallation      ;Telemetry Installation                     ;;Telemetry Installation
+
+# Life insurance billing event
+;premiumprotection          ;Premium Protection                         ;;"This benefit will help to cover the cost of your premiums if you’re totally disabled by illness or injury for more than 26 weeks."
+;renewaloption              ;Renewal Option                             ;;"This option lets you take out a new plan when this plan ends without having to provide more evidence of your health."
+;paymentprotectionbenefit   ;Payment Protection Benefit                 ;;"This pays out a monthly amount if you are incapacitated and can’t perform your own occupation because of illness or injury. If you are claiming this benefit, we’ll also make your payments to the plan for you"
+
+UPDATE BillingEvent;code[unique=true];helpContent[lang=$lang];
+;cancellationcoverage;      "We will pay up to the amount shown in the Summary for any irrecoverable expenses incurred by You inrespect of Event Attire, flowers, photographs, caterers, transport, accommodation and the services from any other event supplier booked but not used as a direct result of the unavoidable cancellation or curtailment."
+;eventclothingcoverage;     "We will pay for the reinstatement or replacement (at Our discretion) of Event attire if such attire is lost or damaged whilst in your possession or that of a close relative within 3 months prior to and for the duration of the event and the taking of the photographs immediately following the event by the professional photographer only."
+;deductible;                "There is a nominal $35.00 deductible for each covered section except the Marquee extension which is $100.00.";
+;eventmoneycoverage;        "We will pay up to the amount stated in the Summary (subject to a maximum of $250 for any one item) for loss of or damage to event due to accident, fire or theft whilst being stored by you or your close relative."
+;rearrangementcoverage;     "In the event of cancellation or curtailment of the event, Reception or Services for reasons specified under Cancellation, we will pay up to the amount detailed in the Summary to reimburse you for reasonable Additional Costs incurred in rearranging the event and/or event Reception and/or event Services to a similar standard to the amount originally budgeted."
+;decorationssundriescoverage;  "We will pay up to the amount stated in the Summary for loss of or damage to event decoration and sundries."
+;carstransportcoverage;     "We will pay up to the amount stated in the Summary if the private hire firm or individual with whom the transport arrangements have been made fails to meet its/their contractual obligation(s)."
+;photographyvideocoverage;  "We will pay up to the amount stated on the Summary to reimburse you for unforeseen expenses necessarily incurred to take/re-take event photographs or videos or refund any nonrecoverable amount which you originally contracted to pay as a direct and necessary consequence of the reasons as stated in the Summary."
+;failuresupplierscoverage;  "Following the bankruptcy or liquidation of any prebooked event service supplier we will pay up to the amount detailed in the Summary for the irrecoverable deposits and additional costs in arranging alternative, equivalent services.";
+;personalliabilitycoverage; "We will indemnify you up to the amount specified in the Summary in respect of your legal liability arising from accidental injury to third parties or accidental loss of or damage to third party property."
+;excesswaivercoverage;      "In the event of a claim, no excess (deductible) will be charged";
+;venueCoverage;             "We will pay up to the amount detailed in the summary in the even of loss of or damage occurring in the period of hire (not exceeding 4 days). Please see the Policy Summary for full details of cover."
+;publicliability;           "Cover does not apply to events taking place outside the United Kingdom. We will indemnify you, up to the amount specified in the Summary for the legal liability of any persons invited to the event or event Reception by you, arising from accidental injury to third parties or accidental loss or damage to third party property";
+;increaselimitfailuresupplierandpublicliability; "We will pay an increased amount as specified in the summary for failure of suppliers. For public liability, we will pay up to the a mount specified in the summar, for accidental injury or accidental loss/damage to property. Please see the Policy Summary for full details of cover."
+;increaselimitfailuresupplier; "We will pay an increased amount as specified in the summary for failure of suppliers. For public liability, we will pay up to the a mount specified in the summar, for accidental injury or accidental loss/damage to property. Please see the Policy Summary for full details of cover."
+;homeemergencycover;		"We will pay up to the amount show for any reasonable out of pocket expenses."
+;depositreturnassistance;	"We will pay up to the amount shown for any non-refundable deposits."
+
+#Travel Insurance BillingEvent
+;baggage;                    "Buying a policy with baggage cover will mean that if your bags are lost or stolen in transit you will be compensated to replace the items";
+;cancellation;               "Buying a policy with cancellation cover means that if you need to cancel the holiday through illness, injury or bereavement you will covered for the cost of the cancelled holiday";
+;medicalexpenses;            "Buying a policy with medical expenses means that if you are injured or fall ill you will be assisted with the costs.";
+;repatriation;               "Buying a policy with repatriation coverage means that in the unfortunate event of death the burden of repatriation of remains will be assisted with";
+;legalexpenses;              "Buying a policy with legal expense coverage means that if you require any legal advice or expenses you will be assisted with them to the maximum of the coverage";
+;curtailment;                "Buying a policy with curtailment cover means that if you need to return home due to illness or emergency you will be covered for the unused part of your travel and accommodation and also reasonable travel expenses to return home";
+;safi;                       "Buying a policy with Safi coverage means that if you book a holiday and the airline you are due to fly with goes out of business, your flight costs and rearrangement fees will be assisted with";
+;hospitalbenefit;            "Buying a policy with hospital benefit means If you are hospitalised you will be paid for each night in hospital up to the maximum amount";
+;accommodationcover;         "Buying a policy with accommodation cover will cover you for relocation or alternative placing if the hired accommodation is not liveable or has major sanitisation issues";
+;delayeddeparture;           "Buying a policy with delayed departure cover means that you will be reimbursed for the length of time you are delayed at the airport";
+;supplierinsolvency;         "Buying a policy with supplier insolvency means that if the end supplier becomes insolvent whilst you are on holiday arrangements will be made to replace the end supplier arrangements to a similar standard that to which was originally booked";
+;misseddeparture;            "Buying a policy with missed departure coverage means that if you have tried everything in your power to get to the point of departure but failed you can provide written support of the incident and may be eligible for compensation";
+;petcare;                    "Buying a policy with pet care coverage will ensure that if your pet or pets are injured or struck with sudden illness whilst travelling, assistance will be provided towards veterinarian bills";
+;personalmoney;              "Buying a policy with personal money coverage will provide replacement money in the event of lost or stolen money from your person";
+;wintersports;               "Buying a policy with winter sports coverage will cover you for purchased or hired winter sports equipment damaged whilst engaging in on-piste winter sports and any reserved piste fees, should you be unable to travel.";
+;abandonmentcover;           "Buying a policy with abandonment cover means that you are financially protected if you turn up to the airport and then suffer a delay which results in you having to abandon your trip. ";
+;hijack;                     "Buying a policy with hijack cover means that you will be financially protected if your transport is hijacked and holiday delayed";
+;muggingbenefit;             "Buying a policy with mugging coverage means that if your property is stolen in a mugging we will reimburse the cost, provided you have reported the incident to the police";
+;repaystudentloan;           "Buying a policy with student loan repayment coverage means that if you are injured an unable to gain employment to repay your student loan, we will repay this.";
+;businesscover;              "Buying a policy with business cover means that your work materials are covered against damage, e.g. uniform, gadgets (phone,tablet, laptop) and travel documents";
+;valuablesextensioncover;    "Buying a policy with valuables extension cover means that you can claim for one item worth half of the cover, or all items to the total of the cover. We define valuables as any of the following items: Photographic, audio, video and electrical equipment , MP3 players, games consoles, personal organisers, eReaders , computer equipment, tablet PCs, binoculars, antiques, jewellery, watches, furs, leather goods, animal skins, silks, precious stones and items made of or containing gold, silver or precious metals, hearing aids, sports and leisure equipment , musical instruments, mobile phones and mobile phone accessories";
+;hazardousactivitiescover;   "Buying a policy with hazardous activity cover will extend cover to activities considered hazardous such as canyon swinging, hang gliding, bungee jumping, shark diving (inside cage), and others.";
+;golfcover;                  "Buying a policy with golf cover will cover your purchased or hired golfing equipment damaged whilst playing golf and reserved green fees, if you should be unable to travel to the course.";
+;personalaccident;           "Buying a policy with personal accident coverage will provide compensation in the event of injuries, disability or death caused solely by violent, accidental, external and visible events";
+
+;tempaccomodationcover;		"Buying a policy with temporary accomodation coverage will provide ensure that any costs involved due to your property being unlivable will be covered."
+;bicyclescover;					"Buying a policy with Bicycle coverage will provide coverage for any bicycles owned by the policy holder."
+
+;terminalillness;           "Covered up to 12 months before the end date of your plan - If diagnosed with terminal illness between the start date of your plan and 12 months or more before the ending date of your plan"
+;travellingabroad;          "Coverage if you die anywhere in the world"

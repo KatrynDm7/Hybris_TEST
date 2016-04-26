@@ -1,0 +1,126 @@
+﻿# set locale for the Match.date data
+#%impex.setLocale(Locale.GERMANY)
+
+insert_update Language;isocode[unique=true];active
+;de;true
+;en;true
+;pl;true
+;fr;true
+
+insert_update Language;isocode[unique=true];name[lang=de];name[lang=en];name[lang=pl];name[lang=fr];fallbacklanguages(isocode)
+;de;Deutsch;German;Niemiecki;Allemagne;en
+;en;Englisch;English;Angielski;Anglais;de
+;pl;Polnisch;Polish;Polski;polonais;en,de
+;fr;Französisch;French;Francuski;Français;en,de
+
+insert_update UserGroup;uid[unique=true];locname[lang=de];locname[lang=en];locname[lang=pl];locname[lang=fr];hmcLoginDisabled;groups(uid)
+;cuppyplayers;Spieler;Players;Gracze;Joueurs;true
+;cuppyadmins;Admins;Admins;Administratorzy;Administrateurs;false;employeegroup
+
+insert_update CountryFlag;code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];catalogVersion(catalog(id),version)[default=Default:Online]
+;DE;de.png;jar:/cuppy/flags/countries/de.png
+;FR;fr.png;jar:/cuppy/flags/countries/fr.png
+;AT;at.png;jar:/cuppy/flags/countries/at.png
+;PL;pl.png;jar:/cuppy/flags/countries/pl.png
+;SE;se.png;jar:/cuppy/flags/countries/se.png
+;CH;ch.png;jar:/cuppy/flags/countries/ch.png
+;NL;nl.png;jar:/cuppy/flags/countries/nl.png
+;US;us.png;jar:/cuppy/flags/countries/us.png
+;GB;gb.png;jar:/cuppy/flags/countries/gb.png
+;JP;jp.png;jar:/cuppy/flags/countries/jp.png
+;HK;hk.png;jar:/cuppy/flags/countries/hk.png
+;CA;ca.png;jar:/cuppy/flags/countries/ca.png
+;BR;br.png;jar:/cuppy/flags/countries/br.png
+
+
+insert_update Country;isocode[unique=true];flag(code);name[lang=de];name[lang=en];name[lang=pl];name[lang=fr];active[virtual=true,default=true]
+;DE;DE;Deutschland;Germany;Niemcy;Allemagne
+;FR;FR;Frankreich;France;Francja;France
+;AT;AT;Österreich;Austria;Austria;Autriche
+;PL;PL;Polen;Poland;Polska;Pologne
+;SE;SE;Schweden;Sweden;Szwecja;Suède
+;CH;CH;Schweiz;Swiss;Szwajcaria;Suisse
+;NL;NL;Niederlande;Netherlands;Niderlandy;Pays-Bas
+;US;US;USA;USA;USA;USA
+;GB;GB;Großbritannien;Great Britain;Wielka Brytania;Grande-Bretagne
+;JP;JP;Japan;Japan;Japonia;Hong-Kong
+;HK;HK;Hongkong;Hong Kong;Hongkong;Hong-Kong
+;CA;CA;Kanada;Canada;Kanada;Canada
+;BR;BR;Brasilien;Brasil;Brazylia;Brésil
+
+INSERT_UPDATE ProfilePicture;code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];catalogVersion(catalog(id),version)[default=Default:Online]
+;default;default.jpg;jar:/cuppy/import/profile/default.jpg
+;defaultKing;default.jpg;jar:/cuppy/import/profile/defaultKing.jpg
+
+$START_USERRIGHTS
+Type;UID;MemberOfGroups;Password;Target;read;change;create;remove;change_perm
+UserGroup;cuppyadmins;;;;;;;;
+# Only see all types except of news
+;;;;Team;+;-;-;-
+;;;;Match;+;+;-;-;-
+;;;;MatchBet;+;-;-;-;-
+;;;;Group;+;-;-;-;-
+;;;;Player;+;+;-;-;-
+;;;;ProfilePicture;+;-;-;-;-
+;;;;CountryFlag;+;-;-;-;-
+;;;;Country;+;-;-;-;-
+;;;;Competition;+;-;-;-;-
+;;;;PlayerPreferences;+;-;-;-;-
+;;;;News;+;+;+;+;-
+;;;;UpdateCompetitionCronJob;+;-;-;-;-
+;;;;WorkflowAction;+;-;-;-;-
+
+#Permit change of email flag
+;;;;News.email;+;-;+;-;-
+
+#Permit all except goals of match and team
+;;;;Match.id;+;-;-;-;-
+;;;;Match.date;+;-;-;-;-
+;;;;Match.group;+;-;-;-;-
+;;;;Match.location;+;-;-;-;-
+;;;;Match.matchbets;+;-;-;-;-
+
+#Do not see bets
+;;;;MatchBet.homeGoals;-;-;-;-;-
+;;;;MatchBet.guestGoals;-;-;-;-;-
+
+#Permit all except of confirm user
+;;;;Player.uid;+;-;-;-;-
+;;;;Player.country;+;+;-;-;-
+;;;;Player.name;+;+;-;-;-
+;;;;Player.email;+;+;-;-;-
+;;;;Player.matchbets;+;-;-;-;-
+;;;;Player.profilePicture;+;+;-;-;-
+$END_USERRIGHTS
+
+INSERT_UPDATE Catalog;id[unique=true];defaultCatalog
+;Default;true
+
+INSERT_UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];active
+;Default;Online;true
+
+INSERT_UPDATE CronJob; code[unique=true];job(code);singleExecutable;sessionLanguage(isocode)
+;collectStatisticsCronJob;collectStatisticsJob;false;de
+;cleanUpStatisticsCronJob;cleanUpStatisticsJob;false;de
+;sendReminderCronJob;sendReminderJob;false;de
+
+INSERT_UPDATE Trigger;cronjob(code)[unique=true];second;minute;hour;day;month;year;relative;active;maxAcceptableDelay
+#% afterEach: impex.getLastImportedItem().setActivationTime(new Date());
+;collectStatisticsCronJob;0;1;0;0;-1;-1;true;true;-1
+;cleanUpStatisticsCronJob;0;0;0;1;-1;-1;true;true;-1
+;sendReminderCronJob;0;0;0;1;-1;-1;true;true;-1
+
+#minimal constraints for a match bet home/guest goal
+INSERT_UPDATE MinConstraint;active;descriptor(enclosingType(code),qualifier);id[unique=true];message[lang=de];message[lang=en];qualifier;severity(code,itemtype(code));target;type(code);value
+;true;MatchBet:guestGoals;guestGoalMinimalConstraint;Gasttipp darf nicht negativ sein;Guest bet can not be negative;guestGoals;ERROR:Severity;de.hybris.platform.cuppy.model.MatchBetModel;MatchBet;0
+;true;MatchBet:homeGoals;homeGoalMinimalConstraint;Heimtipp darf nicht negativ sein;Home bet can not be negative;homeGoals;ERROR:Severity;de.hybris.platform.cuppy.model.MatchBetModel;MatchBet;0
+
+# not null constraints for a match guest/home result 
+INSERT_UPDATE NotNullConstraint;active;descriptor(enclosingType(code),qualifier);id[unique=true];message[lang=de];message[lang=en];qualifier;severity(code,itemtype(code));target;type(code);
+;true;MatchBet:player;betPlayerNotNullConstraint;Eine Wette benötigt einen Spieler;A bet needs a player;player;ERROR:Severity;de.hybris.platform.cuppy.model.MatchBetModel;MatchBet;
+;true;MatchBet:match;betTeamNotNullConstraint;Eine Wette benötigt ein Spiel;A bet needs a match;match;ERROR:Severity;de.hybris.platform.cuppy.model.MatchBetModel;MatchBet;
+
+INSERT_UPDATE DecimalMinConstraint;active;descriptor(enclosingType(code),qualifier);id[unique=true];message[lang=de];message[lang=en];qualifier;severity(code,itemtype(code));target;type(code);value
+;true;Group:multiplier;multiplierMinimalConstraint;Wertungsfaktor darf nicht negativ sein;Score multiplier can not be negative;multiplier;ERROR:Severity;de.hybris.platform.cuppy.model.GroupModel;Group;0
+
+#% de.hybris.platform.core.Registry.getApplicationContext().getBean(de.hybris.platform.validation.services.ValidationService.class).reloadValidationEngine();

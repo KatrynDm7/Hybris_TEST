@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2015 hybris AG All rights reserved. This software is the confidential and proprietary information 
+	of hybris ("Confidential Information"). You shall not disclose such Confidential Information and shall use it only in accordance with 
+	the terms of the license agreement you entered into with hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd 
+						http://www.springframework.org/schema/aop 
+						http://www.springframework.org/schema/aop/spring-aop.xsd"
+	default-autowire="byName">
+
+
+
+    <!-- NAVIGATION GENERATOR SERVICES -->
+    <bean id="navigationGeneratorCategoryConverter" class="de.hybris.liveeditaddon.cockpit.navigationbargenerator.converters.CategoryConverter" >
+        <property name="categoryModelUrlResolver" ref="categoryModelUrlResolver"/>
+        <property name="i18nService" ref="i18nService"/>
+    </bean>
+
+    <alias alias="navigationGeneratorCategoriesReader" name="defaultNavigationGeneratorCategoriesReader"/>
+    <bean id="defaultNavigationGeneratorCategoriesReader" class="de.hybris.liveeditaddon.cockpit.navigationbargenerator.impl.DefaultCategoriesReader" >
+        <property name="catalogVersionService" ref="catalogVersionService"/>
+        <property name="categoryService" ref="categoryService"/>
+        <property name="categoryConverter" ref="navigationGeneratorCategoryConverter"/>
+    </bean>
+
+    <alias alias="navigationGeneratorOutputCreator" name="navigationGeneratorImpexOutputCreator"/>
+    <bean id="navigationGeneratorImpexOutputCreator" class="de.hybris.liveeditaddon.cockpit.navigationbargenerator.impl.ImpexOutputCreator" >
+    </bean>
+
+    <bean id="navigationBarGenerator" class="de.hybris.liveeditaddon.cockpit.navigationbargenerator.impl.NavigationBarGeneratorImpl" >
+        <property name="categoriesReader" ref="navigationGeneratorCategoriesReader"/>
+        <property name="outputCreator" ref="navigationGeneratorOutputCreator"/>
+    </bean>
+
+    <!-- DEFAULT CATALOG DATA SERVICE -->
+    <bean id="navigationGeneratorDefaultCatalogDataService" class="de.hybris.liveeditaddon.cockpit.navigationbargenerator.impl.DefaultCatalogDataService">
+        <property name="cmsAdminSiteService" ref="cmsAdminSiteService" />
+        <property name="baseSiteService" ref="baseSiteService" />
+    </bean>
+
+</beans>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd 
+						http://www.springframework.org/schema/aop 
+						http://www.springframework.org/schema/aop/spring-aop.xsd
+						http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+       default-autowire="byName">
+
+
+ 	<bean id="liveeditaddonThemeConfigListMergeDirective" depends-on="themeConfig" parent="listMergeDirective" >
+		<property name="add" value="/cmscockpit/css/liveeditaddon.css" />
+		<property name="listPropertyDescriptor" value="uris" />
+	</bean>
+
+	<bean id="CockpitProductReferenceContentBrowserActionColumn" class="de.hybris.platform.cockpit.components.listview.impl.DefaultActionColumnConfiguration"
+		scope="prototype">
+		<constructor-arg value="Actions" />
+		<property name="actions">
+			<list>
+				<ref bean="ProductReferenceSynchronizationAction" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="ProductReferenceSynchronizationAction"
+		class="de.hybris.liveeditaddon.cockpit.components.listview.impl.ProductReferenceSynchronisationAction"
+		scope="prototype" >
+		<property name="synchronizationService" ref="productSynchronizationService" />
+	</bean>
+
+    <alias name="defaultSiteMediaFormatMap" alias="siteMediaFormatMap" />
+    <util:map id="defaultSiteMediaFormatMap" map-class="java.util.Hashtable">
+        <entry key="default" value-ref="responsiveImageFormats" />
+    </util:map>
+
+    <alias alias="mediaFormatService" name="defaultMediaFormatService" />
+	<bean id="defaultMediaFormatService" class="de.hybris.liveeditaddon.cockpit.service.impl.DefaultMediaFormatService">
+        <property name="siteMediaFormatMapping" ref="siteMediaFormatMap" />
+	</bean>
+	
+</beans>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<advanced-search>
+	
+	<group name="root" type="Category">
+        <label key="cockpit.config.label.General" />
+		<group name="general">
+			<label key="cockpit.config.label.General" />
+            <property qualifier="Category.code" visible="true">
+
+             </property>
+            <property qualifier="Category.name" visible="true">
+                <parameter>
+
+                </parameter>
+            </property>
+            <property qualifier="Category.catalogVersion" visible="true" editor="shortListEditor">
+
+            </property>
+		</group>
+	</group>
+	
+</advanced-search>

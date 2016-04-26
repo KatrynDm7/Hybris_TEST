@@ -1,0 +1,67 @@
+*** Settings ***
+Library	   de.hybris.platform.c4ccustomeratddtests.keywords.C4cKeywordLibrary
+Library           de.hybris.platform.atddimpex.keywords.ImpexKeywordLibrary
+Resource		  impex/Impex_Keywords.txt
+
+*** Keywords ***
+import commercecart sampledata
+    [Documentation]    Imports the commercecart test data
+    prepare environment
+    import impex from resource    /c4ccustomer/import/projectdata-c4cdata-streams.impex
+
+reset system
+    [Documentation]    Resets the system attributes to the original values
+    remove data
+
+Check that datahub is running
+    [Documentation]    Check that datahub server has successfully started
+    @{csv} =           Create list    integrationKey    NAME    LASTNAME    EMAIL
+    ${feed} =          Set variable   DEFAULT_FEED
+    ${itemType} =      Set variable   CustomerRawItem
+    Export to datahub     ${feed}    ${itemType}     @{csv}
+
+create customer with uid "${uid:[^"]+}" and name "${name:[^"]+}"
+    [Documentation]    Create customer with given uid and name
+    create customer     ${uid}    ${name}
+
+create address for customer with uid "${uid:[^"]+}"
+    [Documentation]    Create address for customer
+    create address for customer     ${uid}
+
+read data from c4c
+    [Documentation]    Wait C4C Soap XML file
+    ${result}=    read data
+    [Return]    ${result}
+
+run cron job
+    [Documentation]    Create address for customer
+    perform cron job
+
+generate random id
+    [Documentation]     Generates random Id
+    ${id} =    generate id
+    [Return]    ${id}
+
+send compositions call
+    [Documentation]     Send compositions
+    send compositions
+
+send publications call
+    [Documentation]     Send publications
+    send publications
+
+extract data from xml "${xml:[^"]+}" by xPath "${xpath:[^"]+}"
+    [Documentation]     Extract data from xml by xpath
+    log    Searching ${xpath} in ${xml}    INFO
+    ${data} =    extract data from xml by xPath    ${xml}    ${xpath}
+    [Return]    ${data}
+
+get customer by uid "${uid:[^"]+}"
+    [Documentation]    Get customer by uid
+    ${customer} =    get customer by uid    ${uid}
+    [Return]    ${customer}
+
+get message URL
+    [Documentation]    Get message URL from c4c
+    ${URL} =    get URL
+    [Return]    ${URL}

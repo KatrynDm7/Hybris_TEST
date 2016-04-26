@@ -1,0 +1,876 @@
+$contentCatalog=financialContentCatalog
+$contentCatalogName=Financial Content Catalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$productCatalog=financialProductCatalog
+$productCatalogName=Financial Product Catalog
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$picture=media(code, $contentCV);
+$image=image(code, $contentCV);
+$media=media(code, $contentCV);
+$page=page(uid, $contentCV);
+$contentPage=contentPage(uid, $contentCV);
+$product=product(code, $productCV)
+$category=category(code, $productCV)
+$siteResource=jar:de.hybris.platform.financialstore.constants.FinancialStoreConstants&/financialstore/import/sampledata/contentCatalogs/$contentCatalog
+$productResource=jar:de.hybris.platform.financialstore.constants.FinancialStoreConstants&/financialstore/import/sampledata/productCatalogs/$productCatalog
+$jarResourceCms=jar:de.hybris.platform.financialstore.constants.FinancialStoreConstants&/financialstore/import/sampledata/cockpits/cmscockpit
+$addonExtensionName=financialacceleratorstorefront
+
+# CMS Site Settings
+UPDATE CMSSite;uid[unique=true];defaultPreviewCategory(code, $productCV);defaultPreviewProduct(code, $productCV)
+;insurance;insurances_event;;
+
+# Site Logo
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];altText;folder(qualifier)[default='images']
+;;/images/theme/header_01.png;header_01.png;$siteResource/images/theme/header_01.png;image/png;hybris Accelerator;
+
+# Site Logo Component
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink;
+;;SiteLogoComponent;Site Logo Component;SiteLogoComponent;"/";
+
+# CMS Link Components
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];$category;$product;styleAttributes
+;;HomepageNavLink;Home Page Nav Link;/;HomepageNavLink;HomepageNavLink;;;;
+;;HomepageLink;Home Page Link;/;HomepageLink;HomepageLink;;;;
+;;StoreFinderLink;Store Finder Link;/store-finder;StoreFinderLink;StoreFinderLink;;;;
+;;LoginLink;Login Link;/login;LoginLink;LoginLink;;;;
+;;AboutAcceleratorLink;About Accelerator Link;"http://www.hybris.com/multichannel-accelerator";AboutAcceleratorLink;AboutAcceleratorLink;newWindow;;;
+;;DocumentationLink;Documentation Link;"https://wiki.hybris.com/display/release5/Release+5+Documentation+Home";DocumentationLink;DocumentationLink;newWindow;;;
+;;AboutHybrisLink;About Hybris Link;"http://www.hybris.com";AboutHybrisLink;AboutHybrisLink;newWindow;;;
+;;ContactUsLink;Contact Us Link;/#;ContactUsLink;ContactUsLink;;;;
+;;FacebookLink;Facebook Link;/#;FacebookLink;FacebookLink;;;;class="follow-us-facebook"
+;;TwitterLink;Twitter Link;/#;TwitterLink;TwitterLink;;;;class="follow-us-twitter"
+;;AgileCommerceBlogLink;Agile Commerce Blog Link;/#;AgileCommerceBlogLink;AgileCommerceBlogLink;;;;class="follow-us-agilecommerceblog"
+;;LinkedInLink;Linked In Link;/#;LinkedInLink;LinkedInLink;;;;class="follow-us-linkedin"
+;;YoutubeLink;YouTube Link;/#;YoutubeLink;YoutubeLink;;;;class="follow-us-youtube"
+;;GooglePlusLink;Google+ Link;/#;GooglePlusLink;GooglePlusLink;;;;class="follow-us-googleplus"
+;;FAQLink;FAQ Link;/faq;FAQLink;FAQLin;;;;
+;;TermsAndConditionsLink;Terms and Conditions Link;/termsAndConditions;TermsAndConditionsLink;TermsAndConditionsLink;;;;
+;;AccountHomeLink;Account Home Link;/my-account;AccountHomeLink;AccountHomeLink;;;;
+;;AccountProfileLink;AccountProfileLink;/my-account/profile;AccountProfileLink;AccountProfileLink;;;;class="myacc-link myacc-profile"
+;;AccountProfileBackToAccountHomeLink;AccountProfileBackToAccountHomeLink;/my-account;AccountProfileBackToAccountHomeLink;AccountProfileBackToAccountHomeLink;;;;class="myacc-link myacc-profile"
+
+;;AccountMyPoliciesLink;AccountMyPoliciesLink;/my-account/my-policies;AccountMyPoliciesLink;AccountMyPoliciesLink;;;;class="myacc-link myacc-mypolicies"
+;;AccountMyPoliciesBackToAccountHomeLink;AccountMyPoliciesBackToAccountHomeLink;/my-account;AccountMyPoliciesBackToAccountHomeLink;AccountMyPoliciesBackToAccountHomeLink;;;;class="myacc-link myacc-mypolicies"
+;;AccountMyQuotesLink;AccountMyQuotesLink;/my-account/my-quotes;AccountMyQuotesLink;AccountMyQuotesLink;;;;class="myacc-link myacc-myquotes"
+;;AccountMyQuotesBackToAccountHomeLink;AccountMyQuotesBackToAccountHomeLink;/my-account;AccountMyQuotesBackToAccountHomeLink;AccountMyQuotesBackToAccountHomeLink;;;;class="myacc-link myacc-myquotes"
+
+;;AccountPersonalDetailsLink;AccountPersonalDetailsLink;/my-account/profile;AccountPersonalDetailsLink;AccountPersonalDetailsLink;;;;
+;;AccountUpdatePasswordLink;AccountUpdatePasswordLink;/my-account/update-password;AccountUpdatePasswordLink;AccountUpdatePasswordLink;;;;
+;;AccountAddressBookBackToAccountHomeLink;AccountAddressBookBackToAccountHomeLink;/my-account;AccountAddressBookBackToAccountHomeLink;AccountAddressBookBackToAccountHomeLink;;;;class="myacc-link myacc-addressbook"
+;;AccountManageAddressLink;AccountManageAddressLink;/my-account/address-book;AccountManageAddressLink;AccountManageAddressLink;;;;
+;;AccountPaymentDetailsLink;AccountPaymentDetailsLink;/my-account/payment-details;AccountPaymentDetailsLink;AccountPaymentDetailsLink;;;;class="myacc-link myacc-paymentdetails"
+;;AccountPaymentDetailsBackToAccountHomeLink;AccountPaymentDetailsBackToAccountHomeLink;/my-account;AccountPaymentDetailsBackToAccountHomeLink;AccountPaymentDetailsBackToAccountHomeLink;;;;class="myacc-link myacc-paymentdetails"
+;;AccountManagePaymentDetailsLink;AccountManagePaymentDetailsLink;/my-account/payment-details;AccountManagePaymentDetailsLink;AccountManagePaymentDetailsLink;;;;
+;;AccountOrderHistoryLink;AccountOrderHistoryLink;/my-account/orders;AccountOrderHistoryLink;AccountOrderHistoryLink;;;;class="myacc-link myacc-orderhistory"
+;;AccountOrderHistoryBackToAccountHomeLink;AccountOrderHistoryBackToAccountHomeLink;/my-account;AccountOrderHistoryBackToAccountHomeLink;AccountOrderHistoryBackToAccountHomeLink;;;;class="myacc-link myacc-orderhistory"
+;;AccountViewOrderHistoryLink;AccountViewOrderHistoryLink;/my-account/orders;AccountViewOrderHistoryLink;AccountViewOrderHistoryLink;;;;
+;;FindAgentLink;FindAgentLink;/find-agent;FindAgentLink;FindAgentLink;;;;
+;;HeaderEmailLink;HeaderEmailLink;/email;HeaderEmailLink;HeaderEmailLink;;;;class="email-link"
+;;HeaderChatLink;HeaderChatLink;/chat;HeaderChatLink;HeaderChatLink;;;;class="chat-link"
+;;AccountTravelPolicyLink;AccountTravelPolicyLink;/my-account/;AccountTravelPolicyLink;AccountTravelPolicyLink;;;;class="myacc-travel"
+;;TravelInsuranceCategoryLink;Travel Insurance Link;;TravelInsuranceCategoryLink;TravelInsuranceCategoryLink;;insurances_travel;;
+;;EventInsuranceCategoryLink;Event Insurance Link;;EventInsuranceCategoryLink;EventInsuranceCategoryLink;;insurances_event;;
+;;PropertyHomeownersInsuranceCategoryLink;Property Homeowners Insurance Link;;PropertyHomeownersInsuranceCategoryLink;PropertyHomeownersInsuranceCategoryLink;;insurances_property_homeowners;;
+;;PropertyRentersInsuranceCategoryLink;Property Renters Insurance Link;;PropertyRentersInsuranceCategoryLink;PropertyRentersInsuranceCategoryLink;;insurances_property_renters;;
+;;AutoInsuranceCategoryLink;Auto Insurance Link;;AutoInsuranceCategoryLink;AutoInsuranceCategoryLink;;insurances_auto;;
+;;LifeInsuranceCategoryLink;Life Insurance Link;;LifeInsuranceCategoryLink;LifeInsuranceCategoryLink;;insurances_life;;
+
+;;PropertyHomeownersInsuranceLink;Property Homeowners Insurance Link;;PropertyHomeownersInsuranceLink;PropertyHomeownersInsuranceLink;;insurances_property_homeowners;;
+;;PropertyRentersInsuranceLink;Property Renters Insurance Link;;PropertyRentersInsuranceLink;PropertyRentersInsuranceLink;;insurances_property_renters;;
+;;TravelInsuranceLink;Travel Insurance Link;;TravelInsuranceLink;TravelInsuranceLink;;insurances_travel;;
+;;EventInsuranceLink;Property Insurance Link;;EventInsuranceLink;EventInsuranceLink;;insurances_event;;
+;;AutoInsuranceLink;Auto Insurance Link;;AutoInsuranceLink;AutoInsuranceLink;;insurances_auto;;
+;;LifeInsuranceLink;Life Insurance Link;;LifeInsuranceLink;LifeInsuranceLink;;insurances_life;;
+;;NewsLink;News Link;/#;NewsLink;NewsLink;;;;
+;;CareersLink;Careers Link;#;CareersLink;CareersLink;;;;
+;;CookiePolicyLink;Cookie Policy Link;#;CookiePolicyLink;CookiePolicyLink;;;;
+;;SiteMapLink;Site Map Link;#;SiteMapLink;SiteMapLink;;;;
+
+UPDATE CMSLinkImageComponent;$contentCV[unique=true];uid[unique=true];url;category(code, $productCV);
+;;ins_property_homeowners_home_link;Insurance/Homeowners-Main/Homeowners/c/insurances_property_homeowners;;;
+;;ins_property_renters_home_link;Insurance/Renters-Main/Rental/c/insurances_property_renters;;;
+
+# Lightbox Banner for Mini Cart
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
+;;LightboxHomeDeliveryBannerComponent;Lightbox Home Delivery Banner Component;LightboxHomeDeliveryBannerComponent;
+
+# CMS Mini Cart Component
+INSERT_UPDATE MiniCartComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;totalDisplay(code);shownProductCount;lightboxBannerComponent(&componentRef)
+;;MiniCart;Mini Cart;MiniCart;SUBTOTAL;3;LightboxHomeDeliveryBannerComponent
+
+# Navigation Bar Component
+INSERT_UPDATE NavigationBarComponent;$contentCV[unique=true];uid[unique=true];name;wrapAfter;link(uid, $contentCV);styleClass;&componentRef
+;;InsuranceHomeBarComponent;Insurance Home Bar Component;10;HomepageLink;"home-link";InsuranceHomeBarComponent
+;;EventInsuranceBarComponent;Event Insurance Bar Component;10;EventInsuranceCategoryLink;;EventInsuranceBarComponent
+;;TravelInsuranceBarComponent;Travel Insurance Bar Component;10;TravelInsuranceCategoryLink;;TravelInsuranceBarComponent
+;;PropertyHomeownersInsuranceBarComponent;Property Homeowners Insurance Bar Component;10;PropertyHomeownersInsuranceCategoryLink;;PropertyHomeownersInsuranceBarComponent
+;;PropertyRentersInsuranceBarComponent;Property Homeowners Insurance Bar Component;10;PropertyRentersInsuranceCategoryLink;;PropertyRentersInsuranceBarComponent
+;;AutoInsuranceBarComponent;Auto Insurance Bar Component;10;AutoInsuranceCategoryLink;;AutoInsuranceBarComponent
+;;LifeInsuranceBarComponent;Life Insurance Bar Component;10;LifeInsuranceCategoryLink;;LifeInsuranceBarComponent
+
+# Navigation Bar Component
+INSERT_UPDATE AccountNavigationComponent;$contentCV[unique=true];uid[unique=true];name;navigationNode(&nodeRef);styleClass;&componentRef
+;;AccountLinksNavigationComponent;Account Links Navigation Component;AccountLinksNavNode;;AccountLinksNavigationComponent
+
+# Account Navigation Bar Component
+INSERT_UPDATE AccountNavigationCollectionComponent;$contentCV[unique=true];uid[unique=true];name;components(uid, $contentCV);&componentRef
+
+# Navigation Bar Component
+INSERT_UPDATE NavigationBarCollectionComponent;$contentCV[unique=true];uid[unique=true];name;components(uid, $contentCV);&componentRef
+;;NavBarComponent;Navigation Bar Collection Component;PropertyHomeownersInsuranceBarComponent,PropertyRentersInsuranceBarComponent,AutoInsuranceBarComponent,LifeInsuranceBarComponent,TravelInsuranceBarComponent,EventInsuranceBarComponent;NavBarComponent
+
+# CMS tabs components
+INSERT_UPDATE CMSTabParagraphComponent;$contentCV[unique=true];uid[unique=true];name;visible;&componentRef
+;;deliveryTab;Delivery tab;true;deliveryTab
+
+INSERT_UPDATE CMSTabParagraphContainer;$contentCV[unique=true];uid[unique=true];name;visible;simpleCMSComponents(uid, $contentCV);&componentRef
+;;TabPanelContainer;Tab container;true;deliveryTab;TabPanelContainer
+
+# CMS Footer Component
+INSERT_UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];wrapAfter;&componentRef
+;;FooterComponent;5;FooterComponent
+;;FollowUsFooterComponent;2;FollowUsFooterComponent
+
+# CMS Paragraph Component (Contact information)
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;ContactInfo;Contact information;ContactInfo
+
+# CMS VariantSelector Components
+INSERT_UPDATE ProductVariantSelectorComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;VariantSelector;Product Variant Selector;VariantSelector
+
+# CMS ProductAddToCart Components
+INSERT_UPDATE ProductAddToCartComponent;$contentCV[unique=true];uid[unique=true];name;actions(&actionRef);&componentRef
+;;AddToCart;Product Add To Cart;PickUpInStoreAction,AddToCartAction,ShareOnSocialNetworkAction;AddToCart
+
+# CMS AddToCart Action
+INSERT_UPDATE AddToCartAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
+;;AddToCartAction;/cart/add;Product Add To Cart Action;ActionRestriction;AddToCartAction
+
+INSERT_UPDATE ListAddToCartAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
+;;ListAddToCartAction;/cart/add;Product Add To Cart Action;ActionRestriction;ListAddToCartAction
+
+INSERT_UPDATE ListPickUpInStoreAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
+;;ListPickUpInStoreAction;/store-pickup/{productCode}/pointOfServices;Pickup in Store Action;ActionRestriction;ListPickUpInStoreAction
+
+# CMS PickUpInStoreAction Action
+INSERT_UPDATE PickUpInStoreAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
+;;PickUpInStoreAction;/store-pickup/{productCode}/pointOfServices;Pickup in Store Action;ActionRestriction;PickUpInStoreAction
+
+# CMS ShareOnSocialNetwork Action
+INSERT_UPDATE ShareOnSocialNetworkAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
+;;ShareOnSocialNetworkAction;/;Share On Social Network Action;ActionRestriction;ShareOnSocialNetworkAction
+
+# CMS Action Restrictions
+INSERT_UPDATE CMSActionRestriction;$contentCV[unique=true];uid[unique=true];name;
+;;ActionRestriction;A CMSAction restriction;
+
+# CMS ProductReferences Components
+INSERT_UPDATE ProductReferencesComponent;$contentCV[unique=true];uid[unique=true];name;productReferenceTypes(code);maximumNumberProducts;&componentRef
+;;accessories;Accessories;ACCESSORIES;5;accessories
+;;CrossSelling;Cross Selling;CROSSELLING;5;CrossSelling
+;;Others;Others;OTHERS;5;Others
+;;Similar;Similar;SIMILAR;5;Similar
+
+# CMS PurchasedCategorySuggestion Components
+INSERT_UPDATE PurchasedCategorySuggestionComponent;$contentCV[unique=true];uid[unique=true];name;productReferenceTypes(code);maximumNumberProducts;filterPurchased;category(code, $productCV);&componentRef
+;;PurchasedCategorySuggestions;Purchased Category Suggestions;OTHERS;10;true;insurances_event;PurchasedCategorySuggestions
+
+# CMS CartSuggestion Components
+INSERT_UPDATE CartSuggestionComponent;$contentCV[unique=true];uid[unique=true];name;productReferenceTypes(code);maximumNumberProducts;filterPurchased;&componentRef
+;;CartSuggestions;Cart Suggestions;ACCESSORIES,SIMILAR;20;true;CartSuggestions
+
+# CMS SearchBox Components
+INSERT_UPDATE SearchBoxComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;SearchBox;Search Box;SearchBox
+
+INSERT_UPDATE ProductRefinementComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;RefinementFacetComponent;Product Refinement Facet Component;RefinementFacetComponent
+
+INSERT_UPDATE CMSProductListComponent;$contentCV[unique=true];uid[unique=true];name;actions(uid,$contentCV);&componentRef
+;;ProductListComponent;Product List Component;ListPickUpInStoreAction,ListAddToCartAction;ProductListComponent
+
+INSERT_UPDATE ProductGridComponent;$contentCV[unique=true];uid[unique=true];name;actions(uid,$contentCV);&componentRef
+;;ProductGridComponent;Product Grid Component;ListPickUpInStoreAction,ListAddToCartAction;ProductGridComponent
+
+INSERT_UPDATE SearchResultsListComponent;$contentCV[unique=true];uid[unique=true];name;actions(uid,$contentCV);&componentRef
+;;SearchResultsList;Search Result List Component;ListPickUpInStoreAction,ListAddToCartAction;SearchResultsList
+
+INSERT_UPDATE SearchResultsListComponent;$contentCV[unique=true];uid[unique=true];name;actions(uid,$contentCV);&componentRef
+;;SearchResultsGrid;Search Result Grid Component;ListPickUpInStoreAction,ListAddToCartAction;SearchResultsGrid
+
+# Content Slots
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;SiteLogoSlot;SiteLogoComponent
+;;HomepageNavLinkSlot;HomepageNavLink
+;;MiniCartSlot;
+;;NavigationBarSlot;NavBarComponent,breadcrumbComponent
+;;NavigationBarSlot-NoBreadcrumbs;NavBarComponent
+;;NavigationBarSlot-Empty;
+;;TabsSlot;TabPanelContainer
+;;SearchBoxSlot;
+;;FooterSlot;FollowUsFooterComponent,FooterComponent
+;;HeaderLinksSlot;HeaderEmailLink,HeaderChatLink,AccountTravelPolicyLink
+;;VariantSelectorSlot;VariantSelector
+;;AddToCartSlot;AddToCart
+;;UpSellingSlot;Similar
+;;CrossSellingSlot;accessories
+;;SuggestionSlot;CartSuggestions
+;;ProductLeftRefinements;RefinementFacetComponent
+
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];folder(qualifier)[default='images']
+
+
+# Category Pages
+INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved'];previewImage(code, $contentCV)
+
+# Category Page Restrictions
+INSERT_UPDATE CMSCategoryRestriction;$contentCV[unique=true];uid[unique=true];name;categories(code, $productCV);pages(uid, $contentCV)
+
+# CMS Navigation Nodes #
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;children(uid,$contentCV)[mode=append]
+;root;;root;;
+
+# CMS Navigation Nodes
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef
+;SiteRootNode;;SiteRootNode;root;;SiteRootNode
+;InsuranceNavNode;;Insurance Site;SiteRootNode;HomepageNavLink;InsuranceNavNode
+;HomeNavNode;;Insurance Home Link;InsuranceNavNode;HomepageLink;HomeNavNode
+;InsuranceFooterNavNode;;Insurance Pages;InsuranceNavNode;PropertyHomeownersInsuranceLink,PropertyRentersInsuranceLink,AutoInsuranceLink,LifeInsuranceLink,TravelInsuranceLink,EventInsuranceLink;InsuranceFooterNavNode
+;AboutUsNavNode;;About Us Pages;InsuranceNavNode;NewsLink,ContactUsLink,CareersLink,FindAgentLink;AboutUsNavNode
+;LegalNavNode;;Legal Pages;InsuranceNavNode;TermsAndConditionsLink,CookiePolicyLink,FAQLink,SiteMapLink;LegalNavNode
+;FollowUsNavNode;;Follow Us Pages;InsuranceNavNode;AgileCommerceBlogLink,LinkedInLink,FacebookLink,TwitterLink,YoutubeLink,GooglePlusLink;FollowUsNavNode
+;AccountLinksNavNode;;Your Account;SiteRootNode;AccountProfileLink,AccountMyPoliciesLink,AccountMyQuotesLink,AccountPaymentDetailsLink,AccountOrderHistoryLink;AccountLinksNavNode
+;AccountProfileNavNode;;Profile;SiteRootNode;AccountPersonalDetailsLink,AccountUpdatePasswordLink;AccountProfileNavNode
+;AccountAddressBookNavNode;;Address Book;SiteRootNode;AccountManageAddressLink;AccountAddressBookNavNode
+;AccountPaymentDetailsNavNode;;Address Book;SiteRootNode;AccountManagePaymentDetailsLink;AccountPaymentDetailsNavNode
+;AccountOrderHistoryNavNode;;Order History;SiteRootNode;AccountViewOrderHistoryLink;AccountOrderHistoryNavNode
+
+;AccountMyPoliciesNavNode;;My Policies;SiteRootNode;AccountMyPoliciesLink;AccountMyPoliciesNavNode
+;AccountMyQuotesNavNode;;My Quotes;SiteRootNode;AccountMyQuotesLink;AccountMyQuotesNavNode
+
+;EventInsuranceNavNode;;Event;InsuranceNavNode;EventInsuranceCategoryLink;EventInsuranceNavNode
+;AutoInsuranceNavNode;;Auto;InsuranceNavNode;AutoInsuranceCategoryLink;AutoInsuranceNavNode
+;LifeInsuranceNavNode;;Life;InsuranceNavNode;LifeInsuranceCategoryLink;LifeInsuranceNavNode
+;TravelInsuranceNavNode;;Travel;InsuranceNavNode;TravelInsuranceCategoryLink;TravelInsuranceNavNode
+;PropertyHomeownersInsuranceNavNode;;Property;InsuranceNavNode;PropertyHomeownersInsuranceCategoryLink;PropertyHomeownersInsuranceNavNode
+;PropertyRentersInsuranceNavNode;;Property;InsuranceNavNode;PropertyRentersInsuranceCategoryLink;PropertyRentersInsuranceNavNode
+
+# Navigation Bar Component
+INSERT_UPDATE NavigationBarComponent;$contentCV[unique=true];uid[unique=true];navigationNode(&nodeRef);dropDownLayout(code)
+;;InsuranceHomeBarComponent;HomeNavNode
+;;EventInsuranceBarComponent;EventInsuranceNavNode
+;;TravelInsuranceBarComponent;TravelInsuranceNavNode
+;;PropertyHomeownersInsuranceBarComponent;PropertyHomeownersInsuranceNavNode
+;;PropertyRentersInsuranceBarComponent;PropertyRentersInsuranceNavNode
+;;AutoInsuranceBarComponent;AutoInsuranceNavNode
+;;LifeInsuranceBarComponent;LifeInsuranceNavNode
+
+INSERT_UPDATE NavigationBarComponent;$contentCV[unique=true];uid[unique=true];name;wrapAfter;navigationNode(&nodeRef);link(uid, $contentCV);styleClass;dropDownLayout(code);&componentRef
+
+# Update CMS Footer Component with Nav Nodes
+INSERT_UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];navigationNodes(&nodeRef)
+;;FooterComponent;InsuranceFooterNavNode,AboutUsNavNode,LegalNavNode
+;;FollowUsFooterComponent;FollowUsNavNode
+
+# Preview Image for use in the CMS Cockpit for special ContentPages
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];folder(qualifier)[default='images']
+;;accountPagePreview;text/png;AccountPage.png;$jarResourceCms/preview-images/insurance/AccountPage.png
+;;addEditAddressPagePreview;text/png;AddEditAddressPage.png;$jarResourceCms/preview-images/insurance/AddEditAddressPage.png
+;;addressBookPagePreview;text/png;AddressBook.png;$jarResourceCms/preview-images/insurance/AddressBookPage.png
+;;cartPagePreview;text/png;CartPage.png;$jarResourceCms/preview-images/insurance/CartPage.png
+;;checkoutLoginPagePreview;text/png;CheckoutLoginPage.png;$jarResourceCms/preview-images/insurance/CheckoutLoginPage.png
+;;multiStepCheckoutSummaryPagePreview;text/png;MultiStepCheckoutSummaryPage.png;$jarResourceCms/preview-images/insurance/MultiStepCheckoutSummaryPage.png
+;;frequentlyAskedQuestionsPage;text/png;FrequentlyAskedQuestionsPage.png;$jarResourceCms/preview-images/insurance/FrequentlyAskedQuestionsPage.png;;;
+;;termsAndConditionsPage;text/png;TermsAndConditionsPage.png;$jarResourceCms/preview-images/insurance/TermsAndConditionsPage.png;;;
+;;homepagePreview;text/png;Homepage.png;$jarResourceCms/preview-images/insurance/Homepage.png
+;;loginPagePreview;text/png;LoginPage.png;$jarResourceCms/preview-images/insurance/LoginPage.png
+;;notFoundPagePreview;text/png;NotFoundPage.png;$jarResourceCms/preview-images/insurance/NotFoundPage.png
+;;orderConfirmationPagePreview;text/png;OrderConfirmationPage.png;$jarResourceCms/preview-images/insurance/OrderConfirmationPage.png
+;;orderDetailsPagePreview;text/png;OrderDetailsPage.png;$jarResourceCms/preview-images/insurance/OrderDetailsPage.png
+;;orderHistoryPagePreview;text/png;OrderHistoryPage.png;$jarResourceCms/preview-images/insurance/OrderHistoryPage.png
+;;paymentDetailsPagePreview;text/png;PaymentDetailsPage.png;$jarResourceCms/preview-images/insurance/PaymentDetailsPage.png
+;;productDetailsPagePreview;text/png;ProductDetailsPage.png;$jarResourceCms/preview-images/insurance/ProductDetailsPage.png
+;;productListPagePreview;text/png;ProductListPage.png;$jarResourceCms/preview-images/insurance/ProductListPage.png
+;;profilePagePreview;text/png;ProfilePage.png;$jarResourceCms/preview-images/insurance/ProfilePage.png
+;;searchResultsEmptyPagePreview;text/png;SearchResultsEmptyPage.png;$jarResourceCms/preview-images/insurance/SearchResultsEmptyPage.png
+;;searchResultsPagePreview;text/png;SearchResultsPage.png;$jarResourceCms/preview-images/insurance/SearchResultsPage.png
+;;storefinderPagePreview;text/png;StoreFinderPage.png;$jarResourceCms/preview-images/insurance/StoreFinderPage.png
+;;updateForgottenPasswordPagePreview;text/png;UpdateForgottenPasswordPage.png;$jarResourceCms/preview-images/insurance/UpdateForgottenPasswordPage.png
+;;productGridPagePreview;text/png;ProductGridPage.png;$jarResourceCms/preview-images/insurance/ProductGridPage.png
+;;defaultCategoryPagePreview;text/png;DefaultCategoryPage.png;$jarResourceCms/preview-images/insurance/DefaultCategoryPage.png
+;;orderExpiredPagePreview;text/png;OrderExpiredPage.png;$jarResourceCms/preview-images/insurance/OrderExpiredPage.png;;;
+;;myPoliciesPagePreview;text/png;MyPoliciesPage.png;$jarResourceCms/preview-images/insurance/MyPoliciesPage.png;;;
+;;myQuotesPagePreview;text/png;MyQuotesPage.png;$jarResourceCms/preview-images/insurance/MyQuotesPage.png;;;
+;;findAgentPage;text/png;FindAgent.png;$jarResourceCms/preview-images/insurance/FindAgent.png;;;
+
+# Functional Content Pages
+UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $contentCV)
+;;multiStepCheckoutSummaryPage;multiStepCheckoutSummaryPagePreview
+;;orderConfirmationPage;orderConfirmationPagePreview
+;;cartPage;cartPagePreview
+;;search;searchResultsPagePreview
+;;account;accountPagePreview
+;;profile;profilePagePreview
+;;address-book;addressBookPagePreview
+;;add-edit-address;addEditAddressPagePreview
+;;payment-details;paymentDetailsPagePreview
+;;order;orderDetailsPagePreview
+;;orders;orderHistoryPagePreview
+;;storefinderPage;storefinderPagePreview
+;;checkout-login;checkoutLoginPagePreview
+;;login;loginPagePreview
+;;notFound;notFoundPagePreview
+;;searchEmpty;searchResultsEmptyPagePreview
+;;updatePassword;updateForgottenPasswordPagePreview
+;;orderExpired;orderExpiredPagePreview
+;;my-policies;myPoliciesPagePreview
+;;my-quotes;myQuotesPagePreview
+
+# Simple Content Pages 
+UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $contentCV);linkComponents(&linkRef)
+;;faq;frequentlyAskedQuestionsPage;FAQLink
+
+# Order Expired Page
+UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $contentCV)
+;;orderExpired;orderExpiredPagePreview
+
+UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $contentCV);linkComponents(&linkRef)
+;;termsAndConditions;termsAndConditionsPage;TermsAndConditionsLink
+
+UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];linkComponents(&linkRef);;;;;
+;;storefinderPage;StoreFinderLink
+;;login;LoginLink
+
+# Product Details Page
+UPDATE ProductPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $contentCV)
+;;productDetails;productDetailsPagePreview
+
+# Category Pages
+UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $contentCV)
+;;productList;productListPagePreview
+;;productGrid;productGridPagePreview
+;;category;defaultCategoryPagePreview
+
+
+###### Insurance Camera Accessories and Supplies Category Landing Page ######
+
+INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved'];previewImage(code, $contentCV)
+
+INSERT_UPDATE CMSCategoryRestriction;$contentCV[unique=true];uid[unique=true];name;categories(code, $productCV);pages(uid, $contentCV)
+
+INSERT_UPDATE CategoryFeatureComponent;$contentCV[unique=true];uid[unique=true];name;category(code, $productCV);&componentRef
+
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='CamerasAccessoriesAndSuppliesCategoryPage'];contentSlot(uid,$contentCV)[unique=true]
+
+###### Insurance Search Results Page ######
+
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;Section2Slot-search;Section2 Slot for search;true;
+;;Section4Slot-search;Section4 Slot for search;true;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='search'];contentSlot(uid,$contentCV)[unique=true]
+;;Section2-search;Section2;;Section2Slot-search
+;;Section4-search;Section4;;Section4Slot-search
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;NoSearchResultsParagraphComponent;No Search Results Paragraph Component;NoSearchResultsParagraphComponent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;TopContent-searchEmpty;Top Slot for searchEmpty;true;
+;;SideContent-searchEmpty;Side Slot for searchEmpty;true;
+;;MiddleContent-searchEmpty;Middle Slot for searchEmpty;true;NoSearchResultsParagraphComponent
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='searchEmpty'];contentSlot(uid,$contentCV)[unique=true]
+;;Top-searchEmpty;TopContent;;TopContent-searchEmpty
+;;Side-searchEmpty;SideContent;;SideContent-searchEmpty
+;;Middle-searchEmpty;MiddleContent;;MiddleContent-searchEmpty
+
+
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
+;;NextDayDeliveryBanner;Next Day Delivery Banner;NextDayDeliveryBanner
+
+
+###### Insurance Cart Page ######
+
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink;
+;;NextDayDeliveryBanner120;Next Day Delivery Banner (120);NextDayDeliveryBanner120;#;
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;EmptyCartParagraphComponent;Empty Cart Paragraph Component;EmptyCartParagraphComponent
+
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;TopContent-cartPage;Top Slot for Cart Page;true;checkoutProgressBar
+;;MiddleContent-cartPage;Middle Slot for Cart Page;true;EmptyCartParagraphComponent
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='cartPage'];contentSlot(uid,$contentCV)[unique=true]
+;;Top-cartPage;TopContent;;TopContent-cartPage
+;;Middle-cartPage;MiddleContent;;MiddleContent-cartPage
+
+###### Insurance Checkout Login Page ######
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;TopContent-checkoutLogin;Top Slot for Checkout Login Page;true;checkoutProgressBar
+
+###### Insurance Checkout Summary / Proceed to Checkout Page ######
+
+###### Insurance Store Finder Page ######
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;SideContent-StoreFinderPage;Side Slot for Store Finder Page;true;
+;;MiddleContent-StoreFinderPage;Middle Slot for Store Finder Page;true;StoreFinderComponent
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='storefinderPage'];contentSlot(uid,$contentCV)[unique=true]
+;;Side-StoreFinderPage;SideContent;;SideContent-StoreFinderPage
+;;Middle-StoreFinderPage;MiddleContent;;MiddleContent-StoreFinderPage
+
+###### Insurance FAQ Page ###### 
+ 
+# CMSParagraphComponent 
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;;;;
+;;faqMenuParagraph;FAQ Paragraph;FAQMenuParagraph;;;;
+;;faqTextParagraph;FAQ Paragraph;FAQTextParagraph;;;;
+ 
+# ContentSlot 
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;Section2ASlot-FAQ;Section2A Slot for FAQ Page;true;FAQMenuParagraph;;;
+;;Section2BSlot-FAQ;Section2B Slot for FAQ Page;true;FAQTextParagraph;;;
+ 
+# ContentSlotForPage 
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='faq'];contentSlot(uid,$contentCV)[unique=true];;;
+;;Section2A-FAQ;Section2A;;Section2ASlot-FAQ;;;
+;;Section2B-FAQ;Section2B;;Section2BSlot-FAQ;;;
+
+###### Insurance Order Expired Page ######
+
+# CMSParagraphComponent 
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;;;;
+;;orderExpiredMenuParagraph;Order Expired Paragraph;OrderExpiredMenuParagraph;;;;
+;;orderExpiredTextParagraph;Order Expired Paragraph;OrderExpiredTextParagraph;;;;
+ 
+# ContentSlot 
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;Section2ASlot-OrderExpired;Section2A Slot for Order Expired Page;true;OrderExpiredMenuParagraph;;;
+;;Section2BSlot-OrderExpired;Section2B Slot for Order Expired Page;true;OrderExpiredTextParagraph;;;
+ 
+# ContentSlotForPage 
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='orderExpired'];contentSlot(uid,$contentCV)[unique=true];;;
+;;Section2A-OrderExpired;Section2A;;Section2ASlot-OrderExpired;;;
+;;Section2B-OrderExpired;Section2B;;Section2BSlot-OrderExpired;;;
+
+###### Insurance Terms and Conditions Page
+
+# CMSParagraphComponent
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;;;;
+;;termsAndConditionsMenuParagraph;Terms and Conditions Paragraph;TermsAndConditionsMenuParagraph;;;;
+;;termsAndConditionsTextParagraph;Terms and Conditions Paragraph;TermsAndConditionsTextParagraph;;;;
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;Section2ASlot-TermsAndConditions;Section2A Slot for Terms and Conditions Page;true;TermsAndConditionsMenuParagraph;;;
+;;Section2BSlot-TermsAndConditions;Section2B Slot for Terms and Conditions Page;true;TermsAndConditionsTextParagraph;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='termsAndConditions'];contentSlot(uid,$contentCV)[unique=true];;;
+;;Section2A-TermsAndConditions;Section2A;;Section2ASlot-TermsAndConditions;;;
+;;Section2B-TermsAndConditions;Section2B;;Section2BSlot-TermsAndConditions;;;
+
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;AccountPaymentDetailsComponent;Account Payment Details Component;accountPaymentInfoPage.jsp;;AccountPaymentDetailsComponent
+;;AccountOrderDetailsHeadlineComponent;Account Order Details Headline Component;accountOrderDetailHeadline.jsp;;AccountOrderDetailsHeadlineComponent
+;;AccountOrderDetailsTotalsComponent;Account Order Details Order Totals Component;accountOrderDetailOrderTotals.jsp;;AccountOrderDetailsTotalsComponent
+;;AccountOrderDetailsShippingComponent;Account Order Details Shipping Info Component;accountOrderDetailShippingInfo.jsp;;AccountOrderDetailsShippingComponent
+;;AccountOrderDetailsItemsComponent;Account Order Details Items Info Component;accountOrderDetailItems.jsp;;AccountOrderDetailsItemsComponent
+;;AccountOrderHistoryComponent;Account History Component;accountOrderHistoryPage.jsp;;AccountOrderHistoryComponent
+;;AccountProfileComponent;Account Profile Component;accountProfilePage.jsp;;AccountProfileComponent
+;;AccountAddressBookComponent;Account Address Book Component;accountAddressBookPage.jsp;;AccountAddressBookComponent
+;;AccountAddEditAddressComponent;Account Add Edit Address Component;accountEditAddressPage.jsp;;AccountAddEditAddressComponent
+;;UpdatePasswordComponent;Update Password Component;accountChangePasswordPage.jsp;;UpdatePasswordComponent
+;;UpdateProfileComponent;Update Profile Component;accountProfileEditPage.jsp;;UpdateProfileComponent
+;;UpdateEmailComponent;Update Email Component;accountProfileEmailEditPage.jsp;;UpdateEmailComponent
+;;StoreFinderComponent;Store Finder Component;storeFinderContent.jsp;ViewStoreAction;StoreFinderComponent
+;;NewCustomerLoginComponent;New Customer Login Component;accountNewCustomerLogin.jsp;;NewCustomerLoginComponent
+;;ReturningCustomerLoginComponent;Returning Customer Login Component;accountReturningCustomerLogin.jsp;;ReturningCustomerLoginComponent
+;;NewCustomerCheckoutLoginComponent;New Customer Checkout Login Component;checkoutNewCustomerLogin.jsp;;NewCustomerCheckoutLoginComponent
+;;ReturningCustomerCheckoutLoginComponent;Returning Customer Checkout Login Component;checkouReturningCustomerLogin.jsp;;ReturningCustomerCheckoutLoginComponent
+
+INSERT_UPDATE InsuranceJspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;AccountMyPoliciesComponent;Account My Policies Component;pages/account/accountMyPoliciesPage.jsp;;AccountMyPoliciesComponent
+;;AccountMyQuotesComponent;Account My Quotes Component;pages/account/accountMyQuotesPage.jsp;;AccountMyQuotesComponent
+;;AccountMyProfileComponent;Account My Profile Component;pages/account/accountMyProfilePage.jsp;;AccountMyProfileComponent
+
+
+INSERT_UPDATE BreadcrumbComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;breadcrumbComponent;Breadcrumb CMS Component;breadcrumbComponent
+
+# CMS View Order Action
+INSERT_UPDATE ViewOrderAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
+;;ViewOrderAction;/my-account/order/{orderCode};View Order Action;ActionRestriction;ViewOrderAction
+
+# CMS View Store Action
+INSERT_UPDATE ViewStoreAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
+;;ViewStoreAction;;View Store Action;ActionRestriction;ViewStoreAction
+
+###### My Account
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;;;;
+;;MyAccountHeaderCMSParagraphComponnet;My account header;MyAccountHeaderCMSParagraphComponnet
+
+###### Account Homepage
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;TopContent-Account;Top Content Slot for My Account Homepage;true;MyAccountHeaderCMSParagraphComponnet,AccountLinksNavigationComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='account'];contentSlot(uid,$contentCV)[unique=true];;;
+;;TopContent-Account;TopContent;;TopContent-Account;;;
+
+###### Account Profile
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;TopContent-profile;Top Content Slot for My Account Profile;true;MyAccountHeaderCMSParagraphComponnet,AccountProfileBackToAccountHomeLink;;;
+;;BodyContent-profile;Body Content Slot for My Account Profile;true;AccountMyProfileComponent;;;
+;;BottomContent-profile;Bottom Content Slot for My Account Profile;true;AccountMyPoliciesLink,AccountMyQuotesLink,AccountPaymentDetailsLink,AccountOrderHistoryLink;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='profile'];contentSlot(uid,$contentCV)[unique=true];;;
+;;TopContent-profile;TopContent;;TopContent-profile;;;
+;;BodyContent-profile;BodyContent;;BodyContent-profile;;;
+;;BottomContent-profile;BottomContent;;BottomContent-profile;;;
+
+###### Account Update Password
+# ContentSlot
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;TopContent-updatePassword;Top Content Slot for Update Password;true;MyAccountHeaderCMSParagraphComponnet,AccountProfileBackToAccountHomeLink;;;
+;;BodyContent-updatePassword;Body Content Slot for Update Password;true;UpdatePasswordComponent;;;
+;;BottomContent-updatePassword;Bottom Content Slot for Update Password;true;AccountMyPoliciesLink,AccountMyQuotesLink,AccountPaymentDetailsLink,AccountOrderHistoryLink;;;
+
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='updatePassword'];contentSlot(uid,$contentCV)[unique=true];;;
+;;TopContent-updatePassword;TopContent;;TopContent-updatePassword;;;
+;;BodyContent-updatePassword;BodyContent;;BodyContent-updatePassword;;;
+;;BottomContent-updatePassword;BottomContent;;BottomContent-updatePassword;;;
+
+###### Account Update Profile
+# ContentSlot
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;TopContent-update-profile;Top Content Slot for Update Profile;true;MyAccountHeaderCMSParagraphComponnet,AccountProfileBackToAccountHomeLink;;;
+;;BodyContent-update-profile;Body Content Slot for Update Profile;true;UpdateProfileComponent;;;
+;;BottomContent-update-profile;Bottom Content Slot for Update Profile;true;AccountMyPoliciesLink,AccountMyQuotesLink,AccountPaymentDetailsLink,AccountOrderHistoryLink;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='update-profile'];contentSlot(uid,$contentCV)[unique=true];;;
+;;TopContent-update-profile;TopContent;;TopContent-update-profile;;;
+;;BodyContent-update-profile;BodyContent;;BodyContent-update-profile;;;
+;;BottomContent-update-profile;BottomContent;;BottomContent-update-profile;;;
+
+###### Account Update Email
+# ContentSlot
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;TopContent-update-email;Top Content Slot for Update Email;true;MyAccountHeaderCMSParagraphComponnet,AccountProfileBackToAccountHomeLink;;;
+;;BodyContent-update-email;Body Content Slot for Update Email;true;UpdateEmailComponent;;;
+;;BottomContent-update-email;Bottom Content Slot for Update Email;true;AccountMyPoliciesLink,AccountMyQuotesLink,AccountPaymentDetailsLink,AccountOrderHistoryLink;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='update-email'];contentSlot(uid,$contentCV)[unique=true];;;
+;;TopContent-update-email;TopContent;;TopContent-update-email;;;
+;;BodyContent-update-email;BodyContent;;BodyContent-update-email;;;
+;;BottomContent-update-email;BottomContent;;BottomContent-update-email;;;
+
+###### Account My Policies
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;TopContent-my-policies;Top Content Slot for My Account My Policies;true;MyAccountHeaderCMSParagraphComponnet,AccountProfileLink,AccountMyPoliciesBackToAccountHomeLink;;;
+;;BodyContent-my-policies;Body Content Slot for My Account My Policies;true;AccountMyPoliciesComponent;;;
+;;BottomContent-my-policies;Bottom Content Slot for My Account My Policies;true;AccountMyQuotesLink,AccountPaymentDetailsLink,AccountOrderHistoryLink;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='my-policies'];contentSlot(uid,$contentCV)[unique=true];;;
+;;TopContent-my-policies;TopContent;;TopContent-my-policies;;;
+;;BodyContent-my-policies;BodyContent;;BodyContent-my-policies;;;
+;;BottomContent-my-policies;BottomContent;;BottomContent-my-policies;;;
+
+
+###### Account My Quotes
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;TopContent-my-quotes;Top Content Slot for My Account My Quotes;true;MyAccountHeaderCMSParagraphComponnet,AccountProfileLink,AccountMyPoliciesLink,AccountMyQuotesBackToAccountHomeLink;;;
+;;BodyContent-my-quotes;Body Content Slot for My Account My Quotes;true;AccountMyQuotesComponent;;;
+;;BottomContent-my-quotes;Bottom Content Slot for My Account My Quotes;true;AccountPaymentDetailsLink,AccountOrderHistoryLink;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='my-quotes'];contentSlot(uid,$contentCV)[unique=true];;;
+;;TopContent-my-quotes;TopContent;;TopContent-my-quotes;;;
+;;BodyContent-my-quotes;BodyContent;;BodyContent-my-quotes;;;
+;;BottomContent-my-quotes;BottomContent;;BottomContent-my-quotes;;;
+
+######  Account payment detail page
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;TopContent-payment-details;Top Content Slot for My Account payment-details;true;MyAccountHeaderCMSParagraphComponnet,AccountProfileLink,AccountMyPoliciesLink,AccountMyQuotesLink,AccountPaymentDetailsBackToAccountHomeLink;;;
+;;BodyContent-payment-details;Body Content Slot for My Account payment-details;true;AccountPaymentDetailsComponent;;;
+;;BottomContent-payment-details;Bottom Content Slot for My Account payment-details;true;AccountOrderHistoryLink;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='payment-details'];contentSlot(uid,$contentCV)[unique=true];;;
+;;TopContent-payment-details;TopContent;;TopContent-payment-details;;;
+;;BodyContent-payment-details;BodyContent;;BodyContent-payment-details;;;
+;;BottomContent-payment-details;BottomContent;;BottomContent-payment-details;;;
+
+###### Account Address Book
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;TopContent-address-book;Top Content Slot for Account Address Book;true;MyAccountHeaderCMSParagraphComponnet,AccountProfileLink,AccountMyPoliciesLink,AccountMyQuotesLink,AccountPaymentDetailsLink,AccountAddressBookBackToAccountHomeLink;;;
+;;BodyContent-address-book;Body Content Slot for Account Address Book;true;AccountAddressBookComponent;;;
+;;BottomContent-address-book;Bottom Content Slot for Account Address Book;true;AccountOrderHistoryLink;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='address-book'];contentSlot(uid,$contentCV)[unique=true];;;
+;;TopContent-address-book;TopContent;;TopContent-address-book;;;
+;;BodyContent-address-book;BodyContent;;BodyContent-address-book;;;
+;;BottomContent-address-book;BottomContent;;BottomContent-address-book;;;
+
+###### Account Add Edit Address
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;TopContent-add-edit-address;Top Content Slot for Add Edit Address;true;MyAccountHeaderCMSParagraphComponnet,AccountProfileLink,AccountMyPoliciesLink,AccountMyQuotesLink,AccountPaymentDetailsLink,AccountAddressBookBackToAccountHomeLink;;;
+;;BodyContent-add-edit-address;Body Content Slot for Add Edit Address;true;AccountAddEditAddressComponent;;;
+;;BottomContent-add-edit-address;Bottom Content Slot for Add Edit Address;true;AccountOrderHistoryLink;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='add-edit-address'];contentSlot(uid,$contentCV)[unique=true];;;
+;;TopContent-add-edit-address;TopContent;;TopContent-add-edit-address;;;
+;;BodyContent-add-edit-address;BodyContent;;BodyContent-add-edit-address;;;
+;;BottomContent-add-edit-address;BottomContent;;BottomContent-add-edit-address;;;
+
+###### Account Order History
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;TopContent-orders;Top Content Slot for My Account Order History;true;MyAccountHeaderCMSParagraphComponnet,AccountProfileLink,AccountMyPoliciesLink,AccountMyQuotesLink,AccountPaymentDetailsLink,AccountOrderHistoryBackToAccountHomeLink;;;
+;;BodyContent-orders;Body Content Slot for My Account Order History;true;AccountOrderHistoryComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='orders'];contentSlot(uid,$contentCV)[unique=true];;;
+;;TopContent-orders;TopContent;;TopContent-orders;;;
+;;BodyContent-orders;BodyContent;;BodyContent-orders;;;
+
+###### Account Order Details
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;TopContent-orderdetail;Top Content Slot for My Account Order Details;true;MyAccountHeaderCMSParagraphComponnet,AccountProfileLink,AccountMyPoliciesLink,AccountMyQuotesLink,AccountPaymentDetailsLink,AccountOrderHistoryBackToAccountHomeLink,;;;
+;;BodyContent-orderdetail;Body Content Slot for My Account Order Details;true;AccountOrderDetailsHeadlineComponent,AccountOrderDetailsTotalsComponent,AccountOrderDetailsShippingComponent,AccountOrderDetailsItemsComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='order'];contentSlot(uid,$contentCV)[unique=true];;;
+;;TopContent-orderdetail;TopContent;;TopContent-orderdetail;;;
+;;BodyContent-orderdetail;BodyContent;;BodyContent-orderdetail;;;
+
+
+#### ProductListPage
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;ProductListSlot;Product List Slot for Product List;true;ProductListComponent;;;
+
+#### ProductGridPage
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;ProductGridSlot;Product Grid Slot for Product List;true;ProductGridComponent;;;
+
+#### SearchResultListPage
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SearchResultsListSlot;Search Result List Slot for Search List;true;SearchResultsList;;;
+
+#### SearchResultGridPage
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SearchResultsGridSlot;Search Result Grid Slot for Search List;true;SearchResultsGrid;;;
+
+# Simple Content Pages
+UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $contentCV);linkComponents(&linkRef)
+;;faq;frequentlyAskedQuestionsPage;FAQLink
+
+###### Insurance FAQ Page ######
+
+# CMSParagraphComponent
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;;;;
+;;faqMenuParagraph;FAQ Paragraph;FAQMenuParagraph;;;;
+;;faqTextParagraph;FAQ Paragraph;FAQTextParagraph;;;;
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;Section2ASlot-FAQ;Section2A Slot for FAQ Page;true;FAQMenuParagraph;;;
+;;Section2BSlot-FAQ;Section2B Slot for FAQ Page;true;FAQTextParagraph;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='faq'];contentSlot(uid,$contentCV)[unique=true];;;
+;;Section2A-FAQ;Section2A;;Section2ASlot-FAQ;;;
+;;Section2B-FAQ;Section2B;;Section2BSlot-FAQ;;;
+
+###### Insurance Order Expired Page ######
+
+# CMSParagraphComponent
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;;;;
+;;orderExpiredMenuParagraph;Order Expired Paragraph;OrderExpiredMenuParagraph;;;;
+;;orderExpiredTextParagraph;Order Expired Paragraph;OrderExpiredTextParagraph;;;;
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;Section2ASlot-OrderExpired;Section2A Slot for Order Expired Page;true;OrderExpiredMenuParagraph;;;
+;;Section2BSlot-OrderExpired;Section2B Slot for Order Expired Page;true;OrderExpiredTextParagraph;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='orderExpired'];contentSlot(uid,$contentCV)[unique=true];;;
+;;Section2A-OrderExpired;Section2A;;Section2ASlot-OrderExpired;;;
+;;Section2B-OrderExpired;Section2B;;Section2BSlot-OrderExpired;;;
+
+### Customer Login
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;LeftContentSlot-login;Left Content Slot for Customer Login;true;NewCustomerLoginComponent;;;
+;;RightContentSlot-login;Right Content Slot for Customer Login;true;ReturningCustomerLoginComponent;;;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='login'];contentSlot(uid,$contentCV)[unique=true];;;
+
+;;LeftContentSlot-login;LeftContentSlot;;LeftContentSlot-login;;;
+;;RightContentSlot-login;RightContentSlot;;RightContentSlot-login;;;
+
+### Checkout Login
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;BottomHeaderSlot-checkout-login;Top Content Slot for Checkout Login;true;checkoutProgressBar;;;
+;;LeftContentSlot-checkout-login;Left Content Slot for Checkout Login;true;NewCustomerCheckoutLoginComponent;;;
+;;CenterContentSlot-checkout-login;Center Content Slot for Checkout Login;true;ReturningCustomerCheckoutLoginComponent;;;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='checkout-login'];contentSlot(uid,$contentCV)[unique=true];;;
+;;BottomHeaderSlot-checkout-login;BottomHeaderSlot;;BottomHeaderSlot-checkout-login;;;
+;;LeftContentSlot-checkout-login;LeftContentSlot;;LeftContentSlot-checkout-login;;;
+;;CenterContentSlot-checkout-login;CenterContentSlot;;CenterContentSlot-checkout-login;;;
+
+
+########################################
+###### Insurance Homepage
+########################################
+# Site-wide Homepage
+UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $contentCV);linkComponents(&linkRef)
+;;homepage;homepagePreview;HomepageNavLink
+
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];altText;&imageRef;folder(qualifier)[default='images']
+;;HomeVisual_travel.png     ;$siteResource/images/banners/homepage/HomeVisual_travel.png ;      ;;;
+;;HomeVisual_agent.png      ;$siteResource/images/banners/homepage/HomeVisual_agent.png ;       ;;;
+;;HomeVisual_risk.png       ;$siteResource/images/banners/homepage/HomeVisual_risk.png ;        ;;;
+;;HomeVisual_event.png       ;$siteResource/images/banners/homepage/HomeVisual_event.png ;        ;;;
+;;HomeVisual_renters.png       ;$siteResource/images/banners/homepage/HomeVisual_renters.png ;        ;;;
+;;HomeVisual_homeowners.png       ;$siteResource/images/banners/homepage/HomeVisual_homeowners.png ;        ;;;
+;;HomeVisual_auto.png       ;$siteResource/images/banners/homepage/HomeVisual_auto.png ;        ;;;
+
+;;CatVisual_event.png       ;$siteResource/images/banners/categorypage/CatVisual_event.png ;        ;;;
+;;CatVisual_homeowners.png   ;$siteResource/images/banners/categorypage/CatVisual_homeowners.png ;    ;;;
+;;CatVisual_renters.png      ;$siteResource/images/banners/categorypage/CatVisual_renters.png ;       ;;;
+;;CatVisual_travel.png      ;$siteResource/images/banners/categorypage/CatVisual_travel.png ;       ;;;
+
+
+INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink;media(code, $contentCV)
+;;banner_HomeVisual_travel  ;Banner for links to Travel compare page    ;banner_HomeVisual_travel   ;"/c/insurances_travel" ;HomeVisual_travel.png
+;;banner_HomeVisual_agent   ;Banner for Connects to Find agent          ;banner_HomeVisual_agent    ;"/find-agent"          ;HomeVisual_agent.png
+;;banner_HomeVisual_risk    ;Banner for links to risk compare page        ;banner_HomeVisual_risk     ;"#"                    ;HomeVisual_risk.png
+;;banner_HomeVisual_renters    ;Banner for links to renters compare page        ;banner_HomeVisual_renters     ;"#"                    ;HomeVisual_renters.png
+;;banner_HomeVisual_homeowners    ;Banner for links to homeowners compare page        ;banner_HomeVisual_homeowners     ;"#"                    ;HomeVisual_homeowners.png
+;;banner_HomeVisual_event    ;Banner for links to event compare age        ;banner_HomeVisual_event     ;"#"                    ;HomeVisual_event.png
+;;banner_HomeVisual_auto     ;Banner for links to auto compare age        ;banner_HomeVisual_auto     ;"#"                    ;HomeVisual_auto.png
+;;banner_CatVisual_event        ;Banner for links to Event cat page         ;banner_CatVisual_event         ; ;CatVisual_event.png
+;;banner_CatVisual_homeowners   ;Banner for links to Homeowners cat page    ;banner_CatVisual_homeowners    ; ;CatVisual_homeowners.png
+;;banner_CatVisual_renters      ;Banner for links to Renters cat page       ;banner_CatVisual_renters       ; ;CatVisual_renters.png
+;;banner_CatVisual_travel       ;Banner for links to Travel cat page        ;banner_CatVisual_travel        ; ;CatVisual_travel.png
+
+
+INSERT_UPDATE CMSRotatingImagesComponent;$contentCV[unique=true];uid[unique=true];name;banners(&componentRef);&componentRef
+;;InsuranceHomepageCarouselComponent;Insurance Homepage Carousel;banner_HomeVisual_travel,banner_HomeVisual_event,banner_HomeVisual_renters,banner_HomeVisual_homeowners,banner_HomeVisual_agent,banner_HomeVisual_risk,banner_HomeVisual_auto;InsuranceHomepageCarouselComponent
+
+INSERT_UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];name;products(code,$productCV);scroll(code);popup;&componentRef
+
+# CMS Paragraph Component
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;allOurService_paragraph;All Our Service information;allOurService_paragraph
+;;getPersonal_paragraph;Get Personal information;getPersonal_paragraph
+;;findAnAgent_paragraph;Find An Agent information;findAnAgent_paragraph
+
+INSERT_UPDATE CMSViewPoliciesComponent;$contentCV[unique=true];uid[unique=true];name;numberOfPoliciesToDisplay;&componentRef
+;;policy_homepage_component;View Policies component;5;policy_homepage_component;
+
+INSERT_UPDATE CMSViewQuotesComponent;$contentCV[unique=true];uid[unique=true];name;numberOfQuotesToDisplay;&componentRef
+;;quotes_homepage_component;View Quotes component;5;quotes_homepage_component;
+
+# Homepage - All Our Services Section
+
+INSERT_UPDATE CMSImageComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;ins_travel_home_image     ;Ins travel service image   ;ins_travel_home_image
+;;ins_property_homeowners_home_image   ;Ins property homeowners service image ;ins_property_homeowners_home_image
+;;ins_property_renters_home_image   ;Ins property renters service image ;ins_property_renters_home_image
+;;ins_event_home_image      ;Ins event service image    ;ins_event_home_image
+;;ins_auto_home_image       ;Auto insurance service image;ins_auto_home_image
+;;ins_life_home_image       ;Life insurance service image;ins_life_home_image
+
+INSERT_UPDATE CMSLinkImageComponent;$contentCV[unique=true];uid[unique=true];name;url;category(code, $productCV);image(uid,$contentCV);target(code)[default='sameWindow'];&componentRef;styleAttributes;
+;;ins_travel_home_link      ;Ins travel service link    ;;insurances_travel ;ins_travel_home_image;;ins_travel_home_link        ;id="ins_travel_home_link";
+;;ins_property_homeowners_home_link    ;Ins property homeowners service link  ;;insurances_property_homeowners   ;ins_property_homeowners_home_image;;ins_property_homeowners_home_link;id="ins_property_homeowners_home_link";
+;;ins_property_renters_home_link    ;Ins property renters service link  ;;insurances_property_renters   ;ins_property_renters_home_image;;ins_property_renters_home_link;id="ins_property_renters_home_link";
+;;ins_event_home_link       ;Ins event service link     ;;insurances_event   ;ins_event_home_image;;ins_event_home_link       ;id="ins_event_home_link";
+;;ins_auto_home_link       ;Ins auto service link     ;;insurances_auto;ins_auto_home_image;;ins_auto_home_link       ;id="ins_auto_home_link";
+;;ins_life_home_link       ;Ins life service link     ;;insurances_life;ins_life_home_image;;ins_life_home_link       ;id="ins_life_home_link";
+
+INSERT_UPDATE CMSAllOurServicesComponent;$contentCV[unique=true];uid[unique=true];name;linkImages(uid,$contentCV);&componentRef;
+;;allOurServices     ;All our services    ;ins_property_homeowners_home_link,ins_property_renters_home_link,ins_auto_home_link,ins_life_home_link,ins_travel_home_link,ins_event_home_link ;allOurServices
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;Section1Slot-Homepage;Section1 Slot for Homepage;true;InsuranceHomepageCarouselComponent
+;;Section2ASlot-Homepage;Section2A Slot for Homepage;true;allOurService_paragraph,allOurServices,findAnAgent_paragraph;
+;;Section2BSlot-Homepage;Section2B Slot for Homepage;true;quotes_homepage_component;
+;;Section2CSlot-Homepage;Section2C Slot for Homepage;true;policy_homepage_component;
+;;Section3Slot-Homepage;Section3 Slot for Homepage;true;;
+;;Section4Slot-Homepage;Section4 Slot for Homepage;true;;
+;;Section5Slot-Homepage;Section5 Slot for Homepage;true;;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]
+;;Section1-Homepage;Section1;;Section1Slot-Homepage
+;;Section2A-Homepage;Section2A;;Section2ASlot-Homepage
+;;Section2B-Homepage;Section2B;;Section2BSlot-Homepage
+;;Section2C-Homepage;Section2C;;Section2CSlot-Homepage
+;;Section3-Homepage;Section3;;Section3Slot-Homepage
+;;Section4-Homepage;Section4;;Section4Slot-Homepage
+;;Section5-Homepage;Section5;;Section5Slot-Homepage
+
+################################################
+##### Insurance Find Agents Page
+################################################
+
+# Content Page
+UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $contentCV);linkComponents(&linkRef)
+;;find-agent;findAgentPage;FindAgentLink
+
+INSERT_UPDATE CMSAgentRootComponent;$contentCV[unique=true];uid[unique=true];name;agentRootCategory;&componentRef;
+;;rootComponent     ;All agents in root category    ;insurance_agents ;rootComponent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;Section1FindAgentSlot-FindAgent;Section1 Slot for FindAgent;true;rootComponent
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='find-agent'];contentSlot(uid,$contentCV)[unique=true]
+;;Section1-FindAgent;Section1;;Section1FindAgentSlot-FindAgent
+
+##### Insurance Extended Checkout Progress Bar
+################################################
+
+INSERT_UPDATE DynamicProgressBarStepsComponent;$contentCV[unique=true];uid[unique=true];name;styleAttributes;&componentRef
+;;checkoutProgressBar;Checkout progress bar component;;checkoutProgressBar;
+

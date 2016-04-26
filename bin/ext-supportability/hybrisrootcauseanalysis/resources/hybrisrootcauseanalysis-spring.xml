@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+           
+            
+    <!-- EXCEPTION ANALYSIS -->
+	<bean id="listLogAppender" class="de.hybris.e2e.hybrisrootcauseanalysis.exceptionanalysis.ListLogAppender" init-method="init">
+	
+		<!-- properties from .properties file -->
+		<property name="logSeverity" value="${e2e.rootcauseanalysis.exceptionanalysis.listlog.logseverity}" />
+		<property name="traceSeverity" value="${e2e.rootcauseanalysis.exceptionanalysis.listlog.traceseverity}" />
+		<property name="enableTracing" value="${e2e.rootcauseanalysis.exceptionanalysis.listlog.enabletracing}" />
+		<property name="rotationSize" value="${e2e.rootcauseanalysis.exceptionanalysis.listlog.rotationsize}" />
+		<property name="rotationCount" value="${e2e.rootcauseanalysis.exceptionanalysis.listlog.rotationcount}" />
+		<property name="logPath" value="${e2e.rootcauseanalysis.exceptionanalysis.listlog.logpath}" />
+		<property name="tracePath" value="${e2e.rootcauseanalysis.exceptionanalysis.listlog.tracepath}" />
+		
+		<!-- properties from hybrisdatasupplier extension -->
+		<property name="dcComponentName" value="#{dataSupplierRepositoryService.getHybrisProductTechnicalName()}" />
+		<property name="csnComponentName" value="#{dataSupplierRepositoryService.getHybrisSoftwareComponentTechnicalName()}" />
+	</bean>
+    <bean id="listLogConfigChangeListener" class="de.hybris.e2e.hybrisrootcauseanalysis.exceptionanalysis.ListLogConfigChangeListener" init-method="init" />
+
+
+	<!-- TECHNICAL MONITORING -->
+	<bean id="heartbeatService" class="de.hybris.e2e.hybrisrootcauseanalysis.technicalmonitoring.services.impl.DefaultHeartbeatService" />
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+	<!-- CHANGE ANALYSIS -->
+	
+	<!-- Dao -->
+	<bean id="defaultCockpitUiDao" class="de.hybris.e2e.hybrisrootcauseanalysis.changeanalysis.dao.impl.DefaultCockpitUiDao">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean> 
+	<!-- END : Dao -->
+	
+	<!-- properties service changes -->
+	<bean id="abstractPropertiesChanges" abstract="true">
+		<property name="sorted" value="true" />
+		<property name="nameFile" value="e2echangeanalysis.properties"/><!-- Name of the file under data/nameFolder -->
+	</bean> 
+	
+	<bean id="defaultSolrChanges" class="de.hybris.e2e.hybrisrootcauseanalysis.changeanalysis.services.impl.DefaultSolrChangesService" parent="abstractPropertiesChanges">
+		<property name="facetSearchConfigDao" ref="facetSearchConfigDao"/>
+		<property name="nameFile" value="solr.properties"/><!-- Name of the file under data/nameFolder -->
+	</bean>
+	
+	<bean id="defaultLicenceChanges" class="de.hybris.e2e.hybrisrootcauseanalysis.changeanalysis.services.impl.DefaultLicenceChangesService" parent="abstractPropertiesChanges">
+		<property name="nameFile" value="licence.properties"/><!-- Name of the file under data/nameFolder -->
+	</bean>
+	<!--END : properties service changes -->
+	
+	<!-- xml service changes -->
+	<bean id="abstractXmlChanges" abstract="true">
+		<property name="mediaService" ref="mediaService" />
+	</bean>
+	
+	<bean id="defaultBackofficeChanges" class="de.hybris.e2e.hybrisrootcauseanalysis.changeanalysis.services.impl.DefaultXmlChangesService" parent="abstractXmlChanges">
+		<property name="nameFile" value="backoffice.xml" />
+		<property name="code" value="cockpitng-config" />
+	</bean>
+	
+	<bean id="defaultHmcChanges" class="de.hybris.e2e.hybrisrootcauseanalysis.changeanalysis.services.impl.DefaultXmlChangesService" parent="abstractXmlChanges">
+		<property name="nameFile" value="hmc.xml" />
+		<property name="code" value="current.hmc.structure" />
+	</bean>
+	
+	<bean id="defaultCockpitChanges" class="de.hybris.e2e.hybrisrootcauseanalysis.changeanalysis.services.impl.DefaultCockpitChangesService">
+		<property name="nameFolder" value="cockpitconfigurations"/>
+		<property name="cockpitUiDao" ref="defaultCockpitUiDao" />
+	</bean>
+	<!-- END : xml service changes -->
+	
+	
+	<!-- File Services -->
+	<bean id="abstractFileService" abstract="true">
+		<property name="nameFolder" value="e2erootcauseanalysis"/><!-- Name of the folder in data -->
+	</bean>
+	<bean id="defaultE2EXmlFileService" class="de.hybris.e2e.hybrisrootcauseanalysis.changeanalysis.services.impl.DefaultXmlFileService" parent="abstractFileService"></bean>
+	<bean id="defaultE2EPropertiesFileService" class="de.hybris.e2e.hybrisrootcauseanalysis.changeanalysis.services.impl.DefaultPropertiesFileService" parent="abstractFileService"></bean>
+	<!-- END : File Services -->
+	
+	<!-- Job -->
+	<bean id="e2eChangeAnalysisFilesJob" class="de.hybris.e2e.hybrisrootcauseanalysis.changeanalysis.job.E2EChangeAnalysisFilesJob">
+		<property name="changesPropertiesList">
+			<list>
+				<ref bean="defaultSolrChanges" />
+				<ref bean="defaultLicenceChanges" />
+			</list>
+		</property>
+		<property name="changesXmlList">
+			<list>
+				<ref bean="defaultBackofficeChanges" />
+				<ref bean="defaultHmcChanges" />
+			</list>
+		</property>
+		<property name="cockpitChanges" ref="defaultCockpitChanges" />
+		<property name="propertiesFileService" ref="defaultE2EPropertiesFileService"/>
+		<property name="xmlFileService" ref="defaultE2EXmlFileService" />
+	</bean>
+	<!-- END : Job -->
+	
+</beans>

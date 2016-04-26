@@ -1,0 +1,38 @@
+﻿ToEmail: $ctx.stringEscapeUtils.escapeXml($ctx.email)<br>
+fromEmail: $ctx.stringEscapeUtils.escapeXml($ctx.fromEmail)<br>
+<br>__________________________________________________<br>
+Name: $ctx.stringEscapeUtils.escapeXml($ctx.userName)<br>
+Email Address: $ctx.stringEscapeUtils.escapeXml($ctx.userEmail)<br>
+Phone Number: $ctx.stringEscapeUtils.escapeXml($ctx.phone)<br>
+
+Call back is requested:
+#if( $ctx.callback == true )
+Yes
+#else
+No
+#end
+<br>
+Interest:
+#if( $ctx.interest.isEmpty() )
+not chosen
+#else
+$ctx.stringEscapeUtils.escapeXml($ctx.interest)
+#end
+<br>
+<br>
+Message: $ctx.stringEscapeUtils.escapeXml($ctx.userMessage)<br>
+<br>
+#if (!$ctx.cartCode)
+	#if (!$ctx.isAnonymousUser())
+		#set ($deliveryInfoUrl = "${ctx.baseUrl}/assisted-service/emulate?customerId=${ctx.userUid}")
+	#end
+#else
+    #if ($ctx.isAnonymousUser())
+        #set ($deliveryInfoUrl = "${ctx.baseUrl}/assisted-service/emulate?cartId=${ctx.cartCode}")
+		#else
+        #set ($deliveryInfoUrl = "${ctx.baseUrl}/assisted-service/emulate?customerId=${ctx.userUid}&cartId=${ctx.cartCode}")
+    #end
+#end
+#if ($deliveryInfoUrl)
+<a href="$deliveryInfoUrl">Login on sender's behalf</a>
+#end

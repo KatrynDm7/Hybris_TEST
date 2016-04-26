@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	                       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<import resource="common/xstream-converters-spring.xml"/>
+	<import resource="common/cache-config-spring.xml"/>
+	<import resource="common/error-config-spring.xml"/>
+	<import resource="common/filter-config-spring.xml"/>
+	<import resource="common/jaxb-converters-spring.xml"/>
+	<import resource="common/security-spring.xml"/>
+
+	<context:annotation-config/>
+	<context:component-scan
+			base-package="de.hybris.platform.ycommercewebservices.validator, de.hybris.platform.ycommercewebservices.populator"
+			scope-resolver="de.hybris.platform.spring.IgnoreTenantScopeMetadataResolver"/>
+
+	<bean id="listMergeBeanPostProcessor"
+	      class="de.hybris.platform.commerceservices.spring.config.ListMergeDirectiveBeanPostProcessor"/>
+	<bean id="mapMergeBeanPostProcessor"
+	      class="de.hybris.platform.commerceservices.spring.config.MapMergeDirectiveBeanPostProcessor"/>
+
+	<alias name="defaultPaymentProviderRequestSupportedStrategy" alias="paymentProviderRequestSupportedStrategy"/>
+	<bean id="defaultPaymentProviderRequestSupportedStrategy"
+		  class="de.hybris.platform.ycommercewebservices.request.support.impl.PaymentProviderRequestSupportedStrategy">
+		<property name="paymentProviderStrategy" ref="commercePaymentProviderStrategy"/>
+		<property name="unsupportedRequestMap">
+			<map>
+				<entry>
+					<key>
+						<value>cisCybersource</value>
+					</key>
+					<list>
+						<value>addPaymentDetails</value>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+</beans>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config xmlns="http://www.hybris.com/cockpit/config">
+
+    <context merge-by="module" parent="auto" component="explorer-tree">
+        <explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
+            <explorer-tree:navigation-node id="hmc.group.ondemandcommon.producttaxcode">
+                <explorer-tree:type-node code="ProductTaxCode" id="ProductTaxCode"/>
+            </explorer-tree:navigation-node>
+        </explorer-tree:explorer-tree>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="OndemandBaseStorePreference" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="atsFormula"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="ProductTaxCode" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="taxCode"/>
+            <list-view:column qualifier="productCode"/>
+            <list-view:column qualifier="taxArea"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="AbstractOrder" type="Order" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.positions_and_prices">
+               <editorArea:customSection name="hmc.section.order.ondemandprices" spring-bean="orderComponentRenderer"/>
+               </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="AbstractOrderEntry" type="OrderEntry" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.common">
+               <editorArea:customSection name="hmc.section.orderentry.ondemandprices" spring-bean="orderEntryComponentRenderer"/>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="BaseStore" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.properties">
+                <editorArea:section name="hmc.section.ondemandbasestorepreferences">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="ondemandBaseStorePreferences"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="AbstractOrder" type="Order" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list/>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="module" parent="auto" type="Item" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list/>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="AbstractOrderEntry" type="OrderEntry" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list/>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="OndemandBaseStorePreference" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="atsFormula" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="baseStore" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="externalCallsEnabled" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="assignedCockpitItemTemplates" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long" name="pk" selected="false"/>
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="BaseStore" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list/>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="ProductTaxCode" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="productCode" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="taxArea" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="taxCode" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="assignedCockpitItemTemplates" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long" name="pk" selected="false"/>
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
+    <context type="OndemandBaseStorePreference" component="base" parent="GenericItem" merge-by="type">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>atsFormula</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="ProductTaxCode" component="base" parent="GenericItem" merge-by="type">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>taxCode</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+</config>

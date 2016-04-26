@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context
+		   http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config />
+
+    <alias name="defaultEntitlementDao" alias="entitlementDao" />
+    <bean id="defaultEntitlementDao"
+          class="de.hybris.platform.entitlementservices.daos.impl.DefaultEntitlementDao" parent="abstractItemDao">
+        <property name="modelService" ref="modelService" />
+    </bean>
+
+    <alias name="defaultEntitlementService" alias="entitlementService" />
+    <bean id="defaultEntitlementService" class="de.hybris.platform.entitlementservices.entitlement.impl.DefaultEntitlementService" >
+        <property name="entitlementDao" ref="entitlementDao" />
+    </bean>
+
+	<alias name="defaultEntitlementFacadeDecorator" alias="entitlementFacadeDecorator" />
+	<bean id="defaultEntitlementFacadeDecorator"
+		class="de.hybris.platform.entitlementservices.facades.impl.DefaultEntitlementFacadeDecorator" >
+	</bean>
+	
+	<alias name="defaultProductEntitlementEmsGrantPopulator" alias="productEntitlementEmsGrantPopulator" />
+	<bean name="defaultProductEntitlementEmsGrantPopulator" class="de.hybris.platform.entitlementservices.entitlement.converters.populator.ProductEntitlementEmsGrantPopulator"/>
+
+    <bean id="emsGrantData" class="de.hybris.platform.entitlementservices.data.EmsGrantData" scope="prototype"/>
+    	
+	<alias name="defaultProductEntitlementEmsGrantConverter" alias="productEntitlementEmsGrantConverter"/>
+	<bean id="defaultProductEntitlementEmsGrantConverter" parent="abstractPopulatingConverter" >
+		<lookup-method name="createTarget" bean="emsGrantData"/>
+		<property name="populators">
+			<list>
+				<ref bean="productEntitlementEmsGrantPopulator"/>
+			</list>
+		</property>
+	</bean>	
+			
+	<bean id="abstractEntitlementParentChildValidateInterceptor"
+		  class="de.hybris.platform.entitlementservices.interceptor.impl.AbstractParentChildValidateInterceptor"
+		  abstract="true" >
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<bean id="productEntitlementIDGenerator" class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator" >
+		<property name="key" value="ProductEntitlementId"/>
+		<property name="digits" value="8"/>
+		<property name="start" value="00000000"/>
+		<property name="numeric" value="false"/>
+	</bean>
+
+	<bean id="productEntitlementIdPrepareInterceptor" class="de.hybris.platform.entitlementservices.interceptor.impl.ProductEntitlementIdPrepareInterceptor" >
+		<property name="productEntitlementIDGenerator" ref="productEntitlementIDGenerator"/>
+	</bean>
+
+	<bean id="productEntitlementPrepareInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping" >
+		<property name="interceptor" ref="productEntitlementIdPrepareInterceptor"/>
+		<property name="typeCode" value="ProductEntitlement"/>
+	</bean>
+
+	<bean id="productEntitlementValidateInterceptor"
+		  class="de.hybris.platform.entitlementservices.interceptor.impl.ProductEntitlementValidateInterceptor"
+		  parent="abstractEntitlementParentChildValidateInterceptor" >
+		<property name="modelService" ref="modelService"/>
+	</bean>
+	<bean id="productEntitlementValidateInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping" >
+		<property name="interceptor" ref="productEntitlementValidateInterceptor"/>
+		<property name="typeCode" value="ProductEntitlement"/>
+	</bean>
+
+	<bean id="productEntitlementInitDefaultsInterceptor" class="de.hybris.platform.entitlementservices.interceptor.impl.ProductEntitlementInitDefaultsInterceptor"/>
+	<bean id="productEntitlementInitDefaultsInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="productEntitlementInitDefaultsInterceptor"/>
+		<property name="typeCode" value="ProductEntitlement"/>
+	</bean>
+
+	<bean id="entitlementValueProvider" class="de.hybris.platform.entitlementservices.search.solrfacetsearch.provider.impl.EntitlementValueProvider" parent="abstractPropertyFieldValueProvider" >
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+		<property name="sessionService" ref="sessionService"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
+	</bean>
+
+    <bean id="entitlementPlaceOrderMethodHook"
+          class="de.hybris.platform.entitlementservices.order.hook.EntitlementPlaceOrderMethodHook">
+        <property name="entitlementFacadeDecorator" ref="entitlementFacadeDecorator" />
+        <property name="productEntitlementEmsGrantConverter" ref="productEntitlementEmsGrantConverter"/>
+        <property name="baseStoreService" ref="baseStoreService"/>
+    </bean>
+
+    <bean id="entitlementPlaceOrderMethodHooksListMergeDirective" depends-on="commercePlaceOrderMethodHooks" parent="listMergeDirective" >
+        <property name="add" ref="entitlementPlaceOrderMethodHook"  />
+    </bean>
+
+</beans>

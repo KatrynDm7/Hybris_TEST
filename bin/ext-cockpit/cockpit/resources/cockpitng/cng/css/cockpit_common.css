@@ -1,0 +1,26 @@
+/*
+ * [y] hybris Platform
+ *
+ * Copyright (c) 2000-2015 hybris AG
+ * All rights reserved.
+ *
+ * This software is the confidential and proprietary information of hybris
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * license agreement you entered into with hybris.
+ */
+
+/*Icons for explorer tree */
+
+div.yw-explorerTree .y-tree-icon-CockpitItemTemplate.y-tree-icon{
+
+    background-image: url("images/090_item_templates.png");
+}
+div.yw-explorerTree .y-tree-icon-CockpitUIComponentConfiguration.y-tree-icon{
+
+    background-image: url("images/091_ui_components_configurations.png");
+}
+div.yw-explorerTree .y-tree-icon-CockpitUIComponentAccessRight.y-tree-icon{
+
+    background-image: url("images/092_ui_components_access_rights.png");
+}

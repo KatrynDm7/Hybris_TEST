@@ -1,0 +1,69 @@
+#http://de.wikipedia.org/wiki/ISO-3166-1-Kodierliste;;;;;;;
+;;;;;;;
+# set locale for the Match.date data;;;;;;;
+#%impex.setLocale(Locale.GERMANY);;;;;;;
+
+$comp=2lger2010;;;;;;;
+
+insert_update Competition;code[unique=true];name[lang=de];name[lang=en];name[lang=pl];type(code)
+;$comp;2. Bundesliga 2010;2. League Germany 2010;2. Bundesliga 2010;league
+
+# INSERT_UPDATE News;content[lang=de];content[lang=en];competition(code)[unique=true];;;;
+# ;Willkommen zur 2. Bundelsiga 2010;Welcome to 2. League Germany 2010;$comp;;;;
+
+insert_update Group;competition(code)[unique=true,default=$comp];code[unique=true];name[lang=de];name[lang=en];multiplier;sequenceNumber;
+;;round1;Hinrunde;First Round;1;1;
+;;round2;Rückrunde;Second Round;1;2;
+;;rel1;Relegation 1. Liga;Relegation 1. League;1;3;
+;;rel2;Relegation 2. Liga;Relegation 2. League;1;4;
+
+insert_update CountryFlag;code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];catalogVersion(catalog(id),version)[default=Default:Online]
+;HBS;hertha_bsc_berlin.gif;jar:/cuppy/flags/de/hertha_bsc_berlin.gif;;;;
+;ALA;alemannia_aachen.gif;jar:/cuppy/flags/de/alemannia_aachen.gif;;;;
+;FFR;fsv_frankfurt.gif;jar:/cuppy/flags/de/fsv_frankfurt.gif;;;;
+;I04;fc_ingolstadt_04.gif;jar:/cuppy/flags/de/fc_ingolstadt_04.gif;;;;
+;SCP;sc_paderborn_07.gif;jar:/cuppy/flags/de/sc_paderborn_07.gif;;;;
+;ECO;fc_energie_cottbus.gif;jar:/cuppy/flags/de/fc_energie_cottbus.gif;;;;
+;GRF;spvgg_greuther_fuerth.gif;jar:/cuppy/flags/de/spvgg_greuther_fuerth.gif;;;;
+;VOS;vfl_osnabrueck.gif;jar:/cuppy/flags/de/vfl_osnabrueck.gif;;;;
+;VBO;vfl_bochum.gif;jar:/cuppy/flags/de/vfl_bochum.gif;;;;
+;FCA;fc_augsburg.gif;jar:/cuppy/flags/de/fc_augsburg.gif;;;;
+;EAU;fc_erzgebirge_aue.gif;jar:/cuppy/flags/de/fc_erzgebirge_aue.gif;;;;
+;RWO;rot-weiss_oberhausen.gif;jar:/cuppy/flags/de/rot-weiss_oberhausen.gif;;;;
+;UBE;1_fc_union_berlin.gif;jar:/cuppy/flags/de/1_fc_union_berlin.gif;;;;
+;MDU;msv_duisburg.gif;jar:/cuppy/flags/de/msv_duisburg.gif;;;;
+;ABI;arminia_bielefeld.gif;jar:/cuppy/flags/de/arminia_bielefeld.gif;;;;
+;M60;tsv_1860_muenchen.gif;jar:/cuppy/flags/de/tsv_1860_muenchen.gif;;;;
+;KSC;karlsruher_sc.gif;jar:/cuppy/flags/de/karlsruher_sc.gif;;;;
+;FDU;fortuna_duesseldorf.gif;jar:/cuppy/flags/de/fortuna_duesseldorf.gif;;;;
+
+insert_update Team;isocode[unique=true];name[lang=de];flag(code)
+;HBS;Hertha BSC;HBS;
+;ALA;Alemannia Aachen;ALA;
+;FFR;FSV Frankfurt;FFR;
+;I04;FC Ingolstadt 04;I04;
+;SCP;SC Paderborn 07;SCP;
+;ECO;Energie Cottbus;ECO;
+;GRF;SpVgg Greuther Fürth;GRF;
+;VOS;VfL Osnabrück;VOS;
+;VBO;VfL Bochum;VBO;
+;FCA;FC Augsburg;FCA;
+;EAU;Erzgebirge Aue;EAU;
+;RWO;Rot-Weiss Oberhausen;RWO;
+;UBE;1. FC Union Berlin;UBE;
+;MDU;MSV Duisburg;MDU;
+;ABI;Arminia Bielefeld;ABI;
+;M60;TSV 1860 München;M60;
+;KSC;Karlsruher SC;KSC;
+;FDU;Fortuna Düsseldorf;FDU;
+
+insert_update Match;id[unique=true];matchday;date[dateformat='dd.MM.yy HH.mm'];group(code,competition(code[default=$comp]))[unique=true];homeTeam(isocode);guestTeam(isocode);location
+# will be gathered by webservice
+
+INSERT_UPDATE UpdateCompetitionCronJob;code[unique=true];job(code);singleExecutable;sessionLanguage(isocode);competition(code)
+;manualUpdate2LGer2010;update2LGer2010Job;false;de;$comp
+;automatedUpdate2LGer2010;update2LGer2010Job;false;de;$comp
+
+INSERT_UPDATE Trigger;cronjob(code)[unique=true];second;minute;hour;day;month;year;relative;active;maxAcceptableDelay
+#% afterEach: impex.getLastImportedItem().setActivationTime(new Date());
+;automatedUpdate2LGer2010;0;0;1;0;-1;-1;true;true;-1

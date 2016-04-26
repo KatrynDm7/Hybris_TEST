@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="eclipsebin/notused"/>
+
+
+				
+				
+				
+				
+				
+		<attributes>
+			<attribute name="javadoc_location" value="https://download.hybris.com/api/5.7.0"/>
+		</attributes>
+				
+				
+	<classpathentry exported="false" kind="src" path="/platform" />
+	<classpathentry exported="true" kind="lib" path="lib/charon-0.8.5.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/commons-lang3-3.3.2.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/hk2-api-2.4.0-b10.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/hk2-locator-2.4.0-b10.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/hk2-utils-2.4.0-b10.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/javax.inject-2.4.0-b10.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/javax.ws.rs-api-2.0.1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/jersey-common-2.17.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/jersey-guava-2.17.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/netty-buffer-4.0.25.Final.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/netty-codec-4.0.25.Final.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/netty-codec-http-4.0.25.Final.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/netty-common-4.0.25.Final.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/netty-handler-4.0.25.Final.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/netty-transport-4.0.25.Final.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/netty-transport-native-epoll-4.0.25.Final.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/reactor-core-1.1.6.RELEASE.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/rxnetty-0.4.11.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/servo-core-0.8.3.jar" />
+	<classpathentry exported="true" kind="lib" path="bin/yaasconnectserver.jar" >
+		<attributes>
+			<attribute name="javadoc_location" value="https://download.hybris.com/api/5.7.0"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="resources" />
+				
+</classpath>
+				

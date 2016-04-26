@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:file="http://www.springframework.org/schema/integration/file"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+           http://www.springframework.org/schema/integration/file http://www.springframework.org/schema/integration/file/spring-integration-file.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config />
+
+    <bean id="baseDirectoryIns" class="java.lang.String">
+        <constructor-arg value="#{baseDirectory}/financial" />
+    </bean>
+    <!-- 1) Scan for files -->
+    <file:inbound-channel-adapter id="batchFilesInc" directory="#{baseDirectoryIns}"
+                                  filename-regex="^(.*)-(\d+)\.csv" comparator="fileOrderComparator">
+        <int:poller fixed-rate="1000" />
+    </file:inbound-channel-adapter>
+
+    <!-- 2) move the file to processing and setup header -->
+    <file:outbound-gateway request-channel="batchFilesIns" reply-channel="batchFilesInsProc"
+                           directory="#{baseDirectoryIns}/processing" delete-source-files="true" />
+    <int:service-activator input-channel="batchFilesInsProc" output-channel="batchFilesHeaderInit"
+                           ref="insHeaderSetupTask" method="execute" />
+    <bean id="insHeaderSetupTask" class="de.hybris.platform.acceleratorservices.dataimport.batch.task.HeaderSetupTask">
+        <property name="catalog" value="financialProductCatalog"/>
+        <property name="net" value="false" />
+        <property name="storeBaseDirectory" ref="baseDirectoryIns"/>
+    </bean>
+</beans>

@@ -1,0 +1,13 @@
+# ImpEx for Importing Products Store Stock Levels into Insurance Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=financialProductCatalog
+$productCatalogName=Financial Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$vendor=electro
+
+
+# Create some Warehouses for the Vendor
+INSERT_UPDATE Warehouse;code[unique=true];vendor(code)[default=$vendor];default[default='false']
+
+

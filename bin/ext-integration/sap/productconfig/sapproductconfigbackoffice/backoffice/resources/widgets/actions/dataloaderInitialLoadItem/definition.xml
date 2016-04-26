@@ -1,0 +1,17 @@
+<action-definition id="de.hybris.platform.sap.sapproductconfigbackoffice.actions.DataloaderInitialLoadItemAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/action-definition.xsd">
+ 
+    <name>btn.sapproductconfig_dataloader_initial_load</name>
+    <description>Dataloader Initial Load Item Action</description>
+    <author>hybris</author>
+    <version>0.1</version> 
+ 
+    <actionClassName>de.hybris.platform.sap.sapproductconfigbackoffice.actions.DataloaderInitialLoadItemAction</actionClassName>
+ 
+    <inputType>de.hybris.platform.sap.core.configuration.jalo.SAPConfiguration</inputType>
+    <outputType>java.lang.String</outputType>
+ 	<iconUri>icons/icon_action_load_inital_config_default.png</iconUri>    
+    <iconHoverUri>icons/icon_action_load_inital_config_hover.png</iconHoverUri>
+    <iconDisabledUri>icons/icon_action_load_inital_config_disabled.png</iconDisabledUri>
+
+</action-definition>

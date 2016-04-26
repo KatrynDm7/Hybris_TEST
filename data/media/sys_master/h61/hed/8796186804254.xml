@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<advanced-search>
+	<group name="root" type="Group">
+		<label lang="en">Suche nach...</label>
+		<label lang="de">Search for...</label>
+		<group name="general">
+			<label lang="de">Stammdaten</label>
+			<label lang="en">Properties</label>			
+			<property qualifier="Group.code" sort-enabled="true" visible="true"/>
+			<property qualifier="Group.name" sort-enabled="true" visible="true"/>
+			<property qualifier="Group.competition" sort-enabled="true" visible="true"/>
+		</group>
+		<group name="other">
+			<label lang="de">Andere</label>
+			<label lang="en">Other</label>
+			<property qualifier="Group.multiplier" sort-enabled="true" visible="false"/>
+			<property qualifier="Group.matches" sort-enabled="true" visible="false"/>
+		</group>		
+	</group>
+</advanced-search>

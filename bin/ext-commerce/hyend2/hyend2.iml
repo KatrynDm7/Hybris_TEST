@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/resources/hyend2/hyend2-admincockpit-web-spring.xml</file>
+          <file>file://$MODULE_DIR$/resources/hyend2-spring.xml</file>
+          <file>file://$MODULE_DIR$/resources/hyend2-spring-ui.xml</file>
+          <file>file://$MODULE_DIR$/resources/hyend2-spring-aop.xml</file>
+          <file>file://$MODULE_DIR$/resources/hyend2-spring-daos.xml</file>
+          <file>file://$MODULE_DIR$/resources/hyend2-spring-editors.xml</file>
+          <file>file://$MODULE_DIR$/resources/hyend2-spring-services.xml</file>
+          <file>file://$MODULE_DIR$/resources/hyend2-spring-factories.xml</file>
+          <file>file://$MODULE_DIR$/resources/hyend2-spring-resolvers.xml</file>
+          <file>file://$MODULE_DIR$/resources/hyend2-spring-integration.xml</file>
+          <file>file://$MODULE_DIR$/resources/hyend2-spring-interceptors.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/testsrc" isTestSource="true" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="bin1" level="project" />
+    <orderEntry type="library" name="hyend2server" level="project" />
+    <orderEntry type="library" name="lib33" level="project" />
+    <orderEntry type="library" name="lib13" level="project" />
+    <orderEntry type="library" name="lib66" level="project" />
+    <orderEntry type="library" name="lib4" level="project" />
+    <orderEntry type="library" name="lib37" level="project" />
+    <orderEntry type="library" name="lib40" level="project" />
+    <orderEntry type="library" name="cockpitserver" level="project" />
+    <orderEntry type="library" name="lib54" level="project" />
+    <orderEntry type="library" name="impexserver" level="project" />
+    <orderEntry type="library" name="coreserver" level="project" />
+    <orderEntry type="library" name="lib61" level="project" />
+    <orderEntry type="library" name="jetty-runner" level="project" />
+    <orderEntry type="library" name="processingserver" level="project" />
+    <orderEntry type="library" name="sonar-ant-task-2.1" level="project" />
+    <orderEntry type="module" module-name="cockpit" />
+    <orderEntry type="module" module-name="platformservices" />
+    <orderEntry type="module" module-name="bootstrap" />
+    <orderEntry type="module" module-name="processing" />
+    <orderEntry type="module" module-name="core" />
+    <orderEntry type="module" module-name="impex" />
+  </component>
+</module>

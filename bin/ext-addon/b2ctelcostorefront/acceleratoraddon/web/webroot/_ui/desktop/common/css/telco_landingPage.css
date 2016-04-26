@@ -1,0 +1,44 @@
+/* stage banner */
+.section1 {
+    margin: 0 0 3px 0;
+}
+.stripTransmitter {
+    background-color: transparent;
+    border-bottom: none;
+    margin: -51px auto 0;
+    padding: 0;
+    width: 120px !important;
+}
+.stripTransmitter a {
+    color: transparent;
+}
+.stripTransmitter a:after {
+    background-color: #fff;
+    border-radius: 2px;
+    bottom: -25px;
+    content: "";
+    height: 4px;
+    position: absolute;
+    width: 20px;
+    margin-left: -15px;
+}
+.stripTransmitter a.current:after {
+    border-radius: 4px;
+    height: 8px;
+    bottom: -27px;
+}
+/* thumbnail banner */
+.section2 .span-6, .section2 .span-12 {
+    width: 328px;
+}
+.section2 .span-6 {
+    margin-right: 3px;
+}
+.section2 .cms_disp-img_slot .disp-img,
+.disp-img .thumb {
+    margin: 0;
+}
+.disp-img .title,
+.disp-img .action {
+    display: none;
+}

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="items.xsd">
+
+    <collectiontypes>
+        <collectiontype code="OrderFormEntryList" elementtype="OrderFormEntry"
+                        autocreate="true" generate="false" type="list" />
+    </collectiontypes>
+
+    <itemtypes>
+        <itemtype code="OrderForm"  extends="GenericItem" autocreate="true" generate="true">
+            <deployment table="OrderForm" typecode="17001" />
+            <attributes>
+                <attribute  autocreate="true" qualifier="code" type="java.lang.String"
+                            generate="true">
+                    <persistence type="property" />
+                    <modifiers read="true" write="true" search="true"
+                               optional="false" unique="true" />
+                </attribute>
+                <attribute autocreate="true" qualifier="description" type="java.lang.String"
+                           generate="true">
+                    <persistence type="property" />
+                    <modifiers read="true" write="true" search="false"
+                               optional="true" />
+                </attribute>
+                <attribute autocreate="true" qualifier="user" type="User" generate="true">
+                    <persistence type="property"/>
+                    <modifiers read="true" write="true" search="true" optional="false"/>
+                </attribute>
+                <attribute autocreate="true" qualifier="entries"
+                           type="OrderFormEntryList">
+                    <persistence type="property" />
+                    <modifiers read="true" write="true" search="false"
+                               partof="true" optional="false" />
+                </attribute>
+                <attribute autocreate="true" qualifier="currency" type="Currency"
+                           generate="true">
+                    <persistence type="property" />
+                    <modifiers read="true" write="true" search="false"
+                               optional="false" />
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="OrderFormEntry" autocreate="true" generate="true">
+            <deployment table="OrderFormEntry" typecode="17002" />
+            <attributes>
+                <attribute autocreate="true" qualifier="sku" type="java.lang.String"
+                           generate="true">
+                    <persistence type="property" />
+                    <modifiers read="true" write="true" search="true"
+                               optional="false" />
+                </attribute>
+                <attribute autocreate="true" qualifier="quantity" type="java.lang.Integer"
+                           generate="true">
+                    <defaultvalue>Integer.valueOf(0)</defaultvalue>
+                    <persistence type="property" />
+                    <modifiers read="true" write="true" search="true"
+                               optional="false" />
+                </attribute>
+            </attributes>
+        </itemtype>
+
+    </itemtypes>
+</items>

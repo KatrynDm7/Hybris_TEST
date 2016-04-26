@@ -1,0 +1,11 @@
+# ImpEx for Promotions for Flashbuygroupbuypromotions
+
+$defaultPromoGrp=electronicsPromoGrp
+$productCatalog=electronicsProductCatalog
+$catalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalog]),CatalogVersion.version[default=Online])[default=$productCatalog:Online]
+
+INSERT PromotionPriceRow;&tresholdId;Currency(isocode);price
+;1;USD;10
+
+INSERT_UPDATE FlashbuyPromotion;PromotionGroup(Identifier[default=$defaultPromoGrp]);enabled[default=true][unique=true];code[unique=true];title;description;priority;availableUnitsPerProduct;availableUnitsPerUserAndProduct;products(code,$catalogVersion);MessageFired;productFixedUnitPrice(&tresholdId);startBuyDate[dateformat='yyyy-MM-dd''T''HH:mm:ss'];endDate[dateformat='yyyy-MM-dd''T''HH:mm:ss']
+;;;Flash buy electronics;FlashbuyPromotion;Flash buy promotion;1000;50;1;1934793;"Flash buy price of {1}, maximum {4} units - You have saved {3}";1;"2015-05-11T16:14:00.235";"2016-05-11T14:14:00.235";

@@ -1,0 +1,83 @@
+# ImpEx for Insurance Store
+#% impex.setLocale( Locale.GERMAN ); 
+
+$storeUid=insurance
+$productCatalog=financialProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$storeImage=storeImage(qualifier, $catalogVersion)
+
+
+$standardHours=insurance-japan-standard-hours
+$weekendHours=insurance-japan-weekend-hours
+
+INSERT_UPDATE OpeningSchedule;code[unique=true];
+;$standardHours;
+;$weekendHours;
+
+INSERT_UPDATE WeekdayOpeningDay;openingSchedule(code)[unique=true];dayOfWeek(code)[unique=true];openingTime[dateformat=hh:mm];closingTime[dateformat=hh:mm];
+;$standardHours;MONDAY   ; 09:00; 20:00
+;$standardHours;TUESDAY  ; 09:00; 20:00
+;$standardHours;WEDNESDAY; 09:00; 20:00
+;$standardHours;THURSDAY ; 09:00; 20:00
+;$standardHours;FRIDAY   ; 09:00; 20:00
+;$standardHours;SATURDAY ; 10:00; 20:00
+
+;$weekendHours;MONDAY   ; 09:00; 20:00
+;$weekendHours;TUESDAY  ; 09:00; 20:00
+;$weekendHours;WEDNESDAY; 09:00; 20:00
+;$weekendHours;THURSDAY ; 09:00; 20:00
+;$weekendHours;FRIDAY   ; 09:00; 20:00
+;$weekendHours;SATURDAY ; 10:00; 20:00
+;$weekendHours;SUNDAY   ; 10:00; 16:00
+
+
+INSERT_UPDATE SpecialOpeningDay;openingSchedule(code)[unique=true];date[unique=true,dateformat=dd.MM.yyyy];closed;openingTime[dateformat=hh:mm];closingTime[dateformat=hh:mm]
+;$standardHours; 01.01.2015 ;true
+;$standardHours; 14.01.2015 ;true
+;$standardHours; 11.02.2015 ;true
+;$standardHours; 20.03.2015 ;true
+;$standardHours; 29.04.2015 ;true
+;$standardHours; 03.05.2015 ;true
+;$standardHours; 04.05.2015 ;true
+;$standardHours; 05.05.2015 ;true
+;$standardHours; 15.07.2015 ;true
+;$standardHours; 16.09.2015 ;true
+;$standardHours; 23.09.2015 ;true
+;$standardHours; 14.10.2015 ;true
+;$standardHours; 03.11.2015 ;true
+;$standardHours; 23.11.2015 ;true
+;$standardHours; 23.12.2015 ;true
+
+;$weekendHours; 01.01.2015 ;true
+;$weekendHours; 14.01.2015 ;true
+;$weekendHours; 11.02.2015 ;true
+;$weekendHours; 20.03.2015 ;true
+;$weekendHours; 29.04.2015 ;true
+;$weekendHours; 03.05.2015 ;true
+;$weekendHours; 04.05.2015 ;true
+;$weekendHours; 05.05.2015 ;true
+;$weekendHours; 15.07.2015 ;true
+;$weekendHours; 16.09.2015 ;true
+;$weekendHours; 23.09.2015 ;true
+;$weekendHours; 14.10.2015 ;true
+;$weekendHours; 03.11.2015 ;true
+;$weekendHours; 23.11.2015 ;true
+;$weekendHours; 23.12.2015 ;true
+
+
+INSERT_UPDATE PointOfService;name[unique=true];type(code);address(&addrID);latitude;longitude;geocodeTimestamp[dateformat=dd-MM-yyyy];
+
+
+INSERT_UPDATE Address;&addrID;streetname;streetnumber;postalcode[unique=true];town[unique=true];country(isocode);region(isocode);phone1;owner(PointOfService.name)[unique=true]
+
+
+INSERT_UPDATE StoreLocatorFeature;code[unique=true]
+;wheelchair
+;creche
+;sundayWorkshops
+;buyOnlinePickupInStore
+
+UPDATE PointOfService;name[unique=true];features(code);
+
+
+INSERT_UPDATE PoS2WarehouseRel;source(name)[unique=true];target(code)[unique=true]

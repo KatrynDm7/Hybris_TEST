@@ -1,0 +1,6 @@
+#parse( "impex-templates/commercesearchatddtests-common-macros.impex.vm" )
+#[[
+#% impex.setLocale( Locale.ENGLISH );
+INSERT_UPDATE SolrFacetReconfiguration;facet(name,$solrIndexedType)[unique=true];priority;visible[default=true];solrSearchProfiles(code)[unique=true];
+]]#
+;${facetName};${priority};;reconfig-${categoryCode}

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/util 
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="open" class="de.hybris.platform.customerticketingfacades.data.StatusData">
+        <property name="id" value="OPEN"/>
+    </bean>
+    <bean id="inprocess" class="de.hybris.platform.customerticketingfacades.data.StatusData">
+        <property name="id" value="INPROCESS"/>
+    </bean>
+    <bean id="completed" class="de.hybris.platform.customerticketingfacades.data.StatusData">
+        <property name="id" value="COMPLETED"/>
+    </bean>
+    <bean id="closed" class="de.hybris.platform.customerticketingfacades.data.StatusData">
+        <property name="id" value="CLOSED"/>
+    </bean>
+    
+    <util:list id="availableStatuses">
+        <ref bean="open" />
+        <ref bean="inprocess" />
+        <ref bean="completed" />
+        <ref bean="closed" />
+    </util:list>
+
+    <util:map id="validTransitions" key-type="de.hybris.platform.customerticketingfacades.data.StatusData">
+        <entry>
+            <key>
+                <ref bean="open"/>
+            </key>
+            <list>
+                <ref bean="completed"/>
+            </list>
+        </entry>
+        <entry>
+            <key>
+                <ref bean="inprocess"/>
+            </key>
+            <list>
+                <ref bean="completed"/>
+            </list>
+        </entry>
+        <entry>
+            <key>
+                <ref bean="completed"/>
+            </key>
+            <list>
+                <ref bean="inprocess"/>
+            </list>
+        </entry>
+    </util:map>
+    
+    <!-- CS Ticket Integration -->
+    
+    <alias name="defaultCustomerTicketingFacade" alias="defaultTicketFacade"/>
+	<bean id="defaultCustomerTicketingFacade" class="de.hybris.platform.customerticketingfacades.customerticket.DefaultCustomerTicketingFacade"></bean>
+	
+	<alias name="defaultTicketConverter" alias="ticketConverter"/>
+    <bean id="defaultTicketConverter" parent="abstractPopulatingConverter" >
+        <lookup-method name="createTarget" bean="ticketData"/>
+        <property name="populators">
+            <list>
+                <ref bean="defaultTicketPopulator"/>
+            </list>
+        </property>
+    </bean>
+	<bean id="defaultTicketPopulator" class="de.hybris.platform.customerticketingfacades.converters.populators.DefaultTicketPopulator" />
+	
+	<!-- Override  Ticket Service and Ticket Dao-->
+	<alias name="defaultCustomerTicketService" alias="ticketService"/>
+	<bean id="defaultCustomerTicketService" class="de.hybris.platform.customerticketingfacades.service.impl.CustomerTicketingServiceImpl" parent="defaultTicketService"></bean>
+	
+	<alias name="defaultCustomerTicketDao" alias="ticketDao"/>
+	<bean id="defaultCustomerTicketDao" class="de.hybris.platform.customerticketingfacades.dao.impl.DefaultCustomerTicketDaoImpl" parent="defaultTicketDao"/>
+
+    <util:map id="statusMapping">
+        <entry key="New" value-ref="open"/>
+        <entry key="Open" value-ref="inprocess"/>
+        <entry key="Closed" value-ref="completed"/>
+    </util:map>
+
+    <alias name="csTicketStateTransitionMap" alias="ticketStateTransitionMap"/>
+    <util:map id="csTicketStateTransitionMap">
+        <entry>
+            <key>
+                <util:constant static-field="de.hybris.platform.ticket.enums.CsTicketState.NEW"/>
+            </key>
+            <util:list>
+                <util:constant static-field="de.hybris.platform.ticket.enums.CsTicketState.OPEN"/>
+                <util:constant static-field="de.hybris.platform.ticket.enums.CsTicketState.CLOSED"/>
+            </util:list>
+        </entry>
+        <entry>
+            <key>
+                <util:constant static-field="de.hybris.platform.ticket.enums.CsTicketState.OPEN"/>
+            </key>
+            <util:list>
+                <util:constant static-field="de.hybris.platform.ticket.enums.CsTicketState.CLOSED"/>
+            </util:list>
+        </entry>
+        <entry>
+            <key>
+                <util:constant static-field="de.hybris.platform.ticket.enums.CsTicketState.CLOSED"/>
+            </key>
+            <util:list>
+                <util:constant static-field="de.hybris.platform.ticket.enums.CsTicketState.OPEN"/>
+            </util:list>
+        </entry>
+    </util:map>
+    
+    <!-- CS Ticket Integration Ends -->
+
+</beans>

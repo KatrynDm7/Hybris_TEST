@@ -1,0 +1,122 @@
+INSERT_UPDATE Language;isocode[unique=true];active;;;;;;
+;de;true;;;;;;
+;en;true;;;;;;
+
+UPDATE Language;isocode[unique=true];name[lang=de];name[lang=en];;;;;
+;de;Deutsch;German;;;;;
+;en;Englisch;English;;;;;
+
+
+INSERT_UPDATE Currency;isocode[unique=true];name[lang=de];name[lang=en];active;base;conversion;digits;symbol
+;CHF;Schweizer Franken;Swiss franc;true;false;0,6447;2;SFr.
+;EUR;Euro;Euro;true;true;1;2;€
+;USD;US-Dollar;US Dollar;true;false;1,38;2;$
+;GBP;Pfund Sterling;Pound Sterling;true;false;0,68;2;£
+
+INSERT_UPDATE Unit;unitType[unique=true];code[unique=true];name[lang=de];name[lang=en];conversion;;;
+;weight;kg;Kilogramm;kilogram;1
+;weight;g;Gramm;gram;0,001
+;weight;t;Tonnen;ton;1000
+;weight;mg;Milligramm;milligram;0,000001
+;volume;l;Liter;liter;1
+;volume;m³;Kubikmeter;cubic meter;0,001
+;volume;dm³;Kubikdezimeter;cubic decimeter;1
+;volume;cm³;Kubikzentimeter;cubic centimeter;1000
+;volume;ml;Milliliter;milliliter;1000
+
+INSERT_UPDATE Title;code[unique=true];name[lang=de];name[lang=en];;
+;dr;Dr.;dr.;;
+;prof;Prof.;prof.;;
+
+INSERT_UPDATE Country;isocode[unique=true];name[lang=de];name[lang=en];active;
+;AT;Österreich;Austria;true;
+;GB;Großbritannien;United Kingdom;true;
+;DE;Deutschland;Germany;true;
+;CH;Schweiz;Switzerland;true;
+;US;Vereinigte Staaten von Amerika;United States of America;true;
+
+
+INSERT_UPDATE CreditCardType;code[unique=true];name[lang=de];name[lang=en];;
+;amex;American Express;American Express;;
+;visa;Visa;Visa;;
+;master;MasterCard;MasterCard;;
+;diners;Diners;Diners;;
+
+
+INSERT_UPDATE Region;isocode[unique=true];name[lang=de];name[lang=en];active;Country(isocode)
+;DE-BW;Baden-Württemberg;Baden-Wuerttemberg;true;DE
+;DE-BY;Bayern;Bavaria;true;DE
+;DE-BE;Berlin;Berlin;true;DE
+;DE-BR;Brandenburg;Brandenburg;true;DE
+;DE-HB;Bremen;Bremen;true;DE
+;DE-HH;Hamburg;Hamburg;true;DE
+;DE-HE;Hessen;Hesse;true;DE
+;DE-MV;Mecklenburg-Vorpommern;Mecklenburg-Western Pomerania;true;DE
+;DE-NI;Niedersachsen;Lower Saxony;true;DE
+;DE-NW;Nordrhein-Westfalen;North Rhine-Westphalia;true;DE
+;DE-RP;Rheinland-Pfalz;Rhineland-Palatinate;true;DE
+;DE-SL;Saarland;Saarland;true;DE
+;DE-ST;Sachsen-Anhalt;Saxony-Anhalt;true;DE
+;DE-SN;Sachsen;Saxony;true;DE
+;DE-SH;Schleswig-Holstein;Schleswig-Holstein;true;DE
+;DE-TH;Thüringen;Thuringia;true;DE
+;US-AL;Alabama;Alabama;true;US
+;US-AK;Alaska;Alaska;true;US
+;US-AZ;Arizona;Arizona;true;US
+;US-AR;Arkansas;Arkansas;true;US
+;US-CO;Colorado;Colorado;true;US
+;US-CT;Connecticut;Connecticut;true;US
+;US-DE;Delaware;Delaware;true;US
+;US-DC;Washington, D.C.;Washington, D.C.;true;US
+;US-FL;Florida;Florida;true;US
+;US-GA;Georgia;Georgia;true;US
+;US-HI;Hawaii;Hawaii;true;US
+;US-ID;Idaho;Idaho;true;US
+;US-IL;Illinois;Illinois;true;US
+;US-IN;Indiana;Indiana;true;US
+;US-US-IA;Iowa;Iowa;true;US
+;US-CA;Kalifornien;California;true;US
+;US-KS;Kansas;Kansas;true;US
+;US-KY;Kentucky;Kentucky;true;US
+;US-LA;Louisiana;Louisiana;true;US
+;US-ME;Maine;Maine;true;US
+;US-MD;Maryland;Maryland;true;US
+;US-MA;Massachusetts;Massachusetts;true;US
+;US-MI;Michigan;Michigan;true;US
+;US-MN;Minnesota;Minnesota;true;US
+;US-MS;Mississippi;Mississippi;true;US
+;US-MO;Missouri;Missouri;true;US
+;US-MT;Montana;Montana;true;US
+;US-NE;Nebraska;Nebraska;true;US
+;US-NV;Nevada;Nevada;true;US
+;US-NH;New Hampshire;New Hampshire;true;US
+;US-NJ;New Jersey;New Jersey;true;US
+;US-NM;New Mexico;New Mexico;true;US
+;US-NY;New York;New York;true;US
+;US-NC;North Carolina;North Carolina;true;US
+;US-ND;North Dakota;North Dakota;true;US
+;US-OH;Ohio;Ohio;true;US
+;US-OK;Oklahoma;Oklahoma;true;US
+;US-OR;Oregon;Oregon;true;US
+;US-PA;Pennsylvania;Pennsylvania;true;US
+;US-RI;Rhode Island;Rhode Island;true;US
+;US-SC;South Carolina;South Carolina;true;US
+;US-SD;South Dakota;South Dakota;true;US
+;US-TN;Tennessee;Tennessee;true;US
+;US-TX;Texas;Texas;true;US
+;US-UT;Utah;Utah;true;US
+;US-VT;Vermont;Vermont;true;US
+;US-VA;Virginia;Virginia;true;US
+;US-WA;Washington;Washington;true;US
+;US-WV;West Virginia;West Virginia;true;US
+;US-WI;Wisconsin;Wisconsin;true;US
+;US-WY;Wyoming;Wyoming;true;US;;;;;;;;;;;;
+
+INSERT_UPDATE Company;uid[unique=true];buyer;manufacturer;supplier;carrier;country(isocode);locname[lang=de];locname[lang=en];;;;;;;;;
+;hybris;true;false;true;true;DE;hybris GmbH;hybris GmbH;;;;;;;;;
+
+INSERT_UPDATE Address;owner(Company.uid)[unique=true];streetname[unique=true];streetnumber[unique=true];postalcode[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;email;phone1;url;company;appartment;building;fax 
+;hybris;Nymphenburger Strasse;86;D-80636;München;DE;true;true;true;true;info@hybris.de;+49(0)89 / 890 65 0;http://www.hybris.de;hybris GmbH;3. Etage;Treppenhaus 3;+49(0)89 / 890 65 555
+
+UPDATE Company;uid[unique=true];addresses(owner(Company.uid),streetname,streetnumber,postalcode);billingAddress(owner(Company.uid),streetname,streetnumber,postalcode);contactAddress(owner(Company.uid),streetname,streetnumber,postalcode);shippingAddress(owner(Company.uid),streetname,streetnumber,postalcode);vatID;unloadingAddress(owner(Company.uid),streetname,streetnumber,postalcode);;;;;;;;;;
+;hybris;hybris:Nymphenburger Strasse:86:D-80636;hybris:Nymphenburger Strasse:86:D-80636;hybris:Nymphenburger Strasse:86:D-80636;hybris:Nymphenburger Strasse:86:D-80636;DE 200689264;hybris:Nymphenburger Strasse:86:D-80636;;;;;;;;;;

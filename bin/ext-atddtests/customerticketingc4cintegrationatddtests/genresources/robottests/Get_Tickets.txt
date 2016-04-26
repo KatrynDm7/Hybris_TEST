@@ -1,0 +1,77 @@
+*** Settings ***
+Resource          commerce/CommerceServices_Keywords.txt
+Resource          customerticketingc4cintegration/Customer_Ticketing_Keywords.txt
+
+Test Setup        import ct sample data
+
+*** Variables ***
+
+*** Test Cases ***
+
+#####################################
+# Get Tickets retrieves the mock data, so it is not possible to verify list of tickets for particular customers, just retrieving proper mock data can be verified
+#####################################
+
+Test_Get_Tickets
+	[Documentation]    Test for get all tickets for customer
+	${ticketsList}=    get list of tickets for current customer
+	Should Be Equal As Integers    ${ticketsList.size()}    2
+
+Test_Get_Tickets_VerifyTicketFieldValues
+	[Documentation]    Testing getting ticket and verifying the retrieved mock data
+	${ticket}=    create ticket with title "Subject1" and message "Message1"
+	${ticketsList}=    get list of tickets for current customer
+	Should Be Equal As Integers    ${ticketsList.size()}    2
+	###
+	Log    ticketsList[0].id=${ticketsList[0].id}
+	Log    ticketsList[0].customerId=${ticketsList[0].customerId}
+	Log    ticketsList[0].cartId=${ticketsList[0].cartId}
+	Log    ticketsList[0].subject=${ticketsList[0].subject}
+	Log    ticketsList[0].message=${ticketsList[0].message}
+	Log    ticketsList[0].messageHistory=${ticketsList[0].messageHistory}
+	Log    ticketsList[0].creationDate=${ticketsList[0].creationDate}
+	Log    ticketsList[0].lastModificationDate=${ticketsList[0].lastModificationDate}
+	Log    ticketsList[0].status.id=${ticketsList[0].status.id}
+	Log    ticketsList[0].availableStatusTransitions=${ticketsList[0].availableStatusTransitions}
+	###
+	Log    ticketsList[1].id=${ticketsList[1].id}	
+	Log    ticketsList[1].customerId=${ticketsList[1].customerId}
+	Log    ticketsList[1].cartId=${ticketsList[1].cartId}
+	Log    ticketsList[1].subject=${ticketsList[1].subject}
+	Log    ticketsList[1].message=${ticketsList[1].message}
+	Log    ticketsList[1].messageHistory=${ticketsList[1].messageHistory}
+	Log    ticketsList[1].creationDate=${ticketsList[1].creationDate}
+	Log    ticketsList[1].lastModificationDate=${ticketsList[1].lastModificationDate}
+	Log    ticketsList[1].status.id=${ticketsList[1].status.id}
+	Log    ticketsList[1].availableStatusTransitions=${ticketsList[1].availableStatusTransitions}
+	###
+	Should Not Be Empty    ${ticketsList[0].id}
+	Should Not Be Empty    ${ticketsList[1].id}
+	Should Not Be Equal    ${ticketsList[0].id}    ${ticketsList[1].id}
+	###
+	Should Be Equal    ${ticketsList[0].customerId}    ${EMPTY}
+	Should Be Equal    ${ticketsList[1].customerId}    ${EMPTY}
+	###
+	Should Be Equal As Strings    ${ticketsList[0].cartId}    None
+	Should Be Equal As Strings    ${ticketsList[1].cartId}    None
+	###	
+	Should Be Equal    ${ticketsList[0].subject}    Ticket subject
+	Should Be Equal    ${ticketsList[1].subject}    Ticket subject for another reason
+	###
+	Should Be Equal As Strings    ${ticketsList[0].message}    None
+	Should Be Equal As Strings    ${ticketsList[1].message}    None
+	###
+	Should Not Be Empty    ${ticketsList[0].messageHistory}
+	Should Not Be Empty    ${ticketsList[1].messageHistory}
+	###
+    Should Not Be Equal    ${ticketsList[0].creationDate}    ${EMPTY}
+    Should Not Be Equal    ${ticketsList[1].creationDate}    ${EMPTY}
+	###
+    Should Not Be Equal    ${ticketsList[0].lastModificationDate}    ${EMPTY}
+    Should Not Be Equal    ${ticketsList[1].lastModificationDate}    ${EMPTY}
+	###
+	Should Be Equal    ${ticketsList[0].status.id}    OPEN
+	Should Be Equal    ${ticketsList[1].status.id}    OPEN
+	###
+	Should Not Be Empty    ${ticketsList[0].availableStatusTransitions}
+	Should Not Be Empty    ${ticketsList[1].availableStatusTransitions}

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd"
+    default-autowire="byName">
+
+    <alias alias="WebsiteCatalogVersionSelectorSection" name="defaultWebsiteCatalogVersionSelectorSection" />
+    <bean id="defaultWebsiteCatalogVersionSelectorSection" class="de.hybris.platform.cmscockpit.components.sectionpanel.WebsiteCatalogVersionSelectorSection"
+          scope="prototype" autowire="byName">
+        <property name="localizedLabel" value="navigationarea.catalogs" />
+        <property name="initiallySelected" value="false" />
+        <property name="visible" value="true" />
+        <!-- comment out the next lines in order to use the default cockpit selector renderer -->
+        <property name="renderer">
+            <bean class="de.hybris.liveeditaddon.cockpit.navigationbargenerator.menurenderer.CatalogVersionSectionSelectorSectionRenderer"
+                  autowire="byName">
+            </bean>
+        </property>
+        <property name="navigationAreaModel" ref="NavigationNodeNavigationAreaSectionModel" />
+    </bean>
+
+    <alias alias="generateNavigationWizard" name="defaultGenerateNavigationWizard" />
+	<bean id="defaultGenerateNavigationWizard" scope="prototype" class="de.hybris.liveeditaddon.cockpit.navigationbargenerator.wizard.DefaultNavigationGeneratorWizard">
+		<property name="title" value="nav.generator.wizard.title"/>
+        <property name="defaultCatalogDataService" ref="navigationGeneratorDefaultCatalogDataService"/>
+		<property name="pages">
+			<list>
+				<ref bean="navigationGenerator_basicDataPage"/>
+                <ref bean="navigationGenerator_summaryPage" />
+			</list>
+		</property>
+		<property name="pageRoot" value="cmscockpit/navigationbargenerator/wizards"/>
+        <property name="navigationBarGenerator" ref="navigationBarGenerator" />
+	</bean>
+    <alias alias="navigationGenerator_basicDataPage" name="defaultNavigationGenerator_basicDataPage" />
+	<bean id="defaultNavigationGenerator_basicDataPage" class="de.hybris.platform.cockpit.wizards.generic.DefaultGenericItemPage" scope="prototype">
+		<property name="id" value="navigationNode_basicDataPage"/>
+		<property name="title" value="nav.generator.basic.data.page.title" />
+		<property name="componentURI" value="generateNavigation_basicDataPage.zul"/>
+	</bean>
+
+    <alias alias="navigationGenerator_summaryPage" name="defaultNavigationGenerator_summaryPage" />
+    <bean id="defaultNavigationGenerator_summaryPage" class="de.hybris.platform.cockpit.wizards.generic.DefaultGenericItemPage" scope="prototype">
+        <property name="id" value="navigationGenerator_summaryPage"/>
+        <property name="title" value="nav.generator.summary.page.title" />
+        <property name="componentURI" value="generateNavigation_summaryPage.zul"/>
+    </bean>
+
+</beans>

@@ -1,0 +1,118 @@
+/* service plans overview */
+.plans-overview .disp-img.simple-banner {
+    clear: none;
+    float: left;
+    margin: 0 3px 3px 0;
+    width: 328px;
+}
+.plans-overview .disp-img.simple-banner:nth-child(3n) {
+    margin-right: 0;
+}
+
+/* productList */
+.productList .productListItem {
+    border-bottom: 1px solid #dbdad7;
+    overflow: hidden;
+}
+.productList .productListItem:last-child {
+    border-bottom: none;
+}
+.productList .productListItem .head {
+    font-size: 1.286em;
+    font-weight: 700;
+    line-height: 1.334em;
+    border-bottom: none;
+    margin-bottom: 0;
+}
+.productList .productListItem .head a {
+    color: #484848;
+    font-size: 1em;
+}
+.productList .productListItem .price {
+    font-size: 1.286em;
+    font-weight: 700;
+    text-align: right;
+    line-height: .834em;
+    color: #484848;
+    padding-top: 5px;
+}
+.productList .productListItem .price .price-label {
+    font-size: .667em;
+    font-weight: 400;
+    font-style: italic;
+    color: #484848;
+    padding-right: 10px;
+}
+.productList .productListItem .price del,
+.productList .productListItem .price .price-frequency {
+    font-size: .667em;
+    color: #484848;
+}
+.productList .productListItem .price .price-frequency {
+    color: #999;
+    font-weight: 400;
+}
+.productList .productListItem .stars,
+.productList .productListItem .cart,
+.productList .productListItem .lowStock,
+.productList .productListItem .head,
+.productList .productListItem .grid-product-entitlements {
+    margin-left: 130px;
+}
+.productList .productListItem .details {
+    float: left;
+    margin-left: 35px;
+    margin-bottom: 10px;
+    padding: 0;
+    width: 81%;
+}
+.page-guidedselling-select-device .productList .productListItem .details {
+    width: 65%;
+}
+.productList .productListItem .product-classification {
+    font-size: .857em;
+    margin: 20px 0 35px 0;
+    clear: both;
+    background-color: #f0efec;
+}
+.productList .productListItem .product-classification dt {
+    display: none;
+}
+.productList .productListItem .product-classification dd {
+    padding: 5px;
+    border-bottom: 1px solid #dbdad7;
+}
+.productList .productListItem .product-classification dd:last-child {
+    border-bottom: none;
+}
+.productList .productListItem .product-classification strong {
+    display: inline-block;
+    min-width: 122px;
+}
+.productList .productListItem .product-action .positive {
+    margin-bottom: 20px;
+}
+.productList .productListItem .product-disabled-message {
+    font-size: 12px;
+    font-style: italic;
+    color: #484848;
+    display: block;
+    margin-top: 10px;
+}
+.productList .productListItem .select-device button[disabled] {
+    padding: 0 15px;
+}
+/* product search */
+.page-search .results h1 {
+    font-size: 1.714em;
+    font-weight: 700;
+}
+.page-search .searchSpellingSuggestionPrompt {
+    font-size: 1.286em;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 20px;
+}
+.page-search .searchSpellingSuggestionPrompt a {
+    color: #0073e4;
+}

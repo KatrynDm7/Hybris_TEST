@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+
+    <collectiontypes>
+        <collectiontype code="yFormDataList"
+                        elementtype="YFormData" autocreate="true" generate="true"
+                        type="list"/>
+        <collectiontype code="QuoteProcessVisitiedStepList"
+                        elementtype="java.lang.String" autocreate="true" generate="true"
+                        type="list"/>
+    </collectiontypes>
+
+    <enumtypes>
+        <enumtype code="PointOfServiceTypeEnum" generate="true"  autocreate="false">
+            <value code="AGENCY" />
+        </enumtype>
+
+        <enumtype generate="true" code="QuoteBindingState" autocreate="true" dynamic="true">
+            <description>This type determines the binding or none-binding state of the quote.</description>
+            <value code="BIND"/>
+            <value code="UNBIND"/>
+        </enumtype>
+
+        <enumtype generate="true" code="QuoteType" autocreate="true" dynamic="true">
+            <description>This type determines the various types of quote available - if we want to offer more then they should be addred here.</description>
+            <value code="TRAVEL"/>
+            <value code="PROPERTY_HOMEOWNERS"/>
+            <value code="PROPERTY_RENTERS"/>
+            <value code="EVENT" />
+            <value code="AUTO" />
+            <value code="LIFE" />
+        </enumtype>
+        
+        <enumtype generate="true" code="QuoteWorkflowStatus" autocreate="true" dynamic="true">
+            <description>This type determines the various types of quote workflow statuses available.</description>
+            <value code="PENDING"/>
+            <value code="APPROVED"/>
+            <value code="REJECTED"/>
+        </enumtype>
+    </enumtypes>
+
+    <maptypes>
+        <maptype code="String2ObjMapType"
+                 argumenttype="java.lang.String"
+                 returntype="java.lang.Object"
+                 autocreate="true"
+                 generate="true"/>
+    </maptypes>
+
+    <relations>
+
+		<relation generate="true" localized="false" code="AbstractBundleRulesConditionalPostcodesRelation" autocreate="true">
+			<description>This relation links the geographic area to the disable rule</description>
+			<deployment table="BundleRule2CondGeoRel" typecode="6356" />
+			<sourceElement type="AbstractBundleRule" qualifier="conditionalBundleRules" cardinality="many" >
+                <modifiers read="true" write="true" search="true" optional="true"/>
+            </sourceElement>
+			<targetElement type="DisableRuleGeoArea" qualifier="conditionalGeoAreas" cardinality="many" >
+                <modifiers read="true" write="true" search="true" optional="true"/>
+            </targetElement>
+		</relation>
+
+		<relation generate="true" localized="false" code="AbstractOrder2InsurancePolicyRelation" autocreate="true">
+			<description>The associating one (or more) Policy items to an Order</description>
+			<sourceElement type="Order" qualifier="policyOrder" cardinality="one">
+				<modifiers read="true" write="true" search="true" optional="false" />
+			</sourceElement>
+			<targetElement type="InsurancePolicy" qualifier="orderPolicies" cardinality="many" collectiontype="set">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+
+        <relation code="AgentCategoryRelation" localized="false" generate="true" autocreate="true">
+            <deployment table="Agent2CategoryRel" typecode="6360" />
+            <sourceElement type="Agent" qualifier="agent" cardinality="many" />
+            <targetElement type="Category" qualifier="categories" cardinality="many"/>
+        </relation>
+
+    </relations>
+
+	<itemtypes>
+        <typegroup name="CmsPages">
+            <itemtype code="CategoryPage" autocreate="false" generate="false">
+                <description>Extends existing type with additional attributes.</description>
+                <attributes>
+                    <attribute qualifier="bundleTemplate" type="BundleTemplate">
+                        <persistence type="property"/>
+                        <modifiers/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+        </typegroup>
+
+       <typegroup name="Components">
+
+            <itemtype code="CMSMultiComparisonTabContainer" generate="true" extends="AbstractCMSComponentContainer" autocreate="true"
+                      jaloclass="de.hybris.platform.financialservices.jalo.components.CMSMultiComparisonTabContainer">
+                <description>This is container used to group comparison tab components.</description>
+            </itemtype>
+
+            <itemtype code="CMSComparisonTabComponent" generate="true" extends="SimpleCMSComponent" autocreate="true"
+                      jaloclass="de.hybris.platform.financialservices.jalo.components.CMSComparisonTabComponent">
+                <description>It represents comparison tap component. Contains some additional attributes that are required to display comparison panel as a tab.</description>
+                <attributes>
+                    <attribute qualifier="title" generate="true" autocreate="true"
+                               type="localized:java.lang.String">
+                        <persistence type="property"/>
+                        <description>Attribute that represents title of the tab.</description>
+                    </attribute>
+                    <attribute qualifier="comparisonPanel" type="ComparisonPanelCMSComponent">
+                        <persistence type="property"/>
+                        <description>Attribute that represents the comparison panel.</description>
+                    </attribute>                
+               		 <attribute qualifier="imageComponent" type="CMSImageComponent">
+                        <persistence type="property"/>
+                        <description>Attribute that represents the Image component.</description>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="ComparisonPanelCMSComponent" autocreate="true" generate="true" extends="SimpleCMSComponent"
+                      jaloclass="de.hybris.platform.financialservices.jalo.components.ComparisonPanelCMSComponent">
+                <description>CMS comparison panel component</description>
+            </itemtype>
+
+            <itemtype code="CMSFormSubmitComponent" autocreate="true" generate="true" extends="YFormCMSComponent"
+                      jaloclass="de.hybris.platform.financialservices.jalo.components.CMSFormSubmitComponent">
+                <description>CMS form submit component</description>
+                <attributes>
+                    <attribute qualifier="category" type="Category">
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="CMSTripDetailsSubmitComponent" autocreate="true" generate="true" extends="CMSFormSubmitComponent"
+                      jaloclass="de.hybris.platform.financialservices.jalo.components.CMSTripDetailsSubmitComponent">
+                <description>CMS trip details form submit component</description>
+            </itemtype>
+
+            <itemtype code="CMSPropertyDetailsSubmitComponent" autocreate="true" generate="true"
+                      extends="CMSFormSubmitComponent"
+                      jaloclass="de.hybris.platform.financialservices.jalo.components.CMSPropertyDetailsSubmitComponent">
+                <description>CMS property details form submit component</description>
+            </itemtype>
+
+           <itemtype code="CMSAutoDetailsSubmitComponent" autocreate="true" generate="true"
+                     extends="CMSFormSubmitComponent"
+                     jaloclass="de.hybris.platform.financialservices.jalo.components.CMSAutoDetailsSubmitComponent">
+               <description>CMS auto details form submit component</description>
+           </itemtype>
+
+           <itemtype code="CMSLifeDetailsSubmitComponent" autocreate="true" generate="true"
+                     extends="CMSFormSubmitComponent"
+                     jaloclass="de.hybris.platform.financialservices.jalo.components.CMSLifeDetailsSubmitComponent">
+               <description>CMS life insurance details form submit component</description>
+           </itemtype>
+
+            <itemtype code="CMSContactExpertSubmitComponent" autocreate="true" generate="true" extends="YFormCMSComponent"
+                      jaloclass="de.hybris.platform.financialservices.jalo.components.CMSContactExpertSubmitComponent">
+                <description>CMS contact expert form component</description>
+            </itemtype>
+
+
+           <itemtype code="CMSViewPoliciesComponent" autocreate="true" generate="true" extends="SimpleCMSComponent"
+                      jaloclass="de.hybris.platform.financialservices.jalo.components.CMSViewPoliciesComponent">
+                <description>CMS View Policies component</description>
+				<attributes>
+					<attribute autocreate="true" qualifier="numberOfPoliciesToDisplay" type="java.lang.Integer">
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="true" optional="false" />
+					</attribute>
+				</attributes>
+            </itemtype>
+
+            <itemtype code="CMSViewQuotesComponent" autocreate="true" generate="true" extends="SimpleCMSComponent"
+                      jaloclass="de.hybris.platform.financialservices.jalo.components.CMSViewQuotesComponent">
+                <description>CMS View Quotes component</description>
+                <attributes>
+                    <attribute autocreate="true" qualifier="numberOfQuotesToDisplay" type="java.lang.Integer">
+                        <persistence type="property" />
+                        <modifiers read="true" write="true" search="true" optional="false" />
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="CMSLinkImageComponent" autocreate="true" generate="true" extends="CMSLinkComponent"
+                      jaloclass="de.hybris.platform.financialservices.jalo.components.CMSLinkImageComponent">
+                <description>CMS link holder component provides access of the attribute to the model/view</description>
+                <attributes>
+                    <attribute qualifier="image" type="CMSImageComponent">
+                        <modifiers optional="true" />
+                        <persistence type="property" />
+                        <description>Image to display for the link</description>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="CMSAllOurServicesComponent" autocreate="true" generate="true" extends="SimpleCMSComponent"
+                      jaloclass="de.hybris.platform.financialservices.jalo.components.CMSAllOurServicesComponent">
+                <description>CMS all out services category component</description>
+            </itemtype>
+            
+            <itemtype code="CMSRotatingImagesComponent" autocreate="true" generate="true" extends="RotatingImagesComponent"
+                      jaloclass="de.hybris.platform.financialservices.jalo.components.CMSAllOurServicesComponent">
+                <description>Extended to add image text</description>
+            </itemtype>
+            
+            <itemtype code="CMSAgentRootComponent" autocreate="true" generate="true" extends="SimpleCMSComponent"
+                      jaloclass="de.hybris.platform.financialservices.jalo.components.CMSAgentRootComponent">
+                <description>CMS all agent categories component</description>
+                <attributes>
+                    <attribute  type="java.lang.String" qualifier="agentRootCategory">
+                        <modifiers optional="false" />
+                        <persistence type="property" />
+                        <description>HTML element type for the child components</description>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="InsuranceJspIncludeComponent" autocreate="true" generate="true" extends="JspIncludeComponent"
+            		jaloclass="de.hybris.platform.financialservices.jalo.components.InsuranceJspIncludeComponent">
+            	<description>Only overridden here so that we can reference jsps in our area in the add on</description>		
+            </itemtype>
+
+            <itemtype code="CMSCustomDefineStyleCMSComponentsContainer" generate="true" extends="AbstractCMSComponentContainer" autocreate="true"
+                      jaloclass="de.hybris.platform.financialservices.jalo.components.CMSCustomDefineStyleCMSComponentsContainer">
+                <description>This is container used to define and assign style to child components.</description>
+                <attributes>
+                    <attribute  type="java.lang.String" qualifier="elementType">
+                        <modifiers optional="true" />
+                        <persistence type="property" />
+                        <description>HTML element type for the child components</description>
+                    </attribute>
+                    <attribute  type="java.lang.String" qualifier="styleCss">
+                        <modifiers optional="true" />
+                        <persistence type="property" />
+                        <description>Style css classes for the child components</description>
+                    </attribute>
+                    <attribute  type="java.lang.String" qualifier="idKey">
+                        <modifiers optional="true" />
+                        <persistence type="property" />
+                        <description>Base Id key for generate unique ID keys for the child components</description>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="DynamicProgressBarStepsComponent" autocreate="true" generate="true" extends="SimpleCMSComponent"
+                      jaloclass="de.hybris.platform.acceleratorcms.jalo.components.DynamicProgressBarStepsComponent">
+                <description>It represents progress bar component that contains cms progress node.</description>
+                <attributes>
+                    <attribute type="java.lang.String" qualifier="styleAttributes">
+                        <persistence type="property"/>
+                        <modifiers/>
+                        <description>CSS style class of this bar component.</description>
+                    </attribute>
+                </attributes>
+            </itemtype>
+ 
+        </typegroup>
+
+        <typegroup name="Insurance">
+
+            <itemtype code="PriceRow" autocreate="false" generate="false">
+                <description>Extending the PriceRow type to define whether price is coming from hybris or quotation engine.</description>
+                <attributes>
+                    <attribute  type="java.lang.String" qualifier="quotationProvider">
+                        <modifiers optional="true" />
+                        <persistence type="property" />
+                        <description>Quotation Provider information</description>
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="BillingEvent" generate="false" autocreate="false">
+                <attributes>
+                    <attribute autocreate="true" qualifier="helpContent" type="localized:java.lang.String">
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <persistence type="property">
+                            <columntype database="oracle">
+                                <value>CLOB</value>
+                            </columntype>
+                            <columntype database="sap">
+                                <value>NCLOB</value>
+                            </columntype>
+                            <columntype>
+                                <value>HYBRIS.LONG_STRING</value>
+                            </columntype>
+                        </persistence>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="Product" autocreate="false" generate="false">
+                <attributes>
+                    <attribute autocreate="true" qualifier="defaultCategory" type="Category"
+                               isSelectionOf="supercategories">
+                        <persistence type="property" qualifier="DefaultCategory"/>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="DisableRuleGeoArea" generate="true" autocreate="true" extends="GenericItem"
+                      jaloclass="de.hybris.platform.financialservices.jalo.DisableRuleGeoArea">
+                <deployment table="disableGeoArea" typecode="6357"/>
+            	<attributes>
+					<attribute qualifier="areaCode" type="java.lang.String">
+						<description>unique postal code (part or all) code that identifies the region</description>
+						<persistence type="property" />
+						<modifiers read="true" write="false" initial="true"
+							optional="false" unique="true" />
+					</attribute>
+                    <attribute  type="java.lang.String" qualifier="areaName">
+                        <modifiers optional="false" />
+                        <persistence type="property" />
+                        <description>Name of region covered by postal code(s)</description>
+                    </attribute>
+            	</attributes>
+            </itemtype>
+            <itemtype code="InsuranceQuote" generate="true" autocreate="true" extends="GenericItem"
+                      jaloclass="de.hybris.platform.financialservices.jalo.InsuranceQuote">
+                <deployment table="insuranceQuote" typecode="6358"/>
+                <attributes>
+                    <attribute qualifier="quoteId" type="java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="state" type="QuoteBindingState">
+                        <persistence type="property"/>
+                        <defaultvalue>em().getEnumerationValue("QuoteBindingState", "UNBIND")</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="expiryDate" type="java.util.Date">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="startDate" type="java.util.Date">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="quoteVisitiedStepList" type="QuoteProcessVisitiedStepList">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="properties" type="String2ObjMapType">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="quoteWorkflowStatus" type="QuoteWorkflowStatus">
+                        <persistence type="property"/>
+                        <defaultvalue>em().getEnumerationValue("QuoteWorkflowStatus", "PENDING")</defaultvalue>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="Agent" generate="true"
+                      jaloclass="de.hybris.platform.financialservices.jalo.Agent" extends="Customer"
+                      autocreate="true">
+                <deployment table="agent" typecode="6354"/>
+                <attributes>
+                    <attribute qualifier="enquiry" type="Address">
+                        <modifiers read="true" write="true" search="true"
+                                   optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute autocreate="true" qualifier="thumbnail" type="Media">
+                        <persistence type="property"/>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="InsurancePolicy" generate="true" autocreate="true" extends="GenericItem"
+					jaloclass="de.hybris.platform.financialservices.jalo.InsurancePolicy">
+				<deployment table="insurancePolicy" typecode="6359" />
+				<attributes>
+					<attribute qualifier="policyId" type="java.lang.String">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="policyStartDate" type="java.util.Date">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="policyExpiryDate" type="java.util.Date">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="policyUrl" type="java.lang.String">
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+        </typegroup>
+
+        <typegroup name="Cart">
+            <itemtype code="AbstractOrder" generate="false" autocreate="false">
+                <attributes>
+                    <attribute qualifier="insuranceQuote" type="InsuranceQuote" autocreate="true">
+                        <description>Attribute that persist the Insurance Quote information</description>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+        </typegroup>
+
+        <typegroup name="Order">
+            <itemtype code="AbstractOrderEntry" generate="false" autocreate="false">
+                <attributes>
+                    <attribute qualifier="yFormData" type="yFormDataList" generate="true">
+                        <description>YForm data List</description>
+                        <modifiers read="true" write="false" search="true"/>
+                        <persistence type="dynamic" attributeHandler="orderEntryYFormDataDynamicAttributeHandler"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+        </typegroup>
+
+        <typegroup name="Processes">
+            <itemtype code="FindAgentEmailProcess" extends="StoreFrontCustomerProcess"
+                      autocreate="true" generate="true"
+                      jaloclass="de.hybris.platform.commerceservices.jalo.process.FindAgentEmailProcess">
+                <description>Represents process that is used for emailing agent.</description>
+                <attributes>
+                    <attribute qualifier="agentEmail" type="java.lang.String">
+                        <persistence type="property" />
+                        <description>Attribute contains agent email that is used in this process.</description>
+                    </attribute>
+
+                    <attribute qualifier="userMessage" type="java.lang.String">
+                        <persistence type="property">
+                            <columntype database="sap">
+                                <value>nvarchar(4000)</value>
+                            </columntype>
+                            <columntype database="oracle">
+                                <value>varchar2(4000)</value>
+                            </columntype>
+                            <columntype database="mysql">
+                                <value>text</value>
+                            </columntype>
+                            <columntype database="sqlserver">
+                                <value>nvarchar(max)</value>
+                            </columntype>
+                            <columntype database="hsqldb">
+                                <value>LONGVARCHAR</value>
+                            </columntype>
+                        </persistence>
+                        <description>Attribute contains user message that is used in this process.</description>
+                    </attribute>
+
+                    <attribute qualifier="userEmail" type="java.lang.String">
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="callback" type="java.lang.String">
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="phone" type="java.lang.String">
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="userName" type="java.lang.String">
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="interest" type="java.lang.String">
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="userUid" type="java.lang.String">
+                        <persistence type="property" />
+                        <description>Attribute contains user uid that is used in this process.</description>
+                    </attribute>
+                    <attribute qualifier="anonymousUser" type="boolean">
+                        <persistence type="property" />
+                        <description>Attribute contains true if user with uid is anonymous.</description>
+                    </attribute>
+                    <attribute qualifier="cartCode" type="java.lang.String">
+                        <persistence type="property" />
+                        <description>Attribute contains cart code that is used in this process.</description>
+                    </attribute>
+
+                </attributes>
+            </itemtype>
+        </typegroup>
+
+	</itemtypes>
+
+</items>

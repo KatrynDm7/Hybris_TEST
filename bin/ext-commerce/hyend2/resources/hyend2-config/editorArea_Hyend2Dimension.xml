@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>
+	
+	<group qualifier="Hyend2DimensionGeneral" visible="true" initially-opened="true">
+		<label key="cockpit.config.label.General" />
+		<property qualifier="Hyend2Dimension.attributeType" >
+			<parameter>
+				<name>allowCreate</name>
+				<value>false</value>
+			</parameter>
+						<parameter>
+				<name>allowActivate</name>
+				<value>false</value>
+			</parameter>
+			</property>		
+		<property qualifier="Hyend2Dimension.attribute" >
+			<parameter>
+				<name>allowCreate</name>
+				<value>false</value>
+			</parameter>
+						<parameter>
+				<name>allowActivate</name>
+				<value>false</value>
+			</parameter>
+			</property>	
+		<property qualifier="Hyend2Dimension.classificationAttribute" >
+			<parameter>
+				<name>allowCreate</name>
+				<value>false</value>
+			</parameter>
+						<parameter>
+				<name>allowActivate</name>
+				<value>false</value>
+			</parameter>
+		</property>
+		<property qualifier="Hyend2Dimension.displayName" />
+		<property qualifier="Hyend2Dimension.exportId" />
+	</group>
+	
+	<group qualifier="Hyend2IndexElementsSection" visible="true" initially-opened="true">
+		<label key="hyend2.indexelements" />
+		<property qualifier="Hyend2Dimension.indexElements" />	
+	</group>
+
+        <group qualifier="Hyend2EndecaSearchInterfacesSection" visible="true" initially-opened="true">
+                <label key="hyend2.searchinterfaceconfiguration" />
+                <property qualifier="Hyend2Dimension.searchInterfaces" />
+        </group>
+	
+	<group qualifier="Hyend2DimensionPropertySpecification" visible="true" initially-opened="true">
+		<label key="hyend2.dimensionspecification" />
+		<property qualifier="Hyend2Dimension.resolver"  editor="propertyResolverEditor"/>	
+		<property qualifier="Hyend2Dimension.resolverParameter" />
+		<property qualifier="Hyend2Dimension.taxonomyResolver"  editor="taxonomyResolverEditor"/>
+	</group>
+	
+	<group qualifier="Hyend2EndecaDimensionConfigurationSection" visible="true" initially-opened="true">
+		<label key="hyend2.endecadimensionconfiguration" />
+		<property qualifier="Hyend2Dimension.endecaDimensionConfiguration" />	
+	</group>
+	
+</editor>

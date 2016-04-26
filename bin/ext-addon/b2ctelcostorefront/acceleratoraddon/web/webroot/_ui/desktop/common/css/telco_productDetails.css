@@ -1,0 +1,609 @@
+.productDetailsPanel {
+    line-height: 1.75em;
+    overflow: hidden;
+}
+.productSubtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    line-height: 1em;
+    color: #999999;
+    display: inline-block;
+    margin-bottom: 15px;
+    vertical-align: top;
+}
+.productDetailsPanel h1 {
+    font-weight: bold;
+    font-size: 1.714em;
+    line-height: 1em;
+    color: #484848;
+    margin-bottom: 25px;
+    border-bottom: none;
+    margin-top: -2px;
+}
+/* Image gallery */
+.span-14.productImage {
+    margin-bottom: 35px;
+    width: inherit;
+}
+.productImage .productImageGallery {
+    width: 60px;
+    height: 335px;
+}
+.productImage .productImageGallery li,
+#colorbox .productImage .productImageGallery li {
+    margin: 0 0 8px;
+}
+.productImage .productImageGallery .jcarousel-clip {
+    height: 200px;
+}
+#colorbox .productImage .productImageGallery .jcarousel-clip {
+    height: 336px;
+}
+.productImage .productImageGallery li:hover {
+    cursor: pointer;
+}
+.productImage .productImageGallery li .thumb {
+    width: 50px;
+    padding: 4px;
+    border-color: #dbdad7;
+    margin: 0;
+}
+.productImage .productImageGallery li .thumb.active {
+    border-color: #ffb800;
+    border-width: 1px;
+}
+.productImage .productImageGallery li .thumb img {
+    width: 100%;
+}
+.productImage .productImagePrimary {
+    margin: 0 0 0 140px;
+}
+.productImage .productImagePrimary a.productImagePrimaryLink {
+    width: 300px;
+}
+.productImage .productImagePrimary a.productImageZoomLink {
+    right: -25px;
+}
+.span-10 .productImage .productImagePrimary {
+    margin: 0 0 0 85px;
+}
+.span-10 .productImage .productImagePrimary a.productImageZoomLink {
+    right: -5px;
+}
+
+
+/* device description */
+.productDetailsPanel .summary {
+    font-size: 1.143em;
+    line-height: 1.75em;
+    margin-right: 25px;
+    margin-bottom: 25px;
+}
+.prodReview .write {
+    color: #0073e4;
+    font-size: 1.143em;
+    font-weight: normal;
+    background: none;
+    padding: 0;
+}
+
+/* tabs */
+.prod_add_to_cart .tabs > ul.tabs-list,
+#productTabs > ul.tabs-list {
+    border-bottom: 1px solid #dbdad7;
+    border-top: 1px solid #dbdad7;
+    background-color: #f0efec;
+}
+.prod_add_to_cart .tabs > ul.tabs-list > li,
+#productTabs > ul.tabs-list > li {
+    font-weight: bold;
+    border-left: 1px solid #dbdad7;
+    float: left;
+}
+.prod_add_to_cart .tabs > ul.tabs-list > li a,
+#productTabs > ul.tabs-list > li a {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 48px;
+    display: block;
+    padding: 0 24px;
+}
+.prod_add_to_cart .tabs > ul.tabs-list > .current,
+#productTabs > ul.tabs-list > .current {
+    background-color: #fff;
+    border-bottom: 1px solid #fff;
+    border-right: 1px solid #dbdad7;
+    margin-bottom: -1px;
+    margin-right: -1px;
+}
+#productTabs > ul.tabs-list > .current {
+    height: 3.4285em;
+}
+.prod_add_to_cart .tabs > ul.tabs-list > .current a:hover {
+    color: #484848;
+}
+.prod_add_to_cart .tabs > .content,
+#productTabs > .content {
+    border-bottom: 1px solid #dbdad7;
+    border-left: 1px solid #dbdad7;
+    border-right: 1px solid #dbdad7;
+    padding: 25px 25px 0;
+    margin: 0;
+}
+.prod_add_to_cart .tabs .current-info,
+.prod_add_to_cart .tabs .accessibletabsanchor,
+.prod_add_to_cart .tabs .tabhead {
+    left: -999em;
+    position: absolute;
+}
+
+/* tab service plan content */
+.prod_add_to_cart .headline-contract-length,
+.prod_add_to_cart .headline-contract-length-small {
+    float: left;
+    font-size: 1.143em;
+}
+.subTabs {
+    font-size: 1.143em;
+}
+.subTabs .tabs-list > li {
+    float: left;
+}
+.subTabs .tabs-list > li a{
+    background: url("../images/telco_contactRadio.png") no-repeat scroll -2px -1px rgba(0, 0, 0, 0);
+    margin-left: 17px;
+    padding-left: 18px;
+}
+.subTabs .tabs-list > li:first-child a {
+    margin-left: 35px;
+}
+.subTabs .tabs-list > .sub-current a{
+    background-position: -2px -76px;
+}
+.sub-tabbody-table {
+    width: 100%;
+    padding-top: 10px;
+    font-size: 0.875em;
+    line-height: 1.5em;
+}
+.sub-tabbody-table tr td:nth-child(2n) {
+    background-color: #f8f8f7;
+}
+.sub-tabbody-table tr td,
+.sub-tabbody-table tr th {
+    border-top: 1px solid #dbdad7;
+    padding: 15px 10px 30px;
+    vertical-align: top;
+}
+.sub-tabbody-table tr th {
+    padding-bottom: 25px;
+}
+.sub-tabbody-table tr td:nth-child(2n-1),
+.sub-tabbody-table tr th:nth-child(2n-1){
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.sub-tabbody-table tr > th {
+    width: 20%;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+}
+.sub-tabbody-table tr > th,
+.sub-tabbody-table tr:first-child > td {
+    border-top: none;
+    padding: 22px 10px 30px 10px;
+}
+.sub-tabbody-table tr td:first-child,
+.item-only-table tr td:first-child,
+.sub-tabbody-table th {
+    font-size: 1.072em;
+    font-weight: bold;
+    padding-left: 0;
+}
+.sub-tabbody-table tr td > div {
+    margin-bottom: 6px;
+}
+.sub-tabbody-table .details {
+    color: #0073e4;
+}
+.sub-tabbody-table .pay {
+    color: #999999;
+    font-size: 13px;
+}
+.sub-tabbody-table del {
+    display: inline-block;
+    margin-bottom: 3px;
+}
+
+/* special styles for device detail page*/
+.sub-tabbody-table-td0 {
+    width: 142px;
+}
+.sub-tabbody-table-td2,
+.sub-tabbody-table-td3 {
+    width: 56px;
+}
+.sub-tabbody-table-td4,
+.item-only-add{
+    width: 113px;
+}
+.productDescription .sub-tabbody-table tr td {
+    font-size: 1.072em;
+    line-height: 1.05em;
+    background-color: transparent;
+}
+.productDescription .sub-tabbody-table tr td:last-child {
+    padding: 0;
+}
+.productDescription .sub-tabbody-table tr td,
+.productDescription .sub-tabbody-table tr th {
+    padding: 22px 15px 15px 10px;
+}
+.productDescription .sub-tabbody-table .sub-tabbody-table-td1,
+.productDescription .sub-tabbody-table .sub-tabbody-table-td0 {
+    padding-left: 0;
+}
+.productDescription .sub-tabbody-table button.positive {
+    margin: 16px 0;
+    overflow: hidden;
+}
+
+/* device only tab */
+.item-only-table {
+    width: 100%;
+}
+.item-only-add button.positive {
+    margin: 16px 0;
+}
+.item-only-quantity label,
+.item-only-cell-quantity label {
+    display: inline-block;
+    padding-top: 8px;
+}
+input.qty {
+    font-size: 14px;
+    text-align: center;
+    color: #484848;
+    border: 1px solid #dbdad7;
+    border-radius: 3px;
+    box-sizing: border-box;
+    height: 43px;
+    width: 45px;
+    margin-left: 10px;
+}
+.qty {
+    font-size: 16px;
+    color: #484848;
+}
+
+/* product details */
+#productTabs {
+    margin-top: 35px;
+}
+#productTabs ul.tabs-list li a, #productTabs .tabHead {
+    font-size: 1em;
+    text-transform: none;
+    color: #484848;
+}
+#productTabs ul.tabs-list li a:hover {
+    color: #0073e4;
+}
+#productTabs ul.tabs-list li.current a {
+    border: none;
+    color: #484848;
+    padding: 0 24px;
+}
+#productTabs .tabBody {
+    font-size: 16px;
+    line-height: 1.75em;
+    padding: 2% 20% 0 15%;
+}
+#productTabs .productDescriptionText {
+    -moz-column-count: 1;
+    -webkit-column-count: 1;
+    -o-column-count: 1;
+    column-count: 1;
+}
+.productDetailsPanel .description-headline,
+#productTabs .productDescriptionText .description-headline,
+#productTabs .productDescriptionText .description-spacer {
+    font-family: 'Montserrat', sans-serif;
+    display: block;
+    margin-top: 25px;
+}
+#productTabs .productFeatureClasses .headline,
+#write_reviews.reviews .headline {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    text-transform: none;
+    margin: 60px 0 10px;
+    border-bottom: none;
+}
+#productTabs .productFeatureClasses {
+    margin-bottom: 50px;
+}
+#productTabs .productFeatureClasses table {
+    width: 70%;
+}
+#productTabs .productFeatureClasses table td {
+    text-align: right;
+    padding: 7px 0;
+    border-bottom: 1px solid #dbdad7;
+}
+#productTabs .productFeatureClasses table tr:nth-child(2n+1) {
+    background: none;
+}
+#productTabs .productFeatureClasses table td.attrib {
+    text-align: left;
+    font-weight: normal;
+}
+
+/* reviews */
+.reviews .actionBar,
+.reviews .actionBar a,
+.reviews .actionBar .write {
+    color: #484848;
+}
+.reviews .actionBar.top {
+    border-bottom: none;
+}
+.write_review {
+    padding-right: 235px;
+}
+#write_reviews .write_review .headline {
+    margin: 20px 0 0;
+}
+#write_reviews .required.right {
+    float: none!important;
+    margin: 0;
+}
+#stars-wrapper label {
+    margin: 5px 0 0;
+    padding: 0;
+}
+.reviews .actionBar.bottom {
+    border: none;
+}
+.reviews .actionBar a, .reviews .actionBar .write {
+    background: none;
+    font-size: 14px;
+    font-weight: normal;
+    color: #0073e4;
+    padding: 0;
+}
+.reviews .reviewDetail .body {
+    text-align: justify;
+}
+
+/* product detail accessories */
+.productDescription {
+    float: right;
+}
+.productDescription .big-price {
+    font-size: 1.643em;
+    font-weight: bold;
+    line-height: 0.9em;
+    color: #484848;
+}
+.productDescription .summary{
+    margin-right: 0;
+    color: #484848;
+}
+.productDescription .product-entitlements-list,
+.productDescription .stock_message {
+    color: #000;
+    font-size: 16px;
+}
+.item-only-cell-quantity {
+    width: 145px;
+}
+.item-only-cell-add button.positive {
+    margin: 0;
+    float: none;
+}
+
+
+/*  dashboard */
+.dashboard {
+    border-bottom: 2px solid #8d8d8d;
+    color: #999999;
+    margin-bottom: 87px;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+.dashboard a {
+    color: #999999;
+    line-height: 2.084em;
+    text-decoration: underline;
+}
+.dashboard > div {
+    display: table-cell;
+    padding: 15px 0;
+}
+.dashboard.dashboard-empty > div {
+    min-height: 45px;
+}
+.dashboard div {
+    vertical-align: top;
+    position: relative;
+}
+.dashboard-item-active {
+    color: #484848;
+}
+.dashboard-item-active:after {
+    background: url("../images/telco_dashboardActiveItem.png") no-repeat scroll 0 bottom rgba(0, 0, 0, 0);
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 8px;
+    bottom: -2px;
+    left: 45px;
+}
+.dashboard-headline {
+    font-size: .857em;
+    line-height: 2em;
+    font-weight: 700;
+    float: left;
+    margin-bottom: 10px;
+}
+.dashboard-default {
+    line-height: 1.786em;
+    font-weight: 700;
+    clear: both;
+}
+.dashboard-item-name {
+    font-weight: bold;
+}
+.dashboard-headline,
+.dashboard-item-row-container,
+.dashboard-default,
+#showall_extras {
+    margin-left: 25px;
+}
+.dashboard-item-thumb + .dashboard-item-name,
+.dashboard-item-thumb + .dashboard-item-name + .dashboard-item-price {
+    margin-left: 0px;
+}
+.dashboard-edit a {
+    font-size: .857em;
+    line-height: 1.8334em;
+    margin-left: 25px;
+}
+.dashboard-item-row-container {
+    clear: both;
+}
+.dashboard-item-row-container .dashboard-item-thumb {
+    float: left;
+    margin-right: 15px;
+}
+.dashboard-item-frequency {
+    font-style: italic;
+}
+.dashboard + .prod_add_to_cart {
+    margin-top: 65px;
+}
+#showall_extras,
+#hideall_extras {
+    margin-top: 10px;
+    font-size: .857em;
+    line-height: 2.084em;
+}
+#hideall_extras {
+    margin-top: -22px;
+    float: right;
+}
+.showall_extras_showing {
+    float: left;
+}
+#showall_extras_showall {
+    float: right;
+}
+
+/* special styles for service plan detail page */
+.productDetailUpdateable_viewplans .sub-tabbody-table button.positive,
+.sbgProductList .sub-tabbody-table button.positive {
+    float: none;
+    min-width: 148px;
+    width: 100%;
+    margin: 0;
+}
+.page-bundleselection-plan .sub-tabbody-table tr:last-child > td {
+     border-top: none;
+}
+
+
+/* TV channels */
+.sbgProductList {
+    font-size: 1.143em;
+}
+.sbgProductList .sub-tabbody-table,
+.sbgProductList .sub-tabbody-table tr > th {
+    padding-top: 0;
+}
+.sbgProductList .sub-tabbody-table th .name {
+    margin: 20px 0 5px;
+}
+.sbgProductList .sub-tabbody-table th .name a {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.428em;
+    color: #484848;
+}
+.sbgProductList .sub-tabbody-table th .summary {
+    font-weight: 400;
+}
+.sbgProductList .sub-tabbody-table tr:last-child td {
+    padding-bottom: 10px;
+}
+.sbgProductList .sub-tabbody-table tr td:last-child {
+    padding-right: 10px;
+}
+.sbgProductList .sub-tabbody-table tr th:last-child {
+    padding-right: 0;
+}
+
+/* TV channels detail page */
+.page-productDetailsForSBGProducts .productDescription .summary {
+    margin-bottom: 15px;
+}
+.page-productDetailsForSBGProducts .add-to-cart > .qty {
+    margin: 20px 0 10px;
+    float: none;
+}
+.page-productDetailsForSBGProducts .add-to-cart > .qty .stock_message {
+    margin: 0;
+}
+.page-productDetailsForSBGProducts .qty label,
+.page-productDetailsForSBGProducts .qty #qtyInput {
+    display: none;
+}
+.page-productDetailsForSBGProducts .productAddToCartPanel .productAddToCartPanelItem {
+    float: left;
+}
+.page-productDetailsForSBGProducts .productAddToCartPanel .productAddToCartPanelItem > div {
+    width: auto;
+    margin-left: 15px;
+    margin-top: 18px;
+}
+
+/* storefidner/bopis overwrite core css on detail page */
+.add-to-cart > .qty {
+    margin: 50px 0 45px;
+    float: left;
+}
+.add-to-cart > .qty .stock_message {
+    margin-top: -90px;
+}
+#actions-container-for-AddToCart {
+    margin: 50px 0 0 145px;
+}
+#actions-container-for-AddToCart #AddToCart-AddToCartAction {
+    float: left;
+}
+#actions-container-for-AddToCart .add_to_cart_form {
+    width: 110px;
+}
+#actions-container-for-AddToCart .add_to_cart_form .addToCartButton {
+    margin: 0;
+}
+#actions-container-for-AddToCart .pickupInStoreButton {
+    width: 135px;
+    margin: 0;
+}
+#actions-container-for-AddToCart .LoveShare {
+    margin-top: 10px;
+    text-align: left;
+    width: 80px;
+}
+.a2a_menu {
+    border-color: #dbdad7!important;
+    border-radius: 0!important;
+}
+.a2a_menu a {
+    color: #484848!important;
+}
+.a2a_wide a {
+    border-color: #dbdad7!important;
+}
+.a2a_menu a:hover, .a2a_menu a:active, .a2a_menu a.a2a_i:focus {
+    background-color: #f0efec!important;
+}

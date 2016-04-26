@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="solrfacetsearchbackofficeLabelLocator" class="com.hybris.cockpitng.util.labels.ResourcesLabelLocator" scope="singleton" init-method="init" lazy-init="false">
+  		<property name="location" value="/solrfacetsearchbackoffice-backoffice-labels/"/>
+  		<property name="name" value="labels"/>
+  	</bean>
+
+	<bean id="facetSortDropDownNamesProviderImpl" class="de.hybris.platform.solrfacetsearch.backoffice.dropdownnamesprovider.impl.FacetSortDropDownNamesProviderImpl" />
+	<bean id="solrHotUpdateIndexerStepOne" class="de.hybris.platform.solrfacetsearch.backoffice.wizards.hotupdate.SolrHotUpdateIndexerStepOne" scope="prototype">
+		<property name="facetSearchConfigDao" ref="facetSearchConfigDao"/>
+		<property name="cronJobService" ref="cronJobService"/>
+		<property name="labelService" ref="labelService"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="currentObjectPrefix" value="newItem"/>
+	</bean>
+	<bean id="solrHotUpdateIndexerStepTwo" class="de.hybris.platform.solrfacetsearch.backoffice.wizards.hotupdate.SolrHotUpdateIndexerStepTwo" scope="prototype">
+		<property name="cronJobService" ref="cronJobService"/>
+		<property name="labelService" ref="labelService"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="currentObjectPrefix" value="newItem"/>
+	</bean>
+	<bean id="solrHotUpdateIndexerStepThree" class="de.hybris.platform.solrfacetsearch.backoffice.wizards.hotupdate.SolrHotUpdateIndexerStepThree" scope="prototype">
+		<property name="cronJobService" ref="cronJobService"/>
+		<property name="labelService" ref="labelService"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="currentObjectPrefix" value="newItem"/>
+	</bean>
+	
+	<bean id="solrIndexerOperationStepOne" class="de.hybris.platform.solrfacetsearch.backoffice.wizards.indexer.SolrIndexerOperationStepOne" scope="prototype">
+		<property name="facetSearchConfigDao" ref="facetSearchConfigDao"/>
+		<property name="cronJobService" ref="cronJobService"/>
+		<property name="labelService" ref="labelService"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="currentObjectPrefix" value="newItem"/>
+	</bean>
+
+</beans>

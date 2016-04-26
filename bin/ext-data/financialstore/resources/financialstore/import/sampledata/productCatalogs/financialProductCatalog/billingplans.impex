@@ -1,0 +1,10 @@
+# ImpEx for BillingPlans
+
+# Macros / Replacement Parameter definitions
+$billingFrequency=billingFrequency(code)[default='yearly']
+
+INSERT_UPDATE BillingPlan;id[unique=true];billingCycleType(code);$billingFrequency
+;yearlyplan;subscription_start;
+;singleplan;subscription_start;single
+;monthlyplan;subscription_start;monthly
+

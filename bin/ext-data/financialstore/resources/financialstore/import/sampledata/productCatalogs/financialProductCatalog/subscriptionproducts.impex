@@ -1,0 +1,88 @@
+# ImpEx for Importing Products into Insurance Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=financialProductCatalog
+$productCatalogName=Financial Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$supercategories=supercategories(code, $catalogVersion)
+$defaultCategory=defaultCategory(code, $catalogVersion)
+$baseProduct=baseProduct(code,$catalogVersion)
+$approved=approvalstatus(code)[default='approved']
+$taxGroup=Europe1PriceFactory_PTG(code)[default=uk-vat-full]
+
+# Insert Subscription Products
+INSERT_UPDATE SubscriptionProduct;code[unique=true];$catalogVersion;subscriptionTerm(id);soldIndividually[default=false];$supercategories;$defaultCategory;unit(code)[default=pieces];$approved;$taxGroup
+;WED_2STAR					;;annually		;true			;insurances_event,insurance_forms_event		;insurances_event;
+;WED_3STAR					;;annually		;true			;insurances_event,insurance_forms_event		;insurances_event;
+;WED_4STAR					;;annually		;true			;insurances_event,insurance_forms_event		;insurances_event;
+;WED_5STAR					;;annually		;true			;insurances_event,insurance_forms_event		;insurances_event;
+;WED_EXCESSWAIVER			;;annually		;		        ;insurances_event_options						;
+;WED_PUBLICLIABILITY		;;annually		;		        ;insurances_event_options						;
+;WED_VENUECOVER			    ;;annually		;		        ;insurances_event_options						;
+
+#Subscription Products for Travel Insurance
+;TRA_SINGLE_BUDGET			;;single		;true			;insurances_travel_single,insurance_forms_travel_traveller_info		;insurances_travel	;
+;TRA_SINGLE_SILVER			;;single		;true			;insurances_travel_single,insurance_forms_travel_traveller_info		;insurances_travel	;
+;TRA_SINGLE_GOLD			;;single		;true			;insurances_travel_single,insurance_forms_travel_traveller_info		;insurances_travel	;
+;TRA_ANNUAL_BUDGET			;;annually		;true			;insurances_travel_annual,insurance_forms_travel_traveller_info		;insurances_travel	;
+;TRA_ANNUAL_SILVER			;;annually		;true			;insurances_travel_annual,insurance_forms_travel_traveller_info		;insurances_travel	;
+;TRA_ANNUAL_GOLD			;;annually		;true			;insurances_travel_annual,insurance_forms_travel_traveller_info		;insurances_travel	;
+;TRA_BACKPACKERS_BUDGET		;;single		;true			;insurances_travel_backpackers,insurance_forms_travel_traveller_info;insurances_travel	;
+;TRA_BACKPACKERS_SILVER		;;single		;true			;insurances_travel_backpackers,insurance_forms_travel_traveller_info;insurances_travel	;
+;TRA_BACKPACKERS_GOLD		;;single		;true			;insurances_travel_backpackers,insurance_forms_travel_traveller_info;insurances_travel	;
+;TRA_WINTER					;;single		;	        	;insurances_travel_options						;	;
+;TRA_GOLF					;;single		;	        	;insurances_travel_options						;	;
+;TRA_BUSINESS				;;single		;	            ;insurances_travel_options						;	;
+;TRA_VALUABLES				;;single		;		        ;insurances_travel_options						;	;
+;TRA_HAZARDOUS				;;single		;		        ;insurances_travel_options						;	;
+;TRA_EXCESS					;;single		;		        ;insurances_travel_options						;	;
+
+#Subscription Products for Homeowners Property Insurance
+;PRO_PROPERTY_HOMEOWNERS        ;;annualRenewable	;true		;insurances_property_homeowners,insurance_forms_property_personal_details;insurances_property_homeowners;
+;PRO_FLOOD_COVER_HOMEOWNERS		;;annualRenewable	;		    ;insurances_property_options;;
+;PRO_TEMP_ACCOM_HOMEOWNERS		;;annualRenewable	;		    ;insurances_property_options;;
+;PRO_JEWELRY_COVER_HOMEOWNERS	;;annualRenewable	;		    ;insurances_property_options;;
+;PRO_BICYCLES_COVER_HOMEOWNERS	;;annualRenewable	;		    ;insurances_property_options;;
+
+#Subscription Products for Renters Property Insurance
+;PRO_PROPERTY_RENTERS		    ;;annualRenewable	;true		;insurances_property_renters,insurance_forms_property_personal_details;insurances_property_renters;
+;PRO_TEMP_ACCOM_RENTERS			;;annualRenewable	;		    ;insurances_property_options;;
+;PRO_JEWELRY_COVER_RENTERS	    ;;annualRenewable	;		    ;insurances_property_options;;
+;PRO_BICYCLES_COVER_RENTERS	    ;;annualRenewable	;		    ;insurances_property_options;;
+
+#Subscription Products for Homeowners Property Insurance Monthly plan
+;PRO_PROPERTY_HOMEOWNERS_MONTHLY        ;;monthly	;true		;insurances_property_homeowners,insurance_forms_property_personal_details;insurances_property_homeowners;
+;PRO_FLOOD_COVER_HOMEOWNERS_MONTHLY		;;monthly	;		    ;insurances_property_options;;
+;PRO_TEMP_ACCOM_HOMEOWNERS_MONTHLY		;;monthly	;		    ;insurances_property_options;;
+;PRO_JEWELRY_COVER_HOMEOWNERS_MONTHLY	;;monthly	;		    ;insurances_property_options;;
+;PRO_BICYCLES_COVER_HOMEOWNERS_MONTHLY	;;monthly	;		    ;insurances_property_options;;
+
+#Subscription Products for Renters Property Insurance Monthly plan
+;PRO_PROPERTY_RENTERS_MONTHLY		    ;;monthly	;true		;insurances_property_renters,insurance_forms_property_personal_details;insurances_property_renters;
+;PRO_TEMP_ACCOM_RENTERS_MONTHLY			;;monthly	;		    ;insurances_property_options;;
+;PRO_JEWELRY_COVER_RENTERS_MONTHLY	    ;;monthly	;		    ;insurances_property_options;;
+;PRO_BICYCLES_COVER_RENTERS_MONTHLY	    ;;monthly	;		    ;insurances_property_options;;
+
+#Subscription Products for AUTO insurance Annual Plan
+;AUTO_ANNUALLY                          ;;annually  ;true       ;insurances_auto,insurance_forms_auto_personal_details;insurances_auto;;;
+
+#Subscription Products for AUTO insurance Monthly Plan
+;AUTO_MONTHLY                           ;;monthly   ;true       ;insurances_auto,insurance_forms_auto_personal_details;insurances_auto;;;
+
+#Auto insurance options products
+;AUTO_LEGAL_EXPENSE_COVER_ANNUALLY      ;;annually  ;           ;insurances_auto_options;;
+;AUTO_BREAKDOWN_COVER_ANNUALLY          ;;annually  ;           ;insurances_auto_options;;
+;AUTO_KEY_PROTECTION_COVER_ANNUALLY     ;;annually  ;           ;insurances_auto_options;;
+;AUTO_5_YEAR_GUARANTEE_ANNUALLY         ;;annually  ;           ;insurances_auto_options;;
+
+;AUTO_LEGAL_EXPENSE_COVER_MONTHLY       ;;monthly   ;           ;insurances_auto_options;;
+;AUTO_BREAKDOWN_COVER_MONTHLY           ;;monthly   ;           ;insurances_auto_options;;
+;AUTO_KEY_PROTECTION_COVER_MONTHLY      ;;monthly   ;           ;insurances_auto_options;;
+;AUTO_5_YEAR_GUARANTEE_MONTHLY          ;;monthly   ;           ;insurances_auto_options;;
+;AUTO_TELEMETRY_INSTALLATION_MONTHLY    ;;monthly   ;           ;insurances_auto_options;;
+
+#Life insurance product
+;LIFE                                   ;;annually  ;true       ;insurances_life,insurance_forms_life_personal_details;insurances_life;
+;LIFE_PREMIUM_PROTECTION                ;;annually  ;           ;insurances_life_options ;;
+;LIFE_RENEWAL_OPTION                    ;;annually  ;           ;insurances_life_options ;;
+;LIFE_PAYMENT_PROTECTION_BENEFIT        ;;annually  ;           ;insurances_life_options ;;

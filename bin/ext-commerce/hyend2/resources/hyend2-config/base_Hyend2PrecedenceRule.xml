@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<label spring-bean="hyend2precedenceRuleLabelProvider"/>
+	<initial-properties source-object-template="Hyend2IndexSchema">
+        <property-mapping source="src" target="Hyend2PrecedenceRule.indexSchema"/>
+	</initial-properties>
+</base>

@@ -1,0 +1,3 @@
+
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);facet;localized;currency;multiValue;rangeSets(name);facetDisplayNameProvider;fieldValueProvider
+;testIndexedType${testId};type;string;;true;true;false;true;;;classificationPropertyValueProvider

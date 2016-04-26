@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config xmlns="http://www.hybris.com/cockpit/config">
+    <context merge-by="module" parent="auto" component="explorer-tree">
+        <explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
+            <explorer-tree:navigation-node id="hmc.cms2">
+                <explorer-tree:type-node code="SimpleCMSAction" id="SimpleCMSAction" position="9"/>
+            </explorer-tree:navigation-node>
+        </explorer-tree:explorer-tree>
+    </context>
+    <context merge-by="type" parent="AbstractBannerComponent" type="ImageMapComponent" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.properties">
+                <editorArea:section name="hmc.section.cmscomponent.features">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="imageMapHTML"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="SimpleCMSComponent" type="CMSLinkComponent" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.properties">
+                <editorArea:section name="hmc.properties">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="linkName"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="external"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="contentPage"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="category"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="product"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="url"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="target"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="styleAttributes"/>
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab name="hmc.administration">
+                <editorArea:section name="hmc.section.cms.admin">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="containers"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="productCode"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="categoryCode"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="contentPageLabelOrId"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="SimpleCMSComponent" type="ProductFeatureComponent" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.properties">
+                <editorArea:section name="hmc.section.cmscomponent.features">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="product"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="title"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="description"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="media"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="SimpleCMSComponent" type="FooterComponent" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.properties">
+                <editorArea:section name="hmc.section.cmscomponent.features">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="navigationNodes"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="notice"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="wrapAfter"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="showLanguageCurrency" editor="com.hybris.cockpitng.editor.boolean.checkbox"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="SimpleCMSComponent" type="CategoryFeatureComponent" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.properties">
+                <editorArea:section name="hmc.section.cmscomponent.features">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="category"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="title"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="description"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="media"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="AbstractCMSAction" type="SimpleCMSAction" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.properties">
+                <editorArea:section name="hmc.properties">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="url"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.components">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="components"/>
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab merge-mode="remove" name="hmc.tab.components.contentslots"/>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="SimpleCMSComponent" type="NavigationBarComponent" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.properties">
+                <editorArea:section name="hmc.section.cmscomponent.features">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="navigationNode"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="link"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="dropDownLayout"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="styleClass"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="wrapAfter"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="SimpleCMSComponent" type="MiniCartComponent" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.properties">
+                <editorArea:section name="hmc.section.cmscomponent.features">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="title"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="totalDisplay"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="shownProductCount"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="AbstractRestriction" type="CMSUiExperienceRestriction" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.properties">
+                <editorArea:section name="hmc.section.restriction.objects">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="uiExperience"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+</config>

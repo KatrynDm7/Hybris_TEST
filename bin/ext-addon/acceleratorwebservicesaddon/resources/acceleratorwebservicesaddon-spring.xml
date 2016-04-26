@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+	<alias name="defaultCommerceWebServicesPaymentFacade" alias="commerceWebServicesPaymentFacade"/>
+	<bean id="defaultCommerceWebServicesPaymentFacade" parent="paymentFacade" class="de.hybris.platform.acceleratorwebservicesaddon.payment.facade.impl.DefaultCommerceWebServicesPaymentFacade">
+		<property name="configurationService" ref="configurationService"/>
+		<property name="paymentSubscriptionResultService" ref="paymentSubscriptionResultService"/>
+		<property name="modelService" ref="modelService"/>
+	</bean>
+	
+	<alias alias="siteBaseUrlResolutionService" name="wsSiteBaseUrlResolutionService"/>
+	<bean id="wsSiteBaseUrlResolutionService"
+	      class="de.hybris.platform.acceleratorwebservicesaddon.urlresolver.impl.WsSiteBaseUrlResolutionService"
+	      parent="defaultSiteBaseUrlResolutionService">
+	</bean>
+	
+	<alias alias="paymentSubscriptionResultDao" name="defaultPaymentSubscriptionResultDao"/>
+	<bean id="defaultPaymentSubscriptionResultDao" class="de.hybris.platform.acceleratorwebservicesaddon.payment.dao.impl.DefaultPaymentSubscriptionResultDao"
+	      parent="abstractItemDao"/>
+
+	<alias alias="paymentSubscriptionResultService" name="defaultPaymentSubscriptionResultService" />
+	<bean id="defaultPaymentSubscriptionResultService"
+		class="de.hybris.platform.acceleratorwebservicesaddon.payment.service.impl.DefaultPaymentSubscriptionResultService"
+		parent="abstractBusinessService">
+		<property name="paymentSubscriptionResultDao" ref="paymentSubscriptionResultDao" />
+	</bean>	
+	
+	<!-- Place order hook -->
+	<bean id="webServicesPlaceOrderHook" class="de.hybris.platform.acceleratorwebservicesaddon.order.hook.WebServicesPlaceOrderHook">
+		<property name="paymentSubscriptionResultService" ref="paymentSubscriptionResultService" />
+	</bean>
+	
+	<bean id="wsPlaceOrderMethodHooksMergeDirective" depends-on="commercePlaceOrderMethodHooks" parent="listMergeDirective">
+       <property name="add" ref="webServicesPlaceOrderHook"/>
+    </bean>
+    
+    <!-- Old payment subscription result cleaner -->
+	<bean id="oldPaymentSubscriptionResultRemovalJob" class="de.hybris.platform.acceleratorwebservicesaddon.cronjob.OldPaymentSubscriptionResultRemovalJob"
+			parent="abstractJobPerformable">
+		<property name="paymentSubscriptionResultDao" ref="paymentSubscriptionResultDao" />
+		<property name="timeService" ref="timeService"/>
+	</bean>
+    
+</beans>

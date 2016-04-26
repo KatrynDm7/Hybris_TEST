@@ -1,0 +1,78 @@
+# ImpEx for Importing Category Classifications into Insurance Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=financialProductCatalog
+$productCatalogName=Financial Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$classCatalogVersion=catalogversion(catalog(id[default='InsuranceClassification']),version[default='1.0'])[unique=true,default='InsuranceClassification:1.0']
+$classSystemVersion=systemVersion(catalog(id[default='InsuranceClassification']),version[default='1.0'])[unique=true]
+$class=classificationClass(ClassificationClass.code,$classCatalogVersion)[unique=true]
+$supercategories=source(code, $classCatalogVersion)[unique=true]
+$categories=target(code, $catalogVersion)[unique=true]
+$attribute=classificationAttribute(code,$classSystemVersion)[unique=true]
+$unit=unit(code,$classSystemVersion)
+
+# Insert Classifications
+INSERT_UPDATE ClassificationClass;$classCatalogVersion;code[unique=true];allowedPrincipals(uid)[default='customergroup']
+
+
+# Insert Classification Attributes
+INSERT_UPDATE ClassificationAttribute;$classSystemVersion;code[unique=true]
+
+
+# Links ClassificationClasses to Categories
+INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
+
+
+INSERT_UPDATE ClassAttributeAssignment;$class;$attribute;position;$unit;attributeType(code[default=string]);multiValued[default=false];range[default=false];localized[default=false];attributeValues(code,$classSystemVersion)
+
+ 
+ 
+ # Insert Classifications
+INSERT_UPDATE ClassificationClass;$classCatalogVersion;code[unique=true];allowedPrincipals(uid)[default='customergroup']
+;;insuranceplanclassification
+;;travelinsuranceclassification
+;;travelinsurancemaxdays
+;;travelinsurancehomevisits
+;;travelinsurancewintersportsmaxdays
+;;propertyinsurancerebuildvalue
+
+# Insert Classification Attributes
+INSERT_UPDATE ClassificationAttribute;$classSystemVersion;code[unique=true]
+;;cancellationRearrangementCoverage
+;;eventclothingcoverage
+;;eventMoneyCoverage
+;;decorationssundriescoverage
+;;carsTransportCoverage
+;;photographyVideoCoverage	
+;;failureSuppliersCoverage
+;;personalLiabilityCoverage
+;;venueCover
+;;publicLiability
+;;medicalscreening
+;;maxdayspertrip
+;;homevisits
+;;wintersportsmaxdays
+;;rebuildvalue
+
+INSERT_UPDATE ClassAttributeAssignment;$class;$attribute;position;$unit;attributeType(code[default=string]);multiValued[default=false];range[default=false];localized[default=false];attributeValues(code,$classSystemVersion)
+;insuranceplanclassification	;cancellationRearrangementCoverage	;1	;	;boolean
+;insuranceplanclassification	;eventclothingcoverage				;1	;	;boolean
+;insuranceplanclassification	;eventMoneyCoverage				    ;2	;	;boolean
+;insuranceplanclassification	;decorationssundriescoverage		;3	;	;boolean
+;insuranceplanclassification	;carsTransportCoverage				;4	;	;boolean
+;insuranceplanclassification	;photographyVideoCoverage			;5	;	;boolean
+;insuranceplanclassification	;failureSuppliersCoverage			;6	;	;boolean
+;insuranceplanclassification	;personalLiabilityCoverage			;7	;	;boolean
+;insuranceplanclassification	;venueCover						    ;	;	;boolean
+;insuranceplanclassification	;publicLiability					;	;	;boolean
+
+#Travel Insurance attributes
+;travelinsuranceclassification	;medicalscreening					;1	;	;boolean
+;travelinsurancemaxdays			;maxdayspertrip						;2	;	;string;;;true
+;travelinsurancehomevisits		;homevisits							;3	;	;string;;;true
+;travelinsurancewintersportsmaxdays	;wintersportsmaxdays			;4	;	;string;;;true
+
+# Property Insurance attributes
+;propertyinsurancerebuildvalue	;rebuildvalue						;1	;	;string;;;true
+

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<!--
+	file:	 xindex.xml
+-->
+<indicees>
+	<!-- Standardindizees -->
+	<index>
+		<file>panelstatements.xml</file>
+		<nodepath>panelstatements.panelstatement.id</nodepath>
+		<unique>no</unique>
+		<enabled>yes</enabled>
+	</index>
+	<index>
+		<file>actions.xml</file>
+		<nodepath>actions.action.classid</nodepath>
+		<unique>no</unique>
+		<enabled>yes</enabled>
+	</index>
+	<index>
+		<file>pageitems.xml</file>
+		<nodepath>pageitems.pageitem.id</nodepath>
+		<unique>yes</unique>
+		<enabled>yes</enabled>
+	</index>
+</indicees>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+    
+     <bean id="liveEditResourceBeforeViewHandlerListMergeDirective" depends-on="beforeViewHandlersList" parent="listMergeDirective" >
+		<property name="add" ref="liveEditResourceBeforeViewHandler" />
+		<property name="afterClasses">
+			<list value-type="java.lang.Class">
+				<value>${cmsPageBeforeViewHandler}</value>
+				<value>${uiThemeResourceBeforeViewHandler}</value>
+			</list>
+		</property>
+	</bean> 
+	
+	<bean id="previewResourceBeforeViewHandlerListMergeDirective" depends-on="beforeViewHandlersList" parent="listMergeDirective" >
+		<property name="add" ref="previewResourceBeforeViewHandler" />
+		<property name="afterBeanNames" value="liveEditResourceBeforeViewHandler" />
+	</bean> 
+    
+    <alias alias="liveEditResourceBeforeViewHandler" name="defaultLiveEditResourceBeforeViewHandler" />
+    <bean id="defaultLiveEditResourceBeforeViewHandler" parent="beforeViewHandlerAdapter" >
+		<property name="adaptee">
+			<bean class="de.hybris.liveeditaddon.web.interceptors.beforeview.LiveEditResourceBeforeViewHandler">
+				<property name="defaultThemeName" value="${defaultThemeName}" />
+			</bean>
+		</property>	
+	</bean>    
+	
+	 <alias alias="previewResourceBeforeViewHandler" name="defaultPreviewResourceBeforeViewHandler" />
+	 <bean id="defaultPreviewResourceBeforeViewHandler" parent="beforeViewHandlerAdapter" >
+		<property name="adaptee">
+			<bean class="de.hybris.liveeditaddon.web.interceptors.beforeview.PreviewResourceBeforeViewHandler">
+				<property name="defaultThemeName" value="${defaultThemeName}" />
+			</bean>
+		</property>	
+	</bean> 
+	
+	<bean id="liveEditJsResourceBeforeViewHandlerListMergeDirective" depends-on="beforeViewHandlersList" parent="listMergeDirective" >
+		<property name="add" ref="liveEditJsResourceBeforeViewHandler" />
+		<property name="afterBeanNames" value="liveEditResourceBeforeViewHandler" />
+	</bean> 
+	
+	<bean id="defaultLiveEditJavaScriptMessageResourceAccessor" parent="abstractJavaScriptMessageResourceAccessor">
+		<property name="addOnName" value="liveeditaddon" />
+	</bean>
+	
+	<bean id="liveEditJsResourceBeforeViewHandler" parent="beforeViewHandlerAdapter">
+		<property name="adaptee">
+			<bean parent="abstractBeforeViewJsPropsHandlerAdaptee" class="de.hybris.liveeditaddon.web.interceptors.beforeview.LiveEditJsResourceBeforeViewHandler">
+				<property name="messageSource" ref="defaultLiveEditJavaScriptMessageResourceAccessor" />
+			</bean>
+		</property>	
+	</bean>
+	
+	<!-- this version will be used in a *CMSComponentTag tag -->
+	<bean id="componentCMSPageSlotComponentService" parent="defaultCMSPageSlotComponentService">
+		<property name="cmsComponentContainerStrategy" ref="componentCmsComponentContainerStrategyRegistry"/>
+	</bean>
+	
+	<bean id="componentCmsComponentContainerStrategyRegistry" parent="defaultCMSComponentContainerStrategyRegistry"/>
+</beans>

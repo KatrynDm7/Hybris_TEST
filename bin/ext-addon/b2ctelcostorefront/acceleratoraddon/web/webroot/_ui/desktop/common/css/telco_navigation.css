@@ -1,0 +1,48 @@
+.navigationbarcollectioncomponent {
+    background-color: #192630;
+    border: none;
+    font-weight: bold;
+    line-height: 2.572em;
+}
+.navigationbarcollectioncomponent li.La {
+    position: relative;
+}
+.navigationbarcollectioncomponent li.La a {
+    font-family: 'Montserrat', sans-serif;
+}
+.navigationbarcollectioncomponent li.La > a {
+    letter-spacing: 0.04em;
+    color: #80b3ce;
+    line-height: 4em;
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: none;
+    transition: none;
+    padding: 0 25px;
+}
+.navigationbarcollectioncomponent li.La.auto > a:hover {
+    color: #fff;
+}
+.navigationbarcollectioncomponent li.La:hover > a {
+    background-color: #ffb800;
+    border: none;
+    color: #484848;
+    padding: 0 25px;
+}
+.navigationbarcollectioncomponent ul.Lb {
+    background-color: #ffb800;
+    box-shadow: none;
+    top: 56px;
+    border: none;
+    width: 200px;
+    padding: 5px 10px 15px 25px;
+}
+.navigationbarcollectioncomponent ul.Lb a {
+    color: #484848;
+}
+.navigationbarcollectioncomponent ul.Lb a:hover {
+    color: #fff
+}
+.navigationbarcollectioncomponent ul.Lb li.Lb span.nav-submenu-title {
+    margin: 0;
+}

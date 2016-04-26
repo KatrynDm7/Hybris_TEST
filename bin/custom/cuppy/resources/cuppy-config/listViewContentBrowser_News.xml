@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list-view unassigned-group-name="Other">
+  <group name="General">
+  		<property qualifier="News.competition" visible="true"/>
+		<property qualifier="News.creationtime" visible="true"/>
+		<property qualifier="News.email" visible="true"/>
+		<property qualifier="News.content" visible="true"/>
+	</group>
+</list-view>

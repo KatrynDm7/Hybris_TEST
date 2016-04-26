@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<widget xmlns="http://www.zkoss.org/2005/zul"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:h="http://www.w3.org/1999/xhtml"
+		xmlns:w="http://www.zkoss.org/2005/zk/client"
+		xmlns:zk="http://www.zkoss.org/2005/zk"
+		xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.hybris.com/schema/cockpitng/zul/zul.xsd">
+ 		
+ 		<!-- No actual UI -->
+
+</widget>

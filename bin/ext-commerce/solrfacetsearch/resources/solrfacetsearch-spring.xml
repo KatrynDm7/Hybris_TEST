@@ -1,0 +1,1078 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+
+
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<alias alias="solrService" name="defaultSolrService" />
+	<bean id="defaultSolrService" class="de.hybris.platform.solrfacetsearch.solr.impl.SolrServiceImpl" parent="abstractBusinessService" />
+
+	<alias alias="standaloneSolrService" name="defaultStandaloneSolrService" />
+	<bean id="defaultStandaloneSolrService" class="de.hybris.platform.solrfacetsearch.solr.impl.SolrServiceStandaloneImpl"
+		parent="abstractBusinessService">
+		<property name="solrCoreNameResolver" ref="solrCoreNameResolver" />
+		<property name="tenantService" ref="tenantService" />
+	</bean>
+
+	<alias alias="facetSearchConfigDao" name="defaultFacetSearchConfigDao" />
+	<bean id="defaultFacetSearchConfigDao" class="de.hybris.platform.solrfacetsearch.config.impl.DefaultFacetSearchConfigDao"
+		parent="abstractItemDao">
+	</bean>
+
+	<!-- alias alias="facetSearchConfigService" name="defaultFacetSearchConfigService" /-->
+	<bean id="defaultFacetSearchConfigService" class="de.hybris.platform.solrfacetsearch.config.impl.DefaultFacetSearchConfigService"
+		parent="abstractBusinessService">
+		<property name="facetSearchConfigDao" ref="facetSearchConfigDao" />
+		<property name="indexedPropertyConverter" ref="indexedPropertyConverter"></property>
+		<property name="solrSearchConfigConverter" ref="solrSearchConfigConverter"></property>
+		<property name="facetSearchConfigConverter" ref="solrFacetSearchConfigConverter"></property>
+	</bean>
+
+	<bean class="de.hybris.platform.solrfacetsearch.solr.impl.AbstractSolrRestService" id="abstractSolrRestService"
+		abstract="true">
+		<property name="solrService" ref="solrService" />
+		<property name="solrCoreNameResolver" ref="solrCoreNameResolver" />
+		<property name="restTemplate" ref="solrRestTemplate" />
+		<property name="configurationService" ref="configurationService" />
+		<property name="facetSearchConfigDao" ref="facetSearchConfigDao" />
+		<property name="tenantService" ref="tenantService" />
+	</bean>
+
+	<bean id="abstractYSolrService" class="de.hybris.platform.solrfacetsearch.common.AbstractYSolrService" abstract="true">
+		<property name="facetSearchConfigService" ref="facetSearchConfigService" />
+		<property name="solrFieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="solrService" ref="solrService" />
+		<property name="solrConfigurationService" ref="solrConfigurationService" />
+	</bean>
+
+	<alias name="defaultSolrAutoSuggestService" alias="solrAutoSuggestService" />
+	<bean id="defaultSolrAutoSuggestService" class="de.hybris.platform.solrfacetsearch.suggester.impl.DefaultSolrAutoSuggestService"
+		parent="abstractYSolrService">
+		<property name="solrIndexedTypeCodeResolver" ref="solrIndexedTypeCodeResolver" />
+	</bean>
+
+	<bean id="mockSolrAutoCompleteService" class="de.hybris.platform.solrfacetsearch.suggester.impl.MockSolrAutoCompleteService" />
+
+	<bean id="productIdentityProvider" class="de.hybris.platform.solrfacetsearch.provider.impl.ProductIdentityProvider" />
+
+	<bean id="itemIdentityProvider" class="de.hybris.platform.solrfacetsearch.provider.impl.ItemIdentityProvider">
+		<property name="modelService" ref="modelService" />
+		<property name="catalogTypeService" ref="catalogTypeService" />
+	</bean>
+
+	<bean id="abstractPropertyFieldValueProvider" class="de.hybris.platform.solrfacetsearch.provider.impl.AbstractPropertyFieldValueProvider"
+		abstract="true">
+		<property name="modelService" ref="modelService" />
+		<property name="localeService" ref="localizationService" />
+		<property name="i18nService" ref="i18nService" />
+		<property name="rangeNameProvider" ref="rangeNameProvider" />
+	</bean>
+
+	<bean id="modelPropertyFieldValueProvider" class="de.hybris.platform.solrfacetsearch.provider.impl.ModelPropertyFieldValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="variantsService" ref="variantsService" />
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+	</bean>
+
+	<bean id="productPriceValueProvider" class="de.hybris.platform.solrfacetsearch.provider.impl.ProductPriceValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="priceService" ref="priceService" />
+	</bean>
+
+	<bean id="classificationPropertyValueProvider" class="de.hybris.platform.solrfacetsearch.provider.impl.ClassificationPropertyValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+	</bean>
+
+	<bean id="categoryNameValueProvider" class="de.hybris.platform.solrfacetsearch.provider.impl.CategoryNameValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="categoriesQualifier" value="supercategories" />
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+	</bean>
+
+	<bean id="categoryCodeValueProvider" class="de.hybris.platform.solrfacetsearch.provider.impl.CategoryCodeValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="categoriesQualifier" value="supercategories" />
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+	</bean>
+
+	<bean id="springELValueProvider" class="de.hybris.platform.solrfacetsearch.provider.impl.SpELValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="parser">
+			<bean class="org.springframework.expression.spel.standard.SpelExpressionParser" />
+		</property>
+	</bean>
+
+	<bean id="noOpQualifierProvider" class="de.hybris.platform.solrfacetsearch.provider.impl.NoOpQualifierProvider" />
+
+	<bean id="languageQualifierProvider" class="de.hybris.platform.solrfacetsearch.provider.impl.LanguageQualifierProvider">
+		<property name="commonI18NService" ref="commonI18NService" />
+	</bean>
+
+	<bean id="currencyQualifierProvider" class="de.hybris.platform.solrfacetsearch.provider.impl.CurrencyQualifierProvider">
+		<property name="commonI18NService" ref="commonI18NService" />
+	</bean>
+
+	<alias name="defaultValueProviderSelectionStrategy" alias="valueProviderSelectionStrategy" />
+	<bean id="defaultValueProviderSelectionStrategy" class="de.hybris.platform.solrfacetsearch.provider.impl.DefaultValueProviderSelectionStrategy">
+		<property name="defaultValueProviderId" value="modelPropertyFieldValueProvider" />
+	</bean>
+
+	<alias name="defaultExpressionEvaluator" alias="expressionEvaluator" />
+	<bean id="defaultExpressionEvaluator" class="de.hybris.platform.solrfacetsearch.provider.impl.DefaultExpressionEvaluator">
+		<property name="parser">
+			<bean class="org.springframework.expression.spel.standard.SpelExpressionParser" />
+		</property>
+	</bean>
+
+	<bean id="abstractValueResolver" abstract="true">
+		<property name="qualifierProvider" ref="noOpQualifierProvider" />
+		<property name="sessionService" ref="sessionService" />
+	</bean>
+
+	<bean id="formatValueFilter" class="de.hybris.platform.solrfacetsearch.provider.impl.FormatValueFilter" />
+
+	<bean id="splitValueFilter" class="de.hybris.platform.solrfacetsearch.provider.impl.SplitValueFilter" />
+
+	<bean id="modelAttributesValueResolver" class="de.hybris.platform.solrfacetsearch.provider.impl.ModelAttributesValueResolver"
+		parent="abstractValueResolver">
+		<property name="qualifierProvider" ref="languageQualifierProvider" />
+		<property name="modelService" ref="modelService" />
+		<property name="typeService" ref="typeService" />
+		<property name="expressionEvaluator" ref="expressionEvaluator" />
+		<property name="valueFilters">
+			<list>
+				<ref bean="formatValueFilter" />
+				<ref bean="splitValueFilter" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="categoryFacetDisplayNameProvider" class="de.hybris.platform.solrfacetsearch.provider.impl.CategoryFacetDisplayNameProvider">
+		<property name="categoryService" ref="categoryService" />
+	</bean>
+
+	<alias name="defaultIndexerService" alias="indexerService" />
+	<bean id="defaultIndexerService" class="de.hybris.platform.solrfacetsearch.indexer.impl.DefaultIndexerService">
+		<property name="indexerStrategyFactory" ref="indexerStrategyFactory" />
+	</bean>
+
+	<alias name="defaultIndexOperationIdGenerator" alias="indexOperationIdGenerator" />
+	<bean id="defaultIndexOperationIdGenerator" class="de.hybris.platform.solrfacetsearch.indexer.strategies.impl.DefaultIndexOperationIdGenerator">
+		<property name="indexOperationIdKeyGenerator" ref="indexOperationIdKeyGenerator" />
+	</bean>
+
+	<bean id="indexOperationIdKeyGenerator" class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator"
+		init-method="init">
+		<property name="key" value="indexOperationId" />
+		<property name="digits" value="-1" />
+		<property name="start" value="1" />
+		<property name="numeric" value="true" />
+	</bean>
+
+	<alias name="defaultIndexerStrategyFactory" alias="indexerStrategyFactory" />
+	<bean id="defaultIndexerStrategyFactory" class="de.hybris.platform.solrfacetsearch.indexer.strategies.impl.DefaultIndexerStrategyFactory">
+		<property name="indexerStrategyBeanId" value="indexerStrategy" />
+	</bean>
+
+	<alias name="defaultIndexerStrategy" alias="indexerStrategy" />
+	<bean id="defaultIndexerStrategy" class="de.hybris.platform.solrfacetsearch.indexer.strategies.impl.DefaultIndexerStrategy"
+		scope="prototype">
+		<property name="sessionService" ref="sessionService" />
+		<property name="userService" ref="userService" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="flexibleSearchQuerySpecFactory" ref="flexibleSearchQuerySpecFactory" />
+		<property name="indexerQueriesExecutor" ref="indexerQueriesExecutor" />
+		<property name="indexerContextFactory" ref="indexerContextFactory" />
+		<property name="indexerWorkerFactory" ref="indexerWorkerFactory" />
+		<property name="indexOperationIdGenerator" ref="indexOperationIdGenerator" />
+		<property name="indexNameResolver" ref="indexNameResolver" />
+		<property name="tenantService" ref="tenantService" />
+	</bean>
+
+	<alias name="defaultIndexOperationStrategyFactory" alias="indexOperationStrategyFactory" />
+	<bean id="defaultIndexOperationStrategyFactory" class="de.hybris.platform.solrfacetsearch.indexer.strategies.impl.DefaultIndexOperationStrategyFactory">
+		<property name="indexOperationStrategiesMapping" ref="indexOperationStrategiesMapping" />
+	</bean>
+
+	<alias name="defaultIndexOperationStrategiesMapping" alias="indexOperationStrategiesMapping" />
+	<util:map id="defaultIndexOperationStrategiesMapping">
+		<entry key="FULL_DIRECT" value="fullDirectIndexOperationStrategy" />
+		<entry key="FULL_TWO_PHASE" value="fullTwoPhaseIndexOperationStrategy" />
+		<entry key="UPDATE" value="updateIndexOperationStrategy" />
+		<entry key="PARTIAL_UPDATE" value="noOpIndexOperationStrategy" />
+		<entry key="DELETE" value="noOpIndexOperationStrategy" />
+	</util:map>
+
+	<bean id="abstractIndexOperationStrategy" abstract="true">
+		<property name="modelService" ref="modelService" />
+		<property name="solrCoresService" ref="solrCoresService" />
+		<property name="solrIndexerOperationsService" ref="solrIndexerOperationsService" />
+	</bean>
+
+	<bean id="fullDirectIndexOperationStrategy" class="de.hybris.platform.solrfacetsearch.indexer.strategies.impl.FullDirectIndexOperationStrategy"
+		parent="abstractIndexOperationStrategy" scope="prototype">
+		<property name="indexer" ref="indexer" />
+		<property name="solrIndexedTypeCodeResolver" ref="solrIndexedTypeCodeResolver" />
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+		<property name="beforeOperationOnIndexCallbacks">
+			<list>
+				<bean class="de.hybris.platform.solrfacetsearch.indexer.callback.impl.DisableReplicationForFullIndex" parent="abstractReplicationCallback" />
+			</list>
+		</property>
+		<property name="afterOperationOnIndexCallbacks">
+			<list>
+				<!-- define code to be called after indexing operation
+				<bean class="de.hybris.platform.solrfacetsearch.indexer.callback.impl.MyOperationCallback">
+					<property name="solrSpellcheckerService" ref="solrSpellcheckerService"/>
+				</bean>
+				-->
+				<bean class="de.hybris.platform.solrfacetsearch.indexer.callback.impl.EnableReplicationForFullIndex" parent="abstractReplicationCallback" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="fullTwoPhaseIndexOperationStrategy" class="de.hybris.platform.solrfacetsearch.indexer.strategies.impl.FullTwoPhaseIndexOperationStrategy"
+		parent="fullDirectIndexOperationStrategy" scope="prototype">
+		<property name="beforeOperationOnIndexCallbacks">
+			<list>
+			</list>
+		</property>
+		<property name="afterOperationOnIndexCallbacks">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="updateIndexOperationStrategy" class="de.hybris.platform.solrfacetsearch.indexer.strategies.impl.UpdateIndexOperationStrategy"
+		parent="abstractIndexOperationStrategy" scope="prototype" />
+
+	<bean id="noOpIndexOperationStrategy" class="de.hybris.platform.solrfacetsearch.indexer.strategies.impl.NoOpIndexOperationStrategy"
+		scope="prototype" />
+
+	<alias name="defaultIndexerWorkerFactory" alias="indexerWorkerFactory" />
+	<bean id="defaultIndexerWorkerFactory" class="de.hybris.platform.solrfacetsearch.indexer.workers.impl.DefaultIndexerWorkerFactory">
+		<property name="workerBeanId" value="indexerWorker" />
+	</bean>
+
+	<alias name="defaultIndexerWorker" alias="indexerWorker" />
+	<bean id="defaultIndexerWorker" class="de.hybris.platform.solrfacetsearch.indexer.workers.impl.DefaultIndexerWorker"
+		scope="prototype">
+		<property name="sessionService" ref="sessionService" />
+		<property name="userService" ref="userService" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="facetSearchConfigService" ref="facetSearchConfigService" />
+		<property name="indexerQueriesExecutor" ref="indexerQueriesExecutor" />
+		<property name="indexerBatchContextFactory" ref="indexerBatchContextFactory" />
+		<property name="indexer" ref="indexer" />
+	</bean>
+
+	<bean id="abstractIndexerJob" parent="abstractJobPerformable" abstract="true">
+		<property name="facetSearchConfigService" ref="facetSearchConfigService" />
+		<property name="indexerService" ref="indexerService" />
+		<property name="indexer" ref="indexer" />
+	</bean>
+
+	<bean id="solrIndexerJob" class="de.hybris.platform.solrfacetsearch.indexer.cron.SolrIndexerJob" parent="abstractIndexerJob" />
+	<bean id="solrIndexerHotUpdateJob" class="de.hybris.platform.solrfacetsearch.indexer.cron.SolrIndexerHotUpdateJob"
+		parent="abstractIndexerJob" />
+	<bean id="solrIndexOptimizationJob" class="de.hybris.platform.solrfacetsearch.jalo.indexer.cron.SolrIndexOptimizationJob"
+		parent="abstractIndexerJob" />
+
+	<bean id="solrExtIndexerJob" class="de.hybris.platform.solrfacetsearch.indexer.cron.SolrExtIndexerJob" parent="abstractJobPerformable">
+		<property name="facetSearchConfigService" ref="facetSearchConfigService" />
+		<property name="indexerService" ref="indexerService" />
+		<property name="indexerQueriesExecutor" ref="indexerQueriesExecutor" />
+	</bean>
+
+	<!-- Helpers -->
+	<alias name="defaultIndexer" alias="indexer" />
+	<bean id="defaultIndexer" class="de.hybris.platform.solrfacetsearch.indexer.impl.DefaultIndexer">
+		<property name="solrDocumentFactory" ref="solrDocumentFactory" />
+		<property name="solrService" ref="solrService" />
+	</bean>
+
+	<bean id="solrDocumentFactory" class="de.hybris.platform.solrfacetsearch.indexer.impl.DefaultSolrDocumentFactory">
+		<property name="modelService" ref="modelService" />
+		<property name="typeService" ref="typeService" />
+		<property name="solrService" ref="solrService" />
+		<property name="indexerBatchContextFactory" ref="indexerBatchContextFactory" />
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="rangeNameProvider" ref="rangeNameProvider" />
+		<property name="valueProviderSelectionStrategy" ref="valueProviderSelectionStrategy" />
+	</bean>
+
+	<bean id="solr.exporter.xml_export" class="de.hybris.platform.solrfacetsearch.indexer.impl.XMLExporter" />
+
+	<alias name="solr.exporter.standalone" alias="solr.exporter.cloud" />
+	<bean id="solr.exporter.standalone" class="de.hybris.platform.solrfacetsearch.indexer.impl.SolrServerExporter">
+		<property name="solrService" ref="solrService" />
+	</bean>
+
+	<bean id="fieldNameTranslator" class="de.hybris.platform.solrfacetsearch.search.impl.DefaultFieldNameTranslator">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="valueProviderSelectionStrategy" ref="valueProviderSelectionStrategy" />
+	</bean>
+
+	<alias name="defaultFacetSearchQueryOperatorTranslator" alias="facetSearchQueryOperatorTranslator" />
+	<bean id="defaultFacetSearchQueryOperatorTranslator" class="de.hybris.platform.solrfacetsearch.search.impl.DefaultFacetSearchQueryOperatorTranslator">
+		<property name="queryOperatorStringMap">
+			<map>
+				<entry key="GREATER_THAN_OR_EQUAL_TO" value="[%s TO *]" />
+				<entry key="LESS_THAN_OR_EQUAL_TO" value="[* TO %s]" />
+				<entry key="GREATER_THAN" value="{%s TO *]" />
+				<entry key="LESS_THAN" value="[* TO %s}" />
+				<entry key="EQUAL_TO" value="%s" />
+				<entry key="CONTAINS" value="*%s*" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="solrFieldNameProvider" class="de.hybris.platform.solrfacetsearch.provider.impl.DefaultFieldNameProvider">
+		<property name="indexedPropertyConverter" ref="indexedPropertyConverter"></property>
+	</bean>
+
+	<alias name="defaultRangeNameProvider" alias="rangeNameProvider" />
+	<bean id="defaultRangeNameProvider" class="de.hybris.platform.solrfacetsearch.provider.impl.DefaultRangeNameProvider" />
+
+	<bean id="simpleParameterProvider" class="de.hybris.platform.solrfacetsearch.provider.impl.SimpleFsQueryParameterProvider" />
+
+	<bean id="mockContextAwareParameterProvider" class="de.hybris.platform.solrfacetsearch.provider.impl.MockContextAwareParameterProvider" />
+
+	<bean id="defaultModelLoader" class="de.hybris.platform.solrfacetsearch.loader.impl.DefaultModelLoader">
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<alias name="defaultFacetSearchService" alias="facetSearchService" />
+	<alias name="defaultFacetSearchService" alias="solrFacetSearchService" />
+	<bean id="defaultFacetSearchService" class="de.hybris.platform.solrfacetsearch.search.impl.DefaultFacetSearchService">
+		<property name="facetSearchStrategyFactory" ref="facetSearchStrategyFactory" />
+	</bean>
+
+	<alias name="defaultFacetSearchStrategyFactory" alias="facetSearchStrategyFactory" />
+	<bean id="defaultFacetSearchStrategyFactory" class="de.hybris.platform.solrfacetsearch.search.impl.DefaultFacetSearchStrategyFactory">
+		<property name="defaultFacetSearchStrategy" ref="defaultFacetSearchStrategy" />
+		<property name="legacyFacetSearchStrategy" ref="legacyFacetSearchStrategy" />
+	</bean>
+
+	<bean id="defaultFacetSearchStrategy" class="de.hybris.platform.solrfacetsearch.search.impl.DefaultFacetSearchStrategy"
+		parent="abstractFacetSearchStrategy">
+		<property name="solrService" ref="solrService" />
+		<property name="facetSearchQueryConverter" ref="facetSearchQueryConverter" />
+		<property name="facetSearchResultConverter" ref="facetSearchResultConverter" />
+		<property name="facetSearchContextFactory" ref="facetSearchContextFactory" />
+	</bean>
+
+	<bean id="legacyFacetSearchStrategy" class="de.hybris.platform.solrfacetsearch.search.impl.LegacyFacetSearchStrategy"
+		parent="abstractFacetSearchStrategy">
+		<property name="solrService" ref="solrService" />
+		<property name="i18NService" ref="i18NService" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="facetSearchContextFactory" ref="facetSearchContextFactory" />
+		<property name="facetSearchResultConverter" ref="facetSearchResultConverter" />
+		<property name="solrQueryConverter" ref="solrQueryConverter" />
+		<property name="resultPostProcessors" ref="solrSearchResultPostProcessors" />
+	</bean>
+
+	<bean id="abstractFacetSearchStrategy" class="de.hybris.platform.solrfacetsearch.search.impl.AbstractFacetSearchStrategy"
+		abstract="true">
+		<property name="searchQueryLanguageResolver" ref="searchQueryLanguageResolver" />
+		<property name="searchQueryCurrencyResolver" ref="searchQueryCurrencyResolver" />
+		<property name="searchQueryCatalogVersionsResolver" ref="searchQueryCatalogVersionsResolver" />
+	</bean>
+
+	<alias alias="freeTextQueryBuilderFactory" name="defaultFreeTextQueryBuilderFactory" />
+	<bean id="defaultFreeTextQueryBuilderFactory" class="de.hybris.platform.solrfacetsearch.search.impl.DefaultFreeTextQueryBuilderFactory" />
+
+	<bean id="abstractFreeTextQueryBuilder" class="de.hybris.platform.solrfacetsearch.search.impl.AbstractFreeTextQueryBuilder"
+		abstract="true" />
+
+	<alias alias="defaultFreeTextQueryBuilder" name="disMaxFreeTextQueryBuilder" />
+
+	<alias alias="multiFieldFreeTextQueryBuilder" name="defaultMultiFieldFreeTextQueryBuilder" />
+	<bean id="defaultMultiFieldFreeTextQueryBuilder" class="de.hybris.platform.solrfacetsearch.search.impl.MultiFieldFreeTextQueryBuilder">
+		<property name="fieldNameTranslator" ref="fieldNameTranslator" />
+	</bean>
+
+	<alias alias="disMaxFreeTextQueryBuilder" name="defaultDisMaxFreeTextQueryBuilder" />
+	<bean id="defaultDisMaxFreeTextQueryBuilder" class="de.hybris.platform.solrfacetsearch.search.impl.DisMaxFreeTextQueryBuilder">
+		<property name="fieldNameTranslator" ref="fieldNameTranslator" />
+	</bean>
+
+	<alias name="defaultSearchQueryLanguageResolver" alias="searchQueryLanguageResolver" />
+	<bean id="defaultSearchQueryLanguageResolver" class="de.hybris.platform.solrfacetsearch.search.impl.DefaultSearchQueryLanguageResolver">
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="userService" ref="userService" />
+	</bean>
+
+	<alias name="defaultSearchQueryCurrencyResolver" alias="searchQueryCurrencyResolver" />
+	<bean id="defaultSearchQueryCurrencyResolver" class="de.hybris.platform.solrfacetsearch.search.impl.DefaultSearchQueryCurrencyResolver">
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="userService" ref="userService" />
+	</bean>
+
+	<alias name="defaultSearchQueryCatalogVersionsResolver" alias="searchQueryCatalogVersionsResolver" />
+	<bean id="defaultSearchQueryCatalogVersionsResolver" class="de.hybris.platform.solrfacetsearch.search.impl.DefaultSearchQueryCatalogVersionsResolver">
+		<property name="catalogVersionService" ref="catalogVersionService" />
+	</bean>
+	
+	<!-- facetSearchQueryConverter & populators -->
+
+	<bean id="facetSearchQueryConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="org.apache.solr.client.solrj.SolrQuery" />
+		<property name="populators">
+			<list>
+				<ref bean="facetSearchQueryBasicPopulator" />
+				<ref bean="facetSearchQueryFilterQueriesPopulator" />
+				<ref bean="facetSearchQueryGroupingPopulator" />
+				<ref bean="facetSearchQuerySortsPopulator" />
+				<ref bean="facetSearchQueryPagingPopulator" />
+				<ref bean="facetSearchQueryFacetsPopulator" />
+				<ref bean="facetSearchQueryFieldsPopulator" />
+				<ref bean="facetSearchQuerySpellcheckPopulator" />
+				<ref bean="facetSearchQueryParamsPopulator" />
+				<ref bean="facetSearchQueryCatalogVersionsPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="abstractFacetSearchQueryPopulator" abstract="true">
+		<property name="fieldNameTranslator" ref="fieldNameTranslator" />
+		<property name="defaultOperator" value="OR" />
+		<property name="facetSearchQueryOperatorTranslator" ref="facetSearchQueryOperatorTranslator" />
+	</bean>
+
+	<bean id="facetSearchQueryBasicPopulator" class="de.hybris.platform.solrfacetsearch.search.impl.populators.FacetSearchQueryBasicPopulator"
+		parent="abstractFacetSearchQueryPopulator">
+		<property name="freeTextQueryBuilderFactory" ref="freeTextQueryBuilderFactory"></property>
+	</bean>
+
+	<bean id="facetSearchQueryFilterQueriesPopulator" class="de.hybris.platform.solrfacetsearch.search.impl.populators.FacetSearchQueryFilterQueriesPopulator"
+		parent="abstractFacetSearchQueryPopulator" />
+
+	<bean id="facetSearchQueryGroupingPopulator" class="de.hybris.platform.solrfacetsearch.search.impl.populators.FacetSearchQueryGroupingPopulator">
+		<property name="fieldNameTranslator" ref="fieldNameTranslator" />
+	</bean>
+
+	<bean id="facetSearchQuerySortsPopulator" class="de.hybris.platform.solrfacetsearch.search.impl.populators.FacetSearchQuerySortsPopulator">
+		<property name="fieldNameTranslator" ref="fieldNameTranslator" />
+	</bean>
+
+	<bean id="facetSearchQueryPagingPopulator" class="de.hybris.platform.solrfacetsearch.search.impl.populators.FacetSearchQueryPagingPopulator" />
+
+	<bean id="facetSearchQueryFacetsPopulator" class="de.hybris.platform.solrfacetsearch.search.impl.populators.FacetSearchQueryFacetsPopulator"
+		parent="abstractFacetSearchQueryPopulator">
+		<property name="defaultFacetSort" value="count" />
+	</bean>
+
+	<bean id="facetSearchQueryFieldsPopulator" class="de.hybris.platform.solrfacetsearch.search.impl.populators.FacetSearchQueryFieldsPopulator">
+		<property name="fieldNameTranslator" ref="fieldNameTranslator" />
+	</bean>
+
+	<bean id="facetSearchQuerySpellcheckPopulator" class="de.hybris.platform.solrfacetsearch.search.impl.populators.FacetSearchQuerySpellcheckPopulator" />
+
+	<bean id="facetSearchQueryParamsPopulator" class="de.hybris.platform.solrfacetsearch.search.impl.populators.FacetSearchQueryParamsPopulator" />
+
+	<bean id="facetSearchQueryCatalogVersionsPopulator"
+		class="de.hybris.platform.solrfacetsearch.search.impl.populators.FacetSearchQueryCatalogVersionsFilterPopulator" />
+		
+	<!-- facetSearchResultConverter & populators -->
+
+	<bean id="facetSearchResultConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.solrfacetsearch.search.impl.SolrSearchResult" />
+		<property name="populators">
+			<list>
+				<ref bean="facetSearchResultBasicPopulator" />
+				<ref bean="facetSearchResultFacetsPopulator" />
+				<ref bean="facetSearchResultDocumentsPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="facetSearchResultBasicPopulator" class="de.hybris.platform.solrfacetsearch.search.impl.populators.FacetSearchResultBasicPopulator">
+		<property name="searchResultConverters" ref="searchResultConverters" />
+	</bean>
+
+	<bean id="facetSearchResultFacetsPopulator" class="de.hybris.platform.solrfacetsearch.search.impl.populators.FacetSearchResultFacetsPopulator">
+		<property name="fieldNameTranslator" ref="fieldNameTranslator" />
+	</bean>
+
+	<bean id="facetSearchResultDocumentsPopulator" class="de.hybris.platform.solrfacetsearch.search.impl.populators.FacetSearchResultDocumentsPopulator">
+		<property name="fieldNameTranslator" ref="fieldNameTranslator" />
+	</bean>
+
+	<alias name="defaultSolrQueryConverter" alias="solrSearchQueryConverter" />
+	<alias name="defaultSolrQueryConverter" alias="solrQueryConverter" />
+
+	<bean id="defaultSolrQueryConverter" class="de.hybris.platform.solrfacetsearch.search.impl.DefaultSolrQueryConverter">
+		<property name="queryPostProcessors" ref="solrQueryPostProcessors" />
+		<property name="fieldNameTranslator" ref="fieldNameTranslator" />
+		<property name="defaultLimit" value="${facet.limit.default}" />
+		<property name="forbiddenChar" value="${solr.indexedproperty.forbidden.char}" />
+		<property name="facetSort" value="COUNT" />
+	</bean>
+
+	<alias name="defaultSearchResultConverters" alias="searchResultConverters" />
+	<bean id="defaultSearchResultConverters" class="de.hybris.platform.solrfacetsearch.search.impl.SearchResultConverters">
+		<property name="converterMapping">
+			<map key-type="java.lang.String" value-type="de.hybris.platform.solrfacetsearch.search.impl.ConvertersMapping">
+				<entry key="Product" value-ref="productConverterMapping" />
+			</map>
+		</property>
+	</bean>
+
+	<alias name="defaultProductConverterMapping" alias="productConverterMapping" />
+	<bean id="defaultProductConverterMapping" class="de.hybris.platform.solrfacetsearch.search.impl.ConvertersMapping">
+		<property name="converters">
+			<map key-type="de.hybris.platform.solrfacetsearch.enums.ConverterType" value-type="de.hybris.platform.servicelayer.dto.converter.Converter">
+				<entry key="DEFAULT" value-ref="solrProductConverter" />
+				<entry key="STOREFRONT" value-ref="solrProductConverter" />
+				<entry key="CUSTOMER_SERVICE" value-ref="solrProductConverter" />
+				<entry key="COCKPIT" value-ref="solrProductConverter" />
+			</map>
+		</property>
+	</bean>
+
+	<alias name="defaultSolrQueryPostProcessors" alias="solrQueryPostProcessors" />
+	<util:list id="defaultSolrQueryPostProcessors">
+		<!-- Query post processors -->
+	</util:list>
+
+	<alias name="defaultSolrKeywordRedirectService" alias="solrKeywordRedirectService" />
+	<bean id="defaultSolrKeywordRedirectService" class="de.hybris.platform.solrfacetsearch.search.impl.DefaultSolrKeywordRedirectService">
+		<property name="solrFacetSearchKeywordDao" ref="solrFacetSearchKeywordDao" />
+		<property name="keywordRedirectSorter" ref="keywordRedirectSorter" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="redirectHandlers">
+			<util:map key-type="de.hybris.platform.solrfacetsearch.enums.KeywordRedirectMatchType" map-class="java.util.HashMap">
+				<entry key="CONTAINS" value-ref="containsKeywordRedirectHandler" />
+				<entry key="STARTS_WITH" value-ref="startsWithKeywordRedirectHandler" />
+				<entry key="ENDS_WITH" value-ref="endsWithKeywordRedirectHandler" />
+				<entry key="REGEX" value-ref="regexKeywordRedirectHandler" />
+				<entry key="EXACT" value-ref="exactKeywordRedirectHandler" />
+			</util:map>
+		</property>
+	</bean>
+
+	<alias name="defaultKeywordRedirectSorter" alias="keywordRedirectSorter" />
+	<bean id="defaultKeywordRedirectSorter" class="de.hybris.platform.solrfacetsearch.search.impl.DefaultKeywordRedirectSorter">
+		<property name="sortOrder">
+			<util:list>
+				<value>EXACT</value>
+				<value>REGEX</value>
+				<value>STARTS_WITH</value>
+				<value>ENDS_WITH</value>
+				<value>CONTAINS</value>
+			</util:list>
+		</property>
+		<property name="comparatorList">
+			<util:list>
+				<bean class="de.hybris.platform.solrfacetsearch.search.impl.KeywordLengthComparator">
+				</bean>
+			</util:list>
+		</property>
+	</bean>
+
+	<bean id="solrKeywordRedirectValidateInterceptor" class="de.hybris.platform.solrfacetsearch.config.impl.SolrKeywordRedirectValidateInterceptor">
+		<property name="solrFacetSearchKeywordDao" ref="solrFacetSearchKeywordDao" />
+	</bean>
+
+	<bean id="solrKeywordRedirectValidateMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="solrKeywordRedirectValidateInterceptor" />
+		<property name="typeCode" value="SolrFacetSearchKeywordRedirect" />
+	</bean>
+
+	<alias name="defaultSolrSearchResultPostProcessors" alias="solrSearchResultPostProcessors" />
+	<util:list id="defaultSolrSearchResultPostProcessors">
+		<!-- Result post processors -->
+		<bean class="de.hybris.platform.solrfacetsearch.reporting.processors.SaveResultDataPostProcessor">
+			<property name="solrReportingService" ref="solrReportingService" />
+			<property name="enableCollectingStatistics" value="${solrStats.enableCollectingStatistics}" />
+		</bean>
+
+	</util:list>
+
+	<alias name="defaultContainsKeywordRedirectHandler" alias="containsKeywordRedirectHandler" />
+	<bean id="defaultContainsKeywordRedirectHandler" class="de.hybris.platform.solrfacetsearch.handler.impl.DefaultContainsKeywordRedirectHandler" />
+
+	<alias name="defaultStartsWithKeywordRedirectHandler" alias="startsWithKeywordRedirectHandler" />
+	<bean id="defaultStartsWithKeywordRedirectHandler" class="de.hybris.platform.solrfacetsearch.handler.impl.DefaultStartsWithKeywordRedirectHandler" />
+
+	<alias name="defaultEndsWithKeywordRedirectHandler" alias="endsWithKeywordRedirectHandler" />
+	<bean id="defaultEndsWithKeywordRedirectHandler" class="de.hybris.platform.solrfacetsearch.handler.impl.DefaultEndsWithKeywordRedirectHandler" />
+
+	<alias name="defaultRegexKeywordRedirectHandler" alias="regexKeywordRedirectHandler" />
+	<bean id="defaultRegexKeywordRedirectHandler" class="de.hybris.platform.solrfacetsearch.handler.impl.DefaultRegexKeywordRedirectHandler" />
+
+	<alias name="defaultExactKeywordRedirectHandler" alias="exactKeywordRedirectHandler" />
+	<bean id="defaultExactKeywordRedirectHandler" class="de.hybris.platform.solrfacetsearch.handler.impl.DefaultExactKeywordRedirectHandler" />
+
+
+	<alias name="defaultSolrFacetSearchKeywordDao" alias="solrFacetSearchKeywordDao" />
+	<bean id="defaultSolrFacetSearchKeywordDao" class="de.hybris.platform.solrfacetsearch.search.impl.DefaultSolrFacetSearchKeywordDao">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+
+	<bean id="solrValueRangeSetValidator" class="de.hybris.platform.solrfacetsearch.config.impl.SolrRangeSetInterceptor" />
+	<bean id="solrValueRangeValidator" class="de.hybris.platform.solrfacetsearch.config.impl.SolrRangeValueInterceptor" />
+	<bean id="solrValueRangePreparer" class="de.hybris.platform.solrfacetsearch.config.impl.SolrRangeValuePreparer">
+		<property name="facetSearchConfigDao" ref="facetSearchConfigDao" />
+	</bean>
+
+	<alias name="defaultSolrCoresService" alias="solrCoresService" />
+	<bean id="defaultSolrCoresService" class="de.hybris.platform.solrfacetsearch.solr.impl.DefaultSolrCoresService"
+		parent="abstractBusinessService">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+		<property name="typeService" ref="typeService" />
+		<property name="solrCoreNameResolver" ref="solrCoreNameResolver" />
+	</bean>
+
+	<bean id="solrFacetSearchConfigValidator" class="de.hybris.platform.solrfacetsearch.config.impl.SolrFacetSearchConfigValidator">
+		<property name="typeService" ref="typeService" />
+	</bean>
+	<bean id="solrSearchConfigPreparer" class="de.hybris.platform.solrfacetsearch.config.impl.SolrSearchConfigPreparer" />
+
+	<bean id="solrValueRangeValidatorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="solrValueRangeValidator" />
+		<property name="typeCode" value="SolrValueRange" />
+	</bean>
+	<bean id="solrValueRangePreparerMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="solrValueRangePreparer" />
+		<property name="typeCode" value="SolrValueRange" />
+	</bean>
+	<bean id="solrValueRangeSetValidatorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="solrValueRangeSetValidator" />
+		<property name="typeCode" value="SolrValueRangeSet" />
+	</bean>
+	<bean id="solrSearchConfigPreparerMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="solrSearchConfigPreparer" />
+		<property name="typeCode" value="SolrSearchConfig" />
+	</bean>
+	<bean id="solrFacetSearchConfigValidatorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="solrFacetSearchConfigValidator" />
+		<property name="typeCode" value="SolrFacetSearchConfig" />
+	</bean>
+
+	<bean id="mockupIndexTypeValuesProvider" class="de.hybris.platform.solrfacetsearch.provider.impl.MockupIndexTypeValuesProvider">
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<bean id="demoIndexedTypeFieldsValuesProvider" class="de.hybris.platform.solrfacetsearch.provider.impl.DemoIndexedTypeFieldsValuesProvider">
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<util:map id="disabledReplicationConfigMap" key-type="de.hybris.platform.solrfacetsearch.indexer.callback.replication.IndexOperationCallbackParams"
+		value-type="java.lang.Integer" />
+
+	<bean id="abstractReplicationCallback" class="de.hybris.platform.solrfacetsearch.indexer.callback.impl.AbstractReplicationCallback"
+		abstract="true">
+		<property name="solrService" ref="solrService" />
+		<property name="solrFacetSearchConfigConverter" ref="solrFacetSearchConfigConverter" />
+		<property name="solrIndexedTypeConverter" ref="solrIndexedTypeConverter" />
+		<property name="disabledReplicationConfigMap" ref="disabledReplicationConfigMap">
+		</property>
+	</bean>
+
+	<alias name="defaultSolrCoreNameResolver" alias="solrCoreNameResolver" />
+	<bean id="defaultSolrCoreNameResolver" class="de.hybris.platform.solrfacetsearch.indexer.impl.DefaultSolrCoreNameResolver">
+		<property name="separator" value="_" />
+		<property name="twinCoreSuffix" value="1" />
+	</bean>
+
+	<alias name="defaultSolrIndexedTypeCodeResolver" alias="solrIndexedTypeCodeResolver" />
+	<bean id="defaultSolrIndexedTypeCodeResolver" class="de.hybris.platform.solrfacetsearch.indexer.impl.DefaultSolrIndexedTypeCodeResolver" />
+
+	<!-- 	<bean id="applicationContextCloseListner" class="de.hybris.platform.solrfacetsearch.config.ApplicationContextCloseListner"/>
+	 -->
+
+	<alias alias="flexibleSearchQuerySpecFactory" name="defaultFlexibleSearchQuerySpecFactory" />
+	<bean id="defaultFlexibleSearchQuerySpecFactory" class="de.hybris.platform.solrfacetsearch.config.factories.impl.DefaultFlexibleSearchQuerySpecFactory">
+		<property name="indexStatisticsProvider" ref="indexStatisticsProvider" />
+		<property name="timeService" ref="timeService" />
+	</bean>
+
+	<alias name="defaultSolrIndexStatisticsProvider" alias="indexStatisticsProvider" />
+	<bean id="defaultSolrIndexStatisticsProvider" class="de.hybris.platform.solrfacetsearch.indexer.impl.DefaultSolrIndexStatisticsProvider">
+		<property name="providers">
+			<list>
+				<ref bean="solrCoreRecordsStatisticsProvider" />
+				<ref bean="lukeIndexStatisticsProvider" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="lukeIndexStatisticsProvider" class="de.hybris.platform.solrfacetsearch.indexer.impl.LukeSolrIndexStatisticsProvider">
+		<property name="solrService" ref="solrService" />
+	</bean>
+
+	<bean id="solrCoreRecordsStatisticsProvider" class="de.hybris.platform.solrfacetsearch.indexer.impl.SolrCoreRecordsStatisticsProvider">
+		<property name="solrCoresService" ref="solrCoresService" />
+		<property name="solrIndexerOperationsService" ref="solrIndexerOperationsService" />
+	</bean>
+
+	<bean id="abstractSolrConverter" class="de.hybris.platform.solrfacetsearch.search.AbstractSolrConverter" abstract="true">
+		<property name="fieldNameTranslator" ref="fieldNameTranslator" />
+	</bean>
+
+	<alias name="defaultSolrProductConverter" alias="solrProductConverter" />
+	<bean id="defaultSolrProductConverter" class="de.hybris.platform.solrfacetsearch.search.product.DefaultSolrProductConverter"
+		parent="abstractSolrConverter" />
+
+	<alias name="defaultSolrConfigurationService" alias="solrConfigurationService" />
+	<bean id="defaultSolrConfigurationService" class="de.hybris.platform.solrfacetsearch.solr.impl.DefaultSolrConfigurationService" />
+
+	<alias name="defaultRedirectHmcLabelProvider" alias="redirectHmcLabelProvider" />
+	<bean id="defaultRedirectHmcLabelProvider" class="de.hybris.platform.solrfacetsearch.attribute.DefaultRedirectHmcLabelProvider" />
+
+	<alias name="solrFacetSearchKeywordRedirectValidateInterceptor" alias="defaultSolrFacetSearchKeywordRedirectValidateInterceptor" />
+	<bean id="solrFacetSearchKeywordRedirectValidateInterceptor" class="de.hybris.platform.solrfacetsearch.interceptors.SolrFacetSearchKeywordRedirectValidateInterceptor" />
+
+	<bean id="solrFacetSearchKeywordRedirectValidateInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="defaultSolrFacetSearchKeywordRedirectValidateInterceptor" />
+		<property name="typeCode" value="SolrFacetSearchKeywordRedirect" />
+	</bean>
+
+	<!-- Collecting and reporting query statistics -->
+
+	<bean id="solrReportingService" class="de.hybris.platform.solrfacetsearch.reporting.impl.Log4jSolrReportingService">
+		<property name="formatter" ref="statDateFormatter" />
+	</bean>
+
+	<bean id="statDateFormatter" class="java.text.SimpleDateFormat">
+		<constructor-arg value="${solrStats.dateFormat}" />
+	</bean>
+
+	<bean id="statisticsCollector" class="de.hybris.platform.solrfacetsearch.reporting.impl.DefaultStatisticsCollector"
+		scope="prototype">
+		<property name="formatter" ref="statDateFormatter" />
+	</bean>
+
+	<bean id="solrQueryStatisticsAggregator" class="de.hybris.platform.solrfacetsearch.reporting.impl.Log4jSolrQueryStatisticsAggregator">
+		<property name="formatter" ref="statDateFormatter" />
+		<property name="filePrefix" value="${solrStats.filePrefix}" />
+		<property name="statisticFilesFolder" value="${solrStats.filesLocation}" />
+		<property name="statisticsCollector" ref="statisticsCollector" />
+	</bean>
+
+	<bean id="aggregatedPojoToModelConverter" class="de.hybris.platform.solrfacetsearch.reporting.data.converters.AggregatedStatisticsConverter">
+		<property name="modelService" ref="modelService" />
+		<property name="i18nService" ref="commonI18NService" />
+		<property name="facetSearchConfigDao" ref="facetSearchConfigDao" />
+	</bean>
+
+	<bean id="aggregatedQueryStatsService" class="de.hybris.platform.solrfacetsearch.reporting.impl.DefaultAggregatedQueryStatsService">
+		<property name="modelService" ref="modelService" />
+		<property name="converter" ref="aggregatedPojoToModelConverter" />
+	</bean>
+
+	<bean id="solrQueryStatisticsCollectorJob" class="de.hybris.platform.solrfacetsearch.reporting.cron.SolrQueryStatisticsCollectorJob"
+		parent="abstractJobPerformable">
+		<property name="solrQueryStatisticsAggregator" ref="solrQueryStatisticsAggregator" />
+		<property name="aggregatedQueryStatsService" ref="aggregatedQueryStatsService" />
+		<property name="enableCollectingStatistics" value="${solrStats.enableCollectingStatistics}" />
+	</bean>
+
+	<bean id="solrfacetsearcDataSetup" class="de.hybris.platform.solrfacetsearch.init.SolrfacetsearchDataSetup">
+		<property name="importService" ref="importService" />
+	</bean>
+
+	<alias alias="solrStopWordsService" name="defaultSolrStopWordsService" />
+	<bean class="de.hybris.platform.solrfacetsearch.config.impl.DefaultSolrStopWordsService" id="defaultSolrStopWordsService">
+		<property name="hybrisService" ref="hybrisSolrStopWordsService" />
+		<property name="managedService" ref="managedSolrStopWordsService" />
+	</bean>
+
+	<bean class="de.hybris.platform.solrfacetsearch.config.impl.HybrisSolrStopWordsService" id="hybrisSolrStopWordsService">
+		<property name="facetSearchConfigService" ref="facetSearchConfigService" />
+		<property name="solrService" ref="solrService" />
+		<property name="facetSearchConfigDao" ref="facetSearchConfigDao" />
+	</bean>
+
+	<bean class="de.hybris.platform.solrfacetsearch.config.impl.ManagedSolrStopWordsService" id="managedSolrStopWordsService"
+		parent="abstractSolrRestService" />
+
+	<alias alias="solrSynonymsService" name="defaultSolrSynonymsService" />
+	<bean class="de.hybris.platform.solrfacetsearch.config.impl.DefaultSolrSynonymsService" id="defaultSolrSynonymsService">
+		<property name="hybrisService" ref="hybrisSolrSynonymsService" />
+		<property name="managedService" ref="managedSolrSynonymsService" />
+	</bean>
+
+	<bean class="de.hybris.platform.solrfacetsearch.config.impl.HybrisSolrSynonymsService" id="hybrisSolrSynonymsService">
+		<property name="facetSearchConfigService" ref="facetSearchConfigService" />
+		<property name="i18nService" ref="commonI18NService" />
+		<property name="solrConfigurationService" ref="solrConfigurationService" />
+		<property name="solrService" ref="solrService" />
+		<property name="facetSearchConfigDao" ref="facetSearchConfigDao" />
+	</bean>
+
+	<bean class="de.hybris.platform.solrfacetsearch.config.impl.ManagedSolrSynonymsService" id="managedSolrSynonymsService"
+		parent="abstractSolrRestService" />
+
+	<bean id="solrUpdateSynonymsJob" class="de.hybris.platform.solrfacetsearch.config.impl.UpdateSynonymsJob" parent="abstractJobPerformable">
+		<property name="facetSearchConfigService" ref="facetSearchConfigService" />
+		<property name="solrSynonymsService" ref="solrSynonymsService" />
+	</bean>
+
+	<!-- SORT PROVIDERS -->
+
+	<bean id="facetNameSortProviderAscending" class="de.hybris.platform.solrfacetsearch.config.impl.DefaultFacetSortProvider">
+		<property name="comparator" ref="facetDisplayNameComparator" />
+		<property name="descending" value="false" />
+	</bean>
+
+	<bean id="facetCountSortProviderDescending" class="de.hybris.platform.solrfacetsearch.config.impl.DefaultFacetSortProvider">
+		<property name="comparator" ref="facetCountComparator" />
+		<property name="descending" value="true" />
+	</bean>
+
+
+	<!-- COMPARATORS -->
+	<bean id="facetNameComparator" class="de.hybris.platform.solrfacetsearch.search.impl.comparators.FacetNameComparator" />
+	<bean id="facetDisplayNameComparator" class="de.hybris.platform.solrfacetsearch.search.impl.comparators.FacetDisplayNameComparator" />
+	<bean id="facetCountComparator" class="de.hybris.platform.solrfacetsearch.search.impl.comparators.FacetCountComparator" />
+
+
+	<!--
+	<bean id="solrIndexedPropertyLoadInterceptor" class="de.hybris.platform.solrfacetsearch.config.impl.SolrIndexedPropertyLoadInterceptor"  >
+		<property name="defaultFacetSortProvider" value="facetCountSortProviderDescending"/>
+	</bean>
+	<bean id="solrIndexedPropertyLoadInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="solrIndexedPropertyLoadInterceptor"/>
+		<property name="typeCode" value="SolrIndexedProperty"/>
+	</bean>
+	-->
+
+	<alias name="defaultSolrIndexerOperationsService" alias="solrIndexerOperationsService" />
+	<bean id="defaultSolrIndexerOperationsService" class="de.hybris.platform.solrfacetsearch.solr.impl.DefaultSolrIndexerOperationsService">
+		<property name="clusterService" ref="clusterService" />
+		<property name="timeService" ref="timeService" />
+		<property name="modelService" ref="modelService" />
+		<property name="solrIndexerOperationsDao" ref="solrIndexerOperationsDao" />
+	</bean>
+
+	<alias name="defaultSolrIndexerOperationsDao" alias="solrIndexerOperationsDao" />
+	<bean id="defaultSolrIndexerOperationsDao" class="de.hybris.platform.solrfacetsearch.solr.impl.DefaultSolrIndexerOperationsDao"
+		parent="abstractItemDao">
+		<property name="clusterService" ref="clusterService"></property>
+	</bean>
+
+	<!-- for performance tests -->
+	<!-- 
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	
+	<bean id="timingAspect" class="org.perf4j.log4j.aop.TimingAspect"/>
+	 -->
+
+	<alias name="defaultIndexNameResolver" alias="indexNameResolver" />
+	<bean id="defaultIndexNameResolver" class="de.hybris.platform.solrfacetsearch.solr.impl.DefaultIndexNameResolver">
+		<property name="solrCoreNameResolver" ref="solrCoreNameResolver" />
+	</bean>
+
+	<bean id="solrListenerDefinition" class="de.hybris.platform.solrfacetsearch.common.impl.ListenerDefinition"
+		abstract="true">
+		<property name="priority" value="${solrfacetsearch.listeners.priority.default}" />
+	</bean>
+
+	<alias name="defaultListenersFactory" alias="listenersFactory" />
+	<bean id="defaultListenersFactory" class="de.hybris.platform.solrfacetsearch.common.impl.DefaultListenersFactory">
+		<property name="supportedTypes">
+			<util:list>
+				<value>de.hybris.platform.solrfacetsearch.indexer.IndexerQueryListener</value>
+				<value>de.hybris.platform.solrfacetsearch.indexer.IndexerListener</value>
+				<value>de.hybris.platform.solrfacetsearch.indexer.IndexerBatchListener</value>
+				<value>de.hybris.platform.solrfacetsearch.search.context.FacetSearchListener</value>
+			</util:list>
+		</property>
+	</bean>
+
+	<alias name="defaultIndexerQueriesExecutor" alias="indexerQueriesExecutor" />
+	<bean id="defaultIndexerQueriesExecutor" class="de.hybris.platform.solrfacetsearch.indexer.impl.DefaultIndexerQueriesExecutor">
+		<property name="indexerQueryContextFactory" ref="indexerQueryContextFactory" />
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+
+	<alias name="defaultIndexerQueryContextFactory" alias="indexerQueryContextFactory" />
+	<bean id="defaultIndexerQueryContextFactory" class="de.hybris.platform.solrfacetsearch.indexer.impl.DefaultIndexerQueryContextFactory">
+		<property name="sessionService" ref="sessionService" />
+		<property name="listenersFactory" ref="listenersFactory" />
+	</bean>
+
+	<alias name="defaultIndexerContextFactory" alias="indexerContextFactory" />
+	<bean id="defaultIndexerContextFactory" class="de.hybris.platform.solrfacetsearch.indexer.impl.DefaultIndexerContextFactory">
+		<property name="sessionService" ref="sessionService" />
+		<property name="listenersFactory" ref="listenersFactory" />
+	</bean>
+
+	<alias name="defaultIndexerBatchContextFactory" alias="indexerBatchContextFactory" />
+	<bean id="defaultIndexerBatchContextFactory" class="de.hybris.platform.solrfacetsearch.indexer.impl.DefaultIndexerBatchContextFactory">
+		<property name="sessionService" ref="sessionService" />
+		<property name="listenersFactory" ref="listenersFactory" />
+	</bean>
+
+	<alias name="defaultFacetSearchContextFactory" alias="facetSearchContextFactory" />
+	<bean id="defaultFacetSearchContextFactory" class="de.hybris.platform.solrfacetsearch.search.context.impl.DefaultFacetSearchContextFactory">
+		<property name="sessionService" ref="sessionService" />
+		<property name="listenersFactory" ref="listenersFactory" />
+	</bean>
+
+	<!-- listeners declaration -->
+
+	<bean id="indexerSessionInitializationListener" class="de.hybris.platform.solrfacetsearch.indexer.listeners.SessionInitializationListener">
+		<property name="userService" ref="userService" />
+		<property name="i18nService" ref="i18nService" />
+		<property name="catalogVersionService" ref="catalogVersionService" />
+	</bean>
+
+	<bean id="indexerConfigurationExporterListener" class="de.hybris.platform.solrfacetsearch.indexer.listeners.ConfigurationExporterListener">
+		<property name="solrService" ref="solrService" />
+		<property name="solrStopWordsService" ref="solrStopWordsService" />
+		<property name="solrSynonymsService" ref="solrSynonymsService" />
+	</bean>
+
+	<bean id="indexerIndexOperationStrategyListener" class="de.hybris.platform.solrfacetsearch.indexer.listeners.IndexOperationStrategyListener">
+		<property name="indexOperationStrategyFactory" ref="indexOperationStrategyFactory" />
+	</bean>
+
+	<bean id="indexerOptimizeModeListener" class="de.hybris.platform.solrfacetsearch.indexer.listeners.OptimizeModeListener">
+		<property name="indexer" ref="indexer" />
+	</bean>
+
+	<bean id="indexerCommitModeListener" class="de.hybris.platform.solrfacetsearch.indexer.listeners.CommitModeListener">
+		<property name="indexer" ref="indexer" />
+	</bean>
+
+	<bean id="indexerSessionInitializationListenerDefinition" parent="solrListenerDefinition">
+		<property name="priority" value="1100" />
+		<property name="listener" ref="indexerSessionInitializationListener" />
+	</bean>
+
+	<bean id="indexerConfigurationExporterListenerDefinition" parent="solrListenerDefinition">
+		<property name="priority" value="1190" />
+		<property name="listener" ref="indexerConfigurationExporterListener" />
+	</bean>
+
+	<bean id="indexerIndexOperationStrategyListenerDefinition" parent="solrListenerDefinition">
+		<property name="priority" value="1200" />
+		<property name="listener" ref="indexerIndexOperationStrategyListener" />
+	</bean>
+
+	<bean id="indexerCommitModeListenerDefinition" parent="solrListenerDefinition">
+		<property name="priority" value="1250" />
+		<property name="listener" ref="indexerCommitModeListener" />
+	</bean>
+
+	<bean id="indexerOptimizetModeListenerDefinition" parent="solrListenerDefinition">
+		<property name="priority" value="1260" />
+		<property name="listener" ref="indexerOptimizeModeListener" />
+	</bean>
+
+	<bean id="facetSearchSessionInitializationListener" class="de.hybris.platform.solrfacetsearch.search.context.listeners.SessionInitializationListener">
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="catalogVersionService" ref="catalogVersionService" />
+	</bean>
+
+	<bean id="solrQueryDebuggingListener" class="de.hybris.platform.solrfacetsearch.search.context.listeners.SolrQueryDebuggingListener" />
+
+	<bean id="facetSearchSessionInitializationListenerDefinition" parent="solrListenerDefinition">
+		<property name="priority" value="1100" />
+		<property name="listener" ref="facetSearchSessionInitializationListener" />
+	</bean>
+
+	<!-- Facet search config service using cache -->
+	<alias alias="facetSearchConfigService" name="cachedFacetSearchConfigService" />
+	<bean id="cachedFacetSearchConfigService" class="de.hybris.platform.solrfacetsearch.config.impl.CachedFacetSearchConfigService"
+		parent="abstractBusinessService">
+		<property name="facetSearchConfigCacheService" ref="facetSearchConfigCacheService" />
+		<property name="facetSearchConfigMapper" ref="facetSearchConfigMapper" />
+	</bean>
+
+	<alias alias="facetSearchConfigCacheService" name="defaultFacetSearchConfigCacheService" />
+	<bean id="defaultFacetSearchConfigCacheService" class="de.hybris.platform.solrfacetsearch.config.cache.impl.DefaultFacetSearchConfigCacheService">
+		<property name="cacheController" ref="cacheController" />
+		<property name="facetSearchConfigCacheValueLoader" ref="facetSearchConfigCacheValueLoader" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="facetSearchConfigCacheRegion" ref="facetSearchConfigCacheRegion" />
+	</bean>
+
+	<alias alias="facetSearchConfigCacheValueLoader" name="defaultFacetSearchConfigCacheValueLoader" />
+	<bean id="defaultFacetSearchConfigCacheValueLoader" class="de.hybris.platform.solrfacetsearch.config.cache.impl.DefaultFacetSearchConfigCacheValueLoader">
+		<property name="facetSearchConfigDao" ref="facetSearchConfigDao" />
+		<property name="facetSearchConfigConverter" ref="solrFacetSearchConfigConverter" />
+	</bean>
+
+	<bean id="defaultFacetSearchConfigInvalidationTypeSet" class="de.hybris.platform.solrfacetsearch.config.cache.FacetSearchConfigInvalidationTypeSet">
+		<constructor-arg>
+			<set>
+				<value>2200</value>
+                <!--SolrFacetSearchConfig -->
+				<value>2204</value>
+                <!--SolrValueRangeSet -->
+				<value>2205</value>
+                <!--SolrValueRange -->
+				<value>2206</value>
+                <!--SolrSearchConfig -->
+				<value>2207</value>
+                <!--SolrIndexedType -->
+				<value>2208</value>
+                <!--SolrIndexedProperty -->
+				<value>2209</value>
+                <!--SolrIndexerQuery -->
+				<value>2210</value>
+                <!--SolrIndexerQueryParameter -->
+				<value>2211</value>
+                <!--SolrIndexConfig -->
+				<value>2212</value>
+                <!--SolrServerConfig -->
+				<value>2213</value>
+                <!--SolrEndpointUrl -->
+				<value>2218</value>
+                <!--SolrSynonymConfig -->
+				<value>2221</value>
+                <!--SolrAbstractKeywordRedirect -->
+				<value>2222</value>
+                <!--SolrStopWord -->
+				<value>2223</value>
+                <!--SolrFacetSearchKeywordRedirect -->
+				<value>32</value>
+                <!--Language -->
+				<value>33</value>
+                <!--Currency -->
+				<value>601</value>
+                <!--CatalogVersion -->
+				<value>610</value>
+                <!--ClassAttributeAssignment -->
+				<value>2013</value>
+                <!--BaseStore -->
+				<value>1064</value>
+                <!--BaseSite-->
+			</set>
+		</constructor-arg>
+	</bean>
+
+	<!-- Orika -->
+	<alias alias="facetSearchConfigMapper" name="defaultFacetSearchConfigMapper" />
+	<bean id="defaultFacetSearchConfigMapper" class="de.hybris.platform.solrfacetsearch.config.mapping.DefaultFacetSearchConfigMapper" />
+
+
+	<!-- Rest Template Configuration -->
+	<alias alias="solrRestTemplate" name="defaultSolrRestTemplate" />
+	<bean id="defaultSolrRestTemplate" class="org.springframework.web.client.RestTemplate" />
+</beans>

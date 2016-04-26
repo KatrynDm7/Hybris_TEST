@@ -1,0 +1,21 @@
+#
+# Import Sample Product Cockpit User
+# 
+
+$passwordEncoding=md5
+$defaultPassword=1234
+$setPassword=@password[translator=de.hybris.platform.impex.jalo.translators.ConvertPlaintextToEncodedUserPasswordTranslator][default='$passwordEncoding:$defaultPassword']
+$classificationCatalog=b2ctelcoClassification
+
+INSERT_UPDATE UserGroup;UID[unique=true];groups(uid)[mode=append]
+;productmanagergroup;cockpitgroup,employeegroup
+
+INSERT_UPDATE Employee;UID[unique=true];$setPassword;description;name;groups(uid);sessionLanguage(isocode);sessionCurrency(isocode)
+;productmanager;;Product manager;Product Manager;productmanagergroup;en;EUR
+
+UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];writePrincipals(uid);
+;b2ctelcoProductCatalog;Online;productmanagergroup,productmanager;
+;b2ctelcoProductCatalog;Staged;productmanagergroup,productmanager;
+
+UPDATE ClassificationSystemVersion;catalog(id)[unique=true];version[unique=true];writePrincipals(uid);readPrincipals(uid)
+;$classificationCatalog;1.0;productmanager;productmanager

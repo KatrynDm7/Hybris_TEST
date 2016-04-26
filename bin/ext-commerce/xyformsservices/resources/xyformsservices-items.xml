@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+<items  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<collectiontypes>
+      <collectiontype code="yFormDefinitionList"
+         elementtype="YFormDefinition" autocreate="true" generate="true"
+         type="list" />
+   </collectiontypes>
+
+   <enumtypes>
+      <enumtype code="YFormDefinitionStatusEnum" generate="true" autocreate="true">
+         <value code="ENABLED"/>
+         <value code="DISABLED"/>
+      </enumtype>
+      <enumtype code="YFormDataTypeEnum" generate="true" autocreate="true">
+         <value code="DRAFT"/>
+         <value code="DATA"/>
+      </enumtype>
+      <enumtype code="YFormDataActionEnum" generate="true" autocreate="true">
+         <value code="VIEW"/>
+         <value code="EDIT"/>
+         <value code="NEW"/>
+      </enumtype>
+   </enumtypes>
+
+   <relations>
+      <relation  generate="true" localized="false" code="YFormDefinition2YFormDataRelation" autocreate="true">
+         <sourceElement type="YFormDefinition" qualifier="formDefinition" cardinality="one"/>
+         <targetElement type="YFormData" qualifier="data" cardinality="many">
+            <modifiers partof="false" />
+         </targetElement>
+      </relation>
+      <relation generate="true" localized="false" code="YFormData2YFormDataHistoryRelation" autocreate="true">
+         <sourceElement type="YFormData" qualifier="formData" cardinality="one"/>
+         <targetElement type="YFormDataHistory" qualifier="history" cardinality="many" collectiontype="list" ordered="true">
+            <modifiers partof="false" />
+         </targetElement>
+      </relation>
+      <relation generate="true" localized="false" code="Category2YFormDefinitionRelation" autocreate="true">
+         <deployment table="Cat2YFormDefRel" typecode="6343"/>
+         <sourceElement qualifier="categories" type="Category" cardinality="many" ordered="false">
+            <description>Categories</description>
+            <modifiers read="true" write="true" search="true" optional="true"/>
+         </sourceElement>
+         <targetElement qualifier="yFormDefinitions" type="YFormDefinition" cardinality="many" collectiontype="set" ordered="false">
+            <description>Form Definitions</description>
+            <modifiers read="true" write="true" search="true" optional="true"/>
+         </targetElement>		
+      </relation>
+   </relations>
+
+   <itemtypes>
+      <itemtype code="YFormDefinition" autocreate="true" generate="true">
+            <deployment table="YFormDefinition" typecode="6340"/>
+            <custom-properties>
+                <property name="uniqueKeyAttributeQualifier"><value>"applicationId,formId,version"</value></property>
+            </custom-properties>
+         <attributes>
+            <attribute type="java.lang.String" qualifier="applicationId">
+               <persistence type="property" />
+               <modifiers unique="true" read="true" write="true" search="true" optional="false" />
+            </attribute>
+            <attribute type="java.lang.String" qualifier="formId">
+               <persistence type="property" />
+               <modifiers unique="true" read="true" write="true" search="true" optional="false" />
+            </attribute>
+            <attribute type="int" qualifier="version">
+               <persistence type="property" />
+               <defaultvalue>1</defaultvalue>
+               <modifiers unique="true" read="true" write="true" search="true" optional="false" />
+            </attribute>
+            <attribute type="java.lang.String" qualifier="title">
+               <persistence type="property" />
+            </attribute>
+            <attribute type="java.lang.String" qualifier="description">
+               <persistence type="property" />
+            </attribute>
+            <attribute type="java.lang.String" qualifier="documentId">
+               <persistence type="property"/>
+            </attribute>
+            <attribute type="java.lang.boolean" qualifier="system">
+               <persistence type="property"/>
+               <modifiers read="true" write="true" optional="false"/>
+               <defaultvalue>false</defaultvalue>
+            </attribute>
+            <attribute type="java.lang.boolean" qualifier="latest">
+               <persistence type="property"/>
+               <modifiers read="true" write="true" optional="false"/>
+               <defaultvalue>true</defaultvalue>
+            </attribute>
+            <attribute type="YFormDefinitionStatusEnum" qualifier="status">
+               <persistence type="property" />
+               <modifiers read="true" write="true" search="true" optional="false"/>
+               <defaultvalue>em().getEnumerationValue("YFormDefinitionStatusEnum","ENABLED")</defaultvalue>
+            </attribute>
+            <attribute qualifier="content" type="java.lang.String">
+               <persistence type="property">
+                  <columntype>
+                     <value>HYBRIS.LONG_STRING</value>
+                  </columntype>
+                  <columntype database="mysql">
+                     <value>MEDIUMTEXT</value>
+                  </columntype>
+                  <columntype database="oracle">
+                     <value>CLOB</value>
+                  </columntype>
+                  <columntype database="sqlserver">
+                     <value>TEXT</value>
+                  </columntype>
+                  <columntype database="sap">
+                     <value>NCLOB</value>
+                  </columntype>
+               </persistence>
+            </attribute>
+         </attributes>
+      </itemtype>
+
+      <itemtype code="YFormData" autocreate="true" generate="true">
+         <deployment table="YFormData" typecode="6341"/>
+         <attributes>
+            <attribute type="java.lang.String" qualifier="id">
+               <persistence type="property" />
+               <modifiers read="true" write="true" search="true" optional="false" unique="true"/>
+            </attribute>
+            <attribute type="java.lang.String" qualifier="applicationId">
+               <persistence type="property" />
+               <modifiers read="true" write="true" search="true" optional="false" />
+            </attribute>
+            <attribute type="java.lang.String" qualifier="formId">
+               <persistence type="property" />
+               <modifiers read="true" write="true" search="true" optional="false" />
+            </attribute>
+            <attribute type="java.lang.String" qualifier="refId">
+               <persistence type="property" />
+               <modifiers read="true" write="true" search="true"/>
+            </attribute>
+            <attribute type="java.lang.boolean" qualifier="system">
+               <persistence type="property"/>
+               <modifiers read="true" write="true" optional="false"/>
+               <defaultvalue>false</defaultvalue>
+            </attribute>
+            <attribute type="YFormDataTypeEnum" qualifier="type">
+               <persistence type="property" />
+               <modifiers read="true" write="true" search="true" optional="false" unique="true"/>
+               <defaultvalue>em().getEnumerationValue("YFormDataTypeEnum","DATA")</defaultvalue>
+            </attribute>
+            <attribute qualifier="content" type="java.lang.String">
+               <persistence type="property">
+                  <columntype>
+                     <value>HYBRIS.LONG_STRING</value>
+                  </columntype>
+                  <columntype database="mysql">
+                     <value>MEDIUMTEXT</value>
+                  </columntype>
+                  <columntype database="oracle">
+                     <value>CLOB</value>
+                  </columntype>
+                  <columntype database="sqlserver">
+                     <value>TEXT</value>
+                  </columntype>
+                  <columntype database="sap">
+                     <value>NCLOB</value>
+                  </columntype>
+               </persistence>
+            </attribute>
+         </attributes>
+      </itemtype>
+
+      <itemtype code="YFormDataHistory" autocreate="true" generate="true">
+         <deployment table="YFormDataHistory" typecode="6342"/>
+         <attributes>
+            <attribute type="java.lang.String" qualifier="formDataId">
+               <persistence type="property" />
+               <modifiers read="true" write="true" search="true" optional="false"/>
+            </attribute>
+            <attribute qualifier="content" type="java.lang.String">
+               <persistence type="property">
+                  <columntype>
+                     <value>HYBRIS.LONG_STRING</value>
+                  </columntype>
+                  <columntype database="mysql">
+                     <value>MEDIUMTEXT</value>
+                  </columntype>
+                  <columntype database="oracle">
+                     <value>CLOB</value>
+                  </columntype>
+                  <columntype database="sqlserver">
+                     <value>TEXT</value>
+                  </columntype>
+                  <columntype database="sap">
+                     <value>NCLOB</value>
+                  </columntype>
+               </persistence>
+            </attribute>
+         </attributes>
+      </itemtype>
+
+      <typegroup name="XForm">
+         <itemtype code="YFormCMSComponent"
+                   autocreate="true"
+                   generate="true"
+                   extends="SimpleCMSComponent"
+                   jaloclass="de.hybris.platform.xyformsservices.jalo.component.YFormCMSComponent">
+            <description>This is used to renderer the Orbeon forms by the given parameters.</description>
+            <attributes>
+               <attribute type="java.lang.String" qualifier="applicationId" >
+                  <persistence type="property"/>
+                  <modifiers read="true" write="true"  optional="false" />
+               </attribute>
+               <attribute type="java.lang.String" qualifier="formId" >
+                  <persistence type="property"/>
+                  <modifiers read="true" write="true"  optional="false" />
+               </attribute>
+               <attribute type="java.lang.String" qualifier="formDataId" >
+                  <persistence type="property"/>
+                  <modifiers read="true" write="true" optional="true" />
+               </attribute>
+               <attribute type="YFormDataActionEnum" qualifier="action" >
+                  <persistence type="property"/>
+                  <modifiers read="true" write="true" optional="true"/>
+                  <defaultvalue>em().getEnumerationValue("YFormDataActionEnum","NEW")</defaultvalue>
+               </attribute>
+            </attributes>
+         </itemtype>
+      </typegroup>
+
+      <typegroup name="Category">
+         <itemtype code="Category" autocreate="false" generate="false">
+            <description>Extends existing type with additional attributes.</description>
+            <attributes>
+               <attribute qualifier="allYFormDefinitions" type="yFormDefinitionList">
+                  <persistence type="dynamic" attributeHandler="categoryAllYFormDefinitions"/>
+                  <modifiers read="true" write="false"/>
+                  <description></description>
+               </attribute>
+            </attributes>
+         </itemtype>
+      </typegroup>
+
+      <typegroup name="Product">
+         <itemtype code="Product" autocreate="false" generate="false">
+            <description>Extends existing type with additional attributes.</description>
+            <attributes>
+               <attribute qualifier="allYFormDefinitions" type="yFormDefinitionList">
+                  <persistence type="dynamic" attributeHandler="productAllYFormDefinitions"/>
+                  <modifiers read="true" write="false"/>
+                  <description></description>
+               </attribute>
+            </attributes>
+         </itemtype>
+      </typegroup>
+   </itemtypes>
+</items>

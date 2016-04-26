@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2015 hybris AG All rights reserved. This software is the confidential and proprietary information 
+	of hybris ("Confidential Information"). You shall not disclose such Confidential Information and shall use it only in accordance with the terms 
+	of the license agreement you entered into with hybris. -->
+<config xmlns="http://www.hybris.com/cockpit/config">
+
+<context merge-by="type" parent="ProductPromotion" type="FlashbuyPromotion" component="create-wizard">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="FlashbuyPromotionWizard" title="create.title(ctx.TYPE_CODE)">
+			<wz:step id="step.qualifyingproduct" position="1" label="create.promotion.qualifyingproduct.label" >
+				<wz:content id="step.qualifyingproduct.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="availableUnitsPerProduct"  description="backoffice.text.flashbuypromotion.availableunitsperproduct" />
+                    	<wz:property qualifier="availableUnitsPerUserAndProduct" description="backoffice.text.flashbuypromotion.availableunitsperuserandproduct"  />
+                    	<wz:property qualifier="startBuyDate" description="backoffice.text.flashbuypromotion.startbuydate" />
+                	    <wz:property qualifier="specialDiscount"  description="backoffice.text.flashbuypromotion.specialdis" />                       
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.qualifyingproduct.navigation">
+					<wz:cancel/>
+					<wz:back/>
+					<wz:next visible="!#empty(newPromotion.code)" />
+				    <wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion"/>
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+			<wz:step id="step.messages" position="3" label="create.promotion.messages.label">
+				<wz:content id="step.messages.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="messageFired" description="backoffice.text.flashbuypromotion.messagefired">
+							<wz:editor-parameter>
+                            	<wz:name>rows</wz:name>
+                            	<wz:value>3</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.messages.navigation">
+					<wz:cancel/>
+					<wz:back/>
+					<wz:next visible="!#empty(newPromotion.code)"/>
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion"/>
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+	
+<context merge-by="type" parent="ProductPromotion" type="FlashbuyPromotion" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list/>
+        </advanced-search:advanced-search>
+</context>	
+
+<context merge-by="type" parent="ProductPromotion" type="FlashbuyPromotion" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.tab.promotion.properties">
+                <editorArea:section name="hmc.section.promotion.description" description="backoffice.text.flashbuypromotion.detaileddescription" />
+                <editorArea:section name="hmc.section.promotion.details">                   
+                    	<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="availableUnitsPerProduct"  description="backoffice.text.flashbuypromotion.availableunitsperproduct" />
+                    	<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="availableUnitsPerUserAndProduct" description="backoffice.text.flashbuypromotion.availableunitsperuserandproduct"  />
+                    	<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="startBuyDate" description="backoffice.text.flashbuypromotion.startbuydate" />
+                	    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="specialDiscount"  description="backoffice.text.flashbuypromotion.specialdis" />                
+                </editorArea:section>
+              </editorArea:tab> 
+              <editorArea:tab name="hmc.tab.promotion.messages">
+                <editorArea:section name="hmc.section.promotion.messages" description="hmc.text.promotion.messages.overview">
+                	<editorArea:panel name="flashbuypromotion.messagefired" description="backoffice.text.flashbuypromotion.messagefired">
+                    	<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageFired">
+                        	<editorArea:editor-parameter>
+                            	<editorArea:name>rows</editorArea:name>
+                            	<editorArea:value>4</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+                    </editorArea:panel>                  
+                 </editorArea:section>
+            </editorArea:tab>              
+        </editorArea:editorArea>
+    </context>
+</config>

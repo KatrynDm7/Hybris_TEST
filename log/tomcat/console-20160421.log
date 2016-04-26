@@ -1,0 +1,560 @@
+STATUS | wrapper  | main    | 2016/04/21 11:57:57.314 | Pinging the JVM took 36 seconds to respond.
+STATUS | wrapper  | main    | 2016/04/21 11:57:57.671 | Pinging the JVM took 27 seconds to respond.
+STATUS | wrapper  | main    | 2016/04/21 11:57:57.672 | Pinging the JVM took 18 seconds to respond.
+STATUS | wrapper  | main    | 2016/04/21 11:57:57.673 | Pinging the JVM took 9 seconds to respond.
+INFO   | jvm 1    | main    | 2016/04/21 11:57:57.797 | INFO  [automatedUpdateCl2011::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateCl2011) [UpdateOpenLigaDbService] Checking update status for cl2011
+INFO   | jvm 1    | main    | 2016/04/21 11:57:57.899 | INFO  [automatedUpdate1LGer2011::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate1LGer2011) [UpdateOpenLigaDbService] Checking update status for 1lger2011
+INFO   | jvm 1    | main    | 2016/04/21 11:57:58.055 | INFO  [automatedUpdateWWC2011::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateWWC2011) [UpdateOpenLigaDbService] Checking update status for wwc2011
+INFO   | jvm 1    | main    | 2016/04/21 11:57:58.057 | INFO  [automatedUpdate1LGer2012::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate1LGer2012) [UpdateOpenLigaDbService] Checking update status for 1lger2012
+INFO   | jvm 1    | main    | 2016/04/21 11:57:58.058 | INFO  [automatedUpdateCl2010::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateCl2010) [UpdateOpenLigaDbService] Checking update status for cl2010
+INFO   | jvm 1    | main    | 2016/04/21 11:57:58.062 | INFO  [automatedUpdateCl2012::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateCl2012) [UpdateOpenLigaDbService] Checking update status for cl2012
+INFO   | jvm 1    | main    | 2016/04/21 11:57:58.065 | INFO  [automatedUpdate2LGer2010::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate2LGer2010) [UpdateOpenLigaDbService] Checking update status for 2lger2010
+INFO   | jvm 1    | main    | 2016/04/21 11:57:58.066 | INFO  [automatedUpdateEC2012::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateEC2012) [UpdateOpenLigaDbService] Checking update status for ec2012
+INFO   | jvm 1    | main    | 2016/04/21 11:57:58.067 | INFO  [automatedUpdate1LGer2010::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate1LGer2010) [UpdateOpenLigaDbService] Checking update status for 1lger2010
+INFO   | jvm 1    | main    | 2016/04/21 11:58:00.175 | WARN  [automatedUpdateCl2010::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateCl2010) [UpdateOpenLigaDbService] Can not check webservice for updates: I/O error: www.openligadb.de; nested exception is java.net.UnknownHostException: www.openligadb.de
+INFO   | jvm 1    | main    | 2016/04/21 11:58:00.177 | WARN  [automatedUpdate1LGer2012::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate1LGer2012) [UpdateOpenLigaDbService] Can not check webservice for updates: I/O error: www.openligadb.de; nested exception is java.net.UnknownHostException: www.openligadb.de
+INFO   | jvm 1    | main    | 2016/04/21 11:58:00.177 | INFO  [automatedUpdateCl2010::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateCl2010) [UpdateOpenLigaDbService] Updating matches for cl2010
+INFO   | jvm 1    | main    | 2016/04/21 11:58:00.178 | WARN  [automatedUpdateEC2012::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateEC2012) [UpdateOpenLigaDbService] Can not check webservice for updates: I/O error: www.openligadb.de; nested exception is java.net.UnknownHostException: www.openligadb.de
+INFO   | jvm 1    | main    | 2016/04/21 11:58:00.178 | INFO  [automatedUpdateEC2012::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateEC2012) [UpdateOpenLigaDbService] Updating matches for ec2012
+INFO   | jvm 1    | main    | 2016/04/21 11:58:00.179 | WARN  [automatedUpdateCl2010::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateCl2010) [UpdateOpenLigaDbService] Can not update by webservice: I/O error: www.openligadb.de; nested exception is java.net.UnknownHostException: www.openligadb.de
+INFO   | jvm 1    | main    | 2016/04/21 11:58:00.179 | WARN  [automatedUpdateEC2012::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateEC2012) [UpdateOpenLigaDbService] Can not update by webservice: I/O error: www.openligadb.de; nested exception is java.net.UnknownHostException: www.openligadb.de
+INFO   | jvm 1    | main    | 2016/04/21 11:58:00.180 | WARN  [automatedUpdate1LGer2011::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate1LGer2011) [UpdateOpenLigaDbService] Can not check webservice for updates: I/O error: www.openligadb.de; nested exception is java.net.UnknownHostException: www.openligadb.de
+INFO   | jvm 1    | main    | 2016/04/21 11:58:00.181 | WARN  [automatedUpdateCl2011::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateCl2011) [UpdateOpenLigaDbService] Can not check webservice for updates: I/O error: www.openligadb.de; nested exception is java.net.UnknownHostException: www.openligadb.de
+INFO   | jvm 1    | main    | 2016/04/21 11:58:00.181 | INFO  [automatedUpdateCl2011::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateCl2011) [UpdateOpenLigaDbService] Updating matches for cl2011
+INFO   | jvm 1    | main    | 2016/04/21 11:58:00.181 | INFO  [automatedUpdate1LGer2011::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate1LGer2011) [UpdateOpenLigaDbService] Updating matches for 1lger2011
+INFO   | jvm 1    | main    | 2016/04/21 11:58:00.185 | WARN  [automatedUpdate1LGer2011::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate1LGer2011) [UpdateOpenLigaDbService] Can not update by webservice: I/O error: www.openligadb.de; nested exception is java.net.UnknownHostException: www.openligadb.de
+INFO   | jvm 1    | main    | 2016/04/21 11:58:00.186 | WARN  [automatedUpdateCl2011::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateCl2011) [UpdateOpenLigaDbService] Can not update by webservice: I/O error: www.openligadb.de; nested exception is java.net.UnknownHostException: www.openligadb.de
+INFO   | jvm 1    | main    | 2016/04/21 11:58:00.186 | INFO  [automatedUpdate1LGer2012::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate1LGer2012) [UpdateOpenLigaDbService] Updating matches for 1lger2012
+INFO   | jvm 1    | main    | 2016/04/21 11:58:00.317 | WARN  [automatedUpdate1LGer2012::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate1LGer2012) [UpdateOpenLigaDbService] Can not update by webservice: I/O error: www.openligadb.de; nested exception is java.net.UnknownHostException: www.openligadb.de
+INFO   | jvm 1    | main    | 2016/04/21 11:58:00.341 | WARN  [automatedUpdate2LGer2010::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate2LGer2010) [UpdateOpenLigaDbService] Can not check webservice for updates: I/O error: www.openligadb.de; nested exception is java.net.UnknownHostException: www.openligadb.de
+INFO   | jvm 1    | main    | 2016/04/21 11:58:00.345 | INFO  [automatedUpdate2LGer2010::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate2LGer2010) [UpdateOpenLigaDbService] Updating matches for 2lger2010
+INFO   | jvm 1    | main    | 2016/04/21 11:58:00.346 | WARN  [automatedUpdate1LGer2010::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate1LGer2010) [UpdateOpenLigaDbService] Can not check webservice for updates: I/O error: www.openligadb.de; nested exception is java.net.UnknownHostException: www.openligadb.de
+INFO   | jvm 1    | main    | 2016/04/21 11:58:00.346 | INFO  [automatedUpdate1LGer2010::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate1LGer2010) [UpdateOpenLigaDbService] Updating matches for 1lger2010
+INFO   | jvm 1    | main    | 2016/04/21 11:58:00.347 | WARN  [automatedUpdate1LGer2010::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate1LGer2010) [UpdateOpenLigaDbService] Can not update by webservice: I/O error: www.openligadb.de; nested exception is java.net.UnknownHostException: www.openligadb.de
+INFO   | jvm 1    | main    | 2016/04/21 11:58:00.350 | WARN  [automatedUpdateCl2012::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateCl2012) [UpdateOpenLigaDbService] Can not check webservice for updates: I/O error: www.openligadb.de; nested exception is java.net.UnknownHostException: www.openligadb.de
+INFO   | jvm 1    | main    | 2016/04/21 11:58:00.352 | INFO  [automatedUpdateCl2012::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateCl2012) [UpdateOpenLigaDbService] Updating matches for cl2012
+INFO   | jvm 1    | main    | 2016/04/21 11:58:00.353 | WARN  [automatedUpdateWWC2011::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateWWC2011) [UpdateOpenLigaDbService] Can not check webservice for updates: I/O error: www.openligadb.de; nested exception is java.net.UnknownHostException: www.openligadb.de
+INFO   | jvm 1    | main    | 2016/04/21 11:58:00.355 | INFO  [automatedUpdateWWC2011::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateWWC2011) [UpdateOpenLigaDbService] Updating matches for wwc2011
+INFO   | jvm 1    | main    | 2016/04/21 11:58:00.356 | WARN  [automatedUpdateWWC2011::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateWWC2011) [UpdateOpenLigaDbService] Can not update by webservice: I/O error: www.openligadb.de; nested exception is java.net.UnknownHostException: www.openligadb.de
+INFO   | jvm 1    | main    | 2016/04/21 11:58:00.357 | WARN  [automatedUpdate2LGer2010::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate2LGer2010) [UpdateOpenLigaDbService] Can not update by webservice: I/O error: www.openligadb.de; nested exception is java.net.UnknownHostException: www.openligadb.de
+INFO   | jvm 1    | main    | 2016/04/21 11:58:00.357 | WARN  [automatedUpdateCl2012::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateCl2012) [UpdateOpenLigaDbService] Can not update by webservice: I/O error: www.openligadb.de; nested exception is java.net.UnknownHostException: www.openligadb.de
+STATUS | wrapper  | main    | 2016/04/21 12:55:10.465 | --> Wrapper Started as Console
+STATUS | wrapper  | main    | 2016/04/21 12:55:12.463 | Java Service Wrapper Standard Edition 64-bit 3.5.24
+STATUS | wrapper  | main    | 2016/04/21 12:55:12.463 |   Copyright (C) 1999-2014 Tanuki Software, Ltd. All Rights Reserved.
+STATUS | wrapper  | main    | 2016/04/21 12:55:12.463 |     http://wrapper.tanukisoftware.com
+STATUS | wrapper  | main    | 2016/04/21 12:55:12.463 |   Licensed to hybris software - www.hybris.com for hybris Platform
+STATUS | wrapper  | main    | 2016/04/21 12:55:12.463 | 
+STATUS | wrapper  | main    | 2016/04/21 12:55:13.530 | Launching a JVM...
+INFO   | jvm 1    | main    | 2016/04/21 12:55:16.716 | WrapperManager: Initializing...
+INFO   | jvm 1    | main    | 2016/04/21 12:55:18.769 | апр 21, 2016 11:55:18 AM org.apache.coyote.AbstractProtocol init
+INFO   | jvm 1    | main    | 2016/04/21 12:55:18.770 | INFO: Initializing ProtocolHandler ["http-bio-9001"]
+INFO   | jvm 1    | main    | 2016/04/21 12:55:18.770 | апр 21, 2016 11:55:18 AM org.apache.coyote.AbstractProtocol init
+INFO   | jvm 1    | main    | 2016/04/21 12:55:18.774 | INFO: Initializing ProtocolHandler ["http-bio-9002"]
+INFO   | jvm 1    | main    | 2016/04/21 12:55:19.785 | апр 21, 2016 11:55:19 AM org.apache.coyote.AbstractProtocol init
+INFO   | jvm 1    | main    | 2016/04/21 12:55:19.785 | INFO: Initializing ProtocolHandler ["ajp-bio-8009"]
+INFO   | jvm 1    | main    | 2016/04/21 12:55:19.785 | апр 21, 2016 11:55:19 AM org.apache.catalina.startup.Catalina load
+INFO   | jvm 1    | main    | 2016/04/21 12:55:19.785 | INFO: Initialization processed in 2659 ms
+INFO   | jvm 1    | main    | 2016/04/21 12:55:19.986 | апр 21, 2016 11:55:19 AM org.apache.catalina.mbeans.JmxRemoteLifecycleListener createServer
+INFO   | jvm 1    | main    | 2016/04/21 12:55:19.988 | INFO: The JMX Remote Listener has configured the registry on port 9003 and the server on port 9004 for the Platform server
+INFO   | jvm 1    | main    | 2016/04/21 12:55:19.988 | апр 21, 2016 11:55:19 AM org.apache.catalina.core.StandardService startInternal
+INFO   | jvm 1    | main    | 2016/04/21 12:55:19.996 | INFO: Starting service Catalina
+INFO   | jvm 1    | main    | 2016/04/21 12:55:26.179 | апр 21, 2016 11:55:26 AM org.apache.catalina.startup.TaglibUriRule body
+INFO   | jvm 1    | main    | 2016/04/21 12:55:26.179 | INFO: TLD skipped. URI: http://displaytag.sf.net/el is already defined
+INFO   | jvm 1    | main    | 2016/04/21 12:55:26.180 | апр 21, 2016 11:55:26 AM org.apache.catalina.startup.TaglibUriRule body
+INFO   | jvm 1    | main    | 2016/04/21 12:55:26.180 | INFO: TLD skipped. URI: http://displaytag.sf.net is already defined
+INFO   | jvm 1    | main    | 2016/04/21 12:55:27.127 | >>> No SAP licenses found in the system. Trying fallback to hybris license.
+INFO   | jvm 1    | main    | 2016/04/21 12:55:31.296 | INFO  [localhost-startStop-1] [AbstractTenant] Created master data source DataSourceImpl<<master/master>>
+INFO   | jvm 1    | main    | 2016/04/21 12:55:31.397 | INFO  [localhost-startStop-1] [DefaultClusterNodeManagementService] Automatic cluster ID discovery disabled. Configured ID: 0
+INFO   | jvm 1    | main    | 2016/04/21 12:55:31.397 | INFO  [localhost-startStop-1] [DefaultBroadcastService] Started message broadcast service:
+INFO   | jvm 1    | main    | 2016/04/21 12:55:31.397 | clustering (enabled:false)
+INFO   | jvm 1    | main    | 2016/04/21 12:55:31.397 | sending synchronously - no queue
+INFO   | jvm 1    | main    | 2016/04/21 12:55:31.397 | methods [<loopback>::de.hybris.platform.cluster.LoopBackBroadcastMethod@7bb86cd2]
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.071 | INFO  [localhost-startStop-1] [hybrisserver] 
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.076 | INFO  [localhost-startStop-1] [hybrisserver] *****************************************************************
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.076 | INFO  [localhost-startStop-1] [hybrisserver] 
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.076 | INFO  [localhost-startStop-1] [hybrisserver] Starting up hybris server
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.076 | INFO  [localhost-startStop-1] [hybrisserver] 
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.077 | INFO  [localhost-startStop-1] [hybrisserver] Configuration:
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.077 | INFO  [localhost-startStop-1] [hybrisserver] 
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.077 | INFO  [localhost-startStop-1] [hybrisserver] Cluster:     disabled
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.078 | INFO  [localhost-startStop-1] [hybrisserver] Tenant:      master
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.078 | INFO  [localhost-startStop-1] [hybrisserver] Mode:        development
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.078 | INFO  [localhost-startStop-1] [hybrisserver] OS:          Windows 7 6.1, amd64
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.078 | INFO  [localhost-startStop-1] [hybrisserver] Database:    Pool: hybris - hsqldb, table prefix: 
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.078 | INFO  [localhost-startStop-1] [hybrisserver]              SA - jdbc:hsqldb:file:C:\Users\user\IdeaProjects\hybris\data/hsqldb/mydb;shutdown=true;hsqldb.cache_rows=100000;hsqldb.cache_size=20000;hsqldb.write_delay_millis=1000;hsqldb.inc_backup=true;hsqldb.defrag_limit=2;hsqldb.nio_data_file=false
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.079 | INFO  [localhost-startStop-1] [hybrisserver] Platform:    5.7.0.3
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.079 | INFO  [localhost-startStop-1] [hybrisserver] Java:        Oracle Corporation
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.079 | INFO  [localhost-startStop-1] [hybrisserver]              Java(TM) SE Runtime Environment, 1.8.0_73-b02
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.080 | INFO  [localhost-startStop-1] [hybrisserver]              C:\Program Files\Java\jre1.8.0_73
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.080 | INFO  [localhost-startStop-1] [hybrisserver] VM Locale:   language=ru,country=RU,region=null
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.080 | INFO  [localhost-startStop-1] [hybrisserver] Cache:       RegionCache is not yet initialized. [de.hybris.platform.cache.impl.RegionCacheAdapter]
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.081 | INFO  [localhost-startStop-1] [hybrisserver] Server type: tomcat
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.081 | INFO  [localhost-startStop-1] [hybrisserver] 
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.081 | INFO  [localhost-startStop-1] [hybrisserver] *****************************************************************
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.082 | INFO  [localhost-startStop-1] [hybrisserver] 
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.082 | INFO  [localhost-startStop-1] [hybrisserver] ---------------------------------------------------------------
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.082 | INFO  [localhost-startStop-1] [hybrisserver] --- Extensions in dependency order ( options: 
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.083 | INFO  [localhost-startStop-1] [hybrisserver] ---  @deprecated: is deprecated, p: platform extension,*: auto-required 
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.083 | INFO  [localhost-startStop-1] [hybrisserver] ---  ?: lazy-loaded, i: got items.xml, b: got beans.xml, c: got core module 
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.083 | INFO  [localhost-startStop-1] [hybrisserver] ---  w: got web module, h: got HMC module ) 
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.084 | INFO  [localhost-startStop-1] [hybrisserver] ---------------------------------------------------------------
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.084 | INFO  [localhost-startStop-1] [hybrisserver] core 5.7.0.3 [p*cib]
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.084 | INFO  [localhost-startStop-1] [hybrisserver] testweb 5.7.0.3 [p*w]
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.084 | INFO  [localhost-startStop-1] [hybrisserver] scripting 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.084 | INFO  [localhost-startStop-1] [hybrisserver] paymentstandard 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.096 | INFO  [localhost-startStop-1] [hybrisserver] mediaweb 5.7.0.3 [p*cw]
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.098 | INFO  [localhost-startStop-1] [hybrisserver] maintenanceweb 5.7.0.3 [p*w]
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.098 | INFO  [localhost-startStop-1] [hybrisserver] deliveryzone 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.105 | INFO  [localhost-startStop-1] [hybrisserver] commons 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.106 | INFO  [localhost-startStop-1] [hybrisserver] processing->(scripting,commons) 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.106 | INFO  [localhost-startStop-1] [hybrisserver] impex->processing 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.107 | INFO  [localhost-startStop-1] [hybrisserver] validation->impex 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.107 | INFO  [localhost-startStop-1] [hybrisserver] catalog->(validation,commons) 5.7.0.3 [p*cib]
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.107 | INFO  [localhost-startStop-1] [hybrisserver] europe1->(impex,catalog) 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.107 | INFO  [localhost-startStop-1] [hybrisserver] platformservices->(paymentstandard,impex,deliveryzone,europe1,processing) 5.7.0.3 [p*cb]
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.108 | INFO  [localhost-startStop-1] [hybrisserver] workflow->(catalog,platformservices,processing,commons) 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.111 | INFO  [localhost-startStop-1] [hybrisserver] hac->(impex,catalog,processing,platformservices) 5.7.0.3 [p*w]
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.112 | INFO  [localhost-startStop-1] [hybrisserver] comments->(workflow,impex,catalog,processing) 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.112 | INFO  [localhost-startStop-1] [hybrisserver] advancedsavedquery->(impex,catalog,processing) 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.112 | INFO  [localhost-startStop-1] [hybrisserver] ldap->(impex,catalog,processing) <-?-platformhmc 5.7.0.3 [?ci] path:C:\Users\user\IdeaProjects\hybris\bin\ext-platform-optional\ldap
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.113 | INFO  [localhost-startStop-1] [hybrisserver] hmc->scripting 5.7.0.3 [ciw] path:C:\Users\user\IdeaProjects\hybris\bin\ext-platform-optional\hmc
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.113 | INFO  [localhost-startStop-1] [hybrisserver] mediaconversion->hmc 5.7.0.3 [ciwh] path:C:\Users\user\IdeaProjects\hybris\bin\ext-platform-optional\mediaconversion
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.114 | INFO  [localhost-startStop-1] [hybrisserver] platformhmc->(ldap,hmc) 5.7.0.3 [cibh] path:C:\Users\user\IdeaProjects\hybris\bin\ext-platform-optional\platformhmc
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.114 | INFO  [localhost-startStop-1] [hybrisserver] cockpit->(comments,workflow,impex,catalog,processing,validation) 5.7.0.3 [ci] path:C:\Users\user\IdeaProjects\hybris\bin\ext-cockpit\cockpit
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.114 | INFO  [localhost-startStop-1] [hybrisserver] cuppy->(cockpit,hmc) 5.7.0.3 [ciwh] path:C:\Users\user\IdeaProjects\hybris\bin\custom\cuppy
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.115 | INFO  [localhost-startStop-1] [hybrisserver] cuppytrail->cuppy 5.7.0.3 [cib] path:C:\Users\user\IdeaProjects\hybris\bin\custom\cuppytrail
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.115 | INFO  [localhost-startStop-1] [hybrisserver] cuppytrailfrontend->cuppytrail 5.7.0.3 [cibw] path:C:\Users\user\IdeaProjects\hybris\bin\custom\cuppytrailfrontend
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.115 | INFO  [localhost-startStop-1] [hybrisserver] cuppytrailhmc->(cuppytrail,hmc) 5.7.0.3 [cibh] path:C:\Users\user\IdeaProjects\hybris\bin\custom\cuppytrailhmc
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.117 | INFO  [localhost-startStop-1] [hybrisserver] mcc->(impex,processing,cockpit) 5.7.0.3 [ciw] path:C:\Users\user\IdeaProjects\hybris\bin\ext-cockpit\mcc
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.117 | INFO  [localhost-startStop-1] [hybrisserver] backoffice 5.7.0.3 [ciw] path:C:\Users\user\IdeaProjects\hybris\bin\ext-backoffice\backoffice
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.118 | INFO  [localhost-startStop-1] [hybrisserver] admincockpit->(impex,processing,validation,cockpit) 5.7.0.3 [ciw] path:C:\Users\user\IdeaProjects\hybris\bin\ext-cockpit\admincockpit
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.118 | INFO  [localhost-startStop-1] [hybrisserver] ---------------------------------------------------------------
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.572 | INFO  [localhost-startStop-1] [Licence] ##########################################################################
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.572 | INFO  [localhost-startStop-1] [Licence] This Hybris licence is only for demo or develop usage and is valid for 30 days.
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.572 | INFO  [localhost-startStop-1] [Licence] After this time you have to reinitialize database to continue your work.
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.573 | INFO  [localhost-startStop-1] [Licence] Remaining days ====> 16
+INFO   | jvm 1    | main    | 2016/04/21 12:55:32.573 | INFO  [localhost-startStop-1] [Licence] ##########################################################################
+INFO   | jvm 1    | main    | 2016/04/21 12:55:37.854 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<global>> spring config from extension (core) located in (global-core-spring.xml,core-cache.xml,global-servicelayer-spring.xml,global-core-jmx-spring.xml,global-statistics-spring.xml) took: (1,870 s)
+INFO   | jvm 1    | main    | 2016/04/21 12:55:37.961 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<global>> spring config from extension (mediaconversion) located in (/mediaconversion-global-context.xml) took: (44,26 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:55:38.071 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<global>> spring config from extension (cockpit) located in (global-cockpit-spring.xml) took: (76,54 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:55:38.280 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<global>> spring config from extension (cuppy) located in (global-cuppy-spring.xml,cuppy-ws-spring.xml) took: (187,4 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:55:39.289 | INFO  [localhost-startStop-1] [DefaultRMIRegistryService] Creating Registry on port 2198.
+INFO   | jvm 1    | main    | 2016/04/21 12:55:39.289 | INFO  [localhost-startStop-1] [LocalRMISocketFactory] Creating server socket at '/127.0.0.1:2198'.
+INFO   | jvm 1    | main    | 2016/04/21 12:55:40.530 | INFO  [localhost-startStop-1] [HybrisContextFactory] - Refreshing SpringContext (Global context) took: (2,244 s)
+INFO   | jvm 1    | main    | 2016/04/21 12:55:40.531 | INFO  [localhost-startStop-1] [HybrisContextFactory] Initializing <<global>> Spring ApplicationContext took: (4,627 s)
+INFO   | jvm 1    | main    | 2016/04/21 12:55:40.532 | WARN  [localhost-startStop-1] [AutowiredAnnotationBeanPostProcessor] Inconsistent constructor declaration on bean with name 'defaultCacheController': single autowire-marked constructor flagged as optional - this constructor is effectively required since there is no default constructor to fall back to: public de.hybris.platform.regioncache.DefaultCacheController(de.hybris.platform.regioncache.CacheConfiguration)
+INFO   | jvm 1    | main    | 2016/04/21 12:55:40.532 | WARN  [localhost-startStop-1] [AutowiredAnnotationBeanPostProcessor] Inconsistent constructor declaration on bean with name 'defaultCacheController': single autowire-marked constructor flagged as optional - this constructor is effectively required since there is no default constructor to fall back to: public de.hybris.platform.regioncache.DefaultCacheController(de.hybris.platform.regioncache.CacheConfiguration)
+INFO   | jvm 1    | main    | 2016/04/21 12:55:40.933 | INFO  [localhost-startStop-1] [EHCacheRegion] EHCacheRegion entityCacheRegion, eviction policy FIFO, size 100000
+INFO   | jvm 1    | main    | 2016/04/21 12:55:41.133 | INFO  [localhost-startStop-1] [EHCacheRegion] EHCacheRegion queryCacheRegion, eviction policy FIFO, size 20000
+INFO   | jvm 1    | main    | 2016/04/21 12:55:41.333 | INFO  [localhost-startStop-1] [DefaultCacheController] Regioncache initialized with region count 5
+INFO   | jvm 1    | main    | 2016/04/21 12:55:41.333 | INFO  [localhost-startStop-1] [DefaultCacheController] Cache region: Name: typesystemCacheRegion, size: 0, types: [81, 82, 83, 84, 87], statistics: true, class: class de.hybris.platform.regioncache.region.impl.UnlimitedCacheRegion
+INFO   | jvm 1    | main    | 2016/04/21 12:55:41.333 | INFO  [localhost-startStop-1] [DefaultCacheController] Cache region: Name: entityCacheRegion, size: 100000, types: [__ALL_TYPES__, __NO_QUERY__], exclusive computation: false, statistics: true, class: class de.hybris.platform.regioncache.region.impl.EHCacheRegion
+INFO   | jvm 1    | main    | 2016/04/21 12:55:41.334 | INFO  [localhost-startStop-1] [DefaultCacheController] Cache region: Name: queryCacheRegion, size: 20000, types: [__QUERY_CACHE__], exclusive computation: false, statistics: true, class: class de.hybris.platform.regioncache.region.impl.EHCacheRegion
+INFO   | jvm 1    | main    | 2016/04/21 12:55:41.334 | INFO  [localhost-startStop-1] [DefaultCacheController] Cache region: Name: mediaCacheRegion, size: 0, types: [__MEDIA__cache], statistics: true, class: class de.hybris.platform.media.storage.impl.MediaCacheRegion
+INFO   | jvm 1    | main    | 2016/04/21 12:55:41.335 | INFO  [localhost-startStop-1] [DefaultCacheController] Cache region: Name: scriptsCacheRegion, size: 0, types: [__SCRIPT__], statistics: true, class: class de.hybris.platform.scripting.engine.internal.cache.impl.ScriptsCacheRegion
+INFO   | jvm 1    | main    | 2016/04/21 12:55:41.335 | INFO  [localhost-startStop-1] [DefaultCacheController] Registered Listener RegionCacheAdapter(605458684) - <<master>> on cache controller. Currently registered 1
+INFO   | jvm 1    | main    | 2016/04/21 12:55:51.295 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (core) located in (core-spring.xml,persistence-spring.xml,core-media-spring.xml,core-profiling-spring.xml,core-jmx-spring.xml,core-filter-spring.xml,servicelayer-spring.xml,user-spring.xml,security-spring.xml,media-spring.xml,i18n-spring.xml,interceptor-spring.xml,event-spring.xml) took: (1,080 s)
+INFO   | jvm 1    | main    | 2016/04/21 12:55:51.560 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (scripting) located in (scripting-spring.xml) took: (237,1 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:55:51.672 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (commons) located in (commons-spring.xml) took: (55,71 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:55:51.876 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (processing) located in (processing-spring.xml,cronjob-spring.xml,task-spring.xml,processengine-spring.xml,processing-jmx-spring.xml) took: (252,8 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:55:52.078 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (impex) located in (impex-spring.xml) took: (194,1 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:55:52.227 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (validation) located in (validation-spring.xml) took: (60,20 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:55:52.227 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (europe1) located in (europe1-spring.xml) took: (61,13 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:55:52.674 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (platformservices) located in (catalog-spring.xml,order-spring.xml,product-spring.xml,category-spring.xml,classification-spring.xml,jobs-spring.xml,converters-spring.xml) took: (450,7 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:55:52.674 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (workflow) located in (workflow-spring.xml) took: (42,70 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:55:52.798 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (comments) located in (comments-spring.xml) took: (48,98 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:55:52.799 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (ldap) located in (ldap-spring.xml) took: (41,70 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:55:52.799 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (mediaconversion) located in (mediaconversion-spring.xml) took: (41,88 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:55:52.900 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (platformhmc) located in (platformhmc-spring.xml) took: (46,19 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:55:52.901 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (cockpit) located in (cockpit-spring.xml) took: (55,15 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:55:54.005 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (cuppy) located in (cuppy-spring.xml) took: (1,095 s)
+INFO   | jvm 1    | main    | 2016/04/21 12:55:54.106 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (cuppytrail) located in (cuppytrail-spring.xml) took: (55,18 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:55:54.106 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (cuppytrailfrontend) located in (cuppytrailfrontend-spring.xml) took: (37,95 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:55:54.206 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (cuppytrailhmc) located in (cuppytrailhmc-spring.xml) took: (45,82 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:55:54.206 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (mcc) located in (mcc-spring.xml) took: (42,56 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:55:54.307 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (backoffice) located in (backoffice-spring.xml) took: (35,79 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:55:54.307 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (admincockpit) located in (admincockpit-spring.xml) took: (42,73 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:56:01.624 | ERROR [localhost-startStop-1] [MailSenderFactory] Can not start mail sender, please configure properties mail.smtp.server and mail.smtp.port
+INFO   | jvm 1    | main    | 2016/04/21 12:56:02.809 | INFO  [localhost-startStop-1] [DefaultCacheController] Registered Listener de.hybris.platform.media.storage.impl.DefaultLocalMediaFileCacheService$MediaCacheLifecycleCallback@70f7824 on cache controller. Currently registered 2
+INFO   | jvm 1    | main    | 2016/04/21 12:56:06.898 | INFO  [localhost-startStop-1] [Reflections] Reflections took 158 ms to scan 1 urls, producing 9 keys and 16 values 
+INFO   | jvm 1    | main    | 2016/04/21 12:56:06.899 | INFO  [localhost-startStop-1] [Reflections] Reflections took 1 ms to scan 1 urls, producing 2 keys and 5 values 
+INFO   | jvm 1    | main    | 2016/04/21 12:56:13.198 | WARN  [localhost-startStop-1] [PersistentKeyGenerator] cockpitSavedQuery generator is using deprecated 'numeric' property! Initializing as alphanumeric
+INFO   | jvm 1    | main    | 2016/04/21 12:56:19.846 | INFO  [localhost-startStop-1] [HybrisContextFactory] - Refreshing SpringContext (hybris Application context - master) took: (25,58 s)
+INFO   | jvm 1    | main    | 2016/04/21 12:56:19.846 | INFO  [localhost-startStop-1] [HybrisContextFactory] Initializing application Spring ApplicationContext for tenant master  took: (29,63 s)
+INFO   | jvm 1    | main    | 2016/04/21 12:56:19.947 | INFO  [AfterSaveEventPublisher-master] [DefaultBroadcastService] updating cluster island ID -1->15481123719086096
+INFO   | jvm 1    | main    | 2016/04/21 12:56:21.242 | INFO  [AfterSaveEventPublisher-master] [DefaultTaskService] Task engine starting up (min:10 max:10 idle:20s interval:10s)
+INFO   | jvm 1    | main    | 2016/04/21 12:56:21.343 | INFO  [Task-master-poll] [DefaultTaskService] Polling thread started.
+INFO   | jvm 1    | main    | 2016/04/21 12:56:21.444 | INFO  [Task-master-poll] [DefaultModelConverterRegistry] loading model converters: 
+INFO   | jvm 1    | main    | 2016/04/21 12:56:21.444 | INFO  [Task-master-poll] [DefaultModelConverterRegistry] 	pre-fetch mode:default
+INFO   | jvm 1    | main    | 2016/04/21 12:56:22.118 | INFO  [localhost-startStop-1] [RemoveDefaultSessionFixationStrategyBeanPostProcessor] Removed Spring default SessionFixationProtectionStrategy, since HybrisSessionFixationProtectionStrategy is already defined
+INFO   | jvm 1    | main    | 2016/04/21 12:56:23.084 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/'
+INFO   | jvm 1    | main    | 2016/04/21 12:56:26.251 | INFO  [TaskExecutor-master-45-TriggerTask [8796125889462]] [Version] HV000001: Hibernate Validator 4.3.2.Final
+INFO   | jvm 1    | main    | 2016/04/21 12:56:27.093 | INFO  [automatedUpdateCl2012::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateCl2012) [UpdateOpenLigaDbService] Checking update status for cl2012
+INFO   | jvm 1    | main    | 2016/04/21 12:56:27.211 | INFO  [automatedUpdateEC2012::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateEC2012) [UpdateOpenLigaDbService] Checking update status for ec2012
+INFO   | jvm 1    | main    | 2016/04/21 12:56:27.212 | INFO  [automatedUpdate2LGer2010::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate2LGer2010) [UpdateOpenLigaDbService] Checking update status for 2lger2010
+INFO   | jvm 1    | main    | 2016/04/21 12:56:27.212 | INFO  [automatedUpdateCl2010::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateCl2010) [UpdateOpenLigaDbService] Checking update status for cl2010
+INFO   | jvm 1    | main    | 2016/04/21 12:56:27.213 | INFO  [automatedUpdate1LGer2012::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate1LGer2012) [UpdateOpenLigaDbService] Checking update status for 1lger2012
+INFO   | jvm 1    | main    | 2016/04/21 12:56:27.213 | INFO  [automatedUpdateCl2011::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateCl2011) [UpdateOpenLigaDbService] Checking update status for cl2011
+INFO   | jvm 1    | main    | 2016/04/21 12:56:27.214 | INFO  [automatedUpdate1LGer2011::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate1LGer2011) [UpdateOpenLigaDbService] Checking update status for 1lger2011
+INFO   | jvm 1    | main    | 2016/04/21 12:56:27.214 | INFO  [automatedUpdate1LGer2010::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate1LGer2010) [UpdateOpenLigaDbService] Checking update status for 1lger2010
+INFO   | jvm 1    | main    | 2016/04/21 12:56:27.214 | INFO  [automatedUpdateWWC2011::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateWWC2011) [UpdateOpenLigaDbService] Checking update status for wwc2011
+INFO   | jvm 1    | main    | 2016/04/21 12:56:28.450 | INFO  [TaskExecutor-master-45-TriggerTask [8796125889462]] [ConfigurationImpl] HV000002: Ignoring XML configuration.
+INFO   | jvm 1    | main    | 2016/04/21 12:56:30.823 | INFO  [automatedUpdateWWC2011::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateWWC2011) [UpdateOpenLigaDbService] No update needed for wwc2011
+INFO   | jvm 1    | main    | 2016/04/21 12:56:30.824 | INFO  [automatedUpdateCl2011::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateCl2011) [UpdateOpenLigaDbService] No update needed for cl2011
+INFO   | jvm 1    | main    | 2016/04/21 12:56:30.839 | INFO  [automatedUpdate2LGer2010::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate2LGer2010) [UpdateOpenLigaDbService] No update needed for 2lger2010
+INFO   | jvm 1    | main    | 2016/04/21 12:56:30.840 | INFO  [automatedUpdate1LGer2012::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate1LGer2012) [UpdateOpenLigaDbService] No update needed for 1lger2012
+INFO   | jvm 1    | main    | 2016/04/21 12:56:30.847 | INFO  [automatedUpdateCl2010::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateCl2010) [UpdateOpenLigaDbService] No update needed for cl2010
+INFO   | jvm 1    | main    | 2016/04/21 12:56:30.848 | INFO  [automatedUpdateEC2012::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateEC2012) [UpdateOpenLigaDbService] No update needed for ec2012
+INFO   | jvm 1    | main    | 2016/04/21 12:56:30.849 | INFO  [automatedUpdate1LGer2011::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate1LGer2011) [UpdateOpenLigaDbService] No update needed for 1lger2011
+INFO   | jvm 1    | main    | 2016/04/21 12:56:31.001 | INFO  [automatedUpdateCl2012::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateCl2012) [UpdateOpenLigaDbService] No update needed for cl2012
+INFO   | jvm 1    | main    | 2016/04/21 12:56:31.001 | INFO  [automatedUpdate1LGer2010::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate1LGer2010) [UpdateOpenLigaDbService] No update needed for 1lger2010
+INFO   | jvm 1    | main    | 2016/04/21 12:56:43.588 | INFO  [localhost-startStop-1] (junit) [AbstractTenant] Created master data source DataSourceImpl<<junit/master>>
+INFO   | jvm 1    | main    | 2016/04/21 12:56:43.635 | INFO  [localhost-startStop-1] (junit) [AbstractTenant] Created alternative data source "alt1"
+INFO   | jvm 1    | main    | 2016/04/21 12:56:43.636 | INFO  [localhost-startStop-1] (junit) [AbstractTenant] Created alternative data source "alt2"
+INFO   | jvm 1    | main    | 2016/04/21 12:56:43.636 | INFO  [localhost-startStop-1] (junit) [AbstractTenant] Created alternative data source "a"
+INFO   | jvm 1    | main    | 2016/04/21 12:56:43.638 | INFO  [localhost-startStop-1] (junit) [AbstractTenant] Created alternative data source "b"
+INFO   | jvm 1    | main    | 2016/04/21 12:56:43.638 | INFO  [localhost-startStop-1] (junit) [AbstractTenant] Created alternative data source "c"
+INFO   | jvm 1    | main    | 2016/04/21 12:56:44.316 | WARN  [localhost-startStop-1] (junit) [DefaultCacheController] Listener already registered: RegionCacheAdapter(605458684) - <<junit>> : de.hybris.platform.cache.impl.RegionCacheAdapter
+INFO   | jvm 1    | main    | 2016/04/21 12:56:45.281 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (core) located in (core-spring.xml,core-media-spring.xml,persistence-spring.xml,core-profiling-spring.xml,core-jmx-spring.xml,core-filter-spring.xml,servicelayer-spring.xml,user-spring.xml,security-spring.xml,media-spring.xml,i18n-spring.xml,interceptor-spring.xml,event-spring.xml,test/test-core-spring.xml) took: (496,7 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:56:45.283 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (scripting) located in (scripting-spring.xml) took: (28,21 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:56:45.309 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (commons) located in (commons-spring.xml) took: (23,80 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:56:45.506 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (processing) located in (processing-spring.xml,cronjob-spring.xml,task-spring.xml,processengine-spring.xml,processing-jmx-spring.xml,test/test-processing-spring.xml) took: (246,8 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:56:45.507 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (impex) located in (impex-spring.xml) took: (35,89 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:56:45.507 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (validation) located in (validation-spring.xml) took: (51,92 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:56:45.839 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (europe1) located in (europe1-spring.xml) took: (325,5 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:56:46.070 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (platformservices) located in (catalog-spring.xml,order-spring.xml,product-spring.xml,category-spring.xml,classification-spring.xml,jobs-spring.xml,converters-spring.xml) took: (200,9 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:56:46.070 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (workflow) located in (workflow-spring.xml) took: (29,40 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:56:46.071 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (comments) located in (comments-spring.xml) took: (24,99 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:56:46.214 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (ldap) located in (ldap-spring.xml) took: (27,10 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:56:46.214 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (mediaconversion) located in (mediaconversion-spring.xml) took: (53,47 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:56:46.215 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (platformhmc) located in (platformhmc-spring.xml) took: (24,26 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:56:46.215 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (cockpit) located in (cockpit-spring.xml) took: (35,65 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:56:46.331 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (cuppy) located in (cuppy-spring.xml) took: (91,47 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:56:46.333 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (cuppytrail) located in (cuppytrail-spring.xml) took: (26,01 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:56:46.471 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (cuppytrailfrontend) located in (cuppytrailfrontend-spring.xml) took: (33,39 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:56:46.474 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (cuppytrailhmc) located in (cuppytrailhmc-spring.xml) took: (26,17 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:56:46.475 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (mcc) located in (mcc-spring.xml) took: (27,58 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:56:46.476 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (backoffice) located in (backoffice-spring.xml) took: (28,60 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:56:46.477 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (admincockpit) located in (admincockpit-spring.xml) took: (26,87 ms)
+INFO   | jvm 1    | main    | 2016/04/21 12:56:48.441 | ERROR [localhost-startStop-1] (junit) [MailSenderFactory] Can not start mail sender, please configure properties mail.smtp.server and mail.smtp.port
+INFO   | jvm 1    | main    | 2016/04/21 12:56:48.697 | INFO  [localhost-startStop-1] (junit) [DefaultCacheController] Registered Listener de.hybris.platform.media.storage.impl.DefaultLocalMediaFileCacheService$MediaCacheLifecycleCallback@54fed5a0 on cache controller. Currently registered 3
+INFO   | jvm 1    | main    | 2016/04/21 12:56:51.017 | WARN  [localhost-startStop-1] (junit) [PersistentKeyGenerator] cockpitSavedQuery generator is using deprecated 'numeric' property! Initializing as alphanumeric
+INFO   | jvm 1    | main    | 2016/04/21 12:56:53.712 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] - Refreshing SpringContext (hybris Application context - junit) took: (7,197 s)
+INFO   | jvm 1    | main    | 2016/04/21 12:56:53.723 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Initializing application Spring ApplicationContext for tenant junit  took: (9,078 s)
+INFO   | jvm 1    | main    | 2016/04/21 12:56:53.724 | WARN  [localhost-startStop-1] (junit) [DefaultTaskService] System not initialized. Not starting task module.
+INFO   | jvm 1    | main    | 2016/04/21 12:56:53.724 | WARN  [localhost-startStop-1] (junit) [DefaultTaskService] System not initialized. Not starting task module.
+INFO   | jvm 1    | main    | 2016/04/21 12:56:53.923 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/hmc_junit'
+INFO   | jvm 1    | main    | 2016/04/21 12:56:58.027 | INFO  [localhost-startStop-1] [RemoveDefaultSessionFixationStrategyBeanPostProcessor] Removed Spring default SessionFixationProtectionStrategy, since HybrisSessionFixationProtectionStrategy is already defined
+INFO   | jvm 1    | main    | 2016/04/21 12:56:58.956 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/admincockpit'
+INFO   | jvm 1    | main    | 2016/04/21 12:57:26.635 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/cuppy'
+INFO   | jvm 1    | main    | 2016/04/21 12:57:27.096 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/cuppytrailfrontend'
+INFO   | jvm 1    | main    | 2016/04/21 12:57:27.507 | апр 21, 2016 11:57:27 AM org.apache.catalina.startup.TaglibUriRule body
+INFO   | jvm 1    | main    | 2016/04/21 12:57:27.507 | INFO: TLD skipped. URI: http://displaytag.sf.net/el is already defined
+INFO   | jvm 1    | main    | 2016/04/21 12:57:27.507 | апр 21, 2016 11:57:27 AM org.apache.catalina.startup.TaglibUriRule body
+INFO   | jvm 1    | main    | 2016/04/21 12:57:27.507 | INFO: TLD skipped. URI: http://displaytag.sf.net is already defined
+INFO   | jvm 1    | main    | 2016/04/21 12:57:27.708 | INFO  [localhost-startStop-1] (junit) [RemoveDefaultSessionFixationStrategyBeanPostProcessor] Removed Spring default SessionFixationProtectionStrategy, since HybrisSessionFixationProtectionStrategy is already defined
+INFO   | jvm 1    | main    | 2016/04/21 12:57:28.507 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/hac_junit'
+INFO   | jvm 1    | main    | 2016/04/21 12:57:32.949 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/mcc'
+INFO   | jvm 1    | main    | 2016/04/21 12:57:34.288 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/test'
+INFO   | jvm 1    | main    | 2016/04/21 12:57:35.208 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/hmc'
+INFO   | jvm 1    | main    | 2016/04/21 12:57:35.509 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/mediaconversion'
+INFO   | jvm 1    | main    | 2016/04/21 12:57:55.511 | INFO  [localhost-startStop-1] [RemoveDefaultSessionFixationStrategyBeanPostProcessor] Removed Spring default SessionFixationProtectionStrategy, since HybrisSessionFixationProtectionStrategy is already defined
+INFO   | jvm 1    | main    | 2016/04/21 12:58:12.126 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/backoffice'
+INFO   | jvm 1    | main    | 2016/04/21 12:58:12.127 | INFO  [localhost-startStop-1] [WebManager] Starting ZK 7.0.4 EE (build: 2014120911)
+INFO   | jvm 1    | main    | 2016/04/21 12:58:12.127 | INFO  [localhost-startStop-1] [ConfigParser] Loading system default
+INFO   | jvm 1    | main    | 2016/04/21 12:58:12.427 | INFO  [localhost-startStop-1] [ConfigParser] Parsing jar:file:/C:/Users/user/IdeaProjects/hybris/bin/ext-backoffice/backoffice/web/webroot/WEB-INF/lib/cockpitframework-2.3.0.1.jar!/metainfo/zk/zk.xml
+INFO   | jvm 1    | main    | 2016/04/21 12:58:12.427 | INFO  [localhost-startStop-1] [ConfigParser] Parsing jar:file:/C:/Users/user/IdeaProjects/hybris/bin/ext-backoffice/backoffice/web/webroot/WEB-INF/lib/zul-7.0.4.jar!/metainfo/zk/zk.xml
+INFO   | jvm 1    | main    | 2016/04/21 12:58:12.427 | INFO  [localhost-startStop-1] [ConfigParser] Parsing jar:file:/C:/Users/user/IdeaProjects/hybris/bin/ext-backoffice/backoffice/web/webroot/WEB-INF/lib/zkex-7.0.4.jar!/metainfo/zk/zk.xml
+INFO   | jvm 1    | main    | 2016/04/21 12:58:12.428 | INFO  [localhost-startStop-1] [ConfigParser] Parsing jar:file:/C:/Users/user/IdeaProjects/hybris/bin/ext-backoffice/backoffice/web/webroot/WEB-INF/lib/zkmax-7.0.4.jar!/metainfo/zk/zk.xml
+INFO   | jvm 1    | main    | 2016/04/21 12:58:13.454 | апр 21, 2016 11:58:13 AM org.apache.coyote.AbstractProtocol start
+INFO   | jvm 1    | main    | 2016/04/21 12:58:13.454 | INFO: Starting ProtocolHandler ["http-bio-9001"]
+INFO   | jvm 1    | main    | 2016/04/21 12:58:13.454 | апр 21, 2016 11:58:13 AM org.apache.coyote.AbstractProtocol start
+INFO   | jvm 1    | main    | 2016/04/21 12:58:13.454 | INFO: Starting ProtocolHandler ["http-bio-9002"]
+INFO   | jvm 1    | main    | 2016/04/21 12:58:13.454 | апр 21, 2016 11:58:13 AM org.apache.coyote.AbstractProtocol start
+INFO   | jvm 1    | main    | 2016/04/21 12:58:13.454 | INFO: Starting ProtocolHandler ["ajp-bio-8009"]
+INFO   | jvm 1    | main    | 2016/04/21 12:58:13.455 | апр 21, 2016 11:58:13 AM org.apache.catalina.startup.Catalina start
+INFO   | jvm 1    | main    | 2016/04/21 12:58:13.455 | INFO: Server startup in 173679 ms
+INFO   | jvm 1    | main    | 2016/04/21 13:01:04.587 | WARN  [hybrisHTTP17] [ExtensibleItemEJB] Error decrypting property 'encodedPassword' of item 8796093054980 - probably not encrypted? Using raw value!
+INFO   | jvm 1    | main    | 2016/04/21 13:01:57.839 | INFO  [hybrisHTTP39] [DefaultTenantsFacade] Web app 'hac' is not mapped for tenant <<foo>>[465662612]. Please add hac.webroot=<webroot> if you need to access hac with that tenant.
+INFO   | jvm 1    | main    | 2016/04/21 13:01:57.840 | INFO  [hybrisHTTP39] [DefaultTenantsFacade] Web app 'hac' is not mapped for tenant <<t1>>[745970162]. Please add hac.webroot=<webroot> if you need to access hac with that tenant.
+INFO   | jvm 1    | main    | 2016/04/21 13:01:57.840 | INFO  [hybrisHTTP39] [DefaultTenantsFacade] Web app 'hac' is not mapped for tenant <<t2>>[1070380313]. Please add hac.webroot=<webroot> if you need to access hac with that tenant.
+INFO   | jvm 1    | main    | 2016/04/21 13:01:58.327 | апр 21, 2016 12:01:58 PM org.apache.jasper.compiler.TldLocationsCache tldScanJar
+INFO   | jvm 1    | main    | 2016/04/21 13:01:58.335 | INFO: At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+INFO   | jvm 1    | main    | 2016/04/21 13:04:08.699 | WARN  [hybrisHTTP13] (junit) [RedirectWhenSystemIsNotInitializedFilter] System is NOT initialized. Redirect processing.
+INFO   | jvm 1    | main    | 2016/04/21 13:04:08.699 | WARN  [hybrisHTTP13] (junit) [SessionFilter] Cannot create session (reason: system not initialized)
+INFO   | jvm 1    | main    | 2016/04/21 13:04:12.466 | WARN  [hybrisHTTP13] (junit) [RedirectWhenSystemIsNotInitializedFilter] System is NOT initialized. Redirect processing.
+INFO   | jvm 1    | main    | 2016/04/21 13:04:12.978 | WARN  [hybrisHTTP13] (junit) [SessionFilter] Cannot create session (reason: system not initialized)
+INFO   | jvm 1    | main    | 2016/04/21 13:05:36.345 | WARN  [hybrisHTTP2] (junit) [RedirectWhenSystemIsNotInitializedFilter] System is NOT initialized. Redirect processing.
+INFO   | jvm 1    | main    | 2016/04/21 13:05:36.346 | WARN  [hybrisHTTP2] (junit) [SessionFilter] Cannot create session (reason: system not initialized)
+INFO   | jvm 1    | main    | 2016/04/21 13:05:36.691 | INFO  [hybrisHTTP2] (junit) [DefaultTaskService] Task engine already stopped.
+INFO   | jvm 1    | main    | 2016/04/21 13:05:36.691 | INFO  [hybrisHTTP2] (junit) [Initialization] ###############################################################
+INFO   | jvm 1    | main    | 2016/04/21 13:05:36.692 | INFO  [hybrisHTTP2] (junit) [Initialization] Initialize system ...
+INFO   | jvm 1    | main    | 2016/04/21 13:05:36.692 | INFO  [hybrisHTTP2] (junit) [Initialization] ###############################################################
+INFO   | jvm 1    | main    | 2016/04/21 13:05:36.692 | INFO  [hybrisHTTP2] (junit) [Initialization] Please wait. This step can take some minutes to complete.
+INFO   | jvm 1    | main    | 2016/04/21 13:05:36.693 | INFO  [hybrisHTTP2] (junit) [Initialization] If you do not receive any feedback on this page in this time, consult the applicationserver logs for possible errors.
+INFO   | jvm 1    | main    | 2016/04/21 13:05:36.693 | INFO  [hybrisHTTP2] (junit) [Initialization] Dropping old and creating new empty system ... 
+INFO   | jvm 1    | main    | 2016/04/21 13:05:36.693 | INFO  [hybrisHTTP2] (junit) [Initialization] ### Starting type system initialization
+INFO   | jvm 1    | main    | 2016/04/21 13:05:36.921 | INFO  [hybrisHTTP2] (junit) [Initialization] >>> Creating schema and type system...
+INFO   | jvm 1    | main    | 2016/04/21 13:05:36.934 | INFO  [hybrisHTTP2] (junit) [HybrisSchemaGenerator] Reading type system Information.
+INFO   | jvm 1    | main    | 2016/04/21 13:05:37.902 | INFO  [hybrisHTTP2] (junit) [HybrisSchemaGenerator] Read type system Information. Time taken 1,016 s
+INFO   | jvm 1    | main    | 2016/04/21 13:05:37.971 | INFO  [hybrisHTTP2] (junit) [HybrisSchemaGenerator] Preparing  Db model. 
+INFO   | jvm 1    | main    | 2016/04/21 13:05:40.721 | INFO  [hybrisHTTP2] (junit) [DatabaseModelGenerator] Prepared Database Model with (376) tables.
+INFO   | jvm 1    | main    | 2016/04/21 13:05:40.722 | INFO  [hybrisHTTP2] (junit) [HybrisSchemaGenerator] Prepared  Db model. Time taken 2,777 s
+INFO   | jvm 1    | main    | 2016/04/21 13:05:41.045 | INFO  [hybrisHTTP2] (junit) [HybrisSchemaGenerator] Preparing  Statements
+INFO   | jvm 1    | main    | 2016/04/21 13:05:45.910 | INFO  [hybrisHTTP2] (junit) [HybrisSchemaGenerator] Prepared  Statements. Time taken 4,879 s
+INFO   | jvm 1    | main    | 2016/04/21 13:05:45.911 | INFO  [hybrisHTTP2] (junit) [DefaultDbScriptsExecutor] ###### Executing DDL Drop Statements in batch mode ##########
+INFO   | jvm 1    | main    | 2016/04/21 13:05:46.012 | INFO  [hybrisHTTP2] (junit) [DefaultDbScriptsExecutor] Executed 242 Statements. Time taken: 42,73 ms
+INFO   | jvm 1    | main    | 2016/04/21 13:05:46.012 | INFO  [hybrisHTTP2] (junit) [DefaultDbScriptsExecutor] ###### Executing DDL Statements in batch mode ###############
+INFO   | jvm 1    | main    | 2016/04/21 13:05:46.271 | INFO  [hybrisHTTP2] (junit) [DefaultDbScriptsExecutor] Executed 751 Statements. Time taken: 232,6 ms
+INFO   | jvm 1    | main    | 2016/04/21 13:05:46.273 | INFO  [hybrisHTTP2] (junit) [DefaultDbScriptsExecutor] ###### Executing DML Statements in batch mode ###############
+INFO   | jvm 1    | main    | 2016/04/21 13:06:26.744 | INFO  [hybrisHTTP2] (junit) [DefaultDbScriptsExecutor] Executed 14223 Statements. Time taken: 40,49 s
+INFO   | jvm 1    | main    | 2016/04/21 13:06:26.744 | INFO  [hybrisHTTP2] (junit) [HybrisSchemaGenerator] DDL DROP Script generated to: C:\Users\user\IdeaProjects\hybris\temp\hybris\init_junit_drop_schema.sql
+INFO   | jvm 1    | main    | 2016/04/21 13:06:26.745 | INFO  [hybrisHTTP2] (junit) [HybrisSchemaGenerator] DDL CREATE Script generated to: C:\Users\user\IdeaProjects\hybris\temp\hybris\init_junit_schema.sql
+INFO   | jvm 1    | main    | 2016/04/21 13:06:26.745 | INFO  [hybrisHTTP2] (junit) [HybrisSchemaGenerator] DML Script generated to: C:\Users\user\IdeaProjects\hybris\temp\hybris\init_junit_data.sql
+INFO   | jvm 1    | main    | 2016/04/21 13:06:26.745 | INFO  [hybrisHTTP2] (junit) [Initialization] >>> Reloading persistence...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:29.169 | INFO  [hybrisHTTP2] (junit) [Initialization] >>> Clearing cache...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:29.270 | INFO  [hybrisHTTP2] (junit) [Initialization] >>> Initialize media storages ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:29.270 | INFO  [hybrisHTTP2] (junit) [Initialization] ### Done type system initialization in 0d 00h:00m:52s:515ms.
+INFO   | jvm 1    | main    | 2016/04/21 13:06:29.270 | INFO  [hybrisHTTP2] (junit) [Initialization] Restarting system internals ....
+INFO   | jvm 1    | main    | 2016/04/21 13:06:29.270 | INFO  [hybrisHTTP2] (junit) [DefaultTaskService] Task engine already stopped.
+INFO   | jvm 1    | main    | 2016/04/21 13:06:29.270 | INFO  [hybrisHTTP2] (junit) [DefaultTaskService] Task engine already stopped.
+INFO   | jvm 1    | main    | 2016/04/21 13:06:29.385 | WARN  [hybrisHTTP2] (junit) [AbstractTenant] error getting tenant restart marker from db, using current time
+INFO   | jvm 1    | main    | 2016/04/21 13:06:31.932 | INFO  [hybrisHTTP2] (junit) [DefaultModelConverterRegistry] Clearing the ConverterRegistry after tenant <<junit>> restart 
+INFO   | jvm 1    | main    | 2016/04/21 13:06:32.064 | INFO  [hybrisHTTP2] (junit) [DefaultTaskService] Task engine starting up (min:10 max:10 idle:20s interval:10s)
+INFO   | jvm 1    | main    | 2016/04/21 13:06:32.599 | INFO  [Task-junit-poll] (junit) [DefaultTaskService] Polling thread started.
+INFO   | jvm 1    | main    | 2016/04/21 13:06:32.600 | INFO  [hybrisHTTP2] (junit) [DefaultModelConverterRegistry] loading model converters: 
+INFO   | jvm 1    | main    | 2016/04/21 13:06:32.600 | INFO  [hybrisHTTP2] (junit) [DefaultModelConverterRegistry] 	pre-fetch mode:default
+INFO   | jvm 1    | main    | 2016/04/21 13:06:33.188 | INFO  [hybrisHTTP2] (junit) [Initialization] Clearing hmc configuration from database ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:33.188 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:33.234 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data for core ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:33.594 | INFO  [hybrisHTTP2] (junit) [LangPackDataCreator] creating language 'de'
+INFO   | jvm 1    | main    | 2016/04/21 13:06:33.613 | INFO  [hybrisHTTP2] (junit) [LangPackDataCreator] creating language 'en'
+INFO   | jvm 1    | main    | 2016/04/21 13:06:33.613 | INFO  [hybrisHTTP2] (junit) [LangPackDataCreator] creating language 'es'
+INFO   | jvm 1    | main    | 2016/04/21 13:06:33.613 | INFO  [hybrisHTTP2] (junit) [LangPackDataCreator] creating language 'es_CO'
+INFO   | jvm 1    | main    | 2016/04/21 13:06:33.666 | INFO  [hybrisHTTP2] (junit) [LangPackDataCreator] creating language 'fr'
+INFO   | jvm 1    | main    | 2016/04/21 13:06:33.667 | INFO  [hybrisHTTP2] (junit) [LangPackDataCreator] creating language 'it'
+INFO   | jvm 1    | main    | 2016/04/21 13:06:33.667 | INFO  [hybrisHTTP2] (junit) [LangPackDataCreator] creating language 'ja'
+INFO   | jvm 1    | main    | 2016/04/21 13:06:33.667 | INFO  [hybrisHTTP2] (junit) [LangPackDataCreator] creating language 'ko'
+INFO   | jvm 1    | main    | 2016/04/21 13:06:33.668 | INFO  [hybrisHTTP2] (junit) [LangPackDataCreator] creating language 'pt'
+INFO   | jvm 1    | main    | 2016/04/21 13:06:33.668 | INFO  [hybrisHTTP2] (junit) [LangPackDataCreator] creating language 'ru'
+INFO   | jvm 1    | main    | 2016/04/21 13:06:33.668 | INFO  [hybrisHTTP2] (junit) [LangPackDataCreator] creating language 'zh'
+INFO   | jvm 1    | main    | 2016/04/21 13:06:33.668 | INFO  [hybrisHTTP2] (junit) [LangPackDataCreator] creating language 'zh_TW'
+INFO   | jvm 1    | main    | 2016/04/21 13:06:33.669 | INFO  [hybrisHTTP2] (junit) [LangPackDataCreator] creating language 'hi'
+INFO   | jvm 1    | main    | 2016/04/21 13:06:33.669 | INFO  [hybrisHTTP2] (junit) [LangPackDataCreator] creating language 'id'
+INFO   | jvm 1    | main    | 2016/04/21 13:06:33.669 | INFO  [hybrisHTTP2] (junit) [LangPackDataCreator] processing lang pack iso code 'de'
+INFO   | jvm 1    | main    | 2016/04/21 13:06:33.774 | INFO  [hybrisHTTP2] (junit) [LangPackDataCreator] processing lang pack iso code 'en'
+INFO   | jvm 1    | main    | 2016/04/21 13:06:34.049 | INFO  [hybrisHTTP2] (junit) [LangPackDataCreator] processing lang pack iso code 'es'
+INFO   | jvm 1    | main    | 2016/04/21 13:06:34.105 | INFO  [hybrisHTTP2] (junit) [LangPackDataCreator] processing lang pack iso code 'es_CO'
+INFO   | jvm 1    | main    | 2016/04/21 13:06:34.159 | INFO  [hybrisHTTP2] (junit) [LangPackDataCreator] processing lang pack iso code 'fr'
+INFO   | jvm 1    | main    | 2016/04/21 13:06:34.170 | INFO  [hybrisHTTP2] (junit) [LangPackDataCreator] processing lang pack iso code 'it'
+INFO   | jvm 1    | main    | 2016/04/21 13:06:34.178 | INFO  [hybrisHTTP2] (junit) [LangPackDataCreator] processing lang pack iso code 'ja'
+INFO   | jvm 1    | main    | 2016/04/21 13:06:34.502 | INFO  [hybrisHTTP2] (junit) [LangPackDataCreator] processing lang pack iso code 'ko'
+INFO   | jvm 1    | main    | 2016/04/21 13:06:34.504 | INFO  [hybrisHTTP2] (junit) [LangPackDataCreator] processing lang pack iso code 'pt'
+INFO   | jvm 1    | main    | 2016/04/21 13:06:34.635 | INFO  [hybrisHTTP2] (junit) [LangPackDataCreator] processing lang pack iso code 'ru'
+INFO   | jvm 1    | main    | 2016/04/21 13:06:34.838 | INFO  [hybrisHTTP2] (junit) [LangPackDataCreator] processing lang pack iso code 'zh'
+INFO   | jvm 1    | main    | 2016/04/21 13:06:34.838 | INFO  [hybrisHTTP2] (junit) [LangPackDataCreator] processing lang pack iso code 'zh_TW'
+INFO   | jvm 1    | main    | 2016/04/21 13:06:34.939 | INFO  [hybrisHTTP2] (junit) [LangPackDataCreator] processing lang pack iso code 'hi'
+INFO   | jvm 1    | main    | 2016/04/21 13:06:35.068 | INFO  [hybrisHTTP2] (junit) [LangPackDataCreator] processing lang pack iso code 'id'
+INFO   | jvm 1    | main    | 2016/04/21 13:06:35.779 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data for testweb ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:35.779 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data for scripting ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:35.780 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data for paymentstandard ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:35.780 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data for mediaweb ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:35.781 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data for maintenanceweb ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:35.784 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data for deliveryzone ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:35.785 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data for commons ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:35.785 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data for processing ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:35.786 | INFO  [hybrisHTTP2] (junit) [CronJobManager] importing resource /cronjob/DefaultCronJobFinishNotificationTemplate.csv
+INFO   | jvm 1    | main    | 2016/04/21 13:06:36.044 | INFO  [hybrisHTTP2] (junit) (00000000-ImpEx-Import) [ImpExImportJob] Starting ImpEx cronjob "ImpEx-Import"
+INFO   | jvm 1    | main    | 2016/04/21 13:06:36.501 | INFO  [hybrisHTTP2] (junit) (00000000-ImpEx-Import) [ImpExImportReader] no result provided for value line ValueLine[,line 3 at main script,null,HeaderDescriptor[line 2 at main script, remove, Media, {}, [code, mime, realfilename, @media] ],{1=ValueEntry('DefaultCronJobFinishNotificationTemplate_de'=DefaultCronJobFinishNotificationTemplate_de,unresolved=false,ignore=false), 2=ValueEntry('text/plain'=null,unresolved=null,ignore=false), 3=ValueEntry('DefaultCronJobFinishNotificationTemplate_de.vm'=null,unresolved=null,ignore=false), 4=ValueEntry('jar:/cronjob/DefaultCronJobFinishNotificationTemplate_de.vm'=null,unresolved=null,ignore=false), 5=ValueEntry(''=null,unresolved=null,ignore=false)}]
+INFO   | jvm 1    | main    | 2016/04/21 13:06:36.678 | INFO  [hybrisHTTP2] (junit) (00000000-ImpEx-Import) [ImpExImportReader] no result provided for value line ValueLine[,line 4 at main script,null,HeaderDescriptor[line 2 at main script, remove, Media, {}, [code, mime, realfilename, @media] ],{1=ValueEntry('DefaultCronJobFinishNotificationTemplate_en'=DefaultCronJobFinishNotificationTemplate_en,unresolved=false,ignore=false), 2=ValueEntry('text/plain'=null,unresolved=null,ignore=false), 3=ValueEntry('DefaultCronJobFinishNotificationTemplate_en.vm'=null,unresolved=null,ignore=false), 4=ValueEntry('jar:/cronjob/DefaultCronJobFinishNotificationTemplate_en.vm'=null,unresolved=null,ignore=false), 5=ValueEntry(''=null,unresolved=null,ignore=false)}]
+INFO   | jvm 1    | main    | 2016/04/21 13:06:36.680 | INFO  [hybrisHTTP2] (junit) (00000000-ImpEx-Import) [ConfigurationImpl] HV000002: Ignoring XML configuration.
+INFO   | jvm 1    | main    | 2016/04/21 13:06:36.880 | INFO  [hybrisHTTP2] (junit) (00000000-ImpEx-Import) [Importer] Finished 1 pass in 0d 00h:00m:00s:764ms - processed: 5, no lines dumped (last pass 0)
+INFO   | jvm 1    | main    | 2016/04/21 13:06:37.147 | INFO  [hybrisHTTP2] (junit) [SessionCtxValueJDBCCleaner] ########################################################################################
+INFO   | jvm 1    | main    | 2016/04/21 13:06:37.215 | INFO  [hybrisHTTP2] (junit) [SessionCtxValueJDBCCleaner] Performing SessionCtxValueJDBCCleaner.
+INFO   | jvm 1    | main    | 2016/04/21 13:06:37.216 | If it is not desired, switch the jdbc.clean.sessionContextValues flag to false (or remove it completely)
+INFO   | jvm 1    | main    | 2016/04/21 13:06:37.216 | INFO  [hybrisHTTP2] (junit) [SessionCtxValueJDBCCleaner] ########################################################################################
+INFO   | jvm 1    | main    | 2016/04/21 13:06:37.602 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data for impex ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:37.645 | INFO  [hybrisHTTP2] (junit) [ImpExSystemSetup] importing resource : /impex/essentialdata-ImpexSystemSetupTestDefault.impex
+INFO   | jvm 1    | main    | 2016/04/21 13:06:37.647 | INFO  [hybrisHTTP2] (junit) (00000001-ImpEx-Import) [ImpExImportJob] Starting ImpEx cronjob "ImpEx-Import"
+INFO   | jvm 1    | main    | 2016/04/21 13:06:37.698 | INFO  [hybrisHTTP2] (junit) (00000001-ImpEx-Import) [Importer] Finished 1 pass in 0d 00h:00m:00s:000ms - processed: 0, no lines dumped (last pass 0)
+INFO   | jvm 1    | main    | 2016/04/21 13:06:37.910 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data for validation ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:38.010 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data for catalog ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:42.364 | INFO  [hybrisHTTP2] (junit) [CatalogManager] Importing resource /catalog/cataloguserrights.csv
+INFO   | jvm 1    | main    | 2016/04/21 13:06:42.365 | INFO  [hybrisHTTP2] (junit) (00000002-ImpEx-Import) [ImpExImportJob] Starting ImpEx cronjob "ImpEx-Import"
+INFO   | jvm 1    | main    | 2016/04/21 13:06:42.366 | INFO  [hybrisHTTP2] (junit) (00000002-ImpEx-Import) [Importer] Finished 1 pass in 0d 00h:00m:00s:053ms - processed: 0, no lines dumped (last pass 0)
+INFO   | jvm 1    | main    | 2016/04/21 13:06:42.740 | INFO  [hybrisHTTP2] (junit) [CatalogManager] Importing resource /catalog/essentialdatacatalog.csv
+INFO   | jvm 1    | main    | 2016/04/21 13:06:42.745 | INFO  [hybrisHTTP2] (junit) (00000003-ImpEx-Import) [ImpExImportJob] Starting ImpEx cronjob "ImpEx-Import"
+INFO   | jvm 1    | main    | 2016/04/21 13:06:42.746 | INFO  [hybrisHTTP2] (junit) (00000003-ImpEx-Import) [ConfigurationImpl] HV000002: Ignoring XML configuration.
+INFO   | jvm 1    | main    | 2016/04/21 13:06:42.846 | INFO  [hybrisHTTP2] (junit) (00000003-ImpEx-Import) [Importer] Finished 1 pass in 0d 00h:00m:00s:266ms - processed: 3, no lines dumped (last pass 0)
+INFO   | jvm 1    | main    | 2016/04/21 13:06:44.031 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data for europe1 ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:44.031 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data for platformservices ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:44.031 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data for workflow ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:44.032 | INFO  [hybrisHTTP2] (junit) [WorkflowSystemSetup] Importing resource /workflow/adhoc_workflow_template.impex
+INFO   | jvm 1    | main    | 2016/04/21 13:06:44.443 | INFO  [hybrisHTTP2] (junit) [DefaultImportService] Starting import synchronous using cronjob with code=00000004
+INFO   | jvm 1    | main    | 2016/04/21 13:06:44.445 | INFO  [hybrisHTTP2] (junit) (00000004) [ImpExImportJob] Starting ImpEx cronjob "ImpEx-Import"
+INFO   | jvm 1    | main    | 2016/04/21 13:06:45.983 | INFO  [hybrisHTTP2] (junit) (00000004) [Importer] Finished 1 pass in 0d 00h:00m:01s:300ms - processed: 11, dumped: 1 (last pass: 0)
+INFO   | jvm 1    | main    | 2016/04/21 13:06:45.984 | INFO  [hybrisHTTP2] (junit) (00000004) [Importer] Starting pass 2
+INFO   | jvm 1    | main    | 2016/04/21 13:06:45.984 | INFO  [hybrisHTTP2] (junit) (00000004) [Importer] Finished 2 pass in 0d 00h:00m:00s:021ms - processed: 1, no lines dumped (last pass 1)
+INFO   | jvm 1    | main    | 2016/04/21 13:06:45.984 | INFO  [hybrisHTTP2] (junit) [DefaultImportService] Import was successful (using cronjob with code=00000004)
+INFO   | jvm 1    | main    | 2016/04/21 13:06:45.985 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data for hac ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:45.985 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data for comments ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:46.104 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data for advancedsavedquery ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:46.155 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data for ldap ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:46.156 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data for hmc ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:46.156 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data for mediaconversion ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:46.156 | INFO  [hybrisHTTP2] (junit) [ImpExSystemSetup] importing resource : /impex/essentialdata_mediaconversion_jobs.impex
+INFO   | jvm 1    | main    | 2016/04/21 13:06:46.157 | INFO  [hybrisHTTP2] (junit) (00000005-ImpEx-Import) [ImpExImportJob] Starting ImpEx cronjob "ImpEx-Import"
+INFO   | jvm 1    | main    | 2016/04/21 13:06:46.157 | INFO  [hybrisHTTP2] (junit) (00000005-ImpEx-Import) [Importer] Finished 1 pass in 0d 00h:00m:00s:025ms - processed: 3, no lines dumped (last pass 0)
+INFO   | jvm 1    | main    | 2016/04/21 13:06:46.160 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data for platformhmc ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:46.161 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data for cockpit ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:46.248 | INFO  [hybrisHTTP2] (junit) [CockpitManager] importing resource /cockpit/import/essential_data.csv
+INFO   | jvm 1    | main    | 2016/04/21 13:06:46.316 | INFO  [hybrisHTTP2] (junit) (00000006-ImpEx-Import) [ImpExImportJob] Starting ImpEx cronjob "ImpEx-Import"
+INFO   | jvm 1    | main    | 2016/04/21 13:06:46.438 | INFO  [hybrisHTTP2] (junit) (00000006-ImpEx-Import) [Importer] Finished 1 pass in 0d 00h:00m:00s:121ms - processed: 1, no lines dumped (last pass 0)
+INFO   | jvm 1    | main    | 2016/04/21 13:06:46.439 | INFO  [hybrisHTTP2] (junit) [CockpitManager] importing resource /cockpit/import/comments.csv
+INFO   | jvm 1    | main    | 2016/04/21 13:06:46.653 | INFO  [hybrisHTTP2] (junit) (00000007-ImpEx-Import) [ImpExImportJob] Starting ImpEx cronjob "ImpEx-Import"
+INFO   | jvm 1    | main    | 2016/04/21 13:06:46.653 | WARN  [hybrisHTTP2] (junit) (00000007-ImpEx-Import) [CollectionValueTranslator] line 5 at main script: Localized collection will be modified for Component.readPermitted, however language was not provided explicitly (session language used instead)
+INFO   | jvm 1    | main    | 2016/04/21 13:06:46.654 | WARN  [hybrisHTTP2] (junit) (00000007-ImpEx-Import) [CollectionValueTranslator] line 5 at main script: Localized collection will be modified for Component.writePermitted, however language was not provided explicitly (session language used instead)
+INFO   | jvm 1    | main    | 2016/04/21 13:06:46.654 | WARN  [hybrisHTTP2] (junit) (00000007-ImpEx-Import) [CollectionValueTranslator] line 5 at main script: Localized collection will be modified for Component.createPermitted, however language was not provided explicitly (session language used instead)
+INFO   | jvm 1    | main    | 2016/04/21 13:06:46.655 | WARN  [hybrisHTTP2] (junit) (00000007-ImpEx-Import) [CollectionValueTranslator] line 5 at main script: Localized collection will be modified for Component.removePermitted, however language was not provided explicitly (session language used instead)
+INFO   | jvm 1    | main    | 2016/04/21 13:06:46.863 | INFO  [hybrisHTTP2] (junit) (00000007-ImpEx-Import) [Importer] Finished 1 pass in 0d 00h:00m:00s:160ms - processed: 5, no lines dumped (last pass 0)
+INFO   | jvm 1    | main    | 2016/04/21 13:06:46.893 | INFO  [hybrisHTTP2] (junit) [CockpitManager] importing resource /cockpit/import/report_ui_components.csv
+INFO   | jvm 1    | main    | 2016/04/21 13:06:46.901 | INFO  [hybrisHTTP2] (junit) (00000008-ImpEx-Import) [ImpExImportJob] Starting ImpEx cronjob "ImpEx-Import"
+INFO   | jvm 1    | main    | 2016/04/21 13:06:47.728 | INFO  [hybrisHTTP2] (junit) (00000008-ImpEx-Import) [Importer] Finished 1 pass in 0d 00h:00m:00s:827ms - processed: 39, no lines dumped (last pass 0)
+INFO   | jvm 1    | main    | 2016/04/21 13:06:47.829 | INFO  [hybrisHTTP2] (junit) [CockpitSystemSetup] Import of jasper reports for editor area: Started...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:47.829 | INFO  [hybrisHTTP2] (junit) [CockpitSystemSetup] Saving report for editor area: /cockpit/jasperreports/editorarea/editorAreaReferenceTableRows.jrxml as jasper media :EditorAreaReferenceTableRows
+INFO   | jvm 1    | main    | 2016/04/21 13:06:48.059 | INFO  [hybrisHTTP2] (junit) [CockpitSystemSetup] Saving report for editor area: /cockpit/jasperreports/editorarea/editorAreaLocalizedReport.jrxml as jasper media :EditorAreaLocalizedReport
+INFO   | jvm 1    | main    | 2016/04/21 13:06:48.260 | INFO  [hybrisHTTP2] (junit) [CockpitSystemSetup] Saving report for editor area: /cockpit/jasperreports/editorarea/editorAreaSectionsReport.jrxml as jasper media :EditorAreaSectionsReport
+INFO   | jvm 1    | main    | 2016/04/21 13:06:48.260 | INFO  [hybrisHTTP2] (junit) [CockpitSystemSetup] Saving report for editor area: /cockpit/jasperreports/editorarea/editorAreaCustomRow.jrxml as jasper media :EditorAreaCustomRow
+INFO   | jvm 1    | main    | 2016/04/21 13:06:48.261 | INFO  [hybrisHTTP2] (junit) [CockpitSystemSetup] Saving report for editor area: /cockpit/jasperreports/editorarea/editorAreaAttributesReport.jrxml as jasper media :EditorAreaAttributesReport
+INFO   | jvm 1    | main    | 2016/04/21 13:06:48.363 | INFO  [hybrisHTTP2] (junit) [CockpitSystemSetup] Saving report for editor area: /cockpit/jasperreports/editorarea/editorAreaTableColumnsTitlesReport.jrxml as jasper media :EditorAreaTableColumnsTitlesReport
+INFO   | jvm 1    | main    | 2016/04/21 13:06:48.364 | INFO  [hybrisHTTP2] (junit) [CockpitSystemSetup] Saving report for editor area: /cockpit/jasperreports/editorarea/editorAreaTableRowsReport.jrxml as jasper media :EditorAreaTableRowsReport
+INFO   | jvm 1    | main    | 2016/04/21 13:06:48.365 | INFO  [hybrisHTTP2] (junit) [CockpitSystemSetup] Saving report for editor area: /cockpit/jasperreports/editorarea/editorAreaMainReport.jrxml as jasper media :EditorAreaMainReport
+INFO   | jvm 1    | main    | 2016/04/21 13:06:48.550 | INFO  [hybrisHTTP2] (junit) [CockpitSystemSetup] Saving report for editor area: /cockpit/jasperreports/editorarea/editorAreaMediaReport.jrxml as jasper media :EditorAreaMediaReport
+INFO   | jvm 1    | main    | 2016/04/21 13:06:48.550 | INFO  [hybrisHTTP2] (junit) [CockpitSystemSetup] Saving report for editor area: /cockpit/jasperreports/editorarea/editorAreaTableReport.jrxml as jasper media :EditorAreaTableReport
+INFO   | jvm 1    | main    | 2016/04/21 13:06:48.551 | INFO  [hybrisHTTP2] (junit) [CockpitSystemSetup] Saving report for editor area: /cockpit/jasperreports/editorarea/editorAreaRowsReport.jrxml as jasper media :EditorAreaRowsReport
+INFO   | jvm 1    | main    | 2016/04/21 13:06:48.551 | INFO  [hybrisHTTP2] (junit) [CockpitSystemSetup] Saving report for editor area: /cockpit/jasperreports/editorarea/editorAreaCustomSection.jrxml as jasper media :EditorAreaCustomSection
+INFO   | jvm 1    | main    | 2016/04/21 13:06:48.552 | INFO  [hybrisHTTP2] (junit) [CockpitSystemSetup] Saving report for editor area: /cockpit/jasperreports/editorarea/editorAreaReferenceTable.jrxml as jasper media :EditorAreaReferenceTable
+INFO   | jvm 1    | main    | 2016/04/21 13:06:52.607 | INFO  [hybrisHTTP2] (junit) [CockpitSystemSetup] Import of jasper reports for editor area: Finished.
+INFO   | jvm 1    | main    | 2016/04/21 13:06:52.608 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data for cuppy ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:52.608 | INFO  [hybrisHTTP2] (junit) [ImpExSystemSetup] importing resource : /impex/essentialdataCuppy.impex
+INFO   | jvm 1    | main    | 2016/04/21 13:06:52.739 | INFO  [hybrisHTTP2] (junit) (00000009-ImpEx-Import) [ImpExImportJob] Starting ImpEx cronjob "ImpEx-Import"
+INFO   | jvm 1    | main    | 2016/04/21 13:06:55.169 | INFO  [hybrisHTTP2] (junit) (00000009-ImpEx-Import) [Importer] Finished 1 pass in 0d 00h:00m:02s:390ms - processed: 51, no lines dumped (last pass 0)
+INFO   | jvm 1    | main    | 2016/04/21 13:06:55.507 | INFO  [hybrisHTTP2] (junit) [ImpExSystemSetup] importing resource : /impex/essentialdataTemplates.impex
+INFO   | jvm 1    | main    | 2016/04/21 13:06:55.507 | INFO  [hybrisHTTP2] (junit) (0000000A-ImpEx-Import) [ImpExImportJob] Starting ImpEx cronjob "ImpEx-Import"
+INFO   | jvm 1    | main    | 2016/04/21 13:06:55.639 | INFO  [hybrisHTTP2] (junit) (0000000A-ImpEx-Import) [ConfigurationImpl] HV000002: Ignoring XML configuration.
+INFO   | jvm 1    | main    | 2016/04/21 13:06:55.852 | INFO  [hybrisHTTP2] (junit) (0000000A-ImpEx-Import) [Importer] Finished 1 pass in 0d 00h:00m:00s:461ms - processed: 6, no lines dumped (last pass 0)
+INFO   | jvm 1    | main    | 2016/04/21 13:06:55.954 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data for cuppytrail ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:56.056 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data for cuppytrailfrontend ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:56.056 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data for cuppytrailhmc ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:56.057 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data for mcc ...
+INFO   | jvm 1    | main    | 2016/04/21 13:06:56.057 | INFO  [hybrisHTTP2] (junit) [MccManager] importing resource /impex/mcc_links.impex
+INFO   | jvm 1    | main    | 2016/04/21 13:06:56.174 | INFO  [hybrisHTTP2] (junit) (0000000B-ImpEx-Import) [ImpExImportJob] Starting ImpEx cronjob "ImpEx-Import"
+INFO   | jvm 1    | main    | 2016/04/21 13:06:57.060 | INFO  [hybrisHTTP2] (junit) (0000000B-ImpEx-Import) [Importer] Finished 1 pass in 0d 00h:00m:00s:942ms - processed: 36, no lines dumped (last pass 0)
+INFO   | jvm 1    | main    | 2016/04/21 13:06:57.183 | INFO  [hybrisHTTP2] (junit) [MccManager] importing resource /impex/mcc_links_en.impex
+INFO   | jvm 1    | main    | 2016/04/21 13:06:57.183 | INFO  [hybrisHTTP2] (junit) (0000000C-ImpEx-Import) [ImpExImportJob] Starting ImpEx cronjob "ImpEx-Import"
+INFO   | jvm 1    | main    | 2016/04/21 13:06:57.615 | INFO  [hybrisHTTP2] (junit) (0000000C-ImpEx-Import) [Importer] Finished 1 pass in 0d 00h:00m:00s:351ms - processed: 20, no lines dumped (last pass 0)
+INFO   | jvm 1    | main    | 2016/04/21 13:06:57.715 | INFO  [hybrisHTTP2] (junit) [MccManager] importing resource /impex/mcc_links_de.impex
+INFO   | jvm 1    | main    | 2016/04/21 13:06:57.849 | INFO  [hybrisHTTP2] (junit) (0000000D-ImpEx-Import) [ImpExImportJob] Starting ImpEx cronjob "ImpEx-Import"
+INFO   | jvm 1    | main    | 2016/04/21 13:06:58.131 | INFO  [hybrisHTTP2] (junit) (0000000D-ImpEx-Import) [Importer] Finished 1 pass in 0d 00h:00m:00s:342ms - processed: 20, no lines dumped (last pass 0)
+INFO   | jvm 1    | main    | 2016/04/21 13:06:58.252 | INFO  [hybrisHTTP2] (junit) [MccManager] importing resource /impex/mcc_links_es.impex
+INFO   | jvm 1    | main    | 2016/04/21 13:06:58.255 | INFO  [hybrisHTTP2] (junit) (0000000E-ImpEx-Import) [ImpExImportJob] Starting ImpEx cronjob "ImpEx-Import"
+INFO   | jvm 1    | main    | 2016/04/21 13:06:58.556 | INFO  [hybrisHTTP2] (junit) (0000000E-ImpEx-Import) [Importer] Finished 1 pass in 0d 00h:00m:00s:260ms - processed: 20, no lines dumped (last pass 0)
+INFO   | jvm 1    | main    | 2016/04/21 13:06:58.862 | INFO  [hybrisHTTP2] (junit) [MccManager] importing resource /impex/mcc_links_es_CO.impex
+INFO   | jvm 1    | main    | 2016/04/21 13:06:58.863 | INFO  [hybrisHTTP2] (junit) (0000000F-ImpEx-Import) [ImpExImportJob] Starting ImpEx cronjob "ImpEx-Import"
+INFO   | jvm 1    | main    | 2016/04/21 13:06:59.070 | INFO  [hybrisHTTP2] (junit) (0000000F-ImpEx-Import) [Importer] Finished 1 pass in 0d 00h:00m:00s:315ms - processed: 20, no lines dumped (last pass 0)
+INFO   | jvm 1    | main    | 2016/04/21 13:06:59.189 | INFO  [hybrisHTTP2] (junit) [MccManager] importing resource /impex/mcc_links_fr.impex
+INFO   | jvm 1    | main    | 2016/04/21 13:06:59.190 | INFO  [hybrisHTTP2] (junit) (0000000G-ImpEx-Import) [ImpExImportJob] Starting ImpEx cronjob "ImpEx-Import"
+INFO   | jvm 1    | main    | 2016/04/21 13:06:59.555 | INFO  [hybrisHTTP2] (junit) (0000000G-ImpEx-Import) [Importer] Finished 1 pass in 0d 00h:00m:00s:326ms - processed: 20, no lines dumped (last pass 0)
+INFO   | jvm 1    | main    | 2016/04/21 13:06:59.857 | INFO  [hybrisHTTP2] (junit) [MccManager] importing resource /impex/mcc_links_it.impex
+INFO   | jvm 1    | main    | 2016/04/21 13:06:59.858 | INFO  [hybrisHTTP2] (junit) (0000000H-ImpEx-Import) [ImpExImportJob] Starting ImpEx cronjob "ImpEx-Import"
+INFO   | jvm 1    | main    | 2016/04/21 13:07:00.096 | INFO  [hybrisHTTP2] (junit) (0000000H-ImpEx-Import) [Importer] Finished 1 pass in 0d 00h:00m:00s:322ms - processed: 20, no lines dumped (last pass 0)
+INFO   | jvm 1    | main    | 2016/04/21 13:07:00.356 | INFO  [hybrisHTTP2] (junit) [MccManager] importing resource /impex/mcc_links_ja.impex
+INFO   | jvm 1    | main    | 2016/04/21 13:07:00.358 | INFO  [hybrisHTTP2] (junit) (0000000I-ImpEx-Import) [ImpExImportJob] Starting ImpEx cronjob "ImpEx-Import"
+INFO   | jvm 1    | main    | 2016/04/21 13:07:00.569 | INFO  [hybrisHTTP2] (junit) (0000000I-ImpEx-Import) [Importer] Finished 1 pass in 0d 00h:00m:00s:311ms - processed: 20, no lines dumped (last pass 0)
+INFO   | jvm 1    | main    | 2016/04/21 13:07:00.676 | INFO  [hybrisHTTP2] (junit) [MccManager] importing resource /impex/mcc_links_ko.impex
+INFO   | jvm 1    | main    | 2016/04/21 13:07:00.809 | INFO  [hybrisHTTP2] (junit) (0000000J-ImpEx-Import) [ImpExImportJob] Starting ImpEx cronjob "ImpEx-Import"
+INFO   | jvm 1    | main    | 2016/04/21 13:07:01.140 | INFO  [hybrisHTTP2] (junit) (0000000J-ImpEx-Import) [Importer] Finished 1 pass in 0d 00h:00m:00s:390ms - processed: 20, no lines dumped (last pass 0)
+INFO   | jvm 1    | main    | 2016/04/21 13:07:01.301 | INFO  [hybrisHTTP2] (junit) [MccManager] importing resource /impex/mcc_links_pt.impex
+INFO   | jvm 1    | main    | 2016/04/21 13:07:01.426 | INFO  [hybrisHTTP2] (junit) (0000000K-ImpEx-Import) [ImpExImportJob] Starting ImpEx cronjob "ImpEx-Import"
+INFO   | jvm 1    | main    | 2016/04/21 13:07:01.741 | INFO  [hybrisHTTP2] (junit) (0000000K-ImpEx-Import) [Importer] Finished 1 pass in 0d 00h:00m:00s:320ms - processed: 20, no lines dumped (last pass 0)
+INFO   | jvm 1    | main    | 2016/04/21 13:07:01.878 | INFO  [hybrisHTTP2] (junit) [MccManager] importing resource /impex/mcc_links_ru.impex
+INFO   | jvm 1    | main    | 2016/04/21 13:07:01.878 | INFO  [hybrisHTTP2] (junit) (0000000L-ImpEx-Import) [ImpExImportJob] Starting ImpEx cronjob "ImpEx-Import"
+INFO   | jvm 1    | main    | 2016/04/21 13:07:02.207 | INFO  [hybrisHTTP2] (junit) (0000000L-ImpEx-Import) [Importer] Finished 1 pass in 0d 00h:00m:00s:327ms - processed: 20, no lines dumped (last pass 0)
+INFO   | jvm 1    | main    | 2016/04/21 13:07:02.340 | INFO  [hybrisHTTP2] (junit) [MccManager] importing resource /impex/mcc_links_zh.impex
+INFO   | jvm 1    | main    | 2016/04/21 13:07:02.341 | INFO  [hybrisHTTP2] (junit) (0000000M-ImpEx-Import) [ImpExImportJob] Starting ImpEx cronjob "ImpEx-Import"
+INFO   | jvm 1    | main    | 2016/04/21 13:07:02.642 | INFO  [hybrisHTTP2] (junit) (0000000M-ImpEx-Import) [Importer] Finished 1 pass in 0d 00h:00m:00s:258ms - processed: 20, no lines dumped (last pass 0)
+INFO   | jvm 1    | main    | 2016/04/21 13:07:02.853 | INFO  [hybrisHTTP2] (junit) [MccManager] importing resource /impex/mcc_links_zh_TW.impex
+INFO   | jvm 1    | main    | 2016/04/21 13:07:02.853 | INFO  [hybrisHTTP2] (junit) (0000000N-ImpEx-Import) [ImpExImportJob] Starting ImpEx cronjob "ImpEx-Import"
+INFO   | jvm 1    | main    | 2016/04/21 13:07:03.132 | INFO  [hybrisHTTP2] (junit) (0000000N-ImpEx-Import) [Importer] Finished 1 pass in 0d 00h:00m:00s:295ms - processed: 20, no lines dumped (last pass 0)
+INFO   | jvm 1    | main    | 2016/04/21 13:07:03.246 | INFO  [hybrisHTTP2] (junit) [MccManager] importing resource /impex/mcc_links_hi.impex
+INFO   | jvm 1    | main    | 2016/04/21 13:07:03.346 | INFO  [hybrisHTTP2] (junit) (0000000O-ImpEx-Import) [ImpExImportJob] Starting ImpEx cronjob "ImpEx-Import"
+INFO   | jvm 1    | main    | 2016/04/21 13:07:03.546 | INFO  [hybrisHTTP2] (junit) (0000000O-ImpEx-Import) [Importer] Finished 1 pass in 0d 00h:00m:00s:229ms - processed: 20, no lines dumped (last pass 0)
+INFO   | jvm 1    | main    | 2016/04/21 13:07:03.546 | INFO  [hybrisHTTP2] (junit) [MccManager] importing resource /impex/mcc_links_id.impex
+INFO   | jvm 1    | main    | 2016/04/21 13:07:03.647 | INFO  [hybrisHTTP2] (junit) (0000000P-ImpEx-Import) [ImpExImportJob] Starting ImpEx cronjob "ImpEx-Import"
+INFO   | jvm 1    | main    | 2016/04/21 13:07:03.851 | INFO  [hybrisHTTP2] (junit) (0000000P-ImpEx-Import) [Importer] Finished 1 pass in 0d 00h:00m:00s:218ms - processed: 20, no lines dumped (last pass 0)
+INFO   | jvm 1    | main    | 2016/04/21 13:07:04.004 | INFO  [hybrisHTTP2] (junit) [MccManager] importing resource /impex/mcc_links_pl.impex
+INFO   | jvm 1    | main    | 2016/04/21 13:07:04.005 | WARN  [hybrisHTTP2] (junit) [MccManager] Import resource '/impex/mcc_links_pl.impex' not found!
+INFO   | jvm 1    | main    | 2016/04/21 13:07:04.005 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data for backoffice ...
+INFO   | jvm 1    | main    | 2016/04/21 13:07:04.005 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating essential data for admincockpit ...
+INFO   | jvm 1    | main    | 2016/04/21 13:07:04.006 | INFO  [hybrisHTTP2] (junit) [AdmincockpitManager] importing resource /impex/essentialdata_admincockpit_maintenance_jobs.impex
+INFO   | jvm 1    | main    | 2016/04/21 13:07:04.006 | INFO  [hybrisHTTP2] (junit) (0000000Q-ImpEx-Import) [ImpExImportJob] Starting ImpEx cronjob "ImpEx-Import"
+INFO   | jvm 1    | main    | 2016/04/21 13:07:04.006 | INFO  [hybrisHTTP2] (junit) (0000000Q-ImpEx-Import) [Importer] Finished 1 pass in 0d 00h:00m:00s:084ms - processed: 2, no lines dumped (last pass 0)
+INFO   | jvm 1    | main    | 2016/04/21 13:07:04.128 | INFO  [hybrisHTTP2] (junit) [ImpExSystemSetup] importing resource : /impex/essentialdata_admincockpit_access_rights.impex
+INFO   | jvm 1    | main    | 2016/04/21 13:07:04.128 | INFO  [hybrisHTTP2] (junit) (0000000R-ImpEx-Import) [ImpExImportJob] Starting ImpEx cronjob "ImpEx-Import"
+INFO   | jvm 1    | main    | 2016/04/21 13:07:04.235 | INFO  [hybrisHTTP2] (junit) (0000000R-ImpEx-Import) [Importer] Finished 1 pass in 0d 00h:00m:00s:027ms - processed: 0, no lines dumped (last pass 0)
+INFO   | jvm 1    | main    | 2016/04/21 13:07:04.339 | INFO  [hybrisHTTP2] (junit) [ImpExSystemSetup] importing resource : /impex/essentialdata_admincockpit_maintenance_jobs.impex
+INFO   | jvm 1    | main    | 2016/04/21 13:07:04.340 | INFO  [hybrisHTTP2] (junit) (0000000S-ImpEx-Import) [ImpExImportJob] Starting ImpEx cronjob "ImpEx-Import"
+INFO   | jvm 1    | main    | 2016/04/21 13:07:04.345 | WARN  [hybrisHTTP2] (junit) (0000000S-ImpEx-Import) [HeaderDescriptor] line 5 at main script: column job of type RemoveOrphanedFilesCronJob is not writable, but you want to update it. If you want to write this non writable attribute explicit, you have to use the forceWrite=true modifier. This warning is printed only once for header. Please check subsequent lines for similar problem.
+INFO   | jvm 1    | main    | 2016/04/21 13:07:04.346 | INFO  [hybrisHTTP2] (junit) (0000000S-ImpEx-Import) [Importer] Finished 1 pass in 0d 00h:00m:00s:012ms - processed: 2, no lines dumped (last pass 0)
+INFO   | jvm 1    | main    | 2016/04/21 13:07:04.453 | INFO  [hybrisHTTP2] (junit) [ImpExSystemSetup] importing resource : /impex/essentialdata_admincockpit_ui_access_rights.impex
+INFO   | jvm 1    | main    | 2016/04/21 13:07:04.454 | INFO  [hybrisHTTP2] (junit) (0000000T-ImpEx-Import) [ImpExImportJob] Starting ImpEx cronjob "ImpEx-Import"
+INFO   | jvm 1    | main    | 2016/04/21 13:07:04.455 | INFO  [hybrisHTTP2] (junit) (0000000T-ImpEx-Import) [Importer] Finished 1 pass in 0d 00h:00m:00s:033ms - processed: 1, no lines dumped (last pass 0)
+INFO   | jvm 1    | main    | 2016/04/21 13:07:04.556 | INFO  [hybrisHTTP2] (junit) [Initialization] Localizing types ...
+INFO   | jvm 1    | main    | 2016/04/21 13:07:04.556 | INFO  [hybrisHTTP2] (junit) [TypeLocalization] 4 threads will be used to localize type system.
+INFO   | jvm 1    | main    | 2016/04/21 13:07:10.664 | INFO  [hybrisHTTP2] (junit) [BatchedStatementsExecutor] Waiting for all statements to be executed
+INFO   | jvm 1    | main    | 2016/04/21 13:07:17.562 | INFO  [hybrisHTTP2] (junit) [BatchedStatementsExecutor] Succesfully executed 175975 statements.
+INFO   | jvm 1    | main    | 2016/04/21 13:07:17.563 | INFO  [hybrisHTTP2] (junit) [TypeLocalization] Localization took 12,98 s
+INFO   | jvm 1    | main    | 2016/04/21 13:07:17.563 | INFO  [hybrisHTTP2] (junit) [Initialization] Creating project data ...
+INFO   | jvm 1    | main    | 2016/04/21 13:07:17.663 | INFO  [hybrisHTTP2] (junit) [Initialization] ###############################################################
+INFO   | jvm 1    | main    | 2016/04/21 13:07:17.663 | INFO  [hybrisHTTP2] (junit) [Initialization] FINISHED. The initialization took: 0d 00h:01m:41s:060ms
+INFO   | jvm 1    | main    | 2016/04/21 13:07:17.663 | INFO  [hybrisHTTP2] (junit) [Initialization] ###############################################################
+INFO   | jvm 1    | main    | 2016/04/21 13:07:25.333 | WARN  [Task-junit-poll] (junit) [JaloSession] Jalo session (s1960943650832) has been created in context of tenant <<junit>>[1938910796] which since that has been initialized/updated - session is not adequate anymore.
+INFO   | jvm 1    | main    | 2016/04/21 13:47:25.456 | INFO  [automatedUpdateEC2012::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateEC2012) [UpdateOpenLigaDbService] Checking update status for ec2012
+INFO   | jvm 1    | main    | 2016/04/21 13:47:25.859 | INFO  [automatedUpdateEC2012::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateEC2012) [UpdateOpenLigaDbService] No update needed for ec2012
+INFO   | jvm 1    | main    | 2016/04/21 13:47:35.623 | INFO  [automatedUpdate1LGer2010::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate1LGer2010) [UpdateOpenLigaDbService] Checking update status for 1lger2010
+INFO   | jvm 1    | main    | 2016/04/21 13:47:35.625 | INFO  [automatedUpdate1LGer2011::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate1LGer2011) [UpdateOpenLigaDbService] Checking update status for 1lger2011
+INFO   | jvm 1    | main    | 2016/04/21 13:47:35.625 | INFO  [automatedUpdateWWC2011::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateWWC2011) [UpdateOpenLigaDbService] Checking update status for wwc2011
+INFO   | jvm 1    | main    | 2016/04/21 13:47:35.726 | INFO  [automatedUpdate1LGer2012::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate1LGer2012) [UpdateOpenLigaDbService] Checking update status for 1lger2012
+INFO   | jvm 1    | main    | 2016/04/21 13:47:35.726 | INFO  [automatedUpdate2LGer2010::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate2LGer2010) [UpdateOpenLigaDbService] Checking update status for 2lger2010
+INFO   | jvm 1    | main    | 2016/04/21 13:47:35.726 | INFO  [automatedUpdateCl2011::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateCl2011) [UpdateOpenLigaDbService] Checking update status for cl2011
+INFO   | jvm 1    | main    | 2016/04/21 13:47:35.727 | INFO  [automatedUpdateCl2012::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateCl2012) [UpdateOpenLigaDbService] Checking update status for cl2012
+INFO   | jvm 1    | main    | 2016/04/21 13:47:35.727 | INFO  [automatedUpdateCl2010::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateCl2010) [UpdateOpenLigaDbService] Checking update status for cl2010
+INFO   | jvm 1    | main    | 2016/04/21 13:47:35.827 | INFO  [automatedUpdate1LGer2011::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate1LGer2011) [UpdateOpenLigaDbService] No update needed for 1lger2011
+INFO   | jvm 1    | main    | 2016/04/21 13:47:35.827 | INFO  [automatedUpdate1LGer2010::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate1LGer2010) [UpdateOpenLigaDbService] No update needed for 1lger2010
+INFO   | jvm 1    | main    | 2016/04/21 13:47:35.927 | INFO  [automatedUpdate1LGer2012::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate1LGer2012) [UpdateOpenLigaDbService] No update needed for 1lger2012
+INFO   | jvm 1    | main    | 2016/04/21 13:47:35.927 | INFO  [automatedUpdateCl2010::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateCl2010) [UpdateOpenLigaDbService] No update needed for cl2010
+INFO   | jvm 1    | main    | 2016/04/21 13:47:35.929 | INFO  [automatedUpdateCl2011::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateCl2011) [UpdateOpenLigaDbService] No update needed for cl2011
+INFO   | jvm 1    | main    | 2016/04/21 13:47:35.931 | INFO  [automatedUpdate2LGer2010::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdate2LGer2010) [UpdateOpenLigaDbService] No update needed for 2lger2010
+INFO   | jvm 1    | main    | 2016/04/21 13:47:35.931 | INFO  [automatedUpdateWWC2011::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateWWC2011) [UpdateOpenLigaDbService] No update needed for wwc2011
+INFO   | jvm 1    | main    | 2016/04/21 13:47:35.932 | INFO  [automatedUpdateCl2012::de.hybris.platform.servicelayer.internal.jalo.ServicelayerJob] (automatedUpdateCl2012) [UpdateOpenLigaDbService] No update needed for cl2012
+STATUS | wrapper  | main    | 2016/04/21 14:01:52.990 | CTRL-C trapped.  Shutting down.
+INFO   | jvm 1    | main    | 2016/04/21 14:01:54.815 | shutting down hybris registry..
+INFO   | jvm 1    | main    | 2016/04/21 14:01:54.819 | INFO  [Thread-1] [DefaultTaskService] Shutting down task engine for tenant master.
+INFO   | jvm 1    | main    | 2016/04/21 14:01:54.824 | INFO  [Thread-1] [DefaultTaskService] Terminating task polling thread.
+INFO   | jvm 1    | main    | 2016/04/21 14:01:54.824 | INFO  [Thread-1] [DefaultTaskService] Stopped task engine for tenant master.
+INFO   | jvm 1    | main    | 2016/04/21 14:01:54.825 | INFO  [Thread-1] [DefaultTaskService] Task engine already stopped.
+INFO   | jvm 1    | main    | 2016/04/21 14:01:54.925 | WARN  [AfterSaveEventPublisher-master] [DefaultAfterSaveListenerRegistry] AfterSaveEventPublisher-master has been interrupted - stopping now: sleep interrupted
+INFO   | jvm 1    | main    | 2016/04/21 14:01:54.925 | INFO  [AfterSaveEventPublisher-master] [DefaultAfterSaveListenerRegistry] AfterSaveEventPublisher-master has been interrupted/terminated but without InterruptedException - stopping now.
+INFO   | jvm 1    | main    | 2016/04/21 14:01:54.925 | INFO  [Thread-1] (junit) [DefaultTaskService] Shutting down task engine for tenant junit.
+INFO   | jvm 1    | main    | 2016/04/21 14:01:54.925 | INFO  [Thread-1] (junit) [DefaultTaskService] Terminating task polling thread.
+INFO   | jvm 1    | main    | 2016/04/21 14:01:54.925 | INFO  [Thread-1] (junit) [DefaultTaskService] Stopped task engine for tenant junit.
+INFO   | jvm 1    | main    | 2016/04/21 14:01:54.926 | INFO  [Thread-1] (junit) [DefaultTaskService] Task engine already stopped.
+INFO   | jvm 1    | main    | 2016/04/21 14:01:54.926 | WARN  [AfterSaveEventPublisher-junit] (junit) [DefaultAfterSaveListenerRegistry] AfterSaveEventPublisher-junit has been interrupted - stopping now: sleep interrupted
+INFO   | jvm 1    | main    | 2016/04/21 14:01:54.926 | INFO  [AfterSaveEventPublisher-junit] (junit) [DefaultAfterSaveListenerRegistry] AfterSaveEventPublisher-junit has been interrupted/terminated but without InterruptedException - stopping now.
+INFO   | jvm 1    | main    | 2016/04/21 14:01:55.133 | INFO  [Thread-1] (junit) [DefaultCacheController] Removed listener from cache controller. Currently registered 2
+INFO   | jvm 1    | main    | 2016/04/21 14:01:55.735 | WARN  [Thread-1] [DefaultCacheController] Listener not un-registered (not found): RegionCacheAdapter(605458684) - <<master>> : de.hybris.platform.cache.impl.RegionCacheAdapter
+INFO   | jvm 1    | main    | 2016/04/21 14:01:57.135 | INFO  [Thread-1] [DefaultRemoteDrain] RemoteDrain has been already unexported
+INFO   | jvm 1    | main    | 2016/04/21 14:01:57.135 | INFO  [Thread-1] [DefaultRMIRegistryService] Unexporting the registry.
+INFO   | jvm 1    | main    | 2016/04/21 14:01:57.136 | INFO  [Thread-1] [DefaultRMIRegistryService] Registry has been already unexported.
+INFO   | jvm 1    | main    | 2016/04/21 14:01:57.436 | INFO  [Thread-1] [DefaultClusterNodeManagementService] Unregistering assigned cluster node id 0...
+STATUS | wrapper  | main    | 2016/04/21 14:01:58.537 | <-- Wrapper Stopped

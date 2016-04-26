@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Sourcing Helpers -->
+	<bean id="sourcingConfigurator" class="de.hybris.platform.warehousing.sourcing.util.SourcingConfigurator">
+		<property name="sourcingFactorFactory" ref="sourcingFactorFactory" />
+	</bean>
+	
+	<!-- New DAOs -->
+	<bean id="abstractWarehousingDao" class="de.hybris.platform.warehousing.util.dao.impl.AbstractWarehousingDao" abstract="true">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+	<bean id="zoneDao" class="de.hybris.platform.warehousing.util.dao.impl.ZoneDaoImpl" parent="abstractWarehousingDao" />
+	<bean id="vendorDao" class="de.hybris.platform.warehousing.util.dao.impl.VendorDaoImpl" parent="abstractWarehousingDao" />
+	<bean id="warehousingOrderDao" class="de.hybris.platform.warehousing.util.dao.impl.WarehousingOrderDaoImpl" parent="abstractWarehousingDao" />
+	<bean id="warehousingConsignmentDao" class="de.hybris.platform.warehousing.util.dao.impl.WarehousingConsignmentDaoImpl" parent="abstractWarehousingDao" />
+	<bean id="allocationEventDao" class="de.hybris.platform.warehousing.util.dao.impl.AllocationEventDaoImpl" parent="abstractWarehousingDao" />
+
+	<!-- Instance Getter/Creators -->
+	<bean id="abstractItems" class="de.hybris.platform.warehousing.util.models.AbstractItems" abstract="true">
+		<property name="modelService" ref="modelService" />
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+	
+	<bean id="languages" class="de.hybris.platform.warehousing.util.models.Languages" parent="abstractItems">
+		<property name="languageDao" ref="languageDao" />
+	</bean>
+
+	<bean id="countries" class="de.hybris.platform.warehousing.util.models.Countries" parent="abstractItems">
+		<property name="countryDao" ref="countryDao" />
+	</bean>
+	
+	<bean id="zones" class="de.hybris.platform.warehousing.util.models.Zones" parent="abstractItems">
+		<property name="zoneDao" ref="zoneDao" />
+		<property name="countries" ref="countries" />
+	</bean>
+	
+	<bean id="deliveryModes" class="de.hybris.platform.warehousing.util.models.DeliveryModes" parent="abstractItems">
+		<property name="deliveryModeDao" ref="deliveryModeDao" />
+	</bean>
+	
+	<bean id="vendors" class="de.hybris.platform.warehousing.util.models.Vendors" parent="abstractItems">
+		<property name="vendorDao" ref="vendorDao" />
+	</bean>
+	
+	<bean id="currencies" class="de.hybris.platform.warehousing.util.models.Currencies" parent="abstractItems">
+		<property name="currencyDao" ref="currencyDao" />
+	</bean>
+	
+	<bean id="units" class="de.hybris.platform.warehousing.util.models.Units" parent="abstractItems">
+		<property name="unitDao" ref="unitDao" />
+	</bean>
+	
+	<bean id="catalogs" class="de.hybris.platform.warehousing.util.models.Catalogs" parent="abstractItems">
+		<property name="catalogDao" ref="catalogDao" />
+	</bean>
+	
+	<bean id="catalogVersions" class="de.hybris.platform.warehousing.util.models.CatalogVersions" parent="abstractItems">
+		<property name="catalogVersionDao" ref="catalogVersionDao" />
+		<property name="catalogs" ref="catalogs" />
+		<property name="currencies" ref="currencies" />
+	</bean>
+	
+	<bean id="baseStores" class="de.hybris.platform.warehousing.util.models.BaseStores" parent="abstractItems">
+		<property name="baseStoreDao" ref="baseStoreDao" />
+		<property name="catalogs" ref="catalogs" />
+		<property name="countries" ref="countries" />
+		<property name="currencies" ref="currencies" />
+		<property name="languages" ref="languages" />
+		<property name="deliveryModes" ref="deliveryModes" />
+	</bean>
+	
+	<bean id="baseSites" class="de.hybris.platform.warehousing.util.models.BaseSites" parent="abstractItems">
+		<property name="baseSiteDao" ref="baseSiteDao" />
+		<property name="baseStores" ref="baseStores" />
+	</bean>
+	
+	<bean id="warehouses" class="de.hybris.platform.warehousing.util.models.Warehouses" parent="abstractItems">
+		<property name="warehouseDao" ref="warehouseDao" />
+		<property name="baseStores" ref="baseStores" />
+		<property name="vendors" ref="vendors" />
+		<property name="deliveryModes" ref="deliveryModes" />
+	</bean>
+	
+	<bean id="pointsOfService" class="de.hybris.platform.warehousing.util.models.PointsOfService" parent="abstractItems">
+		<property name="pointOfServiceDao" ref="pointOfServiceDao" />
+		<property name="baseStores" ref="baseStores" />
+		<property name="countries" ref="countries" />
+		<property name="warehouses" ref="warehouses" />
+		<property name="addresses" ref="addresses" />
+	</bean>
+	
+	<bean id="addresses" class="de.hybris.platform.warehousing.util.models.Addresses" parent="abstractItems">
+		<property name="addressDao" ref="addressDao" />
+		<property name="countries" ref="countries" />
+		<property name="users" ref="users" />
+	</bean>
+	
+	<bean id="products" class="de.hybris.platform.warehousing.util.models.Products" parent="abstractItems">
+		<property name="productDao" ref="productDao" />
+		<property name="catalogVersions" ref="catalogVersions" />
+		<property name="units" ref="units" />
+	</bean>
+	
+	<bean id="stockLevels" class="de.hybris.platform.warehousing.util.models.StockLevels" parent="abstractItems">
+		<property name="stockLevelDao" ref="stockLevelDao" />
+		<property name="products" ref="products" />
+		<property name="warehouses" ref="warehouses" />
+	</bean>
+	
+	<bean id="users" class="de.hybris.platform.warehousing.util.models.Users" parent="abstractItems">
+		<property name="userDao" ref="userDao" />
+	</bean>
+	
+	<bean id="orders" class="de.hybris.platform.warehousing.util.models.Orders" parent="abstractItems">
+		<property name="warehousingOrderDao" ref="warehousingOrderDao" />
+		<property name="baseStores" ref="baseStores" />
+		<property name="currencies" ref="currencies" />
+		<property name="deliveryModes" ref="deliveryModes" />
+		<property name="products" ref="products" />
+		<property name="units" ref="units" />
+		<property name="users" ref="users" />
+		<property name="addresses" ref="addresses" />
+		<property name="pointsOfService" ref="pointsOfService" />
+	</bean>
+	
+	<bean id="consignments" class="de.hybris.platform.warehousing.util.models.Consignments" parent="abstractItems">
+		<property name="addresses" ref="addresses" />
+		<property name="deliveryModes" ref="deliveryModes" />
+		<property name="orders" ref="orders" />
+		<property name="warehouses" ref="warehouses" />
+		<property name="warehousingConsignmentDao" ref="warehousingConsignmentDao" />
+	</bean>
+	
+	<bean id="allocationEvents" class="de.hybris.platform.warehousing.util.models.AllocationEvents" parent="abstractItems">
+		<property name="allocationEventDao" ref="allocationEventDao" />
+		<property name="consignments" ref="consignments" />
+	</bean>
+</beans>

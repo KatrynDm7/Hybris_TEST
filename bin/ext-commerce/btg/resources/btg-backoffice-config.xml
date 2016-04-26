@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config xmlns="http://www.hybris.com/cockpit/config">
+    <context merge-by="module" parent="auto" component="explorer-tree">
+        <explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
+            <explorer-tree:navigation-node id="hmc_treenode_marketing">
+                <explorer-tree:type-node code="BTGConfig" id="hmc_type_tree_btgconfig"/>
+            </explorer-tree:navigation-node>
+        </explorer-tree:explorer-tree>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="BTGConfig" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.tab.btgconfig">
+                <editorArea:section name="hmc.section.btgconfig">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="defaultCatalogVersion"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="defaultTimeUnit"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="usedRuleTypes"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="operandMapping"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+</config>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd">
+	
+	<security:http disable-url-rewriting="true" pattern="/**/p/**/orderForm">
+		
+		<security:session-management session-authentication-strategy-ref="fixation" />
+		
+		<security:anonymous username="anonymous" granted-authority="ROLE_ANONYMOUS"/>
+		
+		<!-- AUTHENTICATED pages Order forms-->
+		<security:intercept-url pattern="/**/p/**/orderForm" access="ROLE_CUSTOMERGROUP"/>
+
+		<security:form-login login-page="/login"
+							 authentication-failure-handler-ref="loginAuthenticationFailureHandler"
+							 authentication-success-handler-ref="loginGuidAuthenticationSuccessHandler"/>
+
+
+		<security:logout logout-url="/logout" success-handler-ref="logoutSuccessHandler"/>
+
+		<security:port-mappings>
+			<security:port-mapping http="#{configurationService.configuration.getProperty('tomcat.http.port')}"
+								   https="#{configurationService.configuration.getProperty('tomcat.ssl.port')}"/>
+			<security:port-mapping http="80" https="443"/>
+			<!--security:port-mapping http="#{configurationService.configuration.getProperty('proxy.http.port')}"
+				https="#{configurationService.configuration.getProperty('proxy.ssl.port')}" /-->
+		</security:port-mappings>
+
+		<security:request-cache ref="httpSessionRequestCache"/>
+		
+		<security:access-denied-handler ref="b2bAccessDeniedHandler"/>
+		
+	</security:http>
+	
+	<!-- Add to the excludeUrlSet so that the main http element ignores and passes over the matching to the above secuirity:http configuration -->
+	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetObject">
+			<ref bean="excludeUrlSet"/>
+		</property>
+		<property name="targetMethod">
+			<value>addAll</value>
+		</property>
+		<property name="arguments">
+			<util:set>
+				<value>/**/p/**/orderForm</value>
+			</util:set>
+		</property>
+	</bean>
+	
+	<security:authentication-manager alias="authenticationManager">
+		<security:authentication-provider ref="b2bAcceleratorAuthenticationProvider"/>
+	</security:authentication-manager>
+	
+	<bean id="b2bAccessDeniedHandler"
+		  class="de.hybris.platform.b2bacceleratoraddon.security.DefaultAccessDeniedHandler"/>
+	
+	<bean id="b2bAcceleratorAuthenticationProvider"
+		  class="de.hybris.platform.b2bacceleratoraddon.security.B2BAcceleratorAuthenticationProvider">
+		<property name="cartService" ref="cartService"/>
+		<property name="userService" ref="userService"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="userDetailsService" ref="originalUidUserDetailsService"/>
+		<property name="bruteForceAttackCounter" ref="b2bBruteForceAttackCounter"/>
+		<property name="preAuthenticationChecks" ref="b2bRejectUserPreAuthenticationChecks"/>
+		<property name="b2bUserGroupProvider" ref="b2bUserGroupProvider"/>
+		<aop:scoped-proxy/>
+	</bean>
+			
+	<bean id="b2bUserGroupProvider" class="de.hybris.platform.b2bacceleratoraddon.security.impl.DefaultB2BUserGroupProvider">
+		<property name="userService" ref="userService"/>
+		<property name="b2BCustomerService" ref="defaultB2BCustomerService"/>
+		<property name="authorizedGroups" ref="authorizedGroups"/>
+		<property name="authorizedGroupsToCheckOut" ref="authorizedGroupsToCheckOut"/>
+	</bean>
+	
+	<util:set id="authorizedGroups" value-type="java.lang.String">
+		<value>b2bcustomergroup</value>
+		<value>b2bmanagergroup</value>
+		<value>b2bapprovergroup</value>
+	    <value>b2badmingroup</value>
+	</util:set>
+	
+	<util:set id="authorizedGroupsToCheckOut" value-type="java.lang.String">
+		<value>b2bcustomergroup</value>
+	</util:set>
+
+	<bean id="b2bRejectUserPreAuthenticationChecks" class="de.hybris.platform.spring.security.RejectUserPreAuthenticationChecks">
+		<property name="allowedUserTypes">
+			<list>
+				<value>Customer</value>
+				<value>Employee</value>
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultB2BLoginAuthenticationSuccessHandler" alias="loginAuthenticationSuccessHandler"/>
+	<bean id="defaultB2BLoginAuthenticationSuccessHandler"
+		  class="de.hybris.platform.b2bacceleratoraddon.security.B2BStorefrontAuthenticationSuccessHandler">
+		<property name="customerFacade" ref="customerFacade"/>
+		<property name="defaultTargetUrl" value="/my-account"/>
+		<property name="useReferer" value="false"/>
+		<property name="requestCache" ref="httpSessionRequestCache"/>
+		<property name="uiExperienceService" ref="uiExperienceService"/>
+		<property name="sessionService" ref="sessionService"/>
+		<property name="cartFacade" ref="cartFacade"/>
+        <property name="adminGroup" value="ROLE_ADMINGROUP"/>
+        <property name="forceDefaultTargetForUiExperienceLevel">
+			<map key-type="de.hybris.platform.commerceservices.enums.UiExperienceLevel"
+				 value-type="java.lang.Boolean">
+				<entry key="DESKTOP" value="false"/>
+				<entry key="MOBILE" value="false"/>
+			</map>
+		</property>
+		<property name="restrictedPages" ref="loginSuccessRestrictedPages"/>
+		<property name="listRedirectUrlsForceDefaultTarget" ref="loginSuccessForceDefaultTarget"/>
+		<property name="bruteForceAttackCounter" ref="b2bBruteForceAttackCounter"/>
+	</bean>
+	
+	<util:list id="loginSuccessRestrictedPages" value-type="java.lang.String">
+		<value>/login</value>
+	</util:list>
+	
+	<util:list id="loginSuccessForceDefaultTarget" value-type="java.lang.String">
+		<value>/checkout</value>
+	</util:list>
+	
+	<!-- Login Failure Handlers -->
+	
+	<bean id="b2bBruteForceAttackCounter" class="de.hybris.platform.b2bacceleratoraddon.security.impl.DefaultBruteForceAttackCounter">
+		<constructor-arg name="maxFailedLogins" value="5"/>
+		<constructor-arg name="cacheExpiration" value="60"/>
+		<constructor-arg name="cacheSizeLimit" value="1000"/>
+	</bean>
+</beans>

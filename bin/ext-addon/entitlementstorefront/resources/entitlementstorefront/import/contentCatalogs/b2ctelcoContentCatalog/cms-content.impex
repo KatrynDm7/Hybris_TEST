@@ -1,0 +1,43 @@
+#
+# Import the CMS content for the My Entitlements Page
+#
+$contentCatalog=b2ctelcoContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$jarResourceCms=jar:de.hybris.platform.entitlementstorefront.constants.EntitlementstorefrontConstants&/entitlementstorefront/import/cockpits/cmscockpit/$contentCatalog
+$addonExtensionName=entitlementstorefront
+
+# My Entitlements Page Preview
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];altText;folder(qualifier)[default='images']
+;;entitlements-preview;MyEntitlementsPage.png;$jarResourceCms/MyEntitlementsPage.png;image/png;hybris Accelerator;
+
+
+## Configure page for My Entitlements
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];previewImage(code, $contentCV)[default='entitlements-preview']
+;;entitlements;Access & Entitlements;AccountPageTemplate;entitlements;;;;
+
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow']
+;;AccountEntitlementsLink;AccountEntitlementsLink;/my-account/entitlements;AccountEntitlementsLink;AccountEntitlementsLink;
+;;AccountShowEntitlementsLink;AccountShowEntitlementsLink;/my-account/entitlements;AccountShowEntitlementsLink;AccountShowEntitlementsLink;
+
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef)[mode=append];&nodeRef
+;AccountLeftNavNode;;My Entitlements;SiteRootNode;AccountEntitlementsLink;AccountLeftNavNode
+;AccountEntitlementsNavNode;;Entitlements;SiteRootNode;AccountShowEntitlementsLink;AccountEntitlementsNavNode
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;AccountEntitlementsComponent;Account My Entitlements Component;/WEB-INF/views/addons/$addonExtensionName/desktop/pages/telco/account/accountEntitlementsPage.jsp;;AccountEntitlementsComponent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV);;;
+;;SideContent-entitlements;Side Content Slot for My Entitlements Details;true;AccountLeftNavigationComponent;;;
+;;BodyContent-entitlements;Body Content Slot for My Entitlements Details;true;AccountEntitlementsComponent;;;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='entitlements'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-entitlements;SideContent;;SideContent-entitlements;;;
+;;BodyContent-entitlements;BodyContent;;BodyContent-entitlements;;;
+
+INSERT_UPDATE AccountNavigationComponent;$contentCV[unique=true];uid[unique=true];name;navigationNode(&nodeRef);styleClass;&componentRef
+;;AccountEntitlementsNavigationComponent;Account Entitlements Navigation Component;AccountEntitlementsNavNode;;AccountEntitlementsNavigationComponent
+
+# Account Navigation Bar Component
+INSERT_UPDATE AccountNavigationCollectionComponent;$contentCV[unique=true];uid[unique=true];name;components(uid, $contentCV)[mode=append];&componentRef
+;;AccountHomepageComponent;Account Homepage Component;AccountEntitlementsNavigationComponent;AccountHomepageComponent
+

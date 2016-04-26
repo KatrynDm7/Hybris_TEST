@@ -1,0 +1,99 @@
+#http://de.wikipedia.org/wiki/ISO-3166-1-Kodierliste
+
+# set locale for the Match.date data
+#%impex.setLocale(Locale.GERMANY)
+
+$comp=cl2010
+
+insert_update Competition;code[unique=true];name[lang=de];name[lang=en];name[lang=pl];type(code)
+;$comp;Champions League 2010/2011;Champions League 2010/2011;Liga Mistrzów 2010/2011;tournament
+
+# INSERT_UPDATE News;content[lang=de];content[lang=en];competition(code)[unique=true]
+# ;Willkommen zur Champions League 2010/2011;Welcome to the Champions League 2010/2011;$comp
+
+insert_update Group;competition(code)[unique=true,default=$comp];code[unique=true];name[lang=de];name[lang=en];name[lang=pl];multiplier;sequenceNumber
+;;PRE;Vorrunde;Preliminaries;Kwalifikacje;1;1
+;;LAST16;Achtelfinale;Last16;Czwarta runda;2;2
+;;QUARTER;Viertelfinale;Quarter Finals;Ćwierćfinał;2;3
+;;SEMI;Halbfinale;Semi Finals;Półfinał;2;4
+;;THIRD;Kleines Finale;Third Place;Mecz o trzecie miejsce;2;5
+;;FINAL;Finale;Final;Finał;2;6
+
+insert_update CountryFlag;code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];catalogVersion(catalog(id),version)[default=Default:Online]
+;ac_mailand;ac_mailand.png;jar:/cuppy/flags/it/ac_mailand.png
+;aj_auxerre;aj_auxerre.png;jar:/cuppy/flags/fr/aj_auxerre.png
+;ajax_amsterdam;ajax_amsterdam.png;jar:/cuppy/flags/nl/ajax_amsterdam.png
+;as_rom;as_rom.png;jar:/cuppy/flags/it/as_rom.png
+;FCB;bayern_muenchen.png;jar:/cuppy/flags/de/bayern_muenchen.png
+;benfica_lissabon;benfica_lissabon.png;jar:/cuppy/flags/pt/benfica_lissabon.png
+;bursaspor;bursaspor.png;jar:/cuppy/flags/tr/bursaspor.png
+;cfr_cluj;cfr_cluj.png;jar:/cuppy/flags/ro/cfr_cluj.png
+;fc_arsenal;fc_arsenal.png;jar:/cuppy/flags/en/fc_arsenal.png
+;fc_barcelona;fc_barcelona.png;jar:/cuppy/flags/es/fc_barcelona.png
+;fc_basel;fc_basel.png;jar:/cuppy/flags/ch/fc_basel.png
+;fc_chelsea;fc_chelsea.png;jar:/cuppy/flags/en/fc_chelsea.png
+;fc_kopenhagen;fc_kopenhagen.png;jar:/cuppy/flags/dk/fc_kopenhagen.png
+;S04;fc_schalke_04.png;jar:/cuppy/flags/de/fc_schalke_04.png
+;fc_twente_enschede;fc_twente_enschede.png;jar:/cuppy/flags/nl/fc_twente_enschede.png
+;fc_valencia;fc_valencia.png;jar:/cuppy/flags/es/fc_valencia.png
+;glasgow_rangers;glasgow_rangers.png;jar:/cuppy/flags/en/glasgow_rangers.png
+;hapoel_tel_aviv;hapoel_tel_aviv.png;jar:/cuppy/flags/il/hapoel_tel_aviv.png
+;inter_mailand;inter_mailand.png;jar:/cuppy/flags/it/inter_mailand.png
+;manchester_united;manchester_united.png;jar:/cuppy/flags/en/manchester_united.png
+;msk_zilina;msk_zilina.png;jar:/cuppy/flags/sk/msk_zilina.png
+;olympique_lyon;olympique_lyon.png;jar:/cuppy/flags/fr/olympique_lyon.png
+;olympique_marseille;olympique_marseille.png;jar:/cuppy/flags/fr/olympique_marseille.png
+;panathinaikos_athen;panathinaikos_athen.png;jar:/cuppy/flags/gr/panathinaikos_athen.png
+;partizan_belgrad;partizan_belgrad.png;jar:/cuppy/flags/rs/partizan_belgrad.png
+;real_madrid;real_madrid.png;jar:/cuppy/flags/es/real_madrid.png
+;rubin_kasan;rubin_kasan.png;jar:/cuppy/flags/ru/rubin_kasan.png
+;schachtar_donezk;schachtar_donezk.png;jar:/cuppy/flags/ru/schachtar_donezk.png
+;spartak_moskau;spartak_moskau.png;jar:/cuppy/flags/ru/spartak_moskau.png
+;sporting_braga;sporting_braga.png;jar:/cuppy/flags/pt/sporting_braga.png
+;tottenham_hotspur;tottenham_hotspur.png;jar:/cuppy/flags/en/tottenham_hotspur.png
+;BRE;werder_bremen.png;jar:/cuppy/flags/de/werder_bremen.png
+
+insert_update Team;isocode[unique=true];name[lang=de];name[lang=en];name[lang=pl];flag(code)
+;ac_mailand;AC Milan;;;ac_mailand
+;aj_auxerre;AJ Auxerre;;;aj_auxerre
+;ajax_amsterdam;Ajax Amsterdam;;;ajax_amsterdam;;
+;as_rom;AS Rom;;;as_rom;;
+;FCB;FC Bayern München;;;FCB;;
+;benfica_lissabon;SL Benfica;;;benfica_lissabon;;
+;bursaspor;Bursaspor;;;bursaspor;;
+;cfr_cluj;CFR 1907 Cluj;;;cfr_cluj;;
+;fc_arsenal;Arsenal FC;;;fc_arsenal;;
+;fc_barcelona;FC Barcelona;;;fc_barcelona;;
+;fc_basel;FC Basel;;;fc_basel;;
+;fc_chelsea;Chelsea FC;;;fc_chelsea;;
+;fc_kopenhagen;FC Kopenhagen;;;fc_kopenhagen;;
+;S04;FC Schalke 04;;;S04;;
+;fc_twente_enschede;FC Twente Enschede;;;fc_twente_enschede;;
+;fc_valencia;Valencia CF;;;fc_valencia;;
+;glasgow_rangers;Glasgow Rangers;;;glasgow_rangers;;
+;hapoel_tel_aviv;Hapoel Tel Aviv;;;hapoel_tel_aviv;;
+;inter_mailand;Inter Mailand;;;inter_mailand;;
+;manchester_united;Manchester United FC;;;manchester_united;;
+;msk_zilina;MSK Zilina;;;msk_zilina;;
+;olympique_lyon;Olympique Lyonnais;;;olympique_lyon;;
+;olympique_marseille;Olympique Marseille;;;olympique_marseille;;
+;panathinaikos_athen;Panathinaikos;;;panathinaikos_athen;;
+;partizan_belgrad;Partizan;;;partizan_belgrad;;
+;real_madrid;Real Madrid CF;;;real_madrid;;
+;rubin_kasan;Rubin Kazan;;;rubin_kasan;;
+;schachtar_donezk;Shakhtar Donetsk;;;schachtar_donezk;;
+;spartak_moskau;Spartak Moskva;;;spartak_moskau;;
+;sporting_braga;Sporting Braga;;;sporting_braga;;
+;tottenham_hotspur;Tottenham Hotspur FC;;;tottenham_hotspur;;
+;BRE;Werder Bremen;;;BRE;;
+
+insert_update Match;id[unique=true];matchday;date[dateformat='dd.MM.yy HH.mm'];group(code,competition(code[default=$comp]))[unique=true];homeTeam(isocode);guestTeam(isocode);location
+# will be gathered by webservice
+
+INSERT_UPDATE UpdateCompetitionCronJob;code[unique=true];job(code);singleExecutable;sessionLanguage(isocode);competition(code)
+;manualUpdateCL2010;updateCl2010Job;false;de;$comp
+;automatedUpdateCl2010;updateCl2010Job;false;de;$comp
+
+INSERT_UPDATE Trigger;cronjob(code)[unique=true];second;minute;hour;day;month;year;relative;active;maxAcceptableDelay
+#% afterEach: impex.getLastImportedItem().setActivationTime(new Date());
+;automatedUpdateCl2010;0;0;1;0;-1;-1;true;true;-1

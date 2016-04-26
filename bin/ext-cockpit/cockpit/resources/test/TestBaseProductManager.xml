@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="Product.code"/>
+			<property qualifier="Product.name"/>
+		</search-properties>
+		<sort-properties>
+			<property qualifier="Product.name"/>
+		</sort-properties>
+	</search>
+	<initial-properties source-object-template="Product.test">
+		<property-mapping source="source1" target="target1"/>
+		<property-mapping source="source2" target="target2"/>
+	</initial-properties>
+	<initial-properties source-object-template="Product.gibetnicht">
+		<property-mapping source="source1" target="target1"/>
+		<property-mapping source="source2" target="target2"/>
+	</initial-properties>
+</base>

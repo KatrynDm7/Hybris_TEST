@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wizard-config showPrefilledValues="false" selectMode="true" createMode="true" createWithinPopup="false" createWithinEditor="false">
+	<displayed-properties>
+	<group qualifier="Hyend2DimensionGeneral" visible="true" initially-opened="true">
+		<label key="cockpit.config.label.General" />
+		<property qualifier="Hyend2AbstractAttribute.attributeType">
+			<parameter name="allowCreate" value="false"/>		
+			<parameter name="allowActivate" value="false"/>
+		</property>		
+		<property qualifier="Hyend2AbstractAttribute.attribute">
+			<parameter name="allowCreate" value="false"/>		
+			<parameter name="allowActivate" value="false"/>
+		</property>
+		<property qualifier="Hyend2AbstractAttribute.classificationAttribute">
+			<parameter name="allowCreate" value="false"/>		
+			<parameter name="allowActivate" value="false"/>
+		</property>
+		<property qualifier="Hyend2Dimension.displayName" />
+		<property qualifier="Hyend2Dimension.exportId" />
+	</group>
+	
+	<group qualifier="Hyend2EndecaDimensionConfigurationWizard" visible="true" initially-opened="true">
+		<label key="hyend2.endecadimensionconfiguration" />
+		<property qualifier="Hyend2Dimension.endecaDimensionConfiguration" >
+			<parameter name="restrictToCreateTypes" value="Hyend2EndecaDimensionConfiguration"/>
+		</property>	
+	</group>
+	
+	<group qualifier="Hyend2DimensionIndexSchemasWizard" visible="true" initially-opened="true">
+		<label key="hyend2.indexelements" />
+		<property qualifier="Hyend2Dimension.indexElements" />		
+	</group>
+	
+	</displayed-properties>
+</wizard-config>

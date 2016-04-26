@@ -1,0 +1,30 @@
+<html>
+	<head>
+	</head>
+
+	<body>
+	Dear $ctx.player.name,<br/><br/>
+
+	for following matches you have not placed a bet yet:<br/>
+	<table border="1">
+		<tr>
+			<th>Name</th>
+			<th>Kick-off Time</th>
+			<th>Host</th>
+			<th>Guest</th>
+		</tr>
+		#foreach( $match in $ctx.reminderMatches )
+		<tr>
+			<td>$match.name</td>
+			<td>$match.kickOffTime</td>
+			<td>$match.home</td>
+			<td>$match.guest</td>
+		</tr>
+		#end
+	</table>
+	
+	<br/><br/>Best Regards,<br/>
+	Your Cuppy-Team<br/>
+	</body>
+
+</html>

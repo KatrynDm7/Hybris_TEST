@@ -1,0 +1,7 @@
+*** Settings ***
+Library			  de.hybris.platform.financialacceleratorstorefrontatddtests.policy.keywords.PolicyKeywordLibrary
+
+*** Keywords ***
+verify the insurance policy creation
+	[Documentation]   Verifies the Insurance Policy that have been created after placing the order. 
+	verify insurance policy

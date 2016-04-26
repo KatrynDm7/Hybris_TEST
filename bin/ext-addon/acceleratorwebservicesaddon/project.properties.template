@@ -1,0 +1,37 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform 
+# 
+# Copyright (c) 2000-2013 hybris AG
+# All rights reserved.
+#  
+# This software is the confidential and proprietary information of hybris 
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with hybris.
+#
+#  
+# -----------------------------------------------------------------------
+
+# you can put key/value pairs here.
+# Use Config.getParameter(..) to retrieve the values during runtime.
+
+acceleratorwebservicesaddon.key=value
+
+############# Silent Order POST settings ###############
+#sop.post.url=https://orderpagetest.ic3.com/hop/ProcessOrder.do
+sop.post.url=/acceleratorservices/sop-mock/process
+
+hop.cybersource.testCurrency=USD
+hop.cybersource.merchantID=your_merchant_id
+hop.cybersource.sharedSecret=your_shared_secret
+hop.cybersource.serialNumber=your_serial_number
+hop.cybersource.setupFee=0
+
+#Web root for commerce web services - used in CommerceWebServicesPaymentFacade for creating full SOP merchant callback url 
+webroot.commercewebservices.http=http://localhost:9001/rest
+webroot.commercewebservices.https=https://localhost:9002/rest
+
+# Specifies the location of the spring context file putted automatically to the global platform application context.
+acceleratorwebservicesaddon.application-context=acceleratorwebservicesaddon-spring.xml
+
+ycommercewebservices.additionalWebSpringConfigs.acceleratorwebservicesaddon=classpath:/acceleratorwebservicesaddon/web/spring/acceleratorwebservicesaddon-web-spring.xml

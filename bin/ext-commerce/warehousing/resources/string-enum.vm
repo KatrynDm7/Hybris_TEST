@@ -1,0 +1,27 @@
+package $packageName;
+ 
+#if ( $hasDescription )
+/**
+ * $description
+ */
+#end
+public enum $shortClassName   
+{
+ 
+#foreach($v in $enumValue)
+    $v.comment
+    ${StringUtils.upperCase($v.name)}#if ($foreach.last); #else , #end
+ 
+#end
+ 
+    final private String value;
+ 
+    private $shortClassName(String value) {
+        this.value = value;
+    }
+ 
+    public String getValue() {
+        return value;
+    }
+ 
+}

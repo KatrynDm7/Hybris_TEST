@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widgets.xsd">
+
+    <widget-extension widgetId="mainSlot">
+		<widget id="cloneContainerAdapter" widgetDefinitionId="com.hybris.cockpitng.clonecontaineradapter" slotId="cockpitWidgetChildrenInvisible" template="false">
+			<setting key="widgetStyleClass" type="String"></setting>
+			<setting key="__externalLocationPath" type="String">extension://y2ysyncbackoffice</setting>
+			<setting key="widgetStyleAttribute" type="String"></setting>
+			<virtual-sockets/>
+		</widget>
+
+		<widget id="performY2YSyncJobAdapter" widgetDefinitionId="com.hybris.cockpitng.y2ysyncjobadapter" slotId="cockpitWidgetChildrenInvisible" template="false">
+			<setting key="widgetStyleClass" type="String"></setting>
+			<setting key="__externalLocationPath" type="String">extension://y2ysyncbackoffice</setting>
+			<setting key="widgetStyleAttribute" type="String"></setting>
+			<virtual-sockets/>
+		</widget>
+
+
+		<widget id="dataHubConfigPreviewWidget" widgetDefinitionId="com.hybris.platform.y2ysync.widgets.datahub.config.preview" slotId="cockpitWidgetChildrenInvisible" template="true">
+			<setting key="widgetStyleClass" type="String"></setting>
+			<setting key="__externalLocationPath" type="String">extension://y2ysyncbackoffice</setting>
+			<setting key="widgetStyleAttribute" type="String"></setting>
+			<virtual-sockets/>
+		</widget>
+    </widget-extension>
+
+
+	<widget-connection sourceWidgetId="STUB_com.hybris.platform.y2ysync.datahub.config" outputId="dataHubConfigDisplayWidget" targetWidgetId="dataHubConfigPreviewWidget" inputId="createContext"/>
+
+    <widget-connection sourceWidgetId="cloneContainerAdapter" outputId="contextMap" targetWidgetId="configurableFlow" inputId="context"/>
+    <widget-connection sourceWidgetId="STUB_com.hybris.cockpitng.action.clonecontainer" outputId="cloneContainerForm" targetWidgetId="cloneContainerAdapter" inputId="cloneContainerForm"/>
+
+	<widget-connection sourceWidgetId="performY2YSyncJobAdapter" outputId="contextMap" targetWidgetId="configurableFlow" inputId="context"/>
+	<widget-connection sourceWidgetId="STUB_com.hybris.platform.y2ysync.syncjob.perform" outputId="performY2YSyncJob" targetWidgetId="performY2YSyncJobAdapter" inputId="performY2YSyncJob"/>
+
+
+	<widget-connection sourceWidgetId="STUB_com.hybris.cockpitng.action.duplicatecatalogids" outputId="duplicatedIdentifiersReport" targetWidgetId="duplicateIDsReport" inputId="createContext"/>
+
+</widgets>

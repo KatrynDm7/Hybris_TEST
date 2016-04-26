@@ -1,0 +1,19 @@
+$catalog-id=testCatalog
+$catalog-version=Online
+$catalog-version-staged=Staged
+
+$catalogversion=catalogversion(catalog(id[default=$catalog-id]),version[default=$catalog-version])[unique=true,default=$catalog-id:$catalog-version]
+$catalogversion-staged=catalogversion(catalog(id[default=$catalog-id]),version[default=$catalog-version-staged])[unique=true,default=$catalog-id:$catalog-version-staged]
+$ruleType=ruleType(code)[default='ANY']
+
+INSERT_UPDATE DisableRuleGeoArea;areaCode[unique=true];areaName;
+;XX1;Test Area 1;
+;XX2;Test Area 2;
+;XX3;Test Area 3;
+;XX4;Test Area 4;
+;XX5;Test Area 5;
+
+# Disable Product rule
+INSERT_UPDATE DisableProductBundleRule;id[unique=true];name;$catalogversion;bundleTemplate(id,version[default=1.0],$catalogversion);conditionalGeoAreas(areaCode);targetProducts(code,$catalogversion);$ruleType
+;iphonegeodisable		;No iPhone 32Gb for Dummy District;;IPhoneDeviceSelection;XX1,XX2,XX5;APPLE_IPHONE_4S_32GB;;;
+

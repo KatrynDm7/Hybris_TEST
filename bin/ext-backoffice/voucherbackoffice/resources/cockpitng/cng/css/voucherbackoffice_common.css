@@ -1,0 +1,8 @@
+/* Icons for explorer tree */
+div.yw-explorerTree .y-tree-icon-hmc_type_tree_voucher span.z-vfiletree-tee, div.yw-explorerTree .y-tree-icon-hmc_type_tree_voucher span.z-vfiletree-last {
+    background-image: url("images/088_vouchers.png");
+}
+
+div.yw-explorerTree .y-tree-icon-hmc_type_tree_voucher .y-tree-icon {
+    background-image: url("images/088_vouchers.png");
+}

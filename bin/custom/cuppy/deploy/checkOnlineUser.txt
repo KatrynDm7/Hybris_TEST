@@ -1,0 +1,70 @@
+import de.hybris.platform.jalo.*;
+import de.hybris.platform.cuppy.jalo.*;
+
+long now = System.currentTimeMillis();
+
+System.out.println("\nOnline Player with count:");
+Map map=new HashMap();
+for (JaloSession session : JaloConnection.getInstance().getAllSessions())
+{
+	if(session.getUser() instanceof Player)
+	{
+		if(map.get(session.getUser().getUID())==null)
+		{
+			map.put(session.getUser().getUID(),1);
+		}
+		else
+		{
+			map.put(session.getUser().getUID(),map.get(session.getUser().getUID())+1);
+		}
+	}
+}
+for (Map.Entry entry : map.entrySet())
+{
+	System.out.println("  "+entry.getKey()+" - "+entry.getValue());
+}
+
+System.out.println("\nOnline Non-Player with count:");
+map=new HashMap();
+for (JaloSession session : JaloConnection.getInstance().getAllSessions())
+{
+	if(!(session.getUser() instanceof Player))
+	{
+		if(map.get(session.getUser().getUID())==null)
+		{
+			map.put(session.getUser().getUID(),1);
+		}
+		else
+		{
+			map.put(session.getUser().getUID(),map.get(session.getUser().getUID())+1);
+		}
+	}
+}
+for (Map.Entry entry : map.entrySet())
+{
+	System.out.println("  "+entry.getKey()+" - "+entry.getValue());
+}
+
+System.out.println("\nOnline Player with timeout:");
+for (JaloSession session : JaloConnection.getInstance().getAllSessions())
+{
+	if(session.getUser() instanceof Player)
+	{
+		long out = session.getLastAccessed() + (session.getTimeout() * 1000);
+		String timeoutS = "" + ((out - now) / 1000) + "s";
+		String timeoutM = "" + ((out - now) / 1000 / 60) + "m";
+		System.out.println("  "+session.getUser().getUID() +" - "+(timeoutM.equals("0m")?timeoutS:timeoutM));
+	}
+}
+
+System.out.println("\nOnline Non-Player with timeout:");
+for (JaloSession session : new LinkedHashSet(JaloConnection.getInstance().getAllSessions()))
+{
+	if(!(session.getUser() instanceof Player))
+	{
+		long out = session.getLastAccessed() + (session.getTimeout() * 1000);
+		String timeoutS = "" + ((out - now) / 1000) + "s";
+		String timeoutM = "" + ((out - now) / 1000 / 60) + "m";
+		System.out.println("  "+session.getUser().getUID() +" - "+(timeoutM.equals("0m")?timeoutS:timeoutM));
+	}
+}

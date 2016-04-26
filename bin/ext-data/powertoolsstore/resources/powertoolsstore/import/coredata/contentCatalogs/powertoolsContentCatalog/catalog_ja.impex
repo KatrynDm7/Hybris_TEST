@@ -1,0 +1,10 @@
+#
+# Import the Powertools Content Catalog
+#
+
+# Language
+$lang=ja
+
+# Create Content Catalog
+UPDATE ContentCatalog;id[unique=true];name[lang=$lang]
+ ;powertoolsContentCatalog;"動力工具のコンテンツ カタログ"

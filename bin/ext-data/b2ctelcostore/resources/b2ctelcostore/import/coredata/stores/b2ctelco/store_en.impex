@@ -1,0 +1,10 @@
+#
+# Import the B2CTelco BaseStore
+#
+
+# Language
+$lang=en
+
+# Create Base Store
+UPDATE BaseStore;uid[unique=true];name[lang=$lang]
+ ;b2ctelco;"B2C Telco Store"

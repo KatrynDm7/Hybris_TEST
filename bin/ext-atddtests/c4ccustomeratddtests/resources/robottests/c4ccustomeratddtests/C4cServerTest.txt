@@ -1,0 +1,42 @@
+*** Settings ***
+Resource          atddrunner/AtddRunner_Keywords.txt
+Resource          c4ccustomeratddtests/C4cCustomer_Keywords.txt
+
+Test Setup        import commercecart sampledata
+Test Teardown     reset system
+
+Suite Setup       start server "c4cIntegrationServer"
+Suite Teardown    stop server "c4cIntegrationServer"
+
+*** Test Cases ***
+DatahubConnection_Test
+    [Documentation]    Simple health-check of datahub server
+    Check that datahub is running
+
+C4CIntegration_Test
+    [Documentation]    C4C integration check.
+    ${userId} =    generate random id
+    ${firstName}    Set Variable    John
+    ${lastName}    Set Variable    Doe
+    create customer with uid "${userId}" and name "${firstName} ${lastName}"
+    create address for customer with uid "${userId}"
+    run cron job
+    ${xml}=    read data from c4c
+    ${givenName}=    extract data from xml "${xml}" by xPath "//BusinessPartnerSUITEReplicateRequestMessage/BusinessPartner[ExternalID='${userId}']//GivenName"
+    ${familyName}=    extract data from xml "${xml}" by xPath "//BusinessPartnerSUITEReplicateRequestMessage/BusinessPartner[ExternalID='${userId}']//FamilyName"
+    ${customer}=    get customer by uid "${userId}"
+    Should Be Equal As Strings    ${firstName}    ${givenName}
+    Should Be Equal As Strings    ${lastName}    ${familyName}
+
+C4CIntegration_Test_Only_first_Name
+    [Documentation]    C4C integration check if customer's last name was not provided.
+    ${userId} =    generate random id
+    ${name}    Set Variable    John
+    create customer with uid "${userId}" and name "${name}"
+    create address for customer with uid "${userId}"
+    run cron job
+	${xml}=    read data from c4c
+    ${givenName}=    extract data from xml "${xml}" by xPath "//BusinessPartnerSUITEReplicateRequestMessage/BusinessPartner[ExternalID='${userId}']//GivenName"
+	${familyName}=    extract data from xml "${xml}" by xPath "//BusinessPartnerSUITEReplicateRequestMessage/BusinessPartner[ExternalID='${userId}']//FamilyName"
+	Should Be Equal As Strings    ${name}    ${givenName}
+	Should Be Empty    ${familyName}

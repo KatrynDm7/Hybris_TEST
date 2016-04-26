@@ -1,0 +1,237 @@
+<?xml version="1.0"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+
+<project name="solrserver_buildcallbacks">
+
+	<target name="buildSolrComponents">
+		<callback extname="" target="before_buildSolrComponents" />
+		<buildSolrComponents />
+		<callback extname="" target="after_buildSolrComponents" />
+	</target>
+
+	<target name="createSolrInstance" description="Creates a Solr instance [allowed parameters: -Dinstance.name -Dinstance.conf.dir -Dinstance.data.dir -Dinstance.log.dir].">
+		<callback extname="" target="before_createSolrInstance" />
+		<createSolrInstance />
+		<callback extname="" target="after_createSolrInstance" />
+	</target>
+
+	<target name="deleteSolrInstance" description="Deletes a Solr instance [allowed parameters: -Dinstance.name -Dinstance.conf.dir -Dinstance.data.dir -Dinstance.log.dir].">
+		<callback extname="" target="before_deleteSolrInstance" />
+		<deleteSolrInstance />
+		<callback extname="" target="after_deleteSolrInstance" />
+	</target>
+
+	<target name="startSolrServer" depends="createSolrInstance" description="Starts a Solr server [allowed parameters: -Dinstance.name -Dinstance.port -Dinstance.conf.dir -Dinstance.data.dir -Dinstance.log.dir -Dinstance.memory -Dinstance.javaoptions].">
+		<callback extname="" target="before_startSolrServer" />
+		<startSolrServer />
+		<callback extname="" target="after_startSolrServer" />
+	</target>
+
+	<target name="stopSolrServer" description="Stops a Solr server [allowed parameters: -Dinstance.name -Dinstance.port -Dinstance.data.dir].">
+		<callback extname="" target="before_stopSolrServer" />
+		<stopSolrServer />
+		<callback extname="" target="after_stopSolrServer" />
+	</target>
+
+	<macrodef name="buildSolrComponents">
+		<sequential>
+			<delete dir="${ext.solrserver.path}/solrclasses" />
+			<mkdir dir="${ext.solrserver.path}/solrclasses" />
+
+			<javacompile destdir="${ext.solrserver.path}/solrclasses">
+				<source>
+					<pathelement path="${ext.solrserver.path}/solrsrc" />
+				</source>
+				<additionalclasspath>
+					<fileset dir="${ext.solrserver.path}/resources/solr/server/solr-webapp/webapp/WEB-INF/lib">
+						<include name="**.jar" />
+					</fileset>
+				</additionalclasspath>
+			</javacompile>
+
+			<jar destfile="${ext.solrserver.path}/resources/solr/contrib/hybris/lib/hybriscomponents.jar">
+				<fileset dir="${ext.solrserver.path}/solrclasses" />
+				<manifest>
+					<attribute name="Built-By" value="hybris" />
+					<section name="common">
+						<attribute name="Implementation-Title" value="hybris Solr components" />
+						<attribute name="Implementation-Version" value="${hybris.build.version}-${DSTAMP}" />
+						<attribute name="Implementation-Vendor" value="hybris" />
+					</section>
+				</manifest>
+			</jar>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="createSolrInstance">
+		<sequential>
+			<property name="instance.name" value="default" />
+			<solrinstanceproperty instanceName="${instance.name}" instanceProperty="config.dir" defaultValue="${HYBRIS_CONFIG_DIR}/solr/instances/${instance.name}" />
+			<solrinstanceproperty instanceName="${instance.name}" instanceProperty="data.dir" defaultValue="${HYBRIS_DATA_DIR}/solr/instances/${instance.name}" />
+			<solrinstanceproperty instanceName="${instance.name}" instanceProperty="log.dir" defaultValue="${HYBRIS_LOG_DIR}/solr/instances/${instance.name}" />
+
+			<echo>Creating ${instance.name} Solr instance</echo>
+
+			<if>
+				<available file="${instance.config.dir}" />
+				<then />
+				<else>
+					<copy file="${ext.solrserver.path}/resources/solr/server/resources/log4j.properties" todir="${instance.config.dir}" />
+					<replaceregexp file="${instance.config.dir}/log4j.properties" match="solr.log=logs" replace="solr.log=${solr.log.dir}" byline="true" />
+
+					<copy file="${ext.solrserver.path}/resources/solr/server/solr/solr.xml" todir="${instance.config.dir}" />
+
+					<mkdir dir="${instance.config.dir}/configsets" />
+
+					<copy todir="${instance.config.dir}/configsets">
+						<fileset dir="${ext.solrserver.path}/resources/solr/server/solr/configsets" includes="**" />
+					</copy>
+				</else>
+			</if>
+
+			<mkdir dir="${instance.data.dir}" />
+			<mkdir dir="${instance.data.dir}/cores" />
+
+			<mkdir dir="${instance.log.dir}" />
+		</sequential>
+	</macrodef>
+
+	<macrodef name="deleteSolrInstance">
+		<sequential>
+			<property name="instance.name" value="default" />
+			<solrinstanceproperty instanceName="${instance.name}" instanceProperty="config.dir" defaultValue="${HYBRIS_CONFIG_DIR}/solr/instances/${instance.name}" />
+			<solrinstanceproperty instanceName="${instance.name}" instanceProperty="data.dir" defaultValue="${HYBRIS_DATA_DIR}/solr/instances/${instance.name}" />
+			<solrinstanceproperty instanceName="${instance.name}" instanceProperty="log.dir" defaultValue="${HYBRIS_LOG_DIR}/solr/instances/${instance.name}" />
+
+			<echo>Deleting ${instance.name} Solr instance from:</echo>
+			<echo>${instance.config.dir}</echo>
+			<echo>${instance.data.dir}</echo>
+			<echo>${instance.log.dir}</echo>
+
+			<input message="All config, data and log files will be deleted. Continue (y/n)?" validargs="y,n" addproperty="do.delete" defaultvalue="n" />
+
+			<if>
+				<equals arg1="${do.delete}" arg2="y" />
+				<then>
+					<delete dir="${instance.config.dir}" includeEmptyDirs="true" deleteonexit="true" quiet="true" verbose="true" />
+					<delete dir="${instance.data.dir}" includeEmptyDirs="true" deleteonexit="true" quiet="true" verbose="true" />
+					<delete dir="${instance.log.dir}" includeEmptyDirs="true" deleteonexit="true" quiet="true" verbose="true" />
+				</then>
+			</if>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="startSolrServer">
+		<sequential>
+			<property name="instance.name" value="default" />
+			<solrinstanceproperty instanceName="${instance.name}" instanceProperty="port" defaultValue="8983" />
+			<solrinstanceproperty instanceName="${instance.name}" instanceProperty="config.dir" defaultValue="${HYBRIS_CONFIG_DIR}/solr/instances/${instance.name}" />
+			<solrinstanceproperty instanceName="${instance.name}" instanceProperty="data.dir" defaultValue="${HYBRIS_DATA_DIR}/solr/instances/${instance.name}" />
+			<solrinstanceproperty instanceName="${instance.name}" instanceProperty="log.dir" defaultValue="${HYBRIS_LOG_DIR}/solr/instances/${instance.name}" />
+			<solrinstanceproperty instanceName="${instance.name}" instanceProperty="memory" defaultValue="512m" />
+			<solrinstanceproperty instanceName="${instance.name}" instanceProperty="javaoptions" defaultValue="" />
+
+			<echo>Starting ${instance.name} Solr instance on port ${instance.port}</echo>
+			<echo>${instance.javaoptions}</echo>
+
+			<exec executable="bash" failonerror="true" osfamily="unix">
+				<env key="SOLR_LOGS_DIR" value="${instance.log.dir}" />
+				<env key="LOG4J_PROPS" value="${instance.config.dir}/log4j.properties" />
+				<env key="SOLR_PID_DIR" value="${instance.data.dir}" />
+				<arg value="${ext.solrserver.path}/resources/solr/bin/solr" />
+				<arg value="start" />
+				<arg value="-d" />
+				<arg value="${ext.solrserver.path}/resources/solr/server" />
+				<arg value="-s" />
+				<arg value="${instance.config.dir}" />
+				<arg value="-p" />
+				<arg value="${instance.port}" />
+				<arg value="-m" />
+				<arg value="${instance.memory}" />
+				<arg value="-Dsolr.log.dir=${instance.log.dir}" />
+				<arg value="-DconfigSetBaseDir=${instance.config.dir}/configsets" />
+				<arg value="-DcoreRootDirectory=${instance.data.dir}/cores" />
+				<arg value="-a" />
+				<arg value="${instance.javaoptions}" />
+			</exec>
+
+			<exec executable="cmd.exe" failonerror="true" osfamily="windows">
+				<env key="SOLR_LOGS_DIR" value="${instance.log.dir}" />
+				<env key="LOG4J_CONFIG" value="${instance.config.dir}/log4j.properties" />
+				<arg value="/C" />
+				<arg value="${ext.solrserver.path}/resources/solr/bin/solr.cmd" />
+				<arg value="start" />
+				<arg value="-d" />
+				<arg value="${ext.solrserver.path}/resources/solr/server" />
+				<arg value="-s" />
+				<arg value="${instance.config.dir}" />
+				<arg value="-p" />
+				<arg value="${instance.port}" />
+				<arg value="-m" />
+				<arg value="${instance.memory}" />
+				<arg value="-Dsolr.log.dir=${instance.log.dir}" />
+				<arg value="-DconfigSetBaseDir=${instance.config.dir}/configsets" />
+				<arg value="-DcoreRootDirectory=${instance.data.dir}/cores" />
+				<arg value="-a" />
+				<arg value="${instance.javaoptions}" />
+			</exec>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="stopSolrServer">
+		<sequential>
+			<property name="instance.name" value="default" />
+			<solrinstanceproperty instanceName="${instance.name}" instanceProperty="port" defaultValue="8983" />
+			<solrinstanceproperty instanceName="${instance.name}" instanceProperty="data.dir" defaultValue="${HYBRIS_DATA_DIR}/solr/instances/${instance.name}" />
+
+			<echo>Stopping ${instance.name} Solr instance on port ${instance.port}</echo>
+
+			<exec executable="bash" failonerror="true" osfamily="unix">
+				<env key="SOLR_PID_DIR" value="${instance.data.dir}" />
+				<arg value="${ext.solrserver.path}/resources/solr/bin/solr" />
+				<arg value="stop" />
+				<arg value="-p" />
+				<arg value="${instance.port}" />
+			</exec>
+
+			<exec executable="cmd.exe" failonerror="true" osfamily="windows">
+				<env key="SOLR_PID_DIR" value="${instance.data.dir}" />
+				<arg value="/C" />
+				<arg value="${ext.solrserver.path}/resources/solr/bin/solr.cmd" />
+				<arg value="stop" />
+				<arg value="-p" />
+				<arg value="${instance.port}" />
+			</exec>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="solrinstanceproperty">
+		<attribute name="instanceName" />
+		<attribute name="instanceProperty" />
+		<attribute name="defaultValue" />
+		<sequential>
+			<if>
+				<isset property="solrserver.instances.@{instanceName}.@{instanceProperty}" />
+				<then>
+					<propertycopy name="instance.@{instanceProperty}" from="solrserver.instances.@{instanceName}.@{instanceProperty}" />
+				</then>
+				<else>
+					<property name="instance.@{instanceProperty}" value="@{defaultValue}" />
+				</else>
+			</if>
+		</sequential>
+	</macrodef>
+
+</project>

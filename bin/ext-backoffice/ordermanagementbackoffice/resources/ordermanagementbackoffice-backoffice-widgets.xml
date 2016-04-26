@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widgets.xsd">
+
+
+	<widget-extension widgetId="backofficeMainSlot">
+ 		
+ 		 <widget id="omsBackofficePerspective" widgetDefinitionId="com.hybris.cockpitng.borderlayout" slotId="perspectives" title="Order Management" template="false">
+            
+            
+          	  <widget id="omsExplorerTree" widgetDefinitionId="com.hybris.cockpitng.widgets.common.explorertree" slotId="leftSlot" template="false">
+              
+
+              	<widget id="openOrderConditionEvaluator" widgetDefinitionId="com.hybris.cockpitng.conditionevaluator"
+					slotId="cockpitWidgetChildrenInvisible" template="false">
+					
+					<widget id="openOrderStatus" widgetDefinitionId="de.hybris.ordermanagementbackoffice.widgets.OpenOrderStatus" slotId="cockpitWidgetChildrenInvisible"
+						template="false">
+						<setting key="widgetStyleAttribute" type="String"></setting>
+						<setting key="widgetStyleClass" type="String"></setting>
+						<virtual-sockets />
+					</widget>
+					<setting key="expression" type="String">#root.id EQ 'ordermanagementbackoffice.typenode.order.open'</setting>
+					<setting key="socketDataType_$T" type="String">com.hybris.backoffice.navigation.NavigationNode</setting>
+					<virtual-sockets />
+					
+				</widget>
+				
+				<widget id="returnableOrderConditionEvaluator" widgetDefinitionId="com.hybris.cockpitng.conditionevaluator"
+					slotId="cockpitWidgetChildrenInvisible" template="false">
+					
+					<widget id="returnableOrder" widgetDefinitionId="de.hybris.ordermanagementbackoffice.widgets.returnableorder" slotId="cockpitWidgetChildrenInvisible"
+						template="false">
+						<setting key="widgetStyleAttribute" type="String"></setting>
+						<setting key="widgetStyleClass" type="String"></setting>
+						<virtual-sockets />
+					</widget>
+					<setting key="expression" type="String">#root.id EQ 'ordermanagementbackoffice.typenode.create.return'</setting>
+					<setting key="socketDataType_$T" type="String">com.hybris.backoffice.navigation.NavigationNode</setting>
+					<virtual-sockets />
+					
+				</widget>
+
+                <widget id="returnProcessExecutor" widgetDefinitionId="de.hybris.ordermanagementbackoffice.widgets.returnprocessexecutor"
+                        slotId="cockpitWidgetChildrenInvisible" template="false">
+                    <setting key="socketDataType_$T" type="String">de.hybris.platform.returns.model.ReturnRequestModel</setting>
+                    <virtual-sockets />
+                </widget>
+
+                <widget id="omsExplorerTreeConditionEvaluator" widgetDefinitionId="com.hybris.cockpitng.conditionevaluator" slotId="cockpitWidgetChildrenInvisible" template="false">
+                    
+                    <widget id="omsExplorerTreePropExtractor" widgetDefinitionId="com.hybris.cockpitng.widgets.common.propextractor" slotId="cockpitWidgetChildrenInvisible" template="false">
+                        <setting key="expression" type="String">name</setting>
+                        <setting key="socketDataType_$T" type="String">java.lang.String</setting>
+                        <setting key="widgetStyleAttribute" type="String"></setting>
+                        <setting key="widgetStyleClass" type="String"></setting>
+                        <virtual-sockets/>
+                    </widget>
+                    
+                    <setting key="expression" type="String">#root instanceof T(com.hybris.cockpitng.tree.node.TypeNode)</setting>
+                    <setting key="socketDataType_$T" type="String">java.lang.Object</setting>
+                    <setting key="widgetStyleAttribute" type="String"></setting>
+                    <setting key="widgetStyleClass" type="String"></setting>
+                    <virtual-sockets/>
+                </widget>
+
+            
+            
+                <widget id="omsConditionEvaluator" widgetDefinitionId="com.hybris.cockpitng.conditionevaluator" slotId="cockpitWidgetChildrenInvisible" template="false">
+                    <widget id="omsWorkflowActionAdapter" widgetDefinitionId="com.hybris.cockpitng.workflowactionadapter" slotId="cockpitWidgetChildrenInvisible" template="false">
+                        <setting key="widgetStyleAttribute" type="String"></setting>
+                        <setting key="widgetStyleClass" type="String"></setting>
+                        <virtual-sockets/>
+                    </widget>
+                    <setting key="expression" type="String">#root.id EQ 'hmc_backoffice-workflow-inbox'</setting>
+                    <setting key="socketDataType_$T" type="String">com.hybris.backoffice.navigation.NavigationNode</setting>
+                    <setting key="widgetStyleAttribute" type="String"></setting>
+                    <setting key="widgetStyleClass" type="String"></setting>
+                    <virtual-sockets/>
+                </widget>
+                
+                
+                <setting key="explorerTreeConfigCtx" type="String">oms-explorer-tree</setting>
+                <setting key="widgetStyleAttribute" type="String"></setting>
+                <setting key="widgetStyleClass" type="String"></setting>
+                <setting key="allowFilteringEntries" type="Boolean">true</setting>
+                <virtual-sockets/>
+            
+            </widget>
+            
+            
+            
+            <widget id="omsCollapsibleContainer" widgetDefinitionId="com.hybris.cockpitng.collapsiblecontainer" slotId="centerSlot" template="false">
+                
+                <widget id="omsAdvancedSearch" widgetDefinitionId="com.hybris.cockpitng.advancedsearch" slotId="top" template="false">
+                    
+                    <widget id="omsAdvancedSearchEngine" widgetDefinitionId="com.hybris.cockpitng.widgets.common.advancedsearchengine" slotId="cockpitWidgetChildrenInvisible" template="false">
+                        <setting key="widgetStyleAttribute" type="String"></setting>
+                        <setting key="widgetStyleClass" type="String"></setting>
+                        <setting key="defaultPageSize" type="Integer">10</setting>
+                        <virtual-sockets/>
+                    </widget>
+                    
+                    <setting key="advancedSearchConfigCtxCode" type="String">advanced-search</setting>
+                    <setting key="widgetStyleAttribute" type="String"></setting>
+                    <setting key="addRowPosition" type="String">Header</setting>
+                    <setting key="widgetStyleClass" type="String"></setting>
+                    <setting key="isNestedObjectCreationDisabled" type="Boolean">true</setting>
+                    <setting key="simpleSearchConfigCtxCode" type="String">simple-search</setting>
+                    <setting key="forceSearchForCode" type="String">WorkflowAction,Order,ReturnRequest</setting>
+                    <virtual-sockets/>
+                </widget>
+
+                <widget id="omsList" widgetDefinitionId="com.hybris.cockpitng.collectionBrowser" slotId="center" template="false">
+                    <setting key="listSubtitle" type="String">emptylist</setting>
+                    <setting key="socketDataType_$T" type="String">java.lang.Object</setting>
+                    <setting key="widgetStyleAttribute" type="String"></setting>
+                    <setting key="pageSize" type="Integer">10</setting>
+                    <setting key="maxCharsInCell" type="Integer">70</setting>
+                    <setting key="actionSlotComponentId" type="String">omslistviewActions</setting>
+                    <setting key="multiSelect" type="Boolean">false</setting>
+                    <setting key="colConfigCtxCode" type="String">omslistview</setting>
+                    <setting key="itemRenderer" type="String">listViewRenderer</setting>
+                    <setting key="listTitle" type="String"></setting>
+                    <setting key="sortableListHeader" type="Boolean">true</setting>
+                    <setting key="widgetStyleClass" type="String"></setting>
+                    <setting key="asyncLoading" type="Boolean">true</setting>
+                    <virtual-sockets/>
+                </widget>
+                
+                <widget id="omsEditorArea" widgetDefinitionId="com.hybris.cockpitng.backoffice.defaultEditorArea" slotId="bottom" template="false">
+                
+                    <widget id="omsPermissionmanagementgroup" widgetDefinitionId="com.hybris.cockpitng.backoffice.permissionmanagementgroup" slotId="cockpitWidgetChildrenInvisible" title="Permission Management" template="true">
+                        <instance-settings socketEventRoutingMode="LAST_USED">
+                            <create onInit="false" reuseExisting="true">
+                                <all-incoming-events/>
+                            </create>
+                            <close/>
+                            <select onInit="false">
+                                <all-incoming-events/>
+                            </select>
+                        </instance-settings>
+                        <setting key="/com.hybris.cockpitng.backoffice.permissionmanagementgroup/eastWidth" type="String">25%</setting>
+                        <setting key="/fieldPermissions/sortableListHeader" type="Boolean">true</setting>
+                        <setting key="/permissionManager/type_id_accessor" type="String"></setting>
+                        <setting key="/permissionManager/principal_id_attribute" type="String">uid</setting>
+                        <setting key="/centerSlotContent/centerCaption" type="String">Center Caption</setting>
+                        <setting key="/leftSlotContent/thirdSectionDisabled" type="Boolean">true</setting>
+                        <setting key="/com.hybris.cockpitng.backoffice.permissionmanagementgroup/eastBorder" type="String">none</setting>
+                        <setting key="/permissionManager/type_typeCode" type="String">ComposedType</setting>
+                        <setting key="/widgetFilterAttributes/enabledByDefault" type="Boolean">true</setting>
+                        <setting key="/widgetFilterTypeOrPrincipal/enabledByDefault" type="Boolean">true</setting>
+                        <setting key="/leftSlotContent/allowLockingCenterPanel" type="Boolean">false</setting>
+                        <setting key="/leftSlotContent/topPanelInitiallyLocked" type="Boolean">false</setting>
+                        <setting key="/leftSlotContent/topPanelCollapsed" type="Boolean">false</setting>
+                        <setting key="/typePermissions/listTitle" type="String"></setting>
+                        <setting key="/fieldPermissions/asyncLoading" type="Boolean">false</setting>
+                        <setting key="/leftSlotContent/centerPanelInitiallyLocked" type="Boolean">false</setting>
+                        <setting key="/typePermissions/asyncLoading" type="Boolean">false</setting>
+                        <setting key="/centerSlotContent/centerPanelCollapsed" type="Boolean">false</setting>
+                        <setting key="/fieldPermissions/pageSize" type="Integer">50</setting>
+                        <setting key="/leftSlotContent/centerHeight" type="String">80px</setting>
+                        <setting key="/com.hybris.cockpitng.backoffice.permissionmanagementgroup/southDisabled" type="Boolean">true</setting>
+                        <setting key="/com.hybris.cockpitng.backoffice.permissionmanagementgroup/southHeight" type="String">50px</setting>
+                        <setting key="/typePermissions/actionSlotComponentId" type="String">permissionManagementlistviewActions</setting>
+                        <setting key="/centerSlotContent/bottomCaption" type="String">com.hybris.cockpitng.backoffice.permissionmanagementgroup.attributes</setting>
+                        <setting key="/com.hybris.cockpitng.backoffice.permissionmanagementgroup/westCollapsible" type="Boolean">true</setting>
+                        <setting key="/com.hybris.cockpitng.backoffice.permissionmanagementgroup/opaqueBG" type="String">true</setting>
+                        <setting key="/leftSlotContent/bottomCaption" type="String">com.hybris.cockpitng.backoffice.permissionmanagementgroup.context</setting>
+                        <setting key="/com.hybris.cockpitng.backoffice.permissionmanagementgroup/northBorder" type="String">none</setting>
+                        <setting key="/leftSlotContent/allowLockingBottomPanel" type="Boolean">false</setting>
+                        <setting key="/centerSlotContent/allowLockingBottomPanel" type="Boolean">false</setting>
+                        <setting key="_width" type="String">80%</setting>
+                        <setting key="/permissionManager/principal_typeCode" type="String">Principal</setting>
+                        <setting key="/typePermissions/colConfigCtxCode" type="String">permissionManagementTypes</setting>
+                        <setting key="/leftSlotContent/centerCaption" type="String">Center Caption</setting>
+                        <setting key="/typePermissions/listSubtitle" type="String"></setting>
+                        <setting key="widgetStyleClass" type="String"></setting>
+                        <setting key="/permissionManager/principal_id_accessor" type="String"></setting>
+                        <setting key="/centerSlotContent/topCaption" type="String">com.hybris.cockpitng.backoffice.permissionmanagementgroup.filter.attributes</setting>
+                        <setting key="/com.hybris.cockpitng.backoffice.permissionmanagementgroup/broadcastHorizontalResize" type="Boolean">true</setting>
+                        <setting key="/permissionLegend/controller.groovy" type="String">package com.hybris.cockpitng.exampleGroovyWidget;
+
+                            import com.hybris.cockpitng.annotations.SocketEvent;
+                            import com.hybris.cockpitng.util.DefaultWidgetController;
+
+                            /**
+                            * Example groovy controller.
+                            * You can use virtual sockets to communicate.
+                            */
+                            public class GroovyController extends DefaultWidgetController
+                            {
+                            /**
+                            * you can accept incoming sockets like this:
+                            */
+                            @SocketEvent(socketId = &quot;mysocket&quot;)
+                            public void onMySocket(final Object data)
+                            {
+                            // using widget model to store data
+                            getModel().setAttribute(&quot;mydata&quot;, data);
+                            }
+
+                            /**
+                            * you can send data to outgoing sockets like this:
+                            */
+                            public void sendOutput()
+                            {
+                            sendOutput(&quot;myoutput&quot;, getModel().getValue(&quot;mydata&quot;, Object.class));
+                            }
+                            }</setting>
+                        <setting key="/leftSlotContent/bottomPanelCollapsed" type="Boolean">false</setting>
+                        <setting key="/centerSlotContent/bottomPanelCollapsed" type="Boolean">false</setting>
+                        <setting key="/leftSlotContent/topHeight" type="String">33%</setting>
+                        <setting key="/fieldPermissions/listSubtitle" type="String"></setting>
+                        <setting key="/com.hybris.cockpitng.backoffice.permissionmanagementgroup/centerBorder" type="String">none</setting>
+                        <setting key="/centerSlotContent/thirdSectionDisabled" type="Boolean">true</setting>
+                        <setting key="/com.hybris.cockpitng.backoffice.permissionmanagementgroup/northDisabled" type="Boolean">true</setting>
+                        <setting key="/leftSlotContent/allowLockingTopPanel" type="Boolean">false</setting>
+                        <setting key="/com.hybris.cockpitng.backoffice.permissionmanagementgroup/autoCloseWest" type="Boolean">false</setting>
+                        <setting key="/centerSlotContent/centerHeight" type="String">80px</setting>
+                        <setting key="/centerSlotContent/topHeight" type="String">33%</setting>
+                        <setting key="/centerSlotContent/allowLockingTopPanel" type="Boolean">false</setting>
+                        <setting key="/fieldPermissions/listTitle" type="String"></setting>
+                        <setting key="/typePermissions/itemRenderer" type="String">permissionManagementListViewRenderer</setting>
+                        <setting key="/permissionManager/type_id_attribute" type="String">code</setting>
+                        <setting key="/centerSlotContent/topPanelInitiallyLocked" type="Boolean">false</setting>
+                        <setting key="/centerSlotContent/topPanelCollapsed" type="Boolean">false</setting>
+                        <setting key="_height" type="String">80%</setting>
+                        <setting key="/leftSlotContent/topCaption" type="String">com.hybris.cockpitng.backoffice.permissionmanagementgroup.filter.context</setting>
+                        <setting key="/com.hybris.cockpitng.backoffice.permissionmanagementgroup/southCollapsible" type="Boolean">true</setting>
+                        <setting key="/com.hybris.cockpitng.backoffice.permissionmanagementgroup/border" type="String">none</setting>
+                        <setting key="/fieldPermissions/itemRenderer" type="String">listViewRenderer</setting>
+                        <setting key="/com.hybris.cockpitng.backoffice.permissionmanagementgroup/westWidth" type="String">60%</setting>
+                        <setting key="/fieldPermissions/actionSlotComponentId" type="String"></setting>
+                        <setting key="/centerSlotContent/allowLockingCenterPanel" type="Boolean">false</setting>
+                        <setting key="/fieldPermissions/maxCharsInCell" type="Integer">70</setting>
+                        <setting key="/typePermissions/pageSize" type="Integer">50</setting>
+                        <setting key="widgetStyleAttribute" type="String"></setting>
+                        <setting key="/com.hybris.cockpitng.backoffice.permissionmanagementgroup/northHeight" type="String">50px</setting>
+                        <setting key="/centerSlotContent/bottomPanelInitiallyLocked" type="Boolean">false</setting>
+                        <setting key="/com.hybris.cockpitng.backoffice.permissionmanagementgroup/eastDisabled" type="Boolean">true</setting>
+                        <setting key="/widgetFilterField/enabledByDefault" type="Boolean">true</setting>
+                        <setting key="/fieldPermissions/colConfigCtxCode" type="String">permissionManagementFields</setting>
+                        <setting key="/permissionLegend/view.zul" type="String">
+
+                            &lt;?taglib uri=&quot;http://www.zkoss.org/dsp/web/core&quot; prefix=&quot;c&quot;?&gt;
+                            &lt;widget&gt;
+                            &lt;div sclass=&quot;yw-permission-legend&quot;&gt;
+                            &lt;div sclass=&quot;yw-permission-legend-holder&quot;&gt;
+                            &lt;span sclass=&quot;yw-permission-legend-icon-inherited-id&quot;&gt;&lt;/span&gt;
+                            &lt;span sclass=&quot;yw-permission-legend-icon-inherited-ig&quot;&gt;&lt;/span&gt;
+                            ${c:l('permission.inherited')}
+                            &lt;/div&gt;
+                            &lt;div sclass=&quot;yw-permission-legend-holder&quot;&gt;
+                            &lt;span sclass=&quot;yw-permission-legend-icon-d&quot;&gt;&lt;/span&gt;
+                            ${c:l('permission.denied')}
+                            &lt;/div&gt;
+                            &lt;div sclass=&quot;yw-permission-legend-holder&quot;&gt;
+                            &lt;span sclass=&quot;yw-permission-legend-icon-g&quot;&gt;&lt;/span&gt;
+                            ${c:l('permission.granted')}
+                            &lt;/div&gt;
+                            &lt;/div&gt;
+                            &lt;/widget&gt;
+
+                        </setting>
+                        <setting key="/centerSlotContent/centerPanelInitiallyLocked" type="Boolean">false</setting>
+                        <setting key="/com.hybris.cockpitng.backoffice.permissionmanagementgroup/westBorder" type="String">none</setting>
+                        <setting key="/com.hybris.cockpitng.backoffice.permissionmanagementgroup/eastCollapsible" type="Boolean">true</setting>
+                        <setting key="/fieldPermissions/multiSelect" type="Boolean">false</setting>
+                        <setting key="/com.hybris.cockpitng.backoffice.permissionmanagementgroup/southBorder" type="String">none</setting>
+                        <setting key="/com.hybris.cockpitng.backoffice.permissionmanagementgroup/northCollapsible" type="Boolean">true</setting>
+                        <setting key="/typePermissions/sortableListHeader" type="Boolean">true</setting>
+                        <setting key="/typePermissions/maxCharsInCell" type="Integer">70</setting>
+                        <setting key="/com.hybris.cockpitng.backoffice.permissionmanagementgroup/westDisabled" type="Boolean">false</setting>
+                        <setting key="/leftSlotContent/bottomPanelInitiallyLocked" type="Boolean">false</setting>
+                        <setting key="/leftSlotContent/centerPanelCollapsed" type="Boolean">false</setting>
+                        <setting key="/typePermissions/multiSelect" type="Boolean">false</setting>
+                        <virtual-sockets/>
+                    </widget>
+                    <widget id="omsPreviousItemSelector" widgetDefinitionId="com.hybris.cockpitng.previousItemSelector" slotId="previousItemSelectorSlot" template="false">
+                        <setting key="widgetStyleAttribute" type="String"></setting>
+                        <setting key="widgetStyleClass" type="String"></setting>
+                        <virtual-sockets/>
+                    </widget>
+                    <widget id="omsNextItemSelector" widgetDefinitionId="com.hybris.cockpitng.nextItemSelector" slotId="nextItemSelectorSlot" template="false">
+                        <setting key="widgetStyleAttribute" type="String"></setting>
+                        <setting key="widgetStyleClass" type="String"></setting>
+                        <virtual-sockets/>
+                    </widget>
+                    <widget id="omsCancelOrderEntryPopup" widgetDefinitionId="de.hybris.ordermanagementbackoffice.widgets.cancelorderentry" 
+                    		slotId="cockpitWidgetChildrenInvisible" title="Cancel an Item" template="true">
+                        <instance-settings socketEventRoutingMode="LAST_USED">
+                            <create onInit="false" reuseExisting="true">
+                                <incoming-events>
+                                    <socket-event id="inputObject"/>
+                                </incoming-events>
+                            </create>
+                            <close>
+                                <outgoing-events>
+                                    <socket-event id="confirm"/>
+                                </outgoing-events>
+                                <all-outgoing-events/>
+                            </close>
+                            <select onInit="false">
+                                <incoming-events>
+                                    <socket-event id="inputObject"/>
+                                </incoming-events>
+                            </select>
+                        </instance-settings>
+                        <setting key="widgetStyleClass" type="String"></setting>
+                        <setting key="__externalLocationPath" type="String">extension://ordermanagementbackoffice</setting>
+                        <setting key="widgetStyleAttribute" type="String"></setting>
+                        <setting key="_width" type="String">865px</setting>
+                        <setting key="_height" type="String">470px</setting>
+                        <virtual-sockets/>
+                    </widget>
+                    <setting key="widgetStyleAttribute" type="String"></setting>
+                    <setting key="viewModeBtnVisible" type="Boolean">false</setting>
+                    <setting key="widgetStyleClass" type="String"></setting>
+                    <setting key="initViewMode" type="String">fluid</setting>
+                    <setting key="fluidViewCode" type="String">fluid</setting>
+                    <setting key="editorAreaConfigCtx" type="String">oms-editor-area</setting>
+                    <setting key="bottomToolbar" type="Boolean">false</setting>
+                    <setting key="actionSlotComponentId" type="String">omsEditorAreaActions</setting>
+                    <setting key="showLinksInNotifications" type="Boolean">false</setting>
+                    <virtual-sockets>
+                        <output id="cancelOrderEntryContext" type="de.hybris.platform.core.model.order.OrderEntryModel" visibility="default"/>
+                    </virtual-sockets>
+                </widget>
+                <widget id="omsBackofficeSpaceManagement" widgetDefinitionId="com.hybris.backoffice.spaceManagement" slotId="cockpitWidgetChildrenInvisible" template="false">
+                    <setting key="widgetStyleAttribute" type="String"></setting>
+                    <setting key="widgetStyleClass" type="String"></setting>
+                    <virtual-sockets/>
+                </widget>
+                
+                
+                <widget id="omsCancelOrderPopup" widgetDefinitionId="de.hybris.ordermanagementbackoffice.widgets.cancelorder" slotId="cockpitWidgetChildrenInvisible"
+					title="Cancel an Order" template="true">
+
+					<instance-settings socketEventRoutingMode="LAST_USED">
+                            <create onInit="false" reuseExisting="true">
+								<all-incoming-events/>
+                            </create>
+                            <close>
+								<all-outgoing-events/>
+                            </close>
+                            <select onInit="false">
+								<all-incoming-events/>
+                            </select>
+                     </instance-settings>
+					
+					<setting key="widgetStyleClass" type="String"></setting>
+					<setting key="__externalLocationPath" type="String">extension://ordermanagementbackoffice</setting>
+					<setting key="widgetStyleAttribute" type="String"></setting>
+					<setting key="_width" type="String">830px</setting>
+					<setting key="_height" type="String">405px</setting>
+					<virtual-sockets />
+				</widget>
+
+                <widget id="omsCreateReturnRequestPopup" widgetDefinitionId="de.hybris.ordermanagementbackoffice.widgets.createreturnrequest" slotId="cockpitWidgetChildrenInvisible"
+                        title="Create Return Request" template="true">
+
+                    <instance-settings socketEventRoutingMode="LAST_USED">
+                        <create onInit="false" reuseExisting="true">
+                            <all-incoming-events/>
+                        </create>
+                        <close>
+                            <all-outgoing-events/>
+                        </close>
+                        <select onInit="false">
+                            <all-incoming-events/>
+                        </select>
+                    </instance-settings>
+
+                    <setting key="widgetStyleClass" type="String"></setting>
+                    <setting key="__externalLocationPath" type="String">extension://ordermanagementbackoffice</setting>
+                    <setting key="widgetStyleAttribute" type="String"></setting>
+                    <setting key="_width" type="String">900px</setting>
+                    <setting key="_height" type="String">520px</setting>
+                    <virtual-sockets />
+                </widget>
+
+                <setting key="widgetStyleAttribute" type="String"></setting>
+                <setting key="allowLockingCenterPanel" type="Boolean">true</setting>
+                <setting key="bottomPanelCollapsed" type="Boolean">false</setting>
+                <setting key="topHeight" type="String">33%</setting>
+                <setting key="centerCaption" type="String">List</setting>
+                <setting key="bottomPanelInitiallyLocked" type="Boolean">false</setting>
+                <setting key="centerHeight" type="String">50%</setting>
+                <setting key="topPanelInitiallyLocked" type="Boolean">false</setting>
+                <setting key="thirdSectionDisabled" type="Boolean">false</setting>
+                <setting key="allowLockingBottomPanel" type="Boolean">true</setting>
+                <setting key="bottomCaption" type="String">Edit</setting>
+                <setting key="centerPanelCollapsed" type="Boolean">false</setting>
+                <setting key="widgetStyleClass" type="String"></setting>
+                <setting key="topCaption" type="String">Search</setting>
+                <setting key="centerPanelInitiallyLocked" type="Boolean">false</setting>
+                <setting key="topPanelCollapsed" type="Boolean">true</setting>
+                <setting key="allowLockingTopPanel" type="Boolean">true</setting>
+                <virtual-sockets/>
+            </widget> 
+            
+            <setting key="northHeight" type="String">50px</setting>
+            <setting key="northBorder" type="String">none</setting>
+            <setting key="broadcastHorizontalResize" type="Boolean">true</setting>
+            <setting key="eastDisabled" type="Boolean">true</setting>
+            <setting key="eastBorder" type="String">none</setting>
+            <setting key="westCollapsible" type="Boolean">true</setting>
+            <setting key="northCollapsible" type="Boolean">true</setting>
+            <setting key="border" type="String">none</setting>
+            <setting key="centerBorder" type="String">none</setting>
+            <setting key="westDisabled" type="Boolean">false</setting>
+            <setting key="opaqueBG" type="String">true</setting>
+            <setting key="southHeight" type="String">50px</setting>
+            <setting key="widgetStyleAttribute" type="String"></setting>
+            <setting key="westBorder" type="String">none</setting>
+            <setting key="southBorder" type="String">none</setting>
+            <setting key="southDisabled" type="Boolean">true</setting>
+            <setting key="eastWidth" type="String">25%</setting>
+            <setting key="northDisabled" type="Boolean">true</setting>
+            <setting key="widgetStyleClass" type="String"></setting>
+            <setting key="autoCloseWest" type="Boolean">true</setting>
+            <setting key="southCollapsible" type="Boolean">true</setting>
+            <setting key="westWidth" type="String">300px</setting>
+            <setting key="perspectiveImageUrl" type="String">/cng/images/OMS_pers_active1.png</setting>
+            <setting key="eastCollapsible" type="Boolean">true</setting>
+         </widget>
+         
+        <setting key="autoCloseInactive" type="Boolean">false</setting>
+        <setting key="widgetStyleAttribute" type="String"></setting>
+        <setting key="widgetStyleClass" type="String"></setting>
+         
+	</widget-extension>
+	
+	<widget-connection sourceWidgetId="omsExplorerTree" outputId="nodeSelected" targetWidgetId="omsExplorerTreeConditionEvaluator" inputId="input"/>
+    <widget-connection sourceWidgetId="omsExplorerTreeConditionEvaluator" outputId="true" targetWidgetId="omsExplorerTreePropExtractor" inputId="genericInput"/>
+    <widget-connection sourceWidgetId="omsExplorerTreePropExtractor" outputId="genericOutput" targetWidgetId="omsAdvancedSearch" inputId="type"/>
+    <widget-connection sourceWidgetId="omsAdvancedSearch" outputId="searchData" targetWidgetId="omsAdvancedSearchEngine" inputId="searchData"/>
+    <widget-connection sourceWidgetId="omsAdvancedSearch" outputId="searchData" targetWidgetId="omsBackofficeSpaceManagement" inputId="searchData"/>
+    <widget-connection sourceWidgetId="omsBackofficeSpaceManagement" outputId="collapseState" targetWidgetId="omsCollapsibleContainer" inputId="collapseState"/>
+    <widget-connection sourceWidgetId="omsBackofficeSpaceManagement" outputId="collapseState" targetWidgetId="omsCollapsibleContainer" inputId="collapseState"/>
+    <widget-connection sourceWidgetId="omsConditionEvaluator" outputId="true" targetWidgetId="omsWorkflowActionAdapter" inputId="nodeSelected"/>
+    <widget-connection sourceWidgetId="omsWorkflowActionAdapter" outputId="context" targetWidgetId="omsAdvancedSearch" inputId="initContext"/>
+
+    <widget-connection sourceWidgetId="omsList" outputId="sortData" targetWidgetId="omsAdvancedSearch" inputId="sortData"/>
+    <widget-connection sourceWidgetId="omsList" outputId="selectedItem" targetWidgetId="omsBackofficeSpaceManagement" inputId="listSelectedObject"/>
+    <widget-connection sourceWidgetId="omsList" outputId="selectedItem" targetWidgetId="omsEditorArea" inputId="inputObject"/>
+    <widget-connection sourceWidgetId="omsList" outputId="previousItemSelectorContext" targetWidgetId="omsPreviousItemSelector" inputId="previousItemSelectorContext"/>
+    <widget-connection sourceWidgetId="omsList" outputId="nextItemSelectorContext" targetWidgetId="omsNextItemSelector" inputId="nextItemSelectorContext"/>
+    <widget-connection sourceWidgetId="omsPreviousItemSelector" outputId="previousItemSelectorInvocation" targetWidgetId="omsList" inputId="previousItemSelectorInvocation"/>
+    <widget-connection sourceWidgetId="omsNextItemSelector" outputId="nextItemSelectorInvocation" targetWidgetId="omsList" inputId="nextItemSelectorInvocation"/>
+    <widget-connection sourceWidgetId="omsAdvancedSearchEngine" outputId="pageable" targetWidgetId="omsList" inputId="pageable"/>
+	
+    <widget-connection sourceWidgetId="omsExplorerTree" outputId="nodeSelected" targetWidgetId="openOrderConditionEvaluator" inputId="input"/>
+ 	<widget-connection sourceWidgetId="openOrderConditionEvaluator" outputId="true" targetWidgetId="openOrderStatus" inputId="nodeSelected"/>
+ 	<widget-connection sourceWidgetId="openOrderStatus" outputId="outContext" targetWidgetId="omsAdvancedSearch" inputId="initContext"/>
+ 	
+ 	<widget-connection sourceWidgetId="omsExplorerTree" outputId="nodeSelected" targetWidgetId="returnableOrderConditionEvaluator" inputId="input"/>
+ 	<widget-connection sourceWidgetId="returnableOrderConditionEvaluator" outputId="true" targetWidgetId="returnableOrder" inputId="nodeSelected"/>
+ 	<widget-connection sourceWidgetId="returnableOrder" outputId="outContext" targetWidgetId="omsAdvancedSearch" inputId="initContext"/>
+    <!-- Action widget connections -->
+    <widget-connection sourceWidgetId="STUB_de.hybris.ordermanagementbackoffice.actions.cancelorderaction" outputId="cancelOrderContext" targetWidgetId="omsCancelOrderPopup" inputId="inputObject"/>
+    <widget-connection sourceWidgetId="STUB_de.hybris.ordermanagementbackoffice.actions.createreturnrequestaction" outputId="createReturnRequestContext" targetWidgetId="omsCreateReturnRequestPopup" inputId="inputObject"/>
+    <widget-connection sourceWidgetId="omsEditorArea" outputId="cancelOrderEntryContext" targetWidgetId="omsCancelOrderEntryPopup" inputId="inputObject"/>
+    <widget-connection sourceWidgetId="STUB_de.hybris.ordermanagementbackoffice.actions.manualrefundaction" outputId="manualRefundContext" targetWidgetId="returnProcessExecutor" inputId="manualRefund"/>
+    <widget-connection sourceWidgetId="STUB_de.hybris.ordermanagementbackoffice.actions.autorefundaction" outputId="autoRefundContext" targetWidgetId="returnProcessExecutor" inputId="autoRefund"/>
+    <widget-connection sourceWidgetId="STUB_de.hybris.ordermanagementbackoffice.actions.cancelrefundaction" outputId="cancelRefundContext" targetWidgetId="returnProcessExecutor" inputId="cancelRefund"/>
+    <widget-connection sourceWidgetId="STUB_de.hybris.ordermanagementbackoffice.actions.manualtaxreverseaction" outputId="manualTaxReverseContext" targetWidgetId="returnProcessExecutor" inputId="manualTaxReverse"/>
+</widgets>

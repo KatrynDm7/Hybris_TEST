@@ -1,0 +1,110 @@
+*** Settings ***
+Resource          commerce/CommerceServices_Keywords.txt
+Test Setup        import commerce sample data
+
+*** Variables ***
+
+${customerId}=    testuser@saved-carts.com
+${customerId2}=    testuser2@saved-carts.com
+${productCode1}=    P1
+${productCode2}=    P2
+${expirationDays}=    30
+
+*** Test Cases ***
+
+Test_Clone_Empty_Saved_Cart
+	${sessionCart}=    get session cart
+	create customer "${customerId}" with currency "USD"
+	login customer with id "${customerId}"
+	### save the current session cart
+	${savedCart}=    save cart with name "EmptyCart" and description "An Empty Cart"
+	Should Be Equal    ${sessionCart.code}    ${savedCart.code}
+	Should Not Be Equal    ${savedCart.saveTime}    ${null}
+	Should Not Be Equal    ${savedCart.expirationTime}    ${null}
+	### clone the cart and make sure the clone does not have the same code as the original saved cart
+	${clonedCart}=    clone saved cart with code "${savedCart.code}"
+	Should Not Be Equal    ${savedCart.code}    ${clonedCart.code}
+	### make sure the clone is identical to the original saved cart
+	${cloneName}=    Catenate    Copy of ${savedCart.name}
+	Should Be Equal    ${cloneName}    ${clonedCart.name}
+	Should Be Equal    ${savedCart.description}    ${clonedCart.description}
+	Should Be Equal    ${savedCart.entries.size}    ${clonedCart.entries.size}
+	### make sure the clone has been saved
+	Should be Equal    ${clonedCart.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${clonedCart.saveTime}    ${null}
+	Should Not Be Equal    ${clonedCart.expirationTime}    ${null}
+	verify that date "${clonedCart.expirationTime}" is "${expirationDays}" days later than date "${clonedCart.saveTime}"
+
+Test_Clone_Saved_Cart_With_Products
+	${sessionCart}=    get session cart
+	create customer "${customerId}" with currency "USD"
+	login customer with id "${customerId}"
+	### add product to the cart once
+	create product "${productCode1}" with unit "pieces" currency "USD" and price "100"
+	add product "${productCode1}" to cart
+	### add another product to the cart twice
+	create product "${productCode2}" with unit "pieces" currency "USD" and price "50"
+    ${TWO}=     Set Variable    2
+	add "${TWO}" products "${productCode2}" to cart
+	### save the current session cart
+	${savedCart}=    save cart with name "TestCart" and description "A Test Cart"
+	Should Be Equal    ${sessionCart.code}    ${savedCart.code}
+	Should Not Be Equal    ${savedCart.saveTime}    ${null}
+	Should Not Be Equal    ${savedCart.expirationTime}    ${null}
+	Should Be Equal    ${savedCart.entries[0].product.code}    ${productCode1}
+	Should Be Equal As Integers    ${savedCart.entries[0].quantity}    1
+	Should Be Equal    ${savedCart.entries[1].product.code}    ${productCode2}
+	Should Be Equal As Integers   ${savedCart.entries[1].quantity}    2
+	### clone the cart and verify that the cart has been cloned properly
+	${cloneName}=    Catenate    Copy of ${savedCart.name}
+	${clonedCart}=    clone saved cart with code "${savedCart.code}" and set name "${cloneName}" and description "${savedCart.description}"
+	verify that cart with code "${savedCart.code}" has been cloned properly into cart with code "${clonedCart.code}"
+	### also verify that the clone has been saved
+	Should Be Equal    ${savedCart.savedBy.uid}    ${clonedCart.savedBy.uid}
+	Should Be Equal    ${cloneName}    ${clonedCart.name}
+	Should Be Equal    ${savedCart.description}    ${clonedCart.description}
+	Should Not Be Equal    ${clonedCart.saveTime}    ${null}
+	Should Not Be Equal    ${clonedCart.expirationTime}    ${null}
+	verify that date "${clonedCart.expirationTime}" is "${expirationDays}" days later than date "${clonedCart.saveTime}"
+
+Test_Clone_Not_Saved_Cart_FAIL
+	${sessionCart}=    get session cart
+	create customer "${customerId}" with currency "USD"
+	login customer with id "${customerId}"
+	### make sure a cart which hasn't been saved cannot be cloned
+	Run Keyword And Expect Error    CommerceSaveCartException: Cannot find a saved cart for code*
+	...    clone saved cart with code "${sessionCart.code}"
+    
+Test_Clone_Cart_Flagged_For_Deletion_FAIL
+	${sessionCart}=    get session cart
+	create customer "${customerId}" with currency "USD"
+	login customer with id "${customerId}"
+	### save the current session cart
+	${savedCart}=    save cart with name "EmptyCart" and description "An Empty Cart"
+	Should Be Equal    ${sessionCart.code}    ${savedCart.code}
+	Should Not Be Equal    ${savedCart.saveTime}    ${null}
+	Should Not Be Equal    ${savedCart.expirationTime}    ${null}
+	### clone the cart and make sure the clone does not have the same code as the original saved cart
+	${clonedCart}=    clone saved cart with code "${savedCart.code}"
+	Should Not Be Equal    ${savedCart.code}    ${clonedCart.code}
+	### flag the cart for deletion and make sure it cannot be cloned again
+	flag cart with code "${savedCart.code}" for deletion
+	Run Keyword And Expect Error    CommerceSaveCartException: Cannot find a saved cart for code*
+	...    clone saved cart with code "${savedCart.code}"
+    
+Test_Clone_Saved_Cart_Of_Different_User_FAIL
+	create customer "${customerId}" with currency "USD"
+	create customer "${customerId2}" with currency "USD"
+	### save the current session cart as customer 1
+	${sessionCart}=    get session cart
+	login customer with id "${customerId}"
+	${savedCart}=    save cart with name "EmptyCart" and description "An Empty Cart"
+	Should Be Equal    ${sessionCart.code}    ${savedCart.code}
+	Should Not Be Equal    ${savedCart.saveTime}    ${null}
+	Should Not Be Equal    ${savedCart.expirationTime}    ${null}
+	### make sure that another customer cannot clone the saved cart of customer 1
+	${sessionCart}=    create new session cart
+	login customer with id "${customerId2}"
+	Run Keyword And Expect Error    CommerceSaveCartException: Cannot find a saved cart for code*
+    ...    clone saved cart with code "${savedCart.code}"
+    

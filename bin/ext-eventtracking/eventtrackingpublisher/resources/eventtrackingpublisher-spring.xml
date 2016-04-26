@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:int-jms="http://www.springframework.org/schema/integration/jms"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd
+           http://www.springframework.org/schema/integration
+           http://www.springframework.org/schema/integration/spring-integration.xsd
+           http://www.springframework.org/schema/integration/jms
+           http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd">
+
+	<!--
+	The hybris platform provides one single Spring application context for beans located at the jalo layer.
+	Each extension can add beans to this context by specifying them at this configuration file.
+	 
+	You can use and/or redefine beans defined at configuration files of other extensions as well as
+	adding new one.
+		
+	If you want to locate this file at a different location or want to use several files for better,
+	structuring, please use the '<yourextension>.application-context' property at your project.properties file.
+	There you can specify a comma separated list of files where first is tried to find a file per classpath and
+	then per file system.
+
+	
+	If you want to configure beans for your web module please have a look at
+	your web/webroot/WEB-INF/<extname>-web-spring.xml.
+	-->
+	
+	<!--  Example how to override a manager -->
+	<!--
+	<bean id="core.productManager"   class="de.hybris.platform.eventtracking.publisher.jalo.EventtrackingpublisherProductManager" 	init-method="init"	destroy-method="destroy" />
+	-->
+	
+	
+ 	<!--  Example how to configure the class to use for jalo session creation -->
+	<!--
+	<bean id="jalosession"   class="de.hybris.platform.jalo.JaloSessionFactory">
+		<property name="targetClassName" value="de.hybris.platform.eventtracking.publisher.jalo.EventtrackingpublisherJaloSession"/>
+	</bean>
+	-->
+
+	
+	<!--  Example how to override an item  -->
+	<!-- 
+	<bean id="de.hybris.platform.jalo.product.Product" class="de.hybris.platform.eventtracking.publisher.jalo.EventtrackingpublisherProduct" scope="prototype" />		
+ 	-->
+
+	<!--  
+	 Example how to register and use an AOP aspect 
+     Also see http://static.springframework.org/spring/docs/2.5.x/reference/aop.html	
+     -->
+	
+	<!-- 
+	<bean id="eventtrackingpublisherProfBean" class="de.hybris.platform.eventtracking.publisher.aop.EventtrackingpublisherProfilingAspect"/>
+	<aop:config proxy-target-class="true">
+  		<aop:aspect id="eventtrackingpublisherProfAspect" ref="eventtrackingpublisherProfBean" >
+    	  <aop:pointcut id="profiledMethods" 
+	      	expression="execution(* getModificationTime(..))" />  	            
+	   		<aop:around pointcut-ref="profiledMethods" method="profile" />
+  		</aop:aspect>
+	</aop:config>
+	 -->
+
+	
+	<!-- some other examples of a pointcut that matches everything:
+
+    	  <aop:pointcut id="profiledMethods" 
+	      	expression="bean(de.hybris.platform.jalo.user.Customer) &amp;&amp; 
+	      	            !execution(* getPK(..))" />  	            
+	       <aop:pointcut id="profiledMethods" expression="execution(* *(..))" />	
+	  -->
+	
+			
+			
+    <alias name="defaultCsvMapper" alias="csvMapper"/>
+    <bean id="defaultCsvMapper" class="com.fasterxml.jackson.dataformat.csv.CsvMapper"/>
+    
+    <alias name="defaultTrackingEventCsvOrderedFields" alias="trackingEventCsvOrderedFields"/>
+    <util:list id="defaultTrackingEventCsvOrderedFields">
+		<value>eventType</value>
+        <value>url</value>
+        <value>timestamp</value>
+        <value>sessionId</value>
+        <value>userId</value>
+        <value>userEmail</value>
+        <value>categoryId</value>
+        <value>categoryName</value>
+        <value>productId</value>
+        <value>productName</value>
+        <value>productMediaType</value>
+        <value>searchTerm</value>
+        <value>postcode</value>
+        <value>bannerId</value>
+        <value>cartId</value>
+        <value>cartAbandonmentReason</value>
+        <value>quantity</value>
+		<value>piwikId</value>
+		<value>refUrl</value>
+    </util:list>
+
+    <alias name="defaultAbstractCartAwareTrackingEventToCsvDataPopulator" alias="abstractCartAwareTrackingEventToCsvDataPopulator"/>
+    <bean id="defaultAbstractCartAwareTrackingEventToCsvDataPopulator" class="de.hybris.eventtracking.publisher.csv.converters.AbstractCartAwareTrackingEventToCsvDataPopulator"/>
+
+    <alias name="defaultAbstractProductAndCartAwareTrackingEventToCsvDataPopulator" alias="abstractProductAndCartAwareTrackingEventToCsvDataPopulator"/>
+    <bean id="defaultAbstractProductAndCartAwareTrackingEventToCsvDataPopulator" class="de.hybris.eventtracking.publisher.csv.converters.AbstractProductAndCartAwareTrackingEventToCsvDataPopulator"/>
+
+    <alias name="defaultAbstractProductAwareTrackingEventToCsvDataPopulator" alias="abstractProductAwareTrackingEventToCsvDataPopulator"/>
+    <bean id="defaultAbstractProductAwareTrackingEventToCsvDataPopulator" class="de.hybris.eventtracking.publisher.csv.converters.AbstractProductAwareTrackingEventToCsvDataPopulator"/>
+
+    <alias name="defaultAbstractTrackingEventToCsvDataPopulator" alias="abstractTrackingEventToCsvDataPopulator"/>
+    <bean id="defaultAbstractTrackingEventToCsvDataPopulator" class="de.hybris.eventtracking.publisher.csv.converters.AbstractTrackingEventToCsvDataPopulator"/>
+
+    <alias name="defaultAddToCartEventToCsvDataPopulator" alias="addToCartEventToCsvDataPopulator"/>
+    <bean id="defaultAddToCartEventToCsvDataPopulator" class="de.hybris.eventtracking.publisher.csv.converters.AddToCartEventToCsvDataPopulator"/>
+
+    <alias name="defaultBannerClickEventToCsvDataPopulator" alias="bannerClickEventToCsvDataPopulator"/>
+    <bean id="defaultBannerClickEventToCsvDataPopulator" class="de.hybris.eventtracking.publisher.csv.converters.BannerClickEventToCsvDataPopulator"/>
+
+    <alias name="defaultCartAbandonedEventToCsvDataPopulator" alias="cartAbandonedEventToCsvDataPopulator"/>
+    <bean id="defaultCartAbandonedEventToCsvDataPopulator" class="de.hybris.eventtracking.publisher.csv.converters.CartAbandonedEventToCsvDataPopulator"/>
+
+    <alias name="defaultCategoryPageViewEventToCsvDataPopulator" alias="categoryPageViewEventToCsvDataPopulator"/>
+    <bean id="defaultCategoryPageViewEventToCsvDataPopulator" class="de.hybris.eventtracking.publisher.csv.converters.CategoryPageViewEventToCsvDataPopulator"/>
+
+    <alias name="defaultProductMediaViewEventToCsvDataPopulator" alias="productMediaViewEventToCsvDataPopulator"/>
+    <bean id="defaultProductMediaViewEventToCsvDataPopulator" class="de.hybris.eventtracking.publisher.csv.converters.ProductMediaViewEventToCsvDataPopulator"/>
+
+    <alias name="defaultSearchEventToCsvDataPopulator" alias="searchEventToCsvDataPopulator"/>
+    <bean id="defaultSearchEventToCsvDataPopulator" class="de.hybris.eventtracking.publisher.csv.converters.SearchEventToCsvDataPopulator"/>
+
+    <alias name="defaultSearchNoResultsEventToCsvDataPopulator" alias="searchNoResultsEventToCsvDataPopulator"/>
+    <bean id="defaultSearchNoResultsEventToCsvDataPopulator" class="de.hybris.eventtracking.publisher.csv.converters.SearchNoResultsEventToCsvDataPopulator"/>
+
+    <alias name="defaultStoreLocationEnteredEventToCsvDataPopulator" alias="storeLocationEnteredEventToCsvDataPopulator"/>
+    <bean id="defaultStoreLocationEnteredEventToCsvDataPopulator" class="de.hybris.eventtracking.publisher.csv.converters.StoreLocationEnteredEventToCsvDataPopulator"/>
+
+    <alias name="defaultTrackingEventToCsvDataPopulators" alias="trackingEventToCsvDataPopulators"/>
+    <util:list id="defaultTrackingEventToCsvDataPopulators">
+        <ref bean="abstractCartAwareTrackingEventToCsvDataPopulator"/>
+        <ref bean="abstractProductAndCartAwareTrackingEventToCsvDataPopulator"/>
+        <ref bean="abstractProductAwareTrackingEventToCsvDataPopulator"/>
+        <ref bean="abstractTrackingEventToCsvDataPopulator"/>
+        <ref bean="addToCartEventToCsvDataPopulator"/>
+        <ref bean="bannerClickEventToCsvDataPopulator"/>
+        <ref bean="cartAbandonedEventToCsvDataPopulator"/>
+        <ref bean="categoryPageViewEventToCsvDataPopulator"/>
+        <ref bean="productMediaViewEventToCsvDataPopulator"/>
+        <ref bean="searchEventToCsvDataPopulator"/>
+        <ref bean="searchNoResultsEventToCsvDataPopulator"/>     
+        <ref bean="storeLocationEnteredEventToCsvDataPopulator"/>
+    </util:list>
+
+    <alias name="defaultTrackingEventToCsvDataConverter" alias="trackingEventToCsvDataConverter"/>
+    <bean id="defaultTrackingEventToCsvDataConverter"
+            class="de.hybris.eventtracking.publisher.csv.converters.TrackingEventToCsvDataConverter">
+        <property name="populators" ref="trackingEventToCsvDataPopulators"/>
+    </bean>
+
+    <alias name="defaultTrackingEventPublishingListener" alias="trackingEventPublishingListener"/>
+    <bean id="defaultTrackingEventPublishingListener"
+            class="de.hybris.eventtracking.publisher.listeners.TrackingEventPublishingListener"
+            parent="abstractEventListener">
+        <constructor-arg ref="trackingEventCsvPublishChannel"/>
+        <constructor-arg ref="csvMapper"/>
+        <constructor-arg ref="trackingEventCsvOrderedFields"/>
+        <constructor-arg ref="trackingEventToCsvDataConverter"/>
+    </bean>
+
+    <alias name="defaultTrackingEventCsvPublishChannel" alias="trackingEventCsvPublishChannel"/>
+    <int:channel id="defaultTrackingEventCsvPublishChannel">
+        <int:queue />
+    </int:channel>
+
+    <beans profile="eventtrackingpublisher_develop">
+        <int:logging-channel-adapter id="tackingEventPublishingLogger" level="INFO" channel="trackingEventCsvPublishChannel"
+                logger-name="de.hybris.eventtracking.publisher.logger">
+            <int:poller fixed-delay="${eventtrackingpublisher.tracking_event_csv_publish_channel.poller.fixed_delay_ms}"/>
+        </int:logging-channel-adapter>
+    </beans>
+
+    <beans profile="eventtrackingpublisher_activemq">
+        <int-jms:outbound-channel-adapter channel="trackingEventCsvPublishChannel"
+                    destination="eventTrackingPublishingJmsAmqQueue"
+                    connection-factory="eventTrackingPublishingJmsAmqCachingConnectionFactory">
+            <int:poller fixed-delay="${eventtrackingpublisher.tracking_event_csv_publish_channel.poller.fixed_delay_ms}"/>
+        </int-jms:outbound-channel-adapter>
+
+        <alias name="defaultEventTrackingPublishingJmsAmqConnectionFactory" alias="eventTrackingPublishingJmsAmqConnectionFactory"/>
+        <bean id="defaultEventTrackingPublishingJmsAmqConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+            <constructor-arg value="${eventtrackingpublisher.jms.amq.broker.url}"/>
+        </bean>
+
+        <alias name="defaultEventTrackingPublishingJmsAmqCachingConnectionFactory" alias="eventTrackingPublishingJmsAmqCachingConnectionFactory"/>
+        <bean id="defaultEventTrackingPublishingJmsAmqCachingConnectionFactory"
+                  class="org.springframework.jms.connection.CachingConnectionFactory">
+            <property name="targetConnectionFactory" ref="eventTrackingPublishingJmsAmqConnectionFactory"/>
+            <property name="sessionCacheSize" value="${eventtrackingpublisher.jms.spring.caching_connection_factory.session_cache_size}"/>
+            <property name="cacheProducers" value="${eventtrackingpublisher.jms.spring.caching_connection_factory.cache_producers}"/>
+            <property name="cacheConsumers" value="${eventtrackingpublisher.jms.spring.caching_connection_factory.cache_consumers}"/>
+        </bean>
+
+        <alias name="defaultEventTrackingPublishingJmsAmqQueue" alias="eventTrackingPublishingJmsAmqQueue"/>
+        <bean id="defaultEventTrackingPublishingJmsAmqQueue"
+                class="org.apache.activemq.command.ActiveMQQueue">
+            <constructor-arg value="${eventtrackingpublisher.jms.amq.queue.name}"/>
+        </bean>
+    </beans>
+</beans>

@@ -1,0 +1,6 @@
+@CHARSET "UTF-8";
+
+/*Icons for explorer tree */
+div.yw-explorerTree .y-tree-icon-hmc_type_tree_customerreview .y-tree-icon {
+      background-image: url("images/0124_Customer-Review.png");
+}

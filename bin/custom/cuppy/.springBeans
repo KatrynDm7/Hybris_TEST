@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beansProjectDescription>
+	<version>1</version>
+	<pluginVersion><![CDATA[2.5.2.201102280943-SR3]]></pluginVersion>
+	<configSuffixes>
+		<configSuffix><![CDATA[xml]]></configSuffix>
+	</configSuffixes>
+	<enableImports><![CDATA[false]]></enableImports>
+	<configs>
+		<config>resources/cuppy-spring.xml</config>
+		<config>resources/cuppy/cuppy-spring-security.xml</config>
+		<config>resources/cuppy/cuppy-spring-services.xml</config>
+		<config>resources/cuppy/cuppy-web-spring.xml</config>
+		<config>resources/cuppy/cuppy-spring-editors.xml</config>
+		<config>resources/cuppy-ws-spring.xml</config>
+		<config>resources/cuppy-security.xml</config>
+	</configs>
+	<configSets>
+		<configSet>
+			<name><![CDATA[cuppy]]></name>
+			<allowBeanDefinitionOverriding>true</allowBeanDefinitionOverriding>
+			<incomplete>false</incomplete>
+			<configs>
+			</configs>
+		</configSet>
+	</configSets>
+</beansProjectDescription>

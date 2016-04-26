@@ -1,0 +1,16 @@
+#
+# Import the CMS content for the My Entitlements Page
+#
+$contentCatalog=b2ctelcoContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$jarResourceCms=jar:de.hybris.platform.entitlementstorefront.constants.EntitlementstorefrontConstants&/entitlementstorefront/import/cockpits/cmscockpit/$contentCatalog
+$addonExtensionName=entitlementstorefront
+$lang=en
+
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;AccountEntitlementsLink;"Access & Entitlements"
+;;AccountShowEntitlementsLink;"Show your entitlements"
+
+# CMS Navigation Nodes
+UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+;;AccountEntitlementsNavNode;"Access & Entitlements"

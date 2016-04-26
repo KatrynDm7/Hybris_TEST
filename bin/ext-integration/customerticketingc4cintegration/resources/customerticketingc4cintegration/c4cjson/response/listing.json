@@ -1,0 +1,120 @@
+{
+    "d": {
+        "results": [
+            {
+                "__metadata": {
+                    "uri": "https://server:port/path/ServiceTicketCollection('00163E0B52E21ED58C87BFCAF8692167')",
+                    "type": "ZSERVICETICKET.ServiceTicket"
+                },
+                "CauseCategoryID": "",
+                "ContactID": "",
+                "CreationDateTime": "\\/Date(1437547871202)\\/",
+                "CustomerID": "SOME CID",
+                "DataOriginTypeCode": "4",
+                "ExternalContactID": "",
+                "ExternalCustomerID": "",
+                "ExternalKey": "",
+                "ID": "2396",
+                "IncidentCategoryID": "",
+                "LastChangeDateTime": "\\/Date(1437547871202)\\/",
+                "Name": "Ticket subject",
+                "ObjectID": "00163E0B52E21ED58C87BFCAF8692167",
+                "ProcessingTypeCode": "SRRQ",
+                "ResolutionCategoryID": "",
+                "ServiceCategoryID": "",
+                "StatusCode": "1",
+                "Notes": [
+                    {
+                        "__metadata": {
+                            "uri": "https://server:port/path/NotesCollection('00163E0B52E21ED58C87C12064CA6167')",
+                            "type": "ZSERVICETICKET.Notes"
+                        },
+                        "AuthorName": "",
+                        "AuthorUUID": null,
+                        "CreatedBy": "User",
+                        "CreatedOn": "\\/Date(1437547871202)\\/",
+                        "LanguageCode": "",
+                        "LastUpdatedBy": "User",
+                        "ObjectID": "00163E0B52E21ED58C87C12064CA6167",
+                        "ParentObjectID": "00163E0B52E21ED58C87BFCAF8692167",
+                        "ServiceRequestExternalKey": "",
+                        "Text": "Creation description",
+                        "TypeCode": "10004",
+                        "UpdatedOn": "\\/Date(1437547871202)\\/"
+                    }
+                ],
+                "RelatedTransactions": {
+                    "__deferred": {
+                        "uri": "https://server:port/path/ServiceTicketCollection('00163E0B52E21ED58C87BFCAF8692167')/RelatedTransactions"
+                    }
+                }
+            },
+            {
+                "__metadata": {
+                    "uri": "https://server:port/path/ServiceTicketCollection('00163E06B0301EE58C876B86EBFF2654')",
+                    "type": "ZSERVICETICKET.ServiceTicket"
+                },
+                "CauseCategoryID": "",
+                "ContactID": "",
+                "CreationDateTime": "\\/Date(1437546726700)\\/",
+                "CustomerID": "SOME CID",
+                "DataOriginTypeCode": "4",
+                "ExternalContactID": "",
+                "ExternalCustomerID": "",
+                "ExternalKey": "",
+                "ID": "2405",
+                "IncidentCategoryID": "",
+                "LastChangeDateTime": "\\/Date(1437547221473)\\/",
+                "Name": "Ticket subject for another reason",
+                "ObjectID": "00163E06B0301EE58C876B86EBFF2654",
+                "ProcessingTypeCode": "SRRQ",
+                "ResolutionCategoryID": "",
+                "ServiceCategoryID": "",
+                "StatusCode": "1",
+                "Notes": [
+                    {
+                        "__metadata": {
+                            "uri": "https://server:port/path/NotesCollection('00163E06B0301EE58C876BCF56964654')",
+                            "type": "ZSERVICETICKET.Notes"
+                        },
+                        "AuthorName": "",
+                        "AuthorUUID": null,
+                        "CreatedBy": "User",
+                        "CreatedOn": "\\/Date(1437546726700)\\/",
+                        "LanguageCode": "",
+                        "LastUpdatedBy": "User",
+                        "ObjectID": "00163E06B0301EE58C876BCF56964654",
+                        "ParentObjectID": "00163E06B0301EE58C876B86EBFF2654",
+                        "ServiceRequestExternalKey": "",
+                        "Text": "Creation description",
+                        "TypeCode": "10004",
+                        "UpdatedOn": "\\/Date(1437546726700)\\/"
+                    },
+                    {
+                        "__metadata": {
+                            "uri": "https://server:port/path/NotesCollection('00163E06B0301EE58C8790BB4682A6EF')",
+                            "type": "ZSERVICETICKET.Notes"
+                        },
+                        "AuthorName": "",
+                        "AuthorUUID": null,
+                        "CreatedBy": "User",
+                        "CreatedOn": "\\/Date(1437547221473)\\/",
+                        "LanguageCode": "",
+                        "LastUpdatedBy": "User",
+                        "ObjectID": "00163E06B0301EE58C8790BB4682A6EF",
+                        "ParentObjectID": "00163E06B0301EE58C876B86EBFF2654",
+                        "ServiceRequestExternalKey": "",
+                        "Text": "Update description",
+                        "TypeCode": "10007",
+                        "UpdatedOn": "\\/Date(1437547221473)\\/"
+                    }
+                ],
+                "RelatedTransactions": {
+                    "__deferred": {
+                        "uri": "https://server:port/path/ServiceTicketCollection('00163E06B0301EE58C876B86EBFF2654')/RelatedTransactions"
+                    }
+                }
+            }
+        ]
+    }
+}

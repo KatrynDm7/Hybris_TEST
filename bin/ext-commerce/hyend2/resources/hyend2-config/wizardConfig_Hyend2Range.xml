@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wizard-config showPrefilledValues="false" selectMode="true" createMode="true" createWithinPopup="false" createWithinEditor="false">
+	<displayed-properties>
+		<group qualifier="Hyend2RangeGeneralWizard" visible="true" initially-opened="true">
+			<label key="cockpit.config.label.General" />
+			<property qualifier="Hyend2Range.name"></property>		
+			<property qualifier="Hyend2Range.boundType"></property>	
+			<property qualifier="Hyend2Range.rangeType"></property>	
+		</group>
+		
+		<group qualifier="Hyend2RangeAssignedPropsWizard" visible="true" initially-opened="true">
+			<label key="hyend2.assignedproperties" />
+			<property qualifier="Hyend2Range.properties" />		
+		</group>
+		
+		<group qualifier="Hyend2RangeDimConfWizard" visible="true" initially-opened="true">
+			<label key="hyend2.dimensionconfiguration" />
+			<property qualifier="Hyend2Range.endecaDimensionConfiguration" />		
+		</group>
+	
+	</displayed-properties>
+</wizard-config>

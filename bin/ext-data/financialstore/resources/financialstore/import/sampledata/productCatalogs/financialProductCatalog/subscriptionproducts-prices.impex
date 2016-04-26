@@ -1,0 +1,427 @@
+$productCatalog=financialProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default='$productCatalog:Staged']
+$prices=Europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+$taxGroup=Europe1PriceFactory_PTG(code)[default=uk-vat-full]
+$billingEvent=billingEvent(code)[default='paynow']
+
+# Set product approval status to Approved only for those products that have prices.
+$approved=approvalstatus(code)[default='approved']
+
+# Insert Subscription Price Plan
+INSERT_UPDATE SubscriptionPricePlan;&pricePlan;product(code, $catalogVersion)[unique=true];quotationProvider;$catalogVersion;currency(isocode)[default=USD,unique=true];unit(code)[default=pieces]
+;pricePlan_TWO_STAR						;WED_2STAR					;;
+;pricePlan_THREE_STAR					;WED_3STAR					;;
+;pricePlan_FOUR_STAR					;WED_4STAR					;;
+;pricePlan_FIVE_STAR					;WED_5STAR					;;
+;pricePlan_EXCESS_WAIVER				;WED_EXCESSWAIVER			;;
+;pricePlan_VENUE						;WED_VENUECOVER			;;
+;pricePlan_PUBLIC_LIABILITY				;WED_PUBLICLIABILITY		;;
+
+#Subscription Price Plan for Travel Insurance
+;pricePlan_SINGLE_BUDGET				;TRA_SINGLE_BUDGET			;travelInsurance;			
+;pricePlan_SINGLE_SILVER				;TRA_SINGLE_SILVER			;travelInsurance;			
+;pricePlan_SINGLE_GOLD					;TRA_SINGLE_GOLD			;travelInsurance;			
+;pricePlan_ANNUAL_BUDGET				;TRA_ANNUAL_BUDGET			;travelInsurance;			
+;pricePlan_ANNUAL_SILVER				;TRA_ANNUAL_SILVER			;travelInsurance;			
+;pricePlan_ANNUAL_GOLD					;TRA_ANNUAL_GOLD			;travelInsurance;			
+;pricePlan_BACKPACKERS_BUDGET			;TRA_BACKPACKERS_BUDGET		;travelInsurance;	
+;pricePlan_BACKPACKERS_SILVER			;TRA_BACKPACKERS_SILVER		;travelInsurance;	
+;pricePlan_BACKPACKERS_GOLD				;TRA_BACKPACKERS_GOLD		;travelInsurance;
+	
+;pricePlan_TRA_WINTER					;TRA_WINTER					;travelInsurance;	
+;pricePlan_TRA_GOLF						;TRA_GOLF					;travelInsurance;		
+;pricePlan_TRA_BUSINESS					;TRA_BUSINESS				;travelInsurance;		
+;pricePlan_TRA_VALUABLES				;TRA_VALUABLES				;travelInsurance;			
+;pricePlan_TRA_HAZARDOUS				;TRA_HAZARDOUS				;travelInsurance;	
+;pricePlan_TRA_EXCESS					;TRA_EXCESS					;travelInsurance;
+
+#subscription price plan for Homeowners Property Insurance
+;pricePlan_PRO_PROPERTY_HOMEOWNERS		;PRO_PROPERTY_HOMEOWNERS	;propertyHomeownersInsurance;
+;pricePlan_PRO_FLOOD_COVER_HOMEOWNERS	;PRO_FLOOD_COVER_HOMEOWNERS	;propertyHomeownersInsurance;
+;pricePlan_PRO_TEMP_ACCOM_HOMEOWNERS	;PRO_TEMP_ACCOM_HOMEOWNERS	;propertyHomeownersInsurance;
+;pricePlan_PRO_JEWELRY_COVER_HOMEOWNERS	;PRO_JEWELRY_COVER_HOMEOWNERS;propertyHomeownersInsurance;
+;pricePlan_PRO_BICYCLES_COVER_HOMEOWNERS;PRO_BICYCLES_COVER_HOMEOWNERS;propertyHomeownersInsurance;
+
+#subscription price plan for Renters Property Insurance
+;pricePlan_PRO_PROPERTY_RENTERS			;PRO_PROPERTY_RENTERS		;propertyRentersInsurance;
+;pricePlan_PRO_TEMP_ACCOM_RENTERS		;PRO_TEMP_ACCOM_RENTERS		;propertyRentersInsurance;
+;pricePlan_PRO_JEWELRY_COVER_RENTERS	;PRO_JEWELRY_COVER_RENTERS	;propertyRentersInsurance;
+;pricePlan_PRO_BICYCLES_COVER_RENTERS	;PRO_BICYCLES_COVER_RENTERS	;propertyRentersInsurance;
+
+#subscription price plan for Homeowners Property Insurance for monthly plan
+;pricePlan_PRO_PROPERTY_HOMEOWNERS_MONTHLY			;PRO_PROPERTY_HOMEOWNERS_MONTHLY		;propertyHomeownersInsurance;
+;pricePlan_PRO_FLOOD_COVER_HOMEOWNERS_MONTHLY		;PRO_FLOOD_COVER_HOMEOWNERS_MONTHLY		;propertyHomeownersInsurance;
+;pricePlan_PRO_TEMP_ACCOM_HOMEOWNERS_MONTHLY		;PRO_TEMP_ACCOM_HOMEOWNERS_MONTHLY		;propertyHomeownersInsurance;
+;pricePlan_PRO_JEWELRY_COVER_HOMEOWNERS_MONTHLY		;PRO_JEWELRY_COVER_HOMEOWNERS_MONTHLY	;propertyHomeownersInsurance;
+;pricePlan_PRO_BICYCLES_COVER_HOMEOWNERS_MONTHLY	;PRO_BICYCLES_COVER_HOMEOWNERS_MONTHLY	;propertyHomeownersInsurance;
+
+#subscription price plan for Renters Property Insurance for monthly plan
+;pricePlan_PRO_PROPERTY_RENTERS_MONTHLY			;PRO_PROPERTY_RENTERS_MONTHLY		;propertyRentersInsurance;
+;pricePlan_PRO_TEMP_ACCOM_RENTERS_MONTHLY		;PRO_TEMP_ACCOM_RENTERS_MONTHLY		;propertyRentersInsurance;
+;pricePlan_PRO_JEWELRY_COVER_RENTERS_MONTHLY	;PRO_JEWELRY_COVER_RENTERS_MONTHLY	;propertyRentersInsurance;
+;pricePlan_PRO_BICYCLES_COVER_RENTERS_MONTHLY	;PRO_BICYCLES_COVER_RENTERS_MONTHLY	;propertyRentersInsurance;
+
+#subscription price plan for Auto Insurance for annually plan
+;pricePlan_AUTO_ANNUALLY  ;AUTO_ANNUALLY      ;autoInsurance;
+;pricePlan_AUTO_LEGAL_EXPENSE_COVER_ANNUALLY    ;AUTO_LEGAL_EXPENSE_COVER_ANNUALLY  ;autoInsurance;
+;pricePlan_AUTO_BREAKDOWN_COVER_ANNUALLY        ;AUTO_BREAKDOWN_COVER_ANNUALLY      ;autoInsurance;
+;pricePlan_AUTO_KEY_PROTECTION_COVER_ANNUALLY   ;AUTO_KEY_PROTECTION_COVER_ANNUALLY ;autoInsurance;
+;pricePlan_AUTO_5_YEAR_GUARANTEE_ANNUALLY       ;AUTO_5_YEAR_GUARANTEE_ANNUALLY     ;autoInsurance;
+
+#subscription price plan for Auto Insurance for monthly plan
+;pricePlan_AUTO_MONTHLY   ;AUTO_MONTHLY       ;autoInsurance;
+;pricePlan_AUTO_LEGAL_EXPENSE_COVER_MONTHLY     ;AUTO_LEGAL_EXPENSE_COVER_MONTHLY   ;autoInsurance;
+;pricePlan_AUTO_BREAKDOWN_COVER_MONTHLY         ;AUTO_BREAKDOWN_COVER_MONTHLY       ;autoInsurance;
+;pricePlan_AUTO_KEY_PROTECTION_COVER_MONTHLY    ;AUTO_KEY_PROTECTION_COVER_MONTHLY  ;autoInsurance;
+;pricePlan_AUTO_5_YEAR_GUARANTEE_MONTHLY        ;AUTO_5_YEAR_GUARANTEE_MONTHLY      ;autoInsurance;
+;pricePlan_AUTO_TELEMETRY_INSTALLATION_MONTHLY  ;AUTO_TELEMETRY_INSTALLATION_MONTHLY;autoInsurance;
+
+#subscription price plan for Life insurance
+;pricePlan_LIFE         ;LIFE               ;lifeInsurance;
+;pricePlan_LIFE_PREMIUM_PROTECTION              ;LIFE_PREMIUM_PROTECTION            ;lifeInsurance;
+;pricePlan_LIFE_RENEWAL_OPTION                  ;LIFE_RENEWAL_OPTION                ;lifeInsurance;
+;pricePlan_LIFE_PAYMENT_PROTECTION_BENEFIT      ;LIFE_PAYMENT_PROTECTION_BENEFIT    ;lifeInsurance;
+
+# Insert Onetime Charge Entries
+INSERT_UPDATE OneTimeChargeEntry;id[unique=true];subscriptionPricePlanOneTime(&pricePlan);price;$billingEvent;$catalogVersion
+;paynow_Charge_TWO_STAR                         ;pricePlan_TWO_STAR                 ;18.99      ;paynow;
+;deductible_Charge_TWO_STAR                     ;pricePlan_TWO_STAR                 ;35         ;deductible;
+;cancellationCoverage_Charge_TWO_STAR           ;pricePlan_TWO_STAR                 ;5000       ;cancellationcoverage;
+;rearrangementCoverage_TWO_STAR                 ;pricePlan_TWO_STAR                 ;3750       ;rearrangementcoverage;
+;eventclothingcoverage_Charge_TWO_STAR			;pricePlan_TWO_STAR                 ;2000       ;eventclothingcoverage;
+;eventmoneycoverage_Charge_TWO_STAR             ;pricePlan_TWO_STAR                 ;2000       ;eventmoneycoverage;
+;decorationSundriesCoverage_Charge_TWO_STAR     ;pricePlan_TWO_STAR                 ;2000       ;decorationssundriescoverage;
+;carsTransportCoverage_Charge_TWO_STAR          ;pricePlan_TWO_STAR                 ;2000       ;carstransportcoverage;
+;photographyVideoCoverage_Charge_TWO_STAR       ;pricePlan_TWO_STAR                 ;2000       ;photographyvideocoverage;
+
+;paynow_Charge_THREE_STAR                       ;pricePlan_THREE_STAR               ;39.99      ;paynow;
+;deductible_Charge_THREE_STAR                   ;pricePlan_THREE_STAR               ;35         ;deductible;
+;cancellationCoverage_Charge_THREE_STAR         ;pricePlan_THREE_STAR               ;10000      ;cancellationcoverage;
+;rearrangementCoverage_THREE_STAR               ;pricePlan_THREE_STAR               ;7500       ;rearrangementcoverage;
+;eventclothingcoverage_Charge_THREE_STAR               ;pricePlan_THREE_STAR               ;5000       ;eventclothingcoverage;
+;eventmoneycoverage_Charge_THREE_STAR           ;pricePlan_THREE_STAR               ;5000       ;eventmoneycoverage;
+;decorationSundriesCoverage_Charge_THREE_STAR   ;pricePlan_THREE_STAR               ;4000       ;decorationssundriescoverage;
+;carsTransportCoverage_Charge_THREE_STAR        ;pricePlan_THREE_STAR               ;5000       ;carstransportcoverage;
+;photographyVideoCoverage_Charge_THREE_STAR     ;pricePlan_THREE_STAR               ;5000       ;photographyvideocoverage;
+;failureSuppliersCoverage_Charge_THREE_STAR     ;pricePlan_THREE_STAR               ;5000       ;failuresupplierscoverage;
+
+;paynow_Charge_FOUR_STAR                        ;pricePlan_FOUR_STAR                ;79.99      ;paynow;
+;deductible_Charge_FOUR_STAR                    ;pricePlan_FOUR_STAR                ;35         ;deductible;
+;cancellationCoverage_Charge_FOUR_STAR          ;pricePlan_FOUR_STAR                ;20000      ;cancellationcoverage;
+;rearrangementCoverage_FOUR_STAR                ;pricePlan_FOUR_STAR                ;1500       ;rearrangementcoverage;
+;eventclothingcoverage_Charge_FOUR_STAR                ;pricePlan_FOUR_STAR                ;9000       ;eventclothingcoverage;
+;eventmoneycoverage_Charge_FOUR_STAR            ;pricePlan_FOUR_STAR                ;9000       ;eventmoneycoverage;
+;decorationSundriesCoverage_Charge_FOUR_STAR    ;pricePlan_FOUR_STAR                ;6000       ;decorationssundriescoverage;
+;carsTransportCoverage_Charge_FOUR_STAR         ;pricePlan_FOUR_STAR                ;6000       ;carstransportcoverage;
+;photographyVideoCoverage_Charge_FOUR_STAR      ;pricePlan_FOUR_STAR                ;6000       ;photographyvideocoverage;
+;failureSuppliersCoverage_Charge_FOUR_STAR      ;pricePlan_FOUR_STAR                ;6000       ;failuresupplierscoverage;
+;personalLiabilityCoverage_Charge_FOUR_STAR     ;pricePlan_FOUR_STAR                ;2000000    ;personalliabilitycoverage;
+
+;paynow_Charge_FIVE_STAR                        ;pricePlan_FIVE_STAR                ;139.99     ;paynow;
+;deductible_Charge_FIVE_STAR                    ;pricePlan_FIVE_STAR                ;35         ;deductible;
+;cancellationCoverage_Charge_FIVE_STAR          ;pricePlan_FIVE_STAR                ;40000      ;cancellationcoverage;
+;rearrangementCoverage_FIVE_STAR                ;pricePlan_FIVE_STAR                ;30000      ;rearrangementcoverage;
+;eventclothingcoverage_Charge_FIVE_STAR                ;pricePlan_FIVE_STAR                ;15000      ;eventclothingcoverage;
+;eventmoneycoverage_Charge_FIVE_STAR            ;pricePlan_FIVE_STAR                ;150000     ;eventmoneycoverage;
+;decorationSundriesCoverage_Charge_FIVE_STAR    ;pricePlan_FIVE_STAR                ;15000      ;decorationssundriescoverage;
+;carsTransportCoverage_Charge_FIVE_STAR         ;pricePlan_FIVE_STAR                ;7000       ;carstransportcoverage;
+;photographyVideoCoverage_Charge_FIVE_STAR      ;pricePlan_FIVE_STAR                ;7000       ;photographyvideocoverage;
+;failureSuppliersCoverage_Charge_FIVE_STAR      ;pricePlan_FIVE_STAR                ;7000       ;failuresupplierscoverage;
+;personalLiabilityCoverage_Charge_FIVE_STAR     ;pricePlan_FIVE_STAR                ;2000000    ;personalliabilitycoverage;
+
+;paynow_Charge_EXCESS_WAIVER                    ;pricePlan_EXCESS_WAIVER            ;10         ;paynow;
+
+;paynow_Charge_MARQUEE                          ;pricePlan_VENUE                  ;29         ;paynow;
+;deductible_Charge_MARQUEE                      ;pricePlan_VENUE                  ;100        ;deductible;
+
+;paynow_Charge_PUBLIC_LIABILITY                 ;pricePlan_PUBLIC_LIABILITY         ;25         ;paynow;
+;failuresupplierscoverage_Charge_PUBLIC_LIABILITY   ;pricePlan_PUBLIC_LIABILITY     ;10000      ;failuresupplierscoverage;
+;publicliability_Charge_PUBLIC_LIABILITY        ;pricePlan_PUBLIC_LIABILITY         ;1000000    ;publicliability;
+
+#Onetime Charge Entries for Travel Insurance
+;paynow_Charge_SINGLE_BUDGET                    ;pricePlan_SINGLE_BUDGET            ;11      	;paynow;
+;baggage_Charge_SINGLE_BUDGET					;pricePlan_SINGLE_BUDGET			;1000		;baggage
+;excess_Charge_SINGLE_BUDGET					;pricePlan_SINGLE_BUDGET			;100		;excesswaivercoverage
+;cancellation_Charge_SINGLE_BUDGET				;pricePlan_SINGLE_BUDGET			;1000		;cancellation
+;medicalexpenses_Charge_SINGLE_BUDGET			;pricePlan_SINGLE_BUDGET			;5000000	;medicalexpenses
+;repatriation_Charge_SINGLE_BUDGET				;pricePlan_SINGLE_BUDGET			;5000000	;repatriation
+;personalliability_Charge_SINGLE_BUDGET 		;pricePlan_SINGLE_BUDGET			;1000000	;personalliabilitycoverage
+;personalaccident_Charge_SINGLE_BUDGET			;pricePlan_SINGLE_BUDGET			;10000		;personalaccident
+;legalexpenses_Charge_SINGLE_BUDGET				;pricePlan_SINGLE_BUDGET			;10000		;legalexpenses
+;curtailment_Charge_SINGLE_BUDGET				;pricePlan_SINGLE_BUDGET			;1000		;curtailment
+;safi_Charge_SINGLE_BUDGET						;pricePlan_SINGLE_BUDGET			;5000		;safi
+;hospitalbenefit_Charge_SINGLE_BUDGET			;pricePlan_SINGLE_BUDGET			;100		;hospitalbenefit
+;accommodationcover_Charge_SINGLE_BUDGET		;pricePlan_SINGLE_BUDGET			;250		;accommodationcover
+;delayeddeparture_Charge_SINGLE_BUDGET			;pricePlan_SINGLE_BUDGET			;100		;delayeddeparture
+;personalmoney_Charge_SINGLE_BUDGET				;pricePlan_SINGLE_BUDGET			;200		;personalmoney
+;abandonmentcover_Charge_SINGLE_BUDGET			;pricePlan_SINGLE_BUDGET			;250		;abandonmentcover
+
+;paynow_Charge_SINGLE_SILVER                    ;pricePlan_SINGLE_SILVER            ;16      	;paynow;
+;baggage_Charge_SINGLE_SILVER					;pricePlan_SINGLE_SILVER			;2000		;baggage
+;excess_Charge_SINGLE_SILVER					;pricePlan_SINGLE_SILVER			;60			;excesswaivercoverage
+;cancellation_Charge_SINGLE_SILVER				;pricePlan_SINGLE_SILVER			;5000		;cancellation
+;medicalexpenses_Charge_SINGLE_SILVER			;pricePlan_SINGLE_SILVER			;10000000	;medicalexpenses
+;repatriation_Charge_SINGLE_SILVER				;pricePlan_SINGLE_SILVER			;10000000	;repatriation
+;personalliability_Charge_SINGLE_SILVER 		;pricePlan_SINGLE_SILVER			;2000000	;personalliabilitycoverage
+;personalaccident_Charge_SINGLE_SILVER			;pricePlan_SINGLE_SILVER			;20000		;personalaccident
+;legalexpenses_Charge_SINGLE_SILVER				;pricePlan_SINGLE_SILVER			;15000		;legalexpenses
+;curtailment_Charge_SINGLE_SILVER				;pricePlan_SINGLE_SILVER			;5000		;curtailment
+;safi_Charge_SINGLE_SILVER						;pricePlan_SINGLE_SILVER			;5000		;safi
+;hospitalbenefit_Charge_SINGLE_SILVER			;pricePlan_SINGLE_SILVER			;1000		;hospitalbenefit
+;accommodationcover_Charge_SINGLE_SILVER		;pricePlan_SINGLE_SILVER			;1000		;accommodationcover
+;delayeddeparture_Charge_SINGLE_SILVER			;pricePlan_SINGLE_SILVER			;300		;delayeddeparture
+;misseddeparture_Charge_SINGLE_SILVER			;pricePlan_SINGLE_SILVER			;500		;misseddeparture
+;petcare_Charge_SINGLE_SILVER					;pricePlan_SINGLE_SILVER			;200		;petcare
+;personalmoney_Charge_SINGLE_SILVER				;pricePlan_SINGLE_SILVER			;500		;personalmoney
+;abandonmentcover_Charge_SINGLE_SILVER			;pricePlan_SINGLE_SILVER			;1000		;abandonmentcover
+;hijack_Charge_SINGLE_SILVER					;pricePlan_SINGLE_SILVER			;500		;hijack
+
+;paynow_Charge_SINGLE_GOLD                     ;pricePlan_SINGLE_GOLD            	;21      	;paynow;
+;baggage_Charge_SINGLE_GOLD					   ;pricePlan_SINGLE_GOLD				;2500		;baggage
+;excess_Charge_SINGLE_GOLD					   ;pricePlan_SINGLE_GOLD				;50			;excesswaivercoverage
+;cancellation_Charge_SINGLE_GOLD			   ;pricePlan_SINGLE_GOLD				;7500		;cancellation
+;medicalexpenses_Charge_SINGLE_GOLD			   ;pricePlan_SINGLE_GOLD				;15000000	;medicalexpenses
+;repatriation_Charge_SINGLE_GOLD			   ;pricePlan_SINGLE_GOLD				;15000000	;repatriation
+;personalliability_Charge_SINGLE_GOLD 		   ;pricePlan_SINGLE_GOLD				;2000000	;personalliabilitycoverage
+;personalaccident_Charge_SINGLE_GOLD		   ;pricePlan_SINGLE_GOLD				;50000		;personalaccident
+;legalexpenses_Charge_SINGLE_GOLD			   ;pricePlan_SINGLE_GOLD				;50000		;legalexpenses
+;curtailment_Charge_SINGLE_GOLD				   ;pricePlan_SINGLE_GOLD				;75000		;curtailment
+;safi_Charge_SINGLE_GOLD					   ;pricePlan_SINGLE_GOLD				;5000		;safi
+;hospitalbenefit_Charge_SINGLE_GOLD			   ;pricePlan_SINGLE_GOLD				;1500		;hospitalbenefit
+;accommodationcover_Charge_SINGLE_GOLD		   ;pricePlan_SINGLE_GOLD				;1000		;accommodationcover
+;delayeddeparture_Charge_SINGLE_GOLD		   ;pricePlan_SINGLE_GOLD				;400		;delayeddeparture
+;supplierinsolvency_Charge_SINGLE_GOLD		   ;pricePlan_SINGLE_GOLD				;1500		;supplierinsolvency
+;misseddeparture_Charge_SINGLE_GOLD			   ;pricePlan_SINGLE_GOLD				;1000		;misseddeparture
+;petcare_Charge_SINGLE_GOLD					   ;pricePlan_SINGLE_GOLD				;500		;petcare
+;personalmoney_Charge_SINGLE_GOLD			   ;pricePlan_SINGLE_GOLD				;500		;personalmoney
+;abandonmentcover_Charge_SINGLE_GOLD		   ;pricePlan_SINGLE_GOLD				;1000		;abandonmentcover
+;hijack_Charge_SINGLE_GOLD					   ;pricePlan_SINGLE_GOLD				;500		;hijack
+
+;paynow_Charge_ANNUAL_BUDGET                    ;pricePlan_ANNUAL_BUDGET            ;29.99      ;paynow;
+;baggage_Charge_ANNUAL_BUDGET					;pricePlan_ANNUAL_BUDGET			;1000		;baggage
+;excess_Charge_ANNUAL_BUDGET					;pricePlan_ANNUAL_BUDGET			;100		;excesswaivercoverage
+;cancellation_Charge_ANNUAL_BUDGET				;pricePlan_ANNUAL_BUDGET			;1000		;cancellation
+;medicalexpenses_Charge_ANNUAL_BUDGET			;pricePlan_ANNUAL_BUDGET			;5000000	;medicalexpenses
+;repatriation_Charge_ANNUAL_BUDGET				;pricePlan_ANNUAL_BUDGET			;5000000	;repatriation
+;personalliability_Charge_ANNUAL_BUDGET 		;pricePlan_ANNUAL_BUDGET			;1000000	;personalliabilitycoverage
+;personalaccident_Charge_ANNUAL_BUDGET			;pricePlan_ANNUAL_BUDGET			;10000		;personalaccident
+;legalexpenses_Charge_ANNUAL_BUDGET				;pricePlan_ANNUAL_BUDGET			;10000		;legalexpenses
+;curtailment_Charge_ANNUAL_BUDGET				;pricePlan_ANNUAL_BUDGET			;1000		;curtailment
+;safi_Charge_ANNUAL_BUDGET						;pricePlan_ANNUAL_BUDGET			;5000		;safi
+;hospitalbenefit_Charge_ANNUAL_BUDGET			;pricePlan_ANNUAL_BUDGET			;100		;hospitalbenefit
+;accommodationcover_Charge_ANNUAL_BUDGET		;pricePlan_ANNUAL_BUDGET			;250		;accommodationcover
+;delayeddeparture_Charge_ANNUAL_BUDGET			;pricePlan_ANNUAL_BUDGET			;100		;delayeddeparture
+;personalmoney_Charge_ANNUAL_BUDGET				;pricePlan_ANNUAL_BUDGET			;200		;personalmoney
+;wintersports_Charge_ANNUAL_BUDGET				;pricePlan_ANNUAL_BUDGET			;200		;wintersports
+;abandonmentcover_Charge_ANNUAL_BUDGET			;pricePlan_ANNUAL_BUDGET			;1000		;abandonmentcover
+
+;paynow_Charge_ANNUAL_SILVER                    ;pricePlan_ANNUAL_SILVER            ;39.99      ;paynow;
+;baggage_Charge_ANNUAL_SILVER					;pricePlan_ANNUAL_SILVER			;2000		;baggage
+;excess_Charge_ANNUAL_SILVER					;pricePlan_ANNUAL_SILVER			;60			;excesswaivercoverage
+;cancellation_Charge_ANNUAL_SILVER				;pricePlan_ANNUAL_SILVER			;5000		;cancellation
+;medicalexpenses_Charge_ANNUAL_SILVER			;pricePlan_ANNUAL_SILVER			;10000000	;medicalexpenses
+;repatriation_Charge_ANNUAL_SILVER				;pricePlan_ANNUAL_SILVER			;10000000	;repatriation
+;personalliability_Charge_ANNUAL_SILVER 		;pricePlan_ANNUAL_SILVER			;2000000	;personalliabilitycoverage
+;personalaccident_Charge_ANNUAL_SILVER			;pricePlan_ANNUAL_SILVER			;20000		;personalaccident
+;legalexpenses_Charge_ANNUAL_SILVER				;pricePlan_ANNUAL_SILVER			;15000		;legalexpenses
+;curtailment_Charge_ANNUAL_SILVER				;pricePlan_ANNUAL_SILVER			;5000		;curtailment
+;safi_Charge_ANNUAL_SILVER						;pricePlan_ANNUAL_SILVER			;5000		;safi
+;hospitalbenefit_Charge_ANNUAL_SILVER			;pricePlan_ANNUAL_SILVER			;1000		;hospitalbenefit
+;accommodationcover_Charge_ANNUAL_SILVER		;pricePlan_ANNUAL_SILVER			;1000		;accommodationcover
+;delayeddeparture_Charge_ANNUAL_SILVER			;pricePlan_ANNUAL_SILVER			;300		;delayeddeparture
+;misseddeparture_Charge_ANNUAL_SILVER			;pricePlan_ANNUAL_SILVER			;500		;misseddeparture
+;petcare_Charge_ANNUAL_SILVER					;pricePlan_ANNUAL_SILVER			;200		;petcare
+;personalmoney_Charge_ANNUAL_SILVER				;pricePlan_ANNUAL_SILVER			;500		;personalmoney
+;wintersports_Charge_ANNUAL_SILVER				;pricePlan_ANNUAL_SILVER			;500		;wintersports
+;abandonmentcover_Charge_ANNUAL_SILVER			;pricePlan_ANNUAL_SILVER			;5000		;abandonmentcover
+;hijack_Charge_ANNUAL_SILVER					;pricePlan_ANNUAL_SILVER			;500		;hijack
+
+;paynow_Charge_ANNUAL_GOLD                    	;pricePlan_ANNUAL_GOLD         		;54.99      ;paynow;
+;baggage_Charge_ANNUAL_GOLD						;pricePlan_ANNUAL_GOLD				;2500		;baggage
+;excess_Charge_ANNUAL_GOLD						;pricePlan_ANNUAL_GOLD				;50			;excesswaivercoverage
+;cancellation_Charge_ANNUAL_GOLD				;pricePlan_ANNUAL_GOLD				;7500		;cancellation
+;medicalexpenses_Charge_ANNUAL_GOLD				;pricePlan_ANNUAL_GOLD				;15000000	;medicalexpenses
+;repatriation_Charge_ANNUAL_GOLD				;pricePlan_ANNUAL_GOLD				;15000000	;repatriation
+;personalliability_Charge_ANNUAL_GOLD 			;pricePlan_ANNUAL_GOLD				;2000000	;personalliabilitycoverage
+;personalaccident_Charge_ANNUAL_GOLD			;pricePlan_ANNUAL_GOLD				;50000		;personalaccident
+;legalexpenses_Charge_ANNUAL_GOLD				;pricePlan_ANNUAL_GOLD				;50000		;legalexpenses
+;curtailment_Charge_ANNUAL_GOLD					;pricePlan_ANNUAL_GOLD				;7500		;curtailment
+;safi_Charge_ANNUAL_GOLD						;pricePlan_ANNUAL_GOLD				;5000		;safi
+;hospitalbenefit_Charge_ANNUAL_GOLD				;pricePlan_ANNUAL_GOLD				;1500		;hospitalbenefit
+;accommodationcover_Charge_ANNUAL_GOLD			;pricePlan_ANNUAL_GOLD				;1000		;accommodationcover
+;delayeddeparture_Charge_ANNUAL_GOLD			;pricePlan_ANNUAL_GOLD				;400		;delayeddeparture
+;supplierinsolvency_Charge_ANNUAL_GOLD			;pricePlan_ANNUAL_GOLD				;1500		;supplierinsolvency
+;misseddeparture_Charge_ANNUAL_GOLD				;pricePlan_ANNUAL_GOLD				;1000		;misseddeparture
+;petcare_Charge_ANNUAL_GOLD						;pricePlan_ANNUAL_GOLD				;500		;petcare
+;personalmoney_Charge_ANNUAL_GOLD				;pricePlan_ANNUAL_GOLD				;500		;personalmoney
+;wintersports_Charge_ANNUAL_GOLD				;pricePlan_ANNUAL_GOLD				;1000		;wintersports
+;abandonmentcover_Charge_ANNUAL_GOLD			;pricePlan_ANNUAL_GOLD				;7500		;abandonmentcover
+;hijack_Charge_ANNUAL_GOLD						;pricePlan_ANNUAL_GOLD				;500		;hijack
+
+
+;paynow_Charge_BACKPACKERS_BUDGET               ;pricePlan_BACKPACKERS_BUDGET       ;13      	;paynow;
+;baggage_Charge_BACKPACKERS_BUDGET				;pricePlan_BACKPACKERS_BUDGET		;1000		;baggage
+;excess_Charge_BACKPACKERS_BUDGET				;pricePlan_BACKPACKERS_BUDGET		;100		;excesswaivercoverage
+;cancellation_Charge_BACKPACKERS_BUDGET			;pricePlan_BACKPACKERS_BUDGET		;2000		;cancellation
+;medicalexpenses_Charge_BACKPACKERS_BUDGET		;pricePlan_BACKPACKERS_BUDGET		;5000000	;medicalexpenses
+;repatriation_Charge_BACKPACKERS_BUDGET			;pricePlan_BACKPACKERS_BUDGET		;5000000	;repatriation
+;personalliability_Charge_BACKPACKERS_BUDGET 	;pricePlan_BACKPACKERS_BUDGET		;2000000	;personalliabilitycoverage
+;personalaccident_Charge_BACKPACKERS_BUDGET		;pricePlan_BACKPACKERS_BUDGET		;10000		;personalaccident
+;legalexpenses_Charge_BACKPACKERS_BUDGET		;pricePlan_BACKPACKERS_BUDGET		;10000		;legalexpenses
+;curtailment_Charge_BACKPACKERS_BUDGET			;pricePlan_BACKPACKERS_BUDGET		;2000		;curtailment
+;accommodationcover_Charge_BACKPACKERS_BUDGET	;pricePlan_BACKPACKERS_BUDGET		;500		;accommodationcover
+;misseddeparture_Charge_BACKPACKERS_BUDGET		;pricePlan_BACKPACKERS_BUDGET		;250		;misseddeparture
+;personalmoney_Charge_BACKPACKERS_BUDGET		;pricePlan_BACKPACKERS_BUDGET		;150		;personalmoney
+;abandonmentcover_Charge_BACKPACKERS_BUDGET		;pricePlan_BACKPACKERS_BUDGET		;500		;abandonmentcover
+;hijack_Charge_BACKPACKERS_BUDGET				;pricePlan_BACKPACKERS_BUDGET		;250		;hijack
+;muggingbenefit_Charge_BACKPACKERS_BUDGET		;pricePlan_BACKPACKERS_BUDGET		;250		;muggingbenefit
+;repaystudentloan_Charge_BACKPACKERS_BUDGET		;pricePlan_BACKPACKERS_BUDGET		;2500		;repaystudentloan
+
+
+;paynow_Charge_BACKPACKERS_SILVER               ;pricePlan_BACKPACKERS_SILVER       ;17      	;paynow;
+;baggage_Charge_BACKPACKERS_SILVER				;pricePlan_BACKPACKERS_SILVER		;1500		;baggage
+;excess_Charge_BACKPACKERS_SILVER				;pricePlan_BACKPACKERS_SILVER		;60 		;excesswaivercoverage
+;cancellation_Charge_BACKPACKERS_SILVER			;pricePlan_BACKPACKERS_SILVER		;7500		;cancellation
+;medicalexpenses_Charge_BACKPACKERS_SILVER		;pricePlan_BACKPACKERS_SILVER		;10000000	;medicalexpenses
+;repatriation_Charge_BACKPACKERS_SILVER			;pricePlan_BACKPACKERS_SILVER		;10000000	;repatriation
+;personalliability_Charge_BACKPACKERS_SILVER 	;pricePlan_BACKPACKERS_SILVER		;2000000	;personalliabilitycoverage
+;personalaccident_Charge_BACKPACKERS_SILVER		;pricePlan_BACKPACKERS_SILVER		;15000		;personalaccident
+;legalexpenses_Charge_BACKPACKERS_SILVER		;pricePlan_BACKPACKERS_SILVER		;15000		;legalexpenses
+;curtailment_Charge_BACKPACKERS_SILVER			;pricePlan_BACKPACKERS_SILVER		;3000		;curtailment
+;accommodationcover_Charge_BACKPACKERS_SILVER	;pricePlan_BACKPACKERS_SILVER		;750		;accommodationcover
+;misseddeparture_Charge_BACKPACKERS_SILVER		;pricePlan_BACKPACKERS_SILVER		;500		;misseddeparture
+;personalmoney_Charge_BACKPACKERS_SILVER		;pricePlan_BACKPACKERS_SILVER		;200		;personalmoney
+;abandonmentcover_Charge_BACKPACKERS_SILVER		;pricePlan_BACKPACKERS_SILVER		;750		;abandonmentcover
+;hijack_Charge_BACKPACKERS_SILVER				;pricePlan_BACKPACKERS_SILVER		;400		;hijack
+;muggingbenefit_Charge_BACKPACKERS_SILVER		;pricePlan_BACKPACKERS_SILVER		;400		;muggingbenefit
+;repaystudentloan_Charge_BACKPACKERS_SILVER		;pricePlan_BACKPACKERS_SILVER		;2500		;repaystudentloan
+
+;paynow_Charge_BACKPACKERS_GOLD                 ;pricePlan_BACKPACKERS_GOLD         ;21      	;paynow;
+;baggage_Charge_BACKPACKERS_GOLD				;pricePlan_BACKPACKERS_GOLD			;2000		;baggage
+;excess_Charge_BACKPACKERS_GOLD					;pricePlan_BACKPACKERS_GOLD			;50 		;excesswaivercoverage
+;cancellation_Charge_BACKPACKERS_GOLD			;pricePlan_BACKPACKERS_GOLD			;10000		;cancellation
+;medicalexpenses_Charge_BACKPACKERS_GOLD		;pricePlan_BACKPACKERS_GOLD			;15000000	;medicalexpenses
+;repatriation_Charge_BACKPACKERS_GOLD			;pricePlan_BACKPACKERS_GOLD			;15000000	;repatriation
+;personalliability_Charge_BACKPACKERS_GOLD 		;pricePlan_BACKPACKERS_GOLD			;2000000	;personalliabilitycoverage
+;personalaccident_Charge_BACKPACKERS_GOLD		;pricePlan_BACKPACKERS_GOLD			;25000		;personalaccident
+;legalexpenses_Charge_BACKPACKERS_GOLD			;pricePlan_BACKPACKERS_GOLD			;25000		;legalexpenses
+;curtailment_Charge_BACKPACKERS_GOLD			;pricePlan_BACKPACKERS_GOLD			;5000		;curtailment
+;accommodationcover_Charge_BACKPACKERS_GOLD		;pricePlan_BACKPACKERS_GOLD			;1000		;accommodationcover
+;misseddeparture_Charge_BACKPACKERS_GOLD		;pricePlan_BACKPACKERS_GOLD			;1000		;misseddeparture
+;personalmoney_Charge_BACKPACKERS_GOLD			;pricePlan_BACKPACKERS_GOLD			;300		;personalmoney
+;abandonmentcover_Charge_BACKPACKERS_GOLD		;pricePlan_BACKPACKERS_GOLD			;1000		;abandonmentcover
+;hijack_Charge_BACKPACKERS_GOLD					;pricePlan_BACKPACKERS_GOLD			;500		;hijack
+;muggingbenefit_Charge_BACKPACKERS_GOLD			;pricePlan_BACKPACKERS_GOLD			;500		;muggingbenefit
+;repaystudentloan_Charge_BACKPACKERS_GOLD		;pricePlan_BACKPACKERS_GOLD			;5000		;repaystudentloan
+
+;wintersports_Charge_TRA_WINTER					;pricePlan_TRA_WINTER				;1000		;wintersports
+;golfcover_Charge_TRA_GOLF						;pricePlan_TRA_GOLF					;1500		;golfcover
+;businesscover_Charge_TRA_BUSSINESS				;pricePlan_TRA_BUSINESS				;1000		;businesscover
+;hazardousactivities_Charge_TRA_HAZARDOUS		;pricePlan_TRA_HAZARDOUS			;1000		;hazardousactivitiescover
+;valuables_Charge_TRA_VALUABLES					;pricePlan_TRA_VALUABLES			;2000		;valuablesextensioncover
+
+INSERT_UPDATE OneTimeChargeEntry;id[unique=true];subscriptionPricePlanOneTime(&pricePlan);price;$billingEvent;$catalogVersion
+;paynow_Charge_PRO_PROPERTY_HOMEOWNERS          		;pricePlan_PRO_PROPERTY_HOMEOWNERS  ;100      	;paynow;
+;homeemergencycover_Charge_PRO_PROPERTY_HOMEOWNERS 		;pricePlan_PRO_PROPERTY_HOMEOWNERS  ;5000      	;homeemergencycover;
+;excess_Charge_PRO_PROPERTY_HOMEOWNERS					;pricePlan_PRO_PROPERTY_HOMEOWNERS	;500		;excesswaivercoverage;
+;legalexpenses_Charge_PRO_PROPERTY_HOMEOWNERS			;pricePlan_PRO_PROPERTY_HOMEOWNERS	;50000		;legalexpenses;
+
+;paynow_Charge_PRO_PROPERTY_RENTERS            			;pricePlan_PRO_PROPERTY_RENTERS     ;100      	;paynow;
+;depositreturnassistance_Charge_PRO_PROPERTY_RENTERS	;pricePlan_PRO_PROPERTY_RENTERS     ;1000      	;depositreturnassistance;
+;excess_Charge_PRO_PROPERTY_RENTERS						;pricePlan_PRO_PROPERTY_RENTERS		;500		;excesswaivercoverage;
+;legalexpenses_Charge_PRO_PROPERTY_RENTERS				;pricePlan_PRO_PROPERTY_RENTERS		;50000		;legalexpenses;
+
+# Homeowners Property Insurance covarage Monthly
+;homeemergencycover_Charge_PRO_PROPERTY_HOMEOWNERS_MONTHLY 		;pricePlan_PRO_PROPERTY_HOMEOWNERS_MONTHLY  ;5000      	;homeemergencycover;
+;excess_Charge_PRO_PROPERTY_HOMEOWNERS_MONTHLY					;pricePlan_PRO_PROPERTY_HOMEOWNERS_MONTHLY	;500		;excesswaivercoverage;
+;legalexpenses_Charge_PRO_PROPERTY_HOMEOWNERS_MONTHLY			;pricePlan_PRO_PROPERTY_HOMEOWNERS_MONTHLY	;50000		;legalexpenses;
+
+# Renters Property Insurance covarage monthly
+;depositreturnassistance_Charge_PRO_PROPERTY_RENTERS_MONTHLY	;pricePlan_PRO_PROPERTY_RENTERS_MONTHLY     ;1000      	;depositreturnassistance;
+;excess_Charge_PRO_PROPERTY_RENTERS_MONTHLY						;pricePlan_PRO_PROPERTY_RENTERS_MONTHLY		;500		;excesswaivercoverage;
+;legalexpenses_Charge_PRO_PROPERTY_RENTERS_MONTHLY				;pricePlan_PRO_PROPERTY_RENTERS_MONTHLY		;50000		;legalexpenses;
+
+#Optional Homeowners Property Insurance 
+;paynow_Charge_PRO_FLOOD_COVER_HOMEOWNERS		;pricePlan_PRO_FLOOD_COVER_HOMEOWNERS		;20			;paynow;
+;floodcover_Charge_PRO_FLOOD_COVER_HOMEOWNERS	;pricePlan_PRO_FLOOD_COVER_HOMEOWNERS		;20500		;floodcoverage;
+
+;paynow_Charge_PRO_TEMP_ACCOM_HOMEOWNERS		;pricePlan_PRO_TEMP_ACCOM_HOMEOWNERS		;25			;paynow;
+;coverlimit_Charge_PRO_TEMP_ACCOM_HOMEOWNERS	;pricePlan_PRO_TEMP_ACCOM_HOMEOWNERS		;25000		;tempaccomodationcover;
+
+;paynow_Charge_PRO_JEWELRY_COVER_HOMEOWNERS		;pricePlan_PRO_JEWELRY_COVER_HOMEOWNERS		;30			;paynow;
+;coverlimit_Charge_PRO_JEWELRY_COVER_HOMEOWNERS	;pricePlan_PRO_JEWELRY_COVER_HOMEOWNERS		;30500		;jewelrycoverage;
+
+;paynow_Charge_PRO_BICYCLES_COVER_HOMEOWNERS	;pricePlan_PRO_BICYCLES_COVER_HOMEOWNERS	;35			;paynow;
+;coverlimit_Charge_PRO_BICYCLES_COVER_HOMEOWNERS;pricePlan_PRO_BICYCLES_COVER_HOMEOWNERS	;35000		;bicyclescover;
+
+#Optional Renters Property Insurance 
+;paynow_Charge_PRO_TEMP_ACCOM_RENTERS			;pricePlan_PRO_TEMP_ACCOM_RENTERS			;25			;paynow;
+;coverlimit_Charge_PRO_TEMP_ACCOM_RENTERS		;pricePlan_PRO_TEMP_ACCOM_RENTERS			;25000		;tempaccomodationcover;
+
+;paynow_Charge_PRO_JEWELRY_COVER_RENTERS		;pricePlan_PRO_JEWELRY_COVER_RENTERS		;30			;paynow;
+;coverlimit_Charge_PRO_JEWELRY_COVER_RENTERS	;pricePlan_PRO_JEWELRY_COVER_RENTERS		;30500		;jewelrycoverage;
+
+;paynow_Charge_PRO_BICYCLES_COVER_RENTERS		;pricePlan_PRO_BICYCLES_COVER_RENTERS		;35			;paynow;
+;coverlimit_Charge_PRO_BICYCLES_COVER_RENTERS	;pricePlan_PRO_BICYCLES_COVER_RENTERS		;35000		;bicyclescover;
+
+;paynow_Charge_AUTO_ANNUALLY                    ;pricePlan_AUTO_ANNUALLY          ;100        ;paynow;
+;excesswaivercoverage_Charge_AUTO_ANNUALLY      ;pricePlan_AUTO_ANNUALLY          ;75         ;excesswaivercoverage;
+;courtesycover_Charge_AUTO_ANNUALLY             ;pricePlan_AUTO_ANNUALLY          ;50         ;courtesycover;
+;breakdowncare_Charge_AUTO_ANNUALLY             ;pricePlan_AUTO_ANNUALLY          ;60         ;breakdowncare;
+;emergencyhelplineappraisal_Charge_AUTO_ANNUALLY;pricePlan_AUTO_ANNUALLY          ;80         ;emergencyhelplineappraisal;
+;uninsureddriverpromise_Charge_AUTO_ANNUALLY    ;pricePlan_AUTO_ANNUALLY          ;95         ;uninsureddriverpromise;
+
+;paynow_Charge_AUTO_MONTHLY                     ;pricePlan_AUTO_MONTHLY          ;100        ;paynow;
+;excesswaivercoverage_Charge_AUTO_MONTHLY       ;pricePlan_AUTO_MONTHLY          ;75         ;excesswaivercoverage;
+;courtesycover_Charge_AUTO_MONTHLY              ;pricePlan_AUTO_MONTHLY          ;50         ;courtesycover;
+;breakdowncare_Charge_AUTO_MONTHLY              ;pricePlan_AUTO_MONTHLY          ;60         ;breakdowncare;
+;emergencyhelplineappraisal_Charge_AUTO_MONTHLY ;pricePlan_AUTO_MONTHLY          ;80         ;emergencyhelplineappraisal;
+;uninsureddriverpromise_Charge_AUTO_MONTHLY     ;pricePlan_AUTO_MONTHLY          ;95         ;uninsureddriverpromise;
+
+;paynow_Charge_LIFE                             ;pricePlan_LIFE                  ;100        ;paynow;
+;terminalillness_Charge_LIFE                    ;pricePlan_LIFE                  ;10000      ;terminalillness
+;travellingabroad                               ;pricePlan_LIFE                  ;5000       ;travellingabroad
+
+#Optional Auto Insurance
+;paynow_Charge_AUTO_LEGAL_EXPENSE_COVER_ANNUALLY                    ;pricePlan_AUTO_LEGAL_EXPENSE_COVER_ANNUALLY                ;10     ;paynow;
+;coverlimit_Charge_AUTO_LEGAL_EXPENSE_COVER_ANNUALLY                ;pricePlan_AUTO_LEGAL_EXPENSE_COVER_ANNUALLY                ;25000  ;legalexpensecover
+
+;paynow_Charge_AUTO_BREAKDOWN_COVER_ANNUALLY                        ;pricePlan_AUTO_BREAKDOWN_COVER_ANNUALLY                    ;10     ;paynow
+;coverlimit_AUTO_BREAKDOWN_COVER_ANNUALLY                           ;pricePlan_AUTO_BREAKDOWN_COVER_ANNUALLY                    ;25000  ;breakdowncover
+
+;paynow_Charge_AUTO_KEY_PROTECTION_COVER_ANNUALLY                   ;pricePlan_AUTO_KEY_PROTECTION_COVER_ANNUALLY               ;10     ;paynow
+;coverlimit_Charge_AUTO_KEY_PROTECTION_COVER_ANNUALLY               ;pricePlan_AUTO_KEY_PROTECTION_COVER_ANNUALLY               ;25000  ;keyprotectioncover
+
+;paynow_Charge_AUTO_5_YEAR_GUARANTEE_ANNUALLY                       ;pricePlan_AUTO_5_YEAR_GUARANTEE_ANNUALLY                   ;10     ;paynow
+;coverlimit_Charge_AUTO_5_YEAR_GUARANTEE_ANNUALLY                   ;pricePlan_AUTO_5_YEAR_GUARANTEE_ANNUALLY                   ;25000  ;5yearguarantee
+
+;paynow_Charge_AUTO_LEGAL_EXPENSE_COVER_MONTHLY                     ;pricePlan_AUTO_LEGAL_EXPENSE_COVER_MONTHLY                 ;10     ;paynow
+;coverlimit_Charge_AUTO_LEGAL_EXPENSE_COVER_MONTHLY                 ;pricePlan_AUTO_LEGAL_EXPENSE_COVER_MONTHLY                 ;25000  ;legalexpensecover
+
+;paynow_Charge_AUTO_BREAKDOWN_COVER_MONTHLY                         ;pricePlan_AUTO_BREAKDOWN_COVER_MONTHLY                     ;10     ;paynow
+;coverlimit_Charge_AUTO_BREAKDOWN_COVER_MONTHLY                     ;pricePlan_AUTO_BREAKDOWN_COVER_MONTHLY                     ;25000  ;breakdowncover
+
+;paynow_Charge_AUTO_KEY_PROTECTION_COVER_MONTHLY                    ;pricePlan_AUTO_KEY_PROTECTION_COVER_MONTHLY                ;10     ;paynow
+;coverlimit_Charge_AUTO_KEY_PROTECTION_COVER_MONTHLY                ;pricePlan_AUTO_KEY_PROTECTION_COVER_MONTHLY                ;25000  ;keyprotectioncover
+
+;paynow_Charge_AUTO_5_YEAR_GUARANTEE_MONTHLY                        ;pricePlan_AUTO_5_YEAR_GUARANTEE_MONTHLY                    ;10     ;paynow
+;coverlimit_Charge_AUTO_5_YEAR_GUARANTEE_MONTHLY                    ;pricePlan_AUTO_5_YEAR_GUARANTEE_MONTHLY                    ;25000  ;5yearguarantee
+
+;paynow_Charge_AUTO_TELEMETRY_INSTALLATION_MONTHLY                  ;pricePlan_AUTO_TELEMETRY_INSTALLATION_MONTHLY              ;10     ;paynow
+;coverlimit_Charge_AUTO_TELEMETRY_INSTALLATION_MONTHLY              ;pricePlan_AUTO_TELEMETRY_INSTALLATION_MONTHLY              ;25000  ;telemetryinstallation
+
+INSERT_UPDATE OneTimeChargeEntry;id[unique=true];subscriptionPricePlanOneTime(&pricePlan);price;$billingEvent;$catalogVersion
+;paynow_Charge_LIFE_PREMIUM_PROTECTION                              ;pricePlan_LIFE_PREMIUM_PROTECTION                          ;10     ;paynow
+;coverlimit_Charge_LIFE_PREMIUM_PROTECTION                          ;pricePlan_LIFE_PREMIUM_PROTECTION                          ;25000  ;premiumprotection
+
+;paynow_Charge_LIFE_RENEWAL_OPTION                                  ;pricePlan_LIFE_RENEWAL_OPTION                              ;10     ;paynow
+;coverlimit_Charge_LIFE_RENEWAL_OPTION                              ;pricePlan_LIFE_RENEWAL_OPTION                              ;25000  ;renewaloption
+
+;paynow_Charge_LIFE_PAYMENT_PROTECTION_BENEFIT                      ;pricePlan_LIFE_PAYMENT_PROTECTION_BENEFIT                  ;10     ;paynow
+;coverlimit_Charge_LIFE_PAYMENT_PROTECTION_BENEFIT                  ;pricePlan_LIFE_PAYMENT_PROTECTION_BENEFIT                  ;25000  ;paymentprotectionbenefit
+
+#Recurring Charge Entries for Property Insurance
+INSERT_UPDATE RecurringChargeEntry;id[unique=true];subscriptionPricePlanRecurring(&pricePlan);price;cycleStart;$catalogVersion
+;REC_PRO_PROPERTY_HOMEOWNERS_MONTHLY		;  pricePlan_PRO_PROPERTY_HOMEOWNERS_MONTHLY 	;20 ;1 ;
+;REC_PRO_PROPERTY_RENTERS_MONTHLY			;  pricePlan_PRO_PROPERTY_RENTERS_MONTHLY		;20 ;1 ;
+;REC_AUTO_MONTHLY                           ;  pricePlan_AUTO_MONTHLY                       ;10 ;1 ;

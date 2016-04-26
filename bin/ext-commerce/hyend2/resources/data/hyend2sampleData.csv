@@ -1,0 +1,90 @@
+﻿$defaultCatalog=hwcatalog
+$defaultCatalogVersion=Online
+$catalogVersion=catalogVersion(catalog(id[default='$defaultCatalog']),version[default='$defaultCatalogVersion'])[unique=true,default='$defaultCatalog:$defaultCatalogVersion']
+$systemName=SampleClassification;
+$systemVersion=1.0;
+$attribute=classificationAttribute(code,systemVersion(catalog(id[default='$systemName']),version[default='$systemVersion']));
+$appName=h2v20110616
+$host=qaendeca
+$casPort=8500
+$eacPort=8888
+
+INSERT_UPDATE Hyend2IndexSchema;name[unique=true];active;casConfiguration(name)
+;my index schema;true;qaendeca cas;
+
+INSERT_UPDATE Hyend2IndexElement;name[unique=true];active;type(code);baselineQuery;baselineQueryUser(uid);updateQuery;updateQueryUser(uid);deleteQuery;
+;i1;true;Product;SELECT {PK} FROM {Product};hyend2user;SELECT {PK} FROM {Product} WHERE {modifiedtime} > ?lastIndexTime;hyend2user
+
+INSERT_UPDATE Hyend2CasEacConfiguration;name[unique=true];casHost;casPort;casAppName;eacHost;eacPort;eacAppName;
+;qaendeca cas;$host;$casPort;$appName;$host;$eacPort;$appName;
+
+INSERT_UPDATE Hyend2Property;&Item;attribute(enclosingType(code),qualifier);classificationAttribute(code);exportId[unique=true];propertyType(code);endecaPropertyType(code);resolver;resolverParameter;attributeType(code);endecaAttributeConfiguration(name);displayName
+;Item1;;;code;SIMPLE;STRING;spELpropertyResolver;code;Product;ac1;Identifier
+;Item2;;;name;MULTILANGUAGE;STRING;spELpropertyResolver;getName(#locale);Product;ac1;Product name
+;Item5;;;price_usd;SIMPLE;DECIMAL;spELpropertyResolver;@priceService.getPriceInformationsForProduct(#item).![priceValue].?[currencyIso == 'USD'].![value];Product;ac1;Price (usd)
+
+INSERT_UPDATE Hyend2Dimension;&Item;attribute(enclosingType(code),qualifier);$attribute;exportId[unique=true];propertyType(code);endecaPropertyType(code);resolver;resolverParameter;taxonomyResolver;attributeType(code);endecaDimensionConfiguration(name);displayName
+;Item3;;clockSpeed;clockSpeed;SIMPLE;STRING;classificationPropertyResolver;;;Product;dc1;Clock speed
+
+INSERT_UPDATE Hyend2CategoryDimension;&Item;exportId[unique=true];propertyType(code);endecaPropertyType(code);resolver;resolverParameter;taxonomyResolver;attributeType(code);endecaDimensionConfiguration(name);displayName
+;Item4;Categories;SIMPLE;STRING;spELpropertyResolver;supercategories.![code];categoriesTaxonomyResolver;Product;dc1;Categories
+
+INSERT_UPDATE Hyend2is2language;source(name)[unique=true];target(isocode)[unique=true]
+;my index schema;en
+
+INSERT_UPDATE Hyend2is2currency;source(name)[unique=true];target(isocode)[unique=true]
+;my index schema;EUR
+
+INSERT_UPDATE Hyend2is2cv;source(name)[unique=true];target(catalog(id),version)[unique=true]
+;my index schema;$defaultCatalog:$defaultCatalogVersion
+
+INSERT_UPDATE Hyend2is2ie;source(name)[unique=true];target(name)[unique=true]
+;my index schema;i1
+
+INSERT_UPDATE Hyend2casConf2lang;source(name)[unique=true];target(isocode)[unique=true]
+;qaendeca cas;en
+
+INSERT_UPDATE Hyend2is2properties;source(name)[unique=true];target(&Item)[unique=true]
+;i1;Item1
+;i1;Item2
+;i1;Item5
+
+INSERT_UPDATE Hyend2is2dim;source(name)[unique=true];target(&Item)[unique=true]
+;i1;Item3
+
+INSERT_UPDATE Hyend2is2cdim;source(name)[unique=true];target(&Item)[unique=true]
+;i1;Item4
+
+INSERT_UPDATE Hyend2EndecaAttributeConfiguration;name[unique=true];searchable;searchWildcard;offlineSort;recordFilterable;showWithList;showWithRecord;rollupKey
+;ac1;true;true;false;true;true;true;false
+
+INSERT_UPDATE Hyend2EndecaDimensionConfiguration;name[unique=true];searchable;searchWildcard;offlineSort;showWithList;showWithRecord;rollupKey;autogen[default=true];computeRefinementCount[default=false];hidden[default=false];hierarchyDimSearch[default=false];hierarchyRecordSearch[default=false];multiselectType(code)[default=NONE];dynRankingEnabled[default=false];dynRankingRefinementCount[default=10];dynRankingMore[default=false];dynRankingSort(code)[default=ALPHA]
+;dc1;true;true;false;true;true;true;false;false;false;;;;;;;;
+
+#INSERT_UPDATE Hyend2PrecedenceRule;indexSchema(name);fromDimension(exportId);dimensionValueItem(Category.catalogVersion(catalog(id),version),Category.code);dimensionValueString;to(exportId);ruleType
+#;my index schema;Categories;;;clockSpeed;STANDARD
+
+INSERT_UPDATE Hyend2Range;&Item;name[unique=true,lang=en];name[lang=de];boundType(code);rangeType(code);endecaDimensionConfiguration(name)
+;Item6;Price range;Price range;FLOATING_POINT;RANGE;dc1;
+
+INSERT_UPDATE Hyend2RangeEntry;range(name[lang=en])[unique=true];displayName[unique=true,lang=en];lowerBound;includeLowerBound;upperBound;includeUpperBound
+;Price range;0-100;0;true;100;false
+;Price range;100-200;100;true;200;false
+;Price range;200-400;200;true;400;false
+;Price range;400-600;400;true;600;false
+;Price range;600-1000;600;true;1000;false
+;Price range;Over 1000;1000;true;100000000;false
+
+INSERT_UPDATE Hyend2prop2range;source(&Item)[unique=true];target(name[lang=en])[unique=true]
+;Item5;Price range
+
+INSERT_UPDATE Hyend2SearchInterface;name[unique=true]
+;core
+;extended
+
+INSERT_UPDATE Hyend2aa2si;source(&Item)[unique=true];target(name)[unique=true]
+;Item1;core
+;Item2;core
+;Item4;core
+;Item3;extended
+;Item5;extended

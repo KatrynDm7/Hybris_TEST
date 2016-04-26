@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2010 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<configuration xmlns="hybris.de/schemas/hmc/generic"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="hybris.de/schemas/hmc/generic hmc.xsd">
+
+
+	<!-- Configuration for extension bla -->
+
+
+	<explorertree>
+		<group name="cuppy">
+			<typeref type="Competition"/>
+			<typeref type="Match"/>
+			<typeref type="MatchBet"/>
+			<typeref type="Group"/>
+			<typeref type="Team"/>
+			<typeref type="Player"/>
+			<typeref type="News"/>
+		</group>
+	</explorertree>
+	
+	<type name="Player" mode="append">
+		<organizer>
+			<search mode="append">
+				<condition attribute="email"/>
+				<condition attribute="confirmed"/>
+				<condition attribute="country"/>
+			</search>
+			<result>
+				<listview mode="append">
+					<itemlayout>
+						<attribute name="email"/>
+						<attribute name="country"/>
+					</itemlayout>
+				</listview>
+			</result>
+			<editor>
+				<tab name="tab.cuppy">
+					<section name="section.cuppy">
+						<listlayout>
+							<attribute name="email"/>
+							<attribute name="country"/>
+							<attribute name="confirmed"/>
+							<attribute name="sendNewsletter"/>
+							<attribute name="preferences"/>
+							<attribute name="matchbets"/>
+							<attribute name="competitions"/>
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+	
+	<type name="Country" mode="append">
+		<organizer>
+			<editor>
+				<tab name="tab.cuppy">
+					<section name="section.cuppy">
+						<listlayout>
+							<attribute name="flag"/>
+							<attribute name="players"/>
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+	
+	<type name="Team" mode="append">
+		<organizer>
+			<search mode="append">
+				<condition attribute="dummy"/>
+			</search>
+			<editor>
+				<tab name="tab.cuppy">
+					<section name="section.cuppy">
+						<listlayout>
+							<attribute name="dummy"/>
+							<attribute name="homematches"/>
+							<attribute name="guestmatches"/>
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+	
+	<type name="Competition" mode="append" useselector="true">
+		<organizer>
+			<search mode="replace">
+				<condition attribute="code"/>
+				<condition attribute="name"/>
+			</search>
+			<result mode="replace">
+				<listview>
+					<itemlayout>
+						<attribute name="code" width="100"/>
+						<attribute name="name" width="100"/>
+					</itemlayout>
+				</listview>
+			</result>
+			<editor>
+				<essentials mode="replace">
+					<listlayout>
+						<attribute name="code"/>
+					</listlayout>
+				</essentials>
+				<tab name="tab.cuppy">
+					<section name="section.cuppy">
+						<listlayout>
+							<attribute name="name"/>
+							<attribute name="groups">
+								<referencecollectioneditor create="true" add="false" editable="true" externalcreate="false" presetattribute="competition">
+									<itemlayout>
+										<attribute name="code" width="80"/>
+										<attribute name="multiplier" width="50"/>
+										<attribute name="name"/>
+									</itemlayout>
+								</referencecollectioneditor>
+							</attribute>
+							<attribute name="players"/>
+							<attribute name="news"/>
+							<attribute name="type"/>
+							<attribute name="finished"/>
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+		<defaultreference searchattribute="code" mode="replace">
+			<itemlayout>
+				<attribute name="name" fallback="code"/>
+			</itemlayout>
+		</defaultreference>
+	</type>
+
+	<type name="Match" mode="append">
+		<organizer>
+			<search mode="replace">
+				<condition attribute="id"/>
+				<condition attribute="date"/>
+				<condition attribute="group"/>
+				<condition attribute="hometeam"/>
+			</search>
+			<result mode="replace">
+				<listview>
+					<itemlayout>
+						<attribute name="id" width="50"/>
+						<attribute name="hometeam" width="150"/>
+						<attribute name="guestteam" width="150"/>
+						<attribute name="date" width="150"/>
+						<attribute name="group" width="100"/>
+						<attribute name="matchday" width="100"/>
+					</itemlayout>
+				</listview>
+			</result>
+			<editor>
+				<essentials mode="replace">
+					<listlayout>
+						<attribute name="id"/>
+					</listlayout>
+				</essentials>
+				<tab name="tab.cuppy">
+					<section name="section.cuppy">
+						<listlayout>
+							<attribute name="hometeam"/>
+							<attribute name="homegoals"/>
+							<attribute name="guestteam"/>
+							<attribute name="guestgoals"/>
+							<attribute name="date"/>
+							<attribute name="location"/>
+							<attribute name="group"/>
+							<attribute name="matchday"/>
+							<attribute name="matchbets"/>
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+		<defaultreference mode="replace">
+			<itemlayout>
+				<attribute name="id"/>
+			</itemlayout>
+		</defaultreference>
+	</type>
+	
+	<type name="MatchBet" mode="append">
+		<organizer>
+			<search mode="replace">
+				<condition attribute="player"/>
+				<condition attribute="match"/>
+			</search>
+			<result mode="replace">
+				<listview>
+					<itemlayout>
+						<attribute name="player" width="100"/>
+						<attribute name="homegoals" width="50"/>
+						<attribute name="guestgoals" width="50"/>
+						<attribute name="match" width="100"/>
+					</itemlayout>
+				</listview>
+			</result>
+			<editor>
+				<essentials mode="replace">
+					<listlayout>
+						<attribute name="player"/>
+						<attribute name="match"/>
+					</listlayout>
+				</essentials>
+				<tab name="tab.cuppy">
+					<section name="section.cuppy">
+						<listlayout>
+							<attribute name="homegoals"/>
+							<attribute name="guestgoals"/>
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+		<defaultreference mode="replace">
+			<itemlayout>
+				<attribute name="player"/>
+				<attribute name="match"/>
+			</itemlayout>
+		</defaultreference>
+	</type>
+	
+	<type name="Group" mode="append" useselector="true">
+		<organizer>
+			<search mode="replace">
+				<condition attribute="competition"/>
+				<condition attribute="code"/>
+				<condition attribute="name"/>
+			</search>
+			<result mode="replace">
+				<listview>
+					<itemlayout>
+						<attribute name="competition" width="100"/>
+						<attribute name="code" width="100"/>
+						<attribute name="name" width="100"/>
+						<attribute name="multiplier" width="50"/>
+					</itemlayout>
+				</listview>
+			</result>
+			<editor>
+				<essentials mode="replace">
+					<listlayout>
+						<attribute name="competition"/>
+						<attribute name="code"/>
+					</listlayout>
+				</essentials>
+				<tab name="tab.cuppy">
+					<section name="section.cuppy">
+						<listlayout>
+							<attribute name="name"/>
+							<attribute name="multiplier"/>
+							<attribute name="matches"/>
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+		<defaultreference searchattribute="code" mode="replace">
+			<itemlayout>
+				<attribute name="competition"/>
+				<attribute name="name" fallback="code"/>
+			</itemlayout>
+		</defaultreference>
+	</type>
+	
+	<type name="News" mode="append">
+		<organizer>
+			<search mode="replace">
+				<condition attribute="competition"/>
+				<condition attribute="creationTime"/>
+				<condition attribute="email"/>
+				<condition attribute="content"/>
+			</search>
+			<result mode="replace">
+				<listview>
+					<itemlayout>
+						<attribute name="competition" width="100"/>
+						<attribute name="creationTime" width="100"/>
+						<attribute name="email" width="100"/>
+					</itemlayout>
+				</listview>
+			</result>
+			<editor>
+				<essentials mode="replace">
+					<listlayout>
+						<attribute name="competition"/>
+					</listlayout>
+				</essentials>
+				<tab name="tab.cuppy">
+					<section name="section.cuppy">
+						<listlayout>
+							<attribute name="content">
+								<wysiwygeditor/>
+							</attribute>
+							<attribute name="email"/>
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+		<defaultreference searchattribute="content" mode="replace">
+			<itemlayout>
+				<attribute name="creationTime"/>
+			</itemlayout>
+		</defaultreference>
+	</type>
+	
+	<type name="PlayerPreferences" mode="append">
+		<organizer>
+			<search mode="replace">
+				<condition attribute="currentCompetition"/>
+			</search>
+			<result mode="replace">
+				<listview>
+					<itemlayout>
+						<attribute name="currentCompetition" width="100"/>
+					</itemlayout>
+				</listview>
+			</result>
+			<editor>
+				<essentials mode="replace">
+				</essentials>
+				<tab name="tab.cuppy">
+					<section name="section.cuppy">
+						<listlayout>
+							<attribute name="currentCompetition"/>
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+		<defaultreference mode="replace">
+			<itemlayout>
+				<attribute name="currentCompetition"/>
+			</itemlayout>
+		</defaultreference>
+	</type>
+	
+	<type name="ProfilePicture" mode="append">
+	</type>
+	
+	<type name="CountryFlag" mode="append">
+	</type>
+</configuration>

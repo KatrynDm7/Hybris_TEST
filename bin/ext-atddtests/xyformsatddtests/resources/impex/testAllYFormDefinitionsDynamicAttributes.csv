@@ -1,0 +1,31 @@
+$applicationId=applicationId
+$catalogId=testCatalog
+$catalog-version=Online
+$approved=approvalstatus(code)[default='approved']
+$catalogversion=catalogversion(catalog(id[default=$catalogId]),version[default=$catalog-version])[unique=true,default=$catalogId:$catalog-version]
+$supercategories=supercategories(code,catalogversion(catalog(id[default=$catalogId]),version[default=$catalog-version]))
+
+INSERT_UPDATE Catalog	;id[unique=true]
+								;$catalogId
+
+INSERT_UPDATE CatalogVersion	;catalog(id)[unique=true]	;version[unique=true]	;active
+										;$catalogId						;$catalog-version			;true
+
+
+INSERT_UPDATE YFormDefinition	;applicationId[unique=true]	;formId[unique=true]	;version[unique=true]
+										;$applicationId					;formId1					;1			
+										;$applicationId					;formId2					;1
+										;$applicationId					;formId3					;1
+										;$applicationId					;formId4					;1
+										;$applicationId					;formId5					;1
+
+INSERT_UPDATE Category	;code[unique=true]	;$catalogversion	;$supercategories	;yFormDefinitions(applicationId, formId, version)
+								;Category1				;						;						;$applicationId:formId1:1
+								;Category2				;						;Category1			;$applicationId:formId2:1
+								;Category3				;						;Category2			;
+								;Category4				;						;Category3			;$applicationId:formId3:1
+								;Category5				;						;Category1			;$applicationId:formId4:1
+
+INSERT_UPDATE Product	;code[unique=true]	;$supercategories		;$catalogversion	;$approved
+								;Product1				;Category4,Category5	;						;
+								;Product2				;Category3				;						;

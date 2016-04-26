@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="syncTaskFactory" class="de.hybris.y2ysync.task.internal.SyncTaskFactory">
+		<property name="modelService" ref="modelService"/>
+		<property name="taskService" ref="taskService"/>
+	</bean>
+
+	<bean id="y2ySyncMasterJobPerformable" class="de.hybris.y2ysync.job.Y2YSyncMasterJobPerformable"
+			parent="abstractJobPerformable">
+		<property name="changeDetectionService" ref="changeDetectionService"/>
+		<property name="mediaService" ref="mediaService"/>
+		<property name="syncTaskFactory" ref="syncTaskFactory"/>
+	</bean>
+
+    <bean id="y2ySyncDAO" class="de.hybris.y2ysync.task.dao.Y2YSyncDAO">
+        <property name="flexibleSearchService" ref="flexibleSearchService"/>
+    </bean>
+
+    <!-- Task runners -->
+    <bean abstract="true" id="abstractMainTaskRunner" class="de.hybris.y2ysync.task.runner.AbstractMainTaskRunner">
+        <property name="modelService" ref="modelService"/>
+    </bean>
+
+    <bean id="syncZipTaskRunner" class="de.hybris.y2ysync.task.runner.ImportZipCreatorTaskRunner" parent="abstractMainTaskRunner">
+        <property name="y2YSyncDAO" ref="y2ySyncDAO"/>
+        <property name="importZipCreator" ref="importZipCreator"/>
+    </bean>
+
+    <bean id="syncDataHubTaskRunner" class="de.hybris.y2ysync.task.runner.DataHubRequestTaskRunner" parent="abstractMainTaskRunner">
+        <property name="y2YSyncDAO" ref="y2ySyncDAO"/>
+        <property name="requestCreator" ref="dataHubRequestCreator"/>
+    </bean>
+
+    <bean id="importZipCreator" class="de.hybris.y2ysync.task.runner.internal.ImportZipCreator">
+        <property name="modelService" ref="modelService"/>
+        <property name="mediaService" ref="mediaService"/>
+        <property name="y2YSyncDAO" ref="y2ySyncDAO"/>
+    </bean>
+
+    <bean id="dataHubRequestCreator" class="de.hybris.y2ysync.task.runner.internal.DataHubRequestCreator">
+        <property name="y2YSyncDAO" ref="y2ySyncDAO"/>
+        <property name="restTemplate" ref="restTemplate"/>
+        <property name="homeUrl" value="${y2ysync.home.url:#{null}}"/>
+    </bean>
+
+    <bean id="itemChangesProcessor" class="de.hybris.y2ysync.task.runner.ItemChangesProcessor" parent="abstractMainTaskRunner">
+        <property name="exportService" ref="exportService"/>
+        <property name="mediaService" ref="mediaService"/>
+        <property name="changeDetectionService" ref="changeDetectionService"/>
+        <property name="typeService" ref="typeService"/>
+        <property name="userService" ref="userService"/>
+        <property name="y2YSyncDAO" ref="y2ySyncDAO"/>
+    </bean>
+
+    <!-- Services -->
+    <alias name="defaultSyncConfigService" alias="syncConfigService" />
+    <bean id="defaultSyncConfigService" class="de.hybris.y2ysync.services.impl.DefaultSyncConfigService">
+        <property name="modelService" ref="modelService"/>
+        <property name="typeService" ref="typeService"/>
+        <property name="impexHeaderBuilder" ref="impexHeaderBuilder"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
+        <property name="flexibleSearchService" ref="flexibleSearchService"/>
+    </bean>
+
+    <alias name="defaultStreamConfigCloningService" alias="streamConfigCloningService"/>
+    <bean id="defaultStreamConfigCloningService" class="de.hybris.y2ysync.services.impl.DefaultStreamConfigCloningService">
+        <property name="itemModelCloneCreator" ref="itemModelCloneCreator"/>
+    </bean>
+
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="impexHeaderBuilder" class="de.hybris.y2ysync.impex.typesystem.ImpexHeaderBuilder">
+        <property name="typeService" ref="typeService"/>
+    </bean>
+
+    <alias name="defaultDataHubConfigService" alias="dataHubConfigService" />
+    <bean id="defaultDataHubConfigService" class="de.hybris.y2ysync.services.impl.DefaultDataHubConfigService" >
+        <property name="modelService" ref="modelService"/>
+    </bean>
+
+    <alias name="defaultSyncExecutionService" alias="syncExecutionService" />
+    <bean id="defaultSyncExecutionService" class="de.hybris.y2ysync.services.impl.DefaultSyncExecutionService">
+        <property name="modelService" ref="modelService" />
+        <property name="cronJobService" ref="cronJobService"/>
+        <property name="flexibleSearchService" ref="flexibleSearchService"/>
+    </bean>
+
+	<bean id="infoExpressionGenerator" class="de.hybris.y2ysync.deltadetection.InfoExpressionGenerator">
+		<constructor-arg ref="typeService" />
+	</bean>
+
+    <!-- Interceptors -->
+    <bean id="y2yColumnDefinitionValidateInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor">
+            <bean class="de.hybris.y2ysync.model.Y2YColumnDefinitionValidateInterceptor" />
+        </property>
+        <property name="typeCode" value="Y2YColumnDefinition"/>
+    </bean>
+
+    <bean id="y2yColumnDefinitionPrepareInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor">
+            <bean class="de.hybris.y2ysync.model.Y2YColumnDefinitionPrepareInterceptor" >
+                <property name="impexHeaderBuilder" ref="impexHeaderBuilder"/>
+                <property name="commonI18NService" ref="commonI18NService"/>
+            </bean>
+        </property>
+        <property name="typeCode" value="Y2YColumnDefinition"/>
+    </bean>
+
+    <bean id="y2yStreamConfigurationPrepareInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor">
+            <bean class="de.hybris.y2ysync.model.Y2YStreamConfigurationPrepareInterceptor" >
+                <property name="catalogTypeService" ref="catalogTypeService"/>
+                <property name="infoExpressionGenerator" ref="infoExpressionGenerator"/>
+            </bean>
+        </property>
+        <property name="typeCode" value="Y2YStreamConfiguration"/>
+    </bean>
+</beans>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widgets.xsd">
+
+	<widget-extension widgetId="systemBar">
+	<widget id="occ-coll-container" widgetDefinitionId="com.hybris.cockpitng.collapsiblecontainer" slotId="cockpitWidgetChildrenInvisible" template="true" title="Search">
+		<widget id="occ-advanced-search" widgetDefinitionId="com.hybris.cockpitng.advancedsearch" slotId="center" title="" template="false">
+			<widget id="occ-advancedsearch-engine" widgetDefinitionId="com.hybris.cockpitng.widgets.common.advancedsearchengine" slotId="cockpitWidgetChildrenInvisible" template="false">
+				<setting key="widgetStyleAttribute" type="String"></setting>
+				<setting key="widgetStyleClass" type="String"></setting>
+				<setting key="defaultPageSize" type="Integer">10</setting>
+				<virtual-sockets/>
+			</widget>
+			<setting key="sendResetWhenDisableAutoSearch" type="Boolean">true</setting>
+			<setting key="disableSimpleSearch" type="Boolean">false</setting>
+			<setting key="disableAdvancedSearchToolbar" type="Boolean">false</setting>
+			<setting key="widgetStyleAttribute" type="String"></setting>
+			<setting key="disableSubtypesCheckbox" type="Boolean">false</setting>
+			<setting key="forceSearchForCode" type="String"></setting>
+			<setting key="simpleSearchConfigCtxCode" type="String">simple-search</setting>
+			<setting key="disableAttributesComparator" type="Boolean">false</setting>
+			<setting key="disableSearchModelCache" type="Boolean">false</setting>
+			<setting key="advancedSearchConfigCtxCode" type="String">advanced-search</setting>
+			<setting key="disableSortOrder" type="Boolean">false</setting>
+			<setting key="addRowPosition" type="String">Header</setting>
+			<setting key="isNestedObjectCreationDisabled" type="Boolean">true</setting>
+			<setting key="widgetStyleClass" type="String"></setting>
+			<setting key="disableAutoSearch" type="Boolean">false</setting>
+			<virtual-sockets/>
+		</widget>
+		<widget id="occ-collection-browser" widgetDefinitionId="com.hybris.cockpitng.collectionBrowser" slotId="bottom" template="false">
+			<widget id="occ-type-aware-adapter" widgetDefinitionId="de.hybris.platform.commerceservices.backoffice.typeAwareSelectionAdapter" slotId="cockpitWidgetChildrenInvisible" template="false">
+				<setting key="widgetStyleAttribute" type="String"></setting>
+				<setting key="widgetStyleClass" type="String"></setting>
+				<setting key="__externalLocationPath" type="String">extension://commerceservicesbackoffice</setting>
+				<virtual-sockets/>
+			</widget>
+			<setting key="listSubtitle" type="String"></setting>
+			<setting key="socketDataType_$T" type="String">java.lang.Object</setting>
+			<setting key="widgetStyleAttribute" type="String"></setting>
+			<setting key="pageSize" type="Integer">10</setting>
+			<setting key="maxCharsInCell" type="Integer">70</setting>
+			<setting key="actionSlotComponentId" type="String">listviewactions</setting>
+			<setting key="multiSelect" type="Boolean">false</setting>
+			<setting key="colConfigCtxCode" type="String">listview</setting>
+			<setting key="itemRenderer" type="String">listViewRenderer</setting>
+			<setting key="listTitle" type="String"></setting>
+			<setting key="sortableListHeader" type="Boolean">true</setting>
+			<setting key="widgetStyleClass" type="String"></setting>
+			<setting key="asyncLoading" type="Boolean">true</setting>
+			<virtual-sockets/>
+		</widget>
+		<instance-settings socketEventRoutingMode="LAST_USED">
+			<create onInit="false" reuseExisting="false">
+				<incoming-events>
+					<socket-event id="activate"/>
+				</incoming-events>
+			</create>
+			<close/>
+			<select onInit="false"/>
+		</instance-settings>
+		<setting key="widgetStyleAttribute" type="String"></setting>
+		<setting key="allowLockingCenterPanel" type="Boolean">false</setting>
+		<setting key="bottomPanelCollapsed" type="Boolean">false</setting>
+		<setting key="topHeight" type="String">33%</setting>
+		<setting key="centerCaption" type="String">Center Caption</setting>
+		<setting key="bottomPanelInitiallyLocked" type="Boolean">false</setting>
+		<setting key="centerHeight" type="String">50%</setting>
+		<setting key="topPanelInitiallyLocked" type="Boolean">false</setting>
+		<setting key="allowLockingBottomPanel" type="Boolean">false</setting>
+		<setting key="thirdSectionDisabled" type="Boolean">true</setting>
+		<setting key="bottomCaption" type="String">Bottom Caption</setting>
+		<setting key="centerPanelCollapsed" type="Boolean">true</setting>
+		<setting key="widgetStyleClass" type="String"></setting>
+		<setting key="centerPanelInitiallyLocked" type="Boolean">false</setting>
+		<setting key="topCaption" type="String">Top Caption</setting>
+		<setting key="topPanelCollapsed" type="Boolean">false</setting>
+		<setting key="allowLockingTopPanel" type="Boolean">false</setting>
+		<virtual-sockets>
+			<input id="activate" type="java.lang.Object" visibility="default"/>
+		</virtual-sockets>
+	</widget>
+	<setting key="widgetStyleAttribute" type="String"></setting>
+	<setting key="viewModeBtnVisible" type="Boolean">false</setting>
+	<setting key="widgetStyleClass" type="String"></setting>
+	<setting key="initViewMode" type="String">fluid</setting>
+	<setting key="fluidViewCode" type="String">fluid</setting>
+	<setting key="editorAreaConfigCtx" type="String">editor-area</setting>
+	<setting key="toolbarDisabled" type="Boolean">false</setting>
+	<setting key="bottomToolbar" type="Boolean">false</setting>
+	<setting key="actionSlotComponentId" type="String">editorareaactions</setting>
+	<setting key="enableEmbededTitle" type="Boolean">false</setting>
+	<virtual-sockets/>
+	</widget-extension>
+
+	<widget-connection sourceWidgetId="occ-advanced-search" outputId="searchData" targetWidgetId="occ-advancedsearch-engine" inputId="searchData"/>
+	<widget-connection sourceWidgetId="occ-advancedsearch-engine" outputId="pageable" targetWidgetId="occ-collection-browser" inputId="pageable"/>
+	<widget-connection sourceWidgetId="STUB_de.hybris.platform.commerceservices.backoffice.editor.stocklevelfindereditor" outputId="finderOutput" targetWidgetId="occ-coll-container" inputId="activate"/>
+	<widget-connection sourceWidgetId="STUB_de.hybris.platform.commerceservices.backoffice.editor.stocklevelfindereditor" outputId="finderOutput" targetWidgetId="occ-advanced-search" inputId="initContext"/>
+
+	<widget-connection sourceWidgetId="occ-type-aware-adapter" outputId="typeAwareObject" targetWidgetId="collectionEditorAreaGroup" inputId="inputDataInput"/>
+	<widget-connection sourceWidgetId="occ-collection-browser" outputId="selectedItem" targetWidgetId="occ-type-aware-adapter" inputId="object"/>
+
+
+
+	<widget-connection sourceWidgetId="STUB_de.hybris.platform.commerceservices.backoffice.editor.consignmentsfindereditor" outputId="finderOutput" targetWidgetId="occ-coll-container" inputId="activate"/>
+	<widget-connection sourceWidgetId="STUB_de.hybris.platform.commerceservices.backoffice.editor.consignmentsfindereditor" outputId="finderOutput" targetWidgetId="occ-advanced-search" inputId="initContext"/>
+
+</widgets>

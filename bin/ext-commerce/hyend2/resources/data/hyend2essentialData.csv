@@ -1,0 +1,72 @@
+
+INSERT_UPDATE ServicelayerJob;code[unique=true];springid
+;hyendexportjob1;hyend2exportPerformable
+
+INSERT_UPDATE Hyend2EndecaPropertyTypeEnum;code[unique=true];name[lang=en]
+;STRING;String
+;INTEGER;Integer
+;DECIMAL;Decimal
+;DATETIME;Datetime
+;GEOCODE;Geocode
+
+INSERT_UPDATE Hyend2AttributeTypeEnum;code[unique=true];name[lang=en]
+;SIMPLE;Simple
+;MULTILANGUAGE;Multilanguage
+;MULTICURRENCY;Multicurrency
+
+INSERT_UPDATE Hyend2MultiselectType;code[unique=true];name[lang=en]
+;NONE;None
+;MULTI_OR;OR
+;MULTI_AND;AND
+
+INSERT_UPDATE Hyend2RangeType;code[unique=true];name[lang=en]
+;RANGE;Range
+;SIFT;Sift
+
+INSERT_UPDATE Hyend2BoundType;code[unique=true];name[lang=en]
+;INTEGER;Integer
+;FLOATING_POINT;Floating point
+;STRING;String
+
+INSERT_UPDATE Hyend2DynRankSort;code[unique=true];name[lang=en]
+;ALPHA;Alpha
+;REFINEMENT_COUNT;Refinement count
+
+INSERT_UPDATE Hyend2RefinementsSortOrder;code[unique=true];name[lang=en]
+;ALPHA;Alpha
+;NUMERIC;Numeric
+
+INSERT_UPDATE Hyend2PrecedenceRuleTypeEnum;code[unique=true];name[lang=en]
+;STANDARD;Standard
+;LEAF;Leaf
+
+INSERT_UPDATE Hyend2EndecaAttributeConfiguration;name[unique=true];searchable;searchWildcard;offlineSort;recordFilterable;showWithList;showWithRecord;rollupKey
+;defaultAttributeConfiguration;true;true;false;true;true;true;false
+
+INSERT_UPDATE Hyend2EndecaDimensionConfiguration;name[unique=true];searchable;searchWildcard;offlineSort;showWithList;showWithRecord;rollupKey;autogen[default=true];computeRefinementCount[default=false];hidden[default=false];hierarchyDimSearch[default=false];hierarchyRecordSearch[default=false];multiselectType(code)[default=NONE];dynRankingEnabled[default=false];dynRankingRefinementCount[default=10];dynRankingMore[default=false];dynRankingSort(code)[default=ALPHA]
+;defaultDimensionConfiguration;true;true;false;true;true;true;false;false;false;;;;;;;;
+
+insert_update NotNullConstraint;id[unique=true,allownull=true];severity(code,itemtype(code));target[allownull=true];type(code);qualifier;descriptor(enclosingType(code),qualifier)
+;hyend2indexSchemaNameNotNull;ERROR:Severity;de.hybris.platform.hyend2.model.Hyend2IndexSchemaModel;Hyend2IndexSchema;name;Hyend2IndexSchema:name
+;hyend2indexSchemaCasConfigurationNotNull;ERROR:Severity;de.hybris.platform.hyend2.model.Hyend2IndexSchemaModel;Hyend2IndexSchema;casConfiguration;Hyend2IndexSchema:casConfiguration
+;hyend2indexSchemaLanguagesNotNull;ERROR:Severity;de.hybris.platform.hyend2.model.Hyend2IndexSchemaModel;Hyend2IndexSchema;languages;Hyend2IndexSchema:languages
+
+;Hyend2CasEacConfigurationNameNotNull;ERROR:Severity;de.hybris.platform.hyend2.model.Hyend2CasEacConfigurationModel;Hyend2CasEacConfiguration;name;Hyend2CasEacConfiguration:name
+
+;hyend2indexElementNameNotNull;ERROR:Severity;de.hybris.platform.hyend2.model.Hyend2IndexElementModel;Hyend2IndexElement;name;Hyend2IndexElement:name
+;hyend2indexElementTypeNotNull;ERROR:Severity;de.hybris.platform.hyend2.model.Hyend2IndexElementModel;Hyend2IndexElement;type;Hyend2IndexElement:type
+
+#insert_update DynamicConstraint;id[unique=true,allownull=true];severity(code,itemtype(code));target[allownull=true];type(code);language(code);expression;message[lang=en]
+#;Hyend2CasEacConfigurationAvailableLanguagesNotEmpty;ERROR:Severity;de.hybris.platform.hyend2.model.Hyend2CasEacConfigurationModel;Hyend2CasEacConfiguration;BEANSHELL;getAvailableLanguages() != null && !getAvailableLanguages().isEmpty();'Available languages' must contain at least one language
+
+INSERT_UPDATE UserGroup;uid[unique=true]
+;hyend2group
+
+INSERT_UPDATE Employee;uid[unique=true];groups(uid)
+;hyend2user;hyend2group
+
+INSERT_UPDATE SearchRestriction;code[unique=true];query;principal(uid);restrictedType(code);generate
+;hyend2cvrule;{catalogversion} IN (?hyend2cvs);hyend2group;Product;false
+
+UPDATE ComposedType;code[unique=true];hyend2precedenceRulesEnabled
+;Category;true

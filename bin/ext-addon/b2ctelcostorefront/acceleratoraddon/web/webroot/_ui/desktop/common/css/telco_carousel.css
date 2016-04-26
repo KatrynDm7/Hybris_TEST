@@ -1,0 +1,76 @@
+/* carousel */
+.span-24 > .scroller {
+    padding: 60px 0 65px;
+}
+.span-24 > .scroller .title {
+    font-size: 1.428em;
+    text-transform: none;
+    color: #484848;
+    border-bottom: none;
+    margin-bottom: 20px;
+}
+.span-24 > .scroller ul li {
+    width: 190px;
+}
+.scrollerProduct .thumb {
+    border-bottom: 1px solid #c3c3c3;
+    min-height: 180px;
+}
+.scrollerProduct .priceContainer,
+.scrollerProduct .details,
+.scrollerProduct:hover{
+    color: #484848;
+}
+.scrollerProduct .priceContainer {
+    font-weight: normal;
+}
+.scrollerProduct:hover .details {
+    color: #0073e5;
+}
+/* vertical carousel */
+.jcarousel-container-vertical {
+    margin: 68px 0;
+}
+.jcarousel-skin .jcarousel-prev-vertical,
+.jcarousel-skin .jcarousel-next-vertical {
+    margin: 0;
+    border: 1px solid #dbdad7;
+    width: 60px;
+    height: 60px;
+    background-image: none;
+    left: 0;
+}
+.jcarousel-skin .jcarousel-prev-vertical:hover,
+.jcarousel-skin .jcarousel-next-vertical:hover {
+    outline: none;
+}
+.jcarousel-skin .jcarousel-prev-vertical {
+    top: -68px;
+}
+.jcarousel-skin .jcarousel-next-vertical {
+    bottom: -64px;
+}
+.jcarousel-skin .jcarousel-prev-vertical:after,
+.jcarousel-skin .jcarousel-next-vertical:after {
+    background: url("../images/telco_scrollerVertical.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    content: "";
+    height: 10px;
+    left: 50%;
+    margin-left: -17%;
+    position: absolute;
+    top: 42%;
+    width: 20px;
+}
+.jcarousel-skin .jcarousel-next-vertical:after {
+    background-position: 0 bottom;
+}
+/* horizontal carousel */
+.jcarousel-skin .jcarousel-prev-horizontal {
+    left: -8px;
+}
+.jcarousel-skin .jcarousel-next-horizontal {
+    right: -8px;
+}
+.jcarousel-skin .jcarousel-prev[disabled], .jcarousel-skin .jcarousel-next[disabled] {
+    opacity: 0.3;
+}

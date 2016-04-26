@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:int="http://www.springframework.org/schema/integration"
+    xmlns:int-http="http://www.springframework.org/schema/integration/http"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/integration
+           http://www.springframework.org/schema/integration/spring-integration.xsd
+           http://www.springframework.org/schema/integration/http
+           http://www.springframework.org/schema/integration/spring-integration-http.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd
+           http://www.springframework.org/schema/task
+           http://www.springframework.org/schema/task/spring-task.xsd">
+
+	<!--
+	The hybris platform provides one single Spring application context for beans located at the jalo layer.
+	Each extension can add beans to this context by specifying them at this configuration file.
+	 
+	You can use and/or redefine beans defined at configuration files of other extensions as well as
+	adding new one.
+		
+	If you want to locate this file at a different location or want to use several files for better,
+	structuring, please use the '<yourextension>.application-context' property at your project.properties file.
+	There you can specify a comma separated list of files where first is tried to find a file per classpath and
+	then per file system.
+
+	
+	If you want to configure beans for your web module please have a look at
+	your web/webroot/WEB-INF/<extname>-web-spring.xml.
+	-->
+	
+	<!--  Example how to override a manager -->
+	<!--
+	<bean id="core.productManager"   class="de.hybris.eventtracking.services.jalo.EventtrackingservicesProductManager" 	init-method="init"	destroy-method="destroy" />
+	-->
+	
+	
+ 	<!--  Example how to configure the class to use for jalo session creation -->
+	<!--
+	<bean id="jalosession"   class="de.hybris.platform.jalo.JaloSessionFactory">
+		<property name="targetClassName" value="de.hybris.eventtracking.services.jalo.EventtrackingservicesJaloSession"/>
+	</bean>
+	-->
+
+	
+	<!--  Example how to override an item  -->
+	<!-- 
+	<bean id="de.hybris.platform.jalo.product.Product" class="de.hybris.eventtracking.services.jalo.EventtrackingservicesProduct" scope="prototype" />		
+ 	-->
+
+	<!--  
+	 Example how to register and use an AOP aspect 
+     Also see http://static.springframework.org/spring/docs/2.5.x/reference/aop.html	
+     -->
+	
+	<!-- 
+	<bean id="eventtrackingservicesProfBean" class="de.hybris.eventtracking.services.aop.EventtrackingservicesProfilingAspect"/>
+	<aop:config proxy-target-class="true">
+  		<aop:aspect id="eventtrackingservicesProfAspect" ref="eventtrackingservicesProfBean" >
+    	  <aop:pointcut id="profiledMethods" 
+	      	expression="execution(* getModificationTime(..))" />  	            
+	   		<aop:around pointcut-ref="profiledMethods" method="profile" />
+  		</aop:aspect>
+	</aop:config>
+	 -->
+
+	
+	<!-- some other examples of a pointcut that matches everything:
+
+    	  <aop:pointcut id="profiledMethods" 
+	      	expression="bean(de.hybris.platform.jalo.user.Customer) &amp;&amp; 
+	      	            !execution(* getPK(..))" />  	            
+	       <aop:pointcut id="profiledMethods" expression="execution(* *(..))" />	
+	  -->
+	
+			
+			
+    <alias name="defaultRawTrackingEventsChannel" alias="rawTrackingEventsChannel"/>
+    <int:channel id="defaultRawTrackingEventsChannel">
+        <int:queue/>
+    </int:channel>
+
+    <alias name="defaultRawTrackingEventsChannel" alias="rawTrackingEventsChannel"/>
+    <int:service-activator id="trackingEventHandlerServiceActivator" input-channel="rawTrackingEventsChannel"
+            expression="@rawTrackingEventHandler.handle(payload)">
+        <int:poller fixed-delay="50" time-unit="MILLISECONDS" task-executor="eventTrackingTaskExecutor" />
+    </int:service-activator>
+
+    <alias name="defaultEventTrackingObjectMapper" alias="eventTrackingObjectMapper"/>
+    <bean id="defaultEventTrackingObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
+
+    <alias name="defaultTrackingEventJsonValidator" alias="trackingEventJsonValidator"/>
+    <bean id="defaultTrackingEventJsonValidator" class="de.hybris.eventtracking.services.validators.TrackingEventJsonValidator">
+        <constructor-arg ref="eventTrackingObjectMapper"/>
+        <constructor-arg value="classpath:event-tracking-schema.json"/>
+    </bean>
+
+    <alias name="defaultTrackingEventTypeResolver" alias="trackingEventTypeResolver"/>
+    <bean id="defaultTrackingEventTypeResolver" class="de.hybris.eventtracking.services.converters.TrackingEventTypeResolver">
+        <constructor-arg ref="eventTrackingObjectMapper"/>
+    </bean>
+
+    <bean id="abstractTrackingEventGenericPopulator" abstract="true">
+        <constructor-arg ref="eventTrackingObjectMapper"/>
+    </bean>
+
+    <alias name="defaultAbstractCartAwareTrackingEventPopulator" alias="abstractCartAwareTrackingEventPopulator"/>
+    <bean id="defaultAbstractCartAwareTrackingEventPopulator"
+            class="de.hybris.eventtracking.services.populators.AbstractCartAwareTrackingEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultAbstractProductAndCartAwareTrackingEventPopulator" alias="abstractProductAndCartAwareTrackingEventPopulator"/>
+    <bean id="defaultAbstractProductAndCartAwareTrackingEventPopulator"
+            class="de.hybris.eventtracking.services.populators.AbstractProductAndCartAwareTrackingEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultAbstractProductAwareTrackingEventPopulator" alias="abstractProductAwareTrackingEventPopulator"/>
+    <bean id="defaultAbstractProductAwareTrackingEventPopulator"
+            class="de.hybris.eventtracking.services.populators.AbstractProductAwareTrackingEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultAbstractTrackingEventPopulator" alias="abstractTrackingEventPopulator"/>
+    <bean id="defaultAbstractTrackingEventPopulator"
+            class="de.hybris.eventtracking.services.populators.AbstractTrackingEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultAddToCartEventPopulator" alias="addToCartEventPopulator"/>
+    <bean id="defaultAddToCartEventPopulator"
+            class="de.hybris.eventtracking.services.populators.AddToCartEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultBannerClickEventPopulator" alias="bannerClickEventPopulator"/>
+    <bean id="defaultBannerClickEventPopulator"
+            class="de.hybris.eventtracking.services.populators.BannerClickEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultCartAbandonedEventPopulator" alias="cartAbandonedEventPopulator"/>
+    <bean id="defaultCartAbandonedEventPopulator"
+            class="de.hybris.eventtracking.services.populators.CartAbandonedEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultCartViewEventPopulator" alias="cartViewEventPopulator"/>
+    <bean id="defaultCartViewEventPopulator"
+            class="de.hybris.eventtracking.services.populators.CartViewEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultCategoryBrowseEventPopulator" alias="categoryBrowseEventPopulator"/>
+    <bean id="defaultCategoryBrowseEventPopulator"
+            class="de.hybris.eventtracking.services.populators.CategoryBrowseEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultCategoryPageViewEventPopulator" alias="categoryPageViewEventPopulator"/>
+    <bean id="defaultCategoryPageViewEventPopulator"
+            class="de.hybris.eventtracking.services.populators.CategoryPageViewEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultFindStoresNearMeEventPopulator" alias="findStoresNearMeEventPopulator"/>
+    <bean id="defaultFindStoresNearMeEventPopulator"
+            class="de.hybris.eventtracking.services.populators.FindStoresNearMeEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultForgottenPasswordEventPopulator" alias="forgottenPasswordEventPopulator"/>
+    <bean id="defaultForgottenPasswordEventPopulator"
+            class="de.hybris.eventtracking.services.populators.ForgottenPasswordEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultPageThroughSearchResultsEventPopulator" alias="pageThroughSearchResultsEventPopulator"/>
+    <bean id="defaultPageThroughSearchResultsEventPopulator"
+            class="de.hybris.eventtracking.services.populators.PageThroughSearchResultsEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultPageViewEventPopulator" alias="pageViewEventPopulator"/>
+    <bean id="defaultPageViewEventPopulator"
+            class="de.hybris.eventtracking.services.populators.PageViewEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultPaymentDetailsEnteredEventPopulator" alias="paymentDetailsEnteredEventPopulator"/>
+    <bean id="defaultPaymentDetailsEnteredEventPopulator"
+            class="de.hybris.eventtracking.services.populators.PaymentDetailsEnteredEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultProceedToCheckoutEventPopulator" alias="proceedToCheckoutEventPopulator"/>
+    <bean id="defaultProceedToCheckoutEventPopulator"
+            class="de.hybris.eventtracking.services.populators.ProceedToCheckoutEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultProductDetailPageViewEventPopulator" alias="productDetailPageViewEventPopulator"/>
+    <bean id="defaultProductDetailPageViewEventPopulator"
+            class="de.hybris.eventtracking.services.populators.ProductDetailPageViewEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultProductMediaViewEventPopulator" alias="productMediaViewEventPopulator"/>
+    <bean id="defaultProductMediaViewEventPopulator"
+            class="de.hybris.eventtracking.services.populators.ProductMediaViewEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultProductReviewsViewEventPopulator" alias="productReviewsViewEventPopulator"/>
+    <bean id="defaultProductReviewsViewEventPopulator"
+            class="de.hybris.eventtracking.services.populators.ProductReviewsViewEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultRefineSearchEventPopulator" alias="refineSearchEventPopulator"/>
+    <bean id="defaultRefineSearchEventPopulator"
+            class="de.hybris.eventtracking.services.populators.RefineSearchEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultRemoveFromCartEventPopulator" alias="removeFromCartEventPopulator"/>
+    <bean id="defaultRemoveFromCartEventPopulator"
+            class="de.hybris.eventtracking.services.populators.RemoveFromCartEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultSearchEventPopulator" alias="searchEventPopulator"/>
+    <bean id="defaultSearchEventPopulator"
+            class="de.hybris.eventtracking.services.populators.SearchEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultSearchNoResultsEventPopulator" alias="searchNoResultsEventPopulator"/>
+    <bean id="defaultSearchNoResultsEventPopulator"
+            class="de.hybris.eventtracking.services.populators.SearchNoResultsEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultShipmentDetailsEnteredEventPopulator" alias="shipmentDetailsEnteredEventPopulator"/>
+    <bean id="defaultShipmentDetailsEnteredEventPopulator"
+            class="de.hybris.eventtracking.services.populators.ShipmentDetailsEnteredEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultStoreLocationEnteredEventPopulator" alias="storeLocationEnteredEventPopulator"/>
+    <bean id="defaultStoreLocationEnteredEventPopulator"
+            class="de.hybris.eventtracking.services.populators.StoreLocationEnteredEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultSuccessfulCheckoutEventPopulator" alias="successfulCheckoutEventPopulator"/>
+    <bean id="defaultSuccessfulCheckoutEventPopulator"
+            class="de.hybris.eventtracking.services.populators.SuccessfulCheckoutEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultUnsuccessfulAddToCartEventPopulator" alias="unsuccessfulAddToCartEventPopulator"/>
+    <bean id="defaultUnsuccessfulAddToCartEventPopulator"
+            class="de.hybris.eventtracking.services.populators.UnsuccessfulAddToCartEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultUnsuccessfulCheckoutEventPopulator" alias="unsuccessfulCheckoutEventPopulator"/>
+    <bean id="defaultUnsuccessfulCheckoutEventPopulator"
+            class="de.hybris.eventtracking.services.populators.UnsuccessfulCheckoutEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultUnsuccessfulLoginEventPopulator" alias="unsuccessfulLoginEventPopulator"/>
+    <bean id="defaultUnsuccessfulLoginEventPopulator"
+            class="de.hybris.eventtracking.services.populators.UnsuccessfulLoginEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultUnsuccessfulPaymentEventPopulator" alias="unsuccessfulPaymentEventPopulator"/>
+    <bean id="defaultUnsuccessfulPaymentEventPopulator"
+            class="de.hybris.eventtracking.services.populators.UnsuccessfulPaymentEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultUnsuccessfulRegistrationEventPopulator" alias="unsuccessfulRegistrationEventPopulator"/>
+    <bean id="defaultUnsuccessfulRegistrationEventPopulator"
+            class="de.hybris.eventtracking.services.populators.UnsuccessfulRegistrationEventPopulator"
+            parent="abstractTrackingEventGenericPopulator"/>
+
+    <alias name="defaultJsonToTrackingEventPopulators" alias="jsonToTrackingEventPopulators"/>
+    <util:list id="defaultJsonToTrackingEventPopulators">
+        <ref bean="abstractCartAwareTrackingEventPopulator"/>
+        <ref bean="abstractProductAndCartAwareTrackingEventPopulator"/>
+        <ref bean="abstractProductAwareTrackingEventPopulator"/>
+        <ref bean="abstractTrackingEventPopulator"/>
+        <ref bean="addToCartEventPopulator"/>
+        <ref bean="bannerClickEventPopulator"/>
+        <ref bean="cartAbandonedEventPopulator"/>
+        <ref bean="cartViewEventPopulator"/>
+        <ref bean="categoryBrowseEventPopulator"/>
+        <ref bean="categoryPageViewEventPopulator"/>
+        <ref bean="findStoresNearMeEventPopulator"/>
+        <ref bean="forgottenPasswordEventPopulator"/>
+        <ref bean="pageThroughSearchResultsEventPopulator"/>
+        <ref bean="pageViewEventPopulator"/>
+        <ref bean="paymentDetailsEnteredEventPopulator"/>
+        <ref bean="proceedToCheckoutEventPopulator"/>
+        <ref bean="productDetailPageViewEventPopulator"/>
+        <ref bean="productMediaViewEventPopulator"/>
+        <ref bean="productReviewsViewEventPopulator"/>
+        <ref bean="refineSearchEventPopulator"/>
+        <ref bean="removeFromCartEventPopulator"/>
+        <ref bean="searchEventPopulator"/>
+        <ref bean="searchNoResultsEventPopulator"/>
+        <ref bean="shipmentDetailsEnteredEventPopulator"/>
+        <ref bean="storeLocationEnteredEventPopulator"/>
+        <ref bean="successfulCheckoutEventPopulator"/>
+        <ref bean="unsuccessfulAddToCartEventPopulator"/>
+        <ref bean="unsuccessfulCheckoutEventPopulator"/>
+        <ref bean="unsuccessfulLoginEventPopulator"/>
+        <ref bean="unsuccessfulPaymentEventPopulator"/>
+        <ref bean="unsuccessfulRegistrationEventPopulator"/>
+    </util:list>
+
+    <alias name="defaultJsonToTrackingEventConverter" alias="jsonToTrackingEventConverter"/>
+    <bean id="defaultJsonToTrackingEventConverter" class="de.hybris.eventtracking.services.converters.JsonToTrackingEventConverter">
+        <constructor-arg ref="trackingEventTypeResolver"/>
+        <property name="populators" ref="jsonToTrackingEventPopulators"/>
+    </bean>
+
+    <alias name="defaultRawTrackingEventHandler" alias="rawTrackingEventHandler"/>
+    <bean id="defaultRawTrackingEventHandler"
+            class="de.hybris.eventtracking.services.handlers.RawTrackingEventHandler">
+        <constructor-arg ref="trackingEventJsonValidator"/>
+        <constructor-arg ref="jsonToTrackingEventConverter"/>
+        <constructor-arg ref="eventTrackingObjectMapper"/>
+        <constructor-arg ref="eventService"/>
+    </bean>
+
+    <alias name="defaultEventTrackingTaskExecutor" alias="eventTrackingTaskExecutor"/>
+    <task:executor id="defaultEventTrackingTaskExecutor" pool-size="5-50" keep-alive="120" queue-capacity="500"/>
+
+</beans>

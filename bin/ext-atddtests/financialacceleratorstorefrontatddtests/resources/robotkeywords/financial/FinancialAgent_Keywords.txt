@@ -1,0 +1,32 @@
+*** Settings ***
+Library			  de.hybris.platform.financialacceleratorstorefrontatddtests.findagent.keywords.AgentKeywordLibrary
+
+*** Keywords ***
+import sampledata
+    [Documentation]    Imports the insurance quotation test data
+    import impex from resource    /impex/financialAgentTestData.csv
+
+can be loaded by uid "${agentUid}"
+    load agent by uid   ${agentUid}
+
+agent with uid "${agentUid}" is in category "${categoryCode}"
+    load agent and check category      ${agentUid}    ${categoryCode}
+
+can load agents from "${categoryCode}"
+    can load agents in category    ${categoryCode}
+
+category with code "${categoryCode}" contains "${number}" agents
+    can load agents in category    ${categoryCode}
+    category contains    ${categoryCode}    ${number}
+
+category "${categoryCode}" does not crash anything
+    load from any category is safely    ${categoryCode}
+
+category "${categoryCode}" does not contain agents
+    unknown category is empty    ${categoryCode}
+
+can load all agents and one of them is "${agentUid}"
+    all agents contain    ${agentUid}
+
+loaded agents contain agent in "${categoryCode}" category
+    all agents contain agent with category    ${categoryCode}

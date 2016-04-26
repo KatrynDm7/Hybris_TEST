@@ -1,0 +1,183 @@
+<html>
+<head>
+	<style type='text/css'>@media screen, print {
+		table {
+			width: 96%;
+			margin: 25px 10px 0;
+		}
+
+		th {
+			padding: 5px 5px 5px 15px;
+			background-color: #ccc;
+			font-weight: bold;
+			border: 1px solid #aaa;
+			text-align: left;
+		}
+
+		td {
+			padding: 5px 0 5px 15px;
+		}
+
+		td.title {
+            vertical-align: top;
+            text-align: right;
+            font-weight: bold;
+        }
+	}</style>
+</head>
+<body>
+#foreach($packInfo in $ctx.consignment.packaginginfos)
+<table>
+	<tr>
+		<td colspan="3">
+            <img src="/backoffice/widgetJarResource/de.hybris.platform.warehousingbackoffice.actions.printpackaction/icons/hybris_logo.png" />
+		</td>
+		<td style="text-align:right;">
+            $!{ctx.date}
+		</td>
+	</tr>
+    <tr>
+        <td>
+            <strong>$!{ctx.getLabel('order.id')}</strong>
+        </td>
+        <td>
+            <strong>$!{ctx.getLabel('order.date')}</strong>
+        </td>
+        <td>
+            <strong>$!{ctx.getLabel('delivery.mode')}</strong>
+        </td>
+    </tr>
+     <tr>
+        <td>
+            $!{ctx.order.code}
+        </td>
+        <td>
+            $!{ctx.order.date}
+        </td>
+        <td>
+            $!{ctx.order.deliveryMode.name}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4"><hr style="border-top: dotted 1px;" /></td>
+    </tr>
+    <tr>
+        <td colspan="4"></td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <strong>$!{ctx.getLabel('ship.to')} </strong><br/>
+            $!{ctx.consignment.shippingAddress.firstname} $!{ctx.consignment.shippingAddress.lastname}
+        </td>
+        <td colspan="2">
+            <strong>$!{ctx.getLabel('bill.to')} </strong><br/>
+            $!{ctx.order.paymentAddress.firstname} $!{ctx.order.paymentAddress.lastname}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            $!{ctx.getLabel('shipping.address.line.1')} <br/>
+            $!{ctx.getLabel('shipping.address.line.2')} <br/>
+            $!{ctx.getLabel('shipping.address.city')} <br/>
+            $!{ctx.getLabel('shipping.address.postalCode')} <br/>
+            $!{ctx.getLabel('shipping.address.phone')} <br/>
+        </td>
+        <td>
+            $!{ctx.consignment.shippingAddress.line1} <br/>
+            $!{ctx.consignment.shippingAddress.line2} <br/>
+            $!{ctx.consignment.shippingAddress.town} <br/>
+            $!{ctx.consignment.shippingAddress.postalcode} <br/>
+            $!{ctx.consignment.shippingAddress.phone1} <br/>
+        </td>
+        <td>
+            $!{ctx.getLabel('billing.address.line.1')} <br/>
+            $!{ctx.getLabel('billing.address.line.2')} <br/>
+            $!{ctx.getLabel('billing.address.city')} <br/>
+            $!{ctx.getLabel('billing.address.postalCode')} <br/>
+            $!{ctx.getLabel('billing.address.phone')} <br/>
+        </td>
+        <td>
+            $!{ctx.order.paymentAddress.line1} <br/>
+            $!{ctx.order.paymentAddress.line2} <br/>
+            $!{ctx.order.paymentAddress.town} <br/>
+            $!{ctx.order.paymentAddress.postalcode} <br/>
+            $!{ctx.order.paymentAddress.phone1} <br/>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4"><hr style="border-top: dotted 1px;" /></td>
+    </tr>
+</table>
+<table>
+    <tr>
+        <td colspan="2">&nbsp;</td>
+        <td colspan="4">Page $foreach.count of $ctx.consignment.packaginginfos.size()</td>
+    </tr>
+	<tr>
+		<td colspan="2"><strong>$!{ctx.getLabel('customer.order')}</strong></td>
+		<td colspan="4">
+			<strong>$!{ctx.getLabel('packInfo')}</strong>&nbsp;
+			($!{ctx.getLabel('packInfoWidth')} $!{packInfo.width}&nbsp;||&nbsp;
+			 $!{ctx.getLabel('packInfoHeight')} $!{packInfo.height}&nbsp;||&nbsp;
+			 $!{ctx.getLabel('packInfoLength')} $!{packInfo.length})
+		</td>
+	</tr>
+    <tr>
+        <th colspan="6"><strong>$!{ctx.getLabel('shipment.details')}</strong></th>
+    </tr>
+    <tr>
+        <th>$!{ctx.getLabel('product.code')}</th>
+        <th>$!{ctx.getLabel('product.image')}</th>
+        <th>$!{ctx.getLabel('product.description')}</th>
+        <th>$!{ctx.number.format('#0.00', $!{ctx.getLabel('product.price')})}</th>
+        <th>$!{ctx.getLabel('product.quantity')}</th>
+        <th>$!{ctx.number.format('#0.00', $!{ctx.getLabel('total.price')})}</th>
+    </tr>
+    #foreach( $consignmentEntry in ${ctx.consignmentEntries} )
+    <tr>
+        <td>$!{consignmentEntry.orderEntry.product.code}</td>
+        <td><img src="$!{ctx.getProductImageURL($consignmentEntry)}" /></td>
+        <td>$!{consignmentEntry.orderEntry.product.name}</td>
+        <td>$!{ctx.number.format('#0.00', $!{consignmentEntry.orderEntry.basePrice})}</td>
+        <td>$!{consignmentEntry.orderEntry.quantityPending}</td>
+        <td>$!{ctx.number.format('#0.00', $!{consignmentEntry.orderEntry.totalPrice})}</td>
+    </tr>
+    #end
+    <tr>
+        <td colspan="3"></td>
+        <th colspan="3">$!{ctx.getLabel('totals')}</th>
+    </tr>
+    <tr>
+        <td colspan="3"></td>
+        <td colspan="2">$!{ctx.getLabel('subTotal')}</td>
+        <td>$!{ctx.number.format('#0.00', $!{ctx.order.subtotal})}</td>
+    </tr>
+    <tr>
+        <td colspan="3"></td>
+        <td colspan="2">$!{ctx.getLabel('taxes')}</td>
+        <td>$!{ctx.number.format('#0.00', $!{ctx.order.totalTax})}</td>
+    </tr>
+    <tr>
+        <td colspan="3"></td>
+        <td colspan="2">$!{ctx.getLabel('shipping.cost')}</td>
+        <td>$!{ctx.number.format('#0.00', $!{ctx.order.deliveryCost})}</td>
+    </tr>
+    <tr>
+        <td colspan="3"></td>
+        <td colspan="2">$!{ctx.getLabel('order.discount')}</td>
+        <td>$!{ctx.number.format('#0.00', $!{ctx.order.totalDiscounts})}</td>
+    </tr>
+    <tr>
+        <td colspan="3"></td>
+        <td colspan="3"><hr style="border-top: dotted 1px;" /></td>
+    </tr>
+    <tr>
+        <td colspan="3"></td>
+        <td colspan="2"><strong>$!{ctx.getLabel('total')}</strong></td>
+        <td><strong>$!{ctx.number.format('#0.00', $!{ctx.order.totalPrice})}</strong></td>
+    </tr>
+</table>
+<hr>
+#end
+</body>
+</html>

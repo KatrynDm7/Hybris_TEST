@@ -1,0 +1,26 @@
+#for tests only !
+#Copy to bin/platform
+
+#for tests only !
+#Wed Oct 08 08:35:21 CEST 2008
+jco.client.lang=en
+jco.client.client=504
+jco.client.passwd=wec_service
+jco.client.user=wec_service
+jco.client.ashost=ldciwef.wdf.sap.corp
+jco.client.sysnr=20
+jco.client.trace=0
+jco.destination.pool_capacity=100
+jco.destination.peak_limit=100
+jco.client.codepage=1100
+jco.destination.auth_type=CURRENT_USER
+
+#for QI3, uncomment the following:
+#jco.client.lang=en
+#jco.client.client=002
+#jco.client.passwd=welcome
+#jco.client.user=hybrisprice
+#jco.client.mshost=ldciqi3.wdf.sap.corp
+#jco.client.group=PUBLIC
+#jco.client.r3name=QI3
+

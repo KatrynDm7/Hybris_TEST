@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2015 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+
+<!-- WARNING: This is the Spring WEB configuration file. If you want to replace 
+	items or managers you have to do this from the extensions core configuration 
+	file (cmscockpit/resources/cmscockpit-application-context.xml) -->
+
+<!-- WARNING: This file is imported in cmscockpit-web-spring.xml therefore you don't need
+	to list it in your deployment descriptor -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/util 
+           http://www.springframework.org/schema/util/spring-util.xsd"
+           default-autowire="byName">
+
+	<bean id="LiveEditPerspective"
+		class="de.hybris.liveeditaddon.cockpit.session.impl.LiveeditaddonPerspective"
+		scope="session" parent="BasePerspective">
+		<property name="uid" value="cmscockpit.perspective.liveedit"/>
+		<property name="label" value="cmscockpit.perspective.liveedit"/>
+		<property name="customCsaURI" value="/cmscockpit/dynamicLiveEditCSA.zul"/>
+		<!-- default site to be activated -->
+		<!-- <property name="activeSiteCode" value="site"/> -->
+		<property name="navigationArea" ref="LiveEditNavigationArea"/>
+		<property name="browserArea">
+			<ref bean="LiveEditPerspectiveBrowserModel" />
+		</property>
+		<property name="editorArea">
+			<bean id="LiveEditEditorAreaModel" parent="BaseEditorAreaModel"/>
+		</property>
+		<property name="popupEditorArea">
+			<bean id="LiveProductPopupEditor" parent="BasePopupEditor">
+				<property name="editorAreaController" ref="CmsPopupEditorAreaController"/>
+			</bean>
+		</property>
+		<property name="liveEditPopupEditorArea">
+			<ref bean="liveEditCallbackEditorArea" />
+		</property>
+		<property name="cockpitTypeService" ref="cockpitTypeService"/>
+	</bean>
+	
+	
+	<bean id="coverageInspectorRenderer" class="de.hybris.liveeditaddon.cockpit.components.inspector.LiveEditAddonCoverageInspectorRenderer" scope="session">
+		<property name="showOnlyVisibleRows" value="false"/>
+	</bean>
+
+	<alias alias="LiveEditPerspectiveBrowserModel" name="LiveeditaddonPerspectiveBrowserModel" />
+	<bean id="LiveeditaddonPerspectiveBrowserModel" class="de.hybris.liveeditaddon.cockpit.session.impl.LiveeditaddonBrowserArea" parent="defaultLiveEditPerspectiveBrowserModel">
+		<property name="viewURI" value="/cmscockpit/liveeditaddonBrowser.zul"/>
+		<property name="inspectorRenderer" ref="coverageInspectorRenderer"/>
+		<property name="openInspectorOnSelect" value="true"/>
+	</bean>
+	
+	<alias name="defaultLiveEditCallbackEditorArea" alias="liveEditCallbackEditorArea" />
+	<bean id="defaultLiveEditCallbackEditorArea" parent="BasePopupEditor" class="de.hybris.liveeditaddon.cockpit.session.impl.LiveEditCallbackEditorArea" >
+		<property name="viewURI" value="/cmscockpit/liveEditCallbackPopupEditor.zul" />
+		<property name="editorAreaController">
+			<ref bean="LiveEditCallbackEditorAreaController" />
+		</property>
+	</bean>
+	
+	<bean id="LiveEditCallbackEditorAreaController" parent="CmsPopupEditorAreaController" class="de.hybris.liveeditaddon.cockpit.session.impl.LiveEditCallbackEditorAreaController" />
+
+
+	<bean id="ProductContentBrowserActionColumn" class="de.hybris.platform.cockpit.components.listview.impl.DefaultActionColumnConfiguration"
+		scope="prototype">
+		<constructor-arg value="Actions" />
+		<property name="actions">
+			<list>
+				<ref bean="ProductSynchronizationAction" />
+				<!-- <ref bean="SynchedProductsAction" />  -->
+			</list>
+		</property>
+	</bean>
+	
+	
+	<alias alias="VariantProductBrowserActionColumn" name="VariantProductContentBrowserActionColumn"/>
+	<bean id="VariantProductContentBrowserActionColumn" class="de.hybris.platform.cockpit.components.listview.impl.DefaultActionColumnConfiguration"
+		scope="prototype">
+		<constructor-arg value="Actions" />
+		<property name="actions">
+			<list>
+				<ref bean="ProductSynchronizationAction" />
+				<!--  <ref bean="SynchedProductsAction" /> -->
+				
+			</list>
+		</property>
+	</bean>
+	
+	
+	<bean id="ProductSynchronizationAction" class="de.hybris.liveeditaddon.cockpit.components.listview.impl.LiveEditProductSynchronizationAction"
+		scope="prototype" >
+		<property name="synchronizationService" ref="productSynchronizationService" />
+	</bean>
+	
+	<!--
+	<bean id="SynchedProductsAction" class="de.hybris.platform.productcockpit.components.listview.impl.ShowSynchProductsAction"
+		scope="prototype" />
+	-->
+
+</beans>

@@ -1,0 +1,102 @@
+$catalog-id=testCatalog
+$catalog-version=Online
+$approved=approvalstatus(code)[default='approved']
+$catalogversion=catalogversion(catalog(id[default=$catalog-id]),version[default=$catalog-version])[unique=true,default=$catalog-id:$catalog-version]
+$supercategories=supercategories(code,catalogversion(catalog(id[default=$catalog-id]),version[default=$catalog-version]))
+$prices=europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+$defaultCategory=defaultCategory(code, $catalogversion)
+
+$currencies=USD	
+$defaultCurrency=USD		
+$defaultLanguage=en		
+$deliveryCountries=US		
+$paymentProvider=Mockup		
+
+$ruleType=ruleType(code)[default='ANY']
+
+INSERT_UPDATE Catalog;id[unique=true]
+;$catalog-id
+
+INSERT_UPDATE Currency;isocode[unique=true];active;conversion;digits;symbol
+;USD;true;1.5;2;"$"
+
+INSERT_UPDATE Unit;unitType[unique=true];code[unique=true];conversion
+;pieces;pieces;1
+
+
+INSERT_UPDATE CatalogVersion; catalog(id)[unique=true]; version[unique=true]; active;defaultCurrency(isocode)
+;$catalog-id;$catalog-version;true;USD
+
+INSERT_UPDATE BaseStore;uid[unique=true];catalogs(id);currencies(isocode);net;defaultCurrency(isocode);languages(isocode);defaultLanguage(isocode);paymentProvider		
+;testStore;$catalog-id;$currencies;false;$defaultCurrency;$defaultLanguage;$defaultLanguage;$paymentProvider	
+
+INSERT_UPDATE BaseSite;uid[unique=true];stores(uid)	
+;testSite;testStore
+
+INSERT_UPDATE Product;code[unique=true];$supercategories;manufacturerName;manufacturerAID;unit(code)[default=pieces];ean;$prices;$catalogversion;$approved
+;PRODUCT01;;product01;product01;;8000000000001;600 USD
+;PRODUCT02;;product02;product02;;8000000000002;650 USD
+;PREMIUM01;;premium01;premium01;;8000000000021;710 USD
+;PREMIUM02;;premium02;premium02;;8000000000022;720 USD
+
+INSERT_UPDATE Vendor;code[unique=true];
+;vendor;
+
+INSERT_UPDATE Warehouse;code[unique=true];vendor(code);default;baseStores(uid)
+;warehouse;vendor;true;testStore
+
+INSERT_UPDATE StockLevel;productCode[unique=true];inStockStatus(code)[default=forceInStock];warehouse(code);
+;PRODUCT01;;warehouse;
+;PRODUCT02;;warehouse;
+;PREMIUM01;;warehouse;
+;PREMIUM02;;warehouse;
+;SUBSCRIPTIONPRODUCT01;;warehouse;
+;SUBSCRIPTIONPRODUCT02;;warehouse;
+
+INSERT_UPDATE BundleTemplate;id[unique=true];version[default=1.0][unique=true];$catalogversion;parentTemplate(id);
+;ParentPackage;;;;
+;ProductComponent1;;;ParentPackage;
+;PremiumComponent2;;;ParentPackage;
+
+
+UPDATE BundleTemplateStatus[batchmode=true];itemtype(code)[unique=true];status(code)
+;BundleTemplateStatus;approved
+
+INSERT_UPDATE BillingEvent;code[unique=true];order;cartAware[default=true]
+;paynow;1;
+;onetimeprice;2;
+
+INSERT_UPDATE BillingFrequency;code[unique=true];order;cartAware[default=true]
+;monthly;5
+;quarterly;6
+;yearly;7
+;annually;8
+
+INSERT_UPDATE BillingPlan;id[unique=true];billingCycleType(code);billingFrequency(code)
+;yearlyplan;subscription_start;yearly
+;monthlyplan;subscription_start;monthly
+
+INSERT_UPDATE SubscriptionTerm;id[unique=true];termOfServiceFrequency(code);termOfServiceNumber(code);termOfServiceRenewal(code);billingPlan(id);cancellable
+;annually;none;1;non_renewing;yearlyplan;false
+;monthly;monthly;1;auto_renewing;monthlyplan;false
+
+# Insert Categories
+INSERT_UPDATE Category;code[unique=true];$catalogversion 
+ ;insurances_travel
+ ;insurances_property_homeowners 
+ 
+INSERT_UPDATE SubscriptionProduct;code[unique=true];subscriptionTerm(id);$defaultCategory;unit(code)[default=pieces];$supercategories;$catalogversion;$approved
+;SUBSCRIPTIONPRODUCT01;annually;insurances_travel
+;SUBSCRIPTIONPRODUCT02;annually;insurances_property_homeowners
+
+UPDATE BundleTemplate;id[unique=true];version[default=1.0][unique=true];products(code, $catalogversion);$catalogversion
+;ProductComponent1;;PRODUCT01,PRODUCT02,SUBSCRIPTIONPRODUCT01,SUBSCRIPTIONPRODUCT02
+;PremiumComponent2;;PREMIUM01,PREMIUM02
+
+INSERT_UPDATE SubscriptionPricePlan;&pricePlan;product(code, $catalogversion)[unique=true];$catalogversion;currency(isocode)[default=USD,unique=true];unit(code)[default=pieces]
+;pricePlan_SUBPRODUCT01;SUBSCRIPTIONPRODUCT01;
+;pricePlan_SUBPRODUCT02;SUBSCRIPTIONPRODUCT02;
+
+INSERT_UPDATE OneTimeChargeEntry;id[unique=true];subscriptionPricePlanOneTime(&pricePlan);price;billingEvent(code);$catalogversion
+;onetimepricecharge01;pricePlan_SUBPRODUCT01;10;onetimeprice
+;onetimepricecharge02;pricePlan_SUBPRODUCT02;15;onetimeprice

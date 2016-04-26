@@ -1,0 +1,70 @@
+*** Settings ***
+Test Setup        import sampledata
+Resource          impex/Impex_Keywords.txt
+Resource          yformServices/YFormDefinitionVersioning_Keywords.txt
+
+*** Test Cases ***
+
+############
+### Get YFormDefinition Model
+############
+
+Test_Get_YFormDefinition_With_Version
+    [Documentation]    verify YFormDefinition model exists with given applicationId, formId and version number
+    verify y form definition with "applicationId" and "testFormVersioning01" with version "1" exists
+
+Test_Get_YFormDefinition_With_Version_Not_Exists
+    [Documentation]    verify YFormDefinition model exists with given applicationId, formId and version number
+    verify not existed y form definition "applicationId" and "testFormVersioning01" with version "2" expect exception "YFormServiceException"
+
+Test_Get_YFormDefinition_Return_Latest_Version
+    [Documentation]    verify YFormDefinition model exists with given applicationId, formId and is always the latest version
+    ${newContent}=    get y form definition from template with "applicationId" and "testFormVersioning01" and "updated content"
+    verify y form definition with "applicationId" and "testFormVersioning01" with version "1" exists
+    verify not existed y form definition "applicationId" and "testFormVersioning01" with version "2" expect exception "YFormServiceException"
+    create y form definition by "applicationId" and "testFormVersioning01" and "${newContent}"
+    verify y form definition with "applicationId" and "testFormVersioning01" with version "2" exists
+
+############
+### Create and Update YFormDefinition model
+############
+
+Test_Create_YFormDefinition_With_No_Previous_Version
+    [Documentation]    verify creation of a new YFormDefinition with version 1
+    ${newContent}=    get y form definition from template with "applicationId" and "testFormVersionong00" and "new content"
+    verify not existed y form definition "applicationId" and "testFormVersionong00" with version "1" expect exception "YFormServiceException"
+    create y form definition by "applicationId" and "testFormVersionong00" and "${newContent}"
+    verify y form definition with "applicationId" and "testFormVersionong00" with version "1" exists
+
+Test_Create_YFormDefinition_With_Previous_Version
+    [Documentation]    verify creation of a new YFormDefinition with version 2
+    ${newContent}=    get y form definition from template with "applicationId" and "testFormVersioning02" and "new content"
+    ${content2}=    get y form definition from template with "applicationId" and "testFormVersioning02" and "content2"
+    verify y form definition with "applicationId" and "testFormVersioning02" with version "1" exists
+    create y form definition by "applicationId" and "testFormVersioning02" and "${newContent}"
+    verify y form definition with "applicationId" and "testFormVersioning02" with version "1" exists
+    verify y form definition "applicationId" and "testFormVersioning02" with version "1" has content "${content2}"
+    verify y form definition with "applicationId" and "testFormVersioning02" with version "2" exists
+    verify y form definition "applicationId" and "testFormVersioning02" with version "2" has content "${newContent}"
+
+Test_Update_YFormDefinition_Keeps_Version_Number
+    [Documentation]    verify update to an existing YFormDefinition with version 1
+    ${content}=    get y form definition from template with "applicationId" and "testFormVersioning03" and "content"
+    ${newContent}=    get y form definition from template with "applicationId" and "testFormVersioning03" and "new content"
+    create y form definition by "applicationId" and "testFormVersioning03" and "${content}"
+    verify y form definition with "applicationId" and "testFormVersioning03" with version "1" exists
+    update y form definition by "applicationId" and "testFormVersioning03" and "${newContent}"
+    verify not existed y form definition "applicationId" and "testFormVersioning03" with version "2" expect exception "YFormServiceException"
+    verify y form definition "applicationId" and "testFormVersioning03" with version "1" has content "${newContent}"
+
+Test_Get_YFormDefinition_With_FormDataId_Returns_The_Right_Version
+    [Documentation]    verify a Form Definition based on formDataId
+    ${content}=    get y form definition from template with "applicationId" and "testFormVersioning04" and "content"
+    ${newContent}=    get y form definition from template with "applicationId" and "testFormVersioning04" and "new content"
+    create y form definition by "applicationId" and "testFormVersioning04" and "${content}"
+    create y form data by "applicationId" and "testFormVersioning04" and "id1" and "ref1" and "content"
+    create y form definition by "applicationId" and "testFormVersioning04" and "${newContent}"
+    create y form data by "applicationId" and "testFormVersioning04" and "id2" and "ref1" and "content"
+    verify y form definition with form data id "id1" exists and has "applicationId" and "testFormVersioning04" with version "1" and content "${content}"
+    verify y form definition with form data id "id2" exists and has "applicationId" and "testFormVersioning04" with version "2" and content "${newContent}"
+ 

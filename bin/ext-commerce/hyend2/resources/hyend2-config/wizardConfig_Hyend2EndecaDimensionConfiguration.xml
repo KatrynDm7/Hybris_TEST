@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wizard-config showPrefilledValues="false" selectMode="true" createMode="true" createWithinPopup="false" createWithinEditor="false">
+	<displayed-properties>
+	<group qualifier="Hyend2edcGeneral" visible="true" initially-opened="true">
+		<label key="cockpit.config.label.General" />
+		<property qualifier="Hyend2EndecaDimensionConfiguration.name" />
+		<property qualifier="Hyend2EndecaDimensionConfiguration.searchable" />
+		<property qualifier="Hyend2EndecaDimensionConfiguration.searchWildcard" />	
+		<property qualifier="Hyend2EndecaDimensionConfiguration.offlineSort" />	
+		<property qualifier="Hyend2EndecaDimensionConfiguration.rollupKey" />	
+		<property qualifier="Hyend2EndecaDimensionConfiguration.showWithList" />	
+		<property qualifier="Hyend2EndecaDimensionConfiguration.showWithRecord" />	
+		<property qualifier="Hyend2EndecaDimensionConfiguration.recordFilterable" />	
+		<property qualifier="Hyend2EndecaDimensionConfiguration.refinementsSortOrder" />
+		<property qualifier="Hyend2EndecaDimensionConfiguration.autogen" />
+		<property qualifier="Hyend2EndecaDimensionConfiguration.hidden" />	
+		<property qualifier="Hyend2EndecaDimensionConfiguration.hierarchyDimSearch" />	
+		<property qualifier="Hyend2EndecaDimensionConfiguration.hierarchyRecordSearch" />	
+		<property qualifier="Hyend2EndecaDimensionConfiguration.computeRefinementCount" />	
+		<property qualifier="Hyend2EndecaDimensionConfiguration.multiselectType" />	
+		<property qualifier="Hyend2EndecaDimensionConfiguration.dynRankingEnabled" />	
+		<property qualifier="Hyend2EndecaDimensionConfiguration.dynRankingRefinementCount" />	
+		<property qualifier="Hyend2EndecaDimensionConfiguration.dynRankingMore" />	
+		<property qualifier="Hyend2EndecaDimensionConfiguration.dynRankingSort" />
+	</group>
+	
+
+	</displayed-properties>
+</wizard-config>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:annotation-config />
+
+	<bean id="catalogVersionCompareService" class="de.hybris.platform.platformbackoffice.services.catalogversion.CatalogVersionCompareService">
+		<property name="modelService" ref="modelService"/>
+		<property name="typeService" ref="typeService"/>
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
+
+	<bean id="taxDiscountValueRenderer" class="de.hybris.platform.platformbackoffice.labelproviders.TaxDiscountValueRenderer">
+		<property name="commonI18NService" ref="commonI18NService"/>
+		<property name="formatFactory" ref="formatFactory"/>
+	</bean>
+
+    <bean id="taxDiscountValueParser" class="de.hybris.platform.platformbackoffice.taxdiscountvalueparser.TaxDiscountValueParser">
+        <property name="currencyDao" ref="currencyDao"/>
+        <property name="formatFactory" ref="formatFactory"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
+        <property name="pattern" value="(?&lt;code&gt;^\w+?) *?: *?(?&lt;value&gt;[0-9]+[,|\.]?[0-9]*.*?)(?:(?&lt;percent&gt;%)| *?(?&lt;currency&gt;[a-zA-Z]{3}))(?: *?= *?(?&lt;appliedValue&gt;[0-9]+[,|\.]?[0-9]*.*?))*"/>
+        <property name="patternExplained" value="&lt;code&gt; : &lt;value&gt;(%| &lt;CUR&gt;)[ = &lt;appliedValue&gt;] for example taxName : 19.00% = 0.19 or taxName : 19 EUR"/>
+    </bean>
+    <alias name="defaultDiscountValueParser" alias="discountValueParser"/>
+    <bean id="defaultDiscountValueParser" class="de.hybris.platform.platformbackoffice.taxdiscountvalueparser.DiscountValueParser" parent="taxDiscountValueParser"/>
+    <alias name="defaultTaxValueParser" alias="taxValueParser"/>
+    <bean id="defaultTaxValueParser" class="de.hybris.platform.platformbackoffice.taxdiscountvalueparser.TaxValueParser" parent="taxDiscountValueParser"/>
+
+</beans>

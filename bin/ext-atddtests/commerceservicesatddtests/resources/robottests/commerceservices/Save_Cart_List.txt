@@ -1,0 +1,107 @@
+*** Settings ***
+Resource          commerce/CommerceServices_Keywords.txt
+Test Setup        import commerce sample data
+
+*** Variables ***
+
+${customerId}=    testuser@saved-carts.com
+${customerId2}=    testuser2@saved-carts.com
+
+*** Test Cases ***
+Get_Empty_List
+	${cartList}=    Get saved carts for current user
+	Should Be Equal As Integers    ${cartList.size()}    0
+
+Get_Empty_List_2
+	create customer "${customerId}" with currency "USD"
+	login customer with id "${customerId}"
+	${cart}=    create new session cart
+	${cartList}=    Get list of saved session carts
+	Should Be Equal As Integers    ${cartList.size()}    0
+
+Get_List_With_Single_Cart
+	create customer "${customerId2}" with currency "USD"
+	login customer with id "${customerId2}"
+	${cart}=    create new session cart
+	save cart with name "TestCart" and description "Test"
+
+	${cartList}=    Get list of saved session carts
+	Should Be Equal As Integers    ${cartList.size()}    1
+
+	Should Be Equal    ${cartList[0].name}    TestCart
+	Should Be Equal    ${cartList[0].description}    Test
+	Should Not Be Equal    ${cartList[0].saveTime}    ${null}
+	Should Not Be Equal    ${cartList[0].savedBy}    ${null}
+	Should Not Be Equal    ${cartList[0].expirationTime}    ${null}
+
+Get_List_With_Multiple_Carts
+	create customer "${customerId}" with currency "USD"
+	login customer with id "${customerId}"
+	${cart}=    create new session cart
+	save cart with name "TestCart" and description "Test"
+
+	${cart2}=    create new session cart
+	save cart with name "TestCart2" and description "Test2"
+
+	${cartList}=    Get list of saved session carts
+	Should Be Equal As Integers    ${cartList.size()}    2
+
+	# The order of carts on list is random, so no verification of hardcoded values is possible
+	# The verification of each cart parameters is by using cart index
+	${1stCartIndex}    ${2ndCartIndex} =          calculate proper cart index for cartListName "cartList" where 1st expected cart name is "TestCart" and 2nd expected cart name is "TestCart2"
+
+	Should Be Equal    ${cartList[${1stCartIndex}].name}    TestCart
+	Should Be Equal    ${cartList[${1stCartIndex}].description}    Test
+	Should Not Be Equal    ${cartList[${1stCartIndex}].saveTime}    ${null}
+	Should Not Be Equal    ${cartList[${1stCartIndex}].savedBy}    ${null}
+	Should Not Be Equal    ${cartList[${1stCartIndex}].expirationTime}    ${null}
+
+	Should Be Equal    ${cartList[${2ndCartIndex}].name}    TestCart2
+	Should Be Equal    ${cartList[${2ndCartIndex}].description}    Test2
+	Should Not Be Equal    ${cartList[${2ndCartIndex}].saveTime}    ${null}
+	Should Not Be Equal    ${cartList[${2ndCartIndex}].savedBy}    ${null}
+	Should Not Be Equal    ${cartList[${2ndCartIndex}].expirationTime}    ${null}
+
+Get_List_And_Flag_Cart_For_Deletion
+	create customer "${customerId}" with currency "USD"
+	login customer with id "${customerId}"
+	${cart}=    create new session cart
+	save cart with name "TestCart" and description "Test"
+
+	${cart2}=    create new session cart
+	save cart with name "TestCart2" and description "Test2"
+
+	${cartList}=    Get list of saved session carts
+	Should Be Equal As Integers    ${cartList.size()}    2
+
+	# The order of carts on list is random, so no verification of hardcoded values is possible
+	# The verification of each cart parameters is by using cart index
+	${1stCartIndex}    ${2ndCartIndex} =          calculate proper cart index for cartListName "cartList" where 1st expected cart name is "TestCart" and 2nd expected cart name is "TestCart2"
+
+	Should Be Equal    ${cartList[${1stCartIndex}].name}    TestCart
+	Should Be Equal    ${cartList[${1stCartIndex}].description}    Test
+	Should Not Be Equal    ${cartList[${1stCartIndex}].saveTime}    ${null}
+	Should Not Be Equal    ${cartList[${1stCartIndex}].savedBy}    ${null}
+	Should Not Be Equal    ${cartList[${1stCartIndex}].expirationTime}    ${null}
+
+	Should Be Equal    ${cartList[${2ndCartIndex}].name}    TestCart2
+	Should Be Equal    ${cartList[${2ndCartIndex}].description}    Test2
+	Should Not Be Equal    ${cartList[${2ndCartIndex}].saveTime}    ${null}
+	Should Not Be Equal    ${cartList[${2ndCartIndex}].savedBy}    ${null}
+	Should Not Be Equal    ${cartList[${2ndCartIndex}].expirationTime}    ${null}
+
+	${flaggedCart}=    flag cart with code "${cartList[${1stCartIndex}].code}" for deletion
+	Should Be Equal    ${flaggedCart.name}    ${null}
+	Should Be Equal    ${flaggedCart.description}    ${null}
+	Should Be Equal    ${flaggedCart.saveTime}    ${null}
+	Should Be Equal    ${flaggedCart.savedBy}    ${null}
+	Should Be Equal    ${flaggedCart.expirationTime}    ${null}
+
+	${cartListAfterUnsave}=    Get list of saved session carts
+	Should Be Equal As Integers    ${cartListAfterUnsave.size()}    1
+
+	Should Be Equal    ${cartListAfterUnsave[0].name}    ${cartList[${2ndCartIndex}].name}
+	Should Be Equal    ${cartListAfterUnsave[0].description}    ${cartList[${2ndCartIndex}].description}
+	Should Not Be Equal    ${cartListAfterUnsave[0].saveTime}    ${null}
+	Should Not Be Equal    ${cartListAfterUnsave[0].savedBy}    ${null}
+	Should Not Be Equal    ${cartListAfterUnsave[0].expirationTime}    ${null} 

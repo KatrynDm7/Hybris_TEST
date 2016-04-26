@@ -1,0 +1,6 @@
+$storeUid=electronics
+$returnProcessCode=return-process
+
+# Base Store
+INSERT_UPDATE BaseStore;uid[unique=true];createReturnProcessCode;
+;$storeUid;$returnProcessCode

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:h="http://www.w3.org/1999/xhtml" 
+		xmlns:zk="http://www.zkoss.org/2005/zk"
+		xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd ">
+		
+	<div width="100%" height="100%" style="position: absolute; top: 0; left: 0;">
+		<div width="100%" sclass="rankings contentPage">
+			<div style="background: #eee; text-align: left; padding: 4px;" height="25px">
+				<hbox>
+					<div></div>
+					<div id="componentToolbar"></div>
+				</hbox>
+			</div>
+			<div width="100%" sclass="bet contentPage">
+				<div use="de.hybris.platform.cuppy.web.components.MatchesComponent" width="90%" sclass="rankingComponent"
+					onCreate="self.init(componentToolbar)"/>
+			</div>
+		</div>
+	</div>
+</zk>

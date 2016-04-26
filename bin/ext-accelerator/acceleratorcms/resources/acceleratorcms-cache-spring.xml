@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd"
+    default-lazy-init="true">
+			
+	<context:annotation-config/>
+	
+	<alias name="defaultCmsCacheRegion" alias="cmsCacheRegion"/>
+	<bean name="defaultCmsCacheRegion" class="de.hybris.platform.regioncache.region.impl.EHCacheRegion">
+	    <constructor-arg name="name" value="cmsCacheRegion" />
+	    <constructor-arg name="maxEntries" value="${regioncache.cmsregion.size}" />
+	    <constructor-arg name="evictionPolicy" value="${regioncache.cmsregion.evictionpolicy}" />
+	    <constructor-arg name="statsEnabled" value="${regioncache.stats.enabled}" />
+	  	<constructor-arg name="exclusiveComputation" value="${regioncache.exclusivecomputation}" />
+	  	<constructor-arg name="ttlSeconds" value="${regioncache.cmsregion.ttl}"/>
+	    <property name="handledTypes">
+	        <array>
+	        	<value>__CMS_CACHE__</value>
+	        </array>
+	    </property>
+	</bean>
+	
+	<bean id="cmsCacheRegionRegistrar" class="de.hybris.platform.regioncache.region.CacheRegionRegistrar" c:region-ref="cmsCacheRegion" />
+	
+
+	
+</beans>

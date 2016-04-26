@@ -1,0 +1,228 @@
+import java.nio.file.*
+import java.nio.file.attribute.*
+
+apply plugin: 'installer-platform-plugin'
+apply plugin: 'installer-datahub-plugin'
+
+def CATALINA_OPTS = "-Xms4096m -Xmx8192m -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:+CMSIncrementalMode -XX:+CMSIncrementalPacing"
+
+hsqldb.port 49302
+
+def sourceSystemRole = platformRole {
+    roleName 'sourceSystem'
+    dbSetup hsqldb.createDb('sourceSystem')
+
+    localProperties {
+        property 'y2ysync.datahub.url', 'http://localhost:8080/datahub-webapp/v1/data-feeds/y2ysync'
+        property 'y2ysync.home.url', 'http://localhost:9001'
+    }
+
+    extensions {
+        scanPath getPlatformIncubatorDir()
+
+        extensionNames 'backoffice', 'datahubbackoffice', 'hmc', 'y2ysynchmc', 'platformbackoffice'
+        extensionNames 'deltadetection', 'y2ysync', 'y2ysyncdemoelectronics', 'solrserver', 'y2ysyncbackoffice'
+    }
+}
+
+def sourceSystemInstance = sourceSystemRole.createInstance {
+    standardPortsFrom 9001
+}
+
+
+def targetSystemRole = platformRole {
+    roleName 'targetSystem'
+    dbSetup hsqldb.createDb('targetSystem')
+
+    extensions {
+        scanPath getPlatformIncubatorDir()
+
+        extensionNames 'backoffice', 'hmc', 'datahubadapter', 'y2ysync', 'electronicsstore', 'solrserver'
+        extensionNames 'yacceleratorinitialdata', 'platformbackoffice', 'y2ysyncbackoffice'
+    }
+    
+    localProperties {
+        property 'solrserver.instances.default.port', '8993'
+    }
+}
+
+def targetSystemInstance = targetSystemRole.createInstance {
+    standardPortsFrom 9011
+}
+
+def datahubServerId = 'datahub-tomcat'
+def datahubCfg = {
+    libraries {
+        propertyFile "local.properties", {
+
+            property 'datahub.extension.exportURL', 'http://localhost:9011/datahubadapter'
+            property 'datahub.extension.userName', 'admin'
+            property 'datahub.extension.password', 'nimda'
+
+            property 'datahub.encryption.key.path', 'encryption-key.txt'
+        }
+
+        lib file('encryption-key.txt')
+    }
+
+    extensionDir "${getPlatformIncubatorDir()}/y2ysyncdemoelectronics/resources/y2ysync-datahub-ext"
+    extension 'y2ysync-datahub-ext'
+
+    webappDir "${platformHome}/../ext-integration/datahub/web-app"
+
+
+    ports {
+        http 8080
+        ssl 9793
+    }
+}
+
+def String getPlatformIncubatorDir() {
+    System.env.PLATFORM_INCUBATOR_SRC == null ? "${suiteHome}/hybris/bin/ext-incubator" : System.env.PLATFORM_INCUBATOR_SRC
+}
+
+task setupRoles << {
+    sourceSystemRole.setup()
+    sourceSystemRole.build()
+    sourceSystemInstance.setup()
+
+    targetSystemRole.setup()
+    targetSystemRole.build()
+    targetSystemInstance.setup()
+}
+
+task setupDataHub << {
+    deleteRecursively("./work/datahub-tomcat")
+
+    datahub(datahubServerId).setup datahubCfg
+}
+
+def deleteRecursively(directory) {
+
+    def path = Paths.get(directory)
+
+    if (!path.toFile().exists()) {
+        return
+    }
+
+    Files.walkFileTree(path, new SimpleFileVisitor<Path>() {
+
+        FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+            Files.delete(file)
+            FileVisitResult.CONTINUE
+        }
+
+        FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+            Files.delete(dir)
+            FileVisitResult.CONTINUE
+        }
+    })
+}
+
+
+task setup(dependsOn: [setupRoles, setupDataHub])
+
+task initializeSourceSystem << {
+    sourceSystemRole.initialize()
+}
+
+task initializeTargetSystem << {
+    targetSystemRole.initialize("${installerHome}/recipes/y2ysync/targetSystemInitConfig.json")
+    targetSystemRole.importImpexFromContent('''
+INSERT_UPDATE MediaFormat;qualifier[unique=true]
+;1200Wx1200H
+;515Wx515H
+;365Wx246H
+;300Wx300H
+;96Wx96H
+;65Wx65H
+;30Wx30H
+;mobile
+;tablet
+;desktop
+;widescreen
+''')
+	targetSystemRole.importImpexFromContent('''
+REMOVE SolrEndpointUrl;url[unique=true];
+;http://localhost:8983/solr;
+
+INSERT SolrEndpointUrl;url[unique=true];master;solrServerConfig(name);
+;http://localhost:8993/solr;true;Local Standalone;
+''')
+}
+
+task initialize << {
+    hsqldb.startInBackground()
+    sourceSystemRole.initialize()
+    targetSystemRole.initialize("${installerHome}/recipes/y2ysync/targetSystemInitConfig.json")
+    targetSystemRole.importImpexFromContent('''
+INSERT_UPDATE MediaFormat;qualifier[unique=true]
+;1200Wx1200H
+;515Wx515H
+;365Wx246H
+;300Wx300H
+;96Wx96H
+;65Wx65H
+;30Wx30H
+;mobile
+;tablet
+;desktop
+;widescreen
+''')
+	targetSystemRole.importImpexFromContent('''
+REMOVE SolrEndpointUrl;url[unique=true];
+;http://localhost:8983/solr;
+
+INSERT SolrEndpointUrl;url[unique=true];master;solrServerConfig(name);
+;http://localhost:8993/solr;true;Local Standalone;
+''')
+    hsqldb.stopInBackground()
+}
+
+task startPlatform << {
+    hsqldb.startInBackground()
+    sourceSystemInstance.startInBackground()
+    targetSystemInstance.startInBackground()
+}
+
+task startSourceSystem << {
+    sourceSystemInstance.startInBackground()
+}
+
+task startTargetSystem << {
+    targetSystemInstance.startInBackground()
+}
+
+task startDataHub << {
+    datahub(datahubServerId).start CATALINA_OPTS
+}
+
+task start(dependsOn: [startPlatform, startDataHub])
+
+task stopPlatform << {
+    sourceSystemInstance.stopInBackground()
+    targetSystemInstance.stopInBackground()
+    hsqldb.stopInBackground()
+}
+
+task stopSourceSystem << {
+    sourceSystemInstance.stopInBackground()
+}
+
+task stopTargetSystem << {
+    targetSystemInstance.stopInBackground()
+}
+
+task stopDataHub << {
+    datahub(datahubServerId).stop()
+}
+
+task stop(dependsOn: [stopPlatform, stopDataHub])
+
+task startHsqldb << {
+    hsqldb.startInBackground()
+}
+
+task stopHsqldb << {
+    hsqldb.stopInBackground()
+}

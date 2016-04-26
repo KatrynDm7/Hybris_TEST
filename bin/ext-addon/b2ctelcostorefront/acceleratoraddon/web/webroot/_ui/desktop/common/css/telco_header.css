@@ -1,0 +1,30 @@
+#header .headerContent .nav {
+    margin-top: 22px;
+    font-weight: bold;
+}
+#header .miniCart > a .count {
+    -webkit-transition: color 200ms ease-in-out 0s;
+    -moz-transition: color 200ms ease-in-out 0s;
+    -o-transition: color 200ms ease-in-out 0s;
+    transition: color 200ms ease-in-out 0s;
+}
+#header .headerContent .nav > li {
+    border-left: medium none;
+}
+#header .headerContent .nav > li:last-child {
+    padding-right: 0;
+}
+#header .headerContent .nav > li.miniCart > a {
+    text-transform: inherit;
+}
+#header .headerContent .logged_in {
+    max-width: 100px;
+}
+/* secondRow */
+#header .headerContent.secondRow {
+    margin-top: 15px;
+}
+/* no language selector */
+#header .headerContent.secondRow .yCmsComponent + .yCmsComponent {
+    display: none;
+}

@@ -1,0 +1,135 @@
+body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, dialog, figure, footer, header, hgroup, nav, section {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: "Helvetica Neue", sans-serif;
+    vertical-align: baseline;
+}
+
+body {
+	background: #F4F4F4 none repeat scroll 0% 0%;
+}
+
+.login_container {
+	padding: 20px 0;
+	background: url("../images/world_map.png") no-repeat scroll 0 0 #ffffff;
+	height: 400px;
+}
+
+#recaptcha_widget {
+	clear: both;	
+}
+
+.userDefinedContent {
+	border: 1px solid #ccc;
+}
+
+.newCustomerRegister select {
+	margin-top: 0;
+}
+
+.newCustomerRegister .phone .form_field-input input {
+	width: auto;
+}
+
+.newCustomerRegister .extension .form_field-input input {
+	width: 74px;
+}
+
+form .newCustomerRegister .extension label {
+	padding-right: 0;
+}
+
+.msg .form_field-input textarea {
+	width: 514px;
+}
+
+.form_link_password_register a{
+	padding-top: 10px;
+}
+
+#registrationForm .msg{
+	clear: both;
+}
+
+.login-panel {
+    background-color: #3C3C3C;
+    margin: 0px auto;
+    float: none;
+}
+
+.title_holder h2 {
+	font-size: 2em;
+}
+
+#loginForm {
+    padding-bottom: 35px;
+}
+
+div.secure_container_holder h2 {
+    color: #FFF;
+    margin-bottom: 0px;
+}
+
+div.secure_container_holder {
+    color: #FFF;
+    padding: 10px 20px;
+}
+
+div.secure_container_holder a {
+    color: #FFF;
+}
+
+#loginForm label.control-label  {
+    text-transform: uppercase;
+}
+
+.secure_container_holder dl {
+    margin-bottom: 0px;
+}
+
+.secure_container_holder button {
+    margin: 0px;
+    padding: 0px 20px;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #FFF;
+    display: block;
+    float: left;
+    border: 2px solid #0068B8;
+    background: #0068B3 none repeat scroll 0% 0%;
+    font-family: "Helvetica Neue",sans-serif;
+    font-size: 100%;
+    line-height: 130%;
+    text-decoration: none;
+    font-weight: normal;
+    cursor: pointer;
+    text-align: center;
+}
+
+#copyright {
+    padding: 10px 0 0;
+}
+
+#copyright .links a, #copyright span p {
+    color: #555;
+    font-size: 10px;
+}
+
+#footer #lang-selector {
+    background-color: #FBFBFB;
+    border: 1px solid;
+    font-size: 10px;
+    height: 15px;
+    min-height: 20px;
+    padding: 2px;
+    width: 120px;
+}
+
+.template-pages-LoginPageTemplate #lang-form .controls {
+    width: 130px;
+    float: left;
+}

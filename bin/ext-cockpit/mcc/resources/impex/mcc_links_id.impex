@@ -1,0 +1,41 @@
+# Do not translate; Do not translate; To be translated; To be translated;
+# ImpEx for Importing Indonesian Localisations for the MCC;;;;
+
+$lang=id;;;;
+$catalogVersion=catalogVersion(catalog(id[default='Default']),version[default='Online'])[unique=true,default='Default:Online'];;;;
+
+UPDATE Catalog;id[unique=true];name[lang=$lang];;
+;Default;Standar-Katalog;;
+
+UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];languages(isocode)[mode=append];
+;Default;Online;$lang;
+;Default;Staged;$lang;
+
+UPDATE StaticLink;code[unique=true];title[lang=$lang];description[lang=$lang];
+;reportCockpit;Kokpit Laporan;Untuk pembuatan laporan yang rumit tapi leluasa untuk dimodifikasi dan ditampilkan.;
+;admincockpit;Kokpit Administrasi;Administrasi dan modifikasi aturan validasi sistem hybris.;
+;hmc2;Manajemen Pengguna & Grup Pengguna (hMC);Manajemen pengguna yang fleksibel dan eksplisit.;
+;hmc;Konsol Manajemen (hMC);Mengatur semua komponen inti dasar sistem hybris Anda.;
+;hac;Konsol Administrasi;Menyajikan tampilan umum alat-alat yang berguna untuk keadministrasian sistem.;
+;productcockpit;Kokpit Produk (PCM);Menyederhanakan manajemen katalog dan produk melalui antarmuka penggunaan yang intuitif dan memudahkan pengelolaan data massal secara efisien.;
+;importcockit;Kokpit Impor;Mengurangi kompleksitas proses impor dan mengonsolidasi data produk dari banyak tempat penyimpanan melalui alat impor bergambar yang intuitif.;
+#;mam;hybris Server DAM (Celum);Jika diinstal, dengan berbasis Celum langsung menuju hybris Server Manajemen Aset Digital;
+;hmc3;Alat Pemasaran (hMC);Mengelola Kampanye Pemasaran secara terpusat untuk semua saluran.;
+;hmc4;Manajemen Order (hMC);Mengelola order, pembayaran, dan mode pengantaran Anda.;
+
+"#% if: !de.hybris.platform.jalo.extension.ExtensionManager.getInstance().isExtensionInstalled(""btgcockpit"")";;;;
+;cmscockpit;Modul Manajemen Konten Web (WCMS);Buat, atur, dan publikasikan konten secara online dan mobile dengan Antarmuka Manajemen Konten Web terpadu.;
+#% endif:;;;;
+
+"#% if: de.hybris.platform.jalo.extension.ExtensionManager.getInstance().isExtensionInstalled(""btgcockpit"")";;;;
+;cmscockpit;Kokpit WCMS dengan Personalisasi Lanjutan;Sistem pemublikasian konten web untuk mengelola situs web, termasuk fungsionalitas Personalisasi Lanjutan untuk segmentasi pelanggan.;
+#% endif:;;;;
+
+;cscockpit;Kokpit Layanan Pelanggan (CS);Menyajikan layanan pelanggan dan dukungan penjualan dalam satu Antarmuka Pengguna terpadu.;
+;printcockpit;Kokpit Cetak;Buat publikasi cetak (semi-)otomatis dan publikasikan ke program DTP.;
+;webfrontends;Frontend Web:;;
+;storetemplate;Templat Toko;Contoh frontend toko web, disajikan dalam kode sumber.;
+;mobiletemplate;Templat Mobile;Frontend Mobile. Perlu diperhatikan bahwa templat ini berisi 3 penyajian visual yang berbeda bergantung fungsionalitas telepon mobile yang Anda gunakan. Ketiga versi itu adalah: WAP 1, WAP 2 dan HTML5. Silakan lihat di perangkat mobile yang sesuai.;
+
+;instore;InStore;hybris InStore adalah aplikasi khusus yang berjalan di perangkat tablet. Dengan NFC dan pemindaian barcode, peritel dapat mengidentifikasi produk, mengakses informasi produk yang melimpah, dan mengecek ketersediaan di seluruh toko agar dapat merespons permintaan pelanggan seketika itu juga.;
+;omscockpit;Kokpit OMS;hybris Layanan Manajemen Order memungkinkan pelanggan mengonfigurasi sekumpulan formula ketersediaan, strategi pemenuhan, aturan pemecahan order, dan tahapan alurkerja guna mencapai solusi OmniCommerce terbaik bagi bisnis mereka.;

@@ -1,0 +1,805 @@
+body {
+	background-image: none;
+	background-repeat: repeat-x;
+	background-color: #162c5e;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#1d346b, endColorstr=#162c5f);
+	-ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#1d346b, endColorstr=#162c5f);
+	background: -moz-linear-gradient(top, #1d346b, #162c5f) #162c5e;
+	background: -ms-linear-gradient(top, #1d346b, #162c5f) #162c5e;
+	background: -o-linear-gradient(top, #1d346b, #162c5f) #162c5e;
+	background: -webkit-gradient(linear, center top, center bottom, from(#1d346b), to(#162c5f) ) #162c5e;
+	background: -webkit-linear-gradient(top, #1d346b, #162c5f) #162c5e;
+	background: linear-gradient(top, #1d346b, #162c5f) #162c5e;
+}
+
+.typeListbox
+{
+	background-color: white;
+}
+.typeListbox tr.z-listbox-odd { background-color: transparent; }
+.typeListbox tr.z-list-item-seld { background: #bcd2ef;}
+
+.loginContainerWindow {
+	background-repeat: no-repeat;
+	background-image: url('../images/hybris_front_cuppy.png');
+}
+
+a.z-toolbar-button {
+	color: #444;
+	font-size: 11px;
+}
+
+a.z-toolbar-button:VISITED {
+	color: #444;
+}
+.cuppyWin > div > div {
+	overflow: auto;
+}
+
+.main_header {
+	
+}
+
+div.menulabel {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+}
+
+.mainDiv {
+	vertical-align: center; 
+	position: relative;
+	/*height: 600px;*/
+	height: 95%;
+	width: 800px; 
+}
+
+.mainContentDiv
+{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+}
+
+.header_title {
+	color:white;
+	font-size:30px;
+	font-weight:bold;
+	left:43%;
+	position:absolute;
+	text-align:center;
+	top:12px;
+	line-height: 30px;
+}
+
+.toolbar {
+	text-align: left;
+}
+
+.toolbar .toolbar_btn {
+	width: 80px;
+	text-align: center;
+}
+
+.toolbar .z-toolbar-button  {
+	color:#444;
+	font-size: 11px;
+	text-decoration: none;
+}
+
+.toolbar .tb_selected {
+	font-weight: bold;
+}
+
+.toolbar_sep
+{
+	position: relative;
+	margin:0 10px 0 10px;
+}
+
+.contentPage {
+	background: white;
+	position: relative;
+}
+
+.cuppy_header {
+	background-image: url("images/cuppy_header_bg.png");
+	overflow: hidden;
+	height: 87px !important;
+}
+
+.cuppy_header .cockpitHomeDiv,
+.cuppy_header span.menu_home_sep {
+	display: none;
+}
+
+.contentContainer {
+	position: absolute; 
+	top: 112px; 
+	bottom: 0; 
+	width: 100%; 
+	overflow: auto;
+	background: white;
+	left: 0;
+}
+
+div.rankings {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 100%;
+}
+
+.rankingComponent {
+	text-align: left; 
+	height: 100%; 
+	position: absolute;
+	left: 5%;
+}
+div.rankingGrid {
+	margin-top: 10px;
+	position: relative;
+	text-align: left;
+	background: white;
+	width: 460px;
+	height: 90% !important;
+}
+
+.rankingGrid div.z-grid-header th.z-column, .rankingGrid div.z-grid-header th.z-auxheader
+{
+	border-width: 0;
+}
+
+.rankingGrid .z-column-cnt 
+{
+	font-weight: bold;
+	font-size: 13px;
+	color: #777;
+	height: 15px;
+}
+
+.rankingGrid.z-row .z-row-inner
+{
+	border-bottom: 1px solid #ddd;
+}
+
+.rankingGrid .z-grid-header { border-bottom: 1px solid #999; }
+
+.rankingGrid div.z-grid-header tr.z-columns, .rankingGrid div.z-grid-header tr.z-auxhead,
+.rankingGrid div.z-grid-header th.z-column
+{
+	background-image: none;
+	background-color: white;
+}
+
+.rankingRow { cursor: pointer; }
+
+.rankingScore, .rankingRank { display: block; min-width: 55px; }
+
+.rankingUserDetails {
+	position: absolute;
+	top: 60px;
+	right: 30px;
+	width: 200px;
+	height: 260px;
+	border: 1px solid #ccc;
+	overflow: hidden;
+}
+
+.rankingUserDetails .z-toolbar-button {
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+}
+
+.rankingUserDetailsRank {
+	bottom:23px;
+	font-size:40px;
+	line-height:40px;
+	position:absolute;
+	right:10px;
+}
+
+.rankingUserDetailsName {
+	bottom:30px;
+	font-size:20px;
+	left:10px;
+	line-height:20px;
+	position:absolute;
+	width:140px;
+}
+
+.rankingUserDetailsScore {
+	position: absolute;
+	display: none;
+}
+
+.rankingUserDetailsImg {
+	border:2px solid #CCCCCC;
+	left:5px;
+	position:absolute;
+	top:25px;
+	width: 90%;
+	height: 150px;
+	overflow: hidden;
+}
+
+.rankingUserDetailsImg img {
+	width: 100%;
+}
+
+.rankingUserDetailsCountry {
+	display: block;
+	background: black;
+	color: #ccc;
+	border: 1px solid #555;
+	margin:3px;
+	padding:2px;
+	overflow: hidden;
+	white-space: nowrap;
+	height: 13px;
+}
+
+.rankingUserDetailsCountry .z-label {
+	color: #eee;
+	margin-left: 4px;
+	white-space: nowrap;
+}
+
+tr.currentUser td.z-row-inner { background: #eee; }
+
+.resultsGrid div.z-grid-header th.z-column, .resultsGrid div.z-grid-header th.z-auxheader
+{
+	border-width: 0;
+}
+
+.resultsGrid .z-column-cnt 
+{
+	font-weight: bold;
+	font-size: 13px;
+	color: #777;
+	height: 15px;
+}
+
+.resultsGrid.z-row .z-row-inner
+{
+	border-bottom: 1px solid #ddd;
+}
+
+.resultsGrid .z-grid-header { border-bottom: 1px solid #999; }
+
+.resultsGrid div.z-grid-header tr.z-columns, .resultsGrid div.z-grid-header tr.z-auxhead,
+.resultsGrid div.z-grid-header th.z-column
+{
+	background-image: none;
+	background-color: white;
+}
+
+.profileUserDetails {
+	position: absolute;
+	top: 60px;
+	right: 30px;
+	width: 200px;
+	height: 240px;
+	border: 1px solid #ccc;
+	overflow: hidden;
+}
+
+table.profileUserDetailsUpload {
+	bottom:10px;
+	font-size:20px;
+	left:10px;
+	line-height:20px;
+	position:absolute;
+	width:140px;
+	background-color: #60A85F;
+}
+
+.profileUserDetailsImg {
+	border:2px solid #CCCCCC;
+	left:5px;
+	position:absolute;
+	top:5px;
+	width: 90%;
+	max-height: 170px;
+}
+
+.groupLabel {
+	border-bottom:1px solid #CCCCCC;
+	display:block;
+	font-size:20px;
+	line-height:30px;
+	margin-bottom:5px;
+	margin-top:10px;
+	padding-bottom:3px;
+}
+
+.groupDiv {
+	width: 340px;
+	float: left; 
+	padding: 20px;
+	padding-bottom: 11px;
+}
+
+.groupDiv > div > div {
+	text-align:center;
+}
+
+.groupDiv > div {
+	margin-bottom: 8px;
+	height: 30px;
+	border:1px solid white;
+}
+
+.groupDiv > div:HOVER, .matchesWindow .matchRow:HOVER {
+	background:none repeat scroll 0 0 #efefef;
+	border:1px solid #CCCCCC;
+}
+
+.groupDiv > div > div > .z-label {
+	font-size:10px;
+	margin-left: 3px;
+}
+.matchRow td {
+	text-align: center;
+}
+
+.matchRow td .z-label {
+	white-space: nowrap;
+	display:block;
+	overflow:hidden;
+}
+
+.matchRow { 
+	margin-bottom: 4px;
+	table-layout: fixed; 
+}
+
+.betDisplay { font-weight: bold; }
+
+.matchFinished {
+	position: relative;
+}
+
+.matchRunning table, .matchFinished table {
+	opacity: 0.5;
+	filter:alpha(opacity=50);
+	-moz-opacity:0.5;
+	-khtml-opacity: 0.5;
+}
+
+.resultDiv {
+	background:none repeat scroll 0 0 #DDDDDD;
+	border:1px solid #CCCCCC;
+	bottom:0;
+	color:black;
+	width: 98%;
+	padding:0px 2px 0px 2px;
+	position:absolute;
+	right:0;
+	visibility: hidden;
+}
+
+.matchInfo .z-label {
+	font-size: 10px;
+	color: #888;
+}
+
+.matchFinished .resultDiv { visibility: visible; }
+
+.teamIcon {
+	max-height: 12px;
+}
+
+.info .z-panel {
+	border:  1px solid #ccc;
+} 
+
+.info .z-panel-header {
+ 	background: none;
+}
+
+.info .z-caption-l {
+	line-height: 20px;
+}
+
+.info .z-panel .z-panel-header {
+	border-bottom: 1px solid #ccc;
+	border-top: none;
+	background: #eee;
+}
+
+.infoPanelChildren {
+	padding: 8px;
+}
+
+.info .z-groupbox-cnt {
+	text-align: left;
+	padding: 5px;
+	padding-left: 20px;
+}
+
+.info .z-groupbox-hl
+{
+	border-bottom: 1px dotted #ccc;
+}
+
+.info .z-groupbox-header {
+	padding: 0;
+}
+.info .z-groupbox-hl,
+.info .z-groupbox-hr,
+.info .z-groupbox-hm
+{
+	background: none;
+}
+
+.info .z-groupbox
+{
+	border-bottom: 20px solid white;
+}
+
+div.profileGrid
+{
+	background:none repeat scroll 0 0 white;
+	left:80px;
+	position:absolute;
+	top:50px;
+	width:60%;
+}
+
+.competitionsRow td.z-row-inner {
+	vertical-align: top;
+}
+
+.competitionsRow td.z-row-inner .z-row-cnt {
+	margin-top: 14px;
+	margin-bottom: 14px;
+}
+
+div.competitionsListbox {
+	border: 1px solid #ccc;
+	width: 200px;
+}
+
+div.competitionsListbox tr.z-listbox-odd,
+div.competitionsListbox tr.z-list-item {
+	background: none;
+}
+
+div.competitionsListbox div.z-list-cell-cnt {
+	margin-bottom: 2px;
+}
+
+div.competitionsListbox div.z-list-cell-cnt input {
+	margin-right: 6px;
+	position:relative;
+	top:3px;
+}
+
+.betsWindow .z-window-highlighted-cnt-noborder {
+	overflow: auto;
+}
+
+.matchRowCmp .matchRow {
+	width: 340px !important;
+}
+.matchRowCmp {
+	position: relative;
+}
+.matchRowCmp > .z-label {
+	position: absolute;
+	right: 4px;
+	bottom: 2px;
+	font-size: 11px;
+}
+
+.otherbetsWindow  .z-window-highlighted-cnt-noborder {
+	padding: 5px;
+	overflow: auto;
+}
+
+.otherbetsRow {
+	border-bottom:1px dotted #CCCCCC;
+	margin-bottom:3px;
+	margin-top:3px;
+	width:100%;
+}
+
+.otherbetsRow img {
+	margin-left: 55px;
+}
+
+.rankingRow:HOVER .rankingName {
+	text-decoration: underline;
+}
+
+.onlineImg {
+	visibility: hidden;
+	height: 14px;
+}
+.playerOnline .onlineImg
+{
+	visibility: visible;
+}
+
+.chatButton {
+	background: url("../images/chat.gif") no-repeat 2px 2px;
+	width: 22px;
+	height: 20px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	cursor: pointer;
+	border-left: 1px solid #bbb;
+}
+
+.cuppyChatWindow {
+	border: 2px solid #999;
+}
+
+.chatOutput {
+	border:1px solid #CCCCCC;
+	bottom:34px;
+	left:5px;
+	overflow:auto;
+	position:absolute;
+	right:3px;
+	top:30px;
+}
+
+.chatInput {
+	position: absolute;
+	height: 20px;
+	bottom: 3px;
+	left: 5px;
+	width: 95%;
+}
+
+.chatOutputEntry {
+	margin-bottom: 5px;
+	margin-left: 5px;
+}
+
+.currentUserChat {
+	color: gray;
+	font-weight: bold;
+}
+.otherUserChat {
+	color: blue;
+	font-weight: bold;
+}
+
+.chatButton .z-label {
+	color: red;
+	font-weight: bold;
+	line-height: 20px;
+}
+
+.matchesRowDate {
+	margin-top : 10px;
+}
+
+.matchesRowDate .z-label {
+	font-weight: bold;
+}
+
+.matchesWindow .matchRowCmp .matchRow {
+	width: 490px !important;
+}
+
+.matchesWindow .matchRow {
+	border : 1px solid white;
+}
+
+.matchdaySelector {
+	width: 30px;
+	margin-left: 6px;
+}
+
+.matchdaySelector .z-combobox-inp {
+	width: 30px;
+}
+.statusbar {
+	display: block;
+	margin-top: 2px;
+}
+
+.statusbar-warn {
+	display: block;
+	margin-top: 2px;
+	color: red;
+}
+
+.rankingTrendUp
+{
+	background-image: url("images/trendup.gif");
+	height: 10px;
+	width: 10px;
+}
+
+.rankingTrendUpUp
+{
+	background-image: url("images/trendupup.gif");
+	height: 10px;
+	width: 10px;
+}
+
+
+.rankingTrendDown
+{
+	background-image: url("images/trenddown.gif");
+	height: 10px;
+	width: 10px;
+}
+
+.rankingTrendDownDown
+{
+	background-image: url("images/trenddowndown.gif");
+	height: 10px;
+	width: 10px;
+}
+
+.rankingTrendNoTrend
+{
+	background-image: url("images/trendnotrend.gif");
+	height: 10px;
+	width: 10px;
+}
+
+.matchdayArrow { margin: 3px; }
+
+.matchdayArrow.z-toolbar-button-disd {
+	visibility: hidden;	
+}
+
+.betSelectMenuheader {
+	border: none !important;
+	background: none !important;
+	border-bottom: 1px solid #bbb !important;
+	padding: 0 !important;
+	color:#444;
+	font-weight: bold;
+}
+
+.betSelectMenuheader.z-menu-item a.z-menu-item-cnt {
+	color:#444;
+}
+
+.betSelectMenuheader .z-menu-item-img {
+	display: none;
+}
+
+.betSelectCnt {
+	text-align: right;
+	padding: 3px;	
+	margin: 4px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	background: url("../../cockpit/css/images/groupbox-tb.png");
+	cursor: pointer;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-o-box-border-radius: 3px;
+	-icab-border-radius: 3px;
+	-khtml-border-radius: 3px;
+}
+
+.betSelectCnt:HOVER {
+	opacity: 0.6;
+}
+
+.quickSelectImg {
+	background:url("../../cockpit/images/start_workflow_blue.png") no-repeat scroll 4px 2px transparent;
+	height:14px;
+	width:14px;
+	position:relative;
+	top:2px;
+}
+
+.betSelectCnt .z-label {
+	line-height: 16px;
+}
+
+body.mobile {
+	/*background: red;*/
+}
+
+body.mobile .zk {
+	height: auto !important;
+}
+
+body.mobile .loginContainerWindow {
+ 	position: static !important;
+	width: 303px !important;
+	background: url("../images/hybris_front_cuppy_mobile.png");
+	background-repeat: repeat-x;
+	margin-top: 10px;
+}
+
+body.mobile .login_grid.z-grid {
+	margin-left: 30px;	
+}
+
+body.mobile .login_grid .z-toolbar-button
+{
+	visibility: hidden;
+} 
+
+
+
+.statisticsStatusbar .chatButton {
+	display: none;
+}
+
+.statisticsDashoard .rankStats {
+	width: 500px;
+}
+
+.statisticsDashoard .playerStats {
+	width: 200px;
+}
+
+.statisticsDashoard .playerStats .rankingUserDetails .z-label,
+.statisticsDashoard .playerStats .rankingUserDetails .rankingUserDetailsCountry {
+	text-align: left;
+}
+
+.statisticsDashoard .playerStats .rankingUserDetailsRank {
+	background: white;
+}
+
+.statisticsDashoard .playerStats .rankingUserDetailsName {
+	overflow: hidden;
+	font-size: 11px;
+}
+
+.statisticsDashoard .playerStats .rankingUserDetails {
+	position: relative;
+	top: 15px;
+	left: 15px;
+	right: auto;
+}
+
+.statisticsDashoard .timepointStats {
+	width: 520px;
+	padding-top: 20px;
+}
+
+.statisticsDashoard .matchStats {
+	width: 250px;
+	padding-top: 20px;
+	padding-left: 10px;
+	overflow: hidden;
+}
+
+.statisticsDashoard .matchStats > div > span:first-child {
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.statisticsDashoard .matchStats > div > .z-label {
+	display: block;
+	text-align: left;
+	margin: 5px;
+}
+
+.statisticsDashoard {
+	height: 600px;
+}
+
+.statisticsDashoard > div {
+	float: left;
+	width: 400px;
+	height: 260px;
+	margin-top: 20px;
+}
+
+.cockpitYLogoDiv
+{
+	background: none;
+	display: none;	
+}

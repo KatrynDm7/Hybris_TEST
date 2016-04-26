@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:element name="widget-dashboard">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="containerlayout" type="containerlayout"/>
+				<xs:element name="widgetpositions" type="widgetpositions"/>
+			</xs:sequence>
+		</xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="containerlayout">
+		<xs:attribute name="value" type="xs:string"/>
+	 </xs:complexType>
+
+    <xs:complexType name="widgetpositions">
+    	<xs:sequence>
+    		<xs:element name="position" type="position" minOccurs="0" maxOccurs="unbounded"/>
+     	</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="position">
+		<xs:attribute name="widgetID" type="xs:string"/>
+		<xs:attribute name="column" type="xs:integer"/>
+		<xs:attribute name="row" type="xs:integer"/>
+	 </xs:complexType>
+</xs:schema>

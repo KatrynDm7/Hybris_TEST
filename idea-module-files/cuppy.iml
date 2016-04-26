@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="cuppyspring" name="cuppyspring" removed="false">
+          <file>file://$MODULE_DIR$/../bin/custom/cuppy/resources/global-cuppy-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/custom/cuppy/resources/cuppy-ws-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/custom/cuppy/resources/cuppy-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/platformservices/resources/product-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/europe1/resources/europe1-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/global-statistics-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/event-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/processing/resources/processengine-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/platformservices/resources/category-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/core-profiling-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/validation/resources/validation-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/processing/resources/task-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/global-core-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/servicelayer-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/platformservices/resources/order-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/processing/resources/processing-jmx-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/ext-cockpit/cockpit/resources/cockpit-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/media-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/processing/resources/processing-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/i18n-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/impex/resources/impex-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/core-jmx-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/platformservices/resources/catalog-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/scripting/resources/scripting-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/interceptor-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/platformservices/resources/converters-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/core-filter-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/platformservices/resources/jobs-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/user-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/comments/resources/comments-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/ext-cockpit/cockpit/resources/global-cockpit-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/global-servicelayer-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/security-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/core-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/processing/resources/cronjob-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/workflow/resources/workflow-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/core-cache.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/platformservices/resources/classification-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/global-core-jmx-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/persistence-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/core-media-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/comments/resources/comments-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/interceptor-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/global-statistics-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/event-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/core-filter-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/user-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/global-servicelayer-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/core-profiling-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/security-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/global-core-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/servicelayer-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/core-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/media-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/core-cache.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/global-core-jmx-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/i18n-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/core-jmx-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/persistence-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/core-media-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/europe1/resources/europe1-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/impex/resources/impex-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/platformservices/resources/product-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/platformservices/resources/converters-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/platformservices/resources/order-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/platformservices/resources/jobs-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/platformservices/resources/classification-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/platformservices/resources/category-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/platformservices/resources/catalog-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/processing/resources/processing-jmx-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/processing/resources/cronjob-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/processing/resources/processengine-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/processing/resources/processing-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/processing/resources/task-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/scripting/resources/scripting-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/validation/resources/validation-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/workflow/resources/workflow-spring.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/../bin/custom/cuppy/web/webroot/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/../bin/custom/cuppy/web/webroot" relative="/" />
+        </webroots>
+        <sourceRoots>
+          <root url="file://$MODULE_DIR$/../bin/custom/cuppy/src" />
+          <root url="file://$MODULE_DIR$/../bin/custom/cuppy/gensrc" />
+          <root url="file://$MODULE_DIR$/../bin/custom/cuppy/resources" />
+          <root url="file://$MODULE_DIR$/../bin/custom/cuppy/hmc/src" />
+          <root url="file://$MODULE_DIR$/../bin/custom/cuppy/hmc/resources" />
+          <root url="file://$MODULE_DIR$/../bin/custom/cuppy/web/src" />
+          <root url="file://$MODULE_DIR$/../bin/custom/cuppy/web/gensrc" />
+          <root url="file://$MODULE_DIR$/../bin/custom/cuppy/commonweb/src" />
+          <root url="file://$MODULE_DIR$/../bin/custom/cuppy/commonweb/gensrc" />
+          <root url="file://$MODULE_DIR$/../bin/custom/cuppy/acceleratoraddon/web/src" />
+          <root url="file://$MODULE_DIR$/../bin/custom/cuppy/acceleratoraddon/web/gensrc" />
+          <root url="file://$MODULE_DIR$/../bin/custom/cuppy/acceleratoraddon/hmc/src" />
+          <root url="file://$MODULE_DIR$/../bin/custom/cuppy/acceleratoraddon/hmc/resources" />
+          <root url="file://$MODULE_DIR$/../bin/custom/cuppy/backoffice/src" />
+          <root url="file://$MODULE_DIR$/../bin/custom/cuppy/backoffice/resources" />
+        </sourceRoots>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/../bin/custom/cuppy/eclipsebin" />
+    <output-test url="file://$MODULE_DIR$/../bin/custom/cuppy/eclipsebin" />
+    <exclude-output />
+    <javadoc-paths>
+      <root url="https://download.hybris.com/api/5.7.0/commercesuite" />
+    </javadoc-paths>
+    <content url="file://$MODULE_DIR$/../bin/custom/cuppy">
+      <sourceFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/gensrc" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/testsrc" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/hmc/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/hmc/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/web/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/web/gensrc" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/web/testsrc" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/commonweb/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/commonweb/gensrc" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/commonweb/testsrc" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/acceleratoraddon/web/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/acceleratoraddon/web/gensrc" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/acceleratoraddon/web/testsrc" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/acceleratoraddon/hmc/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/acceleratoraddon/hmc/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/backoffice/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/backoffice/testsrc" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/backoffice/resources" type="java-resource" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/.externalToolBuilders" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/.settings" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/acceleratoraddon/hmc/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/acceleratoraddon/web/addonsrc" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/acceleratoraddon/web/commonwebsrc" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/acceleratoraddon/web/testclasses" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/backoffice/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/commonweb/addonsrc" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/commonweb/commonwebsrc" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/commonweb/testclasses" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/eclipsebin" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/hmc/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/web/addonsrc" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/web/commonwebsrc" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/web/testclasses" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/custom/cuppy/web/webroot/WEB-INF/classes" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Common libs" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../bin/custom/cuppy/hmc/bin" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/../bin/custom/cuppy/hmc/bin" recursive="true" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module" module-name="platform" exported="" />
+    <orderEntry type="module" module-name="cockpit" exported="" />
+    <orderEntry type="module" module-name="hmc" />
+  </component>
+</module>

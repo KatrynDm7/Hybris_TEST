@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+           
+    <!-- SystemSetup for the ysapproductconfigb2baddon -->
+    <bean id="sapProductConfigSystemSetup" class="de.hybris.platform.sap.productconfig.frontend.setup.ProductConfigSetup"  parent="abstractCoreSystemSetup">
+    </bean>
+
+    <alias name="sapProductConfigDefaultValidator" alias="sapProductConfigValidator" />
+	<bean id="sapProductConfigDefaultValidator" class="de.hybris.platform.sap.productconfig.frontend.validator.ProductConfigurationValidator">
+		<property name="numericChecker" ref="sapProductConfigNumericChecker" />
+	</bean>
+
+    <alias name="sapProductConfigDefaultNumericChecker" alias="sapProductConfigNumericChecker" />
+	<bean id="sapProductConfigDefaultNumericChecker" class="de.hybris.platform.sap.productconfig.frontend.validator.NumericCheckerImpl">
+	</bean>
+	
+	<alias name="sapProductConfigDefaultConflictChecker" alias="sapProductConfigConflictChecker" />
+	<bean id="sapProductConfigDefaultConflictChecker" class="de.hybris.platform.sap.productconfig.frontend.validator.ConflictCheckerImpl">
+	</bean>
+	
+		<bean id="cmsConfigurableProductRestrictionEvaluator" class=" de.hybris.platform.sap.productconfig.frontend.evaluator.CMSConfigurableProductRestrictionEvaluator"
+		scope="tenant">
+			<property name="configurableSource" value="${sapproductconfigservices.configurable_fieldname}" />
+			<property name="modelService" ref="modelService"/>
+		</bean>
+	
+
+	<bean id="cmsConfigurableProductRestrictionEvaluatorMapping" class="de.hybris.platform.cms2.servicelayer.services.evaluator.CMSRestrictionEvaluatorMapping"
+		scope="tenant">
+		<property name="restrictionTypeCode" value="CMSConfigurableProductRestriction" />
+		<property name="restrictionEvaluator" ref="cmsConfigurableProductRestrictionEvaluator" />
+	</bean>
+	<bean id="configurableProductRestrictionDynamicDescription" class="de.hybris.platform.sap.productconfig.frontend.attributehandlers.ConfigurableProductRestrictionDynamicDescription" scope="tenant" />
+</beans>

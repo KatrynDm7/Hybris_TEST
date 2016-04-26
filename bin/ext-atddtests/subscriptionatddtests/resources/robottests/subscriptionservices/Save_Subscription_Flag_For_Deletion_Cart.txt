@@ -1,0 +1,60 @@
+*** Settings ***
+Test Setup    import commercecart sampledata
+Test Teardown    reset system
+Resource    commerce/CommerceServices_Keywords.txt
+Resource    commerce/SubscriptionCommerce_Keywords.txt
+Resource    subscriptionservices/SubscriptionProduct_Keywords.txt
+Resource    subscriptionservices/SubscriptionPricePlan_Keywords.txt
+
+*** Variables ***
+${customer}=    testuser@saved-carts.com
+${saveCartName1}=    Saved Cart 1
+${saveCartDescription1}=    This is a saved cart.
+
+*** Test Cases ***
+Test_Flag_For_Deletion_Subscription_Cart_For_Subscription_Product
+    [Documentation]    This test case flag a customer cart for deletion with a subscription product which has entries in the master cart and the monthly cart
+    create subscription product "SP1"
+    for product "SP1" add subscription priceplan "SPP1" with currency "USD"
+    for subscription priceplan "SPP1" add recurring charge of "20" with cycle start "0"
+    create customer "${customer}" with currency "USD"
+    login customer with id "${customer}"
+    ${sessionCart}=    get session cart
+    add product "SP1" to cart
+    verify that number of child carts is "1"
+    ${savedCart}=    save cart with name "${saveCartName1}" and description "${saveCartDescription1}"
+    Should be Equal    ${savedCart.name}   ${saveCartName1}
+    Should be Equal    ${savedCart.description}   ${saveCartDescription1}
+    ${monthlyCart}=    get cart data for billing time "monthly" and master cart "${savedCart}"
+    Should be Equal    ${monthlyCart.saveTime}   ${savedCart.saveTime}
+    Should be Equal    ${monthlyCart.expirationTime}   ${savedCart.expirationTime}
+    ${FlaggedCart}=    flag for deletion    ${savedCart}
+    ${monthlyCart}=    get cart data for billing time "monthly" and master cart "${savedCart}"
+    Should be Equal    ${FlaggedCart.name}    ${null}
+    Should be Equal    ${FlaggedCart.description}    ${null}
+    Should be Equal    ${FlaggedCart.saveTime}    ${null}
+    Should be Equal    ${FlaggedCart.savedBy}    ${null}
+    Should be Equal    ${FlaggedCart.expirationTime}    ${null}
+    Should be Equal    ${monthlyCart.name}    ${null}
+    Should be Equal    ${monthlyCart.description}    ${null}
+    Should be Equal    ${monthlyCart.saveTime}    ${null}
+    Should be Equal    ${monthlyCart.savedBy}    ${null}
+    Should be Equal    ${monthlyCart.expirationTime}    ${null}
+
+Test_Flag_For_Deletion_Child_Cart
+    create subscription product "SP1"
+    for product "SP1" add subscription priceplan "SPP1" with currency "USD"
+    for subscription priceplan "SPP1" add recurring charge of "20" with cycle start "0"
+    create customer "${customer}" with currency "USD"
+    login customer with id "${customer}"
+    ${sessionCart}=    get session cart
+    add product "SP1" to cart
+    verify that number of child carts is "1"
+    ${savedCart}=    save cart with name "${saveCartName1}" and description "${saveCartDescription1}"
+    Should be Equal    ${savedCart.name}   ${saveCartName1}
+    Should be Equal    ${savedCart.description}   ${saveCartDescription1}
+    ${monthlyCart}=    get cart data for billing time "monthly" and master cart "${savedCart}"
+    Should be Equal    ${monthlyCart.saveTime}   ${savedCart.saveTime}
+    Should be Equal    ${monthlyCart.expirationTime}   ${savedCart.expirationTime}
+    Run Keyword And Expect Error    CommerceSaveCartException: * is a child cart. Only master carts can be saved.
+    ...    flag for deletion    ${monthlyCart}

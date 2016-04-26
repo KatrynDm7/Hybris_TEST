@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widgets.xsd">
+
+   <widget-extension widgetId="editorArea">
+      <widget id="yformbuilder" widgetDefinitionId="de.hybris.platform.xyformsbackoffice.widgets.yformbuilder"
+         slotId="cockpitWidgetChildrenInvisible" title="[yForms] Form Builder" template="true">
+         <instance-settings socketEventRoutingMode="LAST_USED">
+            <create onInit="false" reuseExisting="true">
+               <all-incoming-events />
+            </create>
+            <close />
+            <select onInit="false">
+               <all-incoming-events />
+            </select>
+         </instance-settings>
+      </widget>
+      <widget id="createyformdefinitioncounterpart" widgetDefinitionId="de.hybris.platform.xyformsbackoffice.widgets.createyformdefinitioncounterpart"
+         slotId="cockpitWidgetChildrenInvisible" title="[yForms] Create yForm Definition Counterpart">
+      </widget>
+   </widget-extension>
+
+   <!-- Connection between editForm and yformBuilder -->
+   <widget-connection sourceWidgetId="STUB_de.hybris.platform.xyformsbackoffice.actions.edit" outputId="yformDefinition"
+                      targetWidgetId="yformbuilder" inputId="yformDefinition" />
+
+   <!-- Connection between cloneForm and configurableFlow -->
+   <widget-connection sourceWidgetId="STUB_de.hybris.platform.xyformsbackoffice.actions.clone" outputId="context" 
+                      targetWidgetId="configurableFlow" inputId="context"/>
+   
+   <!-- Connection between configurableFlow and createformcounterpart -->
+   <widget-connection sourceWidgetId="configurableFlow" outputId="wizardResult" 
+                      targetWidgetId="createyformdefinitioncounterpart" inputId="wizardResult" />
+   
+   <!-- Connection between createformcounterpart and editorArea -->
+   <widget-connection sourceWidgetId="createyformdefinitioncounterpart" outputId="yformDefinition"
+                      targetWidgetId="editorArea" inputId="inputObject"/>
+                      
+   <!-- Once the builder has been closed, the editorArea is refreshed -->
+   <widget-connection sourceWidgetId="yformbuilder" outputId="yformDefinition"
+                      targetWidgetId="editorArea" inputId="inputObject"/>
+
+   <!-- Connection between archiveAction and editorArea -->
+   <widget-connection sourceWidgetId="STUB_de.hybris.platform.xyformsbackoffice.actions.archive" outputId="yformDefinition"
+                      targetWidgetId="editorArea" inputId="inputObject"/>
+
+</widgets>

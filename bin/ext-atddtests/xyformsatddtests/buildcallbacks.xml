@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+<project name="xyformsatddtests_buildcallbacks">
+
+	<macrodef name="xyformsatddtests_after_clean">
+		<sequential>
+			<atdd_clean ext="xyformsatddtests"/>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="xyformsatddtests_before_build">
+		<sequential>
+			<mkdir dir="${ext.xyformsatddtests.path}/resources/robottests"/>
+			<mkdir dir="${ext.xyformsatddtests.path}/resources/robotkeywords"/>
+			<mkdir dir="${ext.xyformsatddtests.path}/genresources"/>
+			<mkdir dir="${ext.xyformsatddtests.path}/testsrc"/>
+			<mkdir dir="${ext.xyformsatddtests.path}/classes"/>
+			<atdd_generate_proxies ext="xyformsatddtests"/>
+		</sequential>
+	</macrodef>
+	
+</project>

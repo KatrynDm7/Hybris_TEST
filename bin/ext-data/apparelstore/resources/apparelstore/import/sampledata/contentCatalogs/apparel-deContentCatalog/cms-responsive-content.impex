@@ -1,0 +1,302 @@
+# 
+# ImpEx for Responsive Apparel DE Site CMS Content 
+# 
+$contentCatalog=apparel-deContentCatalog 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged] 
+ 
+$productCatalog=apparelProductCatalog 
+$productCatalogName=Apparel Product Catalog 
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged] 
+$picture=media(code, $contentCV) ;
+$siteResource=jar:de.hybris.platform.apparelstore.constants.ApparelstoreConstants&/apparelstore/import/sampledata/contentCatalogs/$contentCatalog
+$jarResourceCms=jar:de.hybris.platform.apparelstore.constants.ApparelstoreConstants&/apparelstore/import/sampledata/cockpits/cmscockpit
+
+
+# Load the storefront context root config param
+$storefrontContextRoot=$config-storefrontContextRoot
+
+##  Remove the language currency component from the search and place a tag in the footer
+# CMS SearchBox Components
+INSERT_UPDATE SearchBoxComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;SearchBox;Search Box;SearchBox
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;SearchBoxSlot;SearchBox
+
+INSERT_UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];wrapAfter;showLanguageCurrency
+;;FooterComponent;2;true
+
+#################    HOME PAGE START     #################  
+
+###  Home page splash Slot 1  #######
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef
+;;ApparelDEHompageSplashBannerComponent;ApparelDE Homepage Splash Banner Component;/Collections/Snow/c/snow;ApparelDEHompageSplashBannerComponent
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef
+;;ApparelDEHompageSaveBannerComponent;Electronics Homepage Discount Banner Component;/Collections/Snow/c/snow;ApparelDEHompageSaveBannerComponent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
+;;Section1Slot-ApparelDEHomepage;true;ApparelDEHompageSplashBannerComponent,ApparelDEHompageSaveBannerComponent
+
+###  Home page slot 2A  ####
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef
+;;ApparelDEHompageWomenStreetBannerComponent;ApparelDE Homepage Women Dress Banner Component;Categories/Streetwear-women/Skirts-and-Dresses-women/c/260700;ApparelDEHompageWomenStreetBannerComponent
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef
+;;ApparelDEHompageMenStreetBannerComponent;ApparelDE Homepage Men Shirt Banner Component;Categories/Streetwear-men/T-Shirts-men/c/250100;ApparelDEHompageMenStreetBannerComponent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
+;;Section2ASlot-ApparelDEHomepage;true;ApparelDEHompageWomenStreetBannerComponent,ApparelDEHompageMenStreetBannerComponent
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true];;;
+;;Section2A-ApparelDEHomepage;Section2A;;Section2ASlot-ApparelDEHomepage;;;
+
+#### Home section 2B #######
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef
+;;ApparelDEHompageStreetYouthBannerComponent;ApparelDE Homepage Youth Shorts Banner Component;Categories/Streetwear-youth/Boardshorts-youth/c/270600;ApparelDEHompageStreetYouthBannerComponent
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef
+;;ApparelDEHompageBrandsBannerComponent;ApparelDE Homepage Brands Banner Component Child;Brands/c/brands;ApparelDEHompageBrandsBannerComponent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
+;;Section2BSlot-Homepage;true;ApparelDEHompageStreetYouthBannerComponent,ApparelDEHompageBrandsBannerComponent
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true];;;
+;;Section2B-ApparelDEHomepage;Section2B;;Section2BSlot-Homepage;;;
+
+## Home section 3
+INSERT_UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];name;products(code,$productCV);scroll(code);popup;&componentRef
+;;ApparelDEHomepageProductCarouselComponent;Best Selling Products;29533,45572,M33477_B,300310300,300045375,300022356,300047513;allVisible;false;ApparelDEHomepageProductCarouselComponent
+
+INSERT_UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];name;products(code,$productCV);scroll(code);popup;&componentRef
+;;NewApparelDEHomepageProductCarouselComponent;What's New ApparelDE Homepage Product Carousel;29531,300046592,300015407,300040462,M27160_B,M33477_B,300310300,300044599,300005449,300441142;allVisible;false;NewApparelDEHomepageProductCarouselComponent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;Section3Slot-Homepage;ApparelDEHomepageProductCarouselComponent,NewApparelDEHomepageProductCarouselComponent
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true];;;
+;;Section3Slot-Homepage;Section3;;Section3Slot-Homepage;;;
+
+#### Section 4
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;ApparelDEHompageSmDiscountBannerComponent;ApparelDE Homepage Small Discount Banner Component;ApparelDEHompageSmDiscountBannerComponent
+;;ApparelDEHompageShopBannerComponent;ApparelDE Homepage Shop Banner Component;ApparelDEHompageShopBannerComponent
+;;ApparelDEHompageShipmentBannerComponent;ApparelDE Homepage Shipment Banner Component;ApparelDEHompageShipmentBannerComponent
+;;ApparelDEHompageServiceBannerComponent;ApparelDE Homepage Service Banner Component;ApparelDEHompageServiceBannerComponent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
+;;Section4Slot-Homepage;true;ApparelDEHompageSmDiscountBannerComponent,ApparelDEHompageShopBannerComponent,ApparelDEHompageShipmentBannerComponent,ApparelDEHompageServiceBannerComponent
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true];;;
+;;Section4Slot-Homepage;Section4;;Section4Slot-Homepage;;;
+
+#### Section 5
+## Home section 2C
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;ApparelDEHompageFreeDelBannerComponent;ApparelDE Homepage Free Delivery Banner Component;ApparelDEHompageFreeDelBannerComponent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
+;;Section5Slot-Homepage;true;ApparelDEHompageFreeDelBannerComponent
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true];;;
+;;Section5Slot-Homepage;Section5;;Section5Slot-Homepage;;;
+
+#################    HOME PAGE END     #################
+
+#################    MY ACCOUNT START    #################
+
+#### Remove everything related to my account home page and profile overview page for responsive
+
+REMOVE ContentSlot;$contentCV[unique=true];uid[unique=true]
+;;SideContent-Account
+;;SideContent-profile
+
+REMOVE ContentPage;$contentCV[unique=true];uid[unique=true]
+;;account
+;;profile
+
+##### Add AccountOrderDetailsActionsComponent
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;AccountOrderDetailsHeadlineComponent;Account Order Details Headline Component;accountOrderDetailHeadline.jsp;;AccountOrderDetailsHeadlineComponent
+;;AccountOrderDetailsTotalsComponent;Account Order Details Order Totals Component;accountOrderDetailOrderTotals.jsp;;AccountOrderDetailsTotalsComponent
+;;AccountOrderDetailsShippingComponent;Account Order Details Shipping Info Component;accountOrderDetailShippingInfo.jsp;;AccountOrderDetailsShippingComponent
+;;AccountOrderDetailsItemsComponent;Account Order Details Items Info Component;accountOrderDetailItems.jsp;;AccountOrderDetailsItemsComponent
+;;AccountOrderDetailsActionsComponent;Account Order Details Actions Component;accountOrderDetailActions.jsp;;AccountOrderDetailsActionsComponent
+
+###### Empty account page SideContent and BodyContent slots
+UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef);
+;;SideContent-payment-details;;
+;;SideContent-address-book;;
+;;SideContent-add-edit-address;;
+;;SideContent-orders;;
+;;SideContent-orderdetail;;
+;;SideContent-updatePassword;;
+;;SideContent-update-profile;;
+;;SideContent-update-email;;
+;;BodyContent-orderdetail;AccountOrderDetailsHeadlineComponent,AccountOrderDetailsItemsComponent,AccountOrderDetailsShippingComponent,AccountOrderDetailsTotalsComponent,AccountOrderDetailsActionsComponent;
+
+#################    MY ACCOUNT END    #################
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid, $contentCV)
+;;TopContentSlot-cartPage;Top Content Slot for Cart Page;true;CartComponent
+
+INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];masterTemplate(uid,$contentCV);
+;;SnowCategoryPage;ProductGridPageTemplate;
+
+INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];masterTemplate(uid,$contentCV);
+;;StreetCategoryPage;ProductGridPageTemplate;
+
+# Site Logo
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];altText;folder(qualifier)[default='images']
+;;/images/theme/logo-hybris-responsive.png;logo-hybris-responsive.png;$siteResource/images/theme/logo-hybris-responsive.png;image/png;hybris Accelerator;
+
+### Checkout Login
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;ReturningCustomerCheckoutLoginComponent;ReturningCustomerCheckoutLoginComponent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef);;;
+;;LeftContentSlot-checkout-login;ReturningCustomerCheckoutLoginComponent;;;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='checkout-login'];contentSlot(uid,$contentCV)[unique=true];;;
+;;LeftContentSlot-checkout-login;LeftContentSlot;;LeftContentSlot-checkout-login;;;
+
+# Remove view store action from store finder component
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];actions(uid,$contentCV);
+;;StoreFinderComponent;;
+
+# Remove new customer component from the center slot of the checkout login page
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;CenterContentSlot-checkout-login;Center Content Slot for Checkout Login;true;;;;
+
+# create cms link components for my account pages
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow']
+;;PersonalDetailsLink;PersonalDetailsLink;/my-account/update-profile;PersonalDetailsLink;
+;;UpdateEmailLink;UpdateEmailLink;/my-account/update-email;UpdateEmailLink;
+;;UpdatePasswordLink;UpdatePasswordLink;/my-account/update-password;UpdatePasswordLink;
+;;AddressBookLink;AddressBookLink;/my-account/address-book;AddressBookLink;
+;;PaymentDetailsLink;PaymentDetailsLink;/my-account/payment-details;PaymentDetailsLink;
+;;OrderHistoryLink;OrderHistoryLink;/my-account/orders;OrderHistoryLink;
+
+# create navigation root node for my account & child nodes for the root node 
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef
+;MyAccountNavNode;;My Account Nav;SiteRootNode;;MyAccountNavNode
+# children for my account
+;PersonalDetailsNavNode;;PersonalDetailsNavNode;MyAccountNavNode;;PersonalDetailsNavNode
+;UpdateEmailNavNode;;UpdateEmailNavNode;MyAccountNavNode;;UpdateEmailNavNode
+;PaymentDetailsNavNode;;PaymentDetailsNavNode;MyAccountNavNode;;PaymentDetailsNavNode
+;ChangePasswordNavNode;;ChangePasswordNavNode;MyAccountNavNode;;ChangePasswordNavNode
+;OrderHistoryNavNode;;OrderHistoryNavNode;MyAccountNavNode;;OrderHistoryNavNode
+;AddressBookNavNode;;AddressBookNavNode;MyAccountNavNode;;AddressBookNavNode
+
+# create cms navigation entry for nvaigation child nodes
+INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;navigationNode(&nodeRef);item(&linkRef);
+;PersonalDetailsNavNodeEntry;;PersonalDetailsNavNodeEntry;PersonalDetailsNavNode;PersonalDetailsLink;
+;UpdateEmailNavNodeEntry;;UpdateEmailNavNodeEntry;UpdateEmailNavNode;UpdateEmailLink;
+;ChangePasswordNavNodeEntry;;ChangePasswordNavNodeEntry;ChangePasswordNavNode;UpdatePasswordLink;
+;AddressBookNavNodeEntry;;AddressBookNavNodeEntry;AddressBookNavNode;AddressBookLink;
+;PaymentDetailsNavNodeEntry;;PaymentDetailsNavNodeEntry;PaymentDetailsNavNode;PaymentDetailsLink;
+;OrderHistoryNavNodeEntry;;OrderHistoryNavNodeEntry;OrderHistoryNavNode;OrderHistoryLink;
+
+# create navigation component for my account
+INSERT_UPDATE NavigationComponent;$contentCV[unique=true];uid[unique=true];name;styleClass;&componentRef;navigationNode(&nodeRef)
+;;MyAccountComponent;My Account;accNavComponent;MyAccountComponent;MyAccountNavNode
+
+# create a user restriction
+INSERT_UPDATE CMSUserRestriction;$contentCV[unique=true];&userRestriction;name;uid[unique=true];users(uid)
+;;anonymousUserRestriction;Anonymous User Restriction;anonymousUserRestriction;anonymous
+
+# create a inverse restriction
+INSERT_UPDATE CMSInverseRestriction;$contentCV[unique=true];name;originalRestriction(&userRestriction)[allownull=true];uid[unique=true];components(&componentRef)
+;;Logged in User;anonymousUserRestriction;loggedInUser;MyAccountComponent
+
+# add my account navigation component to a content slot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(uid,$contentCV)
+;;HeaderLinksSlot;MyAccountComponent
+
+##############################################################################################################
+############ remove all the account related links, components and nodes							 #############
+############ remove the INSERT_UPDATE & REMOVE statements when merging with desktop.			 #############
+##############################################################################################################
+REMOVE CMSLinkComponent;uid[unique=true];$contentCV[unique=true]
+;AccountHomeLink;
+;AccountProfileLink;
+;AccountPersonalDetailsLink;
+;AccountUpdatePasswordLink;
+;AccountAddressBookLink;
+;AccountManageAddressLink;
+;AccountPaymentDetailsLink;
+;AccountManagePaymentDetailsLink;
+;AccountOrderHistoryLink;
+;AccountViewOrderHistoryLink;
+
+REMOVE CMSNavigationNode;uid[unique=true];$contentCV[unique=true]
+;AccountProfileNavNode;
+;AccountAddressBookNavNode;
+;AccountPaymentDetailsNavNode;
+;AccountOrderHistoryNavNode;
+;AccountLeftNavNode;
+
+REMOVE AccountNavigationComponent;uid[unique=true];$contentCV[unique=true]
+;AccountLeftNavigationComponent;
+;AccountProfileNavigationComponent;
+;AccountAddressBookNavigationComponent;
+;AccountPaymentDetailsNavigationComponent;
+;AccountOrderHistoryNavigationComponent;
+
+REMOVE AccountNavigationCollectionComponent;uid[unique=true];$contentCV[unique=true]
+;AccountHomepageComponent;
+
+# CMS Paragraph Component (Contact information) 
+REMOVE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]
+;;ContactInfo
+
+##############################################################################################################
+############ 									end												 #############
+############ 																					 #############
+##############################################################################################################
+
+###### Update the Brands Category Page #####
+
+INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved'];previewImage(code, $contentCV)
+;;BrandsCategoryPage;Brands Category Page;ProductGridPageTemplate;false;;brandsCategoryPage
+
+##### End Update the Brands Category Page #####
+
+###### Apparel Snow Category Landing Page ######
+
+INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved'];previewImage(code, $contentCV)
+;;SnowCategoryPage;Snow Category Page;CategoryPageTemplate;false;;;
+
+INSERT_UPDATE CMSCategoryRestriction;$contentCV[unique=true];uid[unique=true];name;categories(code, $productCV);pages(uid, $contentCV)
+;;Snow-LandingPageRestriction;Restriction for Snow;snow;SnowCategoryPage
+
+##### Section 1 ######
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef
+;;ApparelDESnowSplashBannerComponent;Snow Splash Banner Component;;ApparelDESnowSplashBannerComponent
+;;ApparelDESnowAccessoriesBannerComponent;Snow Accessories Banner Component;Categories/Accessories/c/220000;ApparelDESnowAccessoriesBannerComponent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
+;;Section1Slot-Snow;true;ApparelDESnowSplashBannerComponent,ApparelDESnowAccessoriesBannerComponent
+
+##### Section 2 ######
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef
+;;ApparelDESnowBeanieBannerComponent;Apparel DE Snow Beanie Banner Component;Categories/Accessories/Beanies/The-Life-Beanie/p/300476946;ApparelDESnowBeanieBannerComponent
+;;ApparelDESnowKryptonBannerComponent;Apparel DE Snow Krypton Banner Component;Categories/Freeski/Ski-Boots/KyrptonRampage-11-12/p/300467248;ApparelDESnowKryptonBannerComponent
+;;ApparelDESnowAndoverJcktBannerComponent;Apparel DE Snow Andover Jacket Banner Component;Categories/Snowwear-men/Snow-Jackets/Andover-Jacket/p/300410966;ApparelDESnowAndoverJcktBannerComponent
+;;ApparelDESnowBeaconJcktBannerComponent;Apparel DE Snow Beacon Jacket Banner Component;Categories/Snowwear-men/Snow-Jackets/BeaconJacket/p/300441355;ApparelDESnowBeaconJcktBannerComponent
+;;ApparelDESnowTropeBeanieBannerComponent;Apparel DE Snow Trop Beanie Banner Component;Categories/Accessories/Beanies/Trope-Beanie/p/300415713;ApparelDESnowTropeBeanieBannerComponent
+;;ApparelDESnowSludgeJcktBannerComponent;Apparel DE Snow Sludge Jacket Banner Component;Categories/Snowwear-youth/Snow-Jackets-youth/Sludge-Jacket-youth/p/300410422;ApparelDESnowSludgeJcktBannerComponent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
+;;Section2Slot-Snow;true;ApparelDESnowBeanieBannerComponent,ApparelDESnowKryptonBannerComponent,ApparelDESnowAndoverJcktBannerComponent,ApparelDESnowBeaconJcktBannerComponent,ApparelDESnowTropeBeanieBannerComponent,ApparelDESnowSludgeJcktBannerComponent
+
+##### Section 3 #####
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
+;;Section3Slot-Snow;true;ApparelDEHompageFreeDelBannerComponent
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='SnowCategoryPage'];contentSlot(uid,$contentCV)[unique=true]
+;;Section1-Snow;Section1;;Section1Slot-Snow
+;;Section2-Snow;Section2;;Section2Slot-Snow
+;;Section3-Snow;Section3;;Section3Slot-Snow
+
+###### End Apparel Snow Category Landing Page ######

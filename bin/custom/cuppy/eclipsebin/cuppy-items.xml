@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2009 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<enumtypes>
+		<enumtype generate="true" code="CompetitionType" autocreate="true">
+			<description>Sets the type of competition on which the frontend will behave slightly different.</description>
+			<value code="league">
+				<description>Competition is a league, so no tournament view will be available.</description>
+			</value>
+			<value code="tournament">
+				<description>Competition is a tournament, so the tournament view will be available.</description>
+			</value>
+		</enumtype>
+	</enumtypes>
+
+	<relations>
+		<relation
+			generate="true"
+			localized="false"
+			code="PlayerCountryRelation"
+			autocreate="true">
+			<description>A player belongs to exactly one country (nation). Specifies the nation flag shown for player and default session language.</description>
+			<sourceElement type="Player" qualifier="players" cardinality="many">
+				<description>All players of this country (nation).</description>
+			</sourceElement>
+			<targetElement type="Country" qualifier="country" cardinality="one">
+				<description>The country (nation) a player belongs to.</description>
+				<modifiers optional="false"/>
+			</targetElement>
+		</relation>
+		
+		<relation
+			generate="true"
+			localized="false"
+			code="PlayerMatchBetRelation"
+			autocreate="true">
+			<description>A player can have bets on matches. A bet is owned by exactly one player.</description>
+			<sourceElement type="MatchBet" qualifier="matchBets" cardinality="many">
+				<description>All bets of the player.</description>
+				<modifiers partof="true"/>
+			</sourceElement>
+			<targetElement type="Player" qualifier="player" cardinality="one">
+				<description>The player this bet belongs to.</description>
+				<modifiers unique="true" optional="false"/>
+			</targetElement>
+		</relation>
+		
+		<relation
+			generate="true"
+			localized="false"
+			code="MatchBetMatchRelation"
+			autocreate="true">
+			<description>A match can have bets placed on. A bet is valid for exactly one match.</description>
+			<sourceElement type="MatchBet" qualifier="matchBets" cardinality="many">
+				<description>The bets placed on this match.</description>
+				<modifiers partof="true"/>
+			</sourceElement>
+			<targetElement type="Match" qualifier="match" cardinality="one">
+				<description>The match this bet belongs to.</description>
+				<modifiers unique="true" optional="false"/>
+			</targetElement>
+		</relation>
+		
+		<relation
+			generate="true"
+			localized="false"
+			code="MatchGroupRelation"
+			autocreate="true">
+			<description>A group consists of matches. Each match must belong to exactly one group.</description>
+			<sourceElement type="Match" qualifier="matches" cardinality="many">
+				<description>The matches of a group</description>
+			</sourceElement>
+			<targetElement type="Group" qualifier="group" cardinality="one">
+				<description>The group the match belongs to.</description>
+				<modifiers optional="false" unique="true"/>
+			</targetElement>
+		</relation>
+		
+		<relation
+			generate="true"
+			localized="false"
+			code="MatchGuestTeamRelation"
+			autocreate="true">
+			<description>A match has exactly one guest team. A team can play in several matches as guest team.</description>
+			<sourceElement type="Match" qualifier="guestMatches" cardinality="many">
+				<description>The matches the team is playing as guest team.</description>
+			</sourceElement>
+			<targetElement type="Team" qualifier="guestTeam" cardinality="one">
+				<description>The guest team of the match.</description>
+				<modifiers optional="false"/>
+			</targetElement>
+		</relation>
+		
+		<relation
+			generate="true"
+			localized="false"
+			code="MatchHomeTeamRelation"
+			autocreate="true">
+			<description>A match has exactly one home team. A team can play in several matches as home team.</description>
+			<sourceElement type="Match" qualifier="homeMatches" cardinality="many">
+				<description>The matches the team is playing as home team.</description>
+			</sourceElement>
+			<targetElement type="Team" qualifier="homeTeam" cardinality="one">
+				<description>The home team of the match.</description>
+				<modifiers optional="false"/>
+			</targetElement>
+		</relation>
+		
+		<relation
+			generate="true"
+			localized="false"
+			code="CompetitionGroupRelation"
+			autocreate="true">
+			<description>A competition consists of groups. A group belongs to exactly one competition.</description>
+			<sourceElement type="Competition" qualifier="competition" cardinality="one">
+				<description>The competition this group belongs to.</description>
+				<modifiers optional="false" unique="true"/>
+			</sourceElement>
+			<targetElement type="Group" qualifier="groups" cardinality="many">
+				<description>The groups the competition consists of.</description>
+			</targetElement>
+		</relation>
+		
+		<relation
+			generate="true"
+			localized="false"
+			code="CompetitionNewsRelation"
+			autocreate="true">
+			<description>A competition can have news. A news belongs to a compeition or not (which means it is valid for all competitions).</description>
+			<sourceElement type="Competition" qualifier="competition" cardinality="one">
+				<description>The competition this news belongs to. If null it belongs to every competition.</description>
+			</sourceElement>
+			<targetElement type="News" qualifier="news" cardinality="many">
+				<description>All news of the competition (excluding news without explicitly assigned comeptition).</description>
+			</targetElement>
+		</relation>
+		
+		<relation
+			generate="true"
+			localized="false"
+			code="CompetitionPlayerRelation"
+			autocreate="true">
+			<description>A player can have active competitions (the player will see them at frontend to bet on). A competition can have players registered for. </description>
+			<deployment table="CompetitionPlayerRel" typecode="168"/>
+			<sourceElement type="Competition" qualifier="competitions" cardinality="many" collectiontype="set">
+				<description>Competitions a player has activated. Competitions will be selectable for player at frontend</description>
+			</sourceElement>
+			<targetElement type="Player" qualifier="players" cardinality="many" collectiontype="set">
+				<description>Players having the competition activated. Competition will be selectable for this player at frontend.</description>
+			</targetElement>
+		</relation>
+	</relations>
+	
+	<itemtypes>
+		<itemtype 
+			code="ProfilePicture"
+			autocreate="true"
+			generate="true"
+			extends="Media"
+			jaloclass="de.hybris.platform.cuppy.jalo.ProfilePicture">
+			<description>A media having a typical profile picture as binary.</description>
+		</itemtype>
+		
+		<itemtype 
+			code="CountryFlag"
+			autocreate="true"
+			generate="true"
+			extends="Media"
+			jaloclass="de.hybris.platform.cuppy.jalo.CountryFlag">
+			<description>A media having a nation flag as binary.</description>
+		</itemtype>
+
+		<itemtype
+			code="User"
+			autocreate="false"
+			generate="false">
+			<attributes>
+				<attribute qualifier="profilePicture" type="ProfilePicture" redeclare="true">
+					<modifiers initial="false" read="true" write="true"
+						optional="true" />
+					<persistence type="property" />
+					<description>Media managing the profile picture of this player.</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype
+			code="Player"
+			autocreate="true"
+			generate="true"
+			extends="User"
+			jaloclass="de.hybris.platform.cuppy.jalo.Player">
+			<attributes>
+				<attribute type="java.lang.String" qualifier="eMail">
+					<persistence type="property"/>
+					<modifiers optional="false"/>
+					<description>EMail address of the player where cuppy related mails will be send to.</description>
+				</attribute>
+				<attribute type="boolean" qualifier="confirmed">
+					<modifiers optional="true"/>
+					<persistence type="property"/>
+					<defaultvalue>Boolean.FALSE</defaultvalue>
+					<description>If true the player will be able to login to frontend.</description>
+				</attribute>
+				<attribute type="PlayerPreferences" qualifier="preferences">
+					<modifiers optional="true" partof="true"/>
+					<persistence type="property"/>
+					<description>References the container for managing frontend related preferences of the player.</description>
+				</attribute>
+				<attribute type="boolean" qualifier="sendNewsletter">
+					<defaultvalue>Boolean.FALSE</defaultvalue>
+					<persistence type="property"/>
+					<description>If true the player will get mails for news published by mail related to competitions the player has activated</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype
+			code="Country"
+			autocreate="false"
+			generate="false">
+			<attributes>
+				<attribute type="CountryFlag" qualifier="flag">
+					<persistence type="property"/>
+					<description>Media managing flag picture of this country.</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype
+			code="Team"
+			autocreate="true"
+			generate="true"
+			extends="Country"
+			jaloclass="de.hybris.platform.cuppy.jalo.Team">
+			<description>Represents a team playing in a match as home or guest.</description>
+			<attributes>
+				<attribute type="boolean" qualifier="dummy">
+					<modifiers optional="false"/>
+					<persistence type="property"/>
+					<description>If true, the team will act as a placeholder</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype
+			code="Competition"
+			autocreate="true"
+			generate="true"
+			extends="GenericItem"
+			jaloclass="de.hybris.platform.cuppy.jalo.Competition">
+			<description>A competition managing matches structured by groups.</description>
+			<deployment table="CuppyCompetition" typecode="166"/>
+			<attributes>
+				<attribute type="java.lang.String" qualifier="code">
+					<persistence type="property"/>
+					<modifiers optional="false" unique="true"/>
+					<description>Unique identifier of a competition.</description>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="name">
+					<persistence type="property"/>
+					<modifiers optional="true"/>
+					<description>Name of the competition.</description>
+				</attribute>
+				<attribute type="CompetitionType" qualifier="type">
+					<persistence type="property"/>
+					<modifiers optional="true"/>
+					<defaultvalue>em().getEnumerationValue("CompetitionType","tournament")</defaultvalue>
+					<description>Type of competition indicating how to present it at frontend.</description>
+				</attribute>
+				<attribute type="boolean" qualifier="Finished">
+					<persistence type="property"/>
+					<description>Is this competition finished and with that no bets can be placed
+					 anymore and all results are calculated.</description>
+				</attribute>
+			</attributes>
+			<indexes>
+				<index name="Competition_unique" unique="true">
+					<key attribute="code"/>
+				</index>
+			</indexes>
+		</itemtype>
+		
+		<itemtype
+			code="MatchBet"
+			autocreate="true"
+			generate="true"
+			extends="GenericItem"
+			jaloclass="de.hybris.platform.cuppy.jalo.MatchBet">
+			<description>A bet of a player on a match.</description>
+			<deployment table="CuppyMatchBet" typecode="160"/>
+			<attributes>
+				<attribute type="int" qualifier="guestGoals">
+					<persistence type="property"/>
+					<modifiers optional="false"/>
+					<description>Amount of goals for guest team at end of match.</description>
+				</attribute>
+				<attribute type="int" qualifier="homeGoals">
+					<persistence type="property"/>
+					<modifiers optional="false"/>
+					<description>Amount of goals for home team at end of match.</description>
+				</attribute>
+			</attributes>
+			<indexes>
+				<index name="MatchBet_unique" unique="true">
+					<key attribute="player"/>
+					<key attribute="match"/>
+				</index>
+			</indexes>
+		</itemtype>
+		
+		<itemtype code="Match"
+			autocreate="true"
+			generate="true"
+			extends="GenericItem"
+			jaloclass="de.hybris.platform.cuppy.jalo.Match">
+			<description>A match is part of a competition and played by a home and guest team.</description>
+			<deployment table="CuppyMatch" typecode="161"/>
+			<attributes>
+				<attribute type="int" qualifier="id">
+					<persistence type="property"/>
+					<modifiers unique="true" optional="false"/>
+					<description>Unique identifier of match within a competition.</description>
+				</attribute>
+				<attribute type="java.lang.Integer" qualifier="guestGoals">
+					<persistence type="property"/>
+					<description>Amount of goals the guest team had at end of match.</description>
+				</attribute>
+				<attribute type="java.lang.Integer" qualifier="homeGoals">
+					<persistence type="property"/>
+					<description>Amount of goals the home team had at end of match.</description>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="location">
+					<persistence type="property"/>
+					<description>Description of place where match take/took place.</description>
+				</attribute>
+				<attribute type="java.util.Date" qualifier="date">
+					<persistence type="property"/>
+					<modifiers optional="false"/>
+					<description>The date of the match (start date/time).</description>
+				</attribute>
+				<attribute type="int" qualifier="matchday">
+					<persistence type="property"/>
+					<modifiers optional="false"/>
+					<description>Absolute number of day of match within competition. Used to order matches by day.
+					For league games it is similar to the matchday.</description>
+				</attribute>
+			</attributes>
+			<indexes>
+				<index name="Match_unique" unique="true">
+					<key attribute="id"/>
+					<key attribute="group"/>
+				</index>
+				<index name="Match_matchday">
+					<key attribute="matchday"/>
+				</index>
+			</indexes>
+		</itemtype>
+		
+		<itemtype
+			code="Group"
+			autocreate="true"
+			generate="true"
+			extends="GenericItem"
+			jaloclass="de.hybris.platform.cuppy.jalo.Group">
+			<description>Organizing matches by a group. For tournaments it is similar to grouping of preliminaries and K.O. rounds.
+			In a league there is not such a grouping needed, so it represents mainly first and second half of season.</description>
+			<deployment table="CuppyGroup" typecode="162"/>
+			<attributes>
+				<attribute type="java.lang.String" qualifier="code">
+					<persistence type="property"/>
+					<modifiers optional="false" unique="true"/>
+					<description>Unique identifier of group within a competition.</description>
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="name">
+					<persistence type="property"/>
+					<description>Name of group.</description>
+				</attribute>
+				<attribute type="float" qualifier="multiplier">
+					<modifiers optional="true"/>
+					<persistence type="property"/>
+					<defaultvalue>Float.valueOf(1.0f)</defaultvalue>
+					<description>Defines a weight for the scoring. The score a player gets on a bet for this match get multiplied by it.</description>
+				</attribute>
+				<attribute type="int" qualifier="sequenceNumber">
+					<modifiers optional="false"/>
+					<persistence type="property"/>
+					<description>Absolute number ordering the groups within a competition. So it is assured that preliminaries are
+					displayed always as first group of a competition for example.</description>
+				</attribute>
+			</attributes>
+			<indexes>
+				<index name="Group_unique" unique="true">
+					<key attribute="code"/>
+					<key attribute="competition"/>
+				</index>
+			</indexes>
+		</itemtype>
+		
+		<itemtype
+			code="News"
+			autocreate="true"
+			generate="true"
+			extends="GenericItem"
+			jaloclass="de.hybris.platform.cuppy.jalo.News">
+			<description>A localized message posted at frontend by administrator which can be send as newsletter additional.</description>
+			<deployment table="CuppyNews" typecode="163"/>
+			<attributes>
+				<attribute type="localized:java.lang.String" qualifier="content">
+					<persistence type="property">
+						<columntype database="oracle">
+							<value>varchar2(4000)</value>
+						</columntype>
+						<columntype database="mysql">
+							<value>text</value>
+						</columntype>
+						<columntype database="sqlserver">
+							<value>nvarchar(4000) null</value>
+						</columntype>
+						<columntype>
+							<value>varchar(4000)</value>
+						</columntype>
+					</persistence>
+					<description>The message of the news.</description>
+				</attribute>
+				<attribute type="boolean" qualifier="eMail">
+					<modifiers optional="false"/>
+					<persistence type="property"/>
+					<description>If true, the news will be send as newsletter too.</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype	code="TimePointStatistic" 
+						autocreate="true" generate="true" 
+						extends="GenericItem"
+						jaloclass="de.hybris.platform.cuppy.jalo.TimePointStatistic">
+			<description>Collects statistics for a certain point of time.</description>
+			<deployment table="CuppyTimePointStats" typecode="164"/>
+			<attributes>
+				<attribute type="int" qualifier="playersOnlineCount">
+					<modifiers optional="false"/>					
+					<persistence type="property"/>
+					<description>Amount of players online (logged in) at creation time of this item.</description>					
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype 	code="OverallStatistic" 
+						autocreate="true" generate="true" 
+						extends="GenericItem"
+						singleton="true"
+						jaloclass="de.hybris.platform.cuppy.jalo.OverallStatistic">
+			<description>Collects statistics not realted to a certain point of time.</description>
+			<deployment table="CuppyOverallStats" typecode="165"/>
+			<attributes>
+				<attribute type="int" qualifier="playersOnlineMaxCount">
+					<modifiers optional="false"/>		
+					<persistence type="property"/>
+					<description>Maximal amount of players online at same time.</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype	code="PlayerPreferences" 
+						autocreate="true" generate="true" 
+						extends="GenericItem"
+						jaloclass="de.hybris.platform.cuppy.jalo.PlayerPreferences">
+			<description>Frontend preferences of a player.</description>
+			<deployment table="CuppyPlayerPreferences" typecode="167"/>
+			<attributes>
+				<attribute type="Competition" qualifier="currentCompetition">
+					<persistence type="property"/>
+					<description>Competition the player was viewing last at frontend.</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="LastStartTimeAwareCronJob"
+					autocreate="true"
+					generate="true"
+					jaloclass="de.hybris.platform.cuppy.jalo.LastStartTimeAwareCronJob"
+					extends="CronJob">
+				<description>A CronJob holding the start time of last execution.</description>
+				<attributes>
+					<attribute qualifier="lastStartTime" type="java.util.Date">
+						<persistence type="property"/>
+						<description>Start time of last execution.</description>
+					</attribute>
+				</attributes>
+		</itemtype>
+		
+		<itemtype code="UpdateCompetitionCronJob"
+					autocreate="true"
+					generate="true"
+					jaloclass="de.hybris.platform.cuppy.jalo.UpdateCompetitionCronJob"
+					extends="LastStartTimeAwareCronJob">
+				<description>Updates matches of a competition.</description>
+				<attributes>
+					<attribute type="Competition" qualifier="competition">
+						<modifiers optional="false"/>					
+						<persistence type="property"/>
+						<description>Competition this CronJob will update.</description>
+					</attribute>
+				</attributes>
+		</itemtype>
+	</itemtypes>
+</items>

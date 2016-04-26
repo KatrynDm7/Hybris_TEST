@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>
+	
+	<group qualifier="Hyend2PrecedenceRuleGeneral" visible="true" initially-opened="true">
+		<label key="cockpit.config.label.General" />
+		<property qualifier="Hyend2PrecedenceRule.indexSchema" >
+			<parameter>
+				<name>allowCreate</name>
+				<value>false</value>
+			</parameter>
+			<parameter>
+				<name>allowActivate</name>
+				<value>false</value>
+			</parameter>
+		</property>		
+	</group>
+	
+	<group qualifier="Hyend2RuleConfigurationSection" visible="true" initially-opened="true">
+		<label key="hyend2.ruleconfiguration" />
+		<property qualifier="Hyend2PrecedenceRule.fromDimension" >
+			<parameter>
+				<name>allowCreate</name>
+				<value>false</value>
+			</parameter>
+			<parameter>
+				<name>allowActivate</name>
+				<value>false</value>
+			</parameter>
+		</property>	
+		<property qualifier="Hyend2PrecedenceRule.dimensionValueItem" >
+			<parameter>
+				<name>allowCreate</name>
+				<value>false</value>
+			</parameter>
+			<parameter>
+				<name>allowActivate</name>
+				<value>false</value>
+			</parameter>
+		</property>
+		<property qualifier="Hyend2PrecedenceRule.dimensionValueString" >
+			<parameter>
+				<name>allowCreate</name>
+				<value>false</value>
+			</parameter>
+			<parameter>
+				<name>allowActivate</name>
+				<value>false</value>
+			</parameter>
+		</property>
+		<property qualifier="Hyend2PrecedenceRule.to" >
+			<parameter>
+				<name>allowCreate</name>
+				<value>false</value>
+			</parameter>
+			<parameter>
+				<name>allowActivate</name>
+				<value>false</value>
+			</parameter>
+		</property>
+		<property qualifier="Hyend2PrecedenceRule.ruleType" >
+			<parameter>
+				<name>allowCreate</name>
+				<value>false</value>
+			</parameter>
+			<parameter>
+				<name>allowActivate</name>
+				<value>false</value>
+			</parameter>
+		</property>
+	</group>
+	
+
+
+</editor>

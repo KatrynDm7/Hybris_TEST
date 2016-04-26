@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+<editor>
+	<group printable="true" position="1" show-in-create-mode="true" show-if-empty="true" initially-opened="true" tabbed="false" visible="true" qualifier="Component">
+		<label key="xyformscockpits.common.label.component" />
+		<property visible="true" qualifier="YFormCMSComponent.name" />
+	</group>
+	<group printable="true" position="2" show-in-create-mode="true" show-if-empty="true" initially-opened="true" tabbed="false" visible="true" qualifier="General">
+		<label key="xyformscockpits.common.label.general" />
+		<property visible="true" qualifier="YFormCMSComponent.applicationId" />
+		<property visible="true" qualifier="YFormCMSComponent.formId" />
+	</group>
+</editor>

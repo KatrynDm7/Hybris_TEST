@@ -1,0 +1,60 @@
+INSERT_UPDATE SolrValueRangeSet;name[unique=true];type
+;testPriceRangeSet${testId};double
+;testStringRangeSet${testId};string
+;testDateRangeSet${testId};date
+
+INSERT_UPDATE SolrValueRange;solrValueRangeSet(name)[unique=true];name[unique=true];from;to
+;testPriceRangeSet${testId};1-100;1;100
+;testPriceRangeSet${testId};101-200;101;200
+;testPriceRangeSet${testId};201-300;201;300
+;testPriceRangeSet${testId};301-400;301;400
+;testPriceRangeSet${testId};401-500;401;500
+;testPriceRangeSet${testId};501-600;501;600
+;testPriceRangeSet${testId};601-700;601;700
+;testPriceRangeSet${testId};701-800;701;800
+;testPriceRangeSet${testId};801-900;801;900
+;testPriceRangeSet${testId};901-1000;901;1000
+;testPriceRangeSet${testId};1001-INF;1001;
+;testStringRangeSet${testId};A-D;A;D
+;testStringRangeSet${testId};E-K;E;K
+;testStringRangeSet${testId};L-R;L;R
+;testStringRangeSet${testId};S-Z;S;Z
+;testDateRangeSet${testId};2009_02;2009-02-01;2009-02-28
+;testDateRangeSet${testId};2009_12;2009-12-01;2009-12-31
+;testDateRangeSet${testId};2008_05;2008-05-01;2008-05-31
+
+INSERT_UPDATE SolrIndexedType;identifier[unique=true];type(code);indexName
+;testIndexedType${testId};Product;testIndexedType${testId}
+
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);facet;localized;currency;multiValue;rangeSets(name);facetDisplayNameProvider;fieldValueProvider
+;testIndexedType${testId};code;string;;false;false;false;false;;;
+;testIndexedType${testId};name;text;sortabletext;false;true;false;false;;;
+;testIndexedType${testId};description;text;;false;true;false;false;;;
+;testIndexedType${testId};manufacturerName;string;sortabletext;true;false;false;false;;;
+;testIndexedType${testId};price;double;;true;false;true;false;testPriceRangeSet${testId};;productPriceValueProvider
+;testIndexedType${testId};priceValue;double;;true;false;true;false;;;productPriceValueProvider
+;testIndexedType${testId};categoryName;string;;true;true;false;true;;;categoryNameValueProvider
+;testIndexedType${testId};categoryCode;string;;true;false;false;true;;categoryFacetDisplayNameProvider;categoryCodeValueProvider
+
+INSERT_UPDATE SolrIndexerQuery;solrIndexedType(identifier)[unique=true];identifier[unique=true];type(code);query;injectLastIndexTime;injectCurrentTime;injectCurrentDate;user(uid)
+;testIndexedType${testId};testFullIndexerQuery${testId};full;SELECT {pk} FROM {Product};false;false;false;anonymous
+;testIndexedType${testId};testUpdateIndexerQuery${testId};update;SELECT {PK} FROM {Product} WHERE {modifiedtime} >= ?lastIndexTime;true;false;false;anonymous
+;testIndexedType${testId};testDeleteIndexerQuery${testId};delete;SELECT {PK} FROM {Product} WHERE {code} = ?code;false;false;false;anonymous
+
+INSERT_UPDATE SolrIndexerQueryParameter;solrIndexerQuery(identifier)[unique=true];name[unique=true];value
+;testDeleteIndexerQuery${testId};code;HW1100-0024
+
+INSERT_UPDATE SolrSearchConfig;description[unique=true];pageSize
+;testSearchConfig${testId};20
+
+INSERT_UPDATE SolrIndexConfig;name[unique=true];batchSize;
+;testIndexConfig${testId};100
+
+INSERT_UPDATE SolrServerConfig;name[unique=true];mode(code)
+;testServerConfig${testId};standalone
+
+INSERT_UPDATE SolrEndpointUrl;solrServerConfig(name)[unique=true];url[unique=true];master[unique=true,default=false]
+;testServerConfig${testId};${solrServerEndpoint};true
+
+INSERT_UPDATE SolrFacetSearchConfig;name[unique=true];languages(isocode);currencies(isocode);catalogVersions(catalog(id),version);solrValueRangeSets(name);solrIndexedTypes(identifier);solrSearchConfig(description);solrIndexConfig(name);solrServerConfig(name)
+;testFacetSearchConfig${testId};en,de;EUR,USD;hwcatalog:Online,hwcatalog:Staged;testPriceRangeSet${testId},testStringRangeSet${testId},testDateRangeSet${testId};testIndexedType${testId};testSearchConfig${testId};testIndexConfig${testId};testServerConfig${testId}

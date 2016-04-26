@@ -1,0 +1,40 @@
+ # Language
+$lang=en
+
+$usCurrency=USD
+$productCatalog=productCatalog
+$catalog-id=testCatalog
+$catalog-version=Online
+$onlineProduct=catalogVersion(catalog(id[$catalog-id]),version[$catalog-version])[unique=true,default='$catalog-id:$catalog-version']
+$storeUid=testStore
+$siteUid=testSite
+$vendor=electro
+$prices=europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+
+INSERT_UPDATE PointOfService;name[unique=true];displayName;type(code);latitude;longitude;geocodeTimestamp[dateformat=dd-MM-yyyy];basestore(uid)[default=$storeUid];warehouses(code);nearbyStoreRadius[default=2000]
+;Nakano;Nakano;STORE;35.7091;139.6732;29-04-2011;;Nakano
+;Shinbashi;Shinbashi;STORE;35.6673;139.75429;29-04-2011;;Shinbashi
+;Koto;Koto;STORE;35.6923;139.8201;29-04-2011;;Koto
+;Misato;Misato;STORE;35.8269;139.8701;29-04-2011;;Misato
+
+INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];reserved
+;7;Nakano;notSpecified;0;-1;0;0;product1;0
+;6;Shinbashi;notSpecified;1;-1;0;0;product1;0
+;6;Nakano;notSpecified;0;-1;0;0;product2;0
+;6;Shinbashi;notSpecified;1;-1;0;0;product2;0
+;6;Koto;notSpecified;1;-1;0;0;product3;0
+;6;Nakano;notSpecified;1;-1;0;0;product3;0
+
+## POS Addresses
+INSERT_UPDATE Address;owner(PointOfService.name)[unique=true];streetname[unique=true];streetnumber[unique=true];postalcode[unique=true];duplicate[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress
+;Nakano;First Street;111;12345;false;New York;US;false;false;true;false
+;Shinbashi;Second Street;222;12345;false;New York;US;false;false;true;false
+;Koto;Third Street;333;12345;false;New York;US;false;false;true;false
+;Misato;Fourth Street;444;12345;false;Montreal;CA;false;false;true;false
+
+UPDATE PointOfService;name[unique=true];address(owner(PointOfService.name),streetname,streetnumber,postalcode,duplicate)
+;Nakano;Nakano:First Street:111:12345:false
+;Shinbashi;Shinbashi:Second Street:222:12345:false
+;Koto;Koto:Third Street:333:12345:false
+;Misato;Misato:Fourth Street:444:12345:false
+

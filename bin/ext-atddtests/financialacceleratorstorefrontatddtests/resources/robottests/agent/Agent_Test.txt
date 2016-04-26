@@ -1,0 +1,33 @@
+*** Settings ***
+Test Setup        import sampledata
+Resource		  impex/Impex_Keywords.txt
+Resource          financial/FinancialAgent_Keywords.txt
+
+*** Test Cases ***
+
+Test_Agent_Loading_Via_UID
+	[Documentation]    Agent Facade test. load by UID.
+	can be loaded by uid "aiden.martinez@insurance.com"
+
+Test_Agent_Has_Category
+	[Documentation]    Agent Facade test. load by UID, checking agent category.
+	agent with uid "aiden.martinez@insurance.com" is in category "insurances_travel"
+
+Test_Agents_Loading_Via_CategoryCode
+	[Documentation]    Agent Facade test. Load agents in category.
+	can load agents from "insurances_property"
+
+Test_Agents_Loading_Via_CategoryCode_With_Checking
+	[Documentation]    Agent Facade test. Load agents in category, checking their number.
+	category with code "insurances_travel" contains "2" agents
+	category with code "insurances_property" contains "1" agents
+
+Test_With_Unknown_Category
+	category "not-existed" does not crash anything
+	category "not-existed" does not contain agents
+
+Test_Load_All_Agents
+	can load all agents and one of them is "aiden.martinez@insurance.com"
+	can load all agents and one of them is "abigail.white@insurance.com"
+	loaded agents contain agent in "insurances_property" category
+	loaded agents contain agent in "insurances_travel" category

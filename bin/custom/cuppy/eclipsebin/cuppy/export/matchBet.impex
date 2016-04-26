@@ -1,0 +1,2 @@
+INSERT_UPDATE MatchBet;player(uid)[unique=true];match(matchday,homeTeam(isocode),guestTeam(isocode))[unique=true];guestGoals;homeGoals;
+#%impex.exportItemsFlexibleSearch("SELECT {b:PK} FROM {MatchBet as b},{Match as m},{Group as g},{Competition as c} WHERE {b:match}={m:pk} AND {m:group}={g:pk} AND {g:competition}={c:pk} AND {c:code}='cl2010' ORDER BY {b:player},{m:matchday},{m:homeTeam}");

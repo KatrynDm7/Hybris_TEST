@@ -1,0 +1,18 @@
+# ImpEx for importing products Future Stock into Powertools Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=powertoolsProductCatalog
+$productCatalogName=Powertools Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+
+INSERT_UPDATE Vendor;code[unique=true];name[lang=en]
+;powertools;Powertools
+
+INSERT_UPDATE FutureStock;productCode[unique=true];quantity;date[unique=true,dateformat=yyyy-MM-dd]
+;3318057;50;2018-03-10
+;3318057;85;2018-06-15
+;72399000_53;15;2018-03-10
+;72399000_53;25;2018-06-10
+;72399000_55;35;2018-03-10
+;72399000_56;45;2018-04-10

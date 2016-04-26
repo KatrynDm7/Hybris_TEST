@@ -1,0 +1,930 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config xmlns="http://www.hybris.com/cockpit/config">
+    <context merge-by="module" parent="auto" component="explorer-tree">
+        <explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
+            <explorer-tree:navigation-node id="hmc.text.group">
+                <explorer-tree:type-node code="MobileAggregator" id="hmc.type_tree_mobileaggregator"/>
+                <explorer-tree:type-node code="MobileShortcode" id="hmc.type_tree_mobileshortcode"/>
+                <explorer-tree:type-node code="MobileReceiveGenericAction" id="hmc.type_tree_mobilereceivegenericaction"/>
+                <explorer-tree:type-node code="PhoneNumberList" id="hmc.type_tree_phonenumberlist"/>
+                <explorer-tree:type-node code="PhoneNumber" id="hmc.type_tree_phonenumber"/>
+                <explorer-tree:type-node code="MobileMessageContext" id="hmc.type_tree_mobilemessagecontext"/>
+                <explorer-tree:type-node code="MobileSendMessageCronJob" id="hmc.type_tree_mobilesendmessagecronjob"/>
+            </explorer-tree:navigation-node>
+        </explorer-tree:explorer-tree>
+    </context>
+    <context merge-by="type" parent="MobileReceiveGenericAction" type="MobileReceiveAndSendTextAction" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="isLink"/>
+            <list-view:column qualifier="content"/>
+            <list-view:column qualifier="subject"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="UserPhoneNumber" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="user"/>
+            <list-view:column qualifier="phoneNumber"/>
+            <list-view:column qualifier="type"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="MobileCostPlan" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="price"/>
+            <list-view:column qualifier="priceCurrency"/>
+            <list-view:column qualifier="startDate"/>
+            <list-view:column qualifier="endDate"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="AbstractAction" type="AbstractMobileSendAction" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="code"/>
+            <list-view:column qualifier="defaultLanguage"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="MobileMessageContext" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="creationtime"/>
+            <list-view:column qualifier="shortcode"/>
+            <list-view:column qualifier="phoneNumber"/>
+            <list-view:column qualifier="type"/>
+            <list-view:column qualifier="status"/>
+            <list-view:column qualifier="incomingText"/>
+            <list-view:column qualifier="outgoingText"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="PhoneNumber" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="country"/>
+            <list-view:column qualifier="number"/>
+            <list-view:column qualifier="format"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="AbstractAction" type="MobileReceiveGenericAction" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="code"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="MobileAggregatorParameter" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="aggregator"/>
+            <list-view:column qualifier="name"/>
+            <list-view:column qualifier="value"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="MobileReceiveGenericAction" type="MobileReceiveAndSubscribeAction" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="list"/>
+            <list-view:column qualifier="remove"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="MobileActionKeyword" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="keyword"/>
+            <list-view:column qualifier="type"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="PhoneNumberList" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="code"/>
+            <list-view:column qualifier="name"/>
+            <list-view:column qualifier="memberSize"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="MobileAggregator" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="code"/>
+            <list-view:column qualifier="engine"/>
+            <list-view:column qualifier="shortcodes"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="MobileActionAssignment" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="shortcode"/>
+            <list-view:column qualifier="keyword"/>
+            <list-view:column qualifier="action"/>
+            <list-view:column qualifier="state"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="MobileReceiveGenericAction" type="MobileReceiveAndSendItemAction" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="content"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="MobileShortcode" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="supportedMessageType"/>
+            <list-view:column qualifier="country"/>
+            <list-view:column qualifier="code"/>
+            <list-view:column qualifier="keywordPrefix"/>
+            <list-view:column qualifier="aggregator"/>
+            <list-view:column qualifier="networkType"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="Principal" type="User" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.text.userphone">
+                <editorArea:section name="hmc.text.userPhone">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="phoneNumbers" editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="MobileReceiveGenericAction" type="MobileReceiveAndSendTextAction" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.text.sms">
+                <editorArea:section name="hmc.text.sms">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="isLink"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="content"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="subject"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="UserPhoneNumber" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.text.customerphonenumber">
+                <editorArea:section name="hmc.text.customerphonenumber">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="user"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="phoneNumber"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="type"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="default"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="MobileCostPlan" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:essentials>
+                <editorArea:essentialSection name="hmc.essential">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="sendingShortcode"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="receivingShortcode"/>
+                </editorArea:essentialSection>
+            </editorArea:essentials>
+            <editorArea:tab name="hmc.text.price">
+                <editorArea:section name="hmc.text.price">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="price"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="priceCurrency"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="startDate"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="endDate"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="AbstractAction" type="AbstractMobileSendAction" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:essentials>
+                <editorArea:essentialSection name="hmc.essential">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="code"/>
+                </editorArea:essentialSection>
+            </editorArea:essentials>
+            <editorArea:tab name="hmc.text.defaults">
+                <editorArea:section name="hmc.text.defaults">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="defaultLanguage"/>
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab name="hmc.text.lists">
+                <editorArea:section name="hmc.text.lists">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="filterLists"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="MobileMessageContext" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:essentials>
+                <editorArea:essentialSection name="hmc.essential">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="type"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="status"/>
+                </editorArea:essentialSection>
+            </editorArea:essentials>
+            <editorArea:tab name="hmc.text.message.general">
+                <editorArea:section name="hmc.text.message.destination">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="countryIsoCode"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="shortcode"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="normalizedShortcode"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.text.message.source">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="phoneCountryIsoCode"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="phoneNumber"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="user"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="normalizedPhoneNumber"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.text.message.routing">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="matchedShortcode"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="matchedActionAssignment"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="matchedAction"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="usingDefaultAction"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="outgoingShortcode"/>
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab name="hmc.text.message.content">
+                <editorArea:section name="hmc.text.message.incoming">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="incomingText"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.text.message.outgoing">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="isLink"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="outgoingSubject"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="outgoingText"/>
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab name="hmc.text.message.pricing">
+                <editorArea:section name="hmc.text.message.pricing">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="price"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="priceCurrency"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="revenue"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="revenueCurrency"/>
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab name="hmc.text.message.advanced">
+                <editorArea:section name="hmc.text.message.errors">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageError"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageErrorDescription"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="aggregatorError"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="aggregatorErrorDescription"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.text.message.smpp">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="incomingMessageId"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="outgoingMessageId"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="optOperator"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="optTariff"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="optSessionId"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="failures"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="rawMessageDetails"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="PhoneNumber" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.text.phonenumber">
+                <editorArea:section name="hmc.text.phonenumber">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="format"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="country"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="number"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="lists"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="AbstractMobileSendAction" type="MobileSendLinkAction" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.text.sms">
+                <editorArea:section name="hmc.text.sms">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="subject"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="link"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="MobileAggregatorParameter" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:essentials>
+                <editorArea:essentialSection name="hmc.essential">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="aggregator"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="name"/>
+                </editorArea:essentialSection>
+            </editorArea:essentials>
+            <editorArea:tab name="hmc.text.parameter">
+                <editorArea:section name="hmc.text.parameter">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="value"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="CronJob" type="MobileSendMessageCronJob" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.tab.sync.settings">
+                <editorArea:section name="hmc.section.sync.settings">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="template"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="subject"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="link"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="deeplinkUrl"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="item"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="variables"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="language"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="phoneNumbers" editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="recipientPhoneNumberLists" editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="recipients"/>
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab name="hmc.tab.cronjob.systemrecovery">
+                <editorArea:section name="hmc.section.cronjob.systemrecovery">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="changeRecordingEnabled"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="MobileReceiveGenericAction" type="MobileReceiveAndSubscribeAction" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.text.sms">
+                <editorArea:section name="hmc.text.subscribe">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="remove"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="list"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="successMessage"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="defaultErrorMessage"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="MobileActionKeyword" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.text.keyword">
+                <editorArea:section name="hmc.text.keyword">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="type"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="keyword"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="PhoneNumberList" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:essentials>
+                <editorArea:essentialSection name="hmc.essential">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="code"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="name"/>
+                </editorArea:essentialSection>
+            </editorArea:essentials>
+            <editorArea:tab name="hmc.text.subs.phones">
+                <editorArea:section name="hmc.text.subs.phones">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="numbers" editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"/>
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab name="hmc.text.phonelist.references">
+                <editorArea:section name="hmc.text.phonelist.shortcodes">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="blockedShortcodes" editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="testingShortcodes" editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="sendingActions"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.text.phonelist.assignments">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="blockedAssignments" editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="testingAssignments" editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="MobileAggregator" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:essentials>
+                <editorArea:essentialSection name="hmc.essential">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="code"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="engine"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="available"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="state"/>
+                </editorArea:essentialSection>
+            </editorArea:essentials>
+            <editorArea:tab name="hmc.text.shortcodes">
+                <editorArea:section name="hmc.text.shortcodes">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="shortcodes" editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"/>
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab name="hmc.text.aggregator.configuration">
+                <editorArea:section name="hmc.text.aggregator.retry">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="maxSendingRetries"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="sendingRetryInterval"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.text.aggregator.configuration">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="parameters" editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="AbstractMobileSendAction" type="MobileSendTextAction" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab merge-mode="remove" name="hmc.text.defaults"/>
+            <editorArea:tab name="hmc.text.sms">
+                <editorArea:section name="hmc.text.sms">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="template"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="defaultLanguage"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="AbstractMobileSendAction" type="MobileSendItemLinkAction" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.text.sms">
+                <editorArea:section name="hmc.text.item">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="subject"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="defaultItem"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="deeplinkUrl"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="MobileActionAssignment" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:essentials>
+                <editorArea:essentialSection name="hmc.essential">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="shortcode"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="action"/>
+                </editorArea:essentialSection>
+            </editorArea:essentials>
+            <editorArea:tab name="hmc.text.assignment">
+                <editorArea:section name="hmc.text.activation">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="language"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="state"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="startDate"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="endDate"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.text.keywords">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="keyword"/>
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab name="hmc.text.programming">
+                <editorArea:section name="hmc.text.whitelist">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="testingPhoneNumbers" editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.text.blacklist">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="phoneNumberFilters" editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="MobileReceiveGenericAction" type="MobileReceiveAndSendItemAction" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.text.sms">
+                <editorArea:section name="hmc.text.item">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="isLink"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="content"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="subject"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.text.deeplink">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="deeplinkUrl"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="MobileShortcode" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:essentials>
+                <editorArea:essentialSection name="hmc.essential">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="country"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="code"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="aggregator"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="keywordPrefix"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="state"/>
+                </editorArea:essentialSection>
+            </editorArea:essentials>
+            <editorArea:tab name="hmc.text.shortcode">
+                <editorArea:section name="hmc.text.shortcodeprefix">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="supportedMessageType"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="networkType"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageMaxSize"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.text.whitelist">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="testingPhoneNumbers" editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.text.blacklist">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="phoneNumberFilters" editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"/>
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab name="hmc.text.actions">
+                <editorArea:section name="hmc.text.default.action">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="defaultAction"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="alternativeReplyRoute"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.text.actions">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="assignments" editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"/>
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab name="hmc.text.billing">
+                <editorArea:section name="hmc.text.cost">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="revenuePlans" editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="costPlans" editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="MobileReceiveGenericAction" type="MobileReceiveAndSendTextAction" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="content" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="isLink" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="subject" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="assignedCockpitItemTemplates" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="code" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long" name="pk" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="segment" selected="false"/>
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="UserPhoneNumber" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="default" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="phoneNumber" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="type" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="user" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="assignedCockpitItemTemplates" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long" name="pk" selected="false"/>
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="MobileCostPlan" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="endDate" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="price" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="priceCurrency" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="receivingShortcode" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="sendingShortcode" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="startDate" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="assignedCockpitItemTemplates" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long" name="pk" selected="false"/>
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="AbstractAction" type="AbstractMobileSendAction" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="defaultLanguage" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="assignedCockpitItemTemplates" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="code" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long" name="pk" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="segment" selected="false"/>
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="MobileMessageContext" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="aggregatorError" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="aggregatorErrorDescription" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="countryIsoCode" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="failures" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="incomingEngineId" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="incomingMessageId" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="incomingText" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="isLink" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="matchedAction" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="matchedActionAssignment" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="matchedShortcode" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="messageError" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="messageErrorDescription" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="normalizedPhoneNumber" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="normalizedShortcode" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="optOperator" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="optSessionId" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="optTariff" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="outgoingEngineId" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="outgoingMessageId" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="outgoingShortcode" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="outgoingSubject" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="outgoingText" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="phoneCountryIsoCode" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="phoneNumber" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="price" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="priceCurrency" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="rawMessageDetails" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="revenue" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="revenueCurrency" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="shortcode" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="status" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="type" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="user" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="usingDefaultAction" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="assignedCockpitItemTemplates" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long" name="pk" selected="false"/>
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="PhoneNumber" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="country" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="normalizedNumber" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="number" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="assignedCockpitItemTemplates" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long" name="pk" selected="false"/>
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="AbstractAction" type="MobileReceiveGenericAction" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="assignedCockpitItemTemplates" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="code" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long" name="pk" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="segment" selected="false"/>
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="AbstractMobileSendAction" type="MobileSendLinkAction" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list/>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="MobileAggregatorParameter" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="aggregator" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="name" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="value" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="assignedCockpitItemTemplates" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long" name="pk" selected="false"/>
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="MobileActionKeyword" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="keyword" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="type" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="assignedCockpitItemTemplates" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long" name="pk" selected="false"/>
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="PhoneNumberList" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="code" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="name" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="assignedCockpitItemTemplates" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long" name="pk" selected="false"/>
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="MobileAggregator" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="code" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="engine" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="maxSendingRetries" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="sendingRetryInterval" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="state" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="assignedCockpitItemTemplates" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long" name="pk" selected="false"/>
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="MobileActionAssignment" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="action" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="endDate" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="keyword" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="language" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="shortcode" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="startDate" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="state" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="assignedCockpitItemTemplates" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long" name="pk" selected="false"/>
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="MobileShortcode" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="aggregator" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="alternativeReplyRoute" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="code" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="country" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="defaultAction" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="keywordPrefix" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="messageMaxSize" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="networkType" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="state" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="supportedMessageType" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="assignedCockpitItemTemplates" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long" name="pk" selected="false"/>
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="AbstractAction" type="AbstractMobileSendAction" component="simple-search">
+        <simple-search:simple-search xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+            <simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="code"/>
+        </simple-search:simple-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="DeeplinkUrl" component="simple-search">
+        <simple-search:simple-search xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+            <simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="code"/>
+        </simple-search:simple-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="PhoneNumber" component="simple-search">
+        <simple-search:simple-search xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+            <simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="number"/>
+        </simple-search:simple-search>
+    </context>
+    <context merge-by="type" parent="AbstractAction" type="MobileReceiveGenericAction" component="simple-search">
+        <simple-search:simple-search xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+            <simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="code"/>
+        </simple-search:simple-search>
+    </context>
+    <context merge-by="type" parent="AbstractMobileSendAction" type="MobileSendLinkAction" component="simple-search">
+        <simple-search:simple-search xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+            <simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="code"/>
+        </simple-search:simple-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="MobileAggregatorParameter" component="simple-search">
+        <simple-search:simple-search xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+            <simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="name"/>
+        </simple-search:simple-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="MobileActionKeyword" component="simple-search">
+        <simple-search:simple-search xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+            <simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="keyword"/>
+        </simple-search:simple-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="PhoneNumberList" component="simple-search">
+        <simple-search:simple-search xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+            <simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="code"/>
+        </simple-search:simple-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="MobileAggregator" component="simple-search">
+        <simple-search:simple-search xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+            <simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="code"/>
+        </simple-search:simple-search>
+    </context>
+    <context merge-by="type" parent="AbstractMobileSendAction" type="MobileSendTextAction" component="simple-search">
+        <simple-search:simple-search xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+            <simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="code"/>
+        </simple-search:simple-search>
+    </context>
+    <context merge-by="type" parent="AbstractMobileSendAction" type="MobileSendItemLinkAction" component="simple-search">
+        <simple-search:simple-search xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+            <simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="code"/>
+        </simple-search:simple-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="MobileShortcode" component="simple-search">
+        <simple-search:simple-search xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+            <simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="code"/>
+        </simple-search:simple-search>
+    </context>
+    <context type="UserPhoneNumber" component="base" merge-by="type" parent="GenericItem">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>user+ ' ' +phoneNumber+ ' ' +type</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="MobileCostPlan" component="base" merge-by="type" parent="GenericItem">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>price+ ' ' +priceCurrency+ ' ' +startDate+ ' ' +endDate</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="AbstractMobileSendAction" component="base" merge-by="type" parent="AbstractAction">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>code</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="MobileMessageContext" component="base" merge-by="type" parent="GenericItem">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>type+ ' ' +status+ ' ' +shortcode+ ' ' +phoneNumber</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="DeeplinkUrl" component="base" merge-by="type" parent="GenericItem">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>code</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="PhoneNumber" component="base" merge-by="type" parent="GenericItem">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>country+ ' ' +number</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="MobileReceiveGenericAction" component="base" merge-by="type" parent="AbstractAction">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>code</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="MobileSendLinkAction" component="base" merge-by="type" parent="AbstractMobileSendAction">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>code</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="MobileAggregatorParameter" component="base" merge-by="type" parent="GenericItem">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>name+ ' ' +value</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="MobileActionKeyword" component="base" merge-by="type" parent="GenericItem">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>keyword</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="PhoneNumberList" component="base" merge-by="type" parent="GenericItem">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>code+ ' ' +name</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="MobileAggregator" component="base" merge-by="type" parent="GenericItem">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>code+ ' ' +engine</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="MobileSendTextAction" component="base" merge-by="type" parent="AbstractMobileSendAction">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>code</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="MobileSendItemLinkAction" component="base" merge-by="type" parent="AbstractMobileSendAction">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>code</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="MobileActionAssignment" component="base" merge-by="type" parent="GenericItem">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>action+ ' ' +keyword</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="MobileShortcode" component="base" merge-by="type" parent="GenericItem">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>supportedMessageType+ ' ' +country+ ' ' +code+ ' ' +keywordPrefix</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+</config>

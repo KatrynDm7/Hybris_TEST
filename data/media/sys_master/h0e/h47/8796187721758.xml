@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="Team.isocode" />
+			<property qualifier="Team.name" />
+		</search-properties>
+		<sort-properties>
+			<property qualifier="Team.isocode" />
+			<property qualifier="Team.name" />
+		</sort-properties>
+	</search>
+	<label>
+		<property qualifier="Team.isocode"/>
+		<property qualifier="Team.name"/>
+	</label>
+</base>

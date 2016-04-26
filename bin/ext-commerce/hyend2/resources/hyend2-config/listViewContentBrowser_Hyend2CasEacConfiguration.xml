@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list-view unassigned-group-name="Other">
+	<group name="General">
+		<property qualifier="Hyend2CasEacConfiguration.name" visible="true" />
+		<property qualifier="Hyend2CasEacConfiguration.active" visible="true"/>
+		<property qualifier="Hyend2CasEacConfiguration.casHost" visible="true" />
+		<property qualifier="Hyend2CasEacConfiguration.casPort" visible="true" />
+		<property qualifier="Hyend2CasEacConfiguration.casAppName" visible="true" />
+		<property qualifier="Hyend2CasEacConfiguration.eacHost" visible="true" />
+		<property qualifier="Hyend2CasEacConfiguration.eacPort" visible="true" />
+		<property qualifier="Hyend2CasEacConfiguration.eacAppName" visible="true" />
+		<property qualifier="Hyend2CasEacConfiguration.availableLanguages" visible="true" />
+		<!--
+		<property qualifier="Hyend2CasEacConfiguration.autoBaseline" visible="true" />
+		-->
+	</group>
+</list-view>

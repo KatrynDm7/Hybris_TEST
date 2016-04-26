@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2015 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+<configuration xmlns="hybris.de/schemas/hmc/generic"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="hybris.de/schemas/hmc/generic hmc.xsd">
+
+
+	<!-- Configuration for extension Timedaccesspromotionsservices -->
+
+	<type name="FlashbuyPromotion" mode="append">
+		<organizer>
+			<editor mode="append">
+				<tab name="tab.promotion.properties" mode="append">
+					<section name="section.promotion.description" mode="replace"
+						position="0">
+						<listlayout>
+							<text name="text.FlashbuyPromotion.detaileddescription" />
+						</listlayout>
+					</section>
+					<section name="section.promotion.details">
+						<columnlayout leftwidth="370">
+							<row>
+								<attribute name="availableUnitsPerProduct" labelwidth="100"
+									width="224" />
+								<text name="text.FlashbuyPromotion.availableUnitsPerProduct" />
+							</row>
+						</columnlayout>
+						<columnlayout leftwidth="370">
+							<row>
+								<attribute name="availableUnitsPerUserAndProduct" labelwidth="100"
+									width="224" />
+								<text name="text.FlashbuyPromotion.availableUnitsPerUserAndProduct" />
+							</row>
+						</columnlayout>
+						<columnlayout leftwidth="370">
+							<row>
+								<attribute name="specialDiscount" labelwidth="100"
+									width="224" />
+								<text name="text.FlashbuyPromotion.specialDis" />
+							</row>
+						</columnlayout>
+						<columnlayout leftwidth="370">
+							<row>
+								<attribute name="startBuydate" labelwidth="100"
+									width="224" />
+								<text name="text.FlashbuyPromotion.startBuyDate" />
+							</row>
+						</columnlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+
+
+</configuration>

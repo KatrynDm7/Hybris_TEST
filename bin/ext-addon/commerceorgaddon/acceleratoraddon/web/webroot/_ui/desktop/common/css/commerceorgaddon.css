@@ -1,0 +1,292 @@
+a.selectionLink {
+    text-decoration: underline;
+}
+
+a.deselectionLink {
+    text-decoration: underline;
+}
+
+a.deselectBudget {
+    text-decoration: underline;
+}
+
+a.selectBudget {
+    text-decoration: underline;
+}
+
+a.selectUser {
+    text-decoration: underline;
+}
+
+a.deselectUser {
+    text-decoration: underline;
+}
+
+tr.selected {
+    background-color: #d3e3f5 !important;
+}
+
+/*
+## treeview
+********************************************************************/
+
+.treeview, .treeview ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.treeview ul {
+    background-color: white;
+    margin-top: 4px;
+}
+
+.treeview .hitarea {
+    background: url(../images/treeview/treeview-default.gif) -64px -25px no-repeat;
+    height: 16px;
+    width: 16px;
+    margin-left: -16px;
+    float: left;
+    cursor: pointer;
+}
+/* fix for IE6 */
+* html .treeview .hitarea {
+    display: inline;
+    float:none;
+}
+
+.treeview li {
+    margin: 0;
+    padding: 3px 0pt 3px 16px;
+}
+.treeview .hover { color: red; cursor: pointer; }
+.treeview li { background: url(../images/treeview/treeview-default-line.gif) 0 0 no-repeat; }
+.treeview li.collapsable, .treeview li.expandable { background-position: 0 -176px; }
+.treeview .expandable-hitarea { background-position: -80px -3px; }
+.treeview li.last { background-position: 0 -1766px }
+.treeview li.lastCollapsable, .treeview li.lastExpandable { background-image: url(../images/treeview/treeview-default.gif); }
+.treeview li.lastCollapsable { background-position: 0 -111px }
+.treeview li.lastExpandable { background-position: -32px -67px }
+
+.treeview div.lastCollapsable-hitarea, .treeview div.lastExpandable-hitarea { background-position: 0; }
+
+.treeview .placeholder {
+    background: url(../images/treeview/ajax-loader.gif) 0 0 no-repeat;
+    height: 16px;
+    width: 16px;
+    display: block;
+}
+.treeview >li.collapsable:first-child{
+    background-position: -17px -90px;
+}
+
+.treeview >li.expandable:first-child{
+    background-position: -49px -46px;
+}
+.treeview li a{
+    display: block;
+    margin-top: -2px;
+}
+
+/* quick fix to expand teh first hierachy*/
+.treeview li ul li ul{
+    display:none;
+}
+
+/*
+## Company
+********************************************************************/
+
+
+#companyNav{
+
+}
+
+#companyNav .headline{
+    border-bottom:1px solid #bfbfbf;
+    line-height:120%;
+    text-transform:uppercase;
+    font-weight:bold;
+    font-size:1.2em;
+    margin:0 0 20px 0;
+    padding:0 0 10px 0;
+}
+
+
+#companyNav li.active{
+    font-weight:bold;
+
+}
+
+
+.customCompany{
+    margin:0 -20px 0 0;
+    width:810px;
+}
+
+
+.customCompany .tile{
+    border:1px solid #bfbfbf;
+    padding:0 20px 20px;
+    width:343px;
+    margin:0 20px 20px 0;
+    height:100px;
+}
+
+
+.customCompany .tile .headline{
+    border-bottom: 1px solid #bfbfbf;
+    font-size: 1.2em;
+    font-weight: bold;
+    height: 39px;
+    line-height: 39px;
+    text-transform: uppercase;
+    margin:0 0 20px;
+}
+
+
+.customCompany .tile .headline a{
+    display:block;
+}
+
+
+.companyContentPane {
+    /*border:1px solid #bfbfbf;*/
+    padding:0 20px 20px;
+    width:748px;
+    margin:0;
+
+}
+
+
+.companyContentPane .headline{
+    border-bottom: 1px solid #bfbfbf;
+    font-size: 1.2em;
+    font-weight: bold;
+    height: 30px;
+    line-height: 30px;
+    text-transform: uppercase;
+    margin:0 0 20px;
+}
+
+
+/*
+## datepicker
+********************************************************************/
+#ui-datepicker-div {
+    background-color: #fff;
+    padding: 5px 5px 5px 5px;
+    box-shadow: 2px 2px 5px #888;
+    display: none;
+}
+
+table.ui-datepicker-calendar tr td {
+    padding: 4px;
+}
+
+.ui-datepicker-next {
+    color: #356F70;
+}
+
+.ui-datepicker-next:hover {
+    color: #7fada5;
+    cursor: pointer;
+}
+
+.ui-datepicker-prev {
+    color: #356F70;
+    padding: 0px 10px 0px 0px;
+}
+
+.ui-datepicker-prev:hover {
+    color: #7fada5;
+    cursor: pointer;
+}
+
+
+.right{
+    margin:0 0 0 20px;
+}
+
+
+/*
+###########Migrated from yb2bstorefront##############
+*/
+
+.orderList{
+    margin:0 0 20px 0;
+}
+
+
+.orderList .headline{
+    border-bottom: 1px solid #bfbfbf;
+    font-size: 1em;
+    font-weight: bold;
+    height: 30px;
+    line-height: 30px;
+    text-transform: uppercase;
+    margin:0 0 20px;
+}
+
+.orderList .orderListTable{
+    width:100%;
+}
+
+.orderList .orderListTable thead th {
+    height:30px;
+    line-height:30px;
+    text-transform:uppercase;
+    font-size:1em;
+    padding-right: 10px;
+    background-color: #3c3c3c;
+    color: #ffffff;
+}
+
+.orderList .orderListTable thead th:first-child,
+.orderList .orderListTable tbody tr td:first-child{
+    padding-left: 20px;
+}
+
+.orderList .orderListTable tbody tr td:last-child{
+    padding-right: 20px;
+}
+
+.companyContentPane .orderListTable tbody tr:nth-child(2n -1),
+.orderList .orderListTable tbody tr:nth-child(4n -1),
+.table_budget tbody tr:nth-child(2n -1){
+    background-color: rgba(255, 255, 255, 0.65);
+}
+
+.orderList .orderListTable thead th:last-child {
+    padding-right: 0;
+}
+
+.orderList .orderListTable .item td{
+    vertical-align:top;
+    border-bottom:1px solid #f4f4f4;
+    padding:20px 0 20px 0;
+}
+
+.orderList .orderListTable tr td{
+    border-bottom:1px solid #f4f4f4;
+}
+
+.orderList .orderListTable .item td.thumb{
+    border-bottom:1px solid #f4f4f4;
+    padding-right:20px;
+    width: 96px;
+}
+
+.orderList .orderListTable tbody td {
+    vertical-align:top;
+    padding-top: 5px;
+}
+
+.orderList .orderListTable tbody td p {
+    margin-bottom: 5px;
+}
+
+.orderList .orderListTable tbody td a {
+    text-decoration: underline;
+}
+

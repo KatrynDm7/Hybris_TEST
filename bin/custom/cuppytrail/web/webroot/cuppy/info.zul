@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:h="http://www.w3.org/1999/xhtml" 
+		xmlns:zk="http://www.zkoss.org/2005/zk"
+		xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd ">
+		
+	<div width="100%" sclass="info contentPage" style="position: relative; overflow: auto;">
+		<portallayout> 
+			<portalchildren width="60%" style="padding: 10px;">
+				<panel movable="false">
+					<caption label="${c:l('info.news')}"/>
+					<toolbar visible="false"/>
+					<panelchildren sclass="infoPanelChildren">
+						<div use="de.hybris.platform.cuppy.web.components.InfoComponent" width="100%"/>					
+					</panelchildren>
+				</panel>
+			</portalchildren>
+			<portalchildren width="36%"  style="padding: 10px;">
+				<panel movable="false">
+					<caption label="${c:l('info.rules')}"/>
+					<toolbar visible="false"/>
+					<panelchildren sclass="infoPanelChildren">
+						<vbox>
+							<label value="${c:l('info.rule1')}"/>
+							<label value="${c:l('info.rule2')}"/>
+							<label value="${c:l('info.rule3')}"/>
+							<separator/>
+							<label value="${c:l('info.rule4')}"/>
+							<separator/>
+							<label value="${c:l('info.rule5')}"/>
+							<label value="${c:l('info.rule6')}"/>
+							<label value="${c:l('info.rule7')}"/>
+						</vbox>
+					</panelchildren>
+				</panel>
+			</portalchildren>
+		</portallayout>
+	</div>
+</zk>

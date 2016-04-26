@@ -1,0 +1,32 @@
+*** Settings ***
+Test Setup        import bundlecartdata sampledata
+Test Teardown     reset system
+
+Resource          bundleservices/Add_To_Cart_Keywords.txt
+Resource          bundleservices/Common_Keywords.txt
+Resource          bundleservices/Verify_Keywords.txt
+Resource          commerce/CommerceServices_Keywords.txt
+Resource		  commerce/SubscriptionCommerce_Keywords.txt
+
+
+*** Variables ***
+
+${customerId}=    testuser@saved-carts.com
+
+*** Test Cases ***
+
+Clear_LastModifiedEntries_On_Clone_Test
+    ${sessionCart}=    get session cart
+    create customer "${customerId}" with currency "USD"
+    login customer with id "${customerId}"
+    
+    add to cart product "PRODUCT01" for component "ProductComponent1"
+    verify that cart total is "600"	    
+    
+    ${savedCart}=    save cart with name "TestCart" and description "Test"
+    Should Be Equal    ${sessionCart.code}    ${savedCart.code}
+
+    ${clonedCart}=    clone saved cart with code "${savedCart.code}"
+    verify that cart with code "${savedCart.code}" has been cloned properly into cart with code "${clonedCart.code}"   
+    verify last modified entries is empty for cart "${clonedCart.code}"
+    Should Not Be Equal    ${savedCart.code}    ${clonedCart.code}

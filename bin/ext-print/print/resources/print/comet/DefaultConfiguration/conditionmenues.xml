@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<!--
+	file:	 conditionmenues.xml
+-->
+<conditionmenues>
+	<conditionmenu>
+		<id>1</id>
+		<description>Customized Dropdown 1</description>
+		<label>Dropdown 1</label>
+		<key>$1</key>
+		<keyword>$1</keyword>
+		<defaultselection>1</defaultselection>
+	</conditionmenu>
+	<conditionmenu>
+		<id>2</id>
+		<description>Customized Dropdown 2</description>
+		<label>Dropdown 2</label>
+		<key>$2</key>
+		<keyword>$2</keyword>
+		<defaultselection>1</defaultselection>
+	</conditionmenu>
+	<conditionmenu>
+		<id>3</id>
+		<description>Customized Dropdown 3</description>
+		<label>Dropdown 3</label>
+		<key>$3</key>
+		<keyword>$3</keyword>
+		<defaultselection>1</defaultselection>
+	</conditionmenu>
+</conditionmenues>

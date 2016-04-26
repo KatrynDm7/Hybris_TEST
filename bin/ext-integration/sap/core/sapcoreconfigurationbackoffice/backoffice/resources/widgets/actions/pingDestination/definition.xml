@@ -1,0 +1,17 @@
+<action-definition id="de.hybris.platform.sap.sapcoreconfigurationbackoffice.actions.PingDestinationAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/action-definition.xsd">
+ 
+    <name>sapcoreconfigurationbackoffice.PingButton</name>
+    <description>Ping Destination</description>
+    <author>hybris</author>
+    <version>0.1</version> 
+ 
+    <actionClassName>de.hybris.platform.sap.sapcoreconfigurationbackoffice.actions.PingDestinationAction</actionClassName>
+ 
+    <inputType>de.hybris.platform.sap.core.configuration.model.SAPRFCDestinationModel</inputType>
+    <outputType>java.lang.String</outputType>
+ 	<iconUri>icons/ping_default.png</iconUri>
+ 	<iconHoverUri>icons/ping_active.png</iconHoverUri>
+    <iconDisabledUri>icons/ping_disabled.png</iconDisabledUri>
+    
+</action-definition>

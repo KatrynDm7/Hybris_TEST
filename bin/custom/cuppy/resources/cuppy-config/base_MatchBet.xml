@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="MatchBet.match" />
+			<property qualifier="MatchBet.player" />
+		</search-properties>
+		<sort-properties>
+			<property qualifier="MatchBet.match" />
+			<property qualifier="MatchBet.player" />
+		</sort-properties>
+	</search>
+	<label>
+		<property qualifier="MatchBet.match.id"/>
+		<property qualifier="MatchBet.player.uid"/>
+	</label>
+</base>

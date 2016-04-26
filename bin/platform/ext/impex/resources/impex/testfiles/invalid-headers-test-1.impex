@@ -1,0 +1,19 @@
+;noheaderuser;noheaderuser;mygroup;
+
+INSERT_UPDATE Employee;UID[unique=true];name;groups(uid);
+;testUser1;user1;mygroup;
+;testUser2;user2;mygroup;
+
+
+
+INSERT_UPDATE UserGroup;UID[unique=true];locname[lang=en]
+;mygroup;mygroup;
+
+
+INSERT_UPDATE Employee;UID[unique=true];illegalColumn;groups(uid);
+;wrongUser;wrongUser;mygroup;
+
+
+INSERT_UPDATE User;UID[unique=true];name;groups(uid);
+;testUser3;user3;mygroup;
+;testUser4;user4;mygroup;

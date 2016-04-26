@@ -1,0 +1,383 @@
+$productCatalog=financialProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default='$productCatalog:Staged']
+$prices=Europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+$billingEvent=billingEvent(code)[default='paynow']
+
+$lang=en
+
+# Insert Subscription Price Plan
+UPDATE SubscriptionPricePlan;&pricePlan;product(code, $catalogVersion)[unique=true];name[lang=$lang];
+;pricePlan_TWO_STAR             ;WED_2STAR          ;Price plan for two star event plan
+;pricePlan_THREE_STAR           ;WED_3STAR          ;Price plan for three star event plan
+;pricePlan_FOUR_STAR            ;WED_4STAR          ;Price plan for four star event plan
+;pricePlan_FIVE_STAR            ;WED_5STAR          ;Price plan for five star event plan
+;pricePlan_EXCESS_WAIVER        ;WED_EXCESSWAIVER   ;Price plan for the product Excess Waiver
+;pricePlan_VENUE                ;WED_VENUECOVER   ;Price plan for the product Marquee
+;pricePlan_PUBLIC_LIABILITY     ;WED_PUBLICLIABILITY;Price plan for the product Public Liability
+
+#Subscription Price Plan for Travel Insurance
+;pricePlan_SINGLE_BUDGET        ;TRA_SINGLE_BUDGET      ;Price plan for single budget trip
+;pricePlan_SINGLE_SILVER        ;TRA_SINGLE_SILVER      ;Price plan for single silver trip
+;pricePlan_SINGLE_GOLD          ;TRA_SINGLE_GOLD        ;Price plan for single gold trip
+;pricePlan_ANNUAL_BUDGET        ;TRA_ANNUAL_BUDGET      ;Price plan for annual budget trip
+;pricePlan_ANNUAL_SILVER        ;TRA_ANNUAL_SILVER      ;Price plan for annual silver trip
+;pricePlan_ANNUAL_GOLD          ;TRA_ANNUAL_GOLD        ;Price plan for annual gold trip
+;pricePlan_BACKPACKERS_BUDGET   ;TRA_BACKPACKERS_BUDGET ;Price plan for backpackers budget trip
+;pricePlan_BACKPACKERS_SILVER   ;TRA_BACKPACKERS_SILVER ;Price plan for backpackers silver trip
+;pricePlan_BACKPACKERS_GOLD     ;TRA_BACKPACKERS_GOLD   ;Price plan for backpackers gold trip
+
+;pricePlan_TRA_WINTER			;TRA_WINTER				;Price plan for winter sports cover	
+;pricePlan_TRA_GOLF				;TRA_GOLF				;Price plan for golf cover		
+;pricePlan_TRA_BUSINESS			;TRA_BUSINESS			;Price plan for business cover		
+;pricePlan_TRA_VALUABLES		;TRA_VALUABLES			;Price plan for valuables cover			
+;pricePlan_TRA_HAZARDOUS		;TRA_HAZARDOUS			;Price plan for hazardous cover	
+;pricePlan_TRA_EXCESS			;TRA_EXCESS				;Price plan for excess cover
+
+#subscription price plan for Homeowners Property Insurance
+;pricePlan_PRO_PROPERTY_HOMEOWNERS		;PRO_PROPERTY_HOMEOWNERS        ;Price plan for homeowners property insurance;
+;pricePlan_PRO_FLOOD_COVER_HOMEOWNERS	;PRO_FLOOD_COVER_HOMEOWNERS		;Price plan for flood cover;
+;pricePlan_PRO_TEMP_ACCOM_HOMEOWNERS	;PRO_TEMP_ACCOM_HOMEOWNERS		;Price plan for temporary accomodation cover;
+;pricePlan_PRO_JEWELRY_COVER_HOMEOWNERS	;PRO_JEWELRY_COVER_HOMEOWNERS	;Price plan for jewelry and watch cover;
+;pricePlan_PRO_BICYCLES_COVER_HOMEOWNERS;PRO_BICYCLES_COVER_HOMEOWNERS	;Price plan for bicycle cover;
+
+#subscription price plan for Renters Property Insurance
+;pricePlan_PRO_PROPERTY_RENTERS			;PRO_PROPERTY_RENTERS	        ;Price plan for renters property insurance;
+;pricePlan_PRO_TEMP_ACCOM_RENTERS		;PRO_TEMP_ACCOM_RENTERS			;Price plan for temporary accomodation cover;
+;pricePlan_PRO_JEWELRY_COVER_RENTERS	;PRO_JEWELRY_COVER_RENTERS		;Price plan for jewelry and watch cover;
+;pricePlan_PRO_BICYCLES_COVER_RENTERS	;PRO_BICYCLES_COVER_RENTERS		;Price plan for bicycle cover;
+
+#subscription price plan for Homeowners Property Insurance for monthly plan
+;pricePlan_PRO_PROPERTY_HOMEOWNERS_MONTHLY		;PRO_PROPERTY_HOMEOWNERS_MONTHLY	;Monthly Price plan for homeowners property insurance;
+
+#subscription price plan for Renters Property Insurance for monthly plan
+;pricePlan_PRO_PROPERTY_RENTERS_MONTHLY			;PRO_PROPERTY_RENTERS_MONTHLY		;Monthly Price plan for renters property insurance;
+
+;pricePlan_AUTO_ANNUALLY      ;AUTO_ANNUALLY        ;Price plan for annually auto insurance;
+;pricePlan_AUTO_MONTHLY       ;AUTO_MONTHLY         ;Price plan for monthly auto insurance;
+
+;pricePlan_AUTO_LEGAL_EXPENSE_COVER_ANNUALLY    ;AUTO_LEGAL_EXPENSE_COVER_ANNUALLY  ;Price plan for annually legal expense cover;
+;pricePlan_AUTO_BREAKDOWN_COVER_ANNUALLY        ;AUTO_BREAKDOWN_COVER_ANNUALLY      ;Price plan for annually breakdown cover;
+;pricePlan_AUTO_KEY_PROTECTION_COVER_ANNUALLY   ;AUTO_KEY_PROTECTION_COVER_ANNUALLY ;Price plan for annually key protection cover;
+;pricePlan_AUTO_5_YEAR_GUARANTEE_ANNUALLY       ;AUTO_5_YEAR_GUARANTEE_ANNUALLY     ;Price plan for annually 5 year guarantee;
+
+;pricePlan_AUTO_LEGAL_EXPENSE_COVER_MONTHLY     ;AUTO_LEGAL_EXPENSE_COVER_MONTHLY   ;Price plan for monthly legal expense cover;
+;pricePlan_AUTO_BREAKDOWN_COVER_MONTHLY         ;AUTO_BREAKDOWN_COVER_MONTHLY       ;Price plan for monthly breakdown cover;
+;pricePlan_AUTO_KEY_PROTECTION_COVER_MONTHLY    ;AUTO_KEY_PROTECTION_COVER_MONTHLY  ;Price plan for monthly key protection cover;
+;pricePlan_AUTO_5_YEAR_GUARANTEE_MONTHLY        ;AUTO_5_YEAR_GUARANTEE_MONTHLY      ;Price plan for monthly 5 year guarantee;
+;pricePlan_AUTO_TELEMETRY_INSTALLATION_MONTHLY  ;AUTO_TELEMETRY_INSTALLATION_MONTHLY;Price plan for monthly telemetry installation;
+
+;pricePlan_LIFE             ;LIFE                   ;Price plan for life insurance;
+;pricePlan_LIFE_PREMIUM_PROTECTION              ;LIFE_PREMIUM_PROTECTION            ;Price plan for premium protection
+;pricePlan_LIFE_RENEWAL_OPTION                  ;LIFE_RENEWAL_OPTION                ;Price plan for renewal option
+;pricePlan_LIFE_PAYMENT_PROTECTION_BENEFIT      ;LIFE_PAYMENT_PROTECTION_BENEFIT    ;Price plan for payment protection benefit
+
+# Insert Onetime Charge Entries
+UPDATE OneTimeChargeEntry;id[unique=true];name[lang=$lang];$catalogVersion
+;paynow_Charge_TWO_STAR                         ;Pay Now charge for two Star Plan
+;deductible_Charge_TWO_STAR                     ;Deductible charge for two Star Plan
+;cancellationCoverage_Charge_TWO_STAR           ;Cancellation Coverage charge for two Star Plan
+;rearrangementCoverage_TWO_STAR                 ;Rearrangement Coverage charge for two Star Plan
+;eventclothingcoverage_Charge_TWO_STAR          ;Event Clothing Coverage charge for two Star Plan
+;eventmoneycoverage_Charge_TWO_STAR             ;Event Money Coverage charge for two Star Plan
+;decorationSundriesCoverage_Charge_TWO_STAR     ;Decorations/Sundries Coverage charge for two Star Plan
+;carsTransportCoverage_Charge_TWO_STAR          ;Cars and Transport Coverage charge for two Star Plan
+;photographyVideoCoverage_Charge_TWO_STAR       ;Photography & Video Coverage charge for two Star Plan
+
+;paynow_Charge_THREE_STAR                       ;Pay Now charge for three Star Plan
+;deductible_Charge_THREE_STAR                   ;Deductible charge for three Star Plan
+;cancellationCoverage_Charge_THREE_STAR         ;Cancellation Coverage charge for three Star Plan
+;rearrangementCoverage_THREE_STAR               ;Rearrangement Coverage charge for three Star Plan
+;eventclothingcoverage_Charge_THREE_STAR        ;Event Clothing Coverage charge for three Star Plan
+;eventmoneycoverage_Charge_THREE_STAR           ;Event Money Coverage charge for three Star Plan
+;decorationSundriesCoverage_Charge_THREE_STAR   ;Decorations/Sundries Coverage charge for three Star Plan
+;carsTransportCoverage_Charge_THREE_STAR        ;Cars and Transport Coverage charge for three Star Plan
+;photographyVideoCoverage_Charge_THREE_STAR     ;Photography & Video Coverage charge for three Star Plan
+;failureSuppliersCoverage_Charge_THREE_STAR     ;Failure of Suppliers Coverage charge for three Star Plan
+
+;paynow_Charge_FOUR_STAR                        ;Pay Now charge for four Star Plan
+;deductible_Charge_FOUR_STAR                    ;Deductible charge for four Star Plan
+;cancellationCoverage_Charge_FOUR_STAR          ;Cancellation Coverage charge for four Star Plan
+;rearrangementCoverage_FOUR_STAR                ;Rearrangement Coverage charge for four Star Plan
+;eventclothingcoverage_Charge_FOUR_STAR         ;Event Clothing Coverage charge for four Star Plan
+;eventmoneycoverage_Charge_FOUR_STAR            ;Event Money Coverage (Cash) charge for four Star Plan
+;decorationSundriesCoverage_Charge_FOUR_STAR    ;Decorations/Sundries Coverage charge for four Star Plan
+;carsTransportCoverage_Charge_FOUR_STAR         ;Cars and Transport Coverage charge for four Star Plan
+;photographyVideoCoverage_Charge_FOUR_STAR      ;Photography & Video Coverage charge for four Star Plan
+;failureSuppliersCoverage_Charge_FOUR_STAR      ;Failure of Suppliers Coverage charge for four Star Plan
+;personalLiabilityCoverage_Charge_FOUR_STAR     ;Personal Liability Coverage charge for four Star Plan
+
+;paynow_Charge_FIVE_STAR                        ;Pay Now charge for five Star Plan
+;deductible_Charge_FIVE_STAR                    ;Deductible charge for five Star Plan
+;cancellationCoverage_Charge_FIVE_STAR          ;Cancellation Coverage charge for five Star Plan
+;rearrangementCoverage_FIVE_STAR                ;Rearrangement Coverage charge for five Star Plan
+;eventclothingcoverage_Charge_FIVE_STAR         ;Event Clothing Coverage charge for five Star Plan
+;eventmoneycoverage_Charge_FIVE_STAR            ;Event money charge for five Star Plan
+;decorationSundriesCoverage_Charge_FIVE_STAR    ;Decorations/Sundries Coverage charge for five Star Plan
+;carsTransportCoverage_Charge_FIVE_STAR         ;Cars and Transport Coverage charge for five Star Plan
+;photographyVideoCoverage_Charge_FIVE_STAR      ;Photography & Video Coverage charge for five Star Plan
+;failureSuppliersCoverage_Charge_FIVE_STAR      ;Failure of Suppliers Coverage charge for five Star Plan
+;personalLiabilityCoverage_Charge_FIVE_STAR     ;Personal Liability Coverage charge for five Star Plan
+
+;paynow_Charge_EXCESS_WAIVER                        ;Pay Now charge
+
+;paynow_Charge_MARQUEE                              ;Pay Now charge
+;deductible_Charge_MARQUEE                          ;Deductible charge
+
+;paynow_Charge_PUBLIC_LIABILITY                     ;Pay Now charge
+;failuresupplierscoverage_Charge_PUBLIC_LIABILITY   ;Increased Limit Failure of Suppliers Cover
+;publicliability_Charge_PUBLIC_LIABILITY            ;Public Liability Cover
+
+#Onetime Charge Entries for Travel Insurance
+;paynow_Charge_SINGLE_BUDGET                    ;Pay now charge for single budget plan
+;baggage_Charge_SINGLE_BUDGET					;Baggage charge for single budget plan
+;excess_Charge_SINGLE_BUDGET					;Excess charge for single budget plan
+;cancellation_Charge_SINGLE_BUDGET				;Cancellation charge for single budget plan
+;medicalexpenses_Charge_SINGLE_BUDGET			;Medical expenses charge for single budget plan
+;repatriation_Charge_SINGLE_BUDGET				;Repatriation charge for single budget plan
+;personalliability_Charge_SINGLE_BUDGET 		;Personal liability charge for single budget plan
+;personalaccident_Charge_SINGLE_BUDGET			;Personal accident charge for single budget plan
+;legalexpenses_Charge_SINGLE_BUDGET				;Legal expenses charge for single budget plan
+;curtailment_Charge_SINGLE_BUDGET				;Curtailment charge for single budget plan
+;safi_Charge_SINGLE_BUDGET						;Safi charge for single budget plan
+;hospitalbenefit_Charge_SINGLE_BUDGET			;Hospital benefit charge for single budget plan
+;accommodationcover_Charge_SINGLE_BUDGET		;Accommodation cover charge for single budget plan
+;delayeddeparture_Charge_SINGLE_BUDGET			;Delay departure charge for single budget plan
+;personalmoney_Charge_SINGLE_BUDGET				;Personal money charge for single budget plan
+;abandonmentcover_Charge_SINGLE_BUDGET			;Abandonment cover charge for single budget plan
+
+;paynow_Charge_SINGLE_SILVER                    ;Pay now cover charge for single silver plan
+;baggage_Charge_SINGLE_SILVER					;Baggage cover charge for single silver plan
+;excess_Charge_SINGLE_SILVER					;Excess cover charge for single silver plan
+;cancellation_Charge_SINGLE_SILVER				;Cancellation cover charge for single silver plan
+;medicalexpenses_Charge_SINGLE_SILVER			;Medical expenses cover charge for single silver plan
+;repatriation_Charge_SINGLE_SILVER				;Repatriation cover charge for single silver plan
+;personalliability_Charge_SINGLE_SILVER 		;Personal liability cover charge for single silver plan
+;personalaccident_Charge_SINGLE_SILVER			;Personal accident cover charge for single silver plan
+;legalexpenses_Charge_SINGLE_SILVER				;Legal expenses cover charge for single silver plan
+;curtailment_Charge_SINGLE_SILVER				;Curtailment cover charge for single silver plan
+;safi_Charge_SINGLE_SILVER						;Safi cover charge for single silver plan
+;hospitalbenefit_Charge_SINGLE_SILVER			;Hospital benefit cover charge for single silver plan
+;accommodationcover_Charge_SINGLE_SILVER		;Accommodation cover charge for single silver plan
+;delayeddeparture_Charge_SINGLE_SILVER			;Delayed departure cover charge for single silver plan
+;misseddeparture_Charge_SINGLE_SILVER			;Missed departure cover charge for single silver plan
+;petcare_Charge_SINGLE_SILVER					;Pet care cover charge for single silver plan
+;personalmoney_Charge_SINGLE_SILVER				;Personal money cover charge for single silver plan
+;abandonmentcover_Charge_SINGLE_SILVER			;Abandonment cover charge for single silver plan
+;hijack_Charge_SINGLE_SILVER					;Hijack cover charge for single silver plan
+
+;paynow_Charge_SINGLE_GOLD                     ;Pay now cover charge for single gold plan
+;baggage_Charge_SINGLE_GOLD					   ;Baggage cover charge for single gold plan
+;excess_Charge_SINGLE_GOLD					   ;Excess cover charge for single gold plan
+;cancellation_Charge_SINGLE_GOLD			   ;Cancellation cover charge for single gold plan
+;medicalexpenses_Charge_SINGLE_GOLD			   ;Medical expenses cover charge for single gold plan
+;repatriation_Charge_SINGLE_GOLD			   ;Repatriation cover charge for single gold plan
+;personalliability_Charge_SINGLE_GOLD 		   ;Personal liability cover charge for single gold plan
+;personalaccident_Charge_SINGLE_GOLD		   ;Personal accident cover charge for single gold plan
+;legalexpenses_Charge_SINGLE_GOLD			   ;Legal expenses cover charge for single gold plan
+;curtailment_Charge_SINGLE_GOLD				   ;Curtailment cover charge for single gold plan
+;safi_Charge_SINGLE_GOLD					   ;Safi cover charge for single gold plan
+;hospitalbenefit_Charge_SINGLE_GOLD			   ;Hospital benefit cover charge for single gold plan
+;accommodationcover_Charge_SINGLE_GOLD		   ;Accommodation cover charge for single gold plan
+;delayeddeparture_Charge_SINGLE_GOLD		   ;Delayed departure cover charge for single gold plan
+;supplierinsolvency_Charge_SINGLE_GOLD		   ;Supplier insolvency cover charge for single gold plan
+;misseddeparture_Charge_SINGLE_GOLD			   ;Missed departure cover charge for single gold plan
+;petcare_Charge_SINGLE_GOLD					   ;Pet care cover charge for single gold plan
+;personalmoney_Charge_SINGLE_GOLD			   ;Personal money cover charge for single gold plan
+;abandonmentcover_Charge_SINGLE_GOLD		   ;Abandonment cover charge for single gold plan
+;hijack_Charge_SINGLE_GOLD					   ;Hijack cover charge for single gold plan
+
+;paynow_Charge_ANNUAL_BUDGET                    ;Pay now cover charge for annual budget plan
+;baggage_Charge_ANNUAL_BUDGET					;Baggage cover charge for annual budget plan
+;excess_Charge_ANNUAL_BUDGET					;Excess cover charge for annual budget plan
+;cancellation_Charge_ANNUAL_BUDGET				;Cancellation cover charge for annual budget plan
+;medicalexpenses_Charge_ANNUAL_BUDGET			;Medical expenses cover charge for annual budget plan
+;repatriation_Charge_ANNUAL_BUDGET				;Repatriation cover charge for annual budget plan
+;personalliability_Charge_ANNUAL_BUDGET 		;Personal liability cover charge for annual budget plan
+;personalaccident_Charge_ANNUAL_BUDGET			;Personal accident cover charge for annual budget plan
+;legalexpenses_Charge_ANNUAL_BUDGET				;Legal expenses cover charge for annual budget plan
+;curtailment_Charge_ANNUAL_BUDGET				;Curtailment cover charge for annual budget plan
+;safi_Charge_ANNUAL_BUDGET						;Safi cover charge for annual budget plan
+;hospitalbenefit_Charge_ANNUAL_BUDGET			;Hospital benefit cover charge for annual budget plan
+;accommodationcover_Charge_ANNUAL_BUDGET		;Accommodation cover charge for annual budget plan
+;delayeddeparture_Charge_ANNUAL_BUDGET			;Delayed departure cover charge for annual budget plan
+;personalmoney_Charge_ANNUAL_BUDGET				;Personal money cover charge for annual budget plan
+;wintersports_Charge_ANNUAL_BUDGET				;Winter sports cover charge for annual budget plan
+;abandonmentcover_Charge_ANNUAL_BUDGET			;Abandonment cover charge for annual budget plan
+
+;paynow_Charge_ANNUAL_SILVER                    ;Pay now cover charge for annual silver plan
+;baggage_Charge_ANNUAL_SILVER					;Baggage cover charge for annual silver plan
+;excess_Charge_ANNUAL_SILVER					;Excess cover charge for annual silver plan
+;cancellation_Charge_ANNUAL_SILVER				;Cancellation cover charge for annual silver plan
+;medicalexpenses_Charge_ANNUAL_SILVER			;Medical expenses cover charge for annual silver plan
+;repatriation_Charge_ANNUAL_SILVER				;Repatriation cover charge for annual silver plan
+;personalliability_Charge_ANNUAL_SILVER 		;Personal liability cover charge for annual silver plan
+;personalaccident_Charge_ANNUAL_SILVER			;Personal accident cover charge for annual silver plan
+;legalexpenses_Charge_ANNUAL_SILVER				;Legal expenses cover charge for annual silver plan
+;curtailment_Charge_ANNUAL_SILVER				;Curtailment cover charge for annual silver plan
+;safi_Charge_ANNUAL_SILVER						;Safi cover charge for annual silver plan
+;hospitalbenefit_Charge_ANNUAL_SILVER			;Hospital benefit cover charge for annual silver plan
+;accommodationcover_Charge_ANNUAL_SILVER		;Accommodation cover charge for annual silver plan
+;delayeddeparture_Charge_ANNUAL_SILVER			;Delayed departure cover charge for annual silver plan
+;misseddeparture_Charge_ANNUAL_SILVER			;Missed departure cover charge for annual silver plan
+;petcare_Charge_ANNUAL_SILVER					;Pet care cover charge for annual silver plan
+;personalmoney_Charge_ANNUAL_SILVER				;Personal money cover charge for annual silver plan
+;wintersports_Charge_ANNUAL_SILVER				;Winter sports cover charge for annual silver plan
+;abandonmentcover_Charge_ANNUAL_SILVER			;Abandonment cover charge for annual silver plan
+;hijack_Charge_ANNUAL_SILVER					;Hijack cover charge for annual silver plan
+
+;paynow_Charge_ANNUAL_GOLD                    	;Pay now cover charge for annual gold plan
+;baggage_Charge_ANNUAL_GOLD						;Baggage cover charge for annual gold plan
+;excess_Charge_ANNUAL_GOLD						;Excess cover charge for annual gold plan
+;cancellation_Charge_ANNUAL_GOLD				;Cancellation cover charge for annual gold plan
+;medicalexpenses_Charge_ANNUAL_GOLD				;Medical expenses cover charge for annual gold plan
+;repatriation_Charge_ANNUAL_GOLD				;Repatriation cover charge for annual gold plan
+;personalliability_Charge_ANNUAL_GOLD 			;Personal liability cover charge for annual gold plan
+;personalaccident_Charge_ANNUAL_GOLD			;Personal accident cover charge for annual gold plan
+;legalexpenses_Charge_ANNUAL_GOLD				;Legal expenses cover charge for annual gold plan
+;curtailment_Charge_ANNUAL_GOLD					;Curtailment cover charge for annual gold plan
+;safi_Charge_ANNUAL_GOLD						;Safi cover charge for annual gold plan
+;hospitalbenefit_Charge_ANNUAL_GOLD				;Hospital benefit cover charge for annual gold plan
+;accommodationcover_Charge_ANNUAL_GOLD			;Accommodation cover charge for annual gold plan
+;delayeddeparture_Charge_ANNUAL_GOLD			;Delayed departure cover charge for annual gold plan
+;supplierinsolvency_Charge_ANNUAL_GOLD			;Supplier insolvency cover charge for annual gold plan
+;misseddeparture_Charge_ANNUAL_GOLD				;Missed departure cover charge for annual gold plan
+;petcare_Charge_ANNUAL_GOLD						;Pet care cover charge for annual gold plan
+;personalmoney_Charge_ANNUAL_GOLD				;Personal money cover charge for annual gold plan
+;wintersports_Charge_ANNUAL_GOLD				;Winter sports cover charge for annual gold plan
+;abandonmentcover_Charge_ANNUAL_GOLD			;Abandonment cover charge for annual gold plan
+;hijack_Charge_ANNUAL_GOLD						;Hijack cover charge for annual gold plan
+
+
+;paynow_Charge_BACKPACKERS_BUDGET               ;Pay now cover charge for backpackers budget plan
+;baggage_Charge_BACKPACKERS_BUDGET				;Baggabe cover charge for backpackers budget plan
+;excess_Charge_BACKPACKERS_BUDGET				;Excess cover charge for backpackers budget plan
+;cancellation_Charge_BACKPACKERS_BUDGET			;Cancellation cover charge for backpackers budget plan
+;medicalexpenses_Charge_BACKPACKERS_BUDGET		;Medical expenses cover charge for backpackers budget plan
+;repatriation_Charge_BACKPACKERS_BUDGET			;Repatriation cover charge for backpackers budget plan
+;personalliability_Charge_BACKPACKERS_BUDGET 	;Personal liability cover charge for backpackers budget plan
+;personalaccident_Charge_BACKPACKERS_BUDGET		;Personal accident cover charge for backpackers budget plan
+;legalexpenses_Charge_BACKPACKERS_BUDGET		;Legal expenses cover charge for backpackers budget plan
+;curtailment_Charge_BACKPACKERS_BUDGET			;Curtailment cover charge for backpackers budget plan
+;accommodationcover_Charge_BACKPACKERS_BUDGET	;Accommodation cover charge for backpackers budget plan
+;misseddeparture_Charge_BACKPACKERS_BUDGET		;Missed departure cover charge for backpackers budget plan
+;personalmoney_Charge_BACKPACKERS_BUDGET		;Personal money cover charge for backpackers budget plan
+;abandonmentcover_Charge_BACKPACKERS_BUDGET		;Abandonment cover charge for backpackers budget plan
+;hijack_Charge_BACKPACKERS_BUDGET				;Hijack cover charge for backpackers budget plan
+;muggingbenefit_Charge_BACKPACKERS_BUDGET		;Mugging benefit cover charge for backpackers budget plan
+;repaystudentloan_Charge_BACKPACKERS_BUDGET		;Repay student loan cover charge for backpackers budget plan
+
+
+;paynow_Charge_BACKPACKERS_SILVER               ;Pay now cover charge for backpackers silver plan
+;baggage_Charge_BACKPACKERS_SILVER				;Baggage cover charge for backpackers silver plan
+;excess_Charge_BACKPACKERS_SILVER				;Excess cover charge for backpackers silver plan
+;cancellation_Charge_BACKPACKERS_SILVER			;Cancelation cover charge for backpackers silver plan
+;medicalexpenses_Charge_BACKPACKERS_SILVER		;Medical expenses cover charge for backpackers silver plan
+;repatriation_Charge_BACKPACKERS_SILVER			;Repatriation cover charge for backpackers silver plan
+;personalliability_Charge_BACKPACKERS_SILVER 	;Personal liability cover charge for backpackers silver plan
+;personalaccident_Charge_BACKPACKERS_SILVER		;Personal accident cover charge for backpackers silver plan
+;legalexpenses_Charge_BACKPACKERS_SILVER		;Legal expenses cover charge for backpackers silver plan
+;curtailment_Charge_BACKPACKERS_SILVER			;Curtailment cover charge for backpackers silver plan
+;accommodationcover_Charge_BACKPACKERS_SILVER	;Accommodation cover charge for backpackers silver plan
+;misseddeparture_Charge_BACKPACKERS_SILVER		;Missed departure cover charge for backpackers silver plan
+;personalmoney_Charge_BACKPACKERS_SILVER		;Personal money cover charge for backpackers silver plan
+;abandonmentcover_Charge_BACKPACKERS_SILVER		;Abandonment cover charge for backpackers silver plan
+;hijack_Charge_BACKPACKERS_SILVER				;Hijack cover charge for backpackers silver plan
+;muggingbenefit_Charge_BACKPACKERS_SILVER		;Mugging benefit cover charge for backpackers silver plan
+;repaystudentloan_Charge_BACKPACKERS_SILVER		;Repay student loan cover charge for backpackers silver plan
+
+;paynow_Charge_BACKPACKERS_GOLD                 ;Pay now cover charge for backpackers gold plan
+;baggage_Charge_BACKPACKERS_GOLD				;baggage cover charge for backpackers gold plan
+;excess_Charge_BACKPACKERS_GOLD					;Excess cover charge for backpackers gold plan
+;cancellation_Charge_BACKPACKERS_GOLD			;Cancellation cover charge for backpackers gold plan
+;medicalexpenses_Charge_BACKPACKERS_GOLD		;Medical expenses cover charge for backpackers gold plan
+;repatriation_Charge_BACKPACKERS_GOLD			;Repatriation cover charge for backpackers gold plan
+;personalliability_Charge_BACKPACKERS_GOLD 		;Personal liability cover charge for backpackers gold plan
+;personalaccident_Charge_BACKPACKERS_GOLD		;Personal accident cover charge for backpackers gold plan
+;legalexpenses_Charge_BACKPACKERS_GOLD			;Legal expenses cover charge for backpackers gold plan
+;curtailment_Charge_BACKPACKERS_GOLD			;Curtailment cover charge for backpackers gold plan
+;accommodationcover_Charge_BACKPACKERS_GOLD		;Accommodation cover charge for backpackers gold plan
+;misseddeparture_Charge_BACKPACKERS_GOLD		;Missed departure cover charge for backpackers gold plan
+;personalmoney_Charge_BACKPACKERS_GOLD			;Personal money cover charge for backpackers gold plan
+;abandonmentcover_Charge_BACKPACKERS_GOLD		;Abandonment cover charge for backpackers gold plan
+;hijack_Charge_BACKPACKERS_GOLD					;Hijack cover charge for backpackers gold plan
+;muggingbenefit_Charge_BACKPACKERS_GOLD			;Mugging benefit cover charge for backpackers gold plan
+;repaystudentloan_Charge_BACKPACKERS_GOLD		;Repay student loan cover charge for backpackers gold plan
+
+;wintersports_Charge_TRA_WINTER					;Winter sports charge for travel plan
+;golfcover_Charge_TRA_GOLF						;Golf cover charge for travel plan
+;businesscover_Charge_TRA_BUSSINESS				;Business cover charge for travel plan
+;hazardousactivities_Charge_TRA_HAZARDOUS		;Hazardous activities cover charge for travel plan
+;valuables_Charge_TRA_VALUABLES					;Valuables cover charge for travel plan
+
+
+# Homeowners Property Insurance
+;excess_Charge_PRO_PROPERTY_HOMEOWNERS			;Excess charge for homeowners property insurance
+;legalexpenses_Charge_PRO_PROPERTY_HOMEOWNERS   ;Legal expenses charge for homeowners property insurance
+;homeemergencycover_Charge_PRO_PROPERTY_HOMEOWNERS;Home Emergency Cover charge for homeowners property insurance
+
+;floodcover_Charge_PRO_FLOOD_COVER_HOMEOWNERS	;Flood cover charge for homeowners property insurance
+;coverlimit_Charge_PRO_TEMP_ACCOM_HOMEOWNERS	;Cover limit for temporary accomodation cover for homeowners property insurance
+;coverlimit_Charge_PRO_JEWELRY_COVER_HOMEOWNERS	;Cover limit for blanket jewelry cover for homeowners property insurance
+;coverlimit_Charge_PRO_BICYCLES_COVER_HOMEOWNERS;Cover limit for bicycle cover for homeowners property insurance
+
+# Renters Property Insurance
+;excess_Charge_PRO_PROPERTY_RENTERS				;Excess charge for renters property insurance
+;legalexpenses_Charge_PRO_PROPERTY_RENTERS	    ;Legal expenses charge for renters property insurance
+;depositreturnassistance_Charge_PRO_PROPERTY_RENTERS;Deposit Return Assistance change for renters property insurance
+
+;coverlimit_Charge_PRO_TEMP_ACCOM_RENTERS	    ;Cover limit for temporary accomodation cover for renters property insurance
+;coverlimit_Charge_PRO_JEWELRY_COVER_RENTERS	;Cover limit for blanket jewelry cover for renters property insurance
+;coverlimit_Charge_PRO_BICYCLES_COVER_RENTERS	;Cover limit for bicycle cover for renters property insurance
+
+# Auto Insurance 
+;paynow_Charge_AUTO_ANNUALLY                    ;Pay now for auto insurance
+;excesswaivercoverage_Charge_AUTO_ANNUALLY      ;Excess waiver
+;courtesycover_Charge_AUTO_ANNUALLY             ;Courtesy cover
+;breakdowncare_Charge_AUTO_ANNUALLY             ;Breakdown care
+;emergencyhelplineappraisal_Charge_AUTO_ANNUALLY;Emergency helpline appraisal
+;uninsureddriverpromise_Charge_AUTO_ANNUALLY    ;Uninsured driver promise
+
+;paynow_Charge_AUTO_MONTHLY                     ;Pay now for auto insurance
+;excesswaivercoverage_Charge_AUTO_MONTHLY       ;Excess waiver
+;courtesycover_Charge_AUTO_MONTHLY              ;Courtesy cover
+;breakdowncare_Charge_AUTO_MONTHLY              ;Breakdown care
+;emergencyhelplineappraisal_Charge_AUTO_MONTHLY ;Emergency helpline appraisal
+;uninsureddriverpromise_Charge_AUTO_MONTHLY     ;Uninsured driver promise
+
+;paynow_Charge_AUTO_LEGAL_EXPENSE_COVER_ANNUALLY                    ;Pay now for legal expense cover
+;coverlimit_Charge_AUTO_LEGAL_EXPENSE_COVER_ANNUALLY                ;Cover limit for legal expense cover
+
+;paynow_Charge_AUTO_BREAKDOWN_COVER_ANNUALLY                        ;Pay now for breakdown cover
+;coverlimit_AUTO_BREAKDOWN_COVER_ANNUALLY                           ;Cover limit for breakdown cover
+
+;paynow_Charge_AUTO_KEY_PROTECTION_COVER_ANNUALLY                   ;Pay now for key protection cover
+;coverlimit_Charge_AUTO_KEY_PROTECTION_COVER_ANNUALLY               ;Cover limit for key protection cover
+
+;paynow_Charge_AUTO_5_YEAR_GUARANTEE_ANNUALLY                       ;Pay now for 5 year guarantee
+;coverlimit_Charge_AUTO_5_YEAR_GUARANTEE_ANNUALLY                   ;Cover limit for 5 year guarantee
+
+;paynow_Charge_AUTO_LEGAL_EXPENSE_COVER_MONTHLY                     ;Pay now for legal expense cover 
+;coverlimit_Charge_AUTO_LEGAL_EXPENSE_COVER_MONTHLY                 ;Cover limit for legal expense cover
+
+;paynow_Charge_AUTO_BREAKDOWN_COVER_MONTHLY                         ;Pay now for breakdown cover
+;coverlimit_Charge_AUTO_BREAKDOWN_COVER_MONTHLY                     ;Cover limit for breakdown cover
+
+;paynow_Charge_AUTO_KEY_PROTECTION_COVER_MONTHLY                    ;Pay now for key protection cover
+;coverlimit_Charge_AUTO_KEY_PROTECTION_COVER_MONTHLY                ;Cover limit for key protection cover
+
+;paynow_Charge_AUTO_5_YEAR_GUARANTEE_MONTHLY                        ;Pay now for 5 year guarantee
+;coverlimit_Charge_AUTO_5_YEAR_GUARANTEE_MONTHLY                    ;Cover limit for 5 year guarantee
+
+;paynow_Charge_AUTO_TELEMETRY_INSTALLATION_MONTHLY                  ;Pay now for telemetry installation
+;coverlimit_Charge_AUTO_TELEMETRY_INSTALLATION_MONTHLY              ;Cover limit for telemetry installation 
+
+;paynow_Charge_LIFE                             ;Pay now for life insurance
+
+;paynow_Charge_LIFE_PREMIUM_PROTECTION                              ;Pay now for premium protection
+;coverlimit_Charge_LIFE_PREMIUM_PROTECTION                          ;Cover limit for premium protection
+
+;paynow_Charge_LIFE_RENEWAL_OPTION                                  ;Pay now for renewal option
+;coverlimit_Charge_LIFE_RENEWAL_OPTION                              ;Cover limit for renewal option
+
+;paynow_Charge_LIFE_PAYMENT_PROTECTION_BENEFIT                      ;Pay now for payment protection benefit
+;coverlimit_Charge_LIFE_PAYMENT_PROTECTION_BENEFIT                  ;Cover limit for payment protection benefit 

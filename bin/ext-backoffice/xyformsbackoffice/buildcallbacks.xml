@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+<project name="xyformsbackoffice_buildcallbacks">
+	
+	<property name="xyformsbackoffice_web_fragment_file" value="${ext.xyformsbackoffice.path}/resources/web-fragment.xml"/>
+	<property name="xyformsbackoffice_web_fragment_dest_jar" value="${ext.backoffice.path}/web/webroot/WEB-INF/lib/webfragmentExt_xyformsbackoffice.jar"/>
+
+	<macrodef name="xyformsbackoffice_after_clean">
+		<sequential>
+			<xyformsbackoffice_remove_web_fragment/>
+			<xyformsbackoffice_remove_extra_resources/>
+		</sequential>
+	</macrodef>
+			
+	<macrodef name="xyformsbackoffice_after_build">
+		<sequential>
+			<xyformsbackoffice_remove_web_fragment/>
+			<xyformsbackoffice_create_web_fragment/>
+			<xyformsbackoffice_copy_extra_resources/>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="xyformsbackoffice_remove_web_fragment">
+		<sequential>
+			<delete file="${xyformsbackoffice_web_fragment_dest_jar}" failonerror="false" verbose="true" />
+		</sequential>
+	</macrodef>
+
+	<macrodef name="xyformsbackoffice_remove_extra_resources">
+		<sequential>
+         <delete file="${ext.backoffice.path}/web/webroot/WEB-INF/urlrewrite.xml" failonerror="false" verbose="true" />
+		</sequential>
+	</macrodef>
+
+	<macrodef name="xyformsbackoffice_create_web_fragment">
+		<sequential>
+			<if>
+				<available file="${xyformsbackoffice_web_fragment_file}"/>
+				<then>
+					<sequential>
+						<jar destfile="${xyformsbackoffice_web_fragment_dest_jar}">
+							<metainf file="${xyformsbackoffice_web_fragment_file}"/>
+						</jar>
+					</sequential>
+				</then>
+			</if>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="xyformsbackoffice_copy_extra_resources">
+		<sequential>
+         <copy file="${ext.xyformsbackoffice.path}/patch/urlrewrite.xml" tofile="${ext.backoffice.path}/web/webroot/WEB-INF/urlrewrite.xml" overwrite="true" verbose="true" />
+		</sequential>
+	</macrodef>
+		
+</project>

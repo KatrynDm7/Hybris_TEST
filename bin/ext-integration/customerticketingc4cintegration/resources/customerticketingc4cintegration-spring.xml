@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd
+           ">
+
+	<bean id="ticketingRestTemplate" class="org.springframework.web.client.RestTemplate">
+		<constructor-arg ref="requestFactory" />
+		<property name="messageConverters">
+			<util:list>
+				<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+				 <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+            		<constructor-arg index="0" name="defaultCharset" value="UTF-8"/>
+        		</bean>
+				<bean class="org.springframework.http.converter.ResourceHttpMessageConverter" />
+				<bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter" />
+				<bean class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter" />
+				<bean class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter" />
+				<bean class="de.hybris.platform.customerticketingc4cintegration.facade.MultipartMixedHttpMessageConverter" />
+				
+			</util:list>
+		</property>
+	</bean>
+	
+
+    <bean id="requestFactory" class="org.springframework.http.client.HttpComponentsClientHttpRequestFactory">
+        <property name="httpClient" ref="c4chttpClient" />
+    </bean>
+    <alias alias="defaultTicketFacade" name="ticketFacade"/>
+    <bean id="c4chttpClient" factory-bean="httpClientFactory" factory-method="getHttpClient"/>
+    <bean id="httpClientFactory" class="de.hybris.platform.customerticketingc4cintegration.factory.HttpClientFactory" />
+
+    <bean id="c4cTicketFacadeMock" class="de.hybris.platform.customerticketingc4cintegration.facade.C4CTicketFacadeMock">
+        <property name="createResource" value="customerticketingc4cintegration/c4cjson/response/create.json"/>
+        <property name="updateResource" value="customerticketingc4cintegration/c4cjson/response/update.json"/>
+        <property name="listTicketsResource" value="customerticketingc4cintegration/c4cjson/response/listing.json"/>
+        <property name="getResource" value="customerticketingc4cintegration/c4cjson/response/details.json"/>
+        <property name="ticketConverter" ref="defaultTicketConverter"/>
+        <property name="defaultC4CTicketConverter" ref="defaultC4CTicketConverter"/>
+        <property name="jacksonObjectMapper" ref="jacksonObjectMapper"/>
+    </bean>
+
+    <bean id="c4cTicketFacadeImpl" class="de.hybris.platform.customerticketingc4cintegration.facade.C4CTicketFacadeImpl">
+        <property name="restTemplate" ref="ticketingRestTemplate"/>
+        <property name="ticketConverter" ref="defaultTicketConverter"/>
+        <property name="defaultC4CTicketConverter" ref="defaultC4CTicketConverter"/>
+        <property name="updateMessageConverter" ref="updateMessageConverter"/>
+        <property name="jacksonObjectMapper" ref="jacksonObjectMapper"/>
+    </bean>
+
+    <bean id="ticketFacadeFactory" class="de.hybris.platform.customerticketingc4cintegration.factory.TicketFacadeFactory" />
+    <alias alias="defaultTicketFacade" name="ticketFacade"/>
+    <bean id="ticketFacade" factory-bean="ticketFacadeFactory" factory-method="getTicketFacade"/>
+
+    <!-- Jackson Mapper -->
+    <bean id="jacksonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper" >
+        <property name="serializationInclusion" value="NON_NULL"/>
+        <property name="propertyNamingStrategy" ref="oDataCaseStrategy"/>
+    </bean>
+    <bean id="oDataCaseStrategy" class="de.hybris.platform.customerticketingc4cintegration.converters.ODataCaseStrategy"/>
+
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject" ref="jacksonObjectMapper" />
+        <property name="targetMethod" value="configure" />
+        <property name="arguments">
+            <list>
+                <value type="com.fasterxml.jackson.databind.DeserializationFeature">ACCEPT_SINGLE_VALUE_AS_ARRAY</value>
+                <value>true</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject" ref="jacksonObjectMapper" />
+        <property name="targetMethod" value="configure" />
+        <property name="arguments">
+            <list>
+                <value type="com.fasterxml.jackson.databind.DeserializationFeature">FAIL_ON_UNKNOWN_PROPERTIES</value>
+                <value>false</value>
+            </list>
+        </property>
+    </bean>
+
+
+    <bean id="ticketPopulator" class="de.hybris.platform.customerticketingc4cintegration.converters.populators.C4C2YTicketPopulator" />
+    <bean id="ticketData" class="de.hybris.platform.customerticketingfacades.data.TicketData" scope="prototype"/>
+    <alias name="defaultTicketConverter" alias="ticketConverter"/>
+    <bean id="defaultTicketConverter" parent="abstractPopulatingConverter" >
+        <lookup-method name="createTarget" bean="ticketData"/>
+        <property name="populators">
+            <list>
+                <ref bean="ticketPopulator"/>
+            </list>
+        </property>
+    </bean>
+        
+    <bean id="defaultC4CTicketPopulator" class="de.hybris.platform.customerticketingc4cintegration.converters.populators.Y2C4CTicketPopulator" />
+    <bean id="c4cTicketData" class="de.hybris.platform.customerticketingc4cintegration.data.ServiceRequestData" scope="prototype"/>
+    <alias name="defaultC4CTicketConverter" alias="c4cTicketConverter"/>
+    <bean id="defaultC4CTicketConverter" parent="abstractPopulatingConverter" >
+        <lookup-method name="createTarget" bean="c4cTicketData"/>
+        <property name="populators">
+            <list>
+                <ref bean="defaultC4CTicketPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+
+    <bean id="updateData" class="de.hybris.platform.customerticketingc4cintegration.data.Note" scope="prototype"/>
+    <bean id="messageUpdatePopulator" class="de.hybris.platform.customerticketingc4cintegration.converters.populators.Y2TicketMessageUpdatePopulator" />
+    <bean id="updateMessageConverter" parent="abstractPopulatingConverter" >
+        <lookup-method name="createTarget" bean="updateData"/>
+        <property name="populators">
+            <list>
+                <ref bean="messageUpdatePopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="sitePropsHolder" class="de.hybris.platform.customerticketingc4cintegration.SitePropsHolder"/>
+
+    <util:map id="statusMapping">
+        <entry key="1" value-ref="open"/>
+        <entry key="2" value-ref="inprocess"/>
+        <entry key="5" value-ref="completed"/>
+        <entry key="6" value-ref="closed"/>
+    </util:map>
+    
+    <alias name="defaultC4CCustomerPopulator" alias="c4cCustomerPopulator"/>
+	<bean id="defaultC4CCustomerPopulator" class="de.hybris.platform.customerticketingc4cintegration.converters.populators.C4CCustomerPopulator"/>
+	
+    <bean parent="modifyPopulatorList">
+		<property name="list" ref="customerConverter" />
+		<property name="add" ref="c4cCustomerPopulator" />
+	</bean>
+
+</beans>

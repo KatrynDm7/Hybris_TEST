@@ -1,0 +1,14 @@
+<properties xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            xmlns:oxf="http://www.orbeon.com/oxf/processors">
+
+    <!-- only save button is shown to the user -->
+    <property as="xs:string"  name="oxf.fr.detail.buttons.yforms.*"                  value="save-final"/>
+
+    <!-- forms and data for yforms are stored in hybris -->
+    <property as="xs:string" name="oxf.fr.persistence.provider.yforms.*.form"        value="hybris-nv"/>
+    <property as="xs:string" name="oxf.fr.persistence.provider.yforms.*.data"        value="hybris-nv"/>
+
+    <!-- general CSS for every form in yforms-->
+    <property as="xs:string" name="oxf.fr.css.custom.uri.yforms.*"                   value="/forms/yforms/style.css"/>
+
+</properties>

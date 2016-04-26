@@ -1,0 +1,15 @@
+.siteSearch .control-group {
+    width: 195px;
+}
+.siteSearch #input_SearchBox {
+    font-weight: normal;
+    border: 1px solid #dbdad7;
+    border-radius: 3px;
+    height: 2.5em;
+    padding: 10px 35px 10px 15px;
+    margin-bottom: 23px;
+}
+.siteSearch .siteSearchSubmit {
+    display: inline-block;
+    margin: 11px 12px 0 -30px;
+}

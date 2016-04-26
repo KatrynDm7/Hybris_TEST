@@ -1,0 +1,342 @@
+.subscriptionsTable {
+    margin: 10px 0;
+    width: 100%;
+    table-layout: fixed;
+}
+.subscriptionsTable thead th {
+    text-transform: none;
+    color: #000;
+    border-bottom: 2px solid #ffbc0e;
+    padding-right: 0;
+    font-weight: bold;
+    height: 30px;
+    line-height: 30px;
+}
+.subscriptionsTable thead .subscriptionsTableState {
+    width: 75px;
+}
+.subscriptionsTable thead .subscriptionsTablePayment {
+    width: 130px;
+}
+.subscriptionsTable thead .subscriptionsTableAction {
+    width: 205px;
+}
+.subscriptionsTable tbody td {
+    color: #484848;
+    font-size: .9286em;
+    padding: 20px 15px 20px 0;
+    vertical-align: top;
+}
+.subscriptionsTable tbody td:last-child {
+    padding-right: 5px;
+}
+.subscriptionsTable tbody td:first-child {
+    padding-left: 5px;
+}
+.subscriptionsTable tbody tr:nth-child(2n) {
+    background-color: #f8f8f7;
+}
+.subscriptionsTable tbody td a {
+    color: #0073e4;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+}
+.subscriptionsTable .secondary,
+.subscriptionsTable .positive {
+    float: left;
+    margin: 0 0 0 15px;
+}
+.subscriptionsTable a.function_btn {
+    line-height: 3.214em;
+    float: left;
+}
+.subscriptionsTable tbody td:first-child a {
+    font-weight: normal;
+}
+.subscriptionsTable tbody td > span {
+    display: block;
+}
+
+
+/* payment detail page / manage subscription */
+.paymentListTable .manageSubscriptions {
+    display: inline-block;
+    border-bottom: 1px solid #dbdad7;
+    padding-bottom: 8px;
+    margin: 0 0 5px 0;
+    float: none;
+}
+.manageSubscriptions .paymentAccount {
+    width: 100%;
+    table-layout: fixed;
+    margin-bottom: 75px;
+}
+.manageSubscriptions .paymentAccount td {
+    vertical-align: top;
+}
+.manageSubscriptions .paymentAccount tr > td:last-child {
+    text-align: right;
+}
+.manageSubscriptions .paymentAccount .function_btn {
+    margin-right: 30px;
+}
+.manageSubscriptions .paymentAccount .remove {
+    margin-right: 45px;
+}
+.manageSubscriptions .orderListTable {
+    margin-bottom: 70px;
+}
+.manageSubscriptions .infoText .no-payment {
+    margin-top: 25px;
+}
+.manageSubscriptions .payment-box {
+    float: left;
+}
+.manageSubscriptions .change-box .secondary {
+    float: right;
+    margin: 0 0 15px 15px;
+}
+.manageSubscriptions .change-box #id_changeToPM {
+    width: 210px;
+}
+
+
+
+/* subscription detail page / manage subscription */
+.manageSubscription {
+    float: left;
+}
+.manageSubscription + .manageSubscription {
+    margin-left: 50px;
+}
+.manageSubscription h3 {
+    font-size: 1.286em;
+    font-weight: bold;
+    color: #484848;
+    margin-bottom: 10px;
+}
+.subscriptionActivity {
+    margin-top: 65px;
+    overflow: hidden;
+}
+.subscriptionActivity h3 {
+    float: left;
+}
+.manageSubscription .order_number {
+    float: right;
+    line-height: 1.7857em;
+}
+.manageSubscription .order_number a {
+    font-weight: normal;
+}
+.page-subscription .p_action_btn.positive.right {
+    margin-top: -9px;
+}
+/* tables */
+.manageSubscriptionTable {
+    border: 1px solid #dbdad7;
+    padding: 15px;
+    width: 342px;
+}
+.manageSubscriptionTable tr:nth-child(2n) td {
+    background-color: #f8f8f7;
+}
+.manageSubscriptionTable td {
+    border-top: 1px solid #dbdad7;
+    padding: 15px 5px;
+    vertical-align: top;
+    width: 50%;
+}
+.manageSubscriptionTable tr:first-child td {
+    border-top: none;
+    padding-top: 0;
+}
+.manageSubscriptionTable tr:first-child:last-child td {
+    padding-bottom: 0;
+}
+#subscription_manage {
+    table-layout: fixed;
+}
+#subscription_manage tr > td:first-child {
+    width: 155px;
+}
+.manageSubscriptionTable select {
+    width: 135px;
+    float: left;
+}
+.manageSubscriptionTable .secondary {
+    margin: 0 0 0 30px;
+}
+.manageSubscriptionTable button.negative {
+    margin: 0;
+    padding: 0;
+}
+button.negative.cancel {
+    margin-left: -3px;
+}
+button.negative.pause, button.negative.play, button.negative.stop {
+    color: #484848;
+    background: url("../images/subscription_iconPlayStop.png") no-repeat scroll 0 4px rgba(0, 0, 0, 0);
+    padding-left: 25px;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    /* Safari and Chrome */
+    button.negative.pause, button.negative.play {
+        background-position: 0 3px;
+    }
+}
+button.negative.play {
+    background-position: 0 -165px;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    /* Safari and Chrome */
+    button.negative.play {
+        background-position: 0 -167px;
+    }
+}
+button.negative.stop {
+    background-position: 0 -82px;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    /* Safari and Chrome */
+    button.negative.stop {
+        background-position: 0 -84px;
+    }
+}
+.manageSubscriptionActions {
+    border-top: 1px solid #dbdad7;
+    margin-top: 30px;
+    padding-top: 20px;
+}
+
+/* tabs */
+.account-upgrade-subscription {
+    margin-bottom: 87px;
+}
+.account-upgrade-subscription .tabs > ul.tabs-list {
+    border-bottom: 1px solid #dbdad7;
+    border-top: 1px solid #dbdad7;
+    background-color: #f0efec;
+}
+.account-upgrade-subscription .tabs > ul.tabs-list > li {
+    font-weight: bold;
+    border-left: 1px solid #dbdad7;
+    float: left;
+}
+.account-upgrade-subscription .tabs > ul.tabs-list > li a {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 48px;
+    display: block;
+    padding: 0 24px;
+}
+.account-upgrade-subscription .tabs > ul.tabs-list > .current {
+    background-color: #fff;
+    border-bottom: 1px solid #fff;
+    border-right: 1px solid #dbdad7;
+    margin-bottom: -1px;
+    margin-right: -1px;
+    height: 48px;
+}
+.account-upgrade-subscription .tabs > ul.tabs-list > .current a:hover {
+    color: #484848;
+}
+.account-upgrade-subscription .tabs > .content {
+    border-bottom: 1px solid #dbdad7;
+    border-left: 1px solid #dbdad7;
+    border-right: 1px solid #dbdad7;
+    padding: 25px 25px 0;
+    margin: 0;
+}
+.account-upgrade-subscription .tabs .current-info,
+.account-upgrade-subscription .tabs .accessibletabsanchor,
+.account-upgrade-subscription .tabs .tabhead {
+    left: -999em;
+    position: absolute;
+}
+/* end tabs */
+.account-upgrade-subscription-table {
+    width: 100%;
+    table-layout: fixed;
+}
+.account-upgrade-subscription-table th {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1428em;
+    font-weight: 700;
+    padding: 10px 0 25px;
+}
+.account-upgrade-subscription-table td {
+    font-size: .92857em;
+    border-top: 1px solid #dbdad7;
+    padding: 15px 5px;
+    vertical-align: top;
+}
+.account-upgrade-subscription-table td:nth-child(2n) {
+    background-color: #f8f8f7;
+}
+.account-upgrade-subscription-table .top_plan {
+    font-size: .875em;
+    line-height: 1em;
+    color: #999999;
+}
+.account-upgrade-subscription-table .info-line.center {
+    margin-top: 14px;
+}
+.account-upgrade-subscription .tabbody {
+    margin-bottom: -73px;
+}
+.account-upgrade-subscription .actions {
+    border-top: 1px solid #dbdad7;
+    margin: 0 -25px;
+    position: relative;
+    top: 45px;
+}
+.account-upgrade-subscription .actions .cancel {
+    display: inline-block;
+    line-height: 3.0714em;
+    margin: 15px 0;
+}
+.account-upgrade-subscription .secondary {
+    margin: 15px 30px;
+}
+/* upgrade subscription popup */
+#upgrade-billing-changes .payment-box {
+    position: relative;
+    width: 285px;
+    float: left;
+    margin-top: 10px;
+}
+#upgrade-billing-changes .payment-box.right:before {
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid #000;
+    content: " ";
+    left: -19px;
+    position: absolute;
+    top: 62px;
+}
+#upgrade-billing-changes .actions #command {
+    float: right;
+}
+#upgrade-billing-changes .upgrade-preview-table {
+    table-layout: fixed;
+    width: 100%;
+    margin-bottom: 25px;
+}
+#upgrade-billing-changes .upgrade-preview-table th {
+    border-bottom: 1px solid #dbdad7;
+    font-weight: 700;
+    color: #000;
+    padding: 3px 0;
+}
+#upgrade-billing-changes .upgrade-preview-table td {
+    padding: 3px 0;
+}
+
+/* billing activity */
+#billingActivities {
+    table-layout: auto;
+}
+#billingActivities td {
+    vertical-align: middle;
+}

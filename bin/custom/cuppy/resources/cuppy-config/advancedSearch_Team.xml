@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<advanced-search>
+	<group name="root" type="Team">
+		<label lang="en">Suche nach...</label>
+		<label lang="de">Search for...</label>
+		<group name="general">
+			<label lang="de">Stammdaten</label>
+			<label lang="en">Properties</label>			
+			<property qualifier="Team.isocode" sort-enabled="true" visible="true"/>
+			<property qualifier="Team.name" sort-enabled="true" visible="true"/>
+			<property qualifier="Team.flag" sort-enabled="true" visible="true"/>
+		</group>
+		<group name="other">
+			<label lang="de">Andere</label>
+			<label lang="en">Other</label>
+			<property qualifier="Team.homeMatches" sort-enabled="true" visible="false"/>
+			<property qualifier="Team.guestMatches" sort-enabled="true" visible="false"/>
+		</group>		
+	</group>
+</advanced-search>

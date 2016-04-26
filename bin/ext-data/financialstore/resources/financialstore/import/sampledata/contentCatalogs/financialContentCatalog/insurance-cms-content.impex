@@ -1,0 +1,390 @@
+##########################
+# cms-content.impex file is loaded before the insurance sample data, therefore created a new impex file
+# as a placeholder for any components that required the use of the on the sample data.
+##########################
+$contentCatalog=financialContentCatalog
+$contentCatalogName=Financial Content Catalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$productCatalog=financialProductCatalog
+$productCatalogName=Financial Product Catalog
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$picture=media(code, $contentCV);
+$image=image(code, $contentCV);
+$media=media(code, $contentCV);
+$page=page(uid, $contentCV);
+$contentPage=contentPage(uid, $contentCV);
+$product=product(code, $productCV)
+$category=category(code, $productCV)
+$siteResource=jar:de.hybris.platform.financialstore.constants.FinancialStoreConstants&/financialstore/import/sampledata/contentCatalogs/$contentCatalog
+$productResource=jar:de.hybris.platform.financialstore.constants.FinancialStoreConstants&/financialstore/import/sampledata/productCatalogs/$productCatalog
+$jarResourceCms=jar:de.hybris.platform.financialstore.constants.FinancialStoreConstants&/financialstore/import/sampledata/cockpits/cmscockpit
+
+# Import modulegen config properties into impex macros
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+$xslfoPackageName=$config-xslfoContextPackageName
+
+#### CMS Component - YFormCMSComponent
+INSERT_UPDATE YFormCMSComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;applicationId;formId;formDataId;action
+
+#### CMS Component - Category Landing Page
+INSERT_UPDATE CMSLinkImageComponent;$contentCV[unique=true];uid[unique=true];name;url;category(code, $productCV);image(uid,$contentCV);target(code)[default='sameWindow'];&componentRef;styleAttributes;
+;;retrieve_quote_link      ;Retrieve Quote link    ;#;;;;retrieve_quote_link;id="retrieveQuoteLink" class="button";
+
+# CMS Link Components
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];$category;$product;styleAttributes
+
+# CMS Paragraph Component
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;travelCategoryLandingPageBannerText;Travel Category Landing Page Banner Text;travelCategoryLandingPageBannerText
+;;eventCategoryLandingPageBannerText;Event Category Landing Page Banner Text;eventCategoryLandingPageBannerText
+;;homeownersCategoryLandingPageBannerText;Homeowners Category Landing Page Banner Text;homeownersCategoryLandingPageBannerText
+;;rentersCategoryLandingPageBannerText;Renters Category Landing Page Banner Text;rentersCategoryLandingPageBannerText
+;;or_text;OR text;or_text
+
+# CMS tabs components
+INSERT_UPDATE CMSTabParagraphComponent;$contentCV[unique=true];uid[unique=true];name;visible;&componentRef;;;
+;;oneColumnTab;One Column tab;true;oneColumnTab;;;;
+;;twoColumnTab;Two Column tab;true;twoColumnTab;;;;
+;;loremipsum1Tab;Loremipsum tab;true;loremipsum1Tab;;;;
+;;loremipsum2Tab;Loremipsum tab;true;loremipsum2Tab;;;;
+
+########################################
+##### Event Insurance Marketing Category Landing Pages
+########################################
+INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved']
+;;EventMarketingCategoryLandingPage;Event Insurances Marketing Category Landing Page;MarketingCategoryLandingPageTemplate;false;
+
+INSERT_UPDATE CMSCategoryRestriction;$contentCV[unique=true];uid[unique=true];name;categories(code, $productCV);pages(uid, $contentCV)
+;;EventInsurance-MarketingCategoryPageRestriction;Restriction for Event Insurances Marketing Category Page;insurance_main_event;EventMarketingCategoryLandingPage
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;Section1Slot-EventMarketingCategoryLandingPage  ;Section1 Slot for EventMarketingCategoryLandingPage;true;event_section1_component_set;
+;;Section2Slot-EventMarketingCategoryLandingPage  ;Section2 Slot for EventMarketingCategoryLandingPage;true;
+;;Section3Slot-EventMarketingCategoryLandingPage  ;Section3 Slot for EventMarketingCategoryLandingPage;true;
+;;TabsSlot-EventMarketingCategoryLandingPage      ;Tabs Slot for EventMarketingCategoryLandingPage;true;event_TabPanelContainer;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='EventMarketingCategoryLandingPage'];contentSlot(uid,$contentCV)[unique=true]
+;;Section1-EventMarketingCategoryLandingPage ;Section1   ;;Section1Slot-EventMarketingCategoryLandingPage;
+;;Section2-EventMarketingCategoryLandingPage ;Section2   ;;Section2Slot-EventMarketingCategoryLandingPage;
+;;Section3-EventMarketingCategoryLandingPage ;Section3   ;;Section3Slot-EventMarketingCategoryLandingPage;
+;;TabSlot-EventMarketingCategoryLandingPage  ;Tabs       ;;TabsSlot-EventMarketingCategoryLandingPage;
+
+INSERT_UPDATE CMSLinkImageComponent;$contentCV[unique=true];uid[unique=true];name;url;category(code, $productCV);image(uid,$contentCV);target(code)[default='sameWindow'];&componentRef;styleAttributes;
+;;event_get_a_quote_link     ;Event Get a Quote link    ;;insurances_event;;;event_get_a_quote_link;id="getAQuoteLink" class="button";
+
+INSERT_UPDATE CMSCustomDefineStyleCMSComponentsContainer;$contentCV[unique=true];uid[unique=true];name;visible;simpleCMSComponents(uid, $contentCV);elementType;styleCss;idKey;&componentRef
+;;event_section1_component_set;Event Section1 Component Set;true;banner_CatVisual_event,eventCategoryLandingPageBannerText,retrieve_quote_link,or_text,event_get_a_quote_link;div;marketing;section1_comp;event_section1_component_set
+
+INSERT_UPDATE CMSTabParagraphContainer;$contentCV[unique=true];uid[unique=true];name;visible;simpleCMSComponents(uid, $contentCV);&componentRef;;
+;;event_TabPanelContainer;Event Tab container;true;oneColumnTab,twoColumnTab,loremipsum1Tab,loremipsum2Tab;event_TabPanelContainer;;
+
+
+########################################
+##### Travel Insurance Marketing Category Landing Pages
+########################################
+INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved']
+;;TravelMarketingCategoryLandingPage;Travel Insurances Marketing Category Landing Page;MarketingCategoryLandingPageTemplate;false;
+
+INSERT_UPDATE CMSCategoryRestriction;$contentCV[unique=true];uid[unique=true];name;categories(code, $productCV);pages(uid, $contentCV)
+;;TravelInsurance-MarketingCategoryPageRestriction;Restriction for Travel Insurances Marketing Category Page;insurance_main_travel;TravelMarketingCategoryLandingPage
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;Section1Slot-TravelMarketingCategoryLandingPage  ;Section1 Slot for TravelMarketingCategoryLandingPage;true;travel_section1_component_set;
+;;Section2Slot-TravelMarketingCategoryLandingPage  ;Section2 Slot for TravelMarketingCategoryLandingPage;true;
+;;Section3Slot-TravelMarketingCategoryLandingPage  ;Section3 Slot for TravelMarketingCategoryLandingPage;true;
+;;TabsSlot-TravelMarketingCategoryLandingPage      ;Tabs Slot for TravelMarketingCategoryLandingPage;true;travel_TabPanelContainer;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='TravelMarketingCategoryLandingPage'];contentSlot(uid,$contentCV)[unique=true]
+;;Section1-TravelMarketingCategoryLandingPage ;Section1   ;;Section1Slot-TravelMarketingCategoryLandingPage;
+;;Section2-TravelMarketingCategoryLandingPage ;Section2   ;;Section2Slot-TravelMarketingCategoryLandingPage;
+;;Section3-TravelMarketingCategoryLandingPage ;Section3   ;;Section3Slot-TravelMarketingCategoryLandingPage;
+;;TabSlot-TravelMarketingCategoryLandingPage  ;Tabs       ;;TabsSlot-TravelMarketingCategoryLandingPage;
+
+INSERT_UPDATE CMSLinkImageComponent;$contentCV[unique=true];uid[unique=true];name;url;category(code, $productCV);image(uid,$contentCV);target(code)[default='sameWindow'];&componentRef;styleAttributes;
+;;travel_get_a_quote_link     ;Travel Get a Quote link    ;;insurances_travel;;;travel_get_a_quote_link;id="getAQuoteLink" class="button";
+
+INSERT_UPDATE CMSCustomDefineStyleCMSComponentsContainer;$contentCV[unique=true];uid[unique=true];name;visible;simpleCMSComponents(uid, $contentCV);elementType;styleCss;idKey;&componentRef
+;;travel_section1_component_set;Travel Section1 Component Set;true;banner_CatVisual_travel,travelCategoryLandingPageBannerText,retrieve_quote_link,or_text,travel_get_a_quote_link;div;marketing;section1_comp;travel_section1_component_set
+
+INSERT_UPDATE CMSTabParagraphContainer;$contentCV[unique=true];uid[unique=true];name;visible;simpleCMSComponents(uid, $contentCV);&componentRef;;
+;;travel_TabPanelContainer;Travel Tab container;true;oneColumnTab,twoColumnTab,loremipsum1Tab,loremipsum2Tab;travel_TabPanelContainer;;
+
+########################################
+##### Homeowner Insurance Marketing Category Landing Pages
+########################################
+INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved']
+;;HomeownerMarketingCategoryLandingPage;Homeowner Insurances Marketing Category Landing Page;MarketingCategoryLandingPageTemplate;false;
+
+INSERT_UPDATE CMSCategoryRestriction;$contentCV[unique=true];uid[unique=true];name;categories(code, $productCV);pages(uid, $contentCV)
+;;HomeownerInsurance-MarketingCategoryPageRestriction;Restriction for Homeowner Insurances Marketing Category Page;insurance_main_homeowners;HomeownerMarketingCategoryLandingPage
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;Section1Slot-HomeownerMarketingCategoryLandingPage  ;Section1 Slot for HomeownerMarketingCategoryLandingPage;true;homeowner_section1_component_set;
+;;Section2Slot-HomeownerMarketingCategoryLandingPage  ;Section2 Slot for HomeownerMarketingCategoryLandingPage;true;
+;;Section3Slot-HomeownerMarketingCategoryLandingPage  ;Section3 Slot for HomeownerMarketingCategoryLandingPage;true;
+;;TabsSlot-HomeownerMarketingCategoryLandingPage      ;Tabs Slot for HomeownerMarketingCategoryLandingPage;true;homeowner_TabPanelContainer;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='HomeownerMarketingCategoryLandingPage'];contentSlot(uid,$contentCV)[unique=true]
+;;Section1-HomeownerMarketingCategoryLanding ;Section1   ;;Section1Slot-HomeownerMarketingCategoryLandingPage;
+;;Section2-HomeownerMarketingCategoryLanding ;Section2   ;;Section2Slot-HomeownerMarketingCategoryLandingPage;
+;;Section3-HomeownerMarketingCategoryLanding ;Section3   ;;Section3Slot-HomeownerMarketingCategoryLandingPage;
+;;TabSlot-HomeownerMarketingCategoryLanding  ;Tabs       ;;TabsSlot-HomeownerMarketingCategoryLandingPage;
+
+INSERT_UPDATE CMSLinkImageComponent;$contentCV[unique=true];uid[unique=true];name;url;category(code, $productCV);image(uid,$contentCV);target(code)[default='sameWindow'];&componentRef;styleAttributes;
+;;homeowner_get_a_quote_link     ;Travel Get a Quote link    ;;insurances_property_homeowners;;;homeowner_get_a_quote_link;id="getAQuoteLink" class="button";
+
+INSERT_UPDATE CMSCustomDefineStyleCMSComponentsContainer;$contentCV[unique=true];uid[unique=true];name;visible;simpleCMSComponents(uid, $contentCV);elementType;styleCss;idKey;&componentRef
+;;homeowner_section1_component_set;Homeowner Section1 Component Set;true;banner_CatVisual_homeowners,homeownersCategoryLandingPageBannerText,retrieve_quote_link,or_text,homeowner_get_a_quote_link;div;marketing;section1_comp;homeowner_section1_component_set
+
+INSERT_UPDATE CMSTabParagraphContainer;$contentCV[unique=true];uid[unique=true];name;visible;simpleCMSComponents(uid, $contentCV);&componentRef;;
+;;homeowner_TabPanelContainer;Homeowner Tab container;true;oneColumnTab,twoColumnTab,loremipsum1Tab,loremipsum2Tab;homeowner_TabPanelContainer;;
+
+########################################
+##### Renters Insurance Marketing Category Landing Pages
+########################################
+INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved']
+;;RentersMarketingCategoryLandingPage;Renters Insurances Marketing Category Landing Page;MarketingCategoryLandingPageTemplate;false;
+
+INSERT_UPDATE CMSCategoryRestriction;$contentCV[unique=true];uid[unique=true];name;categories(code, $productCV);pages(uid, $contentCV)
+;;RentersInsurance-MarketingCategoryPageRestriction;Restriction for Renters Insurances Marketing Category Page;insurance_main_renters;RentersMarketingCategoryLandingPage
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;Section1Slot-RentersMarketingCategoryLandingPage  ;Section1 Slot for RentersMarketingCategoryLandingPage;true;renters_section1_component_set;
+;;Section2Slot-RentersMarketingCategoryLandingPage  ;Section2 Slot for RentersMarketingCategoryLandingPage;true;
+;;Section3Slot-RentersMarketingCategoryLandingPage  ;Section3 Slot for RentersMarketingCategoryLandingPage;true;
+;;TabsSlot-RentersMarketingCategoryLandingPage      ;Tabs Slot for RentersMarketingCategoryLandingPage;true;renters_TabPanelContainer;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='RentersMarketingCategoryLandingPage'];contentSlot(uid,$contentCV)[unique=true]
+;;Section1-RentersMarketingCategoryLanding ;Section1   ;;Section1Slot-RentersMarketingCategoryLandingPage;
+;;Section2-RentersMarketingCategoryLanding ;Section2   ;;Section2Slot-RentersMarketingCategoryLandingPage;
+;;Section3-RentersMarketingCategoryLanding ;Section3   ;;Section3Slot-RentersMarketingCategoryLandingPage;
+;;TabSlot-RentersMarketingCategoryLanding  ;Tabs       ;;TabsSlot-RentersMarketingCategoryLandingPage;
+
+INSERT_UPDATE CMSLinkImageComponent;$contentCV[unique=true];uid[unique=true];name;url;category(code, $productCV);image(uid,$contentCV);target(code)[default='sameWindow'];&componentRef;styleAttributes;
+;;renters_get_a_quote_link     ;Renters Get a Quote link    ;;insurances_property_renters;;;renters_get_a_quote_link;id="getAQuoteLink" class="button";
+
+INSERT_UPDATE CMSCustomDefineStyleCMSComponentsContainer;$contentCV[unique=true];uid[unique=true];name;visible;simpleCMSComponents(uid, $contentCV);elementType;styleCss;idKey;&componentRef
+;;renters_section1_component_set;Renters Section1 Component Set;true;banner_CatVisual_renters,rentersCategoryLandingPageBannerText,retrieve_quote_link,or_text,renters_get_a_quote_link;div;marketing;section1_comp;renters_section1_component_set
+
+INSERT_UPDATE CMSTabParagraphContainer;$contentCV[unique=true];uid[unique=true];name;visible;simpleCMSComponents(uid, $contentCV);&componentRef;;
+;;renters_TabPanelContainer;Renters Tab container;true;oneColumnTab,twoColumnTab,loremipsum1Tab,loremipsum2Tab;renters_TabPanelContainer;;
+
+########################################
+##### Insurance Category Pages
+########################################
+INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved']
+;;EventInsurancesCategoryPage;Event Insurances Category Page;EventInsurancesCategoryPageTemplate;false;
+
+INSERT_UPDATE CMSCategoryRestriction;$contentCV[unique=true];uid[unique=true];name;categories(code, $productCV);pages(uid, $contentCV)
+;;EventInsurances-ComparisonPageRestriction;Restriction for Event Insurances;insurances_event;EventInsurancesCategoryPage
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid, $contentCV)
+;;Section1Slot-EventInsurancesCategoryPage;Section1 Slot for EventInsurancesCategory page;true;checkoutProgressBar
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='EventInsurancesCategoryPage'];contentSlot(uid,$contentCV)[unique=true]
+;;Section1-EventInsurancesCategoryPage2;Section1;;Section1Slot-EventInsurancesCategoryPage;
+
+########################################
+##### Travel Insurance Category Pages
+########################################
+
+INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;bundleTemplate(id, $productCV);approvalStatus(code)[default='approved']
+;;TravelInsurancesCategoryPage;Travel Insurances Category Page;MultiTabsCategoryPageTemplate;false;TRA_PACKAGE;
+
+INSERT_UPDATE CMSCategoryRestriction;$contentCV[unique=true];uid[unique=true];name;categories(code, $productCV);pages(uid, $contentCV)
+;;TravelInsurances-ComparisonPageRestriction;Restriction for Travel Insurances;insurances_travel;TravelInsurancesCategoryPage
+
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid, $contentCV)
+;;Section1Slot-TravelInsurancesCategory;Section1 Slot for TravelInsurancesCategory page;true;checkoutProgressBar,TravelSection1Header,CMSTripDetailsSubmitComponent
+;;Section2Slot-TravelInsurancesCategory;Section2 Slot for TravelInsurancesCategory page;true;TravelSection2Header,TravelMultiComparisonTabContainer
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='TravelInsurancesCategoryPage'];contentSlot(uid,$contentCV)[unique=true]
+;;Section1-TravelInsurancesCategory;Section1;;Section1Slot-TravelInsurancesCategory;
+;;Section2-TravelInsurancesCategory;Section2;;Section2Slot-TravelInsurancesCategory;
+
+# Comparison panel CMS components
+INSERT_UPDATE ComparisonPanelCMSComponent;$contentCV[unique=true];uid[unique=true];name;visible;&componentRef;products(code, $productCV)
+;;singleTripComparisonPanel;Single Trip comparison panel;true;singleTripComparisonPanel;TRA_SINGLE_BUDGET,TRA_SINGLE_SILVER,TRA_SINGLE_GOLD
+;;annualTripComparisonPanel;Annual Trip comparison panel;true;annualTripComparisonPanel;TRA_ANNUAL_BUDGET,TRA_ANNUAL_SILVER,TRA_ANNUAL_GOLD
+;;backpackingTripComparisonPanel;Backpacking Trip comparison panel;true;backpackingTripComparisonPanel;TRA_BACKPACKERS_BUDGET,TRA_BACKPACKERS_SILVER,TRA_BACKPACKERS_GOLD
+
+# CMS comparison tabs components
+INSERT_UPDATE CMSComparisonTabComponent;$contentCV[unique=true];uid[unique=true];name;visible;&componentRef;comparisonPanel(&componentRef);imageComponent(&componentRef)
+;;singleTripComparisonTab;Single Trip comparison tab;true;singleTripComparisonTab;singleTripComparisonPanel;insuranceSingleTabImage
+;;annualTripComparisonTab;Annual Trip comparison tab;true;annualTripComparisonTab;annualTripComparisonPanel;insuranceAnnualTabImage
+;;backpackingTripComparisonTab;Backpacking Trip comparison tab;true;backpackingTripComparisonTab;backpackingTripComparisonPanel;insuranceBackpackTabImage
+
+INSERT_UPDATE CMSMultiComparisonTabContainer;$contentCV[unique=true];uid[unique=true];name;visible;simpleCMSComponents(uid, $contentCV);&componentRef
+;;TravelMultiComparisonTabContainer;Comparison Tab container;true;singleTripComparisonTab,annualTripComparisonTab,backpackingTripComparisonTab;TravelMultiComparisonTabContainer
+
+INSERT_UPDATE CMSTripDetailsSubmitComponent;$contentCV[unique=true];uid[unique=true];name;visible;&componentRef;formId;applicationId
+;;CMSTripDetailsSubmitComponent;Trip Submit Type Controller;true;CMSTripDetailsSubmitComponent;TravelForm-TripDetails;insurance
+
+INSERT_UPDATE CMSPropertyDetailsSubmitComponent;$contentCV[unique=true];uid[unique=true];name;visible;&componentRef;formId;applicationId;$category
+;;CMSHomeownersPropertyDetailsSubmitComponent;Property details submit Component;true;CMSHomeownersPropertyDetailsSubmitComponent;PropertyForm-PropertyInformation-Homeowners;insurance;insurances_property_homeowners
+;;CMSRentersPropertyDetailsSubmitComponent;Property details submit Component;true;CMSRentersPropertyDetailsSubmitComponent;PropertyForm-PropertyInformation-Renters;insurance;insurances_property_renters
+
+########################################
+##### Property Insurance Category Pages - Homeowners
+########################################
+INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved'];bundleTemplate(id, $productCV)
+;;PropertyInsurancesHomeownersCategoryPage;Property Insurances Homeowners Category Page;MultiTabsCategoryPageTemplate;false;
+
+INSERT_UPDATE CMSCategoryRestriction;$contentCV[unique=true];uid[unique=true];name;categories(code, $productCV);pages(uid, $contentCV)
+;;PropertyInsurancesHomeowners-ComparisonPageRestriction;Restriction for Homeowners Property Insurances;insurances_property_homeowners;PropertyInsurancesHomeownersCategoryPage
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid, $contentCV)
+;;Section1Slot-PropertyInsurancesHomeownersCategory;Section1 Slot for PropertyInsurancesHomeownersCategory page;true;checkoutProgressBar, PropertyHomeownersSection1Header,CMSHomeownersPropertyDetailsSubmitComponent
+;;Section2Slot-PropertyInsurancesHomeownersCategory;Section2 Slot for PropertyInsurancesHomeownersCategory page;true;PropertySection2Header,PropertyHomeownersMultiComparisonTabContainer
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='PropertyInsurancesHomeownersCategoryPage'];contentSlot(uid,$contentCV)[unique=true]
+;;Section1-PropertyInsurancesHomeownersCategory;Section1;;Section1Slot-PropertyInsurancesHomeownersCategory;
+;;Section2-PropertyInsurancesHomeownersCategory;Section2;;Section2Slot-PropertyInsurancesHomeownersCategory;
+
+# Comparison panel CMS components
+INSERT_UPDATE ComparisonPanelCMSComponent;$contentCV[unique=true];uid[unique=true];name;visible;&componentRef;products(code, $productCV)
+;;propertyHomeownersComparisonPanel;Homeonwer property insurance comparison panel;true;propertyHomeownersComparisonPanel;PRO_PROPERTY_HOMEOWNERS_MONTHLY,PRO_PROPERTY_HOMEOWNERS
+
+# CMS comparison tabs components
+INSERT_UPDATE CMSComparisonTabComponent;$contentCV[unique=true];uid[unique=true];name;visible;&componentRef;comparisonPanel(&componentRef);imageComponent(&componentRef)
+;;propertyHomeownersComparisonTab;Homeowners property insurance comparison tab;true;propertyHomeownersComparisonTab;propertyHomeownersComparisonPanel;
+
+INSERT_UPDATE CMSMultiComparisonTabContainer;$contentCV[unique=true];uid[unique=true];name;visible;simpleCMSComponents(uid, $contentCV);&componentRef
+;;PropertyHomeownersMultiComparisonTabContainer;Homeowners property insurance Comparison Tab container;true;propertyHomeownersComparisonTab;PropertyHomeownersMultiComparisonTabContainer
+
+########################################
+##### Property Insurance Category Pages - Renters
+########################################
+INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved'];bundleTemplate(id, $productCV)
+;;PropertyInsurancesRentersCategoryPage;Renters Property Insurances Category Page;MultiTabsCategoryPageTemplate;false;
+
+INSERT_UPDATE CMSCategoryRestriction;$contentCV[unique=true];uid[unique=true];name;categories(code, $productCV);pages(uid, $contentCV)
+;;PropertyInsurancesRenters-ComparisonPageRestriction;Restriction for Renters Property Insurances;insurances_property_renters;PropertyInsurancesRentersCategoryPage
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid, $contentCV)
+;;Section1Slot-PropertyInsurancesRentersCategory;Section1 Slot for PropertyInsurancesRentersCategory page;true;checkoutProgressBar,PropertyRentersSection1Header,CMSRentersPropertyDetailsSubmitComponent
+;;Section2Slot-PropertyInsurancesRentersCategory;Section2 Slot for PropertyInsurancesRentersCategory page;true;PropertySection2Header,PropertyRentersMultiComparisonTabContainer
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='PropertyInsurancesRentersCategoryPage'];contentSlot(uid,$contentCV)[unique=true]
+;;Section1-PropertyInsurancesRentersCategory;Section1;;Section1Slot-PropertyInsurancesRentersCategory;
+;;Section2-PropertyInsurancesRentersCategory;Section2;;Section2Slot-PropertyInsurancesRentersCategory;
+
+# Comparison panel CMS components
+INSERT_UPDATE ComparisonPanelCMSComponent;$contentCV[unique=true];uid[unique=true];name;visible;&componentRef;products(code, $productCV)
+;;propertyRentersComparisonPanel;Renters property insurance comparison panel;true;propertyRentersComparisonPanel;PRO_PROPERTY_RENTERS_MONTHLY,PRO_PROPERTY_RENTERS
+
+# CMS comparison tabs components
+INSERT_UPDATE CMSComparisonTabComponent;$contentCV[unique=true];uid[unique=true];name;visible;&componentRef;comparisonPanel(&componentRef);imageComponent(&componentRef)
+;;propertyRentersComparisonTab;Renters property insurance comparison tab;true;propertyRentersComparisonTab;propertyRentersComparisonPanel;
+
+INSERT_UPDATE CMSMultiComparisonTabContainer;$contentCV[unique=true];uid[unique=true];name;visible;simpleCMSComponents(uid, $contentCV);&componentRef
+;;PropertyRentersMultiComparisonTabContainer;Renters Property Insurance Comparison Tab container;true;propertyRentersComparisonTab;PropertyRentersMultiComparisonTabContainer
+
+##### END - Property Insurance Category Pages - Renters
+########################################
+
+########################################
+##### Auto Insurance Category Pages
+########################################
+INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;bundleTemplate(id, $productCV);approvalStatus(code)[default='approved']
+;;AutoInsurancesCategoryPage;Auto Insurances Category Page;MultiTabsCategoryPageTemplate;false;;
+
+INSERT_UPDATE CMSCategoryRestriction;$contentCV[unique=true];uid[unique=true];name;categories(code, $productCV);pages(uid, $contentCV)
+;;AutoInsurances-ComparisonPageRestriction;Restriction for Auto Insurances;insurances_auto;AutoInsurancesCategoryPage
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid, $contentCV)
+;;Section1Slot-AutoInsurancesCategory;Section1 Slot for AutoInsurancesCategoryPage page;true;checkoutProgressBar,AutoSection1Header,CMSAutoDetailsSubmitComponent
+;;Section2Slot-AutoInsurancesCategory;Section2 Slot for AutoInsurancesCategoryPage page;true;AutoSection2Header,AutoMultiComparisonTabContainer
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='AutoInsurancesCategoryPage'];contentSlot(uid,$contentCV)[unique=true]
+;;Section1-AutoInsurancesCategory;Section1;;Section1Slot-AutoInsurancesCategory;
+;;Section2-AutoInsurancesCategory;Section2;;Section2Slot-AutoInsurancesCategory;
+
+INSERT_UPDATE CMSAutoDetailsSubmitComponent;$contentCV[unique=true];uid[unique=true];name;visible;&componentRef;formId;applicationId
+;;CMSAutoDetailsSubmitComponent;Auto Submit Type Controller;true;CMSAutoDetailsSubmitComponent;AutoForm-AutoDetails;insurance
+
+# Comparison panel CMS components
+INSERT_UPDATE ComparisonPanelCMSComponent;$contentCV[unique=true];uid[unique=true];name;visible;&componentRef;products(code, $productCV);mandatoryBundleProducts(code, $productCV);
+;;autoComparisonPanel;Auto comparison panel;true;autoComparisonPanel;AUTO_ANNUALLY,AUTO_MONTHLY;AUTO_MONTHLY;
+
+# CMS comparison tabs components
+INSERT_UPDATE CMSComparisonTabComponent;$contentCV[unique=true];uid[unique=true];name;visible;&componentRef;comparisonPanel(&componentRef);imageComponent(&componentRef)
+;;autoComparisonTab;Auto comparison tab;true;autoComparisonTab;autoComparisonPanel
+
+INSERT_UPDATE CMSMultiComparisonTabContainer;$contentCV[unique=true];uid[unique=true];name;visible;simpleCMSComponents(uid, $contentCV);&componentRef
+;;AutoMultiComparisonTabContainer;Comparison Tab container;true;autoComparisonTab;AutoMultiComparisonTabContainer
+
+########################################
+##### Life Insurance Category Pages
+########################################
+INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;bundleTemplate(id, $productCV);approvalStatus(code)[default='approved']
+;;LifeInsurancesCategoryPage;Life Insurances Category Page;MultiTabsCategoryPageTemplate;false;;
+
+INSERT_UPDATE CMSCategoryRestriction;$contentCV[unique=true];uid[unique=true];name;categories(code, $productCV);pages(uid, $contentCV)
+;;LifeInsurances-ComparisonPageRestriction;Restriction for Life Insurances;insurances_life;LifeInsurancesCategoryPage
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid, $contentCV)
+;;Section1Slot-LifeInsurancesCategory;Section1 Slot for LifeInsurancesCategoryPage page;true;checkoutProgressBar,LifeSection1Header,CMSLifeDetailsSubmitComponent
+;;Section2Slot-LifeInsurancesCategory;Section2 Slot for LifeInsurancesCategoryPage page;true;LifeMultiComparisonTabContainer
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='LifeInsurancesCategoryPage'];contentSlot(uid,$contentCV)[unique=true]
+;;Section1-LifeInsurancesCategory;Section1;;Section1Slot-LifeInsurancesCategory;
+;;Section2-LifeInsurancesCategory;Section2;;Section2Slot-LifeInsurancesCategory;
+
+INSERT_UPDATE CMSLifeDetailsSubmitComponent;$contentCV[unique=true];uid[unique=true];name;visible;&componentRef;formId;applicationId
+;;CMSLifeDetailsSubmitComponent;Life Submit Type Controller;true;CMSLifeDetailsSubmitComponent;LifeForm-LifeDetails;insurance
+
+# Comparison panel CMS components
+INSERT_UPDATE ComparisonPanelCMSComponent;$contentCV[unique=true];uid[unique=true];name;visible;&componentRef;products(code, $productCV)
+;;lifeComparisonPanel;Life comparison panel;true;lifeComparisonPanel;LIFE
+
+# CMS comparison tabs components
+INSERT_UPDATE CMSComparisonTabComponent;$contentCV[unique=true];uid[unique=true];name;visible;&componentRef;comparisonPanel(&componentRef);imageComponent(&componentRef)
+;;lifeComparisonTab;Life comparison tab;true;lifeComparisonTab;lifeComparisonPanel
+
+INSERT_UPDATE CMSMultiComparisonTabContainer;$contentCV[unique=true];uid[unique=true];name;visible;simpleCMSComponents(uid, $contentCV);&componentRef
+;;LifeMultiComparisonTabContainer;Comparison Tab container;true;lifeComparisonTab;LifeMultiComparisonTabContainer
+
+
+########################################
+##### Contact Expert Insurance Page
+########################################
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;Section2ASlot-ContactExpert;Section2A Slot for ContactExpert page;true;CMSContactExpertSubmitComponent
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='FindAgentListTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;Section2A-FindAgentList;Section2A;;Section2ASlot-ContactExpert;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ContactAgentFormTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;Section2A-ContactAgentForm;Section2A;;Section2ASlot-ContactExpert;true
+
+INSERT_UPDATE CMSContactExpertSubmitComponent;$contentCV[unique=true];uid[unique=true];name;visible;&componentRef;formId;applicationId
+;;CMSContactExpertSubmitComponent;Contact Expert Controller;true;CMSContactExpertSubmitComponent;Insurance-ContactExpert;insurance
+
+# CMS Paragraph Component
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;TravelSection1Header;Travel Section1 Header;TravelSection1Header
+;;TravelSection2Header;Travel Section2 Header;TravelSection2Header
+;;PropertyHomeownersSection1Header;Homeowners Property Insurance Section1 Header;PropertyHomeownersSection1Header
+;;PropertyRentersSection1Header;Renters Property Insurance Section1 Header;PropertyRentersSection1Header
+;;PropertySection2Header;Property Section2 Header;PropertySection2Header
+;;AutoSection1Header;Auto Section1 Header;AutoSection1Header
+;;AutoSection2Header;Auto Section2 Header;AutoSection2Header
+;;LifeSection1Header;Life Section1 Header;LifeSection1Header
+
+# CMS Image Components
+INSERT_UPDATE CMSImageComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;insuranceSingleTabImage;Insurance Single Panel Image Image;insuranceSingleTabImage
+;;insuranceAnnualTabImage;Insurance Annual Panel Image Image;insuranceAnnualTabImage
+;;insuranceBackpackTabImage;Insurance Backpackers Panel Image;insuranceBackpackTabImage;;TravelSection2Header;Travel Section2 Header;TravelSection2Header
+
+# CMS components velocity templates
+INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;rendererType(code)[default='velocity']
+;insurances_travel                  ;$xslfoPackageName.TravelPolicyContext;
+;insurances_event                   ;$xslfoPackageName.EventPolicyContext;
+;insurances_auto					;$xslfoPackageName.AutoPolicyContext;
+;insurances_property_homeowners     ;$xslfoPackageName.PropertyHomeownerPolicyContext;
+;insurances_property_renters        ;$xslfoPackageName.PropertyRenterPolicyContext;
+;insurances_life					;$xslfoPackageName.LifePolicyContext;

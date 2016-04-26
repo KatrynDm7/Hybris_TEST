@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_NKRmoCZAEeWHnJHNSs3TdQ" name="Processes">
+  <packagedElement xmi:type="uml:StateMachine" xmi:id="_T8-CcCZAEeWHnJHNSs3TdQ" name="Workflows">
+    <region xmi:id="_T8-CcSZAEeWHnJHNSs3TdQ" name="Order Workflow">
+      <transition xmi:id="_5WAYoCZEEeWjpePyUrzUOg" guard="_JDp9QCZFEeWjpePyUrzUOg" source="_QcdMQCZEEeWjpePyUrzUOg" target="_nuMwxTFCEeWtLOateohHpw">
+        <name xsi:nil="true"/>
+        <ownedRule xmi:id="_JDp9QCZFEeWjpePyUrzUOg" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_JDp9QSZFEeWjpePyUrzUOg" name="null_guard">
+            <body>OK</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_6Bp9sCZEEeWjpePyUrzUOg" guard="_JfIYUCZFEeWjpePyUrzUOg" source="_Q9byYCZEEeWjpePyUrzUOg" target="_Rbr0oCZEEeWjpePyUrzUOg">
+        <ownedRule xmi:id="_JfIYUCZFEeWjpePyUrzUOg" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_JfIYUSZFEeWjpePyUrzUOg" name="null_guard">
+            <body>OK</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_6n2bACZEEeWjpePyUrzUOg" guard="_Kbi9QCZFEeWjpePyUrzUOg" source="_Rbr0oCZEEeWjpePyUrzUOg" target="_SFauICZEEeWjpePyUrzUOg">
+        <ownedRule xmi:id="_Kbi9QCZFEeWjpePyUrzUOg" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_Kbi9QSZFEeWjpePyUrzUOg" name="null_guard">
+            <body>OK</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_7hPhICZEEeWjpePyUrzUOg" guard="_RKndUCZFEeWjpePyUrzUOg" source="_SFauICZEEeWjpePyUrzUOg" target="_TVIpkCZEEeWjpePyUrzUOg">
+        <name xsi:nil="true"/>
+        <ownedRule xmi:id="_RKndUCZFEeWjpePyUrzUOg" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_RKndUSZFEeWjpePyUrzUOg" name="null_guard">
+            <body>onEvent :: WaitForOrderAction .choice :: consignmentProcessEnded</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_8HwukCZEEeWjpePyUrzUOg" guard="_M657oCZFEeWjpePyUrzUOg" source="_TVIpkCZEEeWjpePyUrzUOg" target="_SFauICZEEeWjpePyUrzUOg">
+        <ownedRule xmi:id="_M657oCZFEeWjpePyUrzUOg" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_M657oSZFEeWjpePyUrzUOg" name="null_guard">
+            <body>NOK :: Not All Done</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_8pj0ECZEEeWjpePyUrzUOg" guard="_fYnNECZFEeWjpePyUrzUOg" source="_SFauICZEEeWjpePyUrzUOg" target="_SfmIsCZEEeWjpePyUrzUOg">
+        <ownedRule xmi:id="_fYnNECZFEeWjpePyUrzUOg" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_fYnNESZFEeWjpePyUrzUOg" name="null_guard">
+            <body>onEvent :: WaitForOrderAction .choice :: cancelOrder</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_9V-OICZEEeWjpePyUrzUOg" guard="_8PZ8wCZGEeWjpePyUrzUOg" source="_SfmIsCZEEeWjpePyUrzUOg" target="_S6pF8CZEEeWjpePyUrzUOg">
+        <ownedRule xmi:id="_8PZ8wCZGEeWjpePyUrzUOg" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_8PZ8wSZGEeWjpePyUrzUOg" name="null_guard">
+            <body>onEvent :: CancellationCompletionEvent</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_-YR_sCZEEeWjpePyUrzUOg" guard="_j3w48CZFEeWjpePyUrzUOg" source="_S6pF8CZEEeWjpePyUrzUOg" target="_TVIpkCZEEeWjpePyUrzUOg">
+        <ownedRule xmi:id="_j3w48CZFEeWjpePyUrzUOg" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_j3w48SZFEeWjpePyUrzUOg" name="null_guard">
+            <body>NOK :: Partial Cancellation</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="__Y69UCZEEeWjpePyUrzUOg" guard="_W4tokCZFEeWjpePyUrzUOg" source="_TVIpkCZEEeWjpePyUrzUOg" target="_5YNiAGEyEeW2eNLeqImnTQ">
+        <name xsi:nil="true"/>
+        <ownedRule xmi:id="_W4tokCZFEeWjpePyUrzUOg" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_W4tokSZFEeWjpePyUrzUOg" name="null_guard">
+            <body>OK :: Success - All Done</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_Asp2ECZFEeWjpePyUrzUOg" guard="_YTmSMCZFEeWjpePyUrzUOg" source="_S6pF8CZEEeWjpePyUrzUOg" target="_a8NsgCZAEeWHnJHNSs3TdQ">
+        <ownedRule xmi:id="_YTmSMCZFEeWjpePyUrzUOg" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_YTmSMSZFEeWjpePyUrzUOg" name="null_guard">
+            <body>OK :: Success - All Cancelled</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_C23q4CZFEeWjpePyUrzUOg" source="_T289MCZEEeWjpePyUrzUOg" target="_QcdMQCZEEeWjpePyUrzUOg"/>
+      <transition xmi:id="_nuJtcDFCEeWtLOateohHpw" guard="_nuJtcTFCEeWtLOateohHpw" source="_nuMwxTFCEeWtLOateohHpw" target="_nuMwxjFCEeWtLOateohHpw">
+        <ownedRule xmi:id="_nuJtcTFCEeWtLOateohHpw" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_nuJtcjFCEeWtLOateohHpw" name="null_guard">
+            <body>POTENTIAL</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_nuMJsDFCEeWtLOateohHpw" guard="_nuMJsTFCEeWtLOateohHpw">
+        <ownedRule xmi:id="_nuMJsTFCEeWtLOateohHpw" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_nuMJsjFCEeWtLOateohHpw" name="null_guard">
+            <body>${process.order.code}_ReviewDecision</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_nuMJtjFCEeWtLOateohHpw" guard="_nuMJtzFCEeWtLOateohHpw" target="_nuMwxzFCEeWtLOateohHpw">
+        <ownedRule xmi:id="_nuMJtzFCEeWtLOateohHpw" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_nuMJuDFCEeWtLOateohHpw" name="null_guard">
+            <body>NOK</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_nuMJuTFCEeWtLOateohHpw" guard="_nuMJujFCEeWtLOateohHpw" source="_nuMwwDFCEeWtLOateohHpw" target="_nuMwxDFCEeWtLOateohHpw">
+        <ownedRule xmi:id="_nuMJujFCEeWtLOateohHpw" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_nuMJuzFCEeWtLOateohHpw" name="null_guard">
+            <body>OK</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_nuMJvDFCEeWtLOateohHpw" guard="_nuMJvTFCEeWtLOateohHpw" source="_nuMwxTFCEeWtLOateohHpw" target="_nuMwxDFCEeWtLOateohHpw">
+        <ownedRule xmi:id="_nuMJvTFCEeWtLOateohHpw" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_nuMJvjFCEeWtLOateohHpw" name="null_guard">
+            <body>OK</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_nuMJvzFCEeWtLOateohHpw" guard="_nuMJwDFCEeWtLOateohHpw">
+        <ownedRule xmi:id="_nuMJwDFCEeWtLOateohHpw" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_nuMJwTFCEeWtLOateohHpw" name="null_guard">
+            <body>Wait</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_nuMJwjFCEeWtLOateohHpw" guard="_nuMJwzFCEeWtLOateohHpw" target="_nuMwxTFCEeWtLOateohHpw">
+        <ownedRule xmi:id="_nuMJwzFCEeWtLOateohHpw" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_nuMJxDFCEeWtLOateohHpw" name="null_guard">
+            <body>OK</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_nuMJxTFCEeWtLOateohHpw" guard="_nuMJxjFCEeWtLOateohHpw" source="_nuMwwDFCEeWtLOateohHpw" target="_nuMwwjFCEeWtLOateohHpw">
+        <ownedRule xmi:id="_nuMJxjFCEeWtLOateohHpw" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_nuMJxzFCEeWtLOateohHpw" name="null_guard">
+            <body>NOK</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_nuMJyDFCEeWtLOateohHpw" guard="_nuMJyTFCEeWtLOateohHpw" source="_nuMwxTFCEeWtLOateohHpw" target="_nuMwwjFCEeWtLOateohHpw">
+        <ownedRule xmi:id="_nuMJyTFCEeWtLOateohHpw" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_nuMJyjFCEeWtLOateohHpw" name="null_guard">
+            <body>FRAUD</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_nuMJyzFCEeWtLOateohHpw" guard="_nuMJzDFCEeWtLOateohHpw" source="_nuMwxjFCEeWtLOateohHpw" target="_nuMwwTFCEeWtLOateohHpw">
+        <ownedRule xmi:id="_nuMJzDFCEeWtLOateohHpw" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_nuMJzTFCEeWtLOateohHpw" name="null_guard">
+            <body>OK</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_nuMJzjFCEeWtLOateohHpw" guard="_nuMJzzFCEeWtLOateohHpw" source="_nuMwwTFCEeWtLOateohHpw" target="_nuMwwDFCEeWtLOateohHpw">
+        <ownedRule xmi:id="_nuMJzzFCEeWtLOateohHpw" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_nuMJ0DFCEeWtLOateohHpw" name="null_guard">
+            <body>onEvent :: CSAOrderVerified</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_-xHSwDFCEeWtLOateohHpw" guard="_OvWtIEBiEeW3YpuLvpZ6SQ" source="_nuMwxDFCEeWtLOateohHpw" target="_Q9byYCZEEeWjpePyUrzUOg">
+        <name xsi:nil="true"/>
+        <ownedRule xmi:id="_OvWtIEBiEeW3YpuLvpZ6SQ" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_OvWtIUBiEeW3YpuLvpZ6SQ" name="null_guard">
+            <body>OK</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_ovZnsDFFEeWtLOateohHpw" guard="_uJwegEBiEeW3YpuLvpZ6SQ" source="_nuMwwjFCEeWtLOateohHpw" target="_nuMwxzFCEeWtLOateohHpw">
+        <name xsi:nil="true"/>
+        <ownedRule xmi:id="_uJwegEBiEeW3YpuLvpZ6SQ" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_uJwegUBiEeW3YpuLvpZ6SQ" name="null_guard">
+            <body>OK</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_ztzV4EBiEeW3YpuLvpZ6SQ" guard="_401hIEBiEeW3YpuLvpZ6SQ" source="_nuMwxzFCEeWtLOateohHpw" target="_yf70kEBiEeW3YpuLvpZ6SQ">
+        <ownedRule xmi:id="_401hIEBiEeW3YpuLvpZ6SQ" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_401hIUBiEeW3YpuLvpZ6SQ" name="null_guard">
+            <body>OK :: failed</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_UrwycEBoEeW3YpuLvpZ6SQ" guard="_bCXIIEBoEeW3YpuLvpZ6SQ" source="_S6pF8CZEEeWjpePyUrzUOg" target="_SFauICZEEeWjpePyUrzUOg">
+        <name xsi:nil="true"/>
+        <ownedRule xmi:id="_bCXIIEBoEeW3YpuLvpZ6SQ" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_bCXIIUBoEeW3YpuLvpZ6SQ" name="null_guard">
+            <body>WAIT</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_WzmzkGE0EeW2eNLeqImnTQ" guard="_fW0x0GE0EeW2eNLeqImnTQ" source="_5YNiAGEyEeW2eNLeqImnTQ" target="_PvZJ8GE0EeW2eNLeqImnTQ">
+        <ownedRule xmi:id="_fW0x0GE0EeW2eNLeqImnTQ" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_fW0x0WE0EeW2eNLeqImnTQ" name="null_guard">
+            <body>OK :: Success - Tax Calculated</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_7-HF4GE1EeW2eNLeqImnTQ" guard="_DzIhYGE2EeW2eNLeqImnTQ" source="_PvZJ8GE0EeW2eNLeqImnTQ" target="_G_I_0GE1EeW2eNLeqImnTQ">
+        <name xsi:nil="true"/>
+        <ownedRule xmi:id="_DzIhYGE2EeW2eNLeqImnTQ" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_DzIhYWE2EeW2eNLeqImnTQ" name="null_guard">
+            <body>NOK :: Payment Failed</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_ab1zoGE2EeW2eNLeqImnTQ" guard="_clg14GE2EeW2eNLeqImnTQ" source="_PvZJ8GE0EeW2eNLeqImnTQ" target="_QWLyQGE2EeW2eNLeqImnTQ">
+        <name xsi:nil="true"/>
+        <ownedRule xmi:id="_clg14GE2EeW2eNLeqImnTQ" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_clg14WE2EeW2eNLeqImnTQ" name="null_guard">
+            <body>OK :: Success - Payment Captured</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_d5AeEGE2EeW2eNLeqImnTQ" guard="_kW8K0GE2EeW2eNLeqImnTQ" source="_QWLyQGE2EeW2eNLeqImnTQ" target="_a8NsgCZAEeWHnJHNSs3TdQ">
+        <ownedRule xmi:id="_kW8K0GE2EeW2eNLeqImnTQ" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_kW8K0WE2EeW2eNLeqImnTQ" name="null_guard">
+            <body>OK :: Success</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_oRFFIGE2EeW2eNLeqImnTQ" guard="_pK7eQGE2EeW2eNLeqImnTQ" source="_G_I_0GE1EeW2eNLeqImnTQ" target="_nTBhcGE2EeW2eNLeqImnTQ">
+        <ownedRule xmi:id="_pK7eQGE2EeW2eNLeqImnTQ" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_pK7eQWE2EeW2eNLeqImnTQ" name="null_guard">
+            <body>OK :: Failed</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <subvertex xmi:type="uml:FinalState" xmi:id="_a8NsgCZAEeWHnJHNSs3TdQ" name="Final1"/>
+      <subvertex xmi:type="uml:State" xmi:id="_QcdMQCZEEeWjpePyUrzUOg" name="Check Order"/>
+      <subvertex xmi:type="uml:State" xmi:id="_Q9byYCZEEeWjpePyUrzUOg" name="Geocode Shipping Address"/>
+      <subvertex xmi:type="uml:State" xmi:id="_Rbr0oCZEEeWjpePyUrzUOg" name="Source and Allocate Order"/>
+      <subvertex xmi:type="uml:State" xmi:id="_SFauICZEEeWjpePyUrzUOg" name="Wait for Order Action"/>
+      <subvertex xmi:type="uml:State" xmi:id="_SfmIsCZEEeWjpePyUrzUOg" name="Wait for Order Cancellation Completion"/>
+      <subvertex xmi:type="uml:State" xmi:id="_S6pF8CZEEeWjpePyUrzUOg" name="Verify Order Post-Cancellation"/>
+      <subvertex xmi:type="uml:State" xmi:id="_TVIpkCZEEeWjpePyUrzUOg" name="Verify Order Completion"/>
+      <subvertex xmi:type="uml:Pseudostate" xmi:id="_T289MCZEEeWjpePyUrzUOg" name="Initial1"/>
+      <subvertex xmi:type="uml:State" xmi:id="_nuMwwDFCEeWtLOateohHpw" name="Order Manual Checked"/>
+      <subvertex xmi:type="uml:State" xmi:id="_nuMwwTFCEeWtLOateohHpw" name="Wait For Manual Order Check CSA"/>
+      <subvertex xmi:type="uml:State" xmi:id="_nuMwwjFCEeWtLOateohHpw" name="Cancel Order"/>
+      <subvertex xmi:type="uml:State" xmi:id="_nuMwxDFCEeWtLOateohHpw" name="Send Order Placed Notification"/>
+      <subvertex xmi:type="uml:State" xmi:id="_nuMwxTFCEeWtLOateohHpw" name="Fraud Check"/>
+      <subvertex xmi:type="uml:State" xmi:id="_nuMwxjFCEeWtLOateohHpw" name="Manual Order Check CSA"/>
+      <subvertex xmi:type="uml:State" xmi:id="_nuMwxzFCEeWtLOateohHpw" name="Notify Customer"/>
+      <subvertex xmi:type="uml:FinalState" xmi:id="_yf70kEBiEeW3YpuLvpZ6SQ" name="Final2"/>
+      <subvertex xmi:type="uml:State" xmi:id="_5YNiAGEyEeW2eNLeqImnTQ" name="Post Taxes"/>
+      <subvertex xmi:type="uml:State" xmi:id="_PvZJ8GE0EeW2eNLeqImnTQ" name="Take Payment"/>
+      <subvertex xmi:type="uml:State" xmi:id="_G_I_0GE1EeW2eNLeqImnTQ" name="Payment Failure Notification"/>
+      <subvertex xmi:type="uml:State" xmi:id="_QWLyQGE2EeW2eNLeqImnTQ" name="Complete Order"/>
+      <subvertex xmi:type="uml:FinalState" xmi:id="_nTBhcGE2EeW2eNLeqImnTQ" name="Final3"/>
+    </region>
+    <region xmi:id="_9f3fECZGEeWjpePyUrzUOg" name="Consignment Workflow">
+      <transition xmi:id="_TlCxACZIEeWjpePyUrzUOg" guard="_rQHfMCZIEeWjpePyUrzUOg" source="_4ZsaACZHEeWjpePyUrzUOg" target="_Dj_jsCZSEeWjpePyUrzUOg">
+        <ownedRule xmi:id="_rQHfMCZIEeWjpePyUrzUOg" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_rQHfMSZIEeWjpePyUrzUOg" name="null_guard">
+            <body>[onEvent :: waitForShipConsignment .choice :: cancelConsignment .choice :: manuallyReallocateConsignment]</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_Upl-QCZIEeWjpePyUrzUOg" guard="_tiJMMCZIEeWjpePyUrzUOg" source="_GqDhQCZIEeWjpePyUrzUOg" target="_K3cuwCZIEeWjpePyUrzUOg">
+        <ownedRule xmi:id="_tiJMMCZIEeWjpePyUrzUOg" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_tiJMMSZIEeWjpePyUrzUOg" name="null_guard">
+            <body>OK</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_V2wU8CZIEeWjpePyUrzUOg" guard="_xaVlwCZIEeWjpePyUrzUOg" source="_K3cuwCZIEeWjpePyUrzUOg" target="_QNKPMCZIEeWjpePyUrzUOg">
+        <ownedRule xmi:id="_xaVlwCZIEeWjpePyUrzUOg" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_xaVlwSZIEeWjpePyUrzUOg" name="null_guard">
+            <body>OK :: Success</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_cwnvwCZIEeWjpePyUrzUOg" guard="_ssLNgCZIEeWjpePyUrzUOg" source="_GqDhQCZIEeWjpePyUrzUOg" target="_OHxNADxiEeWtrbbL6U17WA">
+        <ownedRule xmi:id="_ssLNgCZIEeWjpePyUrzUOg" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_ssLNgSZIEeWjpePyUrzUOg" name="null_guard">
+            <body>WAIT</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_YB5LQCZSEeWjpePyUrzUOg" guard="_Z7WAMCZSEeWjpePyUrzUOg" source="_Dj_jsCZSEeWjpePyUrzUOg" target="_GqDhQCZIEeWjpePyUrzUOg">
+        <ownedRule xmi:id="_Z7WAMCZSEeWjpePyUrzUOg" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_Z7WAMSZSEeWjpePyUrzUOg" name="null_guard">
+            <body>ActionCompletionEvent</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_JfRLACpSEeWSMsC2hm0YGQ" guard="_YdI4gCpSEeWSMsC2hm0YGQ" source="_4ZsaACZHEeWjpePyUrzUOg" target="_EzXckCpSEeWSMsC2hm0YGQ">
+        <name xsi:nil="true"/>
+        <ownedRule xmi:id="_YdI4gCpSEeWSMsC2hm0YGQ" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_YdI4gSpSEeWSMsC2hm0YGQ" name="null_guard">
+            <body>[onEvent :: waitForShipConsignment .choice :: confirmShipConsignment]</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_KpwBICpSEeWSMsC2hm0YGQ" guard="_oqreICpSEeWSMsC2hm0YGQ" source="_EzXckCpSEeWSMsC2hm0YGQ" target="_K3cuwCZIEeWjpePyUrzUOg">
+        <ownedRule xmi:id="_oqreICpSEeWSMsC2hm0YGQ" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_oqreISpSEeWSMsC2hm0YGQ" name="null_guard">
+            <body>OK</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_Mq6YADxjEeWtrbbL6U17WA" visibility="public" guard="_h7ZoMDxlEeWEbt-5GP3A3g" source="_OHxNADxiEeWtrbbL6U17WA" target="_4ZsaACZHEeWjpePyUrzUOg">
+        <name xsi:nil="true"/>
+        <ownedRule xmi:id="_h7ZoMDxlEeWEbt-5GP3A3g" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_h7ZoMTxlEeWEbt-5GP3A3g" name="null_guard">
+            <body>SHIP</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_fPZU8DxlEeWEbt-5GP3A3g" guard="_gyyaUDxlEeWEbt-5GP3A3g" source="_OHxNADxiEeWtrbbL6U17WA" target="_bqDl8DxlEeWEbt-5GP3A3g">
+        <ownedRule xmi:id="_gyyaUDxlEeWEbt-5GP3A3g" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_gyyaUTxlEeWEbt-5GP3A3g" name="null_guard">
+            <body>PICKUP</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_64pv8DxlEeWEbt-5GP3A3g" guard="_le_1UDxmEeWEbt-5GP3A3g" source="_bqDl8DxlEeWEbt-5GP3A3g" target="_Dj_jsCZSEeWjpePyUrzUOg">
+        <ownedRule xmi:id="_le_1UDxmEeWEbt-5GP3A3g" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_le_1UTxmEeWEbt-5GP3A3g" name="null_guard">
+            <body>[onEvent :: waitForPickupConsignment .choice :: cancelConsignment]</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_8eMxcDxlEeWEbt-5GP3A3g"/>
+      <transition xmi:id="_-oDZ4DxlEeWEbt-5GP3A3g" guard="_NmsRgDxoEeWUnMj3THuUTQ" source="_jA_-UDxlEeWEbt-5GP3A3g" target="_K3cuwCZIEeWjpePyUrzUOg">
+        <ownedRule xmi:id="_NmsRgDxoEeWUnMj3THuUTQ" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_NmsRgTxoEeWUnMj3THuUTQ" name="null_guard">
+            <body>OK</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_BF-04DxmEeWEbt-5GP3A3g" target="_K3cuwCZIEeWjpePyUrzUOg"/>
+      <transition xmi:id="_Gnv0UDxmEeWEbt-5GP3A3g" guard="_a1e48DxmEeWEbt-5GP3A3g" source="_bqDl8DxlEeWEbt-5GP3A3g" target="_jA_-UDxlEeWEbt-5GP3A3g">
+        <ownedRule xmi:id="_a1e48DxmEeWEbt-5GP3A3g" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_a1e48TxmEeWEbt-5GP3A3g" name="null_guard">
+            <body>onEvent :: WaitForPickupConsignmentAction .choice :: confirmPickupConsignment</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_sc7NcEBbEeW3YpuLvpZ6SQ" source="_OYiFUCZHEeWjpePyUrzUOg" target="_OHxNADxiEeWtrbbL6U17WA"/>
+      <transition xmi:id="_pwYCEEKUEeWzJq4kDxdJjg" guard="_vNAp4EKUEeWzJq4kDxdJjg" source="_bqDl8DxlEeWEbt-5GP3A3g" target="_mPYAgEKUEeWzJq4kDxdJjg">
+        <ownedRule xmi:id="_vNAp4EKUEeWzJq4kDxdJjg" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_vNAp4UKUEeWzJq4kDxdJjg" name="null_guard">
+            <body>Pack</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_UDK5UEKVEeWzJq4kDxdJjg" guard="_cDrMEEKVEeWzJq4kDxdJjg" source="_mPYAgEKUEeWzJq4kDxdJjg" target="_bqDl8DxlEeWEbt-5GP3A3g">
+        <ownedRule xmi:id="_cDrMEEKVEeWzJq4kDxdJjg" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_cDrMEUKVEeWzJq4kDxdJjg" name="null_guard">
+            <body>OK</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_6KLoMEWsEeWzJq4kDxdJjg" guard="_Hg4jkEWtEeWzJq4kDxdJjg" source="_4ZsaACZHEeWjpePyUrzUOg" target="_x0tyEEWsEeWzJq4kDxdJjg">
+        <ownedRule xmi:id="_Hg4jkEWtEeWzJq4kDxdJjg" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_Hg4jkUWtEeWzJq4kDxdJjg" name="null_guard">
+            <body>Pack</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_6wtcsEWsEeWzJq4kDxdJjg" guard="_IMIgAEWtEeWzJq4kDxdJjg" source="_x0tyEEWsEeWzJq4kDxdJjg" target="_4ZsaACZHEeWjpePyUrzUOg">
+        <ownedRule xmi:id="_IMIgAEWtEeWzJq4kDxdJjg" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_IMIgAUWtEeWzJq4kDxdJjg" name="null_guard">
+            <body>OK</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <subvertex xmi:type="uml:Pseudostate" xmi:id="_OYiFUCZHEeWjpePyUrzUOg" name="Initial1"/>
+      <subvertex xmi:type="uml:State" xmi:id="_4ZsaACZHEeWjpePyUrzUOg" name="Wait for Ship Consignment"/>
+      <subvertex xmi:type="uml:State" xmi:id="_GqDhQCZIEeWjpePyUrzUOg" name="Verify Consignment Completion"/>
+      <subvertex xmi:type="uml:State" xmi:id="_K3cuwCZIEeWjpePyUrzUOg" name="Consignment Subprocess End"/>
+      <subvertex xmi:type="uml:FinalState" xmi:id="_QNKPMCZIEeWjpePyUrzUOg" name="Final1"/>
+      <subvertex xmi:type="uml:State" xmi:id="_Dj_jsCZSEeWjpePyUrzUOg" name="Wait for Consignment Action Completion"/>
+      <subvertex xmi:type="uml:State" xmi:id="_EzXckCpSEeWSMsC2hm0YGQ" name="Confirm Ship"/>
+      <subvertex xmi:type="uml:State" xmi:id="_OHxNADxiEeWtrbbL6U17WA" name="Redirect Consignment by DeliveryMode" visibility="public"/>
+      <subvertex xmi:type="uml:State" xmi:id="_bqDl8DxlEeWEbt-5GP3A3g" name="Wait for Pickup Consignment"/>
+      <subvertex xmi:type="uml:State" xmi:id="_jA_-UDxlEeWEbt-5GP3A3g" name="Confirm Pickup"/>
+      <subvertex xmi:type="uml:State" xmi:id="_mPYAgEKUEeWzJq4kDxdJjg" name="Make Ready for Pickup"/>
+      <subvertex xmi:type="uml:State" xmi:id="_x0tyEEWsEeWzJq4kDxdJjg" name="Make Ready for Ship"/>
+    </region>
+    <region xmi:id="_9VnecDnwEeWenezdNlXGOA" name="Return Workflow">
+      <transition xmi:id="_Tg7_MDnzEeWenezdNlXGOA" source="_idH8kDnxEeWenezdNlXGOA" target="_6Z8iEDnxEeWenezdNlXGOA"/>
+      <transition xmi:id="_pKVwkDnzEeWenezdNlXGOA" source="_BdjSQDnzEeWenezdNlXGOA"/>
+      <transition xmi:id="_sM-bIDnzEeWenezdNlXGOA" guard="_2LuxADn4EeWenezdNlXGOA" source="_6Z8iEDnxEeWenezdNlXGOA" target="_BdjSQDnzEeWenezdNlXGOA">
+        <ownedRule xmi:id="_2LuxADn4EeWenezdNlXGOA" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_2LuxATn4EeWenezdNlXGOA" name="null_guard">
+            <body>OK</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_NaG48Dn1EeWenezdNlXGOA" guard="_47KywDn4EeWenezdNlXGOA" source="_BdjSQDnzEeWenezdNlXGOA" target="_7Y_SUDnzEeWenezdNlXGOA">
+        <ownedRule xmi:id="_47KywDn4EeWenezdNlXGOA" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_47KywTn4EeWenezdNlXGOA" name="null_guard">
+            <body>CaptureRefund</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_YcXFcDn1EeWenezdNlXGOA" guard="_q7kmMDoKEeWenezdNlXGOA" source="_7Y_SUDnzEeWenezdNlXGOA" target="__EkMMDnzEeWenezdNlXGOA">
+        <ownedRule xmi:id="_q7kmMDoKEeWenezdNlXGOA" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_q7kmMToKEeWenezdNlXGOA" name="null_guard">
+            <body>OK</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_useRgDn1EeWenezdNlXGOA" guard="_tMC0ADoKEeWenezdNlXGOA" source="_7Y_SUDnzEeWenezdNlXGOA" target="_tBk18Dn1EeWenezdNlXGOA">
+        <ownedRule xmi:id="_tMC0ADoKEeWenezdNlXGOA" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_tMC0AToKEeWenezdNlXGOA" name="null_guard">
+            <body>NOK</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_IeSCsDn2EeWenezdNlXGOA" guard="_9gl5MDoNEeWenezdNlXGOA" source="_tBk18Dn1EeWenezdNlXGOA" target="_1wlfYDnzEeWenezdNlXGOA">
+        <ownedRule xmi:id="_9gl5MDoNEeWenezdNlXGOA" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_9gl5MToNEeWenezdNlXGOA" name="null_guard">
+            <body>cancelReturn</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_LV8zYDn2EeWenezdNlXGOA" guard="_7fZqEDn4EeWenezdNlXGOA" source="_BdjSQDnzEeWenezdNlXGOA" target="_1wlfYDnzEeWenezdNlXGOA">
+        <ownedRule xmi:id="_7fZqEDn4EeWenezdNlXGOA" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_7fZqETn4EeWenezdNlXGOA" name="null_guard">
+            <body>CancelReturn</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_MaUacDn2EeWenezdNlXGOA" source="_tBk18Dn1EeWenezdNlXGOA"/>
+      <transition xmi:id="_1hxf8Dn2EeWenezdNlXGOA" guard="_R2J7kDn3EeWenezdNlXGOA" source="__EkMMDnzEeWenezdNlXGOA" target="_DI8noDn0EeWenezdNlXGOA">
+        <ownedRule xmi:id="_R2J7kDn3EeWenezdNlXGOA" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_R2J7kTn3EeWenezdNlXGOA" name="null_guard">
+            <body>OK</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_1gppIDn3EeWenezdNlXGOA" guard="_7g4GMDn3EeWenezdNlXGOA" source="_sysagDn3EeWenezdNlXGOA" target="_n8u4gDn0EeWenezdNlXGOA">
+        <ownedRule xmi:id="_7g4GMDn3EeWenezdNlXGOA" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_7g4GMTn3EeWenezdNlXGOA" name="null_guard">
+            <body>OK</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_2QXO0Dn3EeWenezdNlXGOA" guard="_85thYDn3EeWenezdNlXGOA" source="_sysagDn3EeWenezdNlXGOA" target="_lqIcYDn3EeWenezdNlXGOA">
+        <ownedRule xmi:id="_85thYDn3EeWenezdNlXGOA" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_85thYTn3EeWenezdNlXGOA" name="null_guard">
+            <body>NOK</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_cY-koDn4EeWenezdNlXGOA" guard="_w6jyUDn4EeWenezdNlXGOA" source="_Bi-vYDn0EeWenezdNlXGOA" target="_qt0AYDnxEeWenezdNlXGOA">
+        <ownedRule xmi:id="_w6jyUDn4EeWenezdNlXGOA" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_w6jyUTn4EeWenezdNlXGOA" name="null_guard">
+            <body>OK</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_ixfl4Dn4EeWenezdNlXGOA" guard="_qjaDADn4EeWenezdNlXGOA" source="_lqIcYDn3EeWenezdNlXGOA" target="_fv_jwDn4EeWenezdNlXGOA">
+        <ownedRule xmi:id="_qjaDADn4EeWenezdNlXGOA" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_qjaDATn4EeWenezdNlXGOA" name="null_guard">
+            <body>FailTaxReverseEvent</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_jvp3QDn4EeWenezdNlXGOA" guard="_tIjgUDn4EeWenezdNlXGOA" source="_n8u4gDn0EeWenezdNlXGOA" target="_fv_jwDn4EeWenezdNlXGOA">
+        <ownedRule xmi:id="_tIjgUDn4EeWenezdNlXGOA" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_tIjgUTn4EeWenezdNlXGOA" name="null_guard">
+            <body>OK</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_ngGqEDn4EeWenezdNlXGOA" source="_fv_jwDn4EeWenezdNlXGOA" target="_Bi-vYDn0EeWenezdNlXGOA"/>
+      <transition xmi:id="_UQDQgDoKEeWenezdNlXGOA" guard="_m37xoDoKEeWenezdNlXGOA" source="_BdjSQDnzEeWenezdNlXGOA" target="_DI8noDn0EeWenezdNlXGOA">
+        <ownedRule xmi:id="_m37xoDoKEeWenezdNlXGOA" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_m37xoToKEeWenezdNlXGOA" name="null_guard">
+            <body>Tax Reverse</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_KwcGADoLEeWenezdNlXGOA" guard="_QC_kwDoLEeWenezdNlXGOA" source="_tBk18Dn1EeWenezdNlXGOA" target="_DI8noDn0EeWenezdNlXGOA">
+        <ownedRule xmi:id="_QC_kwDoLEeWenezdNlXGOA" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_QC_kwToLEeWenezdNlXGOA" name="null_guard">
+            <body>bypassCapture</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:id="_b293MDoNEeWenezdNlXGOA" source="_DI8noDn0EeWenezdNlXGOA" target="_sysagDn3EeWenezdNlXGOA"/>
+      <transition xmi:id="_PcrrgGFDEeWG__eQUVWkkg" guard="_UZ2wIGFDEeWG__eQUVWkkg" source="_1wlfYDnzEeWenezdNlXGOA" target="_ORZkIGFDEeWG__eQUVWkkg">
+        <name xsi:nil="true"/>
+        <ownedRule xmi:id="_UZ2wIGFDEeWG__eQUVWkkg" name="null_transition">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_UZ2wIWFDEeWG__eQUVWkkg" name="null_guard">
+            <body>OK :: Success</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <subvertex xmi:type="uml:Pseudostate" xmi:id="_idH8kDnxEeWenezdNlXGOA" name="Initial1"/>
+      <subvertex xmi:type="uml:FinalState" xmi:id="_qt0AYDnxEeWenezdNlXGOA" name="Final1"/>
+      <subvertex xmi:type="uml:State" xmi:id="_6Z8iEDnxEeWenezdNlXGOA" name="Initial calculate refund action"/>
+      <subvertex xmi:type="uml:Pseudostate" xmi:id="_BdjSQDnzEeWenezdNlXGOA" name="ConfirmOrCancelRefundEvent" kind="choice"/>
+      <subvertex xmi:type="uml:State" xmi:id="_1wlfYDnzEeWenezdNlXGOA" name="Cancel Return"/>
+      <subvertex xmi:type="uml:State" xmi:id="_7Y_SUDnzEeWenezdNlXGOA" name="Capture Refund"/>
+      <subvertex xmi:type="uml:State" xmi:id="__EkMMDnzEeWenezdNlXGOA" name="Success Capture"/>
+      <subvertex xmi:type="uml:State" xmi:id="_Bi-vYDn0EeWenezdNlXGOA" name="Inventory Update"/>
+      <subvertex xmi:type="uml:State" xmi:id="_DI8noDn0EeWenezdNlXGOA" name="Tax Reverse"/>
+      <subvertex xmi:type="uml:State" xmi:id="_n8u4gDn0EeWenezdNlXGOA" name="Success Tax Reverse"/>
+      <subvertex xmi:type="uml:Pseudostate" xmi:id="_tBk18Dn1EeWenezdNlXGOA" name="FailCaptureActionEvent" kind="choice"/>
+      <subvertex xmi:type="uml:State" xmi:id="_lqIcYDn3EeWenezdNlXGOA" name="Fail Tax Reverse"/>
+      <subvertex xmi:type="uml:Pseudostate" xmi:id="_sysagDn3EeWenezdNlXGOA" name="" kind="fork"/>
+      <subvertex xmi:type="uml:Pseudostate" xmi:id="_fv_jwDn4EeWenezdNlXGOA" name="" kind="join"/>
+      <subvertex xmi:type="uml:FinalState" xmi:id="_ORZkIGFDEeWG__eQUVWkkg" name="Final2"/>
+    </region>
+  </packagedElement>
+</uml:Model>

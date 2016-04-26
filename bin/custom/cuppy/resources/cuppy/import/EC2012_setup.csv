@@ -1,0 +1,68 @@
+#http://de.wikipedia.org/wiki/ISO-3166-1-Kodierliste
+
+# set locale for the Match.date data
+#%impex.setLocale(Locale.GERMANY)
+
+$comp=ec2012
+
+insert_update Competition;code[unique=true];name[lang=de];name[lang=en];name[lang=pl];name[lang=fr];type(code)
+;$comp;EM 2012 Polen/Ukraine;EC 2012 Poland/Ukraine;EC 2012 Polska/Ukraina;EC 2012 Pologne/Ukraine;tournament
+
+# INSERT_UPDATE News;content[lang=de];content[lang=en];name[lang=pl];name[lang=fr];competition(code)[unique=true]
+# ;Willkommen zur EM 2012;Welcome to Euro Cup 2012;Witamy w Euro Cup 2012;Bienvenue à Euro Cup 2012;$comp;
+
+insert_update Group;competition(code)[unique=true,default=$comp];code[unique=true];name[lang=de];name[lang=en];name[lang=pl];name[lang=fr];multiplier;sequenceNumber
+;;A;Gruppe A;Group A;Grupa A;Groupe A;1;1
+;;B;Gruppe B;Group B;Grupa B;Groupe B;1;2
+;;C;Gruppe C;Group C;Grupa C;Groupe C;1;3
+;;D;Gruppe D;Group D;Grupa D;Groupe D;1;4
+;;QUARTER;Viertelfinale;Quarter Finals;Cwiercfinal;Quarts de finale;2;10
+;;SEMI;Halbfinale;Semi Finals;Półfinał;Demi-finale;2;11
+;;FINAL;Finale;Final;Final;Finale;2;13
+
+insert_update CountryFlag;code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];catalogVersion(catalog(id),version)[default=Default:Online]
+;CZ;cz.png;jar:/cuppy/flags/countries/cz.png
+;PT;pt.png;jar:/cuppy/flags/countries/pt.png
+;HR;hr.png;jar:/cuppy/flags/countries/hr.png
+;DE;de.png;jar:/cuppy/flags/countries/de.png
+;PL;pl.png;jar:/cuppy/flags/countries/pl.png
+;NL;nl.png;jar:/cuppy/flags/countries/nl.png
+;IT;it.png;jar:/cuppy/flags/countries/it.png
+;FR;fr.png;jar:/cuppy/flags/countries/fr.png
+;ES;es.png;jar:/cuppy/flags/countries/es.png
+;RU;ru.png;jar:/cuppy/flags/countries/ru.png
+;SE;se.png;jar:/cuppy/flags/countries/se.png
+;GR;gr.png;jar:/cuppy/flags/countries/gr.png
+;DK;dk.png;jar:/cuppy/flags/countries/dk.png
+;EN;en.png;jar:/cuppy/flags/countries/england.png
+;UA;ua.png;jar:/cuppy/flags/countries/ua.png
+;IE;ie.png;jar:/cuppy/flags/countries/ie.png
+
+insert_update Team;isocode[unique=true];name[lang=de];name[lang=en];name[lang=pl];name[lang=fr];flag(code)
+;POL;Polen;Poland;Polska;Pologne;PL
+;GRC;Griechenland;Greece;Grecja;Grèce;GR
+;RUS;Russland;Russia;Rosja;Russie;RU
+;CZE;Tschechien;Czechia;Czechy;Tchéquie;CZ
+;NLD;Niederlande;Netherlands;Holandia;Pays-Bas;NL
+;DEN;Dänemark;Denmark;Dania;Danemark;DK
+;GER;Deutschland;Germany;Niemcy;Allemagne;DE
+;POR;Portugal;Portugal;Portugalia;Portugal;PT
+;ESP;Spanien;Spain;Hiszpania;Espagne;ES
+;ITA;Italien;Italy;Wlochy;Italie;IT
+;IRL;Irland;Republic of Ireland;Irlandia;Irlande;IE
+;CRO;Kroatien;Croatia;Chorwacji;Croatie;HR
+;FRA;Frankreich;France;Francja;France;FR
+;ENG;England;England;Anglia;Angleterre;EN
+;UKR;Ukraine;Ukraine;Ukraina;Ukraine;UA
+;SWE;Schweden;Sweden;Szwecja;Suède;SE
+
+insert_update Match;id[unique=true];matchday;date[dateformat='dd.MM.yy HH.mm'];group(code,competition(code[default=$comp]))[unique=true];homeTeam(isocode);guestTeam(isocode);location
+# will be gathered by webservice
+
+INSERT_UPDATE UpdateCompetitionCronJob;code[unique=true];job(code);singleExecutable;sessionLanguage(isocode);competition(code)
+;automatedUpdateEC2012;updateEC2012Job;false;de;$comp
+;manualUpdateEC2012;updateEC2012Job;false;de;$comp
+
+INSERT_UPDATE Trigger;cronjob(code)[unique=true];second;minute;hour;day;month;year;relative;active;maxAcceptableDelay
+#% afterEach: impex.getLastImportedItem().setActivationTime(new Date());
+;automatedUpdateEC2012;0;0;1;0;-1;-1;true;true;-1

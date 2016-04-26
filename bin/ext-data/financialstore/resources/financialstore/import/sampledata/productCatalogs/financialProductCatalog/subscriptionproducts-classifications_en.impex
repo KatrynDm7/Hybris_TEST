@@ -1,0 +1,73 @@
+$productCatalog=financialProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+$classificationCatalog=InsuranceClassification
+$systemVersion=1.0;
+$clSysVer=catalogVersion(version[default='$systemVersion'],catalog(id[default='$classificationCatalog']));
+$catVer=catalogVersion(version[default='Staged'],catalog(id[default=$productCatalog]));
+$clAttrModifiers=system='InsuranceClassification',version='1.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=en
+
+UPDATE Category; $catVer[virtual=true,unique=true]; code[unique=true]; supercategories(code,$clSysVer)[mode=append];
+;insurances_event 			; insuranceplanclassification
+;insurances_event_options 	; insuranceplanclassification
+;insurances_travel_annual		;travelinsuranceclassification
+;insurances_travel_single		;travelinsuranceclassification
+;insurances_travel_backpackers	;travelinsuranceclassification
+;insurances_travel_annual		;travelinsurancemaxdays
+;insurances_travel_single		;travelinsurancemaxdays
+;insurances_travel_backpackers	;travelinsurancehomevisits
+;insurances_travel_annual		;travelinsurancewintersportsmaxdays
+
+# Binding the Classification attribute to the Product
+$feature1=@cancellationRearrangementCoverage[$clAttrModifiers];
+$feature2=@eventclothingcoverage[$clAttrModifiers];
+$feature3=@eventMoneyCoverage[$clAttrModifiers];
+$feature4=@decorationssundriescoverage[$clAttrModifiers];
+$feature5=@carsTransportCoverage[$clAttrModifiers];
+$feature6=@photographyVideoCoverage[$clAttrModifiers];
+$feature7=@failureSuppliersCoverage[$clAttrModifiers];
+$feature8=@personalLiabilityCoverage[$clAttrModifiers];
+$feature9=@venueCover[$clAttrModifiers];
+$feature10=@publicLiability[$clAttrModifiers];
+
+#attributes for travel Insurance
+$feature20=@medicalscreening[$clAttrModifiers];
+$feature21=@maxdayspertrip[$clAttrModifiers];
+$feature22=@homevisits[$clAttrModifiers];
+$feature23=@wintersportsmaxdays[$clAttrModifiers];
+
+#attributes for property insurance
+$feature30=@rebuildvalue[$clAttrModifiers];
+
+UPDATE SubscriptionProduct;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$feature6;$feature7;$feature8;$catalogVersion
+;WED_2STAR;true;true;true;true;true;true;false;false;
+;WED_3STAR;true;true;true;true;true;true;true;false;
+;WED_4STAR;true;true;true;true;true;true;true;true;
+;WED_5STAR;true;true;true;true;true;true;true;true;
+
+UPDATE SubscriptionProduct;code[unique=true];$feature9;$feature10;$catalogVersion
+;WED_VENUECOVER;TRUE;;
+;WED_PUBLICLIABILITY;;TRUE;
+
+UPDATE SubscriptionProduct;code[unique=true];$feature20;$feature21;$catalogVersion
+;TRA_SINGLE_BUDGET	;false	;"365 days (31 days if aged 66 or over)";
+;TRA_SINGLE_SILVER	;true	;"365 days (31 days if aged 66 or over)";
+;TRA_SINGLE_GOLD	;true	;"365 days (31 days if aged 66 or over)";
+		
+UPDATE SubscriptionProduct;code[unique=true];$feature20;$feature21;$feature23;$catalogVersion						
+;TRA_ANNUAL_BUDGET	;false	;"31 days";"Max 10 days in 12 month term";								
+;TRA_ANNUAL_SILVER	;true	;"45 days (31 days if over 65)";"Max 17 days in 12 month term";								
+;TRA_ANNUAL_GOLD	;true	;"90 days (31 days if over 65)";"Max 24 days in 12 month term";
+
+UPDATE SubscriptionProduct;code[unique=true];$feature20;$feature22;$catalogVersion								
+;TRA_BACKPACKERS_BUDGET	;true	;"1 per person";				
+;TRA_BACKPACKERS_SILVER	;true	;"1 per person";						
+;TRA_BACKPACKERS_GOLD	;true	;"1 per person";					
+
+UPDATE SubscriptionProduct;code[unique=true];$feature30;$catalogVersion								
+;PRO_PROPERTY_HOMEOWNERS                    ;"10000";	
+;PRO_PROPERTY_RENTERS                       ;"10000";	
+
+UPDATE SubscriptionProduct;code[unique=true];$feature30;$catalogVersion								
+;PRO_PROPERTY_HOMEOWNERS_MONTHLY               ;"10000";	
+;PRO_PROPERTY_RENTERS_MONTHLY                  ;"10000";	

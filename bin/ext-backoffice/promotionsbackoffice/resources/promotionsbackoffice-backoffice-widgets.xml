@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widgets.xsd">
+
+	<widget-extension widgetId="explorerTree">
+		<widget id="promotionTypeEvaluator" widgetDefinitionId="com.hybris.cockpitng.conditionevaluator" slotId="cockpitWidgetChildrenInvisible" template="false">
+			<widget id="initPromotionsAdvancedSearch" widgetDefinitionId="com.hybris.cockpitng.initPromotionsAdvancedSearch" slotId="cockpitWidgetChildrenInvisible" template="false">
+				<setting key="widgetStyleAttribute" type="String"></setting>
+				<setting key="widgetStyleClass" type="String"></setting>
+				<virtual-sockets/>
+			</widget>			
+			<setting key="expression" type="String">#root.id EQ 'hmc_type_tree_abstractpromotion'</setting>
+			<setting key="socketDataType_$T" type="String">com.hybris.backoffice.navigation.NavigationNode</setting>
+			<setting key="widgetStyleAttribute" type="String"></setting>
+			<setting key="widgetStyleClass" type="String"></setting>
+			<virtual-sockets/>
+		</widget>
+
+	</widget-extension>
+
+    <widget-connection sourceWidgetId="explorerTree" outputId="nodeSelected" targetWidgetId="promotionTypeEvaluator" inputId="input"/>
+    <widget-connection sourceWidgetId="promotionTypeEvaluator" outputId="true" targetWidgetId="initPromotionsAdvancedSearch" inputId="nodeSelected"/>
+    <widget-connection sourceWidgetId="initPromotionsAdvancedSearch" outputId="outContext" targetWidgetId="advancedSearch" inputId="initContext"/>
+</widgets>

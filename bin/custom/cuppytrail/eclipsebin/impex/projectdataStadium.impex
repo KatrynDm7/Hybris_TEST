@@ -1,0 +1,15 @@
+INSERT_UPDATE Stadium;code[unique=true];capacity
+;Emirates;60361
+;VillaPark;42788
+
+UPDATE Match;id[unique=true];group(competition(code),code)[unique=true];stadium(code)
+         ;1;wc2010:A;Emirates
+         ;2;wc2010:A;Emirates
+         ;3;wc2010:B;Emirates
+         ;4;wc2010:B;VillaPark
+
+$START_USERRIGHTS
+Type;UID;MemberOfGroups;Password;Target;read;change;create;remove;change_perm
+UserGroup;cuppyadmins;;;;;;;;
+         ;;;;Stadium;+;+;+;+;-
+$END_USERRIGHTS

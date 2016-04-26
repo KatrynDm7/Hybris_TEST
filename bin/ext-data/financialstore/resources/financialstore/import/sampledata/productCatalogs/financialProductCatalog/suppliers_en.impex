@@ -1,0 +1,15 @@
+# ImpEx for Importing Suppliers into Insurance Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=financialProductCatalog
+$productCatalogName=Financial Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$superCategories=superCategories(code, )
+
+# Language
+$lang=en
+
+
+
+# Create Categories
+UPDATE Category;code[unique=true];$catalogVersion;name[lang=en];description[lang=en]

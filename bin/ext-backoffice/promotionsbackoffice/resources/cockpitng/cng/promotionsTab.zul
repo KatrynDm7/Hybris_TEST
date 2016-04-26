@@ -1,0 +1,123 @@
+<div id="promo-abstractorderPromotionsTab" sclass="yw-editorarea-tabbox-tabpanels-tabpanel-groupbox">
+	<groupbox sclass="yw-editorarea-tabbox-tabpanels-tabpanel-groupbox firedproductpromotions">
+		<caption sclass="yw-editorarea-tabbox-tabpanels-tabpanel-groupbox-caption" label="${c:l('hmc.msg.poe.firedproductpromotions')}" />
+		<div forEach="${arg.promotionResults.firedProductPromotions}">
+			<div sclass="${(each.applied?'promo-applied':'promo-notApplied')}">
+				<div sclass="promo-heading">
+					<label if="${each.applied}" sclass="promo-result" value="${c:l('hmc.msg.poe.applied')}" />
+					<label if="${!each.applied}" sclass="promo-result" value="${c:l('hmc.msg.poe.notapplied')}" />
+					<label sclass="promo-code" value="${each.promotion.code}" />
+					<label sclass="promo-description" value="${each.description}" />
+				</div>
+				<grid>
+					<columns>
+						<column label="${c:l('hmc.msg.poe.header.quantity')}" sort="auto" />
+						<column label="${c:l('hmc.msg.poe.header.unit')}" sort="auto" />
+						<column label="${c:l('hmc.msg.poe.header.product')}" sort="auto" />
+						<column label="${c:l('hmc.msg.poe.header.baseprice')}" sort="auto" />
+						<column label="${c:l('hmc.msg.poe.header.totalprice')}" sort="auto" />
+						<column label="${c:l('hmc.msg.poe.header.adjustedbaseprice')}" sort="auto" />
+						<column label="${c:l('hmc.msg.poe.header.adjustedtotalprice')}" sort="auto" />
+					</columns>
+					<rows>
+						<row forEach="${each.consumedEntries}">
+							<label value="${each.quantity}" />
+							<label value="${each.unit.name}" />
+							<label value="${each.product.code}" />
+							<label value="${each.unitPrice}" />
+							<label value="${each.entryPrice}" />
+							<label value="${each.adjustedUnitPrice}" />
+							<label value="${each.adjustedEntryPrice}" />
+						</row>
+					</rows>
+				</grid>
+			</div>
+		</div>
+	</groupbox>
+
+	<groupbox sclass="yw-editorarea-tabbox-tabpanels-tabpanel-groupbox potentialproductpromotions">
+		<caption sclass="yw-editorarea-tabbox-tabpanels-tabpanel-groupbox-caption" label="${c:l('hmc.msg.poe.potentialproductpromotions')}" />
+		<div if="${!(empty arg.promotionResults.entriesWithPotentialPromotions)}">
+			<listbox sclass="potentialproductpromotions-listbox" forEach="${arg.promotionResults.entriesWithPotentialPromotions}">
+				<listitem sclass="promo-description" label="${each.product.name} (${each.product.code})" />
+				<listitem>
+					<listcell>
+						<listbox>
+							<listitem>
+								<listcell class="promo-productInfo-cell">
+									<h:dl class="promo-productInfo" xmlns:h="xhtml">
+										<h:dt>${c:l('hmc.msg.poe.header.quantity')}</h:dt>
+										<h:dd>${each.quantity}</h:dd>
+										<h:dt>${c:l('hmc.msg.poe.header.unit')}</h:dt>
+										<h:dd>${each.unit.name}</h:dd>
+										<h:dt>${c:l('hmc.msg.poe.header.baseprice')}</h:dt>
+										<h:dd>${each.unitPrice}</h:dd>
+										<h:dt>${c:l('hmc.msg.poe.header.totalprice')}</h:dt>
+										<h:dd>${each.entryPrice}</h:dd>
+									</h:dl>
+								</listcell>
+								<listcell>
+									<h:ul sclass="promo-potentialPromotionList" xmlns:h="xhtml">
+										<h:li forEach="${each.promotionResults}">
+											<label sclass="promo-code" value="${each.promotion.code}" />
+											<label sclass="promo-description" value="${each.description}" />
+											<label sclass="promo-certainty" value="${c:l('hmc.msg.poe.certainty')} ${each.certainty}" />
+										</h:li>
+									</h:ul>
+								</listcell>
+							</listitem>
+						</listbox>
+					</listcell>
+				</listitem>
+			</listbox>
+		</div>
+	</groupbox>
+
+	<groupbox sclass="yw-editorarea-tabbox-tabpanels-tabpanel-groupbox productswithoutpromotions">
+		<caption sclass="yw-editorarea-tabbox-tabpanels-tabpanel-groupbox-caption" label="${c:l('hmc.msg.poe.productswithoutpromotions')}" />
+		<div if="${!(empty arg.promotionResults.entriesNotInPromotions)}">
+			<grid>
+				<columns>
+					<column label="${c:l('hmc.msg.poe.header.quantity')}" sort="auto" />
+					<column label="${c:l('hmc.msg.poe.header.unit')}" sort="auto" />
+					<column label="${c:l('hmc.msg.poe.header.product')}" sort="auto" />
+					<column label="${c:l('hmc.msg.poe.header.baseprice')}" sort="auto" />
+					<column label="${c:l('hmc.msg.poe.header.totalprice')}" sort="auto" />
+				</columns>
+				<rows>
+					<row forEach="${arg.promotionResults.entriesNotInPromotions}">
+						<label value="${each.quantity}" />
+						<label value="${each.unit.name}" />
+						<label value="${each.product.code}" />
+						<label value="${each.unitPrice}" />
+						<label value="${each.entryPrice}" />
+					</row>
+				</rows>
+			</grid>
+		</div>
+	</groupbox>
+
+	<groupbox sclass="yw-editorarea-tabbox-tabpanels-tabpanel-groupbox firedorderpromotions">
+		<caption sclass="yw-editorarea-tabbox-tabpanels-tabpanel-groupbox-caption" label="${c:l('hmc.msg.poe.firedorderpromotions')}" />
+		<div forEach="${arg.promotionResults.firedOrderPromotions}">
+			<div sclass="${(each.applied?'promo-applied':'promo-notApplied')}">
+				<label if="${each.applied}" sclass="promo-result" value="${c:l('hmc.msg.poe.applied')}" />
+				<label if="${!each.applied}" sclass="promo-result" value="${c:l('hmc.msg.poe.notapplied')}" />
+				<label sclass="promo-code" value="${each.promotion.code}" />
+				<label sclass="promo-description" value="${each.description}" />
+			</div>
+		</div>
+	</groupbox>
+
+	<groupbox sclass="yw-editorarea-tabbox-tabpanels-tabpanel-groupbox potentialorderpromotions">
+		<caption sclass="yw-editorarea-tabbox-tabpanels-tabpanel-groupbox-caption" label="${c:l('hmc.msg.poe.potentialorderpromotions')}" />
+		<div forEach="${arg.promotionResults.potentialOrderPromotions}">
+			<div sclass="promo-heading">
+				<label value="${c:l('hmc.msg.poe.potentialpromotion')}" />
+				<label sclass="promo-code" value="${each.promotion.code}" />
+				<label sclass="promo-description" value="${each.description}" />
+				<label sclass="promo-certainty" value="${c:l('hmc.msg.poe.certainty')} ${each.certainty}" />
+			</div>
+		</div>
+	</groupbox>
+</div>

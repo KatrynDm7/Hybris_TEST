@@ -1,0 +1,536 @@
+#placeOrder{
+	margin:0 0 20px 0;
+}
+
+#checkoutContentPanel .summaryPaymentType{
+	position:relative;
+	padding: 0 0 20px 0;
+}
+
+#requestQuote{
+	border: 1px dotted #A5A5A5;
+	padding:0 20px 20px 20px;
+	position:relative;
+	margin:0 0 60px 0;
+	top:10px;
+	clear: both;
+}
+
+#requestQuote textarea{
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 12px;
+	color: #4e4e4e;
+	height: 100px;
+}
+
+#requestQuote .headline{
+	border-bottom: 1px solid #A5A5A5;
+	font-size: 1.2em;
+	font-weight: bold;
+	height: auto;
+	line-height: 20px;
+	text-transform: uppercase;
+	margin: 10px 0 20px 0;
+	padding-bottom: 10px;
+}
+
+#requestQuote #quoteRequestDescription{
+	width: 466px;
+	height:100px;
+	padding:10px;
+	font: inherit;
+}
+
+#requestQuote .form-actions{
+	padding:20px 0 0 0;
+}
+
+.orderHead .headline{
+    font-size: 1em;
+    font-weight: bold;
+    height: 30px;
+    line-height: 30px;
+    text-transform: uppercase;
+    margin: 0 0 20px;	
+}
+
+.quoteReason .headline{
+	border-bottom: 1px dotted #A5A5A5;
+    font-size: 1em;
+    font-weight: bold;
+    height: 30px;
+    line-height: 30px;
+    text-transform: uppercase;
+    margin: 0 0 20px;
+}
+
+#ajaxGrid {
+	margin: 50px 25px;
+}
+
+#page a.button, #page button {
+	background-color: #1a618b;
+	border-color: #1a618b;
+	color: #ffffff;
+}
+
+/*
+## advancedSearch
+********************************************************************/
+
+.advancedSearchLink{
+	float:left;
+	margin-left: 10px;
+	line-height: 30px;
+    text-transform: uppercase;
+}
+
+.advancedSearch{
+	margin:0;
+}
+
+.advancedSearch .headline{
+	border-bottom: 1px solid #bfbfbf;
+	font-size: 1.2em;
+	font-weight: bold;
+	height: 39px;
+	line-height: 39px;
+	text-transform: uppercase;
+	margin:0 0 20px 0;
+}
+
+.advancedSearch .radios .control-group{
+	float:left;
+	margin:0 20px 0 0;
+}
+
+.advancedSearch .radios .control-group label{
+	margin-top:0;
+}
+
+.advancedSearch .searchInput {
+	position:relative;
+}
+
+.advancedSearch .searchInput #js-add-product-ids{
+	margin: 0;
+    position: absolute;
+    right: 0;
+    top: 22px;
+	height:30px;
+}
+
+.advancedSearch .product-id-tag-box{
+	border: 2px solid #C7C7C7;
+	display:block;
+	float:left;
+	margin:10px 20px 10px 0;
+}
+
+.advancedSearch .product-id-tag-box span{
+	padding:0 10px;
+	line-height:20px;
+	display:block;
+	float:left;
+}
+
+.advancedSearch .product-id-tag-box button{
+
+	margin:0;
+	border: 0;
+	border-left: 2px solid #C7C7C7;
+	height: 20px;
+	line-height:20px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.advancedSearch .productListItem{
+	margin-left:0;
+	margin-right:0;
+}
+
+.advancedSearch .orderForm_grid_group{
+	
+}
+
+.advancedSearch  .product-grid-container{
+	
+}
+
+.advancedSearch .add_to_cart_order_form .cart .sku-quantity {
+	width: 20px;
+	text-align: center;
+}
+
+/*
+## account replenishment
+********************************************************************/
+.delivery_stages {
+	margin: 40px 0;
+}
+
+.delivery_stages .orderBox {
+	width: 190px;
+}
+
+.replenishment-detail .payment {
+    width: 230px !important 
+}
+
+.replenishment-confiramtion-details .re_schedule .headline,
+div.delivery_stages .headline{
+	height: auto;
+}
+
+/*
+## Home Page
+********************************************************************/
+body {
+	color: #000;
+	text-align: left;
+	font-size: 12px;
+	background-color: #f4f4f4;
+
+}
+
+.slider_component .stripTransmitter {
+	width: 950px;
+}
+
+.jcarousel-clip {
+	background-color: rgb(244, 244, 244);
+}
+
+.jcarousel-clip .jcarousel-item {
+	background-color: rgb(255, 255, 255);
+}
+
+.jcarousel-container .jcarousel-skin {
+	background: none;
+}
+
+.jcarousel-item .scrollerProduct .thumb {
+	margin: 0px 0px 5px;
+	height: 140px;
+	padding: 0px 0px 20px;
+	border: none;
+}
+
+.jcarousel-item .scrollerProduct .thumb img {
+	width: auto;
+	height: auto;
+	max-width: 140px;
+	max-height: 140px;
+}
+
+.scrollerProduct .details {
+	height: 36px;
+}
+
+.negotiate-quote {
+	margin: 25px 0 40px 0;
+}
+
+.quote-metadata {
+	margin: 25px 0 40px 0;
+}
+
+.orderList .orderListTable thead th {
+	height:30px;
+	line-height:30px;
+	text-transform:uppercase;
+	font-size:1em;
+	padding-right: 10px;
+	background-color: #f6f6f6;
+	color: #000000;
+}
+
+/*
+## Checkout page
+********************************************************************/
+
+#placeOrder #checkoutContentPanel {
+	margin: 0 0 20px 0;
+}
+
+#placeOrder form {
+	padding: 0 10px;
+}
+
+#checkoutOrderDetails .promo {
+	margin-top: 26px;
+}
+
+#checkoutOrderDetails .promo .title_holder h2 {
+	font-size: 1em;
+	font-weight: bold;
+	margin-bottom: 0px;
+}
+
+#placeOrder .place-order {
+	width: 100%;
+	background-color: #046502;
+	margin: 45px 0 0 20px;
+	border: none;
+	font-size: 100%;
+}
+
+#placeOrder .requestQuoteButton {
+	margin: 30px 0 0 0;
+	float: left !important;
+	width: 42%;
+
+}
+
+#placeOrder .scheduleReplenishmentButton {
+	margin: 30px 0 0 0;
+	float: right;
+	width: 42%;
+}
+
+form #replenishmentSchedule {
+	border: 1px dotted #A5A5A5;
+	padding: 0 20px 20px 20px;
+	position: relative;
+	margin: 0 0 60px 0;
+	top: 10px;
+	clear: both;
+}
+
+#replenishmentSchedule .headline {
+	border-bottom: 1px solid #bfbfbf;
+	font-size: 1.2em;
+	font-weight: bold;
+	height: 39px;
+	line-height: 39px;
+	margin: 0 0 20px;
+	text-transform: uppercase;
+}
+
+#replenishmentSchedule .scheduleform {
+	width: 476px;
+	background: transparent none;
+	border-radius: 0;
+	margin-bottom: 15px;
+	padding: 0 5px 6px;
+	height: auto;
+	border: 1px solid #dfdfdf;
+}
+
+.scheduleform label {
+	white-space: nowrap;
+}
+
+.replenishmentFrequency_left label, .replenishmentFrequency label {
+	font-weight: bold;
+	display: block;
+	font-size: 102%;
+}
+
+.replenishmentFrequency_left .control-label {
+	margin: 0;
+	font-weight: bold;
+}
+
+#replenishmentSchedule .scheduleform .replenishmentFrequency, .replenishmentFrequency_left .control-label {
+	border-bottom: 1px solid #bfbfbf;
+	margin-bottom: 10px;
+	padding: 8px 0;
+}
+
+.replenishmentFrequency {
+	float: left;
+	width: 100%;
+	margin: 0 0 4px;
+}
+
+#replenishmentSchedule .scheduleform input[type="radio"] {
+	margin: 0 5px;
+}
+
+.replenishmentFrequency input {
+	display: block;
+	float: left;
+}
+
+#replenishmentSchedule .scheduleform label {
+	vertical-align: top;
+}
+
+.scheduleform label {
+	white-space: nowrap;
+}
+
+.replenishmentFrequency label {
+	display: block;
+	float: left;
+	font-weight: bold;
+	line-height: 16px;
+	margin: 0;
+}
+
+.scheduleform select {
+	border: 1px solid #999999;
+	color: #666666;
+	margin: 1px 8px 0px 0px;
+}
+
+.skip, .skiptocontent, .skiptonavigation {
+	position: absolute;
+	top: -30000px;
+	left: -30000px;
+}
+
+.scheduleform select {
+	border: 1px solid #999999;
+	color: #666666;
+	margin: 1px 8px 0px 0px;
+}
+
+#replenishmentSchedule .scheduleform .div_nWeeks1 {
+	margin: 0 0 10px 0;
+}
+
+.div_nWeeks1 label {
+	padding-top: 0;
+}
+
+.scheduleformW .div_nWeeks1 select {
+	width: 100%;
+	height: 105px;
+}
+
+.scheduleformW .div_nWeeks2 {
+	padding: 5px 0 10px;
+	line-height: 17px;
+	height: 18px;
+}
+
+.scheduleformW .div_nWeeks2 select {
+	margin: 0 5px 0 0px;
+	display: inline;
+}
+
+#replenishmentSchedule .form-actions {
+	padding: 20px 0 0 0;
+}
+
+#replenishmentSchedule .form-actions a.button {
+	margin-top: 0;
+}
+
+.cms_disp-img_slot .content {
+	padding-left: 10px;
+}
+
+button.doCheckoutBut {
+	margin-bottom: 10px;
+}
+
+/*
+## Home Page
+********************************************************************/
+
+.navigationbarcollectioncomponent ul li ul.Lb {
+	left: auto;
+	right: auto;
+	width: 160px;
+}
+
+.orderList .orderListTable thead th:first-child, .orderList .orderListTable tbody tr td:first-child {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.accountContentPane .accountBodyContentSlot .orderList .single_grid_three_dimensions {
+	width: 100%;
+}
+
+.accountContentPane .orderList .orderListTable tbody tr td:last-child {
+	 padding-right: 0px;
+}
+
+/*
+## Multi-D Product Detail Page
+********************************************************************/
+
+#content .orderFormHeader .big-price {
+	margin-left: 0px;
+	padding-left: 5px;
+}
+
+#content .orderFormHeader .pd_name {
+	height: auto;
+}
+
+/*
+## Product Detail page
+********************************************************************/
+
+.productDetailsPanel .productDescription .qty {
+	margin: 10px 0px;
+	padding: 20px;
+	background-color: #FFF;
+	display: inline-block;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.productDetailsPanel .productDescription .qty label {
+	width: 67px;
+	display: block;
+	float: left;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.productDetailsPanel .productDescription .qty input.qty {
+	text-align: center;
+	width: 40px;
+	padding: 0;
+	margin: 0;
+}
+
+.productDescription .stock_message {
+	display: inline;
+}
+
+.productDescription .futureStockLink {
+	display: block;
+	text-align: right;
+	width: 100%;
+	font-weight: normal;
+}
+
+.productDescription .productAddToCartPanelContainer #productOrderButton {
+	text-transform: uppercase;
+	height: 40px;
+	margin-top: 8px;
+	box-sizing: border-box;
+}
+
+.productDescription .productAddToCartPanelContainer .productAddToCartPanelItem {
+	width: 49%;
+	float: right;
+	margin-right: 0px;
+}
+
+.productDescription .productAddToCartPanelContainer #AddToCart-ShareOnSocialNetworkAction {
+	text-align: center;
+	margin: 15px 0 20px;
+	text-align: center;
+	width: 100%;
+	float: right;
+}
+
+.productDescription .productAddToCartPanelContainer .LoveShare {
+	width: 49%;
+	float: right;
+	text-align: center;
+	margin-top: 0;
+}
+
+.page-productDetails .yCmsContentSlot.span-10.last {
+	float: right;
+}

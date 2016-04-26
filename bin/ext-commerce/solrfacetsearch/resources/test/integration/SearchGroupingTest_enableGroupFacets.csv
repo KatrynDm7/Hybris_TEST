@@ -1,0 +1,3 @@
+
+INSERT_UPDATE SolrIndexedType;identifier[unique=true];groupFacets
+;testIndexedType${testId};true

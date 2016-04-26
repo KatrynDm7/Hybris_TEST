@@ -1,0 +1,84 @@
+# ImpEx for Importing Products stock levels into Insurance Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=financialProductCatalog
+$productCatalogName=Financial Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+INSERT_UPDATE Vendor;code[unique=true]
+
+INSERT_UPDATE Warehouse;code[unique=true];name[lang=en];name[lang=de];vendor(code);default
+
+INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];reserved
+;0;default;forceInStock;0;-1;0;0;WED_2STAR;0
+;0;default;forceInStock;0;-1;0;0;WED_3STAR;0
+;0;default;forceInStock;0;-1;0;0;WED_4STAR;0
+;0;default;forceInStock;0;-1;0;0;WED_5STAR;0
+;0;default;forceInStock;0;-1;0;0;WED_EXCESSWAIVER;0
+;0;default;forceInStock;0;-1;0;0;WED_PUBLICLIABILITY;0
+;0;default;forceInStock;0;-1;0;0;WED_VENUECOVER;0
+;0;default;forceInStock;0;-1;0;0;TRA_SINGLE_BUDGET;0
+;0;default;forceInStock;0;-1;0;0;TRA_SINGLE_SILVER;0
+;0;default;forceInStock;0;-1;0;0;TRA_SINGLE_GOLD;0
+;0;default;forceInStock;0;-1;0;0;TRA_ANNUAL_BUDGET;0
+;0;default;forceInStock;0;-1;0;0;TRA_ANNUAL_SILVER;0
+;0;default;forceInStock;0;-1;0;0;TRA_ANNUAL_GOLD;0
+;0;default;forceInStock;0;-1;0;0;TRA_BACKPACKERS_BUDGET;0
+;0;default;forceInStock;0;-1;0;0;TRA_BACKPACKERS_SILVER;0
+;0;default;forceInStock;0;-1;0;0;TRA_BACKPACKERS_GOLD;0
+;0;default;forceInStock;0;-1;0;0;TRA_WINTER;0
+;0;default;forceInStock;0;-1;0;0;TRA_GOLF;0
+;0;default;forceInStock;0;-1;0;0;TRA_BUSINESS;0
+;0;default;forceInStock;0;-1;0;0;TRA_VALUABLES;0
+;0;default;forceInStock;0;-1;0;0;TRA_HAZARDOUS;0
+;0;default;forceInStock;0;-1;0;0;TRA_EXCESS;0
+# Homeowners Property Insurance
+;0;default;forceInStock;0;-1;0;0;PRO_PROPERTY_HOMEOWNERS;0
+;0;default;forceInStock;0;-1;0;0;PRO_FLOOD_COVER_HOMEOWNERS;0
+;0;default;forceInStock;0;-1;0;0;PRO_TEMP_ACCOM_HOMEOWNERS;0
+;0;default;forceInStock;0;-1;0;0;PRO_JEWELRY_COVER_HOMEOWNERS;0
+;0;default;forceInStock;0;-1;0;0;PRO_BICYCLES_COVER_HOMEOWNERS;0
+
+# Renters Property Insurance
+;0;default;forceInStock;0;-1;0;0;PRO_PROPERTY_RENTERS;0
+;0;default;forceInStock;0;-1;0;0;PRO_TEMP_ACCOM_RENTERS;0
+;0;default;forceInStock;0;-1;0;0;PRO_JEWELRY_COVER_RENTERS;0
+;0;default;forceInStock;0;-1;0;0;PRO_BICYCLES_COVER_RENTERS;0
+
+# Homeowners Property Insurance Monthly product
+;0;default;forceInStock;0;-1;0;0;PRO_PROPERTY_HOMEOWNERS_MONTHLY;0
+;0;default;forceInStock;0;-1;0;0;PRO_FLOOD_COVER_HOMEOWNERS_MONTHLY;0
+;0;default;forceInStock;0;-1;0;0;PRO_TEMP_ACCOM_HOMEOWNERS_MONTHLY;0
+;0;default;forceInStock;0;-1;0;0;PRO_JEWELRY_COVER_HOMEOWNERS_MONTHLY;0
+;0;default;forceInStock;0;-1;0;0;PRO_BICYCLES_COVER_HOMEOWNERS_MONTHLY;0
+
+# Renters Property Insurance Monthly product
+;0;default;forceInStock;0;-1;0;0;PRO_PROPERTY_RENTERS_MONTHLY;0
+;0;default;forceInStock;0;-1;0;0;PRO_TEMP_ACCOM_RENTERS_MONTHLY;0
+;0;default;forceInStock;0;-1;0;0;PRO_JEWELRY_COVER_RENTERS_MONTHLY;0
+;0;default;forceInStock;0;-1;0;0;PRO_BICYCLES_COVER_RENTERS_MONTHLY;0
+
+# Auto Insurance Annual product
+;0;default;forceInStock;0;-1;0;0;AUTO_ANNUALLY;0
+;0;default;forceInStock;0;-1;0;0;AUTO_LEGAL_EXPENSE_COVER_ANNUALLY;0
+;0;default;forceInStock;0;-1;0;0;AUTO_BREAKDOWN_COVER_ANNUALLY;0
+;0;default;forceInStock;0;-1;0;0;AUTO_KEY_PROTECTION_COVER_ANNUALLY;0
+;0;default;forceInStock;0;-1;0;0;AUTO_5_YEAR_GUARANTEE_ANNUALLY;0
+# Auto Insurance Monthly product
+;0;default;forceInStock;0;-1;0;0;AUTO_MONTHLY;0
+;0;default;forceInStock;0;-1;0;0;AUTO_LEGAL_EXPENSE_COVER_MONTHLY;0
+;0;default;forceInStock;0;-1;0;0;AUTO_BREAKDOWN_COVER_MONTHLY;0
+;0;default;forceInStock;0;-1;0;0;AUTO_KEY_PROTECTION_COVER_MONTHLY;0
+;0;default;forceInStock;0;-1;0;0;AUTO_5_YEAR_GUARANTEE_MONTHLY;0
+;0;default;forceInStock;0;-1;0;0;AUTO_TELEMETRY_INSTALLATION_MONTHLY;0
+
+;0;default;forceInStock;0;-1;0;0;LIFE;0
+;0;default;forceInStock;0;-1;0;0;LIFE_PREMIUM_PROTECTION;0
+;0;default;forceInStock;0;-1;0;0;LIFE_RENEWAL_OPTION;0
+;0;default;forceInStock;0;-1;0;0;LIFE_PAYMENT_PROTECTION_BENEFIT;0
+
+INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];reserved
+
+
+UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehouse(code));vendors(code)
+

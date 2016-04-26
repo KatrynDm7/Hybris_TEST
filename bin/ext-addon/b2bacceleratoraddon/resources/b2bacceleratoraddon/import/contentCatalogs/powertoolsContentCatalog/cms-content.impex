@@ -1,0 +1,9 @@
+$contentCatalog=powertoolsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$jarResourceCms=jar:de.hybris.platform.b2bacceleratoraddon.constants.B2bacceleratoraddonConstants&/b2bacceleratoraddon/import/cockpit/cmscockpit
+$addonExtensionName=b2bacceleratoraddon
+
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];page;actions(uid,$contentCV);&componentRef
+;;AccountOrderDetailsItemsComponent;/WEB-INF/views/addons/$addonExtensionName/desktop/pages/account/accountOrderDetailItems.jsp;;AccountOrderDetailsItemsComponent
+;;AccountOrderDetailsShippingComponent;/WEB-INF/views/addons/$addonExtensionName/desktop/pages/account/accountOrderDetailShippingInfo.jsp;;AccountOrderDetailsShippingComponent

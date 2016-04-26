@@ -1,0 +1,10 @@
+#
+# Import Delivery Modes for Insurance Products
+#
+
+# Language
+$lang=en
+
+# Zone Delivery Modes
+UPDATE DeliveryMode;code[unique=true];name[lang=$lang];description[lang=$lang]
+;insurance-default;Insurance Default;Default Insurance product delivery mode

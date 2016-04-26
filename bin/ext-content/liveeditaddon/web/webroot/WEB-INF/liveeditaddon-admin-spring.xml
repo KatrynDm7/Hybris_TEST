@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+
+<!-- 
+  WARNING: This is the Spring WEB configuration file. If you want to replace
+  items or managers you have to do this from the extensions core configuration 
+  file (liveeditaddon/resources/liveeditaddon-spring.xml) 
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/mvc
+           http://www.springframework.org/schema/mvc/spring-mvc.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!-- next 2 imports to pull the synchronizationService -->
+    <import resource="classpath:/cockpit/cockpit-spring-services.xml"/>
+    <import resource="classpath:/cmscockpit/cmscockpit-spring-services.xml"/>
+
+    <alias name="defaultCMSSyncPageFacade" alias="cmsSyncPageFacade" />
+    <bean id="defaultCMSSyncPageFacade" class="de.hybris.liveeditaddon.admin.facades.impl.DefaultCMSSyncPageFacade">
+        <property name="sessionService" ref="sessionService" />
+        <property name="catalogVersionService" ref="catalogVersionService" />
+        <property name="cmsPreviewService" ref="cmsPreviewService" />
+        <property name="baseSiteService" ref="baseSiteService" />
+        <property name="uiExperienceService" ref="uiExperienceService" />
+        <property name="synchronizationService" ref="synchronizationService" />
+        <property name="cockpitTypeService" ref="cockpitTypeService" />
+        <property name="userService" ref="userService" />
+        <property name="cmsPageService" ref="cmsPageService" />
+    </bean>
+
+    <alias name="defaultCmsComponentAdminFacade" alias="cmsComponentAdminFacade" />
+	<bean id="defaultCmsComponentAdminFacade" class="de.hybris.liveeditaddon.admin.facades.impl.DefaultCMSComponentAdminFacade" >
+		<property name="componentAdminMenuGroupConverter" ref="rootComponentAdminMenuGroupDataConverter" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="catalogVersionService" ref="catalogVersionService" />
+		<property name="cmsPreviewService" ref="cmsPreviewService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="uiExperienceService" ref="uiExperienceService" />
+	</bean>
+	
+	<alias name="defaultCMSSlotAdminFacade" alias="cmsSlotAdminFacade" />
+	<bean id="defaultCMSSlotAdminFacade" class="de.hybris.liveeditaddon.admin.facades.impl.DefaultCMSSlotAdminFacade" >
+		<property name="slotAdminMenuGroupConverter" ref="rootSlotAdminMenuGroupDataConverter" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="catalogVersionService" ref="catalogVersionService" />
+		<property name="cmsPreviewService" ref="cmsPreviewService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="uiExperienceService" ref="uiExperienceService" />
+	</bean>
+	
+	<bean id="simpleComponentAdminMenuActionPopulator" abstract="true" class="de.hybris.liveeditaddon.admin.converters.populator.SimpleComponentAdminMenuActionPopulator" >
+		<property name="enumerationService" ref="enumerationService" />
+	</bean>
+	<bean id="liveeditaddonComponentAdminMenuActionPopulator" abstract="true" parent="simpleComponentAdminMenuActionPopulator">
+		<property name="addOn" value="liveeditaddon" />
+	</bean>
+	<bean id="componentAdminMenuActionConverter" abstract="true" parent="abstractPopulatingConverter">
+		<!-- <lookup-method name="createTarget" bean="componentAdminMenuActionData"/> -->
+		<property name="targetClass" value="de.hybris.liveeditaddon.admin.ComponentAdminMenuActionData"/>
+	</bean>
+	
+	<bean id="simpleSlotAdminMenuActionPopulator" abstract="true" class="de.hybris.liveeditaddon.admin.converters.populator.SimpleSlotAdminMenuActionPopulator" >
+		<property name="enumerationService" ref="enumerationService" />
+	</bean>
+	<bean id="liveeditaddonSlotAdminMenuActionPopulator" abstract="true" parent="simpleSlotAdminMenuActionPopulator" >
+		<property name="addOn" value="liveeditaddon" />
+	</bean>
+	
+	<bean id="slotAdminMenuActionConverter" abstract="true" parent="abstractPopulatingConverter">
+		<!-- <lookup-method name="createTarget" bean="componentAdminMenuActionData"/> -->
+		<property name="targetClass" value="de.hybris.liveeditaddon.admin.ComponentAdminMenuActionData"/>
+	</bean>
+	
+	<!--  DYNAMIC COMPONENT MENU TOOLING / ACTIONS -->
+	
+	
+	<alias name="defaultCloneComponentAdminMenuActionConverter" alias="cloneComponentAdminMenuActionConverter" />
+	<bean id="defaultCloneComponentAdminMenuActionConverter" parent="componentAdminMenuActionConverter" >
+		<property name="populators">
+			<list>
+				<ref bean="cloneComponentAdminMenuActionPopulator" />
+			</list>
+		</property>
+	</bean>
+	<alias alias="cloneComponentAdminMenuActionPopulator" name="defaultCloneComponentAdminMenuActionPopulator" />
+	<bean id="defaultCloneComponentAdminMenuActionPopulator" parent="liveeditaddonComponentAdminMenuActionPopulator" >
+		<property name="type" value="CLONE" />
+        <property name="adminActionEnabledStrategy" ref="isNotContainerEnabledStrategy" />
+	</bean>
+	
+	<alias name="defaultRemoveComponentAdminMenuActionConverter" alias="removeComponentAdminMenuActionConverter" />
+	<bean id="defaultRemoveComponentAdminMenuActionConverter" parent="componentAdminMenuActionConverter" >
+		<property name="populators">
+			<list>
+				<ref bean="removeComponentAdminMenuActionPopulator" />
+			</list>
+		</property>
+	</bean>
+	<alias alias="removeComponentAdminMenuActionPopulator" name="defaultRemoveComponentAdminMenuActionPopulator" />
+	<bean id="defaultRemoveComponentAdminMenuActionPopulator" parent="liveeditaddonComponentAdminMenuActionPopulator" >
+		<property name="type" value="REMOVE" />
+        <property name="adminActionEnabledStrategy" ref="isNotContainerEnabledStrategy" />
+	</bean>
+
+    <alias name="defaultRemoveContainerAdminMenuActionConverter" alias="removeContainerAdminMenuActionConverter" />
+    <bean id="defaultRemoveContainerAdminMenuActionConverter" parent="componentAdminMenuActionConverter" >
+        <property name="populators">
+            <list>
+                <ref bean="removeContainerAdminMenuActionPopulator" />
+            </list>
+        </property>
+    </bean>
+    <alias alias="removeContainerAdminMenuActionPopulator" name="defaultRemoveContainerAdminMenuActionPopulator" />
+    <bean id="defaultRemoveContainerAdminMenuActionPopulator" parent="liveeditaddonComponentAdminMenuActionPopulator" >
+        <property name="type" value="REMOVE_CONTAINER" />
+        <property name="adminActionEnabledStrategy" ref="isContainerEnabledStrategy" />
+    </bean>
+	
+	<alias name="defaultEditComponentAdminMenuActionConverter" alias="editComponentAdminMenuActionConverter" />
+	<bean id="defaultEditComponentAdminMenuActionConverter" parent="componentAdminMenuActionConverter" >
+		<property name="populators">
+			<list>
+				<ref bean="editComponentAdminMenuActionPopulator" />
+			</list>
+		</property>
+	</bean>
+	<alias alias="editComponentAdminMenuActionPopulator" name="defaultEditComponentAdminMenuActionPopulator" />
+	<bean id="defaultEditComponentAdminMenuActionPopulator" parent="liveeditaddonComponentAdminMenuActionPopulator" >
+		<property name="type" value="EDIT" />
+	</bean>
+	
+	<alias name="defaultPopupEditComponentAdminMenuActionConverter" alias="popupEditComponentAdminMenuActionConverter" />
+	<bean id="defaultPopupEditComponentAdminMenuActionConverter" parent="componentAdminMenuActionConverter" >
+		<property name="populators">
+			<list>
+				<ref bean="popupEditComponentAdminMenuActionPopulator" />
+				<ref bean="componentPkAdminMenuActionPopulator" />
+			</list>
+		</property>
+	</bean>
+	<alias alias="popupEditComponentAdminMenuActionPopulator" name="defaultPopupEditComponentAdminMenuActionPopulator" />
+	<bean id="defaultPopupEditComponentAdminMenuActionPopulator" parent="liveeditaddonComponentAdminMenuActionPopulator" >
+		<property name="type" value="EDIT_POPUP" />
+	</bean>
+	
+	<alias name="defaultSyncComponentAdminMenuActionConverter" alias="syncComponentAdminMenuActionConverter" />
+	<bean id="defaultSyncComponentAdminMenuActionConverter" parent="componentAdminMenuActionConverter" >
+		<property name="populators">
+			<list>
+				<ref bean="syncComponentAdminMenuActionPopulator" />
+			</list>
+		</property>
+	</bean>
+	<alias alias="syncComponentAdminMenuActionPopulator" name="defaultSyncComponentAdminMenuActionPopulator" />
+	<bean id="defaultSyncComponentAdminMenuActionPopulator" parent="liveeditaddonComponentAdminMenuActionPopulator" >
+		<property name="type" value="SYNC" />
+		<property name="adminActionEnabledStrategy" ref="syncActionComponentEnabledStrategy" />	
+	</bean>
+	
+	
+	<alias name="defaultShowComponentAdminMenuActionConverter" alias="showComponentAdminMenuActionConverter" />
+	<bean id="defaultShowComponentAdminMenuActionConverter" parent="componentAdminMenuActionConverter" >
+		<property name="populators">
+			<list>
+				<ref bean="showComponentAdminMenuActionPopulator" />
+			</list>
+		</property>
+	</bean>
+	<alias alias="showComponentAdminMenuActionPopulator" name="defaultShowComponentAdminMenuActionPopulator" />
+	<bean id="defaultShowComponentAdminMenuActionPopulator" parent="liveeditaddonComponentAdminMenuActionPopulator" >
+		<property name="type" value="SHOW" />
+		<property name="adminActionEnabledStrategy" ref="showActionEnabledStrategy" />
+	</bean>
+	
+	<alias name="defaultHideComponentAdminMenuActionConverter" alias="hideComponentAdminMenuActionConverter" />
+	<bean id="defaultHideComponentAdminMenuActionConverter" parent="componentAdminMenuActionConverter" >
+		<property name="populators">
+			<list>
+				<ref bean="hideComponentAdminMenuActionPopulator" />
+			</list>
+		</property>
+	</bean>
+	<alias alias="hideComponentAdminMenuActionPopulator" name="defaultHideComponentAdminMenuActionPopulator" />
+	<bean id="defaultHideComponentAdminMenuActionPopulator" parent="liveeditaddonComponentAdminMenuActionPopulator" >
+		<property name="type" value="HIDE" />
+		<property name="adminActionEnabledStrategy" ref="hideActionEnabledStrategy" />
+	</bean>
+	
+	<alias name="defaultEditComponentRestrictionsAdminMenuActionConverter" alias="editComponentRestrictionsAdminMenuActionConverter" />
+	<bean id="defaultEditComponentRestrictionsAdminMenuActionConverter" parent="componentAdminMenuActionConverter" >
+		<property name="populators">
+			<list>
+				<ref bean="editComponentRestrictionsAdminMenuActionPopulator" />
+				<ref bean="componentPkAdminMenuActionPopulator" />
+				
+			</list>
+		</property>
+	</bean>
+	<alias alias="editComponentRestrictionsAdminMenuActionPopulator" name="defaultEditComponentRestrictionsAdminMenuActionPopulator" />
+	<bean id="defaultEditComponentRestrictionsAdminMenuActionPopulator" parent="liveeditaddonComponentAdminMenuActionPopulator" >
+		<property name="type" value="RESTRICTIONS" />
+	</bean>
+	
+	<alias alias="componentPkAdminMenuActionPopulator" name="defaultComponentPkAdminMenuActionPopulator" />
+	<bean id="defaultComponentPkAdminMenuActionPopulator" class="de.hybris.liveeditaddon.admin.converters.populator.ComponentPkAdminMenuActionPopulator">
+		<property name="cmsComponentService" ref="cmsComponentService" />
+	</bean>
+	
+	<alias name="defaultInspectorComponentAdminMenuActionConverter" alias="inspectorComponentAdminMenuActionConverter" />
+	<bean id="defaultInspectorComponentAdminMenuActionConverter" parent="componentAdminMenuActionConverter" >
+		<property name="populators">
+			<list>
+				<ref bean="inspectComponentAdminMenuActionPopulator" />
+			</list>
+		</property>
+	</bean>
+	<alias alias="inspectComponentAdminMenuActionPopulator" name="defaultInspectComponentAdminMenuActionPopulator" />
+	<bean id="defaultInspectComponentAdminMenuActionPopulator" parent="liveeditaddonComponentAdminMenuActionPopulator" >
+		<property name="type" value="INSPECTOR" />
+	</bean>
+	
+	<alias name="defaultOverrideComponentAdminMenuActionConverter" alias="overrideComponentAdminMenuActionConverter" />
+	<bean id="defaultOverrideComponentAdminMenuActionConverter" parent="componentAdminMenuActionConverter" >
+		<property name="populators">
+			<list>
+				<ref bean="overrideComponentAdminMenuActionPopulator" />
+			</list>
+		</property>
+	</bean>
+	<alias alias="overrideComponentAdminMenuActionPopulator" name="defaultOverrideComponentAdminMenuActionPopulator" />
+	<bean id="defaultOverrideComponentAdminMenuActionPopulator" parent="liveeditaddonComponentAdminMenuActionPopulator" >
+		<property name="type" value="OVERRIDE" />
+	</bean>
+	
+	
+	
+	
+	<alias name="defaultManageProductImageMenuActionConverter" alias="manageProductImageMenuActionConverter" />
+	<bean id="defaultManageProductImageMenuActionConverter" parent="componentAdminMenuActionConverter" >
+		<property name="populators">
+			<list>
+				<ref bean="manageProductImageMenuActionPopulator" />
+			</list>
+		</property>
+	</bean>
+	<alias alias="manageProductImageMenuActionPopulator" name="defaultManageProductImageMenuActionPopulator" />
+	<bean id="defaultManageProductImageMenuActionPopulator" parent="liveeditaddonComponentAdminMenuActionPopulator" >
+		<property name="type" value="MANAGE_PRODUCT_IMAGE" />
+		<property name="adminActionEnabledStrategy" ref="manageProductImagesEnabledStrategy" />	
+	</bean>
+	
+	<alias name="defaultManageProductFeatureImageMenuActionConverter" alias="manageProductFeatureImageMenuActionConverter" />
+	<bean id="defaultManageProductFeatureImageMenuActionConverter" parent="componentAdminMenuActionConverter" >
+		<property name="populators">
+			<list>
+				<ref bean="manageProductFeatureImageMenuActionPopulator" />
+			</list>
+		</property>
+	</bean>
+	<alias alias="manageProductFeatureImageMenuActionPopulator" name="defaultManageProductFeatureImageMenuActionPopulator" />
+	<bean id="defaultManageProductFeatureImageMenuActionPopulator" parent="liveeditaddonComponentAdminMenuActionPopulator" >
+		<property name="type" value="MANAGE_PRODUCT_FEATURE_IMAGE" />
+		<property name="adminActionEnabledStrategy" ref="manageProductFeatureImagesEnabledStrategy" />	
+	</bean>
+
+    <alias name="defaultManageMediaMenuActionConverter" alias="manageMediaMenuActionConverter" />
+    <bean id="defaultManageMediaMenuActionConverter" parent="componentAdminMenuActionConverter" >
+        <property name="populators">
+            <list>
+                <ref bean="mangeMediaMenuActionPopulator" />
+            </list>
+        </property>
+    </bean>
+    <alias alias="mangeMediaMenuActionPopulator" name="defaultManageMediaMenuActionPopulator" />
+    <bean id="defaultManageMediaMenuActionPopulator" parent="liveeditaddonComponentAdminMenuActionPopulator" >
+        <property name="type" value="MANAGE_MEDIA" />
+        <property name="adminActionEnabledStrategy" ref="manageMediaEnabledStrategy" />
+    </bean>
+	
+	<!-- DYNAMIC SLOT MENU ITEMS -->
+	
+	<alias name="defaultAddSlotAdminMenuActionConverter" alias="addSlotAdminMenuActionConverter" />
+	<bean id="defaultAddSlotAdminMenuActionConverter" parent="slotAdminMenuActionConverter" >
+		<property name="populators">
+			<list>
+				<ref bean="addToSlotAdminMenuActionPopulator" />
+			</list>
+		</property>
+	</bean>
+	<alias alias="addToSlotAdminMenuActionPopulator" name="defaultAddToSlotAdminMenuActionPopulator" />
+	<bean id="defaultAddToSlotAdminMenuActionPopulator" parent="liveeditaddonSlotAdminMenuActionPopulator" >
+		<property name="type" value="ADD" />
+	</bean>	
+	
+	<alias name="defaultShowAllInSlotAdminMenuActionConverter" alias="showAllInSlotAdminMenuActionConverter" />
+	<bean id="defaultShowAllInSlotAdminMenuActionConverter" parent="slotAdminMenuActionConverter" >
+		<property name="populators">
+			<list>
+				<ref bean="showAllInSlotAdminMenuActionPopulator" />
+			</list>
+		</property>
+	</bean>
+	<alias alias="showAllInSlotAdminMenuActionPopulator" name="defaultShowAllInSlotAdminMenuActionPopulator" />
+	<bean id="defaultShowAllInSlotAdminMenuActionPopulator" parent="liveeditaddonSlotAdminMenuActionPopulator" >
+		<property name="type" value="SHOW_ALL" />
+	</bean>		
+	
+	<alias name="defaultSyncSlotAdminMenuActionConverter" alias="syncSlotAdminMenuActionConverter" />
+	<bean id="defaultSyncSlotAdminMenuActionConverter" parent="slotAdminMenuActionConverter" >
+		<property name="populators">
+			<list>
+				<ref bean="syncSlotAdminMenuActionPopulator" />
+			</list>
+		</property>
+	</bean>
+	<alias alias="syncSlotAdminMenuActionPopulator" name="defaultSyncSlotAdminMenuActionPopulator" />
+	<bean id="defaultSyncSlotAdminMenuActionPopulator" parent="liveeditaddonSlotAdminMenuActionPopulator" >
+		<property name="type" value="SYNC" />
+		<property name="componentSlotAdminActionEnabledStrategy" ref="syncActionSlotEnabledStrategy" />	
+	</bean>
+	<!--  DYNAMIC COMPONENT MENU TOOLING / MENU STRUCTURE -->
+	
+	
+	<alias name="defaultRootComponentAdminMenuGroupDataConverter" alias="rootComponentAdminMenuGroupDataConverter"/>
+	<bean id="defaultRootComponentAdminMenuGroupDataConverter" parent="abstractPopulatingConverter">
+		<!-- <lookup-method name="createTarget" bean="componentAdminMenuGroupData"/> -->
+		<property name="targetClass" value="de.hybris.liveeditaddon.admin.ComponentAdminMenuGroupData"/>
+		<property name="populators">
+			<list>
+				<ref bean="categoryAndProductActionMenuRequestPopulator" />
+				<ref bean="rootComponentAdminMenuGroupPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultCategoryAndProductActionMenuRequestPopulator" alias="categoryAndProductActionMenuRequestPopulator" />
+	<bean id="defaultCategoryAndProductActionMenuRequestPopulator"  class="de.hybris.liveeditaddon.admin.converters.populator.CategoryAndProductPopulator">
+		<property name="productUrlDecoder" ref="productFrontendUrlDecoder" />
+		<property name="categoryUrlDecoder" ref="categoryFrontendUrlDecoder" />
+	</bean>
+	
+	<alias name="defaultRootComponentAdminMenuGroupPopulator" alias="rootComponentAdminMenuGroupPopulator" />
+	<bean id="defaultRootComponentAdminMenuGroupPopulator" class="de.hybris.liveeditaddon.admin.converters.populator.ComponentAdminMenuGroupPopulator">
+		<property name="type" value="ROOT" />
+		<property name="enumerationService" ref="enumerationService" />	
+		<property name="menuItemConverters">
+			<list>
+				<ref bean="editingComponentAdminMenuGroupPopulator" />
+				<ref bean="cloneComponentAdminMenuActionConverter" />
+				<ref bean="removeComponentAdminMenuActionConverter" />
+                <ref bean="removeContainerAdminMenuActionConverter" />
+				<ref bean="publicationComponentAdminMenuGroupPopulator" />
+				<ref bean="infoComponentAdminMenuGroupPopulator" />
+				<ref bean="xsellComponentAdminMenuGroupPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultEditingComponentAdminMenuGroupPopulator" alias="editingComponentAdminMenuGroupPopulator" />
+	<bean id="defaultEditingComponentAdminMenuGroupPopulator" class="de.hybris.liveeditaddon.admin.converters.populator.ComponentAdminMenuGroupPopulator">
+		<property name="type" value="EDITING" />
+		<property name="enumerationService" ref="enumerationService" />	
+		<property name="menuItemConverters">
+			<list>
+				<ref bean="editComponentAdminMenuActionConverter" />
+				<ref bean="popupEditComponentAdminMenuActionConverter" />
+				<ref bean="editComponentRestrictionsAdminMenuActionConverter" />				
+				<ref bean="manageProductImageMenuActionConverter" />
+                <ref bean="manageMediaMenuActionConverter" />
+                <ref bean="manageProductFeatureImageMenuActionConverter" />
+                <ref bean="editMenuAdminMenuActionConverter"/>
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultPublicationComponentAdminMenuGroupPopulator" alias="publicationComponentAdminMenuGroupPopulator" />
+	<bean id="defaultPublicationComponentAdminMenuGroupPopulator" class="de.hybris.liveeditaddon.admin.converters.populator.ComponentAdminMenuGroupPopulator">
+		<property name="type" value="PUBLICATION" />
+		<property name="enumerationService" ref="enumerationService" />	
+		<property name="menuItemConverters">
+			<list>
+				<ref bean="syncComponentAdminMenuActionConverter" />
+				<ref bean="showComponentAdminMenuActionConverter" />
+				<ref bean="hideComponentAdminMenuActionConverter" />
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultInfoComponentAdminMenuGroupPopulator" alias="infoComponentAdminMenuGroupPopulator" />
+	<bean id="defaultInfoComponentAdminMenuGroupPopulator" class="de.hybris.liveeditaddon.admin.converters.populator.ComponentAdminMenuGroupPopulator">
+		<property name="type" value="INFO" />
+		<property name="enumerationService" ref="enumerationService" />	
+		<property name="menuItemConverters">
+			<list>
+				<ref bean="inspectorComponentAdminMenuActionConverter" />
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultXSellComponentAdminMenuGroupPopulator" alias="xsellComponentAdminMenuGroupPopulator" />
+	<bean id="defaultXSellComponentAdminMenuGroupPopulator" class="de.hybris.liveeditaddon.admin.converters.populator.ComponentAdminMenuGroupPopulator">
+		<property name="type" value="XSELL" />
+		<property name="enumerationService" ref="enumerationService" />	
+		<property name="menuItemConverters">
+			<list>
+				<ref bean="productReferenceAdminMenuActionConverter" />
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultProductReferenceAdminMenuActionConverter" alias="productReferenceAdminMenuActionConverter" />
+	<bean id="defaultProductReferenceAdminMenuActionConverter" parent="componentAdminMenuActionConverter" >
+		<property name="populators">
+			<list>
+				<ref bean="productReferenceAdminMenuActionPopulator" />
+			</list>
+		</property>
+	</bean>
+	<alias alias="productReferenceAdminMenuActionPopulator" name="defaultProductReferenceAdminMenuActionPopulator" />
+	<bean id="defaultProductReferenceAdminMenuActionPopulator" parent="liveeditaddonComponentAdminMenuActionPopulator" >
+		<property name="type" value="EDIT_PRODUCT_REFERENCES" />
+		<property name="adminActionEnabledStrategy" ref="productReferenceActionComponentEnabledStrategy" />	
+	</bean>
+	<util:list id="productReferencesCmsComponentList" >
+		<value>ProductReferencesComponent</value> 
+	</util:list>	
+	<alias alias="productReferenceActionComponentEnabledStrategy" name="defaultProductReferenceActionComponentEnabledStrategy" />
+	<bean id="defaultProductReferenceActionComponentEnabledStrategy" class="de.hybris.liveeditaddon.admin.strategies.impl.RestrictedTypeCodeActionEnabledStrategy">
+		<property name="cmsComponentService" ref="cmsComponentService" />
+		<property name="typeService" ref="typeService" />
+		<property name="typeCodes" ref="productReferencesCmsComponentList" />
+	</bean>
+
+	<bean id="componentAdminMenuActionData" class="de.hybris.liveeditaddon.admin.ComponentAdminMenuActionData" scope="prototype" />
+	<bean id="componentAdminMenuGroupData" class="de.hybris.liveeditaddon.admin.ComponentAdminMenuGroupData" scope="prototype"/>
+
+	<alias name="defaultRootSlotAdminMenuGroupDataConverter" alias="rootSlotAdminMenuGroupDataConverter"/>
+	<bean id="defaultRootSlotAdminMenuGroupDataConverter" parent="abstractPopulatingConverter">
+		<!-- <lookup-method name="createTarget" bean="componentAdminMenuGroupData"/> -->
+		<property name="targetClass" value="de.hybris.liveeditaddon.admin.ComponentAdminMenuGroupData"/>
+		<property name="populators">
+			<list>
+				<ref bean="categoryAndProductActionMenuRequestPopulator" />
+				<ref bean="rootSlotAdminMenuGroupPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultRootSlotAdminMenuGroupPopulator" alias="rootSlotAdminMenuGroupPopulator" />
+	<bean id="defaultRootSlotAdminMenuGroupPopulator" class="de.hybris.liveeditaddon.admin.converters.populator.SlotAdminMenuGroupPopulator">
+		<property name="type" value="ROOT" />
+		<property name="enumerationService" ref="enumerationService" />
+		<property name="menuItemConverters">
+			<list>
+				<ref bean="addSlotAdminMenuActionConverter" />
+				<ref bean="showAllInSlotAdminMenuActionConverter" />
+				<ref bean="syncSlotAdminMenuActionConverter" />
+                <ref bean="editMenuSlotAdminMenuActionConverter"/>
+			</list>
+		</property>
+	</bean>
+
+
+	<alias name="defaultSyncActionComponentEnabledStrategy" alias="syncActionComponentEnabledStrategy" />
+	<bean id="defaultSyncActionComponentEnabledStrategy" class="de.hybris.liveeditaddon.admin.strategies.impl.SyncActionComponentEnabledStrategy">
+        <property name="cmsComponentService" ref="cmsComponentService" />
+        <property name="cmsPageService" ref="cmsPageService" />
+        <property name="userService" ref="userService" />
+        <property name="sessionService" ref="sessionService" />
+        <property name="synchronizationService" ref="synchronizationService" />
+        <property name="typeService" ref="cockpitTypeService" />
+    </bean>
+	<alias name="defaultSyncActionSlotEnabledStrategy" alias="syncActionSlotEnabledStrategy" />
+	<bean id="defaultSyncActionSlotEnabledStrategy" class="de.hybris.liveeditaddon.admin.strategies.impl.SyncSlotActionEnabledStrategy">
+		<property name="cmsContentSlotService" ref="cmsContentSlotService" />
+        <property name="cmsPageService" ref="cmsPageService" />
+		<property name="userService" ref="userService" />
+		<property name="sessionService" ref="sessionService" />
+        <property name="synchronizationService" ref="synchronizationService" />
+        <property name="typeService" ref="cockpitTypeService" />
+	</bean>
+	<alias alias="showActionEnabledStrategy" name="defaultShowActionEnabledStrategy" />
+	<bean id="defaultShowActionEnabledStrategy" class="de.hybris.liveeditaddon.admin.strategies.impl.VisibleActionEnabledStrategy">
+		<property name="cmsComponentService" ref="cmsComponentService" />
+		<property name="enabledIfVisible" value="false" />
+	</bean>
+	<alias alias="hideActionEnabledStrategy" name="defaultHideActionEnabledStrategy" />
+	<bean id="defaultHideActionEnabledStrategy" class="de.hybris.liveeditaddon.admin.strategies.impl.VisibleActionEnabledStrategy">
+		<property name="cmsComponentService" ref="cmsComponentService" />
+		<property name="enabledIfVisible" value="true" />
+	</bean>
+
+	<util:list id="manageProductImagesCmsComponentList" >
+		<value>SimpleProductImageComponent</value> <!-- Warning Weak reference to productpagepack AddOn -->
+	</util:list>
+	<alias alias="manageProductImagesEnabledStrategy" name="defaultManageProductImagesEnabledStrategy" />
+	<bean id="defaultManageProductImagesEnabledStrategy" class="de.hybris.liveeditaddon.admin.strategies.impl.RestrictedTypeCodeActionEnabledStrategy">
+		<property name="cmsComponentService" ref="cmsComponentService" />
+		<property name="typeService" ref="typeService" />
+		<property name="typeCodes" ref="manageProductImagesCmsComponentList" />
+	</bean>
+
+	<util:list id="manageProductFeatureImagesCmsComponentList" >
+		<value>ProductFeatureComponent</value> <!-- Warning Weak reference to productpagepack AddOn --> <!-- Warning Weak reference to productpagepack AddOn -->
+	</util:list>
+	<alias alias="manageProductFeatureImagesEnabledStrategy" name="defaultManageProductFeatureImagesEnabledStrategy" />
+	<bean id="defaultManageProductFeatureImagesEnabledStrategy" class="de.hybris.liveeditaddon.admin.strategies.impl.RestrictedTypeCodeActionEnabledStrategy">
+		<property name="cmsComponentService" ref="cmsComponentService" />
+		<property name="typeService" ref="typeService" />
+		<property name="typeCodes" ref="manageProductFeatureImagesCmsComponentList" />
+	</bean>
+
+    <alias alias="isContainerEnabledStrategy" name="defaultIsContainerEnabledStrategy" />
+    <bean id="defaultIsContainerEnabledStrategy" class="de.hybris.liveeditaddon.admin.strategies.impl.IsContainerEnabledStrategy">
+        <property name="cmsComponentService" ref="cmsComponentService" />
+    </bean>
+
+    <alias alias="isNotContainerEnabledStrategy" name="defaultIsNotContainerEnabledStrategy" />
+    <bean id="defaultIsNotContainerEnabledStrategy" class="de.hybris.liveeditaddon.admin.strategies.impl.IsNotContainerEnabledStrategy">
+        <property name="cmsComponentService" ref="cmsComponentService" />
+    </bean>
+
+    <util:list id="manageMediaCmsComponentList" >
+        <value>SimpleResponsiveBannerComponent</value>
+    </util:list>
+    <alias alias="manageMediaEnabledStrategy" name="defaultManageMediaEnabledStrategy" />
+    <bean id="defaultManageMediaEnabledStrategy" class="de.hybris.liveeditaddon.admin.strategies.impl.RestrictedTypeCodeActionEnabledStrategy">
+        <property name="cmsComponentService" ref="cmsComponentService" />
+        <property name="typeService" ref="typeService" />
+        <property name="typeCodes" ref="manageMediaCmsComponentList" />
+    </bean>
+
+	<alias name="defaultEditMenuSlotAdminMenuActionConverter" alias="editMenuSlotAdminMenuActionConverter"/>
+	<bean id="defaultEditMenuSlotAdminMenuActionConverter" parent="slotAdminMenuActionConverter">
+		<property name="populators">
+			<list>
+				<ref bean="editMenuSlotAdminMenuActionPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+
+
+	<bean id="positionComponentSlotAdminActionEnabledStrategy" class="de.hybris.liveeditaddon.admin.strategies.impl.PositionComponentSlotAdminActionEnabledStrategy">
+		<property name="typeCode" value="NavigationBarComponent"/>
+		<property name="cmsPageService" ref="cmsPageService"/>
+		<property name="typeService" ref="typeService"/>
+	</bean>
+
+
+
+	<alias alias="editMenuSlotAdminMenuActionPopulator" name="defaultEditMenuSlotAdminMenuActionPopulator"/>
+	<bean id="defaultEditMenuSlotAdminMenuActionPopulator" parent="simpleSlotAdminMenuActionPopulator">
+		<property name="type" value="EDIT_NAVIGATION"/>
+		<property name="addOn" value="liveeditaddon"/>
+		<property name="componentSlotAdminActionEnabledStrategy" ref="positionComponentSlotAdminActionEnabledStrategy"/>
+	</bean>
+
+
+
+	<alias name="defaultEditMenuAdminMenuActionConverter" alias="editMenuAdminMenuActionConverter"/>
+	<bean id="defaultEditMenuAdminMenuActionConverter" parent="componentAdminMenuActionConverter">
+		<property name="populators">
+			<list>
+				<ref bean="editMenuAdminMenuActionPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+
+
+	<alias alias="editMenuAdminMenuActionPopulator" name="defaultEditMenuAdminMenuActionPopulator"/>
+	<bean id="defaultEditMenuAdminMenuActionPopulator" parent="simpleComponentAdminMenuActionPopulator">
+		<property name="type" value="EDIT_NAVIGATION"/>
+		<property name="addOn" value="liveeditaddon"/>
+		<property name="adminActionEnabledStrategy" ref="editNavigationEnabledStrategy"/>
+	</bean>
+
+
+    <alias alias="editNavigationEnabledStrategy" name="defaultEditNavigationEnabledStrategy"/>
+    <bean id="defaultEditNavigationEnabledStrategy" class="de.hybris.liveeditaddon.admin.strategies.impl.RestrictedTypeCodeActionEnabledStrategy">
+        <property name="cmsComponentService" ref="cmsComponentService"/>
+        <property name="typeService" ref="typeService"/>
+        <property name="typeCodes" ref="editNavigationCmsComponentList"/>
+    </bean>
+
+    <util:list id="editNavigationCmsComponentList">
+        <value>NavigationBarComponent</value>
+        <value>NavigationBarCollectionComponent</value>
+    </util:list>
+
+</beans>
+

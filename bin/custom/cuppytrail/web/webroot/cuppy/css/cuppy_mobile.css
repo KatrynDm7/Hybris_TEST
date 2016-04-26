@@ -1,0 +1,96 @@
+BODY {
+	margin: 0;
+	padding: 0;
+	width: 460px;
+}
+
+html {
+	width: 460px;
+}
+
+BODY > DIV.zk {
+	width: 460px !important;
+}
+
+.matchesRowDate { margin-left: 3px; }
+
+
+.mobile .statusbar {
+	display: none;
+}
+
+.mobile .mainDiv {
+	width: 460px;
+	height: auto;
+}
+
+.mobile .mainContentDiv > div {
+	height: auto !important;
+	position: relative !important;
+}
+
+.mobile .rankingUserDetails {
+	display: none;
+}
+
+.mobile .contentContainer,
+.mobile .mainContentDiv,
+.mobile .rankingComponent,
+.mobile .contentContainer,
+.mobile .rankings,
+.mobile .matchesWindow .matchRowCmp .matchRow,
+.mobile .profileGrid
+{
+	position: relative;
+	overflow: auto;
+	top: 0;
+	height: auto;
+	left: 0;
+	width: auto !important;
+}
+
+.mobile div.profileGrid {
+	position: relative;
+	width: auto;
+}
+
+.mobile .matchesWindow .matchRowCmp .matchRow {
+	width: auto !important;
+	height: 27px;
+	overflow: hidden;
+}
+
+.mobile .matchRow .teamLabel {
+	width: 110px;
+	overflow: hidden;
+}
+
+.mobile .matchRowCmp > .z-label {
+	background:none repeat scroll 0 0 #EEEEEE;
+	bottom:0;
+	font-size:10px;
+	font-weight:bold;
+	opacity:0.8;
+	right:130px;
+}
+
+.mobile .matchdayArrow > img {
+	width: 30px;
+	height: 26px;
+	margin-left: 20px; 
+}
+
+.mobile .toolbar .z-toolbar-button {
+	font-size: 14px;
+	line-height: 24px;
+}
+
+.mobile .toolbar .toolbar_btn {
+	width: auto;
+	margin-right: 10px;
+}
+
+.hywin {
+	font-size: 16px;
+	line-height: 18px;
+}

@@ -1,0 +1,75 @@
+$contentCatalog=electronicsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$contentCatalogName=Electronics Content Catalog
+$productCatalog=electronicsProductCatalog
+$productCatalogName=Electronics Product Catalog
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$picture=media(code, $contentCV);
+$image=image(code, $contentCV);
+$media=media(code, $contentCV);
+$page=page(uid, $contentCV);
+$contentPage=contentPage(uid, $contentCV);
+$product=product(code, $productCV)
+$category=category(code, $productCV)
+$addonExtensionName=customerticketingaddon
+
+#cms-content.impex
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];previewImage(code, $contentCV)
+;;support-tickets;Support Tickets Page;AccountPageTemplate;support-tickets
+;;add-support-ticket;Add Support Ticket Page;AccountPageTemplate;add-support-ticket
+;;update-support-ticket;Update Support Ticket Page;AccountPageTemplate;update-support-ticket
+
+UPDATE AccountNavigationComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;AccountLeftNavigationComponent;AccountLeftNavigationComponent
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-support-tickets;Side Content Slot for My Account Support Tickets History;true;AccountLeftNavigationComponent;;;
+;;BodyContent-support-tickets;Body Content Slot for My Account Support Tickets History;true;AccountSupportTicketsHistoryComponent;;;
+
+;;SideContent-add-support-ticket;Side Content Slot for AddSupport Ticket;true;AccountLeftNavigationComponent;;;
+;;BodyContent-add-support-ticket;Body Content Slot for AddSupport Ticket;true;AccountAddSupportTicketComponent;;;
+
+;;SideContent-update-support-ticket;Side Content Slot for Update Support Ticket;true;AccountLeftNavigationComponent;;;
+;;BodyContent-update-support-ticket;Body Content Slot for Update Support Ticket;true;AccountUpdateSupportTicketComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='support-tickets'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-support-tickets;SideContent;;SideContent-support-tickets;;;
+;;BodyContent-support-tickets;BodyContent;;BodyContent-support-tickets;;;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='add-support-ticket'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-add-support-ticket;SideContent;;SideContent-add-support-ticket;;;
+;;BodyContent-add-support-ticket;BodyContent;;BodyContent-add-support-ticket;;;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='update-support-ticket'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-update-support-ticket;SideContent;;SideContent-update-support-ticket;;;
+;;BodyContent-update-support-ticket;BodyContent;;BodyContent-update-support-ticket;;;
+
+# Navigation Bar Component
+INSERT_UPDATE AccountNavigationComponent;$contentCV[unique=true];uid[unique=true];name;navigationNode(&nodeRef);styleClass;&componentRef
+;;AccountSupportTicketHistoryNavigationComponent;Account Support Tickets History Navigation Component;AccountSupportTicketHistoryNavNode;;AccountSupportTicketHistoryNavigationComponent
+
+# CMS Navigation Nodes
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef
+;AccountSupportTicketHistoryNavNode;;Order History;AccountLeftNavNode;AccountViewSupportTicketHistoryLink;AccountSupportTicketHistoryNavNode
+
+# CMS Link Components
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];$category;$product;
+;;AccountViewSupportTicketHistoryLink;AccountViewSupportTicketHistoryLink;/my-account/support-tickets;AccountViewSupportTicketHistoryLink;AccountViewSupportTicketHistoryLink;;;;
+;;AccountSupportTicketHistoryLink	   ;AccountSupportTicketHistoryLink     ;/my-account/support-tickets;AccountSupportTicketHistoryLink;AccountSupportTicketHistoryLink;;;;
+
+INSERT_UPDATE AccountNavigationComponent;$contentCV[unique=true];uid[unique=true];name;navigationNode(&nodeRef);styleClass;&componentRef
+;;AccountSupportTicketHistoryNavigationComponent;Account Support Tickets History Navigation Component;AccountSupportTicketHistoryNavNode;;AccountSupportTicketHistoryNavigationComponent
+
+# Account Navigation Bar Component
+INSERT_UPDATE AccountNavigationCollectionComponent;$contentCV[unique=true];uid[unique=true];components(uid, $contentCV)[mode=append];&componentRef
+;;AccountHomepageComponent;AccountSupportTicketHistoryNavigationComponent;AccountHomepageComponent
+
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];parent(uid, $contentCV);links(&linkRef)[mode=append];&nodeRef
+;AccountLeftNavNode;;SiteRootNode;AccountSupportTicketHistoryLink;AccountLeftNavNode
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;&componentRef
+;;AccountSupportTicketsHistoryComponent;Account Support Tickets Component;/WEB-INF/views/addons/$addonExtensionName/desktop/pages/account/accountSupportTicketsPage.jsp;AccountSupportTicketsHistoryComponent
+;;AccountAddSupportTicketComponent;Account AddSupport Ticket Component;/WEB-INF/views/addons/$addonExtensionName/desktop/pages/account/accountAddSupportTicketPage.jsp;AccountAddSupportTicketComponent
+;;AccountUpdateSupportTicketComponent;Account Update Support Ticket Component;/WEB-INF/views/addons/$addonExtensionName/desktop/pages/account/accountUpdateSupportTicketPage.jsp;AccountUpdateSupportTicketComponent

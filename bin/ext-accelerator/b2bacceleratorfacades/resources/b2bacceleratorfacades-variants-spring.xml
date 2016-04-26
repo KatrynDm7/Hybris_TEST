@@ -1,0 +1,61 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation=
+               "http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+	<bean id="b2bProductConfiguredPopulator" parent="productVariantConfiguredPopulator">
+        <property name="populators">
+            <map key-type="de.hybris.platform.commercefacades.product.ProductOption" merge="true">
+                <entry key="VOLUME_PRICES" value-ref="productVolumePricesPopulator"/>
+    		</map>
+    	</property>
+    </bean>
+
+    <alias name="defaultBasicProductSearchOptions" alias="productBasicSearchOptions"/>
+    <util:list id="defaultBasicProductSearchOptions" value-type="de.hybris.platform.commercefacades.product.ProductOption">
+        <value>SUMMARY</value>
+        <value>DESCRIPTION</value>
+        <value>URL</value>
+        <value>PRICE</value>
+        <value>IMAGES</value>
+        <value>STOCK</value>
+        <value>CATEGORIES</value>
+        <value>BASIC</value>
+        <value>VARIANT_MATRIX_BASE</value>
+        <value>VARIANT_MATRIX_URL</value>
+    </util:list>
+
+    <alias name="defaultVariantProductSearchOptions" alias="productVariantSearchOptions"/>
+    <util:list id="defaultVariantProductSearchOptions" value-type="de.hybris.platform.commercefacades.product.ProductOption">
+        <value>CATEGORIES</value>
+        <value>VARIANT_MATRIX_BASE</value>
+        <value>VARIANT_MATRIX_ALL_OPTIONS</value>
+    </util:list>
+
+    <bean name="abstractOrderGenericDao" class="de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao" >
+        <constructor-arg value="AbstractOrder" />
+    </bean>
+
+    <alias name="defaultB2BSolrProductSearchFacade" alias="b2bSolrProductSearchFacade"/>
+    <bean id="defaultB2BSolrProductSearchFacade"
+          class="de.hybris.platform.b2bacceleratorfacades.search.impl.DefaultB2BSolrProductSearchFacade"
+          parent="defaultSolrProductSearchFacade">
+        <property name="productSearchPageVariantsPopulator" ref="productSearchPageVariantsPopulator" />
+    </bean>
+
+    <alias name="defaultB2BFlexibleSearchProductSearchFacade" alias="b2bProductFlexibleSearchFacade"/>
+    <bean id="defaultB2BFlexibleSearchProductSearchFacade"
+          class="de.hybris.platform.b2bacceleratorfacades.search.impl.DefaultB2BFlexibleSearchProductSearchFacade">
+        <property name="b2bFlexibleSearchProductSearchService" ref="b2bFlexibleSearchProductSearchService"/>
+        <property name="flexibleSearchConverter" ref="b2bFlexibleSearchConverter"/>
+        <property name="productSearchPageVariantsPopulator" ref="productSearchPageVariantsPopulator" />
+    </bean>
+    
+    <!-- Add alias for backwards compatility -->
+    <alias name="defaultProductVariantFacade" alias="b2bProductFacade"/>
+    
+</beans>
+

@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context" 
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd 
+           http://www.springframework.org/schema/util 
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <context:annotation-config/>
+    
+    <bean name="deliveryAddressCheckoutStepController"
+          class="de.hybris.platform.storefront.controllers.pages.checkout.steps.DeliveryAddressCheckoutStepController"/>
+    <bean name="deliveryMethodCheckoutStepController"
+          class="de.hybris.platform.storefront.controllers.pages.checkout.steps.DeliveryMethodCheckoutStepController"/>
+    <bean name="formCheckoutStepController"
+          class="de.hybris.platform.storefront.controllers.pages.checkout.steps.FormCheckoutStepController"/>
+    <bean name="hopPaymentResponseController"
+          class="de.hybris.platform.storefront.controllers.pages.checkout.steps.HopPaymentResponseController"/>
+    <bean name="multiStepCheckoutController"
+          class="de.hybris.platform.storefront.controllers.pages.checkout.steps.MultiStepCheckoutController"/>
+    <bean name="paymentMethodCheckoutStepController"
+          class="de.hybris.platform.storefront.controllers.pages.checkout.steps.PaymentMethodCheckoutStepController"/>
+    <bean name="pickupLocationCheckoutStepController"
+          class="de.hybris.platform.storefront.controllers.pages.checkout.steps.PickupLocationCheckoutStepController"/>
+    <bean name="quoteReviewCheckoutStepController" 
+          class="de.hybris.platform.storefront.controllers.pages.checkout.steps.QuoteReviewCheckoutStepController"/>
+    <bean name="sopPaymentResponseController"
+          class="de.hybris.platform.storefront.controllers.pages.checkout.steps.SopPaymentResponseController"/>
+    <bean name="summaryCheckoutStepController"
+          class="de.hybris.platform.storefront.controllers.pages.checkout.steps.SummaryCheckoutStepController"/>
+
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="/checkout/multi/delivery-address">deliveryAddressCheckoutStepController</prop>
+                <prop key="/checkout/multi/delivery-method">deliveryMethodCheckoutStepController</prop>
+                <prop key="/checkout/multi/hop">hopPaymentResponseController</prop>
+                <prop key="/checkout/multi/form">formCheckoutStepController</prop>
+                <prop key="/checkout/multi/payment-method">paymentMethodCheckoutStepController</prop>
+                <prop key="/checkout/multi/pickup-location">pickupLocationCheckoutStepController</prop>
+                <prop key="/checkout/multi/quote">quoteReviewCheckoutStepController</prop> 
+                <prop key="/checkout/multi/sop">sopPaymentResponseController</prop>
+                <prop key="/checkout/multi/summary">summaryCheckoutStepController</prop>
+                <prop key="/checkout/multi/**">multiStepCheckoutController</prop>
+            </props>
+        </property>
+    </bean>
+
+	<!-- Checkout Steps -->
+
+	<alias name="abstractCheckoutStep" alias="checkoutStep"/>
+	<bean id="abstractCheckoutStep" class="de.hybris.platform.financialacceleratorstorefront.checkout.step.InsuranceCheckoutStep" abstract="true">
+		<property name="checkoutStepValidatorList" ref="genericValidationStrategyList"/>
+		<property name="stepVisitedAnalysisStrategyList" ref="genericIsVisitedAnalysisStrategyList"/>
+		<property name="stepEnabledAnalysisStrategyList" ref="genericIsEnabledAnalysisStrategyList"/>
+		<property name="insuranceCartFacade" ref="defaultInsuranceCartFacade"/>
+	</bean>
+
+    <alias name="defaultPreCheckoutStepChooseCover" alias="preCheckoutStepChooseCover" />
+    <bean id="defaultPreCheckoutStepChooseCover" parent="checkoutStep">
+        <property name="checkoutGroup" ref="insuranceCheckoutGroup"/>
+        <property name="checkoutStepValidator" ref="defaultPreCheckoutStepValidator"/>
+        <property name="transitions">
+            <map>
+                <entry key="previous" value-ref="REDIRECT_TO_CHOOSE_COVER"/>
+                <entry key="current" value-ref="REDIRECT_TO_CHOOSE_COVER"/>
+                <entry key="next" value-ref="REDIRECT_TO_WHATS_INCLUDED_CATEGORY_PAGE"/>
+            </map>
+        </property>
+        <property name="progressBarId" value="change-plan"/>
+		<property name="checkoutStepValidatorList" ref="chooseCoverValidationStrategyList"/>
+		<property name="stepVisitedAnalysisStrategyList" ref="chooseCoverIsVisitedAnalysisStrategyList"/>
+    </bean>
+    
+    <alias name="defaultPreCheckoutStepWhatsIncluded" alias="preCheckoutStepWhatsIncluded" />
+    <bean id="defaultPreCheckoutStepWhatsIncluded" parent="checkoutStep">
+        <property name="checkoutGroup" ref="insuranceCheckoutGroup"/>
+        <property name="checkoutStepValidator" ref="defaultPreCheckoutStepValidator"/>
+        <property name="transitions">
+            <map>
+                <entry key="previous" value-ref="REDIRECT_TO_CHOOSE_COVER"/>
+                <entry key="current" value-ref="REDIRECT_TO_WHATS_INCLUDED_CATEGORY_PAGE"/>
+                <entry key="next" value-ref="REDIRECT_TO_CART"/>
+            </map>
+        </property>
+        <property name="progressBarId" value="whats-included"/>
+		<property name="checkoutStepValidatorList" ref="chooseCoverValidationStrategyList"/>
+		<property name="stepVisitedAnalysisStrategyList" ref="whatsIncludedIsVisitedAnalysisStrategyList"/>		
+    </bean>
+
+    <alias name="defaultPreCheckoutStepChangeOptional" alias="preCheckoutStepChangeOptional" />
+    <bean id="defaultPreCheckoutStepChangeOptional" parent="checkoutStep">
+        <property name="checkoutGroup" ref="insuranceCheckoutGroup"/>
+        <property name="checkoutStepValidator" ref="defaultPreCheckoutStepValidator"/>
+        <property name="transitions">
+            <map>
+                <entry key="previous" value-ref="REDIRECT_TO_CHOOSE_COVER"/>
+                <entry key="current" value-ref="REDIRECT_TO_CART"/>
+                <entry key="next" value-ref="REDIRECT_MULTI_STEP_CHECKOUT"/>
+            </map>
+        </property>
+        <property name="progressBarId" value="change-optional"/>
+		<property name="checkoutStepValidatorList" ref="addOptionValidationStrategyList"/>
+    </bean>
+
+	<alias name="defaultMultiStepCheckout" alias="multiStepCheckout" />
+	<bean id="defaultMultiStepCheckout" parent="checkoutStep">
+		<property name="checkoutGroup" ref="insuranceCheckoutGroup"/>
+		<property name="checkoutStepValidator" ref="defaultMultiStepCheckoutValidator"/>
+		<property name="transitions">
+			<map>
+				<entry key="previous" value-ref="REDIRECT_TO_CART"/>
+				<entry key="current" value-ref="REDIRECT_MULTI_STEP_CHECKOUT"/>
+				<entry key="next" value-ref="REDIRECT_TO_FORM"/>
+			</map>
+		</property>
+		<property name="progressBarId" value="multi"/>
+	</bean>
+
+    <alias name="defaultFormCheckoutStep" alias="FORMS_CHECKOUT_STEP_PLACEHOLDER" />
+    <alias name="defaultFormCheckoutStep" alias="formCheckoutStep" />
+    <bean id="defaultFormCheckoutStep" parent="checkoutStep">
+        <property name="checkoutGroup" ref="insuranceCheckoutGroup"/>
+        <property name="checkoutStepValidator" ref="defaultFormCheckoutStepValidator"/>
+        <property name="transitions">
+            <map merge="true">
+                <entry key="previous" value-ref="REDIRECT_TO_CART"/>
+                <entry key="current" value-ref="REDIRECT_TO_FORM"/>
+                <entry key="next" value-ref="REDIRECT_TO_QUOTE_REVIEW"/>
+            </map>
+        </property>
+        <property name="progressBarId" value="quoteForm"/>
+		<property name="checkoutStepValidatorList" ref="personalDetailsValidationStrategyList"/>
+    </bean>
+
+    <alias name="defaultQuoteReviewCheckoutStep" alias="quoteReviewCheckoutStep" />
+    <bean id="defaultQuoteReviewCheckoutStep" parent="checkoutStep">
+        <property name="checkoutGroup" ref="insuranceCheckoutGroup"/>
+        <property name="checkoutStepValidator" ref="quoteReviewCheckoutStepValidator"/>
+        <property name="transitions">
+            <map merge="true">
+                <entry key="previous" value-ref="REDIRECT_TO_FORM"/>
+                <entry key="current" value-ref="REDIRECT_TO_QUOTE_REVIEW"/>
+                <entry key="next" value-ref="REDIRECT_TO_PAYMENT_METHOD"/>
+            </map>
+        </property>
+        <property name="progressBarId" value="quoteReview"/>
+		<property name="checkoutStepValidatorList" ref="quoteReviewValidationStrategyList"/>
+	</bean>
+
+	<alias name="defaultPaymentMethodCheckoutStep" alias="paymentMethodCheckoutStep" />
+	<bean id="defaultPaymentMethodCheckoutStep" parent="checkoutStep">
+		<property name="checkoutGroup" ref="insuranceCheckoutGroup"/>
+		<property name="checkoutStepValidator" ref="paymentCheckoutStepValidator"/>
+		<property name="transitions">
+			<map merge="true">
+				<entry key="previous" value-ref="REDIRECT_TO_QUOTE_REVIEW"/>
+				<entry key="current" value-ref="REDIRECT_TO_PAYMENT_METHOD"/>
+				<entry key="next" value-ref="REDIRECT_TO_SUMMARY"/>
+			</map>
+		</property>
+		<property name="progressBarId" value="paymentMethod"/>
+	</bean>
+
+	<alias name="defaultSummaryCheckoutStep" alias="summaryCheckoutStep" />
+	<bean id="defaultSummaryCheckoutStep"  parent="checkoutStep">
+		<property name="checkoutGroup" ref="insuranceCheckoutGroup"/>
+		<property name="checkoutStepValidator" ref="defaultSummaryCheckoutValidator"/>
+		<property name="transitions">
+			<map merge="true">
+				<entry key="previous" value-ref="REDIRECT_TO_PAYMENT_METHOD"/>
+				<entry key="current" value-ref="REDIRECT_TO_SUMMARY"/>
+				<entry key="next" value="redirect:/checkout/orderConfirmation/%s"/>
+			</map>
+		</property>
+		<property name="progressBarId" value="confirmOrder"/>
+	</bean>
+
+	<!---Default checkout group-->
+
+	<alias name="defaultMultiStepCheckoutGroup" alias="insuranceCheckoutGroup" />
+	<bean id="defaultMultiStepCheckoutGroup"  class="de.hybris.platform.storefront.checkout.steps.InsuranceCheckoutGroup">
+		<property name="groupId"  value="insuranceCheckoutGroup"/>
+		<property name="checkoutStepMap">
+			<map merge="true">
+                <entry key="change-plan" value-ref="preCheckoutStepChooseCover"/>
+                <entry key="whats-included" value-ref="preCheckoutStepWhatsIncluded"/>
+                <entry key="change-optional" value-ref="preCheckoutStepChangeOptional"/>
+				<entry key="multi" value-ref="multiStepCheckout"/>
+                <entry key="form" value-ref="formCheckoutStep"/>
+                <entry key="quote-review" value-ref="quoteReviewCheckoutStep"/>
+				<entry key="payment-method" value-ref="paymentMethodCheckoutStep"/>
+				<entry key="summary" value-ref="summaryCheckoutStep"/>
+			</map>
+		</property>
+		<property name="validationResultsMap">
+			<map merge="true">
+				<entry key="FAILED" value-ref="REDIRECT_TO_CART"/>
+                <entry key="REDIRECT_TO_FORM" value-ref="REDIRECT_TO_FORM"/>
+                <entry key="REDIRECT_TO_DUMMY_STEP" value-ref="REDIRECT_TO_QUOTE_REVIEW"/>
+				<entry key="REDIRECT_TO_CART" value-ref="REDIRECT_TO_CART"/>
+				<entry key="REDIRECT_TO_PAYMENT_METHOD" value-ref="REDIRECT_TO_PAYMENT_METHOD"/>
+                <entry key="REDIRECT_TO_QUOTE_REVIEW" value-ref="REDIRECT_TO_QUOTE_REVIEW" />
+			</map>
+		</property>
+		<property name="checkoutProgressBar">
+			<map merge="true">
+                <!--For Insurance we need to use the insuranceCheckoutStep and therefore setting up the insuranceCheckoutProgressBar instead of the default checkoutProgressBar.-->
+			</map>
+		</property>
+		<property name="insuranceCheckoutProgressBar">
+			<map merge="true">
+				<entry key="0" value-ref="preCheckoutStepChooseCover"/>
+				<entry key="1" value-ref="preCheckoutStepWhatsIncluded"/>
+				<entry key="2" value-ref="preCheckoutStepChangeOptional"/>
+				<entry key="3" value-ref="formCheckoutStep"/>
+				<entry key="4" value-ref="quoteReviewCheckoutStep"/>
+				<entry key="5" value-ref="paymentMethodCheckoutStep"/>
+				<entry key="6" value-ref="defaultSummaryCheckoutStep"/>
+			</map>
+		</property>
+	</bean>
+
+
+	<!--Validation-->
+
+	<alias name="abstractCheckoutStepValidator" alias="abstractCheckoutStepValidator" />
+	<bean id="abstractCheckoutStepValidator" class="de.hybris.platform.acceleratorstorefrontcommons.checkout.steps.validation.AbstractCheckoutStepValidator" abstract="true">
+		<property name="checkoutFlowFacade" ref="checkoutFlowFacade"/>
+		<property name="checkoutFacade" ref="checkoutFacade"/>
+	</bean>
+
+	
+
+	<bean id="defaultMultiStepCheckoutValidator" class="de.hybris.platform.storefront.checkout.steps.validation.impl.DefaultMultiStepCheckoutStepValidator" parent="abstractCheckoutStepValidator" />
+    <bean id="defaultFormCheckoutStepValidator" class="de.hybris.platform.storefront.checkout.steps.validation.impl.DefaultFormCheckoutStepValidator" parent="abstractCheckoutStepValidator" />
+	
+	<alias name="defaultPaymentMethodCheckoutValidator" alias="paymentCheckoutStepValidator"/>
+	<bean id="defaultPaymentMethodCheckoutValidator" class="de.hybris.platform.storefront.checkout.steps.validation.impl.DefaultPaymentCheckoutStepValidator" parent="abstractCheckoutStepValidator">
+		<property name="insuranceCheckoutFacade" ref="insuranceCheckoutFacade"/>
+	</bean>
+	<bean id="defaultSummaryCheckoutValidator" class="de.hybris.platform.storefront.checkout.steps.validation.impl.DefaultSummaryCheckoutStepValidator" parent="abstractCheckoutStepValidator">
+        <property name="insuranceCheckoutFacade" ref="insuranceCheckoutFacade"/>
+	</bean>
+    
+    <alias name="defaultQuoteReviewCheckoutStepValidator" alias="quoteReviewCheckoutStepValidator"/>
+    <bean id="defaultQuoteReviewCheckoutStepValidator" class="de.hybris.platform.storefront.checkout.steps.validation.impl.DefaultQuoteReviewCheckoutStepValidator" parent="abstractCheckoutStepValidator" />
+	<!--  TODO: implement above -->
+
+    <bean id="defaultPreCheckoutStepValidator" class="de.hybris.platform.storefront.checkout.steps.validation.impl.DefaultPreCheckoutStepValidator" parent="abstractCheckoutStepValidator" />
+
+
+    <!--Validation-->
+
+	<!--Checkout GroupMap-->
+	<util:map id="checkoutFlowGroupMap" >
+		<entry key="insuranceCheckoutGroup" value-ref="insuranceCheckoutGroup"/>
+	</util:map>
+	<!--Checkout GroupMap-->
+
+	<!-- Redirects -->
+    <bean id="REDIRECT_TO_CHOOSE_COVER" class="java.lang.String">
+        <constructor-arg value="redirect:/cart/chooseCover"/>
+    </bean>
+    <bean id="REDIRECT_TO_WHATS_INCLUDED_CATEGORY_PAGE" class="java.lang.String">
+        <constructor-arg value="/cart/chooseCover?viewStatus=view"/>
+    </bean>
+
+	<bean id="REDIRECT_TO_CART" class="java.lang.String">
+		<constructor-arg value="redirect:/cart"/>
+	</bean>
+
+	<bean id="REDIRECT_MULTI_STEP_CHECKOUT" class="java.lang.String">
+		<constructor-arg value="redirect:/checkout/multi"/>
+	</bean>
+
+    <bean id="REDIRECT_TO_FORM" class="java.lang.String">
+        <constructor-arg value="redirect:/checkout/multi/form"/>
+    </bean>
+
+	<bean id="REDIRECT_TO_PAYMENT_METHOD" class="java.lang.String">
+		<constructor-arg value="redirect:/checkout/multi/payment-method/add"/>
+	</bean>
+
+	<bean id="REDIRECT_TO_SUMMARY" class="java.lang.String">
+		<constructor-arg value="redirect:/checkout/multi/summary/view"/>
+	</bean>
+	
+	<bean id="REDIRECT_TO_QUOTE_REVIEW" class="java.lang.String">
+		<constructor-arg value="redirect:/checkout/multi/quote/review"/>
+	</bean>
+	
+	<bean id="defaultInsurancecheckoutJavaScriptMessageResourceAccessor" parent="abstractJavaScriptMessageResourceAccessor">
+		<property name="addOnName" value="financialcheckout" />
+	</bean>
+	
+	<bean id="defaultInsurancecheckoutBeforeViewJsPropsHandlerAdaptee" parent="abstractBeforeViewJsPropsHandlerAdaptee" class="de.hybris.platform.addonsupport.interceptors.ExportJsPropertiesBeforeViewHandler">
+		<property name="messageSource" ref="defaultInsurancecheckoutJavaScriptMessageResourceAccessor" />
+	</bean>
+	
+	<bean id="getInsurancecheckoutBeforeViewHandler" parent="beforeViewHandlerAdapter">
+		<property name="adaptee">
+			<ref bean="defaultInsurancecheckoutBeforeViewJsPropsHandlerAdaptee" />
+		</property>	
+	</bean>
+
+	<bean id="InsurancecheckoutBeforeViewHandlerListMergeDirective" depends-on="beforeViewHandlersList" parent="listMergeDirective" >
+		<property name="add" ref="getInsurancecheckoutBeforeViewHandler" />
+	</bean>
+
+
+    <alias name="defaultDynamicFormCheckoutStrategy" alias="dynamicFormCheckoutStrategy"/>
+    <bean id="defaultDynamicFormCheckoutStrategy" class="de.hybris.platform.storefront.checkout.steps.strategy.impl.DefaultDynamicFormCheckoutStrategy">
+        <property name="baseFormUrl" ref="REDIRECT_TO_FORM"/>
+    </bean>
+
+    <alias name="defaultInsuranceCheckoutFormsStrategy" alias="checkoutFormsStrategy"/>
+    <bean id="defaultInsuranceCheckoutFormsStrategy" class="de.hybris.platform.storefront.checkout.steps.strategy.impl.DefaultInsuranceCheckoutFormsStrategy">
+    	<property name="insuranceCheckoutHelper" ref="insuranceCheckoutHelper"/>
+    </bean>
+    
+    <alias name="insuranceCheckoutFlowFacade" alias="checkoutFlowFacade"/>
+	<bean id="insuranceCheckoutFlowFacade" class="de.hybris.platform.acceleratorfacades.flow.impl.DefaultCheckoutFlowFacade" parent="defaultAcceleratorCheckoutFacade" >
+		<property name="checkoutFlowStrategy" ref="checkoutFlowStrategy"/>
+		<property name="checkoutPciStrategy" ref="checkoutPciStrategy"/>
+	</bean>
+</beans>

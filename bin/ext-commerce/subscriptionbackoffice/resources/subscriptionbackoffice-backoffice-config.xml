@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<config xmlns="http://www.hybris.com/cockpit/config">
+
+	<!--Explorer Tree -->
+	<context component="explorer-tree" parent="auto" merge-by="module">
+		<explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
+			<explorer-tree:navigation-node id="hmc_treenode_subscription">
+				<explorer-tree:type-node code="PromotionBillingTimeRestriction" id="hmc_typenode_promotionbillingtimerestriction" />
+				<explorer-tree:type-node code="BillingTime" id="hmc_typenode_billingtime" />
+			</explorer-tree:navigation-node>
+		</explorer-tree:explorer-tree>
+	</context>
+	
+	<!-- Billing Time -->
+	<context type="BillingTime" component="base" merge-by="type" parent="GenericItem">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>nameInCart</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context type="PromotionBillingTimeRestriction" component="base" merge-by="type" parent="GenericItem">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>descriptionPattern</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context type="BillingTime" component="listview" merge-by="type" parent="GenericItem">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="code" />
+			<list-view:column qualifier="nameInCart" />
+			<list-view:column qualifier="nameInOrder" />
+			<list-view:column qualifier="order" />
+		</list-view:list-view>
+	</context>
+	<context type="BillingTime" component="simple-search" merge-by="type" parent="GenericItem">
+		<simple-search:simple-search xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+			<simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="code" />
+			<simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="nameInCart" />
+			<simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="nameInOrder" />
+		</simple-search:simple-search>
+	</context>
+	<context type="BillingTime" component="editor-area" merge-by="type" parent="GenericItem">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:essentials xmlns="http://www.hybris.com/cockpitng/component/editorArea">
+				<editorArea:essentialSection name="hmc.essential">
+					<attribute qualifier="code" />
+					<attribute qualifier="nameInCart" />
+					<attribute qualifier="nameInOrder" />
+					<attribute qualifier="order" />
+				</editorArea:essentialSection>
+			</editorArea:essentials>
+		</editorArea:editorArea>
+	</context>
+	
+	<context type="PromotionBillingTimeRestriction" component="listview" merge-by="type" parent="AbstractPromotionRestriction">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="promotion" />
+		</list-view:list-view>
+	</context>
+	<context type="PromotionBillingTimeRestriction" component="simple-search" merge-by="type" parent="AbstractPromotionRestriction">
+		<simple-search:simple-search xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+			<simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="promotion" />
+			<simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="descriptionPattern" />
+		</simple-search:simple-search>
+	</context>
+	<context type="PromotionBillingTimeRestriction" component="editor-area" merge-by="type" parent="AbstractPromotionRestriction">
+		<editorArea xmlns="http://www.hybris.com/cockpitng/component/editorArea">
+			<essentials>
+				<essentialSection name="hmc.essential">
+					<attribute qualifier="promotion" />
+					<attribute qualifier="descriptionPattern" />
+				</essentialSection>
+			</essentials>
+			<tab name="subscriptionbackoffice.tab.restriction_properties">
+				<section name="subscriptionbackoffice.section.restriction.billing_times" mode="append" position="2">
+					<attribute qualifier="billingTimes"/>
+					<attribute qualifier="positive">
+						<editor-parameter>
+							<name>trueLabel</name>
+							<value>positiveTrue</value>
+						</editor-parameter>
+						<editor-parameter>
+							<name>falseLabel</name>
+							<value>positiveFalse</value>
+						</editor-parameter>
+					</attribute>
+				</section>
+			</tab>
+		</editorArea>
+	</context>
+		
+</config>

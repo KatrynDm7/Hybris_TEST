@@ -1,0 +1,30 @@
+.entitlementsListTable {
+    width: 100%;
+    margin: 10px 0;
+}
+.entitlementsListTable thead th {
+    border-bottom: 2px solid #ffbc0e;
+    color: #000;
+    font-weight: bold;
+    height: 30px;
+    line-height: 30px;
+    padding-right: 0;
+    text-transform: none;
+}
+.accountContentPane .entitlementsItem {
+    border-bottom: 1px dotted #a5a5a5;
+    padding: 20px 0;
+    position: relative;
+}
+.entitlementsListTable tbody tr:nth-child(2n) {
+    background-color: #f8f8f7;
+}
+.entitlementsListTable tbody td {
+    color: #484848;
+    font-size: 0.9286em;
+    padding: 15px 15px 15px 0;
+    vertical-align: top;
+}
+.entitlementsListTable tbody td:first-child {
+    padding-left: 5px;
+}

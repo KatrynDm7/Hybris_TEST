@@ -1,0 +1,879 @@
+#
+# Import the YForms Catalog
+#
+$languages=en
+
+#################################################################
+# Form Template For Sections in Form Builder for yforms Forms - yforms:library
+#################################################################
+
+INSERT_UPDATE YFormDefinition	;applicationId[unique=true]	;formId[unique=true]	;version[unique=true]	;documentId											;title			;description										;content
+										;yforms								;library					;1								;ffba893a657df5595c228bc60c0a195baa5e8bff	;Untitled Form	;"Reusable Components for yforms Forms"	;"
+<xh:html xmlns:xh=""http://www.w3.org/1999/xhtml"" xmlns:xf=""http://www.w3.org/2002/xforms""
+         xmlns:xs=""http://www.w3.org/2001/XMLSchema""
+         xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance""
+         xmlns:ev=""http://www.w3.org/2001/xml-events""
+         xmlns:xi=""http://www.w3.org/2001/XInclude""
+         xmlns:xxi=""http://orbeon.org/oxf/xml/xinclude""
+         xmlns:xxf=""http://orbeon.org/oxf/xml/xforms""
+         xmlns:exf=""http://www.exforms.org/exf/1-0""
+         xmlns:fr=""http://orbeon.org/oxf/xml/form-runner""
+         xmlns:saxon=""http://saxon.sf.net/""
+         xmlns:sql=""http://orbeon.org/oxf/xml/sql""
+         xmlns:soap=""http://schemas.xmlsoap.org/soap/envelope/""
+         xmlns:fb=""http://orbeon.org/oxf/xml/form-builder"">
+    <xh:head>
+        <xh:title>Untitled Form</xh:title>
+        <xf:model id=""fr-form-model"" xxf:expose-xpath-types=""true"">
+
+            <!-- Main instance -->
+            <xf:instance id=""fr-form-instance"" xxf:exclude-result-prefixes=""#all"">
+                <form>
+                    <section-1>
+                        <control-1/>
+                    </section-1>
+                </form>
+            </xf:instance>
+
+            <!-- Bindings -->
+            <xf:bind id=""fr-form-binds"" ref=""instance('fr-form-instance')"">
+                <xf:bind id=""section-1-bind"" name=""section-1"" ref=""section-1"">
+                    <xf:bind id=""control-1-bind"" name=""control-1"" ref=""control-1""/>
+                </xf:bind>
+            </xf:bind>
+
+            <!-- Metadata -->
+            <xf:instance xxf:readonly=""true"" id=""fr-form-metadata"" xxf:exclude-result-prefixes=""#all"">
+                <metadata>
+                    <application-name>yforms</application-name>
+                    <form-name>library</form-name>
+                    <title xml:lang=""en"">Untitled Form</title>
+                    <description xml:lang=""en"">Reusable Components for yforms Forms</description>
+                </metadata>
+            </xf:instance>
+
+            <!-- Attachments -->
+            <xf:instance id=""fr-form-attachments"" xxf:exclude-result-prefixes=""#all"">
+                <attachments>
+                    <css mediatype=""text/css"" filename="""" size=""""/>
+                    <pdf mediatype=""application/pdf"" filename="""" size=""""/>
+                </attachments>
+            </xf:instance>
+
+            <!-- All form resources -->
+            <!-- Don't make readonly by default in case a service modifies the resources -->
+            <xf:instance id=""fr-form-resources"" xxf:readonly=""false"" xxf:exclude-result-prefixes=""#all"">
+                <resources>
+                    <resource xml:lang=""en"">
+                        <section-1>
+                            <label>Untitled Section</label>
+                        </section-1>
+                        <control-1>
+                            <label/>
+                            <hint/>
+                            <alert/>
+                        </control-1>
+                    </resource>
+                </resources>
+            </xf:instance>
+
+            <!-- Utility instances for services -->
+            <xf:instance id=""fr-service-request-instance"" xxf:exclude-result-prefixes=""#all"">
+                <request/>
+            </xf:instance>
+
+            <xf:instance id=""fr-service-response-instance"" xxf:exclude-result-prefixes=""#all"">
+                <response/>
+            </xf:instance>
+
+        </xf:model>
+    </xh:head>
+    <xh:body>
+        <fr:view>
+            <fr:body xmlns:xbl=""http://www.w3.org/ns/xbl""
+                     xmlns:oxf=""http://www.orbeon.com/oxf/processors""
+                     xmlns:p=""http://www.orbeon.com/oxf/pipeline"">
+                <fr:section id=""section-1-control"" bind=""section-1-bind"">
+                    <xf:label ref=""$form-resources/section-1/label""/>
+                    <fr:grid>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id=""control-1-control"" bind=""control-1-bind"">
+                                    <xf:label ref=""$form-resources/control-1/label""/>
+                                    <xf:hint ref=""$form-resources/control-1/hint""/>
+                                    <xf:alert ref=""$fr-resources/detail/labels/alert""/>
+                                </xf:input>
+                            </xh:td>
+                            <xh:td/>
+                        </xh:tr>
+                    </fr:grid>
+                </fr:section>
+            </fr:body>
+        </fr:view>
+    </xh:body>
+</xh:html>
+"
+
+#################################################################
+# Form Template For Sections in Form Builder for yforms Forms - yforms:library
+#################################################################
+
+INSERT_UPDATE YFormData	;id[unique=true] 									;type(code[unique=true])	;formDefinition(applicationId, formId, version)	;system	;applicationId	;formId	;content
+						;ffba893a657df5595c228bc60c0a195baa5e8bff 			;DATA						;orbeon:builder:1 										;true		;yforms			;library	;"
+<xh:html xmlns:xh=""http://www.w3.org/1999/xhtml"" xmlns:xf=""http://www.w3.org/2002/xforms""
+         xmlns:xs=""http://www.w3.org/2001/XMLSchema""
+         xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance""
+         xmlns:ev=""http://www.w3.org/2001/xml-events""
+         xmlns:xi=""http://www.w3.org/2001/XInclude""
+         xmlns:xxi=""http://orbeon.org/oxf/xml/xinclude""
+         xmlns:xxf=""http://orbeon.org/oxf/xml/xforms""
+         xmlns:exf=""http://www.exforms.org/exf/1-0""
+         xmlns:fr=""http://orbeon.org/oxf/xml/form-runner""
+         xmlns:saxon=""http://saxon.sf.net/""
+         xmlns:sql=""http://orbeon.org/oxf/xml/sql""
+         xmlns:soap=""http://schemas.xmlsoap.org/soap/envelope/""
+         xmlns:fb=""http://orbeon.org/oxf/xml/form-builder"">
+    <xh:head>
+        <xh:title>Untitled Form</xh:title>
+        <xf:model id=""fr-form-model"" xxf:expose-xpath-types=""true"">
+
+            <!-- Main instance -->
+            <xf:instance id=""fr-form-instance"" xxf:exclude-result-prefixes=""#all"">
+                <form>
+                    <section-1>
+                        <control-1/>
+                    </section-1>
+                </form>
+            </xf:instance>
+
+            <!-- Bindings -->
+            <xf:bind id=""fr-form-binds"" ref=""instance('fr-form-instance')"">
+                <xf:bind id=""section-1-bind"" name=""section-1"" ref=""section-1"">
+                    <xf:bind id=""control-1-bind"" name=""control-1"" ref=""control-1""/>
+                </xf:bind>
+            </xf:bind>
+
+            <!-- Metadata -->
+            <xf:instance xxf:readonly=""true"" id=""fr-form-metadata"" xxf:exclude-result-prefixes=""#all"">
+                <metadata>
+                    <application-name>yforms</application-name>
+                    <form-name>library</form-name>
+                    <title xml:lang=""en"">Untitled Form</title>
+                    <description xml:lang=""en"">Reusable Components for yforms Forms</description>
+                </metadata>
+            </xf:instance>
+
+            <!-- Attachments -->
+            <xf:instance id=""fr-form-attachments"" xxf:exclude-result-prefixes=""#all"">
+                <attachments>
+                    <css mediatype=""text/css"" filename="""" size=""""/>
+                    <pdf mediatype=""application/pdf"" filename="""" size=""""/>
+                </attachments>
+            </xf:instance>
+
+            <!-- All form resources -->
+            <!-- Don't make readonly by default in case a service modifies the resources -->
+            <xf:instance id=""fr-form-resources"" xxf:readonly=""false"" xxf:exclude-result-prefixes=""#all"">
+                <resources>
+                    <resource xml:lang=""en"">
+                        <section-1>
+                            <label>Untitled Section</label>
+                        </section-1>
+                        <control-1>
+                            <label/>
+                            <hint/>
+                            <alert/>
+                        </control-1>
+                    </resource>
+                </resources>
+            </xf:instance>
+
+            <!-- Utility instances for services -->
+            <xf:instance id=""fr-service-request-instance"" xxf:exclude-result-prefixes=""#all"">
+                <request/>
+            </xf:instance>
+
+            <xf:instance id=""fr-service-response-instance"" xxf:exclude-result-prefixes=""#all"">
+                <response/>
+            </xf:instance>
+
+        </xf:model>
+    </xh:head>
+    <xh:body>
+        <fr:view>
+            <fr:body xmlns:xbl=""http://www.w3.org/ns/xbl""
+                     xmlns:oxf=""http://www.orbeon.com/oxf/processors""
+                     xmlns:p=""http://www.orbeon.com/oxf/pipeline"">
+                <fr:section id=""section-1-control"" bind=""section-1-bind"">
+                    <xf:label ref=""$form-resources/section-1/label""/>
+                    <fr:grid>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id=""control-1-control"" bind=""control-1-bind"">
+                                    <xf:label ref=""$form-resources/control-1/label""/>
+                                    <xf:hint ref=""$form-resources/control-1/hint""/>
+                                    <xf:alert ref=""$fr-resources/detail/labels/alert""/>
+                                </xf:input>
+                            </xh:td>
+                            <xh:td/>
+                        </xh:tr>
+                    </fr:grid>
+                </fr:section>
+            </fr:body>
+        </fr:view>
+    </xh:body>
+</xh:html>
+"
+
+###################################################################################
+# Form Template For yforms Forms - yforms:template
+###################################################################################
+INSERT_UPDATE YFormDefinition	;applicationId[unique=true]	;formId[unique=true]	;version[unique=true]	;documentId											;title			;description								;content
+										;yforms								;template				;1								;eeba893a657df5595c228bc60c0a195baa5e8bee	;Untitled Form	;"Form template for yforms Forms"	;"
+<xh:html xmlns:xh=""http://www.w3.org/1999/xhtml"" xmlns:xf=""http://www.w3.org/2002/xforms""
+         xmlns:xs=""http://www.w3.org/2001/XMLSchema""
+         xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance""
+         xmlns:ev=""http://www.w3.org/2001/xml-events""
+         xmlns:xi=""http://www.w3.org/2001/XInclude""
+         xmlns:xxi=""http://orbeon.org/oxf/xml/xinclude""
+         xmlns:xxf=""http://orbeon.org/oxf/xml/xforms""
+         xmlns:exf=""http://www.exforms.org/exf/1-0""
+         xmlns:fr=""http://orbeon.org/oxf/xml/form-runner""
+         xmlns:saxon=""http://saxon.sf.net/""
+         xmlns:sql=""http://orbeon.org/oxf/xml/sql""
+         xmlns:soap=""http://schemas.xmlsoap.org/soap/envelope/""
+         xmlns:fb=""http://orbeon.org/oxf/xml/form-builder"">
+    <xh:head>
+        <xh:title>Untitled Form</xh:title>
+        <xf:model id=""fr-form-model"" xxf:expose-xpath-types=""true"">
+
+            <!-- Main instance -->
+            <xf:instance id=""fr-form-instance"" xxf:exclude-result-prefixes=""#all"">
+                <form>
+                    <section-1>
+                        <control-1/>
+                    </section-1>
+                </form>
+            </xf:instance>
+
+            <!-- Bindings -->
+            <xf:bind id=""fr-form-binds"" ref=""instance('fr-form-instance')"">
+                <xf:bind id=""section-1-bind"" name=""section-1"" ref=""section-1"">
+                    <xf:bind id=""control-1-bind"" name=""control-1"" ref=""control-1""/>
+                </xf:bind>
+            </xf:bind>
+
+            <!-- Metadata -->
+            <xf:instance xxf:readonly=""true"" id=""fr-form-metadata"" xxf:exclude-result-prefixes=""#all"">
+                <metadata>
+                    <application-name>yforms</application-name>
+                    <form-name>template</form-name>
+                    <title xml:lang=""en"">Untitled Form</title>
+                    <description xml:lang=""en""/>
+                </metadata>
+            </xf:instance>
+
+            <!-- Attachments -->
+            <xf:instance id=""fr-form-attachments"" xxf:exclude-result-prefixes=""#all"">
+                <attachments>
+                    <css mediatype=""text/css"" filename="""" size=""""/>
+                    <pdf mediatype=""application/pdf"" filename="""" size=""""/>
+                </attachments>
+            </xf:instance>
+
+            <!-- All form resources -->
+            <!-- Don't make readonly by default in case a service modifies the resources -->
+            <xf:instance id=""fr-form-resources"" xxf:readonly=""false"" xxf:exclude-result-prefixes=""#all"">
+                <resources>
+                    <resource xml:lang=""en"">
+                        <section-1>
+                            <label>Untitled Section</label>
+                        </section-1>
+                        <control-1>
+                            <label/>
+                            <hint/>
+                            <alert/>
+                        </control-1>
+                    </resource>
+                </resources>
+            </xf:instance>
+
+            <!-- Utility instances for services -->
+            <xf:instance id=""fr-service-request-instance"" xxf:exclude-result-prefixes=""#all"">
+                <request/>
+            </xf:instance>
+
+            <xf:instance id=""fr-service-response-instance"" xxf:exclude-result-prefixes=""#all"">
+                <response/>
+            </xf:instance>
+
+        </xf:model>
+    </xh:head>
+    <xh:body>
+        <fr:view>
+            <fr:body xmlns:xbl=""http://www.w3.org/ns/xbl""
+                     xmlns:oxf=""http://www.orbeon.com/oxf/processors""
+                     xmlns:p=""http://www.orbeon.com/oxf/pipeline"">
+                <fr:section id=""section-1-control"" bind=""section-1-bind"">
+                    <xf:label ref=""$form-resources/section-1/label""/>
+                    <fr:grid>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id=""control-1-control"" bind=""control-1-bind"">
+                                    <xf:label ref=""$form-resources/control-1/label""/>
+                                    <xf:hint ref=""$form-resources/control-1/hint""/>
+                                    <xf:alert ref=""$fr-resources/detail/labels/alert""/>
+                                </xf:input>
+                            </xh:td>
+                            <xh:td/>
+                        </xh:tr>
+                    </fr:grid>
+                </fr:section>
+            </fr:body>
+        </fr:view>
+    </xh:body>
+</xh:html>
+"
+
+#################################################################
+# Form Template For yforms Forms - yforms:template
+#################################################################
+
+INSERT_UPDATE YFormData	;id[unique=true] 									;type(code[unique=true])		;formDefinition(applicationId, formId, version)	;system	;applicationId	;formId		;content
+						;eeba893a657df5595c228bc60c0a195baa5e8bee ;DATA		;orbeon:builder:1				;true											;yforms	;template	;"
+<xh:html xmlns:xh=""http://www.w3.org/1999/xhtml"" xmlns:xf=""http://www.w3.org/2002/xforms""
+         xmlns:xs=""http://www.w3.org/2001/XMLSchema""
+         xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance""
+         xmlns:ev=""http://www.w3.org/2001/xml-events""
+         xmlns:xi=""http://www.w3.org/2001/XInclude""
+         xmlns:xxi=""http://orbeon.org/oxf/xml/xinclude""
+         xmlns:xxf=""http://orbeon.org/oxf/xml/xforms""
+         xmlns:exf=""http://www.exforms.org/exf/1-0""
+         xmlns:fr=""http://orbeon.org/oxf/xml/form-runner""
+         xmlns:saxon=""http://saxon.sf.net/""
+         xmlns:sql=""http://orbeon.org/oxf/xml/sql""
+         xmlns:soap=""http://schemas.xmlsoap.org/soap/envelope/""
+         xmlns:fb=""http://orbeon.org/oxf/xml/form-builder"">
+    <xh:head>
+        <xh:title>Untitled Form</xh:title>
+        <xf:model id=""fr-form-model"" xxf:expose-xpath-types=""true"">
+
+            <!-- Main instance -->
+            <xf:instance id=""fr-form-instance"" xxf:exclude-result-prefixes=""#all"">
+                <form>
+                    <section-1>
+                        <control-1/>
+                    </section-1>
+                </form>
+            </xf:instance>
+
+            <!-- Bindings -->
+            <xf:bind id=""fr-form-binds"" ref=""instance('fr-form-instance')"">
+                <xf:bind id=""section-1-bind"" name=""section-1"" ref=""section-1"">
+                    <xf:bind id=""control-1-bind"" name=""control-1"" ref=""control-1""/>
+                </xf:bind>
+            </xf:bind>
+
+            <!-- Metadata -->
+            <xf:instance xxf:readonly=""true"" id=""fr-form-metadata"" xxf:exclude-result-prefixes=""#all"">
+                <metadata>
+                    <application-name>yforms</application-name>
+                    <form-name>template</form-name>
+                    <title xml:lang=""en"">Untitled Form</title>
+                    <description xml:lang=""en""/>
+                </metadata>
+            </xf:instance>
+
+            <!-- Attachments -->
+            <xf:instance id=""fr-form-attachments"" xxf:exclude-result-prefixes=""#all"">
+                <attachments>
+                    <css mediatype=""text/css"" filename="""" size=""""/>
+                    <pdf mediatype=""application/pdf"" filename="""" size=""""/>
+                </attachments>
+            </xf:instance>
+
+            <!-- All form resources -->
+            <!-- Don't make readonly by default in case a service modifies the resources -->
+            <xf:instance id=""fr-form-resources"" xxf:readonly=""false"" xxf:exclude-result-prefixes=""#all"">
+                <resources>
+                    <resource xml:lang=""en"">
+                        <section-1>
+                            <label>Untitled Section</label>
+                        </section-1>
+                        <control-1>
+                            <label/>
+                            <hint/>
+                            <alert/>
+                        </control-1>
+                    </resource>
+                </resources>
+            </xf:instance>
+
+            <!-- Utility instances for services -->
+            <xf:instance id=""fr-service-request-instance"" xxf:exclude-result-prefixes=""#all"">
+                <request/>
+            </xf:instance>
+
+            <xf:instance id=""fr-service-response-instance"" xxf:exclude-result-prefixes=""#all"">
+                <response/>
+            </xf:instance>
+
+        </xf:model>
+    </xh:head>
+    <xh:body>
+        <fr:view>
+            <fr:body xmlns:xbl=""http://www.w3.org/ns/xbl""
+                     xmlns:oxf=""http://www.orbeon.com/oxf/processors""
+                     xmlns:p=""http://www.orbeon.com/oxf/pipeline"">
+                <fr:section id=""section-1-control"" bind=""section-1-bind"">
+                    <xf:label ref=""$form-resources/section-1/label""/>
+                    <fr:grid>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id=""control-1-control"" bind=""control-1-bind"">
+                                    <xf:label ref=""$form-resources/control-1/label""/>
+                                    <xf:hint ref=""$form-resources/control-1/hint""/>
+                                    <xf:alert ref=""$fr-resources/detail/labels/alert""/>
+                                </xf:input>
+                            </xh:td>
+                            <xh:td/>
+                        </xh:tr>
+                    </fr:grid>
+                </fr:section>
+            </fr:body>
+        </fr:view>
+    </xh:body>
+</xh:html>
+"
+
+#################################################################
+# Form Sample - Contact Form
+#################################################################
+INSERT_UPDATE YFormDefinition	;applicationId[unique=true]	;formId[unique=true]	;version[unique=true]	;documentId											;title				;description							;content
+										;yforms								;contact					;1								;66ba893a657df5595c228bc60c0a195baa5e8be6	;"Contact Form"	;"Sample Form for Contact Data"	;"
+<xh:html xmlns:xh=""http://www.w3.org/1999/xhtml"" xmlns:xf=""http://www.w3.org/2002/xforms""
+         xmlns:xs=""http://www.w3.org/2001/XMLSchema""
+         xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance""
+         xmlns:ev=""http://www.w3.org/2001/xml-events""
+         xmlns:xi=""http://www.w3.org/2001/XInclude""
+         xmlns:xxi=""http://orbeon.org/oxf/xml/xinclude""
+         xmlns:xxf=""http://orbeon.org/oxf/xml/xforms""
+         xmlns:exf=""http://www.exforms.org/exf/1-0""
+         xmlns:fr=""http://orbeon.org/oxf/xml/form-runner""
+         xmlns:saxon=""http://saxon.sf.net/""
+         xmlns:sql=""http://orbeon.org/oxf/xml/sql""
+         xmlns:soap=""http://schemas.xmlsoap.org/soap/envelope/""
+         xmlns:fb=""http://orbeon.org/oxf/xml/form-builder"">
+    <xh:head>
+        <xh:title>Contact Form</xh:title>
+        <xf:model id=""fr-form-model"" xxf:expose-xpath-types=""true"">
+
+            <!-- Main instance -->
+            <xf:instance id=""fr-form-instance"">
+                <form>
+                    <contact>
+                        <name/>
+                        <surname/>
+                        <email/>
+                        <phone/>
+                        <callmeback/>
+                        <message/>
+                    </contact>
+                </form>
+            </xf:instance>
+
+            <!-- Bindings -->
+            <xf:bind id=""fr-form-binds"" ref=""instance('fr-form-instance')"">
+                <xf:bind id=""contact-bind"" name=""contact"" ref=""contact"">
+                    <xf:bind id=""name-bind"" name=""name"" ref=""name"" required=""true()""
+                             constraint=""string-length(.) &gt;= 2 and string-length(.) &lt;= 50""/>
+                    <xf:bind id=""surname-bind"" ref=""surname"" name=""surname"" required=""true()""
+                             constraint=""string-length(.) &gt;=  2 and string-length(.) &lt;= 50""/>
+                    <xf:bind id=""phone-bind"" ref=""phone"" name=""phone""
+                             constraint=""(string(/form/contact/callmeback) = 'true' and (string-length(.) &gt;= 5 and string-length(.) &lt;= 15)) or string(/form/contact/callmeback) = '' or string(/form/contact/callmeback) = 'false'""/>
+                    <xf:bind id=""email-bind"" ref=""email"" name=""email"" required=""true()"">
+                        <xf:constraint id=""constraint-8-constraint""
+                                       value=""matches(upper-case(.),'^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$')""
+                                       level=""error""/>
+                        <xf:constraint id=""constraint-9-constraint"" value=""string-length(.) &lt;= 100"" level=""error""/>
+                    </xf:bind>
+                    <xf:bind id=""callmeback-bind"" ref=""callmeback"" name=""callmeback"" type=""xf:boolean""/>
+                    <xf:bind id=""message-bind"" ref=""message"" name=""message""
+                             constraint=""string-length(.) &gt;= 20 and string-length(.) &lt;= 500""
+                             required=""true()""/>
+                </xf:bind>
+            </xf:bind>
+
+            <!-- Metadata -->
+            <xf:instance xxf:readonly=""true"" id=""fr-form-metadata"">
+                <metadata>
+                    <application-name>yforms</application-name>
+                    <form-name>contact</form-name>
+                    <title xml:lang=""en"">Contact Form</title>
+                    <description xml:lang=""en"">Sample Form for Contact Data</description>
+                </metadata>
+            </xf:instance>
+
+            <!-- Attachments -->
+            <xf:instance id=""fr-form-attachments"">
+                <attachments>
+                    <css mediatype=""text/css"" filename="""" size=""""/>
+                    <pdf mediatype=""application/pdf"" filename="""" size=""""/>
+                </attachments>
+            </xf:instance>
+
+            <!-- All form resources -->
+            <!-- Don't make readonly by default in case a service modifies the resources -->
+            <xf:instance id=""fr-form-resources"" xxf:readonly=""false"">
+                <resources>
+                    <resource xml:lang=""en"">
+                        <contact>
+                            <label>Contact</label>
+                        </contact>
+                        <name>
+                            <label>Name</label>
+                            <hint/>
+                            <alert>Field needs at least 2 characters and can have at most 50.</alert>
+                        </name>
+                        <surname>
+                            <label>Surname</label>
+                            <hint/>
+                            <alert>Field needs at least 2 characters and can have at most 50.</alert>
+                        </surname>
+                        <phone>
+                            <label>Phone Number</label>
+                            <hint/>
+                            <alert>Phone number needs at least 5 characters and can have at most 15.</alert>
+                        </phone>
+                        <callmeback>
+                            <label>Call me back!</label>
+                            <hint/>
+                        </callmeback>
+                        <message>
+                            <label>Message</label>
+                            <hint/>
+                            <alert>Field needs at least 20 characters and can have at most 500.</alert>
+                        </message>
+                        <email>
+                            <label>Email</label>
+                            <hint/>
+                            <alert>Email address does not seem to be a valid one</alert>
+                            <alert>Field can have at most 100 characters.</alert>
+                            
+                        </email>
+                    </resource>
+                </resources>
+            </xf:instance>
+
+            <!-- Utility instances for services -->
+            <xf:instance id=""fr-service-request-instance"" xxf:exclude-result-prefixes=""#all"">
+                <request/>
+            </xf:instance>
+
+            <xf:instance id=""fr-service-response-instance"" xxf:exclude-result-prefixes=""#all"">
+                <response/>
+            </xf:instance>
+
+        </xf:model>
+    </xh:head>
+    <xh:body>
+        <fr:view>
+            <fr:body xmlns:xbl=""http://www.w3.org/ns/xbl""
+                     xmlns:oxf=""http://www.orbeon.com/oxf/processors""
+                     xmlns:p=""http://www.orbeon.com/oxf/pipeline"">
+                <fr:section id=""contact-control"" bind=""contact-bind"" class="""">
+                    <xf:label ref=""$form-resources/contact/label""/>
+                    <fr:grid>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id=""name-control"" bind=""name-bind"" xxf:maxlength=""50"">
+                                    <xf:label ref=""$form-resources/name/label""/>
+                                    <xf:hint ref=""$form-resources/name/hint""/>
+                                    <xf:alert ref=""$form-resources/name/alert"" validation=""name-bind""/>
+                                    <xf:alert ref=""$fr-resources/detail/labels/alert""/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id=""surname-control"" bind=""surname-bind"" xxf:maxlength=""50"">
+                                    <xf:label ref=""$form-resources/surname/label""/>
+                                    <xf:hint ref=""$form-resources/surname/hint""/>
+                                    <xf:alert ref=""$form-resources/surname/alert"" validation=""surname-bind""/>
+                                    <xf:alert ref=""$fr-resources/detail/labels/alert""/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id=""email-control"" bind=""email-bind"" xxf:maxlength=""100"">
+                                    <xf:label ref=""$form-resources/email/label""/>
+                                    <xf:hint ref=""$form-resources/email/hint""/>
+                                    <xf:alert ref=""$form-resources/email/alert[1]"" validation=""constraint-8-constraint""/>
+                                    <xf:alert ref=""$form-resources/email/alert[2]"" validation=""constraint-9-constraint""/>
+                                    <xf:alert ref=""$fr-resources/detail/labels/alert""/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id=""phone-control"" bind=""phone-bind"" xxf:maxlength=""15"">
+                                    <xf:label ref=""$form-resources/phone/label""/>
+                                    <xf:hint ref=""$form-resources/phone/hint""/>
+                                    <xf:alert ref=""$form-resources/phone/alert"" validation=""phone-bind""/>
+                                    <xf:alert ref=""$fr-resources/detail/labels/alert""/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id=""callmeback-control"" bind=""callmeback-bind"">
+                                    <xf:label ref=""$form-resources/callmeback/label""/>
+                                    <xf:hint ref=""$form-resources/callmeback/hint""/>
+                                    <xf:alert ref=""$fr-resources/detail/labels/alert""/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:textarea id=""message-control"" bind=""message-bind"">
+                                    <xf:label ref=""$form-resources/message/label""/>
+                                    <xf:hint ref=""$form-resources/message/hint""/>
+                                    <xf:alert ref=""$form-resources/message/alert"" validation=""message-bind""/>
+                                    <xf:alert ref=""$fr-resources/detail/labels/alert""/>
+                                </xf:textarea>
+                            </xh:td>
+                        </xh:tr>
+                    </fr:grid>
+                </fr:section>
+            </fr:body>
+        </fr:view>
+    </xh:body>
+</xh:html>
+"
+
+#################################################################
+# Form Sample - Contact Form for Orbeon Form Builder
+#################################################################
+
+INSERT_UPDATE YFormData	;id[unique=true] 									;type(code[unique=true])	;formDefinition(applicationId, formId, version)	;system	;applicationId	;formId	;content
+						;66ba893a657df5595c228bc60c0a195baa5e8be6 			;DATA						;orbeon:builder:1 										;true		;yforms			;contact	;"
+<xh:html xmlns:xh=""http://www.w3.org/1999/xhtml"" xmlns:xf=""http://www.w3.org/2002/xforms""
+         xmlns:xs=""http://www.w3.org/2001/XMLSchema""
+         xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance""
+         xmlns:ev=""http://www.w3.org/2001/xml-events""
+         xmlns:xi=""http://www.w3.org/2001/XInclude""
+         xmlns:xxi=""http://orbeon.org/oxf/xml/xinclude""
+         xmlns:xxf=""http://orbeon.org/oxf/xml/xforms""
+         xmlns:exf=""http://www.exforms.org/exf/1-0""
+         xmlns:fr=""http://orbeon.org/oxf/xml/form-runner""
+         xmlns:saxon=""http://saxon.sf.net/""
+         xmlns:sql=""http://orbeon.org/oxf/xml/sql""
+         xmlns:soap=""http://schemas.xmlsoap.org/soap/envelope/""
+         xmlns:fb=""http://orbeon.org/oxf/xml/form-builder"">
+    <xh:head>
+        <xh:title>Contact Form</xh:title>
+        <xf:model id=""fr-form-model"" xxf:expose-xpath-types=""true"">
+
+            <!-- Main instance -->
+            <xf:instance id=""fr-form-instance"">
+                <form>
+                    <contact>
+                        <name/>
+                        <surname/>
+                        <email/>
+                        <phone/>
+                        <callmeback/>
+                        <message/>
+                    </contact>
+                </form>
+            </xf:instance>
+
+            <!-- Bindings -->
+            <xf:bind id=""fr-form-binds"" ref=""instance('fr-form-instance')"">
+                <xf:bind id=""contact-bind"" name=""contact"" ref=""contact"">
+                    <xf:bind id=""name-bind"" name=""name"" ref=""name"" required=""true()""
+                             constraint=""string-length(.) &gt;= 2 and string-length(.) &lt;= 50""/>
+                    <xf:bind id=""surname-bind"" ref=""surname"" name=""surname"" required=""true()""
+                             constraint=""string-length(.) &gt;=  2 and string-length(.) &lt;= 50""/>
+                    <xf:bind id=""phone-bind"" ref=""phone"" name=""phone""
+                             constraint=""(string(/form/contact/callmeback) = 'true' and (string-length(.) &gt;= 5 and string-length(.) &lt;= 15)) or string(/form/contact/callmeback) = '' or string(/form/contact/callmeback) = 'false'""/>
+                    <xf:bind id=""email-bind"" ref=""email"" name=""email"" required=""true()"">
+                        <xf:constraint id=""constraint-8-constraint""
+                                       value=""matches(upper-case(.),'^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$')""
+                                       level=""error""/>
+                        <xf:constraint id=""constraint-9-constraint"" value=""string-length(.) &lt;= 100"" level=""error""/>
+                    </xf:bind>
+                    <xf:bind id=""callmeback-bind"" ref=""callmeback"" name=""callmeback"" type=""xf:boolean""/>
+                    <xf:bind id=""message-bind"" ref=""message"" name=""message""
+                             constraint=""string-length(.) &gt;= 20 and string-length(.) &lt;= 500""
+                             required=""true()""/>
+                </xf:bind>
+            </xf:bind>
+
+            <!-- Metadata -->
+            <xf:instance xxf:readonly=""true"" id=""fr-form-metadata"">
+                <metadata>
+                    <application-name>yforms</application-name>
+                    <form-name>contact</form-name>
+                    <title xml:lang=""en"">Contact Form</title>
+                    <description xml:lang=""en"">Sample Form for Contact Data</description>
+                </metadata>
+            </xf:instance>
+
+            <!-- Attachments -->
+            <xf:instance id=""fr-form-attachments"">
+                <attachments>
+                    <css mediatype=""text/css"" filename="""" size=""""/>
+                    <pdf mediatype=""application/pdf"" filename="""" size=""""/>
+                </attachments>
+            </xf:instance>
+
+            <!-- All form resources -->
+            <!-- Don't make readonly by default in case a service modifies the resources -->
+            <xf:instance id=""fr-form-resources"" xxf:readonly=""false"">
+                <resources>
+                    <resource xml:lang=""en"">
+                        <contact>
+                            <label>Contact</label>
+                        </contact>
+                        <name>
+                            <label>Name</label>
+                            <hint/>
+                            <alert>Field needs at least 2 characters and can have at most 50.</alert>
+                        </name>
+                        <surname>
+                            <label>Surname</label>
+                            <hint/>
+                            <alert>Field needs at least 2 characters and can have at most 50.</alert>
+                        </surname>
+                        <phone>
+                            <label>Phone Number</label>
+                            <hint/>
+                            <alert>Phone number needs at least 5 characters and can have at most 15.</alert>
+                        </phone>
+                        <callmeback>
+                            <label>Call me back!</label>
+                            <hint/>
+                        </callmeback>
+                        <message>
+                            <label>Message</label>
+                            <hint/>
+                            <alert>Field needs at least 20 characters and can have at most 500.</alert>
+                        </message>
+                        <email>
+                            <label>Email</label>
+                            <hint/>
+                            <alert>Email address does not seem to be a valid one</alert>
+                            <alert>Field can have at most 100 characters.</alert>
+                            
+                        </email>
+                    </resource>
+                </resources>
+            </xf:instance>
+
+            <!-- Utility instances for services -->
+            <xf:instance id=""fr-service-request-instance"" xxf:exclude-result-prefixes=""#all"">
+                <request/>
+            </xf:instance>
+
+            <xf:instance id=""fr-service-response-instance"" xxf:exclude-result-prefixes=""#all"">
+                <response/>
+            </xf:instance>
+
+        </xf:model>
+    </xh:head>
+    <xh:body>
+        <fr:view>
+            <fr:body xmlns:xbl=""http://www.w3.org/ns/xbl""
+                     xmlns:oxf=""http://www.orbeon.com/oxf/processors""
+                     xmlns:p=""http://www.orbeon.com/oxf/pipeline"">
+                <fr:section id=""contact-control"" bind=""contact-bind"" class="""">
+                    <xf:label ref=""$form-resources/contact/label""/>
+                    <fr:grid>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id=""name-control"" bind=""name-bind"" xxf:maxlength=""50"">
+                                    <xf:label ref=""$form-resources/name/label""/>
+                                    <xf:hint ref=""$form-resources/name/hint""/>
+                                    <xf:alert ref=""$form-resources/name/alert"" validation=""name-bind""/>
+                                    <xf:alert ref=""$fr-resources/detail/labels/alert""/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id=""surname-control"" bind=""surname-bind"" xxf:maxlength=""50"">
+                                    <xf:label ref=""$form-resources/surname/label""/>
+                                    <xf:hint ref=""$form-resources/surname/hint""/>
+                                    <xf:alert ref=""$form-resources/surname/alert"" validation=""surname-bind""/>
+                                    <xf:alert ref=""$fr-resources/detail/labels/alert""/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id=""email-control"" bind=""email-bind"" xxf:maxlength=""100"">
+                                    <xf:label ref=""$form-resources/email/label""/>
+                                    <xf:hint ref=""$form-resources/email/hint""/>
+                                    <xf:alert ref=""$form-resources/email/alert[1]"" validation=""constraint-8-constraint""/>
+                                    <xf:alert ref=""$form-resources/email/alert[2]"" validation=""constraint-9-constraint""/>
+                                    <xf:alert ref=""$fr-resources/detail/labels/alert""/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id=""phone-control"" bind=""phone-bind"" xxf:maxlength=""15"">
+                                    <xf:label ref=""$form-resources/phone/label""/>
+                                    <xf:hint ref=""$form-resources/phone/hint""/>
+                                    <xf:alert ref=""$form-resources/phone/alert"" validation=""phone-bind""/>
+                                    <xf:alert ref=""$fr-resources/detail/labels/alert""/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id=""callmeback-control"" bind=""callmeback-bind"">
+                                    <xf:label ref=""$form-resources/callmeback/label""/>
+                                    <xf:hint ref=""$form-resources/callmeback/hint""/>
+                                    <xf:alert ref=""$fr-resources/detail/labels/alert""/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:textarea id=""message-control"" bind=""message-bind"">
+                                    <xf:label ref=""$form-resources/message/label""/>
+                                    <xf:hint ref=""$form-resources/message/hint""/>
+                                    <xf:alert ref=""$form-resources/message/alert"" validation=""message-bind""/>
+                                    <xf:alert ref=""$fr-resources/detail/labels/alert""/>
+                                </xf:textarea>
+                            </xh:td>
+                        </xh:tr>
+                    </fr:grid>
+                </fr:section>
+            </fr:body>
+        </fr:view>
+    </xh:body>
+</xh:html>
+"
+
+
+#################################################################
+# Form Sample - Contact Form
+#################################################################
+INSERT_UPDATE YFormData	;id[unique=true]									;type(code[unique=true])		;formDefinition(applicationId, formId, version)	;applicationId	;formId		;content
+						;44ba893a657df5595c228bc60c0a195baa5e8be6			;DATA							;yforms:contact:1								;yforms			;contact	;"
+<?xml version=""1.0"" encoding=""UTF-8""?>
+<form>
+    <contact>
+        <name>John</name>
+        <surname>Doe</surname>
+        <email>john.doe@email.com</email>
+        <phone>1234567890</phone>
+        <callmeback>john.doe@email.com</callmeback>
+        <message>Please call me back! -John Doe</message>
+    </contact>
+</form>
+"

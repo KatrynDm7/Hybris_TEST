@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2015 hybris AG All rights reserved.
+	This software is the confidential and proprietary information of hybris ("Confidential
+	Information"). You shall not disclose such Confidential Information and shall
+	use it only in accordance with the terms of the license agreement you entered
+	into with hybris. -->
+
+
+<!-- WARNING: This is the Spring WEB configuration file. If you want to replace
+	items or managers you have to do this from the extensions core configuration
+	file (feedbackaddon/resources/feedbackaddon-spring.xml) -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <context:annotation-config />
+
+	<bean name="cartPageController" class="de.hybris.platform.financialacceleratorstorefront.controllers.pages.CartPageController"/>
+	<bean name="checkoutLoginController" class="de.hybris.platform.financialacceleratorstorefront.controllers.pages.CheckoutLoginController"/>
+	<bean name="checkoutController" class="de.hybris.platform.financialacceleratorstorefront.controllers.pages.CheckoutController"/>
+	<bean name="findAgentListController" class="de.hybris.platform.financialacceleratorstorefront.controllers.pages.FindAgentListController">
+        <property name="agentFacade" ref="agentFacade"/>
+    </bean>
+   <bean name="contactAgentFormController" class="de.hybris.platform.financialacceleratorstorefront.controllers.pages.ContactAgentFormController">
+        <property name="sessionService" ref="sessionService"/>
+        <property name="yformFacade" ref="yFormFacade"/>
+        <property name="agentFacade" ref="agentFacade"/>
+    </bean>
+    <bean name="categoryPageController" class="de.hybris.platform.financialacceleratorstorefront.controllers.pages.CategoryPageController"/>
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+	        <property name="mappings">
+	            <props>
+	                <prop key="/cart">cartPageController</prop>
+	                <prop key="/cart">checkoutController</prop>
+                    <prop key="/**/c">categoryPageController</prop>
+					<prop key="/**/find-agent">findAgentListController</prop>
+               <prop key="/**/contact-agent">contactAgentFormController</prop>
+	            </props>
+	        </property>
+	</bean>
+	
+	<context:component-scan base-package="de.hybris.platform.financialacceleratorstorefront" scope-resolver="de.hybris.platform.spring.IgnoreTenantScopeMetadataResolver" />
+    
+    
+    	<bean id="logoutSuccessHandler"    class="de.hybris.platform.yacceleratorstorefront.security.StorefrontLogoutSuccessHandler">
+		<property name="alwaysUseDefaultTargetUrl"  value="true" />
+		<property name="useReferer" value="false"/>
+		<property name="defaultTargetUrl" value="/?logout=true"/>
+		<property name="guidCookieStrategy" ref="guidCookieStrategy"/>
+		 <property name="restrictedPages">
+		 <list>
+				<value>/my-account</value>
+				<value>/checkout</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="loginCheckoutAuthenticationSuccessHandler" class="de.hybris.platform.yacceleratorstorefront.security.StorefrontAuthenticationSuccessHandler" >
+		<property name="alwaysUseDefaultTargetUrl"  value="true" />
+		<property name="customerFacade" ref="customerFacade" />
+		<property name="defaultTargetUrl" value="/checkout/multi/form/1"/>
+		<property name="uiExperienceService" ref="uiExperienceService"/>
+		<property name="sessionService" ref="sessionService"/>
+		<property name="cartFacade" ref="cartFacade"/>
+		<property name="forceDefaultTargetForUiExperienceLevel">
+			<map key-type="de.hybris.platform.commerceservices.enums.UiExperienceLevel" value-type="java.lang.Boolean">
+				<entry key="DESKTOP" value="true"/>
+				<entry key="MOBILE" value="true"/>
+			</map>
+		</property>
+		<property name="bruteForceAttackCounter" ref="bruteForceAttackCounter" />
+		<property name="redirectStrategy" ref="commerceRedirectStrategy"/>
+		<property name="restrictedPages">
+			<list>
+				<value>/login/checkout</value>
+			</list>
+		</property>
+        <property name="listRedirectUrlsForceDefaultTarget">
+            <list></list>
+        </property>
+	</bean>
+	
+	
+	<!-- Default substituting CMS Component Renderer -->
+	<bean id="substitutingAddOnJspIncludeCMSComponentRenderer"
+		class="de.hybris.platform.financialacceleratorstorefront.component.renderer.DefaultAddOnSubstitutingCMSComponentRenderer"
+		parent="addOnJspIncludeCMSComponentRenderer">
+		<property name="extensionSubstitutionService" ref="extensionSubstitutionService"/>
+	</bean>
+ 
+    <bean id="insuranceJspIncludeComponentRendererMapping"  parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="InsuranceJspIncludeComponent" />
+        <property name="renderer" ref="insuranceJspIncludeComponentRenderer" />
+    </bean>
+    <bean id="insuranceJspIncludeComponentRenderer" parent="substitutingAddOnJspIncludeCMSComponentRenderer"
+    	class="de.hybris.platform.financialacceleratorstorefront.component.renderer.InsuranceAddOnCMSComponentRender" />
+    
+    <bean id="cmsComparisonTabComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="CMSComparisonTabComponent" />
+        <property name="renderer" ref="cmsComparisonTabComponentRenderer" />
+    </bean>
+    <bean id="cmsComparisonTabComponentRenderer" parent="substitutingAddOnJspIncludeCMSComponentRenderer"/>
+
+    <bean id="cmsCustomDefineStyleCMSComponentsContainerRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="CMSCustomDefineStyleCMSComponentsContainer" />
+        <property name="renderer" ref="cmsCustomDefineStyleCMSComponentsContainerRenderer" />
+    </bean>
+    <bean id="cmsCustomDefineStyleCMSComponentsContainerRenderer" parent="substitutingAddOnJspIncludeCMSComponentRenderer"/>
+
+    <alias alias="cmsComponentContainerStrategyRegistry" name="insuranceCmsComponentContainerStrategyRegistry" />
+    <bean id="insuranceCmsComponentContainerStrategyRegistry" parent="defaultCMSComponentContainerStrategyRegistry">
+        <property name="strategies">
+            <map>
+                <entry key="CMSMultiComparisonTabContainer" value-ref="identityCMSComponentContainerStrategy" />
+                <entry key="CMSCustomDefineStyleCMSComponentsContainer" value-ref="identityCMSComponentContainerStrategy" />
+            </map>
+        </property>
+    </bean>
+
+    <bean id="comparisonPanelCMSComponentRenderer" parent="substitutingAddOnJspIncludeCMSComponentRenderer"
+          class="de.hybris.platform.financialacceleratorstorefront.component.renderer.ComparisonPanelCMSComponentRenderer">
+        <property name="productConverter" ref="comparisonPanelProductConverter"/>
+    </bean>
+
+    <bean id="comparisonPanelCMSComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="ComparisonPanelCMSComponent"/>
+        <property name="renderer" ref="comparisonPanelCMSComponentRenderer"/>
+    </bean>
+
+    <bean id="abstractFormSubmitComponentRenderer" parent="substitutingAddOnJspIncludeCMSComponentRenderer"
+          class="de.hybris.platform.financialacceleratorstorefront.component.renderer.AbstractFormSubmitComponentRenderer"
+          abstract="true">
+        <property name="dateFormatForDisplay" ref="globalDateFormat"/>
+        <property name="sessionService" ref="sessionService"/>
+        <property name="yformFacade" ref="yFormFacade"/>
+    </bean>
+    
+    <bean id="cmsTripDetailsSubmitComponentRenderer" parent="abstractFormSubmitComponentRenderer"
+          class="de.hybris.platform.financialacceleratorstorefront.component.renderer.TripDetailsSubmitComponentRenderer">
+    </bean>
+
+    <bean id="cmsContactExpertSubmitComponentRenderer" parent="substitutingAddOnJspIncludeCMSComponentRenderer"
+          class="de.hybris.platform.financialacceleratorstorefront.component.renderer.ContactExpertSubmitComponentRenderer">
+        <property name="yformFacade" ref="yFormFacade"/>
+        <property name="agentFacade" ref="agentFacade"/>
+        <property name="sessionService" ref="sessionService"/>
+        <property name="contactExpertPreprocessorStrategy" ref="contactExpertYFormPreprocessorStrategy"/>
+    </bean>
+
+    <bean id="cmsContactExpertSubmitComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="CMSContactExpertSubmitComponent"/>
+        <property name="renderer" ref="cmsContactExpertSubmitComponentRenderer"/>
+    </bean>
+
+    <bean id="cmsPropertyDetailsSubmitComponentRenderer" parent="abstractFormSubmitComponentRenderer"
+          class="de.hybris.platform.financialacceleratorstorefront.component.renderer.PropertyDetailsSubmitComponentRenderer">
+        <property name="insurancePropertyDetailsKeysMap" ref="insurancePropertyDetailsKeysMap"/>
+    </bean>
+
+    <bean id="cmsAutoDetailsSubmitComponentRenderer" parent="abstractFormSubmitComponentRenderer"
+          class="de.hybris.platform.financialacceleratorstorefront.component.renderer.AutoDetailsSubmitComponentRenderer">
+    </bean>
+
+    <bean id="cmsLifeDetailsSubmitComponentRenderer" parent="abstractFormSubmitComponentRenderer"
+          class="de.hybris.platform.financialacceleratorstorefront.component.renderer.LifeDetailsSubmitComponentRenderer">
+    </bean>
+
+    <util:map id="insurancePropertyDetailsKeysMap" key-type="java.lang.String" value-type="java.util.List">
+        <entry key="insurances_property_homeowners" value-ref="insurancePropertyBasicDetailsFormKeys"/>
+        <entry key="insurances_property_renters" value-ref="insurancePropertyBasicDetailsFormKeys"/>
+    </util:map>
+    
+    <util:list id="insurancePropertyBasicDetailsFormKeys" value-type="java.lang.String">
+        <value>/form/property-coverage-details-section/property-cover-required</value>
+        <value>/form/property-coverage-details-section/property-cover-start-date</value>
+    </util:list>
+    
+    <util:list id="insurancePropertyDetailsFormKeys" value-type="java.lang.String">
+        <value>/form/property-coverage-details-section/property-cover-required</value>
+        <value>/form/property-coverage-details-section/property-cover-start-date</value>
+        <value>/form/property-details-section/property-type</value>
+        <value>/form/property-details-section/property-value</value>
+        <value>/form/property-details-section/rebuild-value-of-property</value>
+        <value>/form/property-details-section/approximate-year-property-built</value>
+        <value>/form/property-details-section/property-built-standard-construction</value>
+        <value>/form/property-details-section/number-of-bedrooms</value>
+        <value>/form/property-details-section/number-of-bathrooms-shower-rooms</value>
+        <value>/form/property-details-section/number-of-adults-at-the-property</value>
+        <value>/form/property-details-section/number-of-children-at-the-property</value>
+        <value>/form/property-details-section/anyone-property-smoke</value>
+        <value>/form/property-details-section/days-in-a-row-property-likely-unoccupied</value>
+        <value>/form/property-details-section/property-normally-occupied-during-the-day</value>
+        <value>/form/property-details-section/exterior-construction-materials</value>
+        <value>/form/property-building-cover-section/consecutive-years-held-buildings-insurance</value>
+        <value>/form/property-building-cover-section/accidental-damage-cover-building</value>
+        <value>/form/property-contents-cover-section/standard-50000-contents-cover</value>
+        <value>/form/property-contents-cover-section/amount-multiples-10000</value>
+        <value>/form/property-contents-cover-section/consecutive-years-held-contents-insurance</value>
+        <value>/form/property-contents-cover-section/accidental-damage-cover-contents</value>
+        <value>/form/property-contents-cover-section/car-insurance-renewal</value>
+        <value>/form/property-address-section/property-address-line-1</value>
+        <value>/form/property-address-section/property-address-line-2</value>
+        <value>/form/property-address-section/property-address-city</value>
+        <value>/form/property-address-section/property-address-postcode</value>
+        <value>/form/property-address-section/property-address-country</value>
+    </util:list>
+
+    <bean parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="CMSTripDetailsSubmitComponent"/>
+        <property name="renderer" ref="cmsTripDetailsSubmitComponentRenderer"/>
+    </bean>
+
+    <bean parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="CMSPropertyDetailsSubmitComponent"/>
+        <property name="renderer" ref="cmsPropertyDetailsSubmitComponentRenderer"/>
+    </bean>
+
+    <bean parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="CMSAutoDetailsSubmitComponent"/>
+        <property name="renderer" ref="cmsAutoDetailsSubmitComponentRenderer"/>
+    </bean>
+    
+    <bean parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="CMSLifeDetailsSubmitComponent"/>
+        <property name="renderer" ref="cmsLifeDetailsSubmitComponentRenderer"/>
+    </bean>
+    
+    <!-- switch off remember me -->
+    <alias name="insuranceRememberMeServices" alias="rememberMeServices"/>
+    <bean id="insuranceRememberMeServices" parent="defaultRememberMeServices">
+        <property name="alwaysRemember" value="false"/>
+    </bean>
+
+
+    <bean id="cmsAllOurServicesRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="CMSAllOurServicesComponent" />
+        <property name="renderer" ref="cmsAllOurServicesComponentRenderer" />
+    </bean>
+    <bean id="cmsAllOurServicesComponentRenderer" parent="substitutingAddOnJspIncludeCMSComponentRenderer"/>
+    
+    <bean id="cmsRotatingImagesMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="CMSRotatingImagesComponent" />
+        <property name="renderer" ref="cmsRotatingImagesComponentRenderer" />
+    </bean>
+    <bean id="cmsRotatingImagesComponentRenderer" parent="substitutingAddOnJspIncludeCMSComponentRenderer"/>
+    
+
+    <bean id="dynamicProgressBarStepsComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="DynamicProgressBarStepsComponent" />
+        <property name="renderer" ref="dynamicProgressBarStepsComponentRenderer" />
+    </bean>
+    <bean id="dynamicProgressBarStepsComponentRenderer" parent="substitutingAddOnJspIncludeCMSComponentRenderer"/>
+
+    <bean id="travelPolicyContext"
+          class="de.hybris.platform.financialfacades.process.xslfo.context.TravelPolicyContext"
+          parent="abstractPolicyContext"  scope="prototype" >
+    </bean>
+    <bean id="eventPolicyContext"
+          class="de.hybris.platform.financialfacades.process.xslfo.context.EventPolicyContext"
+          parent="abstractPolicyContext"  scope="prototype" >
+    </bean>
+
+    <bean id="autoPolicyContext"
+          class="de.hybris.platform.financialfacades.process.xslfo.context.AutoPolicyContext"
+          parent="abstractPolicyContext"  scope="prototype" >
+    </bean>
+
+    <bean id="propertyHomeownerPolicyContext"
+          class="de.hybris.platform.financialfacades.process.xslfo.context.PropertyHomeownerPolicyContext"
+          parent="abstractPolicyContext"  scope="prototype" >
+    </bean>
+
+    <bean id="propertyRenterPolicyContext"
+          class="de.hybris.platform.financialfacades.process.xslfo.context.PropertyRenterPolicyContext"
+          parent="abstractPolicyContext"  scope="prototype" >
+    </bean>
+    
+    <bean id="lifePolicyContext"
+          class="de.hybris.platform.financialfacades.process.xslfo.context.LifePolicyContext"
+          parent="abstractPolicyContext"  scope="prototype" >
+    </bean>
+
+
+    <!-- Checkout Progress Bar for the StoreFront-->
+    <alias name="abstractProgressStep" alias="progressStep"/>
+    <bean id="abstractProgressStep" class="de.hybris.platform.financialacceleratorstorefront.checkout.step.InsuranceCheckoutStep" abstract="true">
+        <property name="checkoutGroup"><null/></property>
+        <property name="checkoutStepValidatorList" ref="genericValidationStrategyList"/>
+        <property name="stepVisitedAnalysisStrategyList" ref="genericIsVisitedAnalysisStrategyList"/>
+        <property name="stepEnabledAnalysisStrategyList" ref="genericIsEnabledAnalysisStrategyList"/>
+         <property name="insuranceCartFacade" ref="defaultInsuranceCartFacade"/>
+    </bean>
+
+	<bean id="defaultChooseCoverProgressStep" parent="progressStep">
+        <property name="transitions">
+            <map>
+                <entry key="activeStep" value-ref="REDIRECT_TO_CHOOSE_COVER_CATEGORY_PAGE"/>
+                <entry key="alternativeActiveStep" value-ref="ACTUAL_URL_FOR_CHOOSE_COVER"/>
+            </map>
+        </property>
+        <property name="progressBarId" value="change-plan"/>
+        <property name="checkoutStepValidatorList" ref="chooseCoverValidationStrategyList"/>
+        <property name="stepVisitedAnalysisStrategyList" ref="chooseCoverIsVisitedAnalysisStrategyList"/>
+    </bean>
+    
+    <bean id="defaultWhatsIncludedProgressStep" parent="progressStep">
+        <property name="transitions">
+            <map>
+                <entry key="activeStep" value-ref="REDIRECT_TO_WHATS_INCLUDED_CATEGORY_PAGE"/>   
+                <entry key="alternativeActiveStep" value-ref="ACTUAL_URL_FOR_WHATS_INCLUDED"/>
+            </map>
+        </property>
+        <property name="checkoutFlow" value="FLOW_START" />
+        <property name="progressBarId" value="whats-included"/>
+        <property name="checkoutStepValidatorList" ref="chooseCoverValidationStrategyList"/>
+        <property name="stepVisitedAnalysisStrategyList" ref="whatsIncludedIsVisitedAnalysisStrategyList"/>        
+    </bean>
+
+    <bean id="defaultAddOptionProgressStep" parent="progressStep">
+        <property name="transitions">
+            <map>
+                <entry key="activeStep" value-ref="REDIRECT_TO_ADD_OPTIONS"/>
+            </map>
+        </property>
+        <property name="progressBarId" value="change-optional"/>
+        <property name="checkoutStepValidatorList" ref="addOptionValidationStrategyList"/>
+    </bean>
+
+    <bean id="defaultPersonalDetailsStep" parent="progressStep">
+        <property name="transitions">
+            <map>
+                <entry key="activeStep" value-ref="REDIRECT_TO_CHECKOUT"/>
+                <entry key="alternativeActiveStep" value-ref="ADDITIONAL_URL_FOR_CHECKOUT"/>
+            </map>
+        </property>
+        <property name="progressBarId" value="quoteForm"/>
+        <property name="checkoutStepValidatorList" ref="personalDetailsValidationStrategyList"/>
+    </bean>
+
+    <bean id="defaultQuoteReviewStep" parent="progressStep">
+        <property name="transitions">
+            <map>
+                <entry key="activeStep" value-ref="REDIRECT_TO_CHECKOUT_QUOTE_REVIEW"/>
+            </map>
+        </property>
+        <property name="progressBarId" value="quoteReview"/>
+        <property name="checkoutStepValidatorList" ref="quoteReviewValidationStrategyList"/>
+    </bean>
+
+    <bean id="defaultPaymentDetailsStep" parent="progressStep">
+        <property name="transitions">
+            <map>
+                <entry key="activeStep" value-ref="REDIRECT_TO_CHECKOUT_PAYMENT_METHOD"/>
+            </map>
+        </property>
+        <property name="progressBarId" value="paymentMethod"/>
+    </bean>
+
+    <bean id="defaultFinalReviewStep" parent="progressStep">
+        <property name="transitions">
+            <map>
+                <entry key="activeStep" value-ref="REDIRECT_TO_CHECKOUT_SUMMARY"/>
+            </map>
+        </property>
+        <property name="progressBarId" value="confirmOrder"/>
+    </bean>
+
+    <!-- Redirects and URLs-->
+    <bean id="REDIRECT_TO_CHOOSE_COVER_CATEGORY_PAGE" class="java.lang.String">
+        <constructor-arg value="/cart/chooseCover?viewStatus=edit"/>
+    </bean>
+    <bean id="REDIRECT_TO_WHATS_INCLUDED_CATEGORY_PAGE" class="java.lang.String">
+        <constructor-arg value="/cart/chooseCover?viewStatus=view"/>
+    </bean>
+    <bean id="ACTUAL_URL_FOR_CHOOSE_COVER" class="java.lang.String">
+        <constructor-arg value="/c/"/>
+    </bean>
+    <bean id="ACTUAL_URL_FOR_WHATS_INCLUDED" class="java.lang.String">
+        <constructor-arg value="viewStatus=view"/>
+    </bean>
+    <bean id="REDIRECT_TO_ADD_OPTIONS" class="java.lang.String">
+        <constructor-arg value="/cart"/>
+    </bean>
+    <bean id="REDIRECT_TO_CHECKOUT" class="java.lang.String">
+        <constructor-arg value="/cart/checkout"/>
+    </bean>
+    <bean id="ADDITIONAL_URL_FOR_CHECKOUT" class="java.lang.String">
+        <constructor-arg value="/login/checkout"/>
+    </bean>
+    <bean id="REDIRECT_TO_CHECKOUT_QUOTE_REVIEW" class="java.lang.String">
+        <constructor-arg value="/checkout/multi/quote/review"/>
+    </bean>
+    <bean id="REDIRECT_TO_CHECKOUT_PAYMENT_METHOD" class="java.lang.String">
+        <constructor-arg value="/checkout/multi/payment-method/add"/>
+    </bean>
+    <bean id="REDIRECT_TO_CHECKOUT_SUMMARY" class="java.lang.String">
+        <constructor-arg value="/checkout/multi/summary/view"/>
+    </bean>
+
+    <util:map id="defaultFinancialProgressSteps" key-type="java.lang.String" 
+              value-type="de.hybris.platform.financialacceleratorstorefront.checkout.step.InsuranceCheckoutStep">
+        <entry key="0" value-ref="defaultChooseCoverProgressStep"/>        
+        <entry key="1" value-ref="defaultWhatsIncludedProgressStep"/>
+        <entry key="2" value-ref="defaultAddOptionProgressStep"/>
+        <entry key="3" value-ref="defaultPersonalDetailsStep"/>
+        <entry key="4" value-ref="defaultQuoteReviewStep"/>
+        <entry key="5" value-ref="defaultPaymentDetailsStep"/>
+        <entry key="6" value-ref="defaultFinalReviewStep"/>
+    </util:map>
+
+    <alias name="defaultStepTransitionStrategy" alias="stepTransitionStrategy"/>
+    <bean id="defaultStepTransitionStrategy"
+          class="de.hybris.platform.financialacceleratorstorefront.strategies.impl.DefaultStepTransitionStrategy">
+    </bean>
+
+    <alias name="defaultContactExpertYFormPreprocessorStrategy"
+           alias="contactExpertYFormPreprocessorStrategy"/>
+    <bean id="defaultContactExpertYFormPreprocessorStrategy"
+          class="de.hybris.platform.financialfacades.strategies.impl.ContactExpertYFormPreprocessorStrategy">
+    </bean>
+    
+    <alias name="defaultFinancialSessionCookieGenerator" alias="sessionCookieGenerator"/>
+	<bean id="defaultFinancialSessionCookieGenerator" parent="defaultSessionCookieGenerator" >
+		<property name="cookieName" value="JSESSIONID-Financial"/>
+	</bean>
+</beans>

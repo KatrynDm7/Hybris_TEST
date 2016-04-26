@@ -1,0 +1,34 @@
+<html>
+<body>
+Dear $ctx.player.name,
+<br/>
+the following rankings have changed:
+<br/>
+
+#foreach( $ranking in $ctx.rankings )
+	<h3>$ranking.competition.name - Matchday $ranking.lastMatchday/$ranking.matchday</h3>
+	<table>
+		<tr>
+			<th>Rank</th>
+			<th>Prev. Rank</th>
+			<th>Name</th>
+			<th>Score</th>
+			<th>Prev. Score</th>
+		</tr>
+		#foreach( $entry in $ranking.entries )
+			<tr>
+				<td>$entry.rank</td>
+				<td>$entry.lastRank</td>
+				<td>$!entry.player.name</td>
+				<td>$entry.score</td>
+				<td>$entry.lastScore</td>
+			</tr>
+		#end
+	</table>
+#end
+<br/>
+Best regards,
+<br/>
+Your Cuppy-Team
+</body>
+</html>

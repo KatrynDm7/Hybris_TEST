@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<configuration xmlns="hybris.de/schemas/hmc/generic"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="hybris.de/schemas/hmc/generic hmc.xsd">
+
+	<explorertree>
+		<group name="genericDataSupplierWizardGroup">
+			<typeref type="GenericDataSupplierGenerationWizard" />
+		</group>
+	</explorertree>
+
+	<type name="GenericDataSupplierGenerationWizard">
+		<organizer>
+			<editor>
+				<tab name="tab.genericdatasupplier.apps" position="0">
+					<section name="section.genericdatasupplier.apps">
+						<listlayout>
+							<attribute name="datahub" labelwidth="100" />
+							<!-- <attribute name="oms" labelwidth="100" /> -->
+							<attribute name="ems" labelwidth="100" />
+							<attribute name="sbg" labelwidth="100" />
+						</listlayout>
+					</section>
+				</tab>
+				<tab name="tab.genericdatasupplier.datahubproperties" position="1">
+					<section name="section.genericdatasupplier.datahubproperties">
+						<listlayout>
+							<attribute name="datahubWebapp" labelwidth="400" />
+							<attribute name="datahubWebappXml" labelwidth="400" />
+							<attribute name="datahubPropertiesFile" labelwidth="400" />
+						</listlayout>
+					</section>
+				</tab>
+				<tab name="tab.genericdatasupplier.emsproperties" position="2">
+					<section name="section.genericdatasupplier.emsproperties">
+						<listlayout>
+							<attribute name="emsWebapp" labelwidth="400" />
+							<attribute name="emsPomFile" labelwidth="400" />
+						</listlayout>
+					</section>
+				</tab>
+				<tab name="tab.genericdatasupplier.sbgproperties" position="3">
+					<section name="section.genericdatasupplier.sbgproperties">
+						<listlayout>
+							<attribute name="sbgWebapp" labelwidth="400" />
+							<attribute name="sbgPomFile" labelwidth="400" />
+						</listlayout>
+					</section>
+				</tab>
+				<tab name="tab.genericdatasupplier.additional" position="4">
+					<section name="section.genericdatasupplier.additional">
+						<listlayout>
+							<attribute name="savePayload" labelwidth="300" />
+							<attribute name="supplyDelay" labelwidth="300" />
+							<attribute name="sldregLocation" labelwidth="300" />
+							<attribute name="sldregConfigLocation" labelwidth="300" />
+						</listlayout>
+					</section>
+					<section name="section.genericdatasupplier.systemid">
+						<listlayout>
+							<text name="text.systemid.explanation" />
+							<attribute name="systemId" labelwidth="300" />
+						</listlayout>
+					</section>
+				</tab>
+				<tab name="tab.genericdatasupplier.generatedwar" position="5">
+					<section name="section.genericdatasupplier.generatedwar">
+						<listlayout>
+							<text name="text.generatedwar.warning" />
+							<attribute name="generatedWar" labelwidth="300">
+								<downloadmediaeditor />
+							</attribute>
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+
+	<type name="DataSupplierCronJob" icon="images/icons/e_order.gif"
+		mode="append">
+		<organizer mode="append">
+
+			<editor mode="append">
+				<tab name="tab.datasuppliercronjob.datasupplier" mode="append">
+					<section name="section.datasuppliercronjob.payload" mode="append">
+						<listlayout mode="append">
+
+							<attribute name="savePayload" />
+							<attribute name="recentPayload" editable="false">
+								<downloadmediaeditor />
+							</attribute>
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+
+	</type>
+</configuration>

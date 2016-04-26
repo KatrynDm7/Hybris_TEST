@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="Hyend2Property.attributeType"/>
+			<property qualifier="Hyend2Property.exportId"  />
+			<property qualifier="Hyend2Property.displayName" />
+			<property qualifier="Hyend2Property.classification"  />
+		</search-properties>
+		<sort-properties>
+			<property qualifier="Hyend2Property.exportId"/>
+			<property qualifier="Hyend2Property.displayName"/>
+		</sort-properties>
+	</search>
+	
+	<label spring-bean="hyend2propertyLabelProvider"/>
+	
+	<initial-properties source-object-template="Hyend2IndexElement">
+        <property-mapping source="src.type" target="Hyend2Property.attributeType"/>
+        <property-mapping source="src" target="Hyend2Property.indexElements"/>
+ 	</initial-properties>
+
+</base>

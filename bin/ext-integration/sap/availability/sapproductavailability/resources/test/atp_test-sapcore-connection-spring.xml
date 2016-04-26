@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+    
+    <!-- define module access  -->
+	<bean id="sapProductAvailabilityConfigurationAccess" parent="sapCoreModuleConfigurationAccess">
+		<property name="moduleId" value="sapproductavailability" />	
+		
+			<property name="properties">
+			<map>
+				<entry key="MATERIAL" value="EPHBR01" />
+				<entry key="PLANT" value="1000" />
+				<entry key="UNIT" value="PC" />
+				<entry key="sapcommon_salesOrganization" value="1000" />
+				<entry key="sapcommon_distributionChannel" value="10" />
+				<entry key="sapcommon_division" value="00" />
+			</map>
+		</property>
+			
+	</bean>
+	
+	<!-- define business object  -->
+	<alias alias="sapProductAvailabilityBO" name="sapProductAvailabilityBOImpl" />
+	<bean id="sapProductAvailabilityBOImpl" parent="sapCoreBusinessObject"
+		class="de.hybris.platform.sap.sapproductavailability.businessobject.impl.SapProductAvailabilityBOImpl">
+		<property name="moduleConfigurationAccess" ref="sapProductAvailabilityConfigurationAccess" />
+	</bean>
+	
+	<!-- define business object factory  -->
+	<alias alias="sapProductAvailabilityBOFactory" name="defaultSapProductAvailabilityBOFactory" />
+	<bean id="defaultSapProductAvailabilityBOFactory"
+		class="de.hybris.platform.sap.sapproductavailability.service.impl.DefaultSapProductAvailabilityBOFactory">
+		<property name="genericFactory" ref="sapCoreGenericFactory" />
+	</bean>
+	
+	<!-- define ERP back-end object  -->
+	<alias alias="sapProductAvailabilityBackendERP" name="defaultSapProductAvailabilityBackendERP" />
+	<bean id="defaultSapProductAvailabilityBackendERP"
+		class="de.hybris.platform.sap.sapproductavailability.backend.impl.SapProductAvailabilityBackendERP"
+		scope="sapSession" parent="sapCoreBackendObjectJCo">
+	</bean>
+	
+	
+	
+	 <!-- Plant Cache-->
+	<bean id="sapAtpCheckPlantCacheRegion" parent="sapCoreCacheRegion">
+		<constructor-arg name="name" value="sapAtpCheckPlantCacheRegion" />
+		<constructor-arg name="maxEntries" value="1000" />
+		<constructor-arg name="evictionPolicy" value="FIFO" />
+		<constructor-arg name="statsEnabled" value="true" />
+		<constructor-arg name="exclusiveComputation" value="false" />
+		<constructor-arg name="ttlSeconds" value="240" />
+	</bean>
+	
+	
+    
+	<!-- Plant& Material Cache-->
+	<bean id="sapAtpCheckPlantMaterialCacheRegion" parent="sapCoreCacheRegion">
+		<constructor-arg name="name" value="sapAtpCheckPlantMaterialCacheRegion" />
+		<constructor-arg name="maxEntries" value="1000" />
+		<constructor-arg name="evictionPolicy" value="FIFO" />
+		<constructor-arg name="statsEnabled" value="true" />
+		<constructor-arg name="exclusiveComputation" value="false" />
+		<constructor-arg name="ttlSeconds" value="240" />
+	</bean>
+	
+	
+    <!-- Plant& Customer Cache-->
+	<bean id="sapAtpCheckPlantCustomerCacheRegion" parent="sapCoreCacheRegion">
+		<constructor-arg name="name" value="sapAtpCheckPlantCustomerCacheRegion" />
+		<constructor-arg name="maxEntries" value="1000" />
+		<constructor-arg name="evictionPolicy" value="FIFO" />
+		<constructor-arg name="statsEnabled" value="true" />
+		<constructor-arg name="exclusiveComputation" value="false" />
+		<constructor-arg name="ttlSeconds" value="240" /> 
+	</bean>
+    
+	
+	 <!-- ATP Cache-->
+	<bean id="sapAtpCheckAvailabilityCacheRegion" parent="sapCoreCacheRegion">
+		<constructor-arg name="name"
+			value="sapAtpCheckAvailabilityCacheRegion" />
+		<constructor-arg name="maxEntries" value="1000" />
+		<constructor-arg name="evictionPolicy" value="FIFO" />
+		<constructor-arg name="statsEnabled" value="true" />
+		<constructor-arg name="exclusiveComputation" value="false" />
+		<constructor-arg name="ttlSeconds" value="240" /> 
+	</bean>
+	
+    
+	<!-- 
+	
+	<alias alias="atpCheckBackendCacheHelper" name="sapAtpCheckBackendCacheHelper" />
+	<bean id="sapAtpCheckBackendCacheHelper"
+		class="de.hybris.platform.sap.sapproductavailability.backend.impl.SapAtpCheckBackendCacheHelper">
+	</bean>
+	-->
+	<bean id="sapProductAvailabilityCache"
+		class="de.hybris.platform.sap.sapproductavailability.backend.impl.SapProductAvailabilityCache">
+	</bean>
+	
+	
+</beans>

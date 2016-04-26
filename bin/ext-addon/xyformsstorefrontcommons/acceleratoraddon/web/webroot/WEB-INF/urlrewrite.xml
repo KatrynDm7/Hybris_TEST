@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<urlrewrite>
+   <rule>
+      <from>^/orbeon/xforms.*$</from>
+      <to last="true">-</to>
+   </rule>
+   <rule>
+      <from>^/orbeon/.*\.(css|js)$</from>
+      <to last="true">-</to>
+   </rule>
+   <rule>
+      <from>^/orbeon/.*\.(png|gif|jpg|jpeg)$</from>
+      <to last="true">-</to>
+   </rule>
+   <!-- The rest is forbidden -->
+   <!-- including calls to /fr/orbeon/builder/(edit|view|edit)/* , since the only way to access forms is through embedding -->
+   <rule>
+      <from>^/orbeon/.*$</from>
+      <set type="status">403</set>
+      <to>null</to>
+   </rule>
+</urlrewrite>

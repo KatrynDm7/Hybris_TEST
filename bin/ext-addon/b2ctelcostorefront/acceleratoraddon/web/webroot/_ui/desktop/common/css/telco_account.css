@@ -1,0 +1,384 @@
+/* left column */
+.accountLeftNavigation,
+.page-payment-details .span-24.side-content-slot {
+    width: 230px;
+}
+/* for add payment details in myAccount */
+.page-payment-details #content .span-24.side-content-slot {
+    margin-top: 0;
+    font-size: 1em;
+}
+/* home */
+.accountContentPane .accountNav .headline,
+.accountNav .headline {
+    font-size: 1em;
+    line-height: 48px;
+    background-color: #f0efec;
+    border-bottom: medium none;
+    height: 3.4285em;
+    padding-left: 10px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+.accountContentPane .accountNav li.active a,
+.accountNav li.active a {
+    color: #484848;
+}
+.accountContentPane .accountnavigationcollectioncomponent .accountNav {
+    border: none;
+    width: 230px;
+    padding: 0 40px 0 0;
+}
+.accountContentPane .accountnavigationcollectioncomponent .accountNav .headline {
+    line-height: 1.143em;
+    border-bottom: 1px solid #dbdad7;
+    padding: 0 0 10px 0;
+    margin-bottom: 8px;
+    height: auto;
+}
+.accountContentPane .accountnavigationcollectioncomponent .accountNav a {
+    line-height: 2em;
+}
+
+/* right columns */
+/* order history */
+.span-20.accountContentPane,
+.page-payment-details .span-14.append-1 {
+    width: 750px;
+    padding-left: 15px;
+    box-sizing: border-box;
+}
+.accountContentPane .headline {
+    border-bottom: none;
+    font-size: 1.7143em;
+    margin-bottom: 40px;
+    text-transform: none;
+    line-height: 1em;
+    color: #484848;
+}
+.accountContentPane .description {
+    font-size: 1.1428em;
+    margin-bottom: 40px;
+}
+.accountContentPane .infoText {
+    font-size: 1.1428em;
+    margin-bottom: 20px;
+}
+.paginationBar{
+    line-height: 3.428em;
+}
+.paginationBar.top {
+    border-bottom: none;
+}
+.paginationBar.bottom {
+    border-top: none;
+}
+.paginationBar .totalResults {
+    width: 188px;
+}
+.paginationBar .showAll {
+    color: #0073e4;
+    border-left: none;
+    line-height: 2.5em;
+}
+.paginationBar .right .pagination {
+    float: right;
+}
+.orderList .orderListTable,
+.paymentListTable {
+    margin: 10px 0;
+}
+.orderList .orderListTable thead th,
+.paymentListTable thead th {
+    text-transform: none;
+    color: #000;
+    border-bottom: 2px solid #ffbc0e;
+    padding-right: 0;
+    font-weight: bold;
+    height: 30px;
+    line-height: 30px;
+}
+.orderList .orderListTable tbody td,
+.paymentListTable tbody td {
+    color: #484848;
+    font-size: .9286em;
+    padding: 15px 15px 15px 0;
+    vertical-align: top;
+}
+.orderList .orderListTable tbody td:first-child,
+.paymentListTable tbody td:first-child {
+    padding-left: 5px;
+}
+.orderList .orderListTable tbody tr:nth-child(2n),
+.paymentListTable tbody tr:nth-child(2n) {
+    background-color: #f8f8f7;
+}
+.orderList .orderListTable tbody td a,
+.paymentListTable tbody td a {
+    color: #0073e4;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+}
+/* order history detail */
+.accountOrderDetailOrderTotals .span-8 {
+    width: 292px;
+}
+.accountContentPane .span-8:first-child {
+    font-size: 1.143em;
+    line-height: 2em;
+    margin-right: 0;
+}
+.accountContentPane .your_order_number {
+    font-weight: bold;
+}
+.accountContentPane .orderBoxes {
+    margin-top: 55px;
+}
+.accountContentPane .orderBoxes .orderBox {
+    font-size: 1.143em;
+    line-height: 1.75em;
+    border: none;
+    padding: 0;
+    color: #484848;
+    height: auto;
+    width: 310px;
+    margin-bottom: 50px;
+}
+.accountContentPane .orderBoxes .orderBox:nth-child(2n-1) {
+    clear: both;
+    margin-right: 63px;
+}
+.accountContentPane .orderBoxes .orderBox .headline {
+    font-size: 1em;
+    padding-bottom: 3px;
+    border-bottom: 1px solid #dbdad7;
+    margin-bottom: 7px;
+}
+.accountContentPane #cartItems .headline {
+    font-size: 1.2857em;
+    margin-bottom: 20px;
+}
+.accountContentPane .subHeadline {
+    font-size: 1.2857em;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+.accountContentPane #cartItems .description {
+    font-size: 1em;
+    margin-bottom: 25px;
+}
+.accountContentPane #cartItems .description > strong:last-child {
+    margin-left: 15px;
+}
+#cartItems .orderListCart thead > tr > th.cart-bundle-package {
+    width: 160px;
+}
+/* add payment details */
+.page-payment-details .span-14.append-1 {
+    float: right;
+    padding-right: 0;
+    padding-left: 25px;
+}
+.page-payment-details #checkoutProgress {
+    display: none;
+}
+.page-payment-details #checkoutContentPanel .headline {
+    line-height: 1em;
+    margin-bottom: 35px;
+}
+.template-pages-account-accountLayoutPage #viewSavedPayments,
+.template-pages-account-accountLayoutPage .cardForm .form-additionals,
+.template-pages-account-accountLayoutPage .useDeliveryAddress {
+    display: none;
+}
+.template-pages-account-accountLayoutPage #checkoutContentPanel .cardForm {
+    padding-bottom: 65px;
+    margin-right: 0;
+}
+.template-pages-account-accountLayoutPage #checkoutContentPanel .billingForm .headline {
+    margin-bottom: 10px;
+}
+
+/* payment details */
+.paymentListTable {
+    width: 100%;
+    table-layout: fixed;
+}
+/* payment details buttons */
+.paymentListTable a {
+    float: left;
+    margin-right: 25px;
+}
+.paymentListTable .remove {
+    color: #ff0000;
+}
+.accountAction {
+    border-top: 1px solid #dbdad7;
+    margin-top: 45px;
+    clear: both;
+}
+.accountAction .cancel {
+    display: inline-block;
+    line-height: 3.0714em;
+    margin: 15px 0;
+}
+.accountAction .positive {
+    float: right;
+    margin: 15px 0;
+}
+/* payment creditcard box */
+.payment-box {
+    border: 1px solid #000;
+    padding: 15px 20px;
+    margin-bottom: 30px;
+    width: 200px;
+}
+.payment-box .credit-card {
+    font-size: 1.125em;
+    font-weight: 700;
+}
+
+/* edit payment */
+.checkout-add-payment .required {
+    font-size: .8572em;
+}
+.checkout-add-payment .description {
+    margin: 0;
+}
+.checkout-add-payment h1 {
+    font-size: 1.2857em;
+    font-weight: 700;
+}
+.checkout-add-payment dd {
+    margin: 0;
+}
+.checkout-add-payment fieldset.cardDate .control-group {
+    width: 130px;
+}
+.checkout-add-payment .cardForm {
+    padding-bottom: 65px;
+}
+.checkout-add-payment .billingForm {
+    overflow: hidden;
+}
+.accountContentPane .control-group {
+    width: 280px;
+}
+
+/* profile */
+/* need to overwrite core button styles */
+.account-profile-data {
+    float: left;
+    margin-right: 15px;
+}
+.page-profile .button {
+    background-color: transparent;
+    color: #0073e4;
+    padding: 0;
+    margin: 0 0 0 350px;
+    float: none;
+    height: auto;
+    line-height: 1.5em;
+    text-align: left;
+}
+.page-profile .button + .button {
+    margin-top: 5px;
+}
+/* profile and address book - overwriting core markup */
+#updatePasswordForm > .control-group:nth-child(3),
+#updateProfileForm > .control-group:nth-child(3),
+#updateEmailForm > .control-group:nth-child(3) {
+    margin-bottom: 35px;
+}
+.page-updatePassword .span-20.accountContentPane .span-20.last,
+.page-update-profile .span-20.accountContentPane .span-20.last,
+.page-update-email .span-20.accountContentPane .span-20.last,
+.page-add-edit-address .span-20.accountContentPane .span-20.last {
+    width: 710px;
+    font-size: 1.1428em;
+}
+.page-updatePassword .span-20.accountContentPane .span-20.last .description,
+.page-update-profile .span-20.accountContentPane .span-20.last .description,
+.page-update-email .span-20.accountContentPane .span-20.last .description,
+.page-add-edit-address .span-20.accountContentPane .span-20.last .description {
+    font-size: 1em;
+}
+
+/* address book - overwriting core markup */
+.page-address-book .span-20.accountContentPane .span-20.last {
+    width: 710px;
+}
+.page-address-book .accountContentPane .addressItem {
+    border-bottom: 1px solid #dbdad7;
+    clear: both;
+    padding-bottom: 45px;
+}
+.page-address-book .accountContentPane .positive {
+    float: right;
+    margin: 15px 0;
+}
+.page-address-book .addressItem .buttons .is-default-address {
+    margin: 0 180px 0 0;
+}
+.page-address-book .addressItem .buttons .button[href^="edit-address"],
+.page-address-book .addressItem .buttons .removeAddressButton {
+    background-color: transparent;
+    color: #0073e4;
+    padding: 0;
+    margin: 0 35px 0 0;
+    height: auto;
+    line-height: 1.5em;
+}
+.page-address-book .addressItem .buttons .removeAddressButton {
+    color: #ff0000;
+}
+.page-address-book .addressItem .buttons .button[href^="set-default"] {
+    background-color: #0073e4;
+    color: #fff;
+    margin: 0 140px 0 0;
+}
+/* add new address */
+.page-add-edit-address .accountContentPane .form-actions {
+    position: relative;
+    top: 45px;
+    margin: 0;
+}
+.page-add-edit-address .form-additionals .control-group .control-label {
+    margin-bottom: 0;
+}
+.page-add-edit-address .i18nAddressForm .control-group:nth-child(2n) {
+    clear: both;
+}
+.page-add-edit-address .form-additionals {
+    clear: both;
+}
+
+/* my account - address book - remove popup */
+#cboxLoadedContent .addressItem {
+    padding: 25px;
+    font-size: 1.1428em;
+}
+#cboxLoadedContent .addressItem ul {
+    margin-bottom: 20px;
+}
+#cboxLoadedContent .addressItem .buttons {
+    border-top: 1px solid #dbdad7;
+    overflow: hidden;
+    margin-top: 30px;
+}
+#cboxLoadedContent .addressItem .buttons .removeAddressButton {
+    line-height: 42px;
+    height: 43px;
+    background-color: #ffb800;
+    color: #000;
+    padding: 0 10px;
+    margin: 15px 0;
+}
+#cboxLoadedContent .addressItem .buttons .closeColorBox {
+    background-color: transparent;
+    color: #0073e4;
+    padding: 0;
+    margin: 15px 0;
+    height: auto;
+}

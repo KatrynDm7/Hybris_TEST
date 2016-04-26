@@ -1,0 +1,670 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+<!-- ATTENTION: This is just an example file. You have to edit it according 
+	to your needs. -->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<enumtypes>
+	
+		<enumtype code="Hyend2EndecaPropertyTypeEnum" generate="true" autocreate="true">
+			<value code="STRING" />
+			<value code="INTEGER" />
+			<value code="DECIMAL" />
+			<value code="DATETIME" />
+			<value code="GEOCODE" />
+		</enumtype>
+
+		<enumtype code="Hyend2AttributeTypeEnum" autocreate="true" generate="true" >
+			<value code="SIMPLE" />
+			<value code="MULTILANGUAGE" />
+			<value code="MULTICURRENCY" />		
+		</enumtype>
+		
+		<enumtype code="Hyend2MultiselectType" autocreate="true" generate="true" >
+			<value code="NONE" />
+			<value code="MULTI_OR" />
+			<value code="MULTI_AND" />		
+		</enumtype>
+		
+		<enumtype code="Hyend2DynRankSort" autocreate="true" generate="true" >
+			<value code="ALPHA" />
+			<value code="REFINEMENT_COUNT" />
+		</enumtype>
+		
+		<enumtype code="Hyend2RefinementsSortOrder" autocreate="true" generate="true" >
+			<value code="ALPHA" />
+			<value code="NUMERIC" />
+		</enumtype>
+		
+		<enumtype code="Hyend2PrecedenceRuleTypeEnum" autocreate="true" generate="true" >
+			<value code="STANDARD" />
+			<value code="LEAF" />
+		</enumtype>
+		
+		<enumtype code="Hyend2BoundType" autocreate="true" generate="true" >
+			<value code="INTEGER" />
+			<value code="FLOATING_POINT" />
+			<value code="STRING" />
+		</enumtype>
+		
+		<enumtype code="Hyend2RangeType" autocreate="true" generate="true" >
+			<value code="RANGE" />
+			<value code="SIFT" />
+		</enumtype>
+		
+	</enumtypes>
+
+	<relations>
+		<relation generate="true" localized="false" code="Hyend2is2language"
+			autocreate="true">
+			<deployment table="hyend2is2language" typecode="32012"/>
+			<sourceElement type="Hyend2IndexSchema"
+				cardinality="many" navigable="false"></sourceElement>
+			<targetElement type="Language" qualifier="languages"
+				cardinality="many" ></targetElement>
+		</relation>
+		<relation generate="true" localized="false" code="Hyend2is2currency"
+			autocreate="true">
+			<deployment table="hyend2is2currency" typecode="32011"/>
+			<sourceElement type="Hyend2IndexSchema"
+				cardinality="many" navigable="false"></sourceElement>
+			<targetElement type="Currency" qualifier="currencies"
+				cardinality="many" ></targetElement>
+				
+		</relation>
+		<relation generate="true" localized="false"
+			code="Hyend2is2casconf" autocreate="true">
+			<sourceElement type="Hyend2IndexSchema" qualifier="indexSchemas"
+				cardinality="many"></sourceElement>
+			<targetElement type="Hyend2CasEacConfiguration" qualifier="casConfiguration"
+				cardinality="one" ></targetElement>
+		</relation>
+		
+		<relation generate="true" localized="false"
+			code="Hyend2endecaAcProp" autocreate="true">
+			<sourceElement type="Hyend2Property" qualifier="properties"
+				cardinality="many"></sourceElement>
+			<targetElement type="Hyend2EndecaAttributeConfiguration" qualifier="endecaAttributeConfiguration" 
+				cardinality="one" ><modifiers optional="false"/></targetElement>
+		</relation>
+		
+		<relation generate="true" localized="false"
+			code="Hyend2endecaDcDim" autocreate="true">
+			<sourceElement type="Hyend2Dimension" qualifier="dimensions"
+				cardinality="many"></sourceElement>
+			<targetElement type="Hyend2EndecaDimensionConfiguration" qualifier="endecaDimensionConfiguration" 
+				cardinality="one" ><modifiers  optional="false"/></targetElement>
+		</relation>
+		
+		<relation generate="true" localized="false"
+			code="Hyend2casConf2lang" autocreate="true">
+			<deployment table="hyend2casConf2lang" typecode="32013"/>
+			<sourceElement type="Hyend2CasEacConfiguration" navigable="false"
+				cardinality="many"></sourceElement>
+			<targetElement type="Language" qualifier="availableLanguages"
+				cardinality="many" ></targetElement>
+		</relation>	
+		
+		<relation generate="true" localized="false"
+			code="Hyend2is2cv" autocreate="true">
+			<deployment table="hyend2is2cv" typecode="32010"/>
+			<sourceElement type="Hyend2IndexSchema" qualifier="indexSchemas"
+				cardinality="many"></sourceElement>
+			<targetElement type="CatalogVersion" qualifier="catalogVersions"
+				cardinality="many" navigable="true"></targetElement>
+		</relation>
+		<relation generate="true" localized="false"
+			code="Hyend2is2ie" autocreate="true">
+			<deployment table="hyend2is2ie" typecode="32009"/>
+			<sourceElement type="Hyend2IndexSchema" qualifier="indexSchemas"
+				cardinality="many"></sourceElement>
+			<targetElement type="Hyend2IndexElement" qualifier="indexElements"
+				cardinality="many" navigable="true"></targetElement>
+		</relation>
+		<relation generate="true" localized="false"
+			code="Hyend2is2properties" autocreate="true">
+			<deployment table="hyend2is2properties" typecode="32008"/>
+			<sourceElement type="Hyend2IndexElement" qualifier="indexElements"
+				cardinality="many"></sourceElement>
+			<targetElement type="Hyend2Property" qualifier="properties"
+				cardinality="many" navigable="true"></targetElement>
+		</relation>
+		<relation generate="true" localized="false"
+			code="Hyend2is2dim" autocreate="true">
+			<deployment table="hyend2is2dim" typecode="32007"/>
+			<sourceElement type="Hyend2IndexElement" qualifier="indexElements"
+				cardinality="many"></sourceElement>
+			<targetElement type="Hyend2Dimension" qualifier="dimensions"
+				cardinality="many" navigable="true"></targetElement>
+		</relation>
+		
+		<relation generate="true" localized="false"
+			code="Hyend2is2cdim" autocreate="true">
+			<deployment table="hyend2is2cdim" typecode="32017"/>
+			<sourceElement type="Hyend2IndexElement" qualifier="indexElementsForCategoriesDims"
+				cardinality="many"></sourceElement>
+			<targetElement type="Hyend2CategoryDimension" qualifier="categoryDimensions"
+				cardinality="many" navigable="true"></targetElement>
+		</relation>
+		
+		<relation generate="true" localized="false"
+			code="Hyend2ecj2lang" autocreate="true">
+			<deployment table="Hyend2ecj2lang" typecode="32021"/>
+			<sourceElement type="Hyend2ExportCronJob" navigable="false"
+				cardinality="many"></sourceElement>
+			<targetElement type="Language" qualifier="exportLanguages"
+				cardinality="many" ></targetElement>			
+		</relation>
+		
+		<relation generate="true" localized="false"
+			code="Hyend2is2prules" autocreate="true">
+			<sourceElement type="Hyend2IndexSchema" cardinality="one" qualifier="indexSchema">
+				<modifiers optional="false"/>
+			</sourceElement>
+			<targetElement type="Hyend2PrecedenceRule" qualifier="precedenceRules"
+				cardinality="many" ></targetElement>			
+		</relation>
+		
+		<relation generate="true" localized="false"
+			code="Hyend2prop2range" autocreate="true">
+			<deployment table="Hyend2prop2range" typecode="32025"/>
+			<sourceElement type="Hyend2Property" cardinality="many" qualifier="properties">
+			</sourceElement>
+			<targetElement type="Hyend2Range" qualifier="ranges"
+				cardinality="many" ></targetElement>			
+		</relation>
+		
+		<relation generate="true" localized="false"
+			code="Hyend2range2rentries" autocreate="true">
+			<sourceElement type="Hyend2Range" cardinality="one" qualifier="range">
+				<modifiers optional="false"/>
+			</sourceElement>
+			<targetElement type="Hyend2RangeEntry" qualifier="rangeEntries"
+				cardinality="many" ></targetElement>			
+		</relation>
+		
+		<relation generate="true" localized="false"
+			code="Hyend2endecaDcRange" autocreate="true">
+			<sourceElement type="Hyend2Range" qualifier="ranges"
+				cardinality="many"></sourceElement>
+			<targetElement type="Hyend2EndecaDimensionConfiguration" qualifier="endecaDimensionConfiguration" 
+				cardinality="one" ><modifiers  optional="false"/></targetElement>
+		</relation>
+
+		<relation generate="true" localized="false"
+			code="Hyend2aa2si" autocreate="true">
+			<deployment table="hyend2aa2si" typecode="32027"/>
+			<sourceElement type="Hyend2AbstractAttribute" qualifier="attributes"
+				cardinality="many"></sourceElement>
+			<targetElement type="Hyend2SearchInterface" qualifier="searchInterfaces"
+				cardinality="many"></targetElement>
+		</relation>
+	
+		<relation generate="true" localized="false"
+			code="Hyend2range2si" autocreate="true">
+			<deployment table="hyend2range2si" typecode="32028"/>
+			<sourceElement type="Hyend2Range" qualifier="ranges"
+				cardinality="many"></sourceElement>
+			<targetElement type="Hyend2SearchInterface" qualifier="searchInterfaces"
+				cardinality="many"></targetElement>
+		</relation>
+	
+	</relations>
+
+	<itemtypes>
+	
+		<itemtype code="ComposedType" generate="false"
+			autocreate="false">
+			<attributes>
+				<attribute qualifier="hyend2precedenceRulesEnabled" type="java.lang.Boolean">
+					<modifiers read="true" write="true" optional="true" />
+					<persistence type="property" />
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+	
+		<itemtype code="Hyend2AbstractItem" autocreate="true" generate="true" abstract="true" jaloclass="de.hybris.platform.hyend2.jalo.Hyend2AbstractItem"></itemtype>
+
+		<itemtype code="Hyend2IndexSchema" autocreate="true"
+			generate="true" jaloclass="de.hybris.platform.hyend2.jalo.Hyend2IndexSchema" extends="Hyend2AbstractItem">
+			<deployment table="hyend2indexschema" typecode="32000"/>
+			<attributes>
+				<attribute type="java.lang.String" qualifier="name">
+					<modifiers optional="false"/>
+					<persistence type="property"></persistence>
+				</attribute>
+				<attribute type="java.lang.Boolean" qualifier="active">
+					<persistence type="property"></persistence>
+					<modifiers optional="false"/>
+					<defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+				</attribute>
+				<attribute type="java.util.Date" qualifier="lastIndexTime">
+					<persistence type="property"></persistence>
+					<modifiers write="true" />
+				</attribute>
+			</attributes>
+			
+		</itemtype>
+
+		<itemtype code="Hyend2CasEacConfiguration" autocreate="true"
+			generate="true"  jaloclass="de.hybris.platform.hyend2.jalo.Hyend2CasEacConfiguration"  extends="Hyend2AbstractItem">
+			<deployment table="hyend2casconfiguration" typecode="32005"/>
+			<attributes>
+				<attribute type="java.lang.String" qualifier="name">
+					<persistence type="property"></persistence>
+				</attribute>
+				<attribute type="java.lang.Boolean" qualifier="active">
+					<persistence type="property"></persistence>
+					<modifiers optional="false"/>
+					<defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="casHost">
+					<persistence type="property"></persistence>
+					<modifiers optional="false"/>
+				</attribute>
+				<attribute type="java.lang.Integer" qualifier="casPort">
+					<persistence type="property"></persistence>
+					<modifiers optional="false"/>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="casAppName">
+					<persistence type="property"></persistence>
+					<modifiers optional="false"/>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="eacHost">
+					<persistence type="property"></persistence>
+					<modifiers optional="false"/>
+				</attribute>
+				<attribute type="java.lang.Integer" qualifier="eacPort">
+					<persistence type="property"></persistence>
+					<modifiers optional="false"/>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="eacAppName">
+					<persistence type="property"></persistence>
+					<modifiers optional="false"/>
+				</attribute>
+				<attribute type="java.lang.Boolean" qualifier="autoBaseline">
+					<persistence type="property"></persistence>
+					<modifiers optional="false"/>
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="Hyend2IndexElement" autocreate="true"
+			generate="true"  jaloclass="de.hybris.platform.hyend2.jalo.Hyend2IndexElement"  extends="Hyend2AbstractItem">
+			<deployment table="hyend2indexelement" typecode="32001"/>
+			<attributes>
+				<attribute type="java.lang.String" qualifier="name">
+					<persistence type="property"></persistence>
+				</attribute>
+				<attribute type="java.lang.Boolean" qualifier="active">
+					<persistence type="property"></persistence>
+					<modifiers optional="false"/>
+					<defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+				</attribute>
+				<attribute type="ComposedType" qualifier="type">
+					<persistence type="property"></persistence>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="baselineQuery">
+					<persistence type="property">
+						<columntype database="oracle">
+							<value>varchar2(4000)</value>
+						</columntype>
+						<columntype database="mysql">
+							<value>text</value>
+						</columntype>
+						<columntype database="sqlserver">
+							<value>nvarchar(max)</value>
+						</columntype>
+						<columntype database="hsqldb">
+							<value>LONGVARCHAR</value>
+						</columntype>
+						<columntype>
+							<value>varchar</value>
+						</columntype>
+					</persistence>
+				</attribute>
+				<attribute type="User" qualifier="baselineQueryUser">
+					<persistence type="property"></persistence>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="updateQuery">
+					<persistence type="property">
+						<columntype database="oracle">
+							<value>varchar2(4000)</value>
+						</columntype>
+						<columntype database="mysql">
+							<value>text</value>
+						</columntype>
+						<columntype database="sqlserver">
+							<value>nvarchar(max)</value>
+						</columntype>
+						<columntype database="hsqldb">
+							<value>LONGVARCHAR</value>
+						</columntype>
+						<columntype>
+							<value>varchar</value>
+						</columntype>
+					</persistence>
+				</attribute>
+				<attribute type="User" qualifier="updateQueryUser">
+					<persistence type="property"></persistence>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="deleteQuery">
+					<persistence type="property">
+						<columntype database="oracle">
+							<value>varchar2(4000)</value>
+						</columntype>
+						<columntype database="mysql">
+							<value>text</value>
+						</columntype>
+						<columntype database="sqlserver">
+							<value>nvarchar(max)</value>
+						</columntype>
+						<columntype database="hsqldb">
+							<value>LONGVARCHAR</value>
+						</columntype>
+						<columntype>
+							<value>varchar</value>
+						</columntype>
+					</persistence>
+				</attribute>
+				<attribute type="User" qualifier="deleteQueryUser">
+					<persistence type="property"></persistence>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="Hyend2AbstractAttribute" autocreate="true" generate="true" abstract="true" jaloclass="de.hybris.platform.hyend2.jalo.Hyend2AbstractAttribute" extends="Hyend2AbstractItem">
+			<deployment table="hyend2abstractattribute" typecode="32016"/>
+			<attributes>
+				<attribute type="java.lang.Boolean" qualifier="classification">
+					<persistence type="property"></persistence>
+					<modifiers optional="false"/>
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+				</attribute>
+				<attribute type="ComposedType" qualifier="attributeType">
+					<persistence type="property"></persistence>
+				</attribute>
+				<attribute type="AttributeDescriptor" qualifier="attribute">
+					<persistence type="property"></persistence>
+				</attribute>
+				<attribute type="ClassificationAttribute" qualifier="classificationAttribute">
+					<persistence type="property"></persistence>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="exportId">
+					<persistence type="property"></persistence>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="displayName">
+					<persistence type="property"></persistence>
+				</attribute>
+				<attribute qualifier="propertyType" type="Hyend2AttributeTypeEnum">
+					<modifiers optional="false" />
+					<persistence type="property"></persistence>
+					<defaultvalue>em().getEnumerationValue("Hyend2AttributeTypeEnum","SIMPLE")</defaultvalue>	
+				</attribute>
+				<attribute qualifier="endecaPropertyType" type="Hyend2EndecaPropertyTypeEnum">
+					<persistence type="property"></persistence>
+					<defaultvalue>em().getEnumerationValue("Hyend2EndecaPropertyTypeEnum","STRING")</defaultvalue>
+				</attribute>
+				<attribute qualifier="resolver" type="java.lang.String">
+					<modifiers optional="false" />
+					<persistence type="property"></persistence>
+					<defaultvalue>"spELpropertyResolver"</defaultvalue>
+				</attribute>
+				<attribute qualifier="resolverParameter" type="java.lang.String">
+					<persistence type="property"></persistence>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="Hyend2Property" autocreate="true" generate="true" jaloclass="de.hybris.platform.hyend2.jalo.Hyend2Property"  extends="Hyend2AbstractAttribute">
+			<deployment table="hyend2property" typecode="32003"/>
+		</itemtype>
+
+		<itemtype code="Hyend2Dimension" autocreate="true" generate="true" jaloclass="de.hybris.platform.hyend2.jalo.Hyend2Dimension"  extends="Hyend2AbstractAttribute">
+			<deployment table="hyend2dimension" typecode="32004"/>
+			<attributes>
+				<attribute qualifier="taxonomyResolver" type="java.lang.String">
+					<modifiers optional="true" />
+					<persistence type="property"></persistence>
+				</attribute>
+				</attributes>
+		</itemtype>
+		
+		<itemtype code="Hyend2CategoryDimension" autocreate="true" generate="true" jaloclass="de.hybris.platform.hyend2.jalo.Hyend2CategoryDimension"  extends="Hyend2Dimension">
+			<deployment table="hyend2categorydimension" typecode="32015"/>
+			<attributes>
+				<attribute qualifier="resolver" type="java.lang.String" redeclare="true">
+                                        <modifiers optional="false" />
+                                        <persistence type="property"></persistence>
+                                        <defaultvalue>"categoryResolver"</defaultvalue>
+				</attribute>
+				<attribute type="Category" qualifier="rootCategory">
+					<persistence type="property"></persistence>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="Hyend2EndecaAttributeConfiguration" autocreate="true" generate="true" jaloclass="de.hybris.platform.hyend2.jalo.Hyend2EndecaAttributeConfiguration"  extends="Hyend2AbstractItem">
+			<deployment table="hyend2endeca_ac" typecode="32019"/>
+			<attributes>
+				<attribute type="java.lang.String" qualifier="name">
+					<persistence type="property"></persistence>
+				</attribute>
+				<attribute type="java.lang.Boolean" qualifier="searchable">
+					<persistence type="property"></persistence>
+					<modifiers optional="false" />
+					<defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+				</attribute>
+				<attribute type="java.lang.Boolean" qualifier="searchWildcard">
+					<persistence type="property"></persistence>
+					<modifiers optional="false" />
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+				</attribute>
+				<attribute type="java.lang.Boolean" qualifier="offlineSort">
+					<persistence type="property"></persistence>
+					<modifiers optional="false" />
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+				</attribute>
+				<attribute type="java.lang.Boolean" qualifier="recordFilterable">
+					<persistence type="property"></persistence>
+					<modifiers optional="false" />
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+				</attribute>
+				<attribute type="java.lang.Boolean" qualifier="showWithList">
+					<persistence type="property"></persistence>
+					<modifiers optional="false" />
+					<defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+				</attribute>	
+				<attribute type="java.lang.Boolean" qualifier="showWithRecord">
+					<persistence type="property"></persistence>
+					<modifiers optional="false" />
+					<defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+				</attribute>			
+				<attribute type="java.lang.Boolean" qualifier="rollupKey">
+					<persistence type="property"></persistence>
+					<modifiers optional="false" />
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+				</attribute>		
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="Hyend2EndecaDimensionConfiguration" autocreate="true" generate="true" jaloclass="de.hybris.platform.hyend2.jalo.Hyend2EndecaDimensionConfiguration"  extends="Hyend2EndecaAttributeConfiguration">
+			<deployment table="hyend2endeca_dc" typecode="32020"/>
+			<attributes>
+				<attribute type="java.lang.Boolean" qualifier="autogen">
+					<persistence type="property"></persistence>
+					<modifiers optional="false" />
+					<defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+				</attribute>
+				<attribute type="java.lang.Boolean" qualifier="hidden">
+					<persistence type="property"></persistence>
+					<modifiers optional="false" />
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+				</attribute>
+				<attribute type="java.lang.Boolean" qualifier="hierarchyDimSearch">
+					<persistence type="property"></persistence>
+					<modifiers optional="false" />
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+				</attribute>
+				<attribute type="java.lang.Boolean" qualifier="hierarchyRecordSearch">
+					<persistence type="property"></persistence>
+					<modifiers optional="false" />
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+				</attribute>
+				<attribute type="java.lang.Boolean" qualifier="computeRefinementCount">
+					<persistence type="property"></persistence>
+					<modifiers optional="false" />
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+				</attribute>
+				<attribute type="Hyend2MultiselectType" qualifier="multiselectType">
+					<persistence type="property"></persistence>
+					<modifiers optional="false" />
+					<defaultvalue>em().getEnumerationValue("Hyend2MultiselectType","NONE")</defaultvalue>
+				</attribute>		
+				<attribute type="java.lang.Boolean" qualifier="dynRankingEnabled">
+					<persistence type="property"></persistence>
+					<modifiers optional="false" />
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+				</attribute>	
+				<attribute type="java.lang.Integer" qualifier="dynRankingRefinementCount">
+					<persistence type="property"></persistence>
+					<modifiers optional="false" />
+					<defaultvalue>java.lang.Integer.valueOf(10)</defaultvalue>
+				</attribute>
+				<attribute type="java.lang.Boolean" qualifier="dynRankingMore">
+					<persistence type="property"></persistence>
+					<modifiers optional="false" />
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+				</attribute>
+				<attribute type="Hyend2DynRankSort" qualifier="dynRankingSort">
+					<persistence type="property"></persistence>
+					<modifiers optional="false" />
+					<defaultvalue>em().getEnumerationValue("Hyend2DynRankSort","ALPHA")</defaultvalue>
+				</attribute>
+				<attribute type="Hyend2RefinementsSortOrder" qualifier="refinementsSortOrder">
+					<persistence type="property"></persistence>
+					<modifiers optional="false" />
+					<defaultvalue>em().getEnumerationValue("Hyend2RefinementsSortOrder","ALPHA")</defaultvalue>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="Hyend2SearchInterface" autocreate="true" generate="true" jaloclass="de.hybris.platform.hyend2.jalo.Hyend2SearchInterface">
+			<deployment table="hyend2searchinterface" typecode="32026"/>
+			<attributes>
+				<attribute type="java.lang.String" qualifier="name">
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+	<!-- Cronjobs -->
+	
+	<itemtype code="Hyend2ExportCronJob" autocreate="true" generate="true" extends="CronJob"
+			jaloclass="de.hybris.platform.hyend2.jalo.Hyend2ExportCronJob">
+			<attributes>
+				<attribute type="Hyend2IndexSchema" qualifier="indexSchema">
+					<modifiers optional="false" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="indexOperation">
+					<modifiers optional="false" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.Boolean" qualifier="fullItemList">
+					<modifiers optional="false" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="StringCollection" qualifier="itemListToExport">
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+	</itemtype>
+	
+	<itemtype code="Hyend2PrecedenceRule" autocreate="true" generate="true" extends="Hyend2AbstractItem"
+			jaloclass="de.hybris.platform.hyend2.jalo.Hyend2PrecedenceRule">
+			<deployment table="hyend2precrule" typecode="32022"/>
+			<attributes>
+				<attribute type="Hyend2Dimension" qualifier="fromDimension">
+					<modifiers optional="false" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="Item" qualifier="dimensionValueItem">
+					<modifiers optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="dimensionValueString">
+					<modifiers optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="Hyend2Dimension" qualifier="to">
+					<modifiers optional="false" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="Hyend2PrecedenceRuleTypeEnum" qualifier="ruleType">
+					<modifiers optional="false" />
+					<persistence type="property" />
+					<defaultvalue>em().getEnumerationValue("Hyend2PrecedenceRuleTypeEnum","STANDARD")</defaultvalue>
+				</attribute>
+			</attributes>
+	</itemtype>
+	
+	<itemtype code="Hyend2Range" autocreate="true" generate="true" extends="Hyend2AbstractItem"
+			jaloclass="de.hybris.platform.hyend2.jalo.Hyend2Range">
+			<deployment table="hyend2ranges" typecode="32023"/>
+			<attributes>
+				<attribute type="localized:java.lang.String" qualifier="name">
+					<persistence type="property" />
+				</attribute>
+				<attribute type="Hyend2BoundType" qualifier="boundType">
+					<modifiers optional="false" />
+					<persistence type="property" />
+					<defaultvalue>em().getEnumerationValue("Hyend2BoundType","INTEGER")</defaultvalue>
+				</attribute>
+				<attribute type="Hyend2RangeType" qualifier="rangeType">
+					<modifiers optional="false" />
+					<persistence type="property" />
+					<defaultvalue>em().getEnumerationValue("Hyend2RangeType","RANGE")</defaultvalue>
+				</attribute>
+			</attributes>
+	</itemtype>
+	
+	<itemtype code="Hyend2RangeEntry" autocreate="true" generate="true" extends="Hyend2AbstractItem"
+			jaloclass="de.hybris.platform.hyend2.jalo.Hyend2RangeEntry">
+			<deployment table="hyend2rangentries" typecode="32024"/>
+			<attributes>
+				<attribute type="localized:java.lang.String" qualifier="displayName">
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="lowerBound">
+					<modifiers optional="false" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.Boolean" qualifier="includeLowerBound">
+					<modifiers optional="false" />
+					<persistence type="property" />
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="upperBound">
+					<modifiers optional="false" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.Boolean" qualifier="includeUpperBound">
+					<modifiers optional="false" />
+					<persistence type="property" />
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+				</attribute>
+			</attributes>
+	</itemtype> 
+
+	</itemtypes>
+</items>

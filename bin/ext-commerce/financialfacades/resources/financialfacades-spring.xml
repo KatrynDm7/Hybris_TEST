@@ -1,0 +1,816 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config />
+    <alias name="defaultCategorySearchProductInsurancePopulatorMap" alias="categorySearchProductInsurancePopulatorMap"/>
+	<bean id="defaultCategorySearchProductInsurancePopulatorMap" class="org.springframework.beans.factory.config.MapFactoryBean">
+		<property name="sourceMap">
+			<map key-type="java.lang.String" value-type="de.hybris.platform.converters.Populator">
+                <entry key="insurances_event" value-ref="searchInsuranceProductPopulators"/>
+			</map>
+		</property>
+	</bean>
+	
+	<alias name="defaultSearchProductInsurancePopulator" alias="searchProductInsurancePopulator"/>
+	<bean id="defaultSearchProductInsurancePopulator" class="de.hybris.platform.financialfacades.populators.SearchProductInsurancePopulator">
+		<property name="productService" ref="productService"/>
+		<property name="categoryProductInsurancePopulators" ref="categorySearchProductInsurancePopulatorMap"/>
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+    	<property name="list" ref="commerceSearchResultProductConverter"/>
+    	<property name="add"  ref="searchProductInsurancePopulator"/>
+	</bean>
+
+    <alias name="defaultsearchInsuranceProductPopulators" alias="searchInsuranceProductPopulators"/>
+    <bean id="defaultsearchInsuranceProductPopulators" parent="abstractPopulatorList">
+        <property name="populators">
+            <list>
+                <ref bean="productBundlePopulator"/>
+                <ref bean="productBundleDisablePopulator"/>
+                <ref bean="subscriptionProductBasicPopulator"/>                
+                <ref bean="insuranceProductOneTimeChargeSortingPopulator"/>                
+            </list>
+        </property>
+    </bean>
+    
+    <bean parent="modifyPopulatorList">
+    	<property name="list" ref="productConverter"/>
+    	<property name="add"  ref="productPricePopulatorList"/>
+	</bean>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="productConverter"/>
+        <property name="add" ref="insuranceProductOneTimeChargeSortingPopulator"/>
+    </bean>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="productConverter"/>
+        <property name="add"  ref="insuranceProductPopulator"/>
+    </bean>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="cartConverter"/>
+        <property name="remove" ref="bundleCartPopulator"/>
+    </bean>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="extendedCartConverter"/>
+        <property name="remove" ref="bundleCartPopulator"/>
+    </bean>
+
+    <alias name="insuranceOrderEntryProductConverter" alias="orderEntryProductConverter"/>
+    <bean id="insuranceOrderEntryProductConverter" parent="defaultOrderEntryProductConverter">
+        <property name="populators">
+            <list merge="true">
+                <ref bean="productBundlePopulator"/>
+                <ref bean="subscriptionProductBasicPopulator"/>                
+                <ref bean="productDescriptionPopulator"/>
+            </list>
+        </property>
+    </bean>
+    
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="orderEntryProductConverter"/>
+        <property name="add" ref="insuranceProductOneTimeChargeSortingPopulator"/>
+    </bean>
+    
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="orderEntryConverter"/>
+        <property name="add" ref="insuranceOrderEntryFormDataPopulator"/>
+    </bean>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="cartConverter"/>
+        <property name="add" ref="insuranceCartFormDataPopulator"/>
+    </bean>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="extendedCartConverter"/>
+        <property name="add" ref="insuranceCartFormDataPopulator"/>
+    </bean>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="extendedCartConverter"/>
+        <property name="add" ref="insuranceOrderQuotePopulator"/>
+    </bean>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="cartConverter"/>
+        <property name="add" ref="bundleCartPotentialProductsPopulator"/>
+    </bean>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="cartConverter"/>
+        <property name="add" ref="bundleCartPotentialProductDisableRulePopulator"/>
+    </bean>
+    
+    <alias name="defaultBillingTimeDataComparator" alias="billingTimeDataComparator"/>
+    <bean id="defaultBillingTimeDataComparator"
+          class="de.hybris.platform.financialfacades.util.BillingTimeDataComparator">
+        <property name="top" value="paynow"/>
+        <property name="bottom" value="deductible"/>
+    </bean>
+
+    <alias name="defaultOneTimeChargeEntryDataComparator" alias="oneTimeChargeEntryDataComparator"/>
+    <bean id="defaultOneTimeChargeEntryDataComparator"
+          class="de.hybris.platform.financialfacades.util.OneTimeChargeEntryDataComparator">
+        <property name="billingTimeDataComparator" ref="billingTimeDataComparator"/>
+    </bean>
+    
+    <alias name="defaultInsuranceProductOneTimeChargeSortingPopulator" alias="insuranceProductOneTimeChargeSortingPopulator"/>
+    <bean id="defaultInsuranceProductOneTimeChargeSortingPopulator"
+          class="de.hybris.platform.financialfacades.populators.InsuranceProductOneTimeChargeSortingPopulator">
+        <property name="oneTimeChargeEntryDataComparator" ref="oneTimeChargeEntryDataComparator"/>
+    </bean>
+
+    <alias name="insuranceBillingTimePopulator" alias="billingTimePopulator"/>
+    <bean id="insuranceBillingTimePopulator" class="de.hybris.platform.financialfacades.populators.InsuranceBillingTimePopulator" />
+
+    <alias name="defaultInsuranceProductPopulator" alias="insuranceProductPopulator"/>
+    <bean id="defaultInsuranceProductPopulator" class="de.hybris.platform.financialfacades.populators.DefaultInsuranceProductPopulator">
+        <property name="categoryConverter" ref="categoryConverter"/>
+        <property name="modelService" ref="modelService"/>
+    </bean>
+    
+    <alias name="defaultInsuranceOrderEntryFormDataPopulator" alias="insuranceOrderEntryFormDataPopulator"/>
+    <bean id="defaultInsuranceOrderEntryFormDataPopulator" class="de.hybris.platform.financialfacades.populators.InsuranceOrderEntryFormDataPopulator">
+        <property name="getYFormDefinitionsForProductStrategy" ref="getYFormDefinitionsForProductStrategy"/>
+        <property name="insuranceCheckoutHelper" ref="insuranceCheckoutHelper"/>
+        <property name="yFormFacade" ref="yFormFacade"/>
+    </bean>
+    
+    <alias name="defaultInsuranceCartFormDataPopulator" alias="insuranceCartFormDataPopulator"/>
+    <bean id="defaultInsuranceCartFormDataPopulator" class="de.hybris.platform.financialfacades.populators.InsuranceCartFormDataPopulator">
+        <property name="customerFormPrePopulateStrategy" ref="customerFormPrePopulateStrategy"/>
+    </bean>
+        
+    <alias name="defaultInsuranceOrderEntryProductThumbnailImagePopulator"
+           alias="insuranceOrderEntryProductThumbnailImagePopulator"/>
+    <bean id="defaultInsuranceOrderEntryProductThumbnailImagePopulator" class="de.hybris.platform.financialfacades.populators.InsuranceOrderEntryProductThumbnailImagePopulator">
+        <property name="productThumbnailImagePopulator" ref="insuranceProductThumbnailImagePopulator"/>
+    </bean>
+    
+    <alias name="defaultInsuranceProductThumbnailImagePopulator" alias="insuranceProductThumbnailImagePopulator"/>
+    <bean id="defaultInsuranceProductThumbnailImagePopulator" class="de.hybris.platform.financialfacades.populators.InsuranceProductThumbnailImagePopulator">
+        <property name="imagePopulator" ref="imagePopulator"/>
+    </bean>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="orderEntryConverter"/>
+        <property name="add" ref="insuranceOrderEntryProductThumbnailImagePopulator"/>
+    </bean>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="productConverter"/>
+        <property name="add" ref="insuranceProductThumbnailImagePopulator"/>
+    </bean>
+
+    <alias name="insuranceProductConfiguredPopulator" alias="productConfiguredPopulator"/>
+    <bean id="insuranceProductConfiguredPopulator" parent="accProductConfiguredPopulator">
+        <property name="populators">
+            <map key-type="de.hybris.platform.commercefacades.product.ProductOption" merge="true">
+                <entry key="THUMBNAIL" value-ref="insuranceProductThumbnailImagePopulator"/>
+            </map>
+        </property>
+    </bean>
+
+    <alias name="defaultComparisonPanelProductConverter" alias="comparisonPanelProductConverter"/>
+    <bean id="defaultComparisonPanelProductConverter" parent="defaultProductConverter">
+        <property name="targetClass" value="de.hybris.platform.commercefacades.product.data.ProductData"/>
+        <property name="populators">
+            <list merge="true">
+                <ref bean="productBundlePopulator"/>
+                <ref bean="productBundleDisablePopulator"/>
+                <ref bean="subscriptionProductBasicPopulator"/>               
+                <ref bean="productQuotationPricePopulator"/>               
+                <ref bean="insuranceProductOneTimeChargeSortingPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultQuotationPricingFacade" alias="quotationPricingFacade"/>
+    <bean id="defaultQuotationPricingFacade" class="de.hybris.platform.financialfacades.facades.impl.DefaultQuotationPricingFacade">       
+     	<property name="strategies">
+            <map>
+                <entry key-ref="travelInsuranceProviderName" value-ref="travelInsuranceQuotationPricingStrategy" />
+                <entry key-ref="propertyHomeownersInsuranceProviderName" value-ref="homeownersInsuranceQuotationPricingStrategy" />
+                <entry key-ref="propertyRentersInsuranceProviderName" value-ref="rentersInsuranceQuotationPricingStrategy" />
+                <entry key-ref="autoInsuranceProviderName" value-ref="autoQuotationPricingStrategy" />
+                <entry key-ref="lifeInsuranceProviderName" value-ref="lifeQuotationPricingStrategy" />
+            </map>
+        </property>
+    </bean>
+
+    <alias name="defaultProductQuotationPricePopulator" alias="productQuotationPricePopulator"/>
+	<bean id="defaultProductQuotationPricePopulator" class="de.hybris.platform.financialfacades.populators.DefaultProductQuotationPricePopulator" parent="subscriptionProductPricePlanPopulator" >	    
+	    <property name="quotationPricingFacade" ref="quotationPricingFacade"/>
+	    <property name="priceFactory" ref="priceDataFactory"/>	    
+	    <property name="quotationServices" ref="quotationServicesMap"/>
+	</bean>	
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="comparisonPanelProductConverter"/>
+        <property name="remove" ref="productPricePopulatorList"/>
+    </bean>   
+
+    <alias name="defaultPropertyHomeownersInsuranceQuotationPricingStrategy" alias="homeownersInsuranceQuotationPricingStrategy"/>
+    <bean id="defaultPropertyHomeownersInsuranceQuotationPricingStrategy" class="de.hybris.platform.financialfacades.strategies.impl.PropertyHomeownersInsuranceQuotationPricingStrategy" init-method="initStrategy">
+        <property name="mainProductRegexp" value="(.*)PRO_PROPERTY_HOMEOWNERS(.*)"/>
+    </bean>
+
+    <alias name="defaultPropertyRentersInsuranceQuotationPricingStrategy" alias="rentersInsuranceQuotationPricingStrategy"/>
+    <bean id="defaultPropertyRentersInsuranceQuotationPricingStrategy" class="de.hybris.platform.financialfacades.strategies.impl.PropertyRentersInsuranceQuotationPricingStrategy" init-method="initStrategy">
+        <property name="mainProductRegexp" value="(.*)PRO_PROPERTY_RENTERS(.*)"/>
+    </bean>
+    
+    <alias name="defaultAutoQuotationPricingStrategy" alias="autoQuotationPricingStrategy"/>
+    <bean id="defaultAutoQuotationPricingStrategy" class="de.hybris.platform.financialfacades.strategies.impl.AutoQuotationPricingStrategy" init-method="initStrategy">
+        <property name="mainProductRegexp" value="(.*)(AUTO_ANNUALLY|AUTO_MONTHLY)(.*)"/>
+        <property name="dateFormat" value="yyyy-mm-dd" />
+    </bean>  
+    
+     <alias name="defaultTravelInsuranceQuotationPricingStrategy" alias="travelInsuranceQuotationPricingStrategy"/>
+    <bean id="defaultTravelInsuranceQuotationPricingStrategy" class="de.hybris.platform.financialfacades.strategies.impl.TravelInsuranceQuotationPricingStrategy" init-method="initStrategy">
+        <property name="mainProductRegexp" value="(.*)(GOLD|SILVER|BUDGET)(.*)"/>
+    </bean>   
+
+    <alias name="defaultLifeQuotationPricingStrategy" alias="lifeQuotationPricingStrategy"/>
+    <bean id="defaultLifeQuotationPricingStrategy" class="de.hybris.platform.financialfacades.strategies.impl.LifeQuotationPricingStrategy"  init-method="initStrategy">
+        <property name="mainProductRegexp" value="^(LIFE)$"/>
+    </bean>
+    
+    <alias name="defaultInsuranceCartFacade" alias="cartFacade"/>
+    <bean id="defaultInsuranceCartFacade" class="de.hybris.platform.financialfacades.facades.impl.DefaultInsuranceCartFacade" parent="defaultBundleCartFacade">
+        <property name="addToCartStrategies" ref="insuranceAddToCartStrategyList"/>
+        <property name="quotationFacade" ref="quotationPricingFacade"/>
+        <property name="insuranceQuoteFacade" ref="quoteFacade"/>
+        <property name="saveCartFacade" ref="saveCartFacade"/>
+        <property name="userFacade" ref="userFacade"/>
+        <property name="sessionService" ref="sessionService"/>
+        <property name="categoryConverter" ref="categoryConverter"/>
+    </bean>
+	
+    <alias name="defaultInsuranceAddToCartStrategyList" alias="insuranceAddToCartStrategyList"/>
+    <util:list id="defaultInsuranceAddToCartStrategyList" value-type="de.hybris.platform.financialfacades.strategies.InsuranceAddToCartStrategy">
+        <ref bean="travelInsuranceAddToCartStrategy"/>
+        <ref bean="propertyHomeownersInsuranceAddToCartStrategy"/>
+        <ref bean="propertyRentersInsuranceAddToCartStrategy"/>
+        <ref bean="autoInsuranceAddToCartStrategy"/>
+        <ref bean="lifeInsuranceAddToCartStrategy"/>
+    </util:list>
+
+    <alias name="defaultAbstractInsuranceAddToCartStrategy" alias="abstractInsuranceAddToCartStrategy"/>
+    <bean id="defaultAbstractInsuranceAddToCartStrategy" abstract="true"
+          class="de.hybris.platform.financialfacades.strategies.impl.AbstractInsuranceAddToCartStrategy">
+        <property name="cartService" ref="cartService"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="productService" ref="productService"/>
+        <property name="sessionService" ref="sessionService"/>       
+    </bean>
+
+    <alias name="defaultTravelInsuranceAddToCartStrategy" alias="travelInsuranceAddToCartStrategy"/>
+    <bean id="defaultTravelInsuranceAddToCartStrategy" parent="abstractInsuranceAddToCartStrategy"
+          class="de.hybris.platform.financialfacades.strategies.impl.TravelInsuranceAddToCartStrategy">
+        <property name="defaultCategoryCode" value="insurances_travel"/>
+    </bean>
+
+    <alias name="defaultPropertyRentersInsuranceAddToCartStrategy" alias="propertyRentersInsuranceAddToCartStrategy"/>
+    <bean id="defaultPropertyRentersInsuranceAddToCartStrategy" parent="abstractInsuranceAddToCartStrategy"
+          class="de.hybris.platform.financialfacades.strategies.impl.PropertyInsuranceAddToCartStrategy">
+        <property name="defaultCategoryCode" value="insurances_property_renters"/>
+        <property name="addressService" ref="addressService"/>
+    </bean>    
+    
+    <alias name="defaultPropertyHomeownersInsuranceAddToCartStrategy" alias="propertyHomeownersInsuranceAddToCartStrategy"/>
+    <bean id="defaultPropertyHomeownersInsuranceAddToCartStrategy" parent="abstractInsuranceAddToCartStrategy"
+          class="de.hybris.platform.financialfacades.strategies.impl.PropertyInsuranceAddToCartStrategy">
+        <property name="defaultCategoryCode" value="insurances_property_homeowners"/>
+        <property name="addressService" ref="addressService"/>
+    </bean>
+
+    <alias name="defaultAutoInsuranceAddToCartStrategy" alias="autoInsuranceAddToCartStrategy"/>
+    <bean id="defaultAutoInsuranceAddToCartStrategy" parent="abstractInsuranceAddToCartStrategy"
+          class="de.hybris.platform.financialfacades.strategies.impl.AutoInsuranceAddToCartStrategy">
+        <property name="defaultCategoryCode" value="insurances_auto"/>
+    </bean>
+
+    <alias name="defaultLifeInsuranceAddToCartStrategy" alias="lifeInsuranceAddToCartStrategy"/>
+    <bean id="defaultLifeInsuranceAddToCartStrategy" parent="abstractInsuranceAddToCartStrategy"
+          class="de.hybris.platform.financialfacades.strategies.impl.LifeInsuranceAddToCartStrategy">
+        <property name="defaultCategoryCode" value="insurances_life"/>
+    </bean>
+
+    <bean id="mockQuotePolicyStrategy" class="de.hybris.platform.financialfacades.strategies.impl.MockQuotePolicyStrategy">
+        <property name="catalogVersionService" ref="catalogVersionService"/>
+        <property name="productConverter" ref="productConverter"/>
+        <property name="productService" ref="productService"/>
+        <property name="productConfiguredPopulator" ref="productConfiguredPopulator"/>
+    </bean>
+
+    <alias name="defaultInsurancePolicyFacade" alias="policyFacade"/>
+    <bean id="defaultInsurancePolicyFacade" class="de.hybris.platform.financialfacades.facades.impl.DefaultInsurancePolicyFacade">
+        <property name="quotePolicyStrategy" ref="mockQuotePolicyStrategy"/>
+        <property name="customerInsurancePolicyStrategy" ref="customerInsurancePolicyStrategy" />
+    </bean>
+
+    <alias alias="currentFactoryFindPricingStrategy" name="currentQuotationPricingStrategy"/>
+	<bean id="currentQuotationPricingStrategy" class="de.hybris.platform.financialfacades.strategies.impl.QuotationPriceFactoryStrategy"  parent="currentFactoryFindBundlePricingStrategy">		 
+		 <property name="quotationServices" ref="quotationServicesMap"/>
+		 <property name="quotationPricingFacade" ref="quotationPricingFacade"/>       
+	</bean>
+
+    <alias alias="globalDateFormat" name="defaultGlobalDateFormat"/>
+    <bean id="defaultGlobalDateFormat" class="java.lang.String">
+        <constructor-arg type="java.lang.String" value="#{configurationService.configuration.getProperty('global.date.format')}"/>
+    </bean>
+
+    <alias alias="pdfDocumentGenerationService" name="fopDocumentGenerationService"/>
+    <bean id="fopDocumentGenerationService" class="de.hybris.platform.financialfacades.services.document.generation.pdf.fop.impl.FopDocumentGenerationService">
+    </bean>
+
+    <alias alias="policyDocumentDataProcessService" name="mockPolicyDocumentDataProcessStrategy"/>
+    <bean id="mockPolicyDocumentDataProcessStrategy" class="de.hybris.platform.financialfacades.services.document.generation.pdf.fop.impl.MockPolicyDocumentDataProcessStrategy">
+    </bean>
+
+    <alias alias="documentGenerationFacade" name="defaultDocumentGenerationFacade"/>
+    <bean id="defaultDocumentGenerationFacade" class="de.hybris.platform.financialfacades.facades.impl.DefaultDocumentGenerationFacade">
+        <property name="documentGenerationService" ref="pdfDocumentGenerationService"/>
+        <property name="policyDocumentDataProcessService" ref="policyDocumentDataProcessService"/>
+    </bean>
+
+    <alias alias="policyDocumentContextFactory" name="defaultPolicyDocumentContextFactory"/>
+    <bean id="defaultPolicyDocumentContextFactory" class="de.hybris.platform.financialfacades.services.document.generation.pdf.fop.impl.DefaultPolicyDocumentContextFactory">
+        <property name="baseSiteService" ref="baseSiteService"/>
+    </bean>
+
+    <bean id="abstractPolicyContext" class="de.hybris.platform.financialfacades.process.xslfo.context.AbstractPolicyContext"
+          abstract="true">
+        <property name="siteBaseUrlResolutionService" ref="siteBaseUrlResolutionService"/>
+        <property name="urlEncoderService" ref="urlEncoderService"/>
+    </bean>
+
+    <alias name="defaultCustomerFormPrePopulateStrategy" alias="customerFormPrePopulateStrategy"/>
+    <bean id="defaultCustomerFormPrePopulateStrategy"
+          class="de.hybris.platform.financialfacades.strategies.impl.DefaultCustomerFormPrePopulateStrategy">
+        <property name="sessionService" ref="sessionService"/>
+        <property name="cartFacade" ref="cartFacade"/>
+        <property name="customerFacade" ref="customerFacade"/>
+    </bean>
+
+    <alias name="defaultInsuranceCheckoutHelper" alias="insuranceCheckoutHelper"/>
+    <bean id="defaultInsuranceCheckoutHelper"
+          class="de.hybris.platform.financialfacades.util.DefaultInsuranceCheckoutHelper">
+        <property name="yFormFacade" ref="yFormFacade"/>
+        <property name="customerFormPrePopulateStrategy" ref="customerFormPrePopulateStrategy"/>
+    </bean>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="orderConverter"/>
+        <property name="add" ref="insuranceOrderQuotePopulator"/>
+    </bean>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="orderConverter"/>
+        <property name="add" ref="insurancePolicyResponsePopulator"/>
+    </bean>
+
+    <alias name="defaultInsurancePolicyResponsePopulator" alias="insurancePolicyResponsePopulator"/>
+    <bean id="defaultInsurancePolicyResponsePopulator" class="de.hybris.platform.financialfacades.populators.InsurancePolicyResponsePopulator">
+        <property name="dateFormatForDisplay" ref="globalDateFormat"/>
+    </bean>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="orderConverter"/>
+        <property name="add" ref="insuranceOrderPolicyPopulator"/>
+    </bean>
+
+    <alias name="defaultInsuranceOrderPolicyPopulator" alias="insuranceOrderPolicyPopulator"/>
+    <bean id="defaultInsuranceOrderPolicyPopulator" class="de.hybris.platform.financialfacades.populators.InsuranceOrderPolicyPopulator">
+        <property name="insurancePolicyDetailsPopulator" ref="insurancePolicyDetailsPopulator"/>
+    </bean>
+
+    <alias name="defaultInsurancePolicyDetailsPopulator" alias="insurancePolicyDetailsPopulator"/>
+    <bean id="defaultInsurancePolicyDetailsPopulator"
+          class="de.hybris.platform.financialfacades.populators.InsurancePolicyDetailsPopulator">
+        <property name="detailsPopulatorsMap" ref="insurancePolicyDetailsPopulatorMap"/>
+    </bean>
+
+    <alias name="defaultInsurancePolicyDetailsPopulatorMap" alias="insurancePolicyDetailsPopulatorMap"/>
+    <util:map id="defaultInsurancePolicyDetailsPopulatorMap">
+        <entry key="insurances_travel" value-ref="travelInsurancePolicyDetailsPopulatorList"/>
+        <entry key="insurances_property_homeowners" value-ref="propertyInsurancePolicyDetailsPopulatorList"/>
+        <entry key="insurances_property_renters" value-ref="propertyInsurancePolicyDetailsPopulatorList"/>
+        <entry key="insurances_event" value-ref="eventInsurancePolicyDetailsPopulatorList"/>
+        <entry key="insurances_auto" value-ref="autoInsurancePolicyDetailsPopulatorList"/>
+        <entry key="insurances_life" value-ref="lifeInsurancePolicyDetailsPopulatorList"/>
+    </util:map>
+
+    <alias name="defaultTravelInsurancePolicyDetailsPopulatorList"
+           alias="travelInsurancePolicyDetailsPopulatorList"/>
+    <util:list id="defaultTravelInsurancePolicyDetailsPopulatorList">
+        <ref bean="travelInsurancePolicyHolderDetailsPopulator"/>
+        <ref bean="travelInsuranceTravellersDetailsPopulator"/>
+    </util:list>
+    
+    <alias name="defaultEventInsurancePolicyDetailsPopulatorList"
+           alias="eventInsurancePolicyDetailsPopulatorList"/>
+    <util:list id="defaultEventInsurancePolicyDetailsPopulatorList">
+        <ref bean="eventInsurancePolicyHolderDetailsPopulator"/>      
+    </util:list>
+
+    <alias name="defaultAutoInsurancePolicyDetailsPopulatorList"
+           alias="autoInsurancePolicyDetailsPopulatorList"/>
+    <util:list id="defaultAutoInsurancePolicyDetailsPopulatorList">
+        <ref bean="autoInsurancePolicyHolderDetailsPopulator"/>   
+    </util:list>
+    
+    <alias name="defaultLifeInsurancePolicyDetailsPopulatorList"
+           alias="lifeInsurancePolicyDetailsPopulatorList"/>
+    <util:list id="defaultLifeInsurancePolicyDetailsPopulatorList">
+        <ref bean="lifeInsurancePolicyHolderDetailsPopulator"/>   
+    </util:list>
+
+    <alias name="defaultTravelInsuranceQuoteReviewDetailsPopulatorList"
+           alias="travelInsuranceQuoteReviewDetailsPopulatorList"/>
+    <util:list id="defaultTravelInsuranceQuoteReviewDetailsPopulatorList">
+        <ref bean="travelInsurancePolicyHolderDetailsPopulator"/>
+        <ref bean="travelInsuranceTravellersDetailsPopulator"/>
+    </util:list>
+
+    <alias name="defaultPropertyInsurancePolicyDetailsPopulatorList"
+           alias="propertyInsurancePolicyDetailsPopulatorList"/>
+    <util:list id="defaultPropertyInsurancePolicyDetailsPopulatorList">
+        <ref bean="defaultPropertyInsuranceDetailsPopulator"/>
+    </util:list>
+    
+    <alias name="defaultPropertyInsuranceQuoteDetailsPopulatorList"
+           alias="propertyInsuranceQuoteDetailsPopulatorList"/>
+    <util:list id="defaultPropertyInsuranceQuoteDetailsPopulatorList">
+        <ref bean="defaultPropertyInsuranceDetailsPopulator"/>
+    </util:list>
+    
+    <alias name="defaultEventInsuranceQuoteDetailsPopulatorList"
+           alias="eventInsuranceQuoteDetailsPopulatorList"/>
+    <util:list id="defaultEventInsuranceQuoteDetailsPopulatorList">
+        <ref bean="eventInsurancePolicyHolderDetailsPopulator"/>      
+    </util:list>
+
+    <alias name="defaultAutoInsuranceQuoteDetailsPopulatorList"
+           alias="autoInsuranceQuoteDetailsPopulatorList"/>
+    <util:list id="defaultAutoInsuranceQuoteDetailsPopulatorList">
+        <ref bean="autoInsurancePolicyHolderDetailsPopulator"/>
+    </util:list>
+    
+    <alias name="defaultLifeInsuranceQuoteDetailsPopulatorList"
+           alias="lifeInsuranceQuoteDetailsPopulatorList"/>
+    <util:list id="defaultLifeInsuranceQuoteDetailsPopulatorList">
+        <ref bean="lifeInsurancePolicyHolderDetailsPopulator"/>
+    </util:list>
+
+    <bean id="abstractInsuranceDetailsPopulator" abstract="true"
+          class="de.hybris.platform.financialfacades.populators.AbstractInsuranceDetailsPopulator">
+    </bean>
+
+    <alias name="defaultTravelInsurancePolicyHolderDetailsPopulator"
+           alias="travelInsurancePolicyHolderDetailsPopulator"/>
+    <bean id="defaultTravelInsurancePolicyHolderDetailsPopulator" parent="abstractInsuranceDetailsPopulator"
+          class="de.hybris.platform.financialfacades.populators.TravelInsurancePolicyHolderDetailsPopulator">
+    </bean>
+    
+    <alias name="defaultEventInsurancePolicyHolderDetailsPopulator"
+           alias="eventInsurancePolicyHolderDetailsPopulator"/>
+    <bean id="defaultEventInsurancePolicyHolderDetailsPopulator" parent="abstractInsuranceDetailsPopulator"
+          class="de.hybris.platform.financialfacades.populators.EventInsurancePolicyHolderDetailsPopulator">
+    </bean>
+
+    <alias name="defaultAutoInsurancePolicyHolderDetailsPopulator"
+           alias="autoInsurancePolicyHolderDetailsPopulator"/>
+    <bean id="defaultAutoInsurancePolicyHolderDetailsPopulator" parent="abstractInsuranceDetailsPopulator"
+          class="de.hybris.platform.financialfacades.populators.AutoInsurancePolicyHolderDetailsPopulator">
+    </bean>
+    
+    <alias name="defaultLifeInsurancePolicyHolderDetailsPopulator"
+           alias="lifeInsurancePolicyHolderDetailsPopulator"/>
+    <bean id="defaultLifeInsurancePolicyHolderDetailsPopulator" parent="abstractInsuranceDetailsPopulator"
+          class="de.hybris.platform.financialfacades.populators.LifeInsurancePolicyHolderDetailsPopulator">
+    </bean>
+
+    <alias name="defaultTravelInsuranceTravellersDetailsPopulator" alias="travelInsuranceTravellersDetailsPopulator"/>
+    <bean id="defaultTravelInsuranceTravellersDetailsPopulator" parent="abstractInsuranceDetailsPopulator"
+          class="de.hybris.platform.financialfacades.populators.TravelInsuranceTravellersDetailsPopulator">
+    </bean>
+
+    <alias name="defaultPropertyInsuranceDetailsPopulator"
+           alias="propertyInsuranceDetailsPopulator"/>
+    <bean id="defaultPropertyInsuranceDetailsPopulator" parent="abstractInsuranceDetailsPopulator"
+          class="de.hybris.platform.financialfacades.populators.PropertyInsuranceDetailsPopulator">
+    </bean>
+
+    <!-- END Populate the Policy Data to the Order -->
+
+    <alias name="defaultInsuranceQuoteReviewDetailsPopulatorMap" alias="insuranceQuoteReviewDetailsPopulatorMap"/>
+    <util:map id="defaultInsuranceQuoteReviewDetailsPopulatorMap">
+        <entry key="insurances_travel" value-ref="travelInsuranceQuoteReviewDetailsPopulatorList"/>
+        <entry key="insurances_property_homeowners" value-ref="propertyInsuranceQuoteDetailsPopulatorList"/>
+        <entry key="insurances_property_renters" value-ref="propertyInsuranceQuoteDetailsPopulatorList"/>
+        <entry key="insurances_event" value-ref="eventInsuranceQuoteDetailsPopulatorList"/>
+        <entry key="insurances_auto" value-ref="autoInsuranceQuoteDetailsPopulatorList"/>
+        <entry key="insurances_life" value-ref="lifeInsuranceQuoteDetailsPopulatorList"/>
+    </util:map>
+    
+    <alias name="defaultInsuranceQuoteReviewDetailsPopulator" alias="insuranceQuoteReviewDetailsPopulator"/>
+    <bean id="defaultInsuranceQuoteReviewDetailsPopulator"
+          class="de.hybris.platform.financialfacades.populators.InsuranceQuoteReviewDetailsPopulator">
+        <property name="detailsPopulatorsMap" ref="insuranceQuoteReviewDetailsPopulatorMap"/>
+    </bean>
+
+	<alias name="defaultReplaceCartMergingStrategy" alias="commerceCartMergingStrategy" />
+	<bean id="defaultReplaceCartMergingStrategy" class="de.hybris.platform.financialfacades.order.impl.ReplaceCartMergingStrategy" parent="abstractCommerceCartStrategy">
+		<property name="userService" ref="userService" />
+		<property name="commerceCartService" ref="commerceCartService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="commerceAddToCartStrategy" ref="commerceAddToCartStrategy" />
+		<property name="mergeAction" value="OVERWRITE" />
+	</bean>
+    
+
+    <alias name="defaultInsuranceCheckoutFacade" alias="insuranceCheckoutFacade"/>
+    <bean id="defaultInsuranceCheckoutFacade" class="de.hybris.platform.financialfacades.facades.impl.DefaultInsuranceCheckoutFacade">
+        <property name="checkoutFacade" ref="checkoutFacade"/>
+    </bean>
+   
+    <alias name="defaultInsuranceQuotePopulator" alias="insuranceQuotePopulator"/>
+    <bean id="defaultInsuranceQuotePopulator" class="de.hybris.platform.financialfacades.populators.InsuranceQuotePopulator">
+        <property name="dateFormatForDisplay" ref="globalDateFormat"/>
+    </bean>
+
+    <alias name="defaultInsuranceQuoteConverter" alias="insuranceQuoteConverter"/>
+    <bean id="defaultInsuranceQuoteConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.commercefacades.quotation.InsuranceQuoteData"/>
+        <property name="populators">
+            <list>
+                <ref bean="defaultInsuranceQuotePopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultInsurancePolicyListPopulator" alias="insurancePolicyListPopulator"/>
+    <bean id="defaultInsurancePolicyListPopulator" class="de.hybris.platform.financialfacades.populators.InsurancePolicyListPopulator">
+        <property name="dateFormatForDisplay" ref="globalDateFormat"/>
+    </bean>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="cartConverter"/>
+        <property name="add" ref="insuranceOrderQuotePopulator"/>
+    </bean>
+
+    <alias name="defaultAgentFacade" alias="agentFacade"/>
+    <bean id="defaultAgentFacade" class="de.hybris.platform.financialfacades.facades.impl.DefaultAgentFacade">
+        <property name="categoryService" ref="categoryService"/>
+        <property name="agentService" ref="agentService"/>
+        <property name="agentConverter" ref="agentConverter"/>
+        <property name="categoryConverter" ref="categoryConverter"/>
+        <property name="eventService" ref="eventService"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
+        <property name="baseSiteService" ref="baseSiteService"/>
+        <property name="baseStoreService" ref="baseStoreService"/>
+        <property name="cartService" ref="cartService"/>
+        <property name="userService" ref="userService"/>
+    </bean>
+
+    <alias name="defaultAgentPopulator" alias="agentPopulator"/>
+    <bean id="defaultAgentPopulator" class="de.hybris.platform.financialfacades.populators.AgentDataPopulator" >
+        <property name="categoryConverter" ref="categoryConverter"/>
+        <property name="addressConverter" ref="addressConverter"/>
+    </bean>
+
+    <alias name="defaultAgentConverter" alias="agentConverter"/>
+    <bean id="defaultAgentConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.financialfacades.findagent.data.AgentData"/>
+        <property name="populators">
+            <list>
+                <ref bean="agentPopulator"/>
+                <ref bean="customerPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultPolicyCreationSubmitOrderStrategy" alias="policyCreationSubmitOrderStrategy" />
+    <bean id="defaultPolicyCreationSubmitOrderStrategy" class="de.hybris.platform.financialfacades.order.strategies.impl.PolicyCreationSubmitOrderStrategy">
+    	<property name="modelService" ref="modelService" />
+        <property name="policyServiceFacade" ref="mockPolicyServiceFacade"/>
+        <property name="dateFormat" ref="globalDateFormat"/>
+    </bean>
+
+	
+	<alias alias="policyPdfUrlGeneratorStrategy" name="defaultPolicyPdfUrlGeneratorStrategy" />
+	<bean id="defaultPolicyPdfUrlGeneratorStrategy" class="de.hybris.platform.financialfacades.strategies.impl.DefaultPolicyPdfUrlGenertorStrategy">
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+	
+	<!-- Listing ofpolicies via the order -->
+	<alias alias="insurancePolicyListConverter" name="defaultInsurancePolicyListConverter"/>
+    <bean id="defaultInsurancePolicyListConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.insurance.data.InsurancePolicyListingData"/>
+        <property name="populators">
+            <list merge="true">
+                <ref bean="insurancePolicyListPopulator"/>
+            </list>
+        </property>
+    </bean>
+	
+	<alias alias="customerInsurancePolicyStrategy" name="defaultCustomerInsurancePolicyStrategy" />
+	<bean id="defaultCustomerInsurancePolicyStrategy" class="de.hybris.platform.financialfacades.strategies.impl.DefaultCustomerInsurancePolicyStrategy">
+		<property name="userService" ref="userService" />
+		<property name="policyListingConverter" ref="insurancePolicyListConverter" />
+		<property name="productConverter" ref="productConverter" />
+	</bean>
+
+    <!--Checkout Progress Bar for the StoreFront-->
+    <bean id="mockAlwaysValidStepValidationStrategy"
+          class="de.hybris.platform.financialfacades.strategies.impl.MockAlwaysValidStepValidationStrategy"
+          abstract="true" />
+
+    <bean id="mockPropertyControllableValidityStepValidationStrategy"
+          class="de.hybris.platform.financialfacades.strategies.impl.MockPropertyControllableValidityStepValidationStrategy"
+          >
+        <property name="configurationService" ref="configurationService"/>
+        <property name="propertyFlagKey" value="mockPropertyControllableValidityStepValidationStrategy.validity"/>
+    </bean>
+
+    <bean id="alwaysValidValidationStrategy" parent="mockAlwaysValidStepValidationStrategy"/>
+    <bean id="personalDetailsFormValidationStrategy" class="de.hybris.platform.financialfacades.strategies.impl.PersonalDetailsFormValidationStrategy"/>
+
+    <util:list id="genericValidationStrategyList" value-type="de.hybris.platform.financialfacades.strategies.StepValidationStrategy">
+        <ref bean="alwaysValidValidationStrategy"/>
+    </util:list>
+    <util:list id="chooseCoverValidationStrategyList" value-type="de.hybris.platform.financialfacades.strategies.StepValidationStrategy">
+        <ref bean="alwaysValidValidationStrategy"/>
+    </util:list>
+    <util:list id="addOptionValidationStrategyList" value-type="de.hybris.platform.financialfacades.strategies.StepValidationStrategy">
+        <ref bean="mockPropertyControllableValidityStepValidationStrategy"/>
+    </util:list>
+    <util:list id="personalDetailsValidationStrategyList" value-type="de.hybris.platform.financialfacades.strategies.StepValidationStrategy">
+        <ref bean="personalDetailsFormValidationStrategy"/>
+    </util:list>
+    <util:list id="quoteReviewValidationStrategyList" value-type="de.hybris.platform.financialfacades.strategies.StepValidationStrategy">
+        <!--Quote review page validation should be consists of the validation strategy of all the other previous steps.-->
+        <ref bean="alwaysValidValidationStrategy"/>
+    </util:list>
+
+    <bean id="quoteRecordedStepVisitedStrategy"
+          class="de.hybris.platform.financialfacades.strategies.impl.QuoteRecordedStepVisitedStrategy">
+        <property name="insuranceCartFacade" ref="cartFacade"/>
+    </bean>
+    <bean id="initialStepVisitedStrategy"
+          class="de.hybris.platform.financialfacades.strategies.impl.InitialStepVisitedStrategy">
+    </bean>
+    
+    <bean id="postCartStepVisitedStrategy"
+          class="de.hybris.platform.financialfacades.strategies.impl.PostCartStepVisitedStrategy">
+          <property name="cartService" ref="cartService"/>
+    </bean>
+    
+    <util:list id="genericIsVisitedAnalysisStrategyList" value-type="de.hybris.platform.financialfacades.strategies.StepVisitedAnalysisStrategy">
+        <ref bean="quoteRecordedStepVisitedStrategy"/>
+    </util:list>
+    <util:list id="chooseCoverIsVisitedAnalysisStrategyList" value-type="de.hybris.platform.financialfacades.strategies.StepVisitedAnalysisStrategy">
+        <ref bean="initialStepVisitedStrategy"/>
+        <ref bean="quoteRecordedStepVisitedStrategy"/>
+    </util:list>
+    <util:list id="whatsIncludedIsVisitedAnalysisStrategyList" value-type="de.hybris.platform.financialfacades.strategies.StepVisitedAnalysisStrategy">
+       	<ref bean="postCartStepVisitedStrategy"/>
+        <ref bean="quoteRecordedStepVisitedStrategy"/>
+    </util:list>
+
+    <bean id="quoteStatusStepEnabledStrategy"
+          class="de.hybris.platform.financialfacades.strategies.impl.QuoteStatusStepEnabledStrategy">
+        <property name="cartFacade" ref="cartFacade"/>
+    </bean>
+    <util:list id="genericIsEnabledAnalysisStrategyList" value-type="de.hybris.platform.financialfacades.strategies.StepEnabledAnalysisStrategy">
+        <ref bean="quoteStatusStepEnabledStrategy"/>
+    </util:list>
+    <!--END Checkout Progress Bar for the StoreFront-->
+
+    <alias name="mockPolicyServiceFacade" alias="policyServiceFacade"/>
+    <bean id="mockPolicyServiceFacade"
+          class="de.hybris.platform.financialfacades.facades.impl.MockPolicyServiceFacade">
+        <property name="dateFormat" ref="globalDateFormat"/>
+        <property name="configurationService" ref="configurationService"/>
+        <property name="policyPdfUrlGeneratorStrategy" ref="policyPdfUrlGeneratorStrategy" />
+    </bean>
+
+    <!-- Quote Facade and Quote Service Facade, service and strategies. -->
+    <alias name="mockQuoteServiceFacade" alias="quoteServiceFacade"/>
+    <bean id="mockQuoteServiceFacade"
+          class="de.hybris.platform.financialfacades.facades.impl.MockQuoteServiceFacade">
+        <property name="dateFormat" ref="globalDateFormat"/>
+    </bean>
+
+    <alias name="defaultInsuranceQuoteFacade" alias="quoteFacade"/>
+    <bean id="defaultInsuranceQuoteFacade"
+            class="de.hybris.platform.financialfacades.facades.impl.DefaultInsuranceQuoteFacade">
+        <property name="modelService" ref="modelService"/>
+        <property name="cartService" ref="cartService"/>
+        <property name="quoteService" ref="insuranceQuoteService"/>
+        <property name="quoteServiceFacade" ref="quoteServiceFacade"/>
+        <property name="insuranceQuoteListingConverter" ref="insuranceQuoteListingConverter"/>
+    </bean>
+
+    <alias name="defaultQuoteService" alias="insuranceQuoteService"/>
+    <bean id="defaultQuoteService"
+            class="de.hybris.platform.financialfacades.services.impl.DefaultQuoteService">
+        <property name="quoteServiceFacade" ref="quoteServiceFacade"/>
+        <property name="processQuoteResponseDataStrategy" ref="processQuoteResponseDataStrategy"/>
+    </bean>
+
+    <alias name="mockQuoteFacadeProcessQuoteResponseDataStrategy" alias="processQuoteResponseDataStrategy"/>
+    <bean id="mockQuoteFacadeProcessQuoteResponseDataStrategy"
+            class="de.hybris.platform.financialfacades.strategies.impl.MockQuoteFacadeProcessQuoteResponseDataStrategy">
+        <property name="dateFormat" ref="globalDateFormat"/>
+    </bean>
+    <!--END  Quote Facade and Quote Service Facade, service and strategies. -->
+
+    <!-- Listing of quotes via the cart -->
+    <alias alias="insuranceQuoteListingConverter" name="defaultInsuranceQuoteListingConverter"/>
+    <bean id="defaultInsuranceQuoteListingConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.commercefacades.insurance.data.InsuranceQuoteListingData"/>
+        <property name="populators">
+            <list merge="true">
+                <ref bean="insuranceCart2QuoteListingPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultInsuranceCart2QuoteListingPopulator" alias="insuranceCart2QuoteListingPopulator"/>
+    <bean id="defaultInsuranceCart2QuoteListingPopulator" class="de.hybris.platform.financialfacades.populators.InsuranceCart2QuoteListingPopulator">
+    </bean>
+
+	<bean id="defaultEventDataPopulatorStrategy" class="de.hybris.platform.financialfacades.populators.EventDataPopulatorStrategy">
+		<property name="dateFormatForDisplay" ref="globalDateFormat"/>
+	</bean>
+
+	<bean id="defaultAutoDataPopulatorStrategy" class="de.hybris.platform.financialfacades.populators.AutoDataPopulatorStrategy">
+		<property name="dateFormatForDisplay" ref="globalDateFormat"/>
+	</bean>
+    
+    <bean id="defaultLifeDataPopulatorStrategy" class="de.hybris.platform.financialfacades.populators.LifeDataPopulatorStrategy">
+        <property name="dateFormatForDisplay" ref="globalDateFormat"/>
+    </bean>
+
+	<bean id="defaultTravelDataPopulatorStrategy" class="de.hybris.platform.financialfacades.populators.TravelDataPopulatorStrategy">
+		<property name="dateFormatForDisplay" ref="globalDateFormat"/>
+	</bean>
+
+	<bean id="defaultPropertyDataPopulatorStrategy" class="de.hybris.platform.financialfacades.populators.PropertyDataPopulatorStrategy">
+		<property name="dateFormatForDisplay" ref="globalDateFormat"/>
+	</bean>
+
+    <util:list id="insuranceDataPopulatorStrategyList" value-type="de.hybris.platform.financialfacades.populators.InsuranceDataPopulatorStrategy">
+       	<ref bean="defaultEventDataPopulatorStrategy"/>
+       	<ref bean="defaultTravelDataPopulatorStrategy"/>
+        <ref bean="defaultPropertyDataPopulatorStrategy"/>
+        <ref bean="defaultAutoDataPopulatorStrategy"/>
+        <ref bean="defaultLifeDataPopulatorStrategy"/>
+    </util:list>
+    
+    
+    <!-- Populate the Policy Data to the Order -->
+    <alias name="defaultInsuranceOrderQuotePopulator"
+           alias="insuranceOrderQuotePopulator"/>
+    <bean id="defaultInsuranceOrderQuotePopulator"
+          class="de.hybris.platform.financialfacades.populators.InsuranceOrderQuotePopulator">       
+        <property name="insuranceQuoteConverter" ref="insuranceQuoteConverter"/>
+        <property name="insuranceDataPopulatorStrategies" ref="insuranceDataPopulatorStrategyList" />
+    </bean>
+
+    <bean id="findAgentEmailContext" class="de.hybris.platform.financialfacades.email.FindAgentEmailContext" parent="abstractEmailContext" scope="prototype" >
+        <property name="customerConverter" ref="customerConverter"/>
+    </bean>
+
+    <bean id="findAgentMailEventListener" class="de.hybris.platform.financialfacades.email.FindAgentMailEventListener" parent="abstractEventListener">
+        <property name="modelService" ref="modelService"/>
+        <property name="businessProcessService" ref="businessProcessService"/>
+    </bean>
+</beans>

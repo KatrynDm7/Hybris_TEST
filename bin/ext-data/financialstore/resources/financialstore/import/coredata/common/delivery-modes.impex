@@ -1,0 +1,6 @@
+#
+# Import Delivery Modes for Insurance Products
+#
+
+INSERT_UPDATE DeliveryMode;code[unique=true];active[default=true]
+;insurance-default;

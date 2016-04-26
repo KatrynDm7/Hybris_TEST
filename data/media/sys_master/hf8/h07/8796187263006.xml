@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="Competition.code" />
+			<property qualifier="Competition.name" />
+		</search-properties>
+		<sort-properties>
+			<property qualifier="Competition.code" />
+			<property qualifier="Competition.name" />
+		</sort-properties>
+	</search>
+	<label>
+		<property qualifier="Competition.code" />
+		<property qualifier="Competition.name"/>
+	</label>
+</base>

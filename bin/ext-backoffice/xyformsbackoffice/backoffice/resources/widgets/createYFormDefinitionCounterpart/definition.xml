@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<widget-definition id="de.hybris.platform.xyformsbackoffice.widgets.createyformdefinitioncounterpart">
+   <name>[yForms] Create yForm Definition Counterpart</name>
+   <description>Creates or Updates yForm Definition Counterpart</description>
+   <version>1.0</version>
+
+   <sockets>
+      <input id="wizardResult" type="java.lang.Object" />
+      <input id="yformDefinition" type="java.lang.Object" />
+      <output id="yformDefinition" type="java.lang.Object" />
+   </sockets>
+   
+   <keywords>
+      <keyword>yForms</keyword>
+   </keywords>
+
+   <view src="none" />
+   <controller class="de.hybris.platform.xyformsbackoffice.widgets.createyformdefinitioncounterpart.CreateYFormDefinitionCounterpartController"/>
+
+</widget-definition>

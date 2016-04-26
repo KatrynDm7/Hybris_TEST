@@ -1,0 +1,8 @@
+INSERT_UPDATE BackofficeRole;UID[unique=true];locname[lang=en];description;groups(uid);backOfficeLoginDisabled
+;datahubadmingroup;Datahub Admin Group;Datahub Admin Group;;false;
+
+INSERT_UPDATE UserGroup;UID[unique=true];groups(uid)[mode=append]
+;admingroup;datahubadmingroup;
+
+INSERT_UPDATE DataHubInstanceModel;instanceName[unique = true];instanceLocation
+;localhost;http://localhost:8080/datahub-webapp/v1;

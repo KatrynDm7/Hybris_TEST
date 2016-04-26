@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<advanced-search>
+
+	<group name="root" type="media">
+		<label key="config.general.searchfor" />
+		<property qualifier="media.code"/>
+		<property qualifier="media.mime"/>
+		<property qualifier="media.folder"/>
+		<group name="admin" visible="false">
+			<label key="config.general.administration" />
+			<property qualifier="item.pk" visible="false" sort-enabled="false"/>
+			<property qualifier="item.modifiedtime" visible="false" sort-enabled="false"/>
+		</group>
+	</group>
+
+</advanced-search>

@@ -1,0 +1,2 @@
+INSERT_UPDATE SolrServerConfig;name[unique=true];mode(code);embeddedMaster;aliveCheckInterval;connectionTimeout;socketTimeout;maxTotalConnections;maxTotalConnectionsPerHostConfig;tcpNoDelay
+;testServerConfig${testId};standalone;false;100;200;300;400;500;false

@@ -1,0 +1,27 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform 
+# 
+# Copyright (c) 2000-2015 hybris AG
+# All rights reserved.
+#  
+# This software is the confidential and proprietary information of hybris 
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with hybris.
+#
+#  
+# -----------------------------------------------------------------------
+
+secureportaladdon.application-context=secureportaladdon-spring.xml
+
+# Add a reference to the storefront you want to add this addon to
+yacceleratorstorefront.additionalWebSpringConfigs.secureportaladdon=classpath:/secureportaladdon/web/spring/secureportaladdon-web-spring.xml
+admincockpit.additionalWebSpringConfigs.secureportaladdon=classpath:/secureportaladdon/web/spring/b2badmincockpit-web-spring.xml
+
+# This value should always match the value of PasswordResetPageController.REDIRECT_LOGIN
+default.login.uri=/login
+
+checkout.login.uri=/login/checkout
+
+# The custom CSS file of this addon is added to the head declaration
+secureportaladdon.css.paths.desktop=/desktop/common/css/secureportaladdon.css

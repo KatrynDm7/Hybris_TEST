@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+           
+    <context:annotation-config/> 
+
+
+	<!-- Expose /acceleratoraddon/web/webroot/WEB-INF/messages/base.js.properties  resource bundle as javascript variables -->
+	<bean id="defaultSubscriptionstorefrontJavaScriptMessageResourceAccessor" parent="abstractJavaScriptMessageResourceAccessor">
+		<property name="addOnName" value="subscriptionstorefront"/>
+	</bean>
+
+	<bean id="defaultSubscriptionstorefrontBeforeViewJsPropsHandlerAdaptee" parent="abstractBeforeViewJsPropsHandlerAdaptee" class="de.hybris.platform.addonsupport.interceptors.ExportJsPropertiesBeforeViewHandler">
+		<property name="messageSource" ref="defaultSubscriptionstorefrontJavaScriptMessageResourceAccessor"/>
+	</bean>
+
+	<bean id="getSubscriptionstorefrontBeforeViewHandler" parent="beforeViewHandlerAdapter">
+		<property name="adaptee">
+			<ref bean="defaultSubscriptionstorefrontBeforeViewJsPropsHandlerAdaptee"/>
+		</property>
+	</bean>
+	<bean id="SubscriptionstorefrontBeforeViewHandlerListMergeDirective" depends-on="beforeViewHandlersList" parent="listMergeDirective">
+		<property name="add" ref="getSubscriptionstorefrontBeforeViewHandler"/>
+	</bean>
+
+	<bean name="subscriptionPageController" class="de.hybris.platform.subscriptionstorefront.controllers.pages.AccountSubscriptionsPageController"/>
+		
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+	        <property name="mappings">
+	            <props>
+	                <prop key="/my-account/subscription">subscriptionPageController</prop>
+	            </props>
+	        </property>
+	</bean>
+	
+		<!-- localization -->
+	<bean id="messageSource"
+	    class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+	    <property name="basenames">
+	         <list>
+	            <value>/WEB-INF/messages/base</value>
+	            <value>/WEB-INF/messages/addons/subscriptionstorefront/base</value>
+	        </list>
+	     </property>
+	    <property name="defaultEncoding" value="UTF-8"/>
+	</bean>
+	 <bean id="localeChangeInterceptor"
+		    class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		    <property name="paramName" value="lang" />
+		</bean>
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+	    <property name="interceptors">
+	        <ref bean="localeChangeInterceptor" />
+	    </property>
+	</bean>
+	<bean id="localeResolver"
+	    class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+	    <property name="defaultLocale" value="en"/>
+	</bean>
+	
+	<bean id="messageHandler" class="de.hybris.platform.subscrptionstorefront.util.MessageHandler"/>
+</beans>

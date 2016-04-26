@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<project name="financialacceleratorstorefront_buildcallbacks">
+   <target name="install.financialacceleratorstorefront" description="Installing the financialacceleratorstorefront AddOn">
+       <sequential>
+           <financialacceleratorstorefront_install_addons />
+           <financialacceleratorstorefront_copy_orbeon_config />
+       </sequential>
+   </target>
+
+   <macrodef name="financialacceleratorstorefront_install_addons">
+       <sequential>
+           <property file="${ext.financialacceleratorstorefront.path}/addons.properties"  />
+           <echo level="info" message="installing FS AddOns : ${financialacceleratorstorefront.addons} for ${addonStorefront}" />
+           <antcall target="addoninstall" >
+               <param name="addonnames" value="${financialacceleratorstorefront.addons}" />
+               <param name="addonStorefront.yacceleratorstorefront" value="${addonStorefront}" />
+           </antcall>
+       </sequential>
+   </macrodef>
+
+	<macrodef name="financialacceleratorstorefront_copy_orbeon_config">
+		<sequential>
+         <echo level="info" message="copy orbeon config to hybris config dir..."/>
+         <copy todir="${HYBRIS_CONFIG_DIR}/orbeon" overwrite="true" verbose="true" filtering="false">
+            <fileset dir="${ext.financialacceleratorstorefront.path}/orbeon/resources">
+               <include name="**/**.*" />
+               <exclude name="**/properties-*.xml" />
+            </fileset>
+         </copy>
+         <copy todir="${HYBRIS_CONFIG_DIR}/orbeon" overwrite="true" verbose="true" filtering="true">
+	         <filterset begintoken="${" endtoken="}">
+	            <filtersfile file="${ext.financialacceleratorstorefront.path}/project.properties" />
+	            <filtersfile file="${ext.yacceleratorstorefront.path}/project.properties" />
+	            <filtersfile file="project.properties"/> 
+	            <filtersfile file="${HYBRIS_CONFIG_DIR}/local.properties"/>
+	         </filterset>
+            <fileset dir="${ext.financialacceleratorstorefront.path}/orbeon/resources">
+               <include name="**/properties-*.xml" />
+            </fileset>
+         </copy>
+         <copy file="${ext.financialacceleratorstorefront.path}/project.properties" 
+               tofile="${ext.xyformsstorefrontcommons.path}/project.storefront.properties"
+               overwrite="true" verbose="true" filtering="false" />
+		</sequential>
+	</macrodef>
+
+    <macrodef name="financialacceleratorstorefront_after_build">
+        <sequential>
+            <echo level="info" message="Copy financial services accelerator storefront page template for header and footer......"/>
+            <copy overwrite="true" verbose="true"
+                  todir="${ext.yacceleratorstorefront.path}/web/webroot/WEB-INF/tags/desktop/template">
+                <fileset dir="${ext.financialacceleratorstorefront.path}/acceleratoraddon/web/webroot/WEB-INF/tags/desktop/template">
+                    <include name="page.tag"/>
+                </fileset>
+            </copy> 
+        </sequential>
+    </macrodef>
+	
+	<patternset id="financialacceleratorstorefront.localization.pattern">
+		<patternset refid="localization.defaultpattern" />
+		<include name="**/*locales_en.properties"/>
+		<exclude name="**/*.impex"/>
+	</patternset>
+	
+</project>

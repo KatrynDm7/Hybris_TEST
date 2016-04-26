@@ -1,0 +1,10 @@
+#
+# Import the CMS Site configuration for the B2ctelco store
+#
+
+# Language
+$lang=en
+
+# Create CMS Site
+UPDATE CMSSite;uid[unique=true];name[lang=$lang];locale[lang=$lang]
+ ;b2ctelco;"B2C Telco Site";en_GB

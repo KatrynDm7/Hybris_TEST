@@ -1,0 +1,316 @@
+/*
+ * [y] hybris Platform
+ *
+ * Copyright (c) 2000-2015 hybris AG
+ * All rights reserved.
+ *
+ * This software is the confidential and proprietary information of hybris
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * license agreement you entered into with hybris.
+ */
+
+.media-fileupload,
+button.media-download-btn,
+button.media-clear-content-btn{
+    height: 30px;
+    width: 160px;
+    background-repeat: no-repeat;
+    background-position: 5px 50%;
+    margin-bottom: 15px
+}
+
+/* there is not table as a nested html component */
+/* IE 9 FIX */
+/*.media-fileupload.z-button > table{
+    width: 160px;
+}*/
+
+.media-fileupload{
+    background-color: #6F7C91;
+    background-image: url('images/icon_func_upload.png');
+
+}
+
+button.media-download-btn {
+    background-image: url('images/icon_func_download.png');
+
+}
+button.media-clear-content-btn{
+    background-image: url('images/icon_func_clear.png');
+    background-color: #f16b46!important;
+}
+
+.yw-import-wizard-toolbar input {
+    width: 100px;
+}
+
+.y-workflow-apply.z-button {
+    margin-top: 3px;
+}
+
+.yw-workflowaction-decision-section .yw-workflowaction-selected-decision{
+    width: 300px;
+}
+
+/*Icons for explorer tree */
+
+div.yw-explorerTree .y-tree-icon-jalotranslatorconfiguration .y-tree-icon{
+
+    background-image: url("images/explorer-tree/icons/02_configuration_for_content.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_savedvalues .y-tree-icon{
+    background-image: url("images/explorer-tree/icons/011_last_changes.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_format .y-tree-icon
+{
+    background-image: url("images/explorer-tree/icons/013_documents_templates.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_itemformatter .y-tree-icon{
+    background-image: url("images/explorer-tree/icons/014_format_converter.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_mediaformatter .y-tree-icon{
+    background-image: url("images/explorer-tree/icons/015_layer_converter.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_document .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/016_all_documents.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_renderertemplate .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/017_communcation_template.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_type .y-tree-icon{
+    background-image: url("images/explorer-tree/icons/018_types.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_savedquery .y-tree-icon{
+    background-image: url("images/explorer-tree/icons/019_saved_queries.png");
+}
+
+div.yw-explorerTree .y-tree-icon-viewtype .y-tree-icon{
+    background-image: url("images/explorer-tree/icons/020_report_definitions.png");
+}
+
+div.yw-explorerTree .y-tree-icon-hmc_typenode_searchrestriction .y-tree-icon{
+    background-image: url("images/explorer-tree/icons/021_personalization.png");
+}
+
+div.yw-explorerTree .y-tree-icon-hmc_typenode_workflowtemplate .y-tree-icon{
+    background-image: url("images/explorer-tree/icons/029_workflow_templates.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_workflow .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/030_workflows.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_workflowaction .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/031_actions.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_cronjob .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/023_cronJobs.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_constraintgroup .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/026_constraint_groups.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_abstractconstraint .y-tree-icon{
+    background-image: url("images/explorer-tree/icons/027_constraints.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_businessprocess .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/032_business_process.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_category .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/038_categories.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_varianttype .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/040_product_variant_types.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_catalog .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/037_catalogs.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_catalogversion .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/0107_catalog_version.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_product .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/039_products.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_unit .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/041_units.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_keyword .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/042_keywords.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_classificationclass .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/047_classifying_categories.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_classificationattribute .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/048_feature_list.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_classificationattributevalue .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/049_feature_values.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_classificationattributeunit .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/050_classification_units.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_media .y-tree-icon{
+    background-image: url("images/explorer-tree/icons/051_media.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_mediafolder .y-tree-icon{
+    background-image: url("images/explorer-tree/icons/052_media_folders.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_mediacontainer .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/053_media_containers.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_mediaformat .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/054_media_formats.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_mediacontext .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/055_media_context.png");
+}
+
+div.yw-explorerTree .y-tree-icon-hmc_typenode_company .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/056_companies.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_usergroup .y-tree-icon{
+    background-image: url("images/explorer-tree/icons/057_user_groups.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_employee .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/058_employees.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_customer .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/059_castomers.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_address .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/060_addresses.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_title .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/061_titles.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_agreement .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/062_agreements.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_order .y-tree-icon{
+    background-image: url("images/explorer-tree/icons/063_orders.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_orderentry .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/064_order_entries.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_productpricegroup .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/066_product_prices_claces.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_userpricegroup .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/067_customer_prices_claces.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_pricerow .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/068_price_rows.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_tax .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/070_taxes.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_producttaxgroup .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/071_product_class_taxes.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_usertaxgroup .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/072_customer_taxes_jurisdiction.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_taxrow .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/073_tax_rows.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_discount .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/075_discounts.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_productdiscountgroup .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/076_product_discount_classes.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_userdiscountgroup .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/076_customer_discount_groups.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_abstractdiscountrow .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/077_discount_rows.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_zonedeliverymode .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/079_delivery_costs.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_standardpaymentmode .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/078_payment_methods.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_language .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/080_languages.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_currency .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/081_currencies.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_country .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/082_countries.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_region .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/083_regions.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_cart .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/085_carts.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_cartentry .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/086_cart_entries.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_productreference .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/087_product_references.png");
+}
+div.yw-explorerTree .y-tree-icon-hmc_typenode_abstractlinkentry .y-tree-icon{
+    background-image: url("images/explorer-tree/icons/094_link.png");
+}
+
+div.yw-explorerTree .y-tree-icon-hmc_typenode_abstractlinkentry .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/094_link.png");
+}
+
+div.yw-explorerTree .y-tree-icon-hmc_backoffice-workflow-inbox .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/icon_tree_inbox.png");
+}
+
+div.yw-explorerTree .y-tree-icon-hmc_typenode_scripting .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/0109_script.png");
+}
+
+div.yw-explorerTree .y-tree-icon-hmc_typenode_scriptingjob .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/0110_scriptingJob.png");
+}
+
+div.yw-explorerTree .y-tree-icon-hmc_typenode_scriptingtask .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/0111_scriptingTask.png");
+}
+
+div.yw-explorerTree .y-tree-icon-hmc_typenode_dynamic_process_definition .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/0112_dynamicProcessDefinition.png");
+}
+
+div.yw-explorerTree .y-tree-icon-hmc_treenode_impex_import_wizard .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/07_import.png");
+}
+
+div.yw-explorerTree .y-tree-icon-hmc_treenode_impex_export_wizard .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/06_export.png");
+}
+
+div.yw-explorerTree .y-tree-icon-hmc_treenode_script_generator_wizard .y-tree-icon {
+    background-image: url("images/explorer-tree/icons/06_export.png");
+}
+
+div.yw-explorerTree .y-tree-icon-hmc_typenode_jalotranslatorconfiguration .y-tree-icon
+{
+    background-image: url("images/explorer-tree/icons/02_configuration_for_content.png");
+}
+
+div.yw-explorerTree .y-tree-icon-hmc_typenode_job .y-tree-icon
+{
+    background-image: url("images/explorer-tree/icons/0122_job.png");
+}
+
+div.yw-explorerTree .y-tree-icon-hmc_typenode_joblog .y-tree-icon
+{
+    background-image: url("images/explorer-tree/icons/0123_job_log.png");
+}
+
+div.yw-explorerTree .y-tree-icon-hmc_typenode_task .y-tree-icon
+{
+    background-image: url("images/explorer-tree/icons/0124_task.png");
+}
+
+div.yw-explorerTree .y-tree-icon-hmc_typenode_taskcondition .y-tree-icon
+{
+    background-image: url("images/explorer-tree/icons/0125_task_condition.png");
+}

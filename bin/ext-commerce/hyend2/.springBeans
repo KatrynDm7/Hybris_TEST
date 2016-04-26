@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beansProjectDescription>
+	<version>1</version>
+	<pluginVersion><![CDATA[3.1.0.201210040510-RELEASE]]></pluginVersion>
+	<configSuffixes>
+		<configSuffix><![CDATA[xml]]></configSuffix>
+	</configSuffixes>
+	<enableImports><![CDATA[true]]></enableImports>
+	<configs>
+		<config>resources/hyend2-spring.xml</config>
+		<config>resources/hyend2-spring-aop.xml</config>
+		<config>resources/hyend2-spring-daos.xml</config>
+		<config>resources/hyend2-spring-editors.xml</config>
+		<config>resources/hyend2-spring-factories.xml</config>
+		<config>resources/hyend2-spring-integration.xml</config>
+		<config>resources/hyend2-spring-interceptors.xml</config>
+		<config>resources/hyend2-spring-resolvers.xml</config>
+		<config>resources/hyend2-spring-services.xml</config>
+		<config>resources/hyend2-spring-ui.xml</config>
+	</configs>
+	<configSets>
+	</configSets>
+</beansProjectDescription>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+	<!-- Expose /acceleratoraddon/web/webroot/WEB-INF/messages/base.js.properties  resource bundle as javascript variables -->
+	<bean id="defaultEventtrackingwsaddonJavaScriptMessageResourceAccessor" parent="abstractJavaScriptMessageResourceAccessor">
+		<property name="addOnName" value="eventtrackingwsaddon"/>
+	</bean>
+
+	<bean id="defaultEventtrackingwsaddonBeforeViewJsPropsHandlerAdaptee" parent="abstractBeforeViewJsPropsHandlerAdaptee" class="de.hybris.platform.addonsupport.interceptors.ExportJsPropertiesBeforeViewHandler">
+		<property name="messageSource" ref="defaultEventtrackingwsaddonJavaScriptMessageResourceAccessor"/>
+	</bean>
+
+	<bean id="getEventtrackingwsaddonBeforeViewHandler" parent="beforeViewHandlerAdapter">
+		<property name="adaptee">
+			<ref bean="defaultEventtrackingwsaddonBeforeViewJsPropsHandlerAdaptee"/>
+		</property>
+	</bean>
+	<bean id="EventtrackingwsaddonBeforeViewHandlerListMergeDirective" depends-on="beforeViewHandlersList" parent="listMergeDirective">
+		<property name="add" ref="getEventtrackingwsaddonBeforeViewHandler"/>
+	</bean>
+
+	<alias name="defaultEventTrackingCorsFilter" alias="eventTrackingCorsFilter"/>
+	<bean id="defaultEventTrackingCorsFilter" class="de.hybris.eventtracking.ws.filters.EventTrackingCorsFilter">
+		<constructor-arg>
+			<bean class="org.springframework.web.util.UrlPathHelper"/>
+		</constructor-arg>
+	</bean>
+
+	<bean id="eventTrackingCorsFilterListMergeDirective" depends-on="storefrontTenantDefaultFilterChainList" parent="listMergeDirective">
+		<property name="add" ref="eventTrackingCorsFilter"/>
+	</bean>
+
+	<alias name="defaultRawEventEnricher" alias="rawEventEnricher"/>
+	<bean id="defaultRawEventEnricher" class="de.hybris.eventtracking.ws.services.DefaultRawEventEnricher">
+		<constructor-arg ref="userService"/>
+	</bean>
+
+	<alias name="defaultEventsController" alias="eventsController"/>
+	<bean id="defaultEventsController" class="de.hybris.eventtracking.ws.controllers.rest.EventsController">
+		<constructor-arg ref="rawTrackingEventsChannel"/>
+		<constructor-arg ref="rawEventEnricher"/>
+	</bean>
+
+	<alias name="evenTrackingExcludeUrlSet" alias="excludeUrlSet"/>
+	<util:set id="evenTrackingExcludeUrlSet">
+		<value>.*/events</value>
+	</util:set>
+
+</beans>

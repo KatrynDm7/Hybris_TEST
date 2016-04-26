@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config />
+    <context:component-scan base-package="de.hybris.platform.b2ctelcostorefront.controllers.cms"/>
+
+		
+	<!-- Expose /acceleratoraddon/web/webroot/WEB-INF/messages/base.js.properties  resource bundle as javascript variables -->
+	<bean id="defaultB2ctelcostorefrontJavaScriptMessageResourceAccessor" parent="abstractJavaScriptMessageResourceAccessor">
+		<property name="addOnName" value="b2ctelcostorefront"/>
+	</bean>
+	
+	<bean id="defaultB2ctelcostorefrontBeforeViewJsPropsHandlerAdaptee" parent="abstractBeforeViewJsPropsHandlerAdaptee" class="de.hybris.platform.addonsupport.interceptors.ExportJsPropertiesBeforeViewHandler">
+		<property name="messageSource" ref="defaultB2ctelcostorefrontJavaScriptMessageResourceAccessor"/>
+	</bean>
+
+	<bean id="getB2ctelcostorefrontBeforeViewHandler" parent="beforeViewHandlerAdapter">
+		<property name="adaptee">
+			<ref bean="defaultB2ctelcostorefrontBeforeViewJsPropsHandlerAdaptee"/>
+		</property>
+	</bean>
+	<bean id="B2ctelcostorefrontBeforeViewHandlerListMergeDirective" depends-on="beforeViewHandlersList" parent="listMergeDirective">
+		<property name="add" ref="getB2ctelcostorefrontBeforeViewHandler"/>
+	</bean>
+
+	<!-- this overrides the existing product details with our own bean -->
+	<bean name="productPageController" class="de.hybris.platform.b2ctelcostorefront.controllers.pages.ProductPageController"/>
+	<bean name="telcoGuidedSellingController" class="de.hybris.platform.b2ctelcostorefront.controllers.pages.TelcoGuidedSellingController"/>
+	<bean name="addToCartController" class="de.hybris.platform.b2ctelcostorefront.controllers.misc.AddToCartController"/>
+	<bean name="cartPageController" class="de.hybris.platform.b2ctelcostorefront.controllers.pages.CartPageController"/>
+	<bean name="checkoutLoginController" class="de.hybris.platform.b2ctelcostorefront.controllers.pages.TelcoCheckoutLoginController"/>
+	<bean name="checkoutRegisterController" class="de.hybris.platform.b2ctelcostorefront.controllers.pages.TelcoCheckoutRegisterController"/>
+	<bean name="loginPageController" class="de.hybris.platform.b2ctelcostorefront.controllers.pages.TelcoLoginPageController"/>
+	<bean name="registerPageController" class="de.hybris.platform.b2ctelcostorefront.controllers.pages.TelcoRegisterPageController"/>
+	<bean name="accountPageController" class="de.hybris.platform.b2ctelcostorefront.controllers.pages.AccountPageController"/>
+	<bean name="miniCartController" class="de.hybris.platform.b2ctelcostorefront.controllers.misc.MiniCartController"/>
+	<bean name="telcoPaymentDetailsPageController" class="de.hybris.platform.b2ctelcostorefront.controllers.pages.myaccount.PaymentDetailsPageController" />
+	<bean name="telcoSopPaymentResponseController" class="de.hybris.platform.b2ctelcostorefront.controllers.pages.myaccount.SopPaymentResponseController" >
+		<property name="myAccountPaymentDetailsView" ref="myAccountPaymentDetailsView"/>
+		<property name="myAccountPaymentDetailsAddView" ref="myAccountPaymentDetailsAddView"/>
+	</bean>
+	
+	<alias name="defaultMyAccountPaymentDetailsView" alias="myAccountPaymentDetailsView"/>
+	<bean id="defaultMyAccountPaymentDetailsView" class="java.lang.String">
+		<constructor-arg value="redirect:/my-account/my-payment-details"/>
+	</bean>
+	
+	<alias name="defaultMyAccountPaymentDetailsAddView" alias="myAccountPaymentDetailsAddView"/>
+	<bean id="defaultMyAccountPaymentDetailsAddView" class="java.lang.String">
+		<constructor-arg value="addon:/b2ctelcocheckoutaddon/pages/checkout/multi/silentOrderPostPage"/>
+	</bean>
+	
+	<alias name="SbgSopPaymentDetailsValidator" alias="myAccountSbgSopPaymentDetailsValidator"/>
+	<bean id="SbgSopPaymentDetailsValidator" class="de.hybris.platform.b2ctelcostorefront.forms.validation.SbgSopPaymentDetailsValidator">
+		<property name="i18NFacade" ref="i18NFacade"/>
+	</bean>
+	
+	
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+	        <property name="mappings">
+	            <props>
+	                <prop key="/**/p">productPageController</prop>
+	                <prop key="/**/bundle">telcoGuidedSellingController</prop>
+	                <prop key="/cart/add">addToCartController</prop>
+	                <prop key="/cart/addBundle">addToCartController</prop>
+	                <prop key="/cart/**">cartPageController</prop>
+	                <prop key="/login/checkout">checkoutLoginController</prop>
+	                <prop key="/register/checkout">checkoutRegisterController</prop>
+	                <prop key="/login">loginPageController</prop>
+	                <prop key="/register">registerPageController</prop>
+	                <prop key="/my-account/**">accountPageController</prop>
+	                <prop key="/my-account/my-payment-details/**">telcoPaymentDetailsPageController</prop>
+	                <prop key="/my-account/my-payment-details/sop/**">telcoSopPaymentResponseController</prop>
+	                <prop key="/cart/miniCart/**">miniCartController</prop>
+	                <prop key="/cart/rollover/**">miniCartController</prop>
+	            </props>
+	        </property>
+	</bean>
+	
+
+	<alias name="defaultSopResponseUrlStrategy" alias="sopResponseUrlStrategy" />
+	<bean id="defaultSopResponseUrlStrategy"
+		class="de.hybris.platform.b2ctelcostorefront.controllers.pages.myaccount.DefaultSopResponseUrlStrategy">
+		<property name="url" ref="sopResponseUrl"></property>
+	</bean>
+
+	<alias name="defaultSopResponseUrl" alias="sopResponseUrl" />
+	<bean id="defaultSopResponseUrl" class="java.lang.String">
+		<constructor-arg value="/my-account/my-payment-details/sop/response"></constructor-arg>
+	</bean>
+	
+	<!--  override the default yacceleratorstorefront logoutSuccessHandler with b2ctelco-specific values -->
+  	<bean id="logoutSuccessHandler"    class="de.hybris.platform.yacceleratorstorefront.security.StorefrontLogoutSuccessHandler">
+		<property name="alwaysUseDefaultTargetUrl"  value="true" />
+		<property name="useReferer" value="false"/>
+		<property name="defaultTargetUrl" value="/?logout=true"/>
+		<property name="guidCookieStrategy" ref="guidCookieStrategy"/>
+		 <property name="restrictedPages">
+		 <list>
+				<value>/my-account</value>
+				<value>/checkout</value>
+				<value>/bundle</value>
+			</list>
+		</property>
+	</bean>
+
+
+</beans>

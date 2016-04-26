@@ -1,0 +1,31 @@
+INSERT_UPDATE DeviceSupport;code[unique=true];name[lang=en];width;height;Orientation;supportedUiExperience(code);default
+;defaultMobile;Default;320;568;true;Mobile;true
+;iphoneMobile;Apple iPhone 5;320;568;true;Mobile;false
+;samsung4Mobile;Samsung Galaxy IV;360;640;true;Mobile;false
+;iphoneDefault;Apple iPhone 5;320;568;true;Desktop;false
+;ipadDefault;Apple iPad;768;1024;true;Desktop;false
+;samsung4Default;Samsung Galaxy IV;360;640;true;Desktop;false
+;nexusDefault;Google Nexus;604;966;true;Desktop;false
+;desktopDefault;Monitor;0;0;false;Desktop;true
+
+UPDATE DeviceSupport;code[unique=true];name[lang=de]
+;iphoneDefault;Apple iPhone 5
+;ipadDefault;Apple iPad
+;samsung4Default;Samsung Galaxy IV
+;nexusDefault;Google Nexus
+;desktopDefault;Monitor
+
+UPDATE DeviceSupport;code[unique=true];name[lang=de]
+;desktopDefault;Default
+;defaultMobile;Default
+;iphoneMobile;Apple iPhone 5
+;samsung4Mobile;Samsung Galaxy IV
+
+# Adding new component types to component type group
+INSERT_UPDATE ComponentTypeGroups2ComponentType;source(code)[unique=true];target(code)[unique=true]
+;navigation;NavigationBarCollectionComponent
+;navigation;BreadcrumbComponent
+
+# Removing improper component types from component type group
+REMOVE ComponentTypeGroups2ComponentType;source(code)[unique=true];target(code)[unique=true]
+;navigation;NavigationBarComponent

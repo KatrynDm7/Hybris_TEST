@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>
+	
+	<group qualifier="General" initially-opened="true">
+		<label key="cockpit.config.label.General" />
+		<property qualifier="Hyend2EndecaDimensionConfiguration.name" visible="true" />
+	</group>
+	<group qualifier="AssignedDimensions" initially-opened="true">
+		<label key="hyend2.editorArea.assigneddimensions" />
+		<property qualifier="Hyend2EndecaDimensionConfiguration.dimensions" visible="true" />
+	</group>
+	<group qualifier="EndecaPropertyConfiguration"  initially-opened="true">
+		<label key="hyend2.editorArea.endecapropertyconfiguration" />
+		<property qualifier="Hyend2EndecaDimensionConfiguration.searchable" visible="true" />
+		<property qualifier="Hyend2EndecaDimensionConfiguration.searchWildcard" visible="true" />
+		<property qualifier="Hyend2EndecaDimensionConfiguration.offlineSort" visible="true" />
+		<property qualifier="Hyend2EndecaDimensionConfiguration.rollupKey" visible="true" />
+		<property qualifier="Hyend2EndecaDimensionConfiguration.showWithList" visible="true" />
+		<property qualifier="Hyend2EndecaDimensionConfiguration.showWithRecord" visible="true" />
+		<property qualifier="Hyend2EndecaDimensionConfiguration.recordFilterable" visible="true" />	
+	</group>
+	<group qualifier="EndecaDimensionConfiguration"  initially-opened="true">
+		<label key="hyend2.endecadimensionconfiguration" />
+		<property qualifier="Hyend2EndecaDimensionConfiguration.autogen" visible="true" />
+		<property qualifier="Hyend2EndecaDimensionConfiguration.hidden" visible="true" />
+		<property qualifier="Hyend2EndecaDimensionConfiguration.hierarchyDimSearch" visible="true" />
+		<property qualifier="Hyend2EndecaDimensionConfiguration.hierarchyRecordSearch" visible="true" />
+		<property qualifier="Hyend2EndecaDimensionConfiguration.computeRefinementCount" visible="true" />
+		<property qualifier="Hyend2EndecaDimensionConfiguration.refinementsSortOrder" visible="true" />
+		<property qualifier="Hyend2EndecaDimensionConfiguration.multiselectType" visible="true" />
+	</group>
+	<group qualifier="DynamicRankingConfiguration"  initially-opened="true">
+		<label key="hyend2.editorArea.dynamicrankingconfiguration" />
+		<property qualifier="Hyend2EndecaDimensionConfiguration.dynRankingEnabled" visible="true" />
+		<property qualifier="Hyend2EndecaDimensionConfiguration.dynRankingRefinementCount" visible="true" />
+		<property qualifier="Hyend2EndecaDimensionConfiguration.dynRankingMore" visible="true" />
+		<property qualifier="Hyend2EndecaDimensionConfiguration.dynRankingSort" visible="true" />
+	</group>
+</editor>

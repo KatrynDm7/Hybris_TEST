@@ -1,0 +1,48 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform 
+# 
+# Copyright (c) 2000-2015 hybris AG
+# All rights reserved.
+#  
+# This software is the confidential and proprietary information of hybris 
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with hybris.
+#
+#  
+# -----------------------------------------------------------------------
+
+# you can put key/value pairs here.
+# Use Config.getParameter(..) to retrieve the values during runtime.
+
+hybrisanalyticsaddon.key=value
+
+# Specifies the location of the spring context file added automatically to the global platform application context.
+hybrisanalyticsaddon.application-context=hybrisanalyticsaddon-spring.xml
+
+yacceleratorstorefront.additionalWebSpringConfigs.hybrisanalyticsaddon=classpath:/hybrisanalyticsaddon/web/spring/hybrisanalyticsaddon-web-spring.xml
+yb2bacceleratorstorefront.additionalWebSpringConfigs.hybrisanalyticsaddon=classpath:/hybrisanalyticsaddon/web/spring/hybrisanalyticsaddon-web-spring.xml
+
+storefront.supportedUiExperienceLevels.electronics=DESKTOP,MOBILE
+storefront.supportedUiExperienceLevels.apparel-uk=DESKTOP,MOBILE
+storefront.supportedUiExperienceLevels.apparel-de=DESKTOP,MOBILE
+storefront.supportedUiExperienceLevels.powertools=DESKTOP
+
+
+hybrisanalyticsaddon.javascript.paths.desktop=/desktop/common/js/hybrisanalyticsaddon.js;/shared/common/js/piwik-min.js
+hybrisanalyticsaddon.javascript.paths.mobile=/mobile/common/js/hybrisanalyticsaddon.js;/shared/common/js/piwik-min.js
+
+hybrisanalyticsaddon.css.paths.desktop=/desktop/common/css/hybrisanalyticsaddon.css
+hybrisanalyticsaddon.css.paths.mobile=/mobile/common/css/hybrisanalyticsaddon.css
+
+#Can be overriden in config/local.properties or project.properties
+#two piwik tracker URL needs to be configured, one for http pages and one for https pages.
+#the tracker URL for https pages must also use https protocol. 
+piwik.tracker.url=https://localhost:9002/yacceleratorstorefront/events
+piwik.tracker.https.url=https://localhost:9002/yacceleratorstorefront/events
+
+piwik.tracker.siteid=0
+piwik.tracker.siteid.electronics=1
+piwik.tracker.siteid.apparel-de=2
+piwik.tracker.siteid.apparel-uk=3
+

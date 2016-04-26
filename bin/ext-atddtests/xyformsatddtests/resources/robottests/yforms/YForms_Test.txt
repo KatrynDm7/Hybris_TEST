@@ -1,0 +1,112 @@
+*** Settings ***
+Test Setup        import sampledata
+Resource          impex/Impex_Keywords.txt
+Resource          yformServices/YForm_Keywords.txt
+
+*** Test Cases ***
+
+############
+### Get, Create, Update and Create or update YFormDefinition model
+############
+
+Test_Get_Y_Form_Definition_YFormServiceException_If_Not_Existed
+    [Documentation]    verify throws YFormServiceException yForm definition not existed
+    verify not existed y form definition "applicationId" and "weddingForm01" expect exception "YFormServiceException"
+
+Test_Get_Y_Form_Definition
+    [Documentation]    verify the YFormDefinition model exists with given applicationId and formId
+    verify y form definition with "applicationId" and "testForm01" exists
+
+Test_Create_Y_Form_Definition
+    [Documentation]    verify the YFormDefinition model have been created with given applicationId and formId
+    ${content}=    get y form definition from template with "applicationId" and "weddingForm01" and "content"
+    create y form definition by "applicationId" and "weddingForm01" and "${content}"
+    verify y form definition with "applicationId" and "weddingForm01" exists
+
+Test_Update_Y_Form_Definition
+    [Documentation]    verify the YFormDefinition model have been updated with given applicationId and formId
+    ${newContent}=    get y form definition from template with "applicationId" and "weddingForm01" and "new content"
+    update y form definition by "applicationId" and "testForm01" and "${newContent}"
+    verify y form definition "applicationId" and "testForm01" has updated the content to "${newContent}"
+
+Test_Update_Y_Form_Definition_YFromServiceException
+    [Documentation]    verify throws YFormServiceException yForm definition not existed on update
+    ${content}=    get y form definition from template with "applicationId" and "weddingForm01" and "content"
+    verify not existed on update y form definition "applicationId" and "weddingForm01" and "${content}" expect exception "YFormServiceException"
+
+Test_Create_Or_Update_Y_Form_Definition
+    [Documentation]    verify if YFormDefinition not existed will be created; or else will be updated
+    ${content}=    get y form definition from template with "applicationId" and "weddingForm01" and "content"
+    ${newContent}=    get y form definition from template with "applicationId" and "weddingForm01" and "new content"
+    verify not existed y form definition "applicationId" and "weddingForm01" expect exception "YFormServiceException"
+    create y form definition by "applicationId" and "weddingForm01" and "${content}"
+    verify y form definition with "applicationId" and "weddingForm01" exists
+    verify y form definition "applicationId" and "weddingForm01" has updated the content to "${content}"
+    create y form definition by "applicationId" and "weddingForm01" and "${newContent}"
+    verify y form definition "applicationId" and "weddingForm01" has updated the content to "${newContent}"
+
+############
+### Retrun YFormDefinitionData from all the supercategories of the Product
+############
+
+Test_Return_All_The_YFormDefinitionData_That_Relate_To_All_Of_The_Supercategories_Of_The_Product
+    [Documentation]    Verify that all the YFormDefinitionData returned for product
+    @{formDefinitionIds}=    Create List    applicationId:formId2    applicationId:formId4    applicationId:formId3    applicationId:formId1
+    verify that all "@{formDefinitionIds}" y form definition data returned for product "Product1"
+    
+    @{formDefinitionIds}=    Create List    applicationId:formId2    applicationId:formId1
+    verify that all "@{formDefinitionIds}" y form definition data returned for product "Product2"
+    
+Test_Exception_Thrown_When_Get_YFormDefinitionData_That_Relate_To_All_Of_The_Supercategories_Of_A_Product_That_Does_Not_Exist    
+    [Documentation]  Verify that exception thrown when tries to return all y form definition data for non existing product
+ 	verify that exception thrown when tries to return all y form definition data for non existing product "Product3"
+
+############
+### Get, Create, Update and Create or update YFormData model
+############
+
+Test_Get_Y_Form_Data_Got_YFormServiceException_If_Not_Existed
+    [Documentation]    verify throws YFormServiceException yForm data not existed
+    verify not existed y form data "55ba893a657df5595c228bc60c0a195baa5e8be6" expect exception "YFormServiceException"
+
+Test_Get_Y_Form_Data
+    [Documentation]    verify the YFormData model exists with given applicationId and formId
+    verify get y form data with "44ba893a657df5595c228bc60c0a195baa5e8be6" exists
+    verify y form data history has been created for y form data "44ba893a657df5595c228bc60c0a195baa5e8be6"
+
+Test_Create_Y_Form_Data
+    [Documentation]    verify the YFormData model have been created with given applicationId, formId, formDataId, refId, and content
+    create y form data by "applicationId" and "testForm01" and "55ba893a657df5595c228bc60c0a195baa5e8be6" and "ref1" and "content"
+    verify get y form data with "55ba893a657df5595c228bc60c0a195baa5e8be6" exists
+    verify y form data "55ba893a657df5595c228bc60c0a195baa5e8be6" exists with given values "ref1" and "content"
+    verify y form data history has been created for y form data "55ba893a657df5595c228bc60c0a195baa5e8be6"
+
+Test_Update_Y_Form_Data
+    [Documentation]    verify the YFormData model have been updated with given applicationId, formId, formDataId and content
+    update y form data by "44ba893a657df5595c228bc60c0a195baa5e8be6" and "new content"
+    verify y form data "44ba893a657df5595c228bc60c0a195baa5e8be6" has updated the formDataContent to "new content"
+    verify y form data history has been created for y form data "55ba893a657df5595c228bc60c0a195baa5e8be6"
+
+Test_Update_Y_Form_Data_YFromServiceException
+    [Documentation]    verify throws YFormServiceException yForm data not existed on update
+    verify not existed on update y form data "55ba893a657df5595c228bc60c0a195baa5e8be6" and "new content" expect exception "ModelNotFoundException"
+
+Test_Create_Or_Update_Y_Form_Data
+    [Documentation]    verify if YFormData not existed will be creates; or else will be updated
+    verify not existed y form data "55ba893a657df5595c228bc60c0a195baa5e8be6" expect exception "YFormServiceException"
+    create or update y form data by "applicationId" and "testForm01" and "55ba893a657df5595c228bc60c0a195baa5e8be6" and "ref1" and "content"
+    verify get y form data with "55ba893a657df5595c228bc60c0a195baa5e8be6" exists
+    verify y form data "55ba893a657df5595c228bc60c0a195baa5e8be6" has updated the formDataContent to "content"
+    verify y form data history has been created for y form data "55ba893a657df5595c228bc60c0a195baa5e8be6"
+    create or update y form data by "applicationId" and "testForm01" and "55ba893a657df5595c228bc60c0a195baa5e8be6" and "ref1" and "new content"
+    verify y form data "55ba893a657df5595c228bc60c0a195baa5e8be6" has updated the formDataContent to "new content"
+    verify y form data history has been created for y form data "55ba893a657df5595c228bc60c0a195baa5e8be6"
+
+Test_Get_Y_Form_Data_By_Ref_Id
+    [Documentation]    Verify the YFormData models returned by refId
+    @{formDataIds}=    Create List    44ba893a657df5595c228bc60c0a195baa5e8be6    44ba893a657df5595c228bc60c0a191234324324
+	verify y form data list "@{formDataIds}" is retrieved by "ref1"
+
+
+
+    

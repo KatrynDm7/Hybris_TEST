@@ -1,0 +1,191 @@
+
+<Server port="-1" shutdown="SHUTDOWN">
+
+  <Listener className="org.apache.catalina.core.JasperListener" />
+  <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
+  <Listener className="org.apache.catalina.mbeans.JmxRemoteLifecycleListener" rmiRegistryPortPlatform="9003" rmiServerPortPlatform="9004" />
+
+
+  <GlobalNamingResources>
+
+		<!-- If you want to use the jndi database resource please set db.pool.fromJNDI property and uncomment following block.
+			 Furthermore you have to copy the related jdbc library from platform/lib/dbdriver to the tomcat/lib folder -->
+		<!-- <Resource 	name="hybrisDS"
+ 						auth="Container"
+ 						type="javax.sql.DataSource"
+              		maxActive="90"
+              		maxIdle="90"
+              		maxWait="10000"
+              		testWhileIdle="true"
+						timeBetweenEvictionRunsMillis="10000"
+						minEvictableIdleTimeMillis="300000"
+						numTestsPerEvictionRun="100"
+						testOnBorrow="false"
+						testOnReturn="false"
+						whenExhaustedAction="1"
+              		username="sa"
+             		password=""
+              		driverClassName="org.hsqldb.jdbcDriver"
+              		url="jdbc:hsqldb:file:C:\Users\user\IdeaProjects\hybris\data/hsqldb/mydb;shutdown=true;hsqldb.cache_rows=100000;hsqldb.cache_size=20000;hsqldb.write_delay_millis=1000;hsqldb.inc_backup=true;hsqldb.defrag_limit=2;hsqldb.nio_data_file=false" />
+        -->
+
+		<!-- If you want to use a mail JNDI resource please set mail.fromJNDI property and uncomment following block.
+		     Furthermore you have to copy the mail library from ext/core/lib to tomcat/lib -->
+		<!-- <Resource 	name="mail/Session" auth="Container"
+		        		type="javax.mail.Session"
+		        		mail.transport.protocol="smtp"
+		        		mail.smtp.host="${mail.smtp.server}"
+		        		mail.smtp.from="test@hybris.de"
+		        		description="Global E-Mail Resource"
+		    		/>-->
+
+  </GlobalNamingResources>
+
+
+  <Service name="Catalina" >
+
+	<Executor     name="hybrisExecutor"
+			        namePrefix="hybrisHTTP"
+			        maxThreads="200"
+			        minSpareThreads="40"
+			        maxIdleTime="10000"/>
+
+    <Connector port="9001"
+    				maxHttpHeaderSize="8192"
+               maxThreads="200"
+               protocol="org.apache.coyote.http11.Http11Protocol"
+               executor="hybrisExecutor"
+               enableLookups="false"
+               acceptCount="100"
+               connectionTimeout="20000"
+               URIEncoding="UTF-8"
+               disableUploadTimeout="true" />
+
+    <Connector port="9002"
+    				maxHttpHeaderSize="8192"
+               maxThreads="150"
+               protocol="org.apache.coyote.http11.Http11Protocol"
+               executor="hybrisExecutor"
+               enableLookups="false"
+               acceptCount="100"
+               connectionTimeout="20000"
+               disableUploadTimeout="true"
+               URIEncoding="UTF-8"
+               SSLEnabled="true"
+					scheme="https"
+					secure="true"
+					clientAuth="false"
+   				sslProtocol = "TLS"
+   				keystoreFile="${catalina.home}/lib/keystore"
+   				keystorePass="123456"
+                />
+
+    <!--
+    This might evaluate into 
+    <Connector protocol="AJP/1.3" port="8009" proxyPort="${proxy.http.port}" redirectPort="${proxy.ssl.port}" useIPVHosts="${tomcat.ajp.useipv}" />  
+    where the tomcat.ajp.port is mandatory property to render this connector. 
+     --> 
+		<Connector  protocol="AJP/1.3"  URIEncoding="UTF-8"  port="8009" />
+	
+
+    <Engine name="Catalina" defaultHost="localhost">
+
+			<Valve 	className="org.apache.catalina.valves.AccessLogValve"
+             		directory="C:\Users\user\IdeaProjects\hybris\log/tomcat"
+	      		 	prefix="access."
+        	   		suffix=".log"
+	      		 	pattern="combined"
+          />
+
+      <Host 	name="localhost"
+      			appBase="webapps"
+		       	unpackWARs="false"
+		       	autoDeploy="false">
+
+
+			<!-- 'testweb' extension's context for tenant 'junit' -->
+			<Context path="/test" docBase="C:\Users\user\IdeaProjects\hybris\bin\platform\ext\testweb/web/webroot" >
+				<Manager pathname="" />
+				<Loader platformHome="C:\Users\user\IdeaProjects\hybris\bin\platform" className="de.hybris.tomcat.HybrisWebappLoader" deployName="default" />
+			</Context>
+
+			<!-- 'mediaweb' extension's context for tenant 'master' -->
+			<Context path="/medias" docBase="C:\Users\user\IdeaProjects\hybris\bin\platform\ext\mediaweb/web/webroot" >
+				<Manager pathname="" />
+				<Loader platformHome="C:\Users\user\IdeaProjects\hybris\bin\platform" className="de.hybris.tomcat.HybrisWebappLoader" deployName="default" />
+			</Context>
+
+			<!-- 'maintenanceweb' extension's context for tenant 'master' -->
+			<Context path="/maintenance" docBase="C:\Users\user\IdeaProjects\hybris\bin\platform\ext\maintenanceweb/web/webroot" >
+				<Manager pathname="" />
+				<Loader platformHome="C:\Users\user\IdeaProjects\hybris\bin\platform" className="de.hybris.tomcat.HybrisWebappLoader" deployName="default" />
+			</Context>
+
+			<!-- 'hac' extension's context for tenant 'master' -->
+			<Context path="" docBase="C:\Users\user\IdeaProjects\hybris\bin\platform\ext\hac/web/webroot" >
+				<Manager pathname="" />
+				<Loader platformHome="C:\Users\user\IdeaProjects\hybris\bin\platform" className="de.hybris.tomcat.HybrisWebappLoader" deployName="default" />
+			</Context>
+
+			<!-- 'hac' extension's context for tenant 'junit' -->
+			<Context path="/hac_junit" docBase="C:\Users\user\IdeaProjects\hybris\bin\platform\ext\hac/web/webroot" >
+				<Manager pathname="" />
+				<Loader platformHome="C:\Users\user\IdeaProjects\hybris\bin\platform" className="de.hybris.tomcat.HybrisWebappLoader" deployName="default" />
+			</Context>
+
+			<!-- 'hmc' extension's context for tenant 'master' -->
+			<Context path="/hmc" docBase="C:\Users\user\IdeaProjects\hybris\bin\ext-platform-optional\hmc/web/webroot" >
+				<Manager pathname="" />
+				<Loader platformHome="C:\Users\user\IdeaProjects\hybris\bin\platform" className="de.hybris.tomcat.HybrisWebappLoader" deployName="default" />
+			</Context>
+
+			<!-- 'hmc' extension's context for tenant 'junit' -->
+			<Context path="/hmc_junit" docBase="C:\Users\user\IdeaProjects\hybris\bin\ext-platform-optional\hmc/web/webroot" >
+				<Manager pathname="" />
+				<Loader platformHome="C:\Users\user\IdeaProjects\hybris\bin\platform" className="de.hybris.tomcat.HybrisWebappLoader" deployName="default" />
+			</Context>
+
+			<!-- 'mediaconversion' extension's context for tenant 'master' -->
+			<Context path="/mediaconversion" docBase="C:\Users\user\IdeaProjects\hybris\bin\ext-platform-optional\mediaconversion/web/webroot" >
+				<Manager pathname="" />
+				<Loader platformHome="C:\Users\user\IdeaProjects\hybris\bin\platform" className="de.hybris.tomcat.HybrisWebappLoader" deployName="default" />
+			</Context>
+
+			<!-- 'cuppy' extension's context for tenant 'master' -->
+			<Context path="/cuppy" docBase="C:\Users\user\IdeaProjects\hybris\bin\custom\cuppy/web/webroot" >
+				<Manager pathname="" />
+				<Loader platformHome="C:\Users\user\IdeaProjects\hybris\bin\platform" className="de.hybris.tomcat.HybrisWebappLoader" deployName="default" />
+			</Context>
+
+			<!-- 'cuppytrailfrontend' extension's context for tenant 'master' -->
+			<Context path="/cuppytrailfrontend" docBase="C:\Users\user\IdeaProjects\hybris\bin\custom\cuppytrailfrontend/web/webroot" >
+				<Manager pathname="" />
+				<Loader platformHome="C:\Users\user\IdeaProjects\hybris\bin\platform" className="de.hybris.tomcat.HybrisWebappLoader" deployName="default" />
+			</Context>
+
+			<!-- 'mcc' extension's context for tenant 'master' -->
+			<Context path="/mcc" docBase="C:\Users\user\IdeaProjects\hybris\bin\ext-cockpit\mcc/web/webroot" >
+				<Manager pathname="" />
+				<Loader platformHome="C:\Users\user\IdeaProjects\hybris\bin\platform" className="de.hybris.tomcat.HybrisWebappLoader" deployName="default" />
+			</Context>
+
+			<!-- 'backoffice' extension's context for tenant 'master' -->
+			<Context path="/backoffice" docBase="C:\Users\user\IdeaProjects\hybris\bin\ext-backoffice\backoffice/web/webroot" >
+				<Manager pathname="" />
+				<Loader platformHome="C:\Users\user\IdeaProjects\hybris\bin\platform" className="de.hybris.tomcat.HybrisWebappLoader" deployName="default" />
+			</Context>
+
+			<!-- 'admincockpit' extension's context for tenant 'master' -->
+			<Context path="/admincockpit" docBase="C:\Users\user\IdeaProjects\hybris\bin\ext-cockpit\admincockpit/web/webroot" >
+				<Manager pathname="" />
+				<Loader platformHome="C:\Users\user\IdeaProjects\hybris\bin\platform" className="de.hybris.tomcat.HybrisWebappLoader" deployName="default" />
+			</Context>
+
+
+      </Host>
+
+    </Engine>
+
+  </Service>
+
+</Server>

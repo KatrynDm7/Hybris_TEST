@@ -1,0 +1,6 @@
+INSERT_UPDATE UserGroup;UID[unique=true];locname[lang=en]
+;mygroup;mygroup;
+
+
+INSERT_UPDATE UserGroup;UID[unique=true];nosuchcolumn[lang=en]
+;mygroup2;mygroup2;

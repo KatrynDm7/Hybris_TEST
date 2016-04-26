@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+           
+    <context:component-scan base-package="yoccaddonpackage.controllers"/>
+
+	<!-- Cache manager for addon -->
+
+	<alias name="defaultYOccAddonCacheManager" alias="yoccaddonCacheManager"/>
+	<bean id="defaultYOccAddonCacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+		<property name="cacheManager" ref="yoccaddonEhcache"/>
+	</bean>
+
+	<alias name="defaultYOccAddonEhcache" alias="yoccaddonEhcache"/>
+	<bean id="defaultYOccAddonEhcache" class="de.hybris.platform.commercewebservicescommons.cache.TenantAwareEhCacheManagerFactoryBean">
+		<property name="cacheNamePrefix" value="yoccaddonCache_"/>
+		<property name="configLocation" value="/WEB-INF/cache/addons/yoccaddon/ehcache.xml"/>
+	</bean>
+
+	<bean depends-on="wsCacheManagerList" parent="listMergeDirective">
+		<property name="add" ref="yoccaddonCacheManager"/>
+	</bean>
+
+</beans>

@@ -1,0 +1,40 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform 
+# 
+# Copyright (c) 2000-2015 hybris AG
+# All rights reserved.
+#  
+# This software is the confidential and proprietary information of hybris 
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with hybris.
+#
+#  
+# -----------------------------------------------------------------------
+
+# you can put key/value pairs here.
+# Use Config.getParameter(..) to retrieve the values during runtime.
+
+jiathis.key=value
+
+# Specifies the location of the spring context file added automatically to the global platform application context.
+jiathis.application-context=jiathis-spring.xml
+
+ychinaacceleratorstorefront.additionalWebSpringConfigs.jiathis=classpath:/jiathis/web/spring/jiathis-web-spring.xml
+yacceleratorstorefront.additionalWebSpringConfigs.jiathis=classpath:/jiathis/web/spring/jiathis-web-spring.xml
+yb2bacceleratorstorefront.additionalWebSpringConfigs.jiathis=classpath:/jiathis/web/spring/jiathis-web-spring.xml
+yacceleratorstorefront.additionalWebSpringConfigs.addonsupport=classpath:/addonsupport/web/spring/addonsupport-b2c-web-spring.xml
+ychinaacceleratorstorefront.additionalWebSpringConfigs.addonsupport=classpath:/addonsupport/web/spring/addonsupport-b2c-web-spring.xml
+yb2bacceleratorstorefront.additionalWebSpringConfigs.addonsupport=classpath:/addonsupport/web/spring/addonsupport-b2c-web-spring.xml
+
+storefront.supportedUiExperienceLevels.electronics-cn=DESKTOP,MOBILE
+storefront.supportedUiExperienceLevels.electronics=DESKTOP,MOBILE
+storefront.supportedUiExperienceLevels.apparel-uk=DESKTOP,MOBILE
+storefront.supportedUiExperienceLevels.apparel-de=DESKTOP,MOBILE
+storefront.supportedUiExperienceLevels.powertools=DESKTOP
+
+
+jiathis.javascript.paths.desktop=/desktop/common/js/jiathis.js
+jiathis.javascript.paths.mobile=/desktop/common/js/jiathis.js
+jiathis.css.paths.desktop=/desktop/common/css/jiathis.css
+jiathis.css.paths.mobile=/mobile/common/css/jiathis.css

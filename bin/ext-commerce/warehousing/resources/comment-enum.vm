@@ -1,0 +1,50 @@
+package $packageName;
+ 
+#if ( $hasDescription )
+/**
+ * $description
+ */
+#end
+public enum $shortClassName   
+{
+ 
+#foreach($v in $enumValue)
+    $v.comment
+    $v.name#if ($foreach.last); #else , #end
+ 
+#end
+ 
+    final private String commentTypeCode;
+    final private String commentTypeName;
+    final private String componentCode;
+    final private String componentName;
+ 
+    private $shortClassName(String commentTypeCode, String commentTypeName, String componentCode, String componentName) {
+        
+		this.commentTypeCode = commentTypeCode;
+		this.commentTypeName = commentTypeName;
+		this.componentCode = componentCode;
+		this.componentName = componentName;
+    }
+ 
+	public String getComponentCode()
+	{
+		return componentCode;
+	}
+
+	public String getComponentName()
+	{
+		return componentName;
+	}
+
+	public String getCommentTypeCode()
+	{
+		return commentTypeCode;
+	}
+
+	public String getCommentTypeName()
+	{
+		return commentTypeName;
+	}
+ 
+}

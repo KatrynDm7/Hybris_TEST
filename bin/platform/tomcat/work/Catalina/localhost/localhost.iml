@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/_" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/hmc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/maintenance" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="bin1" level="project" />
+    <orderEntry type="library" name="solrj-lib" level="project" />
+    <orderEntry type="library" name="lib4" level="project" />
+    <orderEntry type="library" name="lib21" level="project" />
+    <orderEntry type="library" name="hmcserver" level="project" />
+    <orderEntry type="library" name="classificationsystemsserver" level="project" />
+    <orderEntry type="library" name="europe1server" level="project" />
+    <orderEntry type="library" name="lib26" level="project" />
+    <orderEntry type="library" name="coreserver" level="project" />
+    <orderEntry type="library" name="lib44" level="project" />
+    <orderEntry type="library" name="platformhmchmc" level="project" />
+    <orderEntry type="library" name="lib33" level="project" />
+    <orderEntry type="library" name="catalogserver" level="project" />
+    <orderEntry type="library" name="platformhmcserver" level="project" />
+    <orderEntry type="library" name="advancedsavedqueryserver" level="project" />
+    <orderEntry type="library" name="lib40" level="project" />
+    <orderEntry type="library" name="hybrislicence" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="lib31" level="project" />
+    <orderEntry type="library" name="hybrislicence2" level="project" />
+    <orderEntry type="library" name="ext" level="project" />
+    <orderEntry type="library" name="lib61" level="project" />
+    <orderEntry type="library" name="jetty-runner" level="project" />
+    <orderEntry type="library" name="commercesearchserver" level="project" />
+    <orderEntry type="library" name="hybrislicence1" level="project" />
+    <orderEntry type="library" name="sonar-ant-task-2.1" level="project" />
+    <orderEntry type="module" module-name="classificationsystems" />
+    <orderEntry type="module" module-name="web29" />
+    <orderEntry type="module" module-name="financialacceleratorstorefront" />
+    <orderEntry type="module" module-name="platformhmc" />
+    <orderEntry type="module" module-name="advancedsavedquery" />
+    <orderEntry type="module" module-name="catalog" />
+    <orderEntry type="module" module-name="commercesearch" />
+    <orderEntry type="module" module-name="core" />
+  </component>
+</module>

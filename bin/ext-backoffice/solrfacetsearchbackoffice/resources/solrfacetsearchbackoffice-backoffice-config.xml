@@ -1,0 +1,2325 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config xmlns="http://www.hybris.com/cockpit/config">
+	<context merge-by="module" parent="auto" component="explorer-tree">
+		<explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
+			<explorer-tree:navigation-node id="hmc_treenode_system" merge-mode="append">
+				<explorer-tree:navigation-node id="hmc.solrfacetsearch">
+					<explorer-tree:type-node code="SolrFacetSearchConfig" id="hmc_type_tree_solrfacetsearchconfig"/>
+					<explorer-tree:navigation-node id="SolrIndexerOperationWizard"/>
+					<explorer-tree:navigation-node id="SolrIndexerHotUpdateWizard"/>
+					<explorer-tree:type-node code="SolrIndexedType" id="hmc_type_tree_solrindexedtype"/>
+					<explorer-tree:type-node code="SolrValueRangeSet" id="hmc_type_tree_solrvaluerangeset"/>
+					<explorer-tree:type-node code="SolrIndexedCoresRecord" id="SolrIndexedCoresRecord"/>
+				</explorer-tree:navigation-node>
+			</explorer-tree:navigation-node>
+		</explorer-tree:explorer-tree>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrIndexedType" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="identifier"/>
+			<list-view:column qualifier="type"/>
+		</list-view:list-view>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrIndexOperationRecord" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="mode"/>
+			<list-view:column qualifier="status"/>
+			<list-view:column qualifier="startTime"/>
+			<list-view:column qualifier="finishTime"/>
+		</list-view:list-view>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrEndpointUrl" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="url"/>
+			<list-view:column qualifier="master"/>
+		</list-view:list-view>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrIndexedProperty" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="name"/>
+			<list-view:column qualifier="type"/>
+			<list-view:column qualifier="facet"/>
+			<list-view:column qualifier="exportId"/>
+		</list-view:list-view>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrValueRange" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="solrValueRangeSet"/>
+			<list-view:column qualifier="name"/>
+			<list-view:column qualifier="from"/>
+			<list-view:column qualifier="to"/>
+		</list-view:list-view>
+	</context>
+	<context merge-by="type" parent="SolrAbstractKeywordRedirect" type="SolrURIRedirect" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="url"/>
+		</list-view:list-view>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrStopWord" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="StopWord"/>
+			<list-view:column qualifier="language"/>
+		</list-view:list-view>
+	</context>
+	<context merge-by="type" parent="SolrAbstractKeywordRedirect" type="SolrProductRedirect" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="redirectItem"/>
+		</list-view:list-view>
+	</context>
+	<context merge-by="type" parent="SolrAbstractKeywordRedirect" type="SolrCategoryRedirect" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="redirectItem"/>
+		</list-view:list-view>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrFacetSearchKeywordRedirect" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="keyword"/>
+			<list-view:column qualifier="matchType"/>
+			<list-view:column qualifier="ignoreCase"/>
+		</list-view:list-view>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrIndexerQuery" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="identifier"/>
+			<list-view:column qualifier="type"/>
+		</list-view:list-view>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrSearchConfig" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="pageSize"/>
+			<list-view:column qualifier="defaultSortOrder"/>
+			<list-view:column qualifier="description"/>
+		</list-view:list-view>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrSynonymConfig" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="synonymFrom"/>
+			<list-view:column qualifier="synonymTo"/>
+			<list-view:column qualifier="language"/>
+		</list-view:list-view>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrFacetSearchConfig" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="name"/>
+			<list-view:column qualifier="description"/>
+		</list-view:list-view>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrIndexedCoresRecord" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="coreName"/>
+			<list-view:column qualifier="indexName"/>
+			<list-view:column qualifier="serverMode"/>
+		</list-view:list-view>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrValueRangeSet" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="name"/>
+			<list-view:column qualifier="type"/>
+		</list-view:list-view>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrServerConfig" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="name"/>
+			<list-view:column qualifier="mode"/>
+		</list-view:list-view>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrAbstractKeywordRedirect" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="hmcLabel"/>
+		</list-view:list-view>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrIndexConfig" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="name"/>
+			<list-view:column qualifier="batchSize"/>
+			<list-view:column qualifier="exportPath"/>
+			<list-view:column qualifier="numberOfThreads"/>
+			<list-view:column qualifier="indexMode"/>
+		</list-view:list-view>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrIndexedType" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.configuration.indexedtype">
+				<editorArea:section name="hmc.sec.configuration.indexedtype.essential">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="identifier"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="type"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="indexName"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="configSet" readonly="true"/>
+					
+				</editorArea:section>
+				<editorArea:section name="hmc.sec.configuration.indexedtype.properties">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="solrIndexedProperties"
+												 editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor">
+						<editorArea:editor-parameter>
+							<editorArea:name>listConfigContext</editorArea:name>
+							<editorArea:value>inLineEditorConfig</editorArea:value>
+						</editorArea:editor-parameter>
+						<editorArea:editor-parameter>
+								<editorArea:name>inlineEditing</editorArea:name>
+								<editorArea:value>true</editorArea:value>
+							</editorArea:editor-parameter>
+					</editorArea:attribute>
+				</editorArea:section>
+
+				<editorArea:section name="hmc.sec.configuration.indexedtype.queries">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="solrIndexerQueries"
+												 editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor">
+						<editorArea:editor-parameter>
+							<editorArea:name>listConfigContext</editorArea:name>
+							<editorArea:value>referenceListView</editorArea:value>
+						</editorArea:editor-parameter>
+					</editorArea:attribute>
+				</editorArea:section>
+
+				<editorArea:section name="hmc.sec.configuration.indexedtype.others">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 editor="de.hybris.platform.solrfacetsearch.backoffice.editor.configurabledropdowneditor"
+												 qualifier="identityProvider">
+						<editorArea:editor-parameter>
+							<editorArea:name>dropDownValueClassTypes</editorArea:name>
+							<editorArea:value>de.hybris.platform.solrfacetsearch.provider.IdentityProvider</editorArea:value>
+						</editorArea:editor-parameter>
+					</editorArea:attribute>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 editor="de.hybris.platform.solrfacetsearch.backoffice.editor.configurabledropdowneditor"
+												 qualifier="modelLoader">
+						<editorArea:editor-parameter>
+							<editorArea:name>dropDownValueClassTypes</editorArea:name>
+							<editorArea:value>de.hybris.platform.solrfacetsearch.loader.ModelLoader</editorArea:value>
+						</editorArea:editor-parameter>
+					</editorArea:attribute>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 editor="de.hybris.platform.solrfacetsearch.backoffice.editor.configurabledropdowneditor"
+												 qualifier="valuesProvider">
+						<editorArea:editor-parameter>
+							<editorArea:name>dropDownValueClassTypes</editorArea:name>
+							<editorArea:value>de.hybris.platform.solrfacetsearch.provider.IndexedTypeFieldsValuesProvider</editorArea:value>
+						</editorArea:editor-parameter>
+					</editorArea:attribute>
+					<editorArea:attribute editor="de.hybris.platform.solrfacetsearch.backoffice.editor.configurabledropdowneditor"
+												 qualifier="defaultFieldValueProvider">
+						<editorArea:editor-parameter>
+							<editorArea:name>dropDownValueClassTypes</editorArea:name>
+							<editorArea:value>de.hybris.platform.solrfacetsearch.provider.ValueResolver,de.hybris.platform.solrfacetsearch.provider.FieldValueProvider</editorArea:value>
+						</editorArea:editor-parameter>
+					</editorArea:attribute>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="solrResultConverter"/>
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.configuration.indexedtype.freetext">
+				<editorArea:section name="hmc.sec.configuration.indexedtype.freetextquery">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 editor="de.hybris.platform.solrfacetsearch.backoffice.editor.configurabledropdowneditor"
+												 qualifier="ftsQueryBuilder">
+						<editorArea:editor-parameter>
+							<editorArea:name>dropDownValueClassTypes</editorArea:name>
+							<editorArea:value>de.hybris.platform.solrfacetsearch.search.FreeTextQueryBuilder</editorArea:value>
+						</editorArea:editor-parameter>
+					</editorArea:attribute>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="ftsQueryBuilderParameters"/>
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.configuration.solrgrouping">
+				<editorArea:section name="hmc.sec.configuration.solrgrouping">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="group"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="groupFieldName"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="groupLimit"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="groupFacets"/>
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.configuration.listeners">
+				<editorArea:section name="hmc.sec.configuration.listeners">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="listeners"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrIndexOperationRecord" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.solrindexoperationrecord.tab">
+				<editorArea:section name="hmc.solrindexoperationrecord.sec1">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="solrIndexCoreRecord"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="startTime"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="finishTime"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="threadId"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="clusterId"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="mode"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="status"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="failedReason"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrEndpointUrl" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.configuration.indexconfig">
+				<editorArea:section name="hmc.sec.configuration.indexconfig">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="url"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="master"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrIndexedProperty" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.configuration.indexedproperty">
+				<editorArea:section name="hmc.sec.configuration.indexedproperty">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="name"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="exportId"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="type"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="sortableType"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="localized"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="currency"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="multiValue"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="useForSpellchecking"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="useForAutocomplete"/>
+				</editorArea:section>
+                <editorArea:section name="hmc.sec.configuration.indexedproperty.valueProvider">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 editor="de.hybris.platform.solrfacetsearch.backoffice.editor.configurabledropdowneditor"
+												 qualifier="fieldValueProvider">
+						<editorArea:editor-parameter>
+							<editorArea:name>dropDownValueClassTypes</editorArea:name>
+							<editorArea:value>de.hybris.platform.solrfacetsearch.provider.ValueResolver,de.hybris.platform.solrfacetsearch.provider.FieldValueProvider</editorArea:value>
+						</editorArea:editor-parameter>
+					</editorArea:attribute>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="valueProviderParameter"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="valueProviderParameters"/>
+                </editorArea:section>
+                <editorArea:section  name="hmc.sec.configuration.indexedproperty.ranges">
+            	    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="rangeSet"/>
+            	    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="rangeSets"/>
+                </editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.configuration.indexedproperty.freetext">
+                <editorArea:section name="hmc.sec.configuration.indexedproperty.freetextquery">
+	                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="ftsQuery"/>
+	                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="ftsQueryMinTermLength"/>
+	                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="ftsQueryBoost"/>
+	             </editorArea:section>
+               	<editorArea:section name="hmc.sec.configuration.indexedproperty.freetextfuzzyquery">
+	                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="ftsFuzzyQuery"/>
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="ftsFuzzyQueryMinTermLength"/>
+	                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="ftsFuzzyQueryFuzziness"/>
+	                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="ftsFuzzyQueryBoost"/>
+               	</editorArea:section>
+               	<editorArea:section name="hmc.sec.configuration.indexedproperty.freetextwildcardquery">
+	                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="ftsWildcardQuery"/>
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="ftsWildcardQueryMinTermLength"/>
+	                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="ftsWildcardQueryType"/>
+	                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="ftsWildcardQueryBoost"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.sec.configuration.indexedproperty.freetextphrasequery">
+	                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="ftsPhraseQuery"/>
+	                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="ftsPhraseQuerySlop"/>
+	                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="ftsPhraseQueryBoost"/>
+				</editorArea:section>
+            </editorArea:tab>
+			<editorArea:tab name="hmc.tab.configuration.indexedproperty.facet">
+				<editorArea:section name="hmc.sec.configuration.indexedproperty.facet">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="facet"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="facetDisplayNameProvider"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="facetType"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="priority"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 editor="de.hybris.platform.solrfacetsearch.backoffice.editor.configurabledropdowneditor"
+												 qualifier="customFacetSortProvider">
+						<editorArea:editor-parameter>
+							<editorArea:name>dropDownValueClassTypes</editorArea:name>
+							<editorArea:value>de.hybris.platform.solrfacetsearch.config.FacetSortProvider</editorArea:value>
+						</editorArea:editor-parameter>
+						<editorArea:editor-parameter>
+							<editorArea:name>dropDownValuesNameProvider</editorArea:name>
+							<editorArea:value>facetSortDropDownNamesProviderImpl</editorArea:value>
+						</editorArea:editor-parameter>
+					</editorArea:attribute>
+                </editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="WizardBusinessItem" type="SolrIndexerOperationWizard" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.solrindexeroperationwizard.tab1">
+				<editorArea:section name="hmc.section.facetservciceupdateindexwizard.one">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="indexerOperation"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="facetSearchConfig"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrValueRange" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.configuration.ranges">
+				<editorArea:section name="hmc.sec.configuration.ranges">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="solrValueRangeSet"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="name"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="from"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="to"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>	
+	<context merge-by="type" parent="SolrAbstractKeywordRedirect" type="SolrURIRedirect" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.solruriredirect.tab">
+				<editorArea:section name="hmc.solruriredirect.sec">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="url"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrStopWord" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.configuration.stopword">
+				<editorArea:section name="hmc.sec.configuration.stopword">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="StopWord"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="language"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="SolrAbstractKeywordRedirect" type="SolrProductRedirect" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.solritemredirect.tab">
+				<editorArea:section name="hmc.solritemredirect.sec">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="redirectItem"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="SolrAbstractKeywordRedirect" type="SolrCategoryRedirect" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.solritemredirect.tab">
+				<editorArea:section name="hmc.solritemredirect.sec">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="redirectItem"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrFacetSearchKeywordRedirect" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.configuration.solrconfig.keywordredirects">
+				<editorArea:section name="hmc.sec.configuration.solrconfig.keywordredirects">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="keyword"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="matchType"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="ignoreCase"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="redirect"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="facetSearchConfig"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="language"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrIndexerQuery" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:essentials>
+				<editorArea:essentialSection name="hmc.essential">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="identifier"/>
+				</editorArea:essentialSection>
+			</editorArea:essentials>
+			<editorArea:tab name="hmc.tab.configuration.indexqueries">
+				<editorArea:section name="hmc.sec.configuration.indexqueries">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="query">
+						<editor-parameter>
+							<name>rows</name>
+							<value>10</value>
+						</editor-parameter>
+					</editorArea:attribute>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="solrIndexerQueryParameters"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="parameterProvider"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="type"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="user"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="injectLastIndexTime"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="injectCurrentTime"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="injectCurrentDate"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrSearchConfig" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.configuration.searchconfig">
+				<editorArea:section name="hmc.sec.configuration.searchconfig">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="pageSize"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="defaultSortOrder"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="description"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="restrictFieldsInResponse"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="allFacetValuesInResponse"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="legacyMode"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrSynonymConfig" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.configuration.synonym">
+				<editorArea:section name="hmc.sec.configuration.synonym">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="synonymFrom"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="synonymTo"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="language"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="CronJob" type="SolrIndexerCronJob" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.cronjob.common">
+				<editorArea:section name="hmc.section.cronjob.indexer">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="facetSearchConfig"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="indexerOperation"/>
+					<editorArea:attribute qualifier="indexerHints"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" type="SolrFacetSearchConfig" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:essentials>
+				<editorArea:essentialSection name="hmc.essential">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="name"/>
+				</editorArea:essentialSection>
+			</editorArea:essentials>
+			<editorArea:tab name="hmc.tab.configuration.properties">
+				<editorArea:section name="hmc.sec.configuration.cronjobs">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"
+												 qualifier="solrIndexerCronJob">
+						<editorArea:editor-parameter>
+							<editorArea:name>listConfigContext</editorArea:name>
+							<editorArea:value>referenceListView</editorArea:value>
+						</editorArea:editor-parameter>
+					</editorArea:attribute>
+
+				</editorArea:section>
+				<editorArea:section name="hmc.sec.configuration.properties">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="description"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"
+												 qualifier="catalogVersions">
+						<editorArea:editor-parameter>
+							<editorArea:name>listConfigContext</editorArea:name>
+							<editorArea:value>referenceListView</editorArea:value>
+						</editorArea:editor-parameter>
+					</editorArea:attribute>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="currencies"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"
+												 qualifier="languages">
+						<editorArea:editor-parameter>
+							<editorArea:name>listConfigContext</editorArea:name>
+							<editorArea:value>referenceListView</editorArea:value>
+						</editorArea:editor-parameter>
+					</editorArea:attribute>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="enabledLanguageFallbackMechanism"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"
+												 qualifier="solrValueRangeSets">
+						<editorArea:editor-parameter>
+							<editorArea:name>listConfigContext</editorArea:name>
+							<editorArea:value>referenceListView</editorArea:value>
+						</editorArea:editor-parameter>
+					</editorArea:attribute>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="indexNamePrefix"/>
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.configuration.indexedtypes">
+				<editorArea:section name="hmc.sec.configuration.indexedtypes">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"
+												 qualifier="solrIndexedTypes">
+						<editorArea:editor-parameter>
+							<editorArea:name>listConfigContext</editorArea:name>
+							<editorArea:value>referenceListView</editorArea:value>
+						</editorArea:editor-parameter>
+					</editorArea:attribute>
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.configuration.searchconfig">
+				<editorArea:section name="hmc.sec.configuration.searchconfig">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="solrSearchConfig"/>
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.configuration.solrconfig.redirects">
+				<editorArea:section name="hmc.tab.configuration.solrconfig.redirects.general">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="languageKeywordRedirectMapping">
+						<editorArea:editor-parameter>
+							<editorArea:name>listConfigContext</editorArea:name>
+							<editorArea:value>referenceListView</editorArea:value>
+						</editorArea:editor-parameter>
+					</editorArea:attribute>
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.configuration.solrconfig">
+				<editorArea:section name="hmc.sec.configuration.solrconfig">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="solrServerConfig"/>
+				</editorArea:section>
+				<editorArea:section name="hmc.sec.configuration.indexerconfig">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="solrIndexConfig"/>
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.configuration.solrconfig.synonym">
+				<editorArea:section name="hmc.sec.configuration.solrconfig.synonym">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="languageSynonymMapping">
+						<editorArea:editor-parameter>
+							<editorArea:name>listConfigContext</editorArea:name>
+							<editorArea:value>referenceListView</editorArea:value>
+						</editorArea:editor-parameter>
+					</editorArea:attribute>
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.configuration.solrconfig.stopword">
+				<editorArea:section name="hmc.sec.configuration.solrconfig.stopword">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="languageStopWordMapping">
+						<editorArea:editor-parameter>
+							<editorArea:name>listConfigContext</editorArea:name>
+							<editorArea:value>referenceListView</editorArea:value>
+						</editorArea:editor-parameter>
+					</editorArea:attribute>
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.configuration.listeners">
+				<editorArea:section name="hmc.sec.configuration.listeners">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="listeners"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrFacetSearchConfig" component="editorareaactions">
+		<y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:group qualifier="common">
+				<y:label>actiongroup.common</y:label>
+				<y:action action-id="com.hybris.cockpitng.action.delete" property="currentObject"/>
+				<y:action action-id="de.hybris.platform.solrfacetsearch.action.exportsynonyms" property="currentObject"/>
+				<y:action action-id="de.hybris.platform.solrfacetsearch.action.exportstopwords" property="currentObject"/>
+			</y:group>
+		</y:actions>
+	</context>
+
+	<context type="SolrIndexerCronJob" component="referenceListView">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="code"/>
+			<list-view:column qualifier="job"/>
+			<list-view:column qualifier="status"/>
+			<list-view:column qualifier="result"/>
+			<list-view:column qualifier="timeTable"/>
+		</list-view:list-view>
+	</context>
+
+	<context type="CatalogVersion" component="referenceListView">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="catalog"/>
+			<list-view:column qualifier="version"/>
+		</list-view:list-view>
+	</context>
+
+	<context type="Language" component="referenceListView">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="isocode"/>
+			<list-view:column qualifier="name"/>
+		</list-view:list-view>
+	</context>
+
+	<context type="SolrValueRangeSet" component="referenceListView">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="name"/>
+			<list-view:column qualifier="type"/>
+		</list-view:list-view>
+	</context>
+
+	<context type="SolrIndexedType" component="referenceListView">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="identifier"/>
+			<list-view:column qualifier="type"/>
+		</list-view:list-view>
+	</context>
+
+
+	<context type="SolrFacetSearchKeywordRedirect" component="referenceListView">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="keyword"/>
+			<list-view:column qualifier="matchType"/>
+			<list-view:column qualifier="ignoreCase"/>
+		</list-view:list-view>
+	</context>
+
+	<context type="SolrUpdateSynonymsCronJob" component="referenceListView">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="code"/>
+			<list-view:column qualifier="job"/>
+			<list-view:column qualifier="status"/>
+			<list-view:column qualifier="result"/>
+			<list-view:column qualifier="timeTable"/>
+		</list-view:list-view>
+	</context>
+
+	<context type="SolrValueRange" component="referenceListView2">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="name"/>
+			<list-view:column qualifier="from"/>
+			<list-view:column qualifier="to"/>
+		</list-view:list-view>
+	</context>
+
+	<context type="SolrSynonymConfig" component="referenceListView">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="synonymFrom"/>
+			<list-view:column qualifier="synonymTo"/>
+		</list-view:list-view>
+	</context>
+
+	<context type="SolrStopWord" component="referenceListView">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="StopWord"/>
+		</list-view:list-view>
+	</context>
+
+	<context type="SolrIndexOperationRecord" component="referenceListView">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="mode"/>
+			<list-view:column qualifier="status"/>
+			<list-view:column qualifier="startTime"/>
+			<list-view:column qualifier="finishTime"/>
+		</list-view:list-view>
+	</context>
+
+	<context type="SolrIndexedProperty" component="inLineEditorConfig">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="name"/>
+			<list-view:column qualifier="type"/>
+			<list-view:column qualifier="facet"/>
+			<list-view:column qualifier="multiValue"/>
+			<list-view:column qualifier="useForSpellchecking"/>
+			<list-view:column qualifier="useForAutocomplete"/>
+			<list-view:column qualifier="includeInResponse"/>
+		</list-view:list-view>
+	</context>
+
+	<context type="SolrIndexerQuery" component="referenceListView">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="type"/>
+			<list-view:column qualifier="query"/>
+		</list-view:list-view>
+	</context>
+
+	<context type="SolrSort" component="referenceListView">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="code"/>
+			<list-view:column qualifier="name"/>
+		</list-view:list-view>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="SolrIndexedCoresRecord" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.solrindexedcoresrecord.tab">
+				<editorArea:section name="hmc.solrindexedcoresrecord.sec1">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="coreName"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="indexName"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="serverMode" readonly="true"/>
+				</editorArea:section>
+				<editorArea:section name="hmc.solrindexedcoresrecord.sec2">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"
+												 qualifier="indexOperations" readonly="true">
+						<editorArea:editor-parameter>
+							<editorArea:name>listConfigContext</editorArea:name>
+							<editorArea:value>referenceListView</editorArea:value>
+						</editorArea:editor-parameter>
+					</editorArea:attribute>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrValueRangeSet" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:essentials>
+				<editorArea:essentialSection name="hmc.essential">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="name"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="facetSearchConfigs"/>
+				</editorArea:essentialSection>
+			</editorArea:essentials>
+			<editorArea:tab name="hmc.tab.configuration.ranges">
+				<editorArea:section name="hmc.sec.configuration.ranges">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="type"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"
+												 qualifier="solrValueRanges">
+						<editorArea:editor-parameter>
+							<editorArea:name>listConfigContext</editorArea:name>
+							<editorArea:value>referenceListView2</editorArea:value>
+						</editorArea:editor-parameter>
+					</editorArea:attribute>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrServerConfig" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.configuration.serverconfig">
+				<editorArea:section name="hmc.sec.configuration.serverconfig">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="name"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="mode"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="embeddedMaster"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="aliveCheckInterval"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="connectionTimeout"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="socketTimeout"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="maxTotalConnections"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="maxTotalConnectionsPerHostConfig"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="tcpNoDelay"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="solrEndpointUrls"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="useMasterNodeExclusivelyForIndexing"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="WizardBusinessItem" type="SolrIndexerHotUpdateWizard" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.indexerhotupdate.one">
+				<editorArea:section name="hmc.tab.indexerhotupdate.one">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="solrFacetSearchConfig"/>
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.indexerhotupdate.two">
+				<editorArea:section name="hmc.tab.indexerhotupdate.two">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="indexType"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="updateOperation"/>
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.indexerhotupdate.three">
+				<editorArea:section name="hmc.tab.indexerhotupdate.three">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="itemsToIndex"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="ComposedIndexedType" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.composedIndexedType.tab">
+				<editorArea:section name="hmc.composedIndexedType.sec">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="indexedType"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrIndexConfig" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.configuration.indexconfig">
+				<editorArea:section name="hmc.sec.configuration.indexconfig">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="name"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="batchSize"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="exportPath"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="numberOfThreads"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="indexMode"/>
+					<editorArea:attribute qualifier="commitMode"/>
+					<editorArea:attribute qualifier="optimizeMode"/>
+					<editorArea:attribute qualifier="legacyMode"/>
+				</editorArea:section>
+				<editorArea:section name="hmc.sec.configuration.indexconfig.errorhandling">
+					<editorArea:attribute qualifier="ignoreErrors"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="maxRetries"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+												 qualifier="maxBatchRetries"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrIndexedType" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="identifier"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="identityProvider"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="indexName"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modelLoader"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="solrFacetSearchConfig" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="solrResultConverter" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="type"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="valuesProvider"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="variant"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long"
+											  name="pk" selected="false"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrIndexOperationRecord" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="clusterId"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="failedReason"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="finishTime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="mode"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="solrIndexCoreRecord" selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="startTime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="status"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="threadId"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long"
+											  name="pk" selected="false"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrEndpointUrl" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="master"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="solrServerConfig"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="url"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long"
+											  name="pk" selected="false"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrIndexedProperty" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="categoryField"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="classAttributeAssignment" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="currency"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="customFacetSortProvider" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="displayName"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="exportId"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="facet"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="facetDisplayNameProvider" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="facetSort"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="facetType"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="fieldValueProvider" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="localized"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="multiValue"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="name"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="priority"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="rangeSet"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="rangeSets"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="solrIndexedType"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="sortableType"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="topValuesProvider" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="type"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="useForAutocomplete" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="useForSpellchecking" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="valueProviderParameter" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="includeInResponse"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="assignedCockpitItemTemplates" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long"
+											  name="pk" selected="false"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="WizardBusinessItem" type="SolrIndexerOperationWizard" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list/>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrValueRange" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="from"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="name"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="solrValueRangeSet" selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="to"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long"
+											  name="pk" selected="false"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="module" parent="auto" type="Item" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list/>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="SolrAbstractKeywordRedirect" type="SolrURIRedirect" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="url"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long"
+											  name="pk" selected="false"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrStopWord" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="StopWord"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="facetSearchConfig" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="language"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long"
+											  name="pk" selected="false"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="SolrAbstractKeywordRedirect" type="SolrProductRedirect" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="redirectItem"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long"
+											  name="pk" selected="false"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="SolrAbstractKeywordRedirect" type="SolrCategoryRedirect"
+				component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="redirectItem"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long"
+											  name="pk" selected="false"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrFacetSearchKeywordRedirect" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="facetSearchConfig" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="keyword"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="language"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="matchType"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="redirect"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long"
+											  name="pk" selected="false"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrIndexerQuery" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="identifier"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="injectCurrentDate" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="injectCurrentTime" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="injectLastIndexTime" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="parameterProvider" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="query"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="solrIndexedType"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="type"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="user"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long"
+											  name="pk" selected="false"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrSearchConfig" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="description"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="legacyMode"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="pageSize"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long"
+											  name="pk" selected="false"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrSynonymConfig" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="facetSearchConfig" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="language"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="synonymFrom"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="synonymTo"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long"
+											  name="pk" selected="false"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="CronJob" type="SolrUpdateSynonymsCronJob" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="language"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="solrFacetSearchConfig" selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="active"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="alternativeDataSourceID" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="code"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="currentStep"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="emailAddress"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="emailNotificationTemplate" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="endTime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="errorMode"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="job"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="logLevelDatabase"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="logLevelFile"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="logToDatabase"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="logToFile"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="nodeID"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="pendingSteps"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long"
+											  name="pk" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="priority"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="processedSteps"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="removeOnExit"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="requestAbort"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="requestAbortStep"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="result"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="retry"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="sendEmail"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="sessionCurrency"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="sessionLanguage"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="sessionUser"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="singleExecutable"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="startTime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="status"
+											  selected="false"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="CronJob" type="SolrIndexOptimizationCronJob" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list/>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="CronJob" type="SolrIndexerCronJob" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list/>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrFacetSearchConfig" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="catalogVersions"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="currencies"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="description"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="enabledLanguageFallbackMechanism" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="indexNamePrefix"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="languages"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="name"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="solrIndexConfig"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="solrSearchConfig"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="solrServerConfig"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="solrValueRangeSets" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long"
+											  name="pk" selected="false"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrIndexedCoresRecord" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="coreName"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="currentIndexDataSubDirectory" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="indexName"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="indexTime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="serverMode"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long"
+											  name="pk" selected="false"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="CronJob" type="SolrUpdateStopWordsCronJob" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="language"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="solrFacetSearchConfig" selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="active"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="alternativeDataSourceID" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="code"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="currentStep"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="emailAddress"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="emailNotificationTemplate" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="endTime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="errorMode"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="job"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="logLevelDatabase"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="logLevelFile"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="logToDatabase"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="logToFile"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="nodeID"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="pendingSteps"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long"
+											  name="pk" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="priority"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="processedSteps"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="removeOnExit"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="requestAbort"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="requestAbortStep"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="result"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="retry"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="sendEmail"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="sessionCurrency"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="sessionLanguage"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="sessionUser"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="singleExecutable"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="startTime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="status"
+											  selected="false"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrValueRangeSet" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="facetSearchConfigs" selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="indexedProperties" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="name"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="qualifier"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="type"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long"
+											  name="pk" selected="false"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrServerConfig" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="aliveCheckInterval" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="connectionTimeout" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="embeddedMaster"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="maxTotalConnections" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="maxTotalConnectionsPerHostConfig" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="mode"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="name"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="readTimeout"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="socketTimeout"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="tcpNoDelay"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+											  name="useMasterNodeExclusivelyForIndexing" selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long"
+											  name="pk" selected="false"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="WizardBusinessItem" type="SolrIndexerHotUpdateWizard" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list/>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrAbstractKeywordRedirect" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list/>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="ComposedIndexedType" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list/>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrIndexConfig" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="batchSize"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="exportPath"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="indexMode"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="name"
+											  selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="numberOfThreads"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner"
+											  selected="false"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long"
+											  name="pk" selected="false"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrFacetSearchConfig" component="simple-search">
+		<simple-search:simple-search xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+			<simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="name"/>
+			<simple-search:sort-field name="name" asc="true"/>
+		</simple-search:simple-search>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrSearchConfig" component="simple-search">
+		<simple-search:simple-search xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+			<simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="description"/>
+			<simple-search:sort-field name="description" asc="true"/>
+		</simple-search:simple-search>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrIndexedType" component="simple-search">
+		<simple-search:simple-search xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+			<simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="identifier"/>
+			<simple-search:sort-field name="identifier" asc="true"/>
+		</simple-search:simple-search>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrServerConfig" component="simple-search">
+		<simple-search:simple-search xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+			<simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="name"/>
+			<simple-search:sort-field name="name" asc="true"/>
+		</simple-search:simple-search>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SolrIndexConfig" component="simple-search">
+		<simple-search:simple-search xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+			<simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="name"/>
+			<simple-search:sort-field name="name" asc="true"/>
+		</simple-search:simple-search>
+	</context>
+	<context type="SolrIndexedType" component="base" merge-by="type" parent="GenericItem">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>identifier</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context type="SolrIndexOperationRecord" component="base" merge-by="type" parent="GenericItem">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>solrIndexCoreRecord+ ' ' +mode+ ' ' +status</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context type="SolrEndpointUrl" component="base" merge-by="type" parent="GenericItem">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>url</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context type="SolrIndexedProperty" component="base" merge-by="type" parent="GenericItem">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>name</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context type="SolrURIRedirect" component="base" merge-by="type" parent="SolrAbstractKeywordRedirect">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>url</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context type="SolrStopWord" component="base" merge-by="type" parent="GenericItem">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>StopWord</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context type="SolrProductRedirect" component="base" merge-by="type" parent="SolrAbstractKeywordRedirect">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>redirectItem</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context type="SolrCategoryRedirect" component="base" merge-by="type" parent="SolrAbstractKeywordRedirect">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>redirectItem</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context type="SolrFacetSearchKeywordRedirect" component="base" merge-by="type" parent="GenericItem">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>matchType+ ' ' +keyword</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context type="SolrSearchConfig" component="base" merge-by="type" parent="GenericItem">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>description</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context type="SolrSynonymConfig" component="base" merge-by="type" parent="GenericItem">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>synonymFrom+ ' -&gt; ' +synonymTo</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context type="SolrUpdateSynonymsCronJob" component="base" merge-by="type" parent="CronJob">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>solrFacetSearchConfig+ ' ' +language</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context type="SolrFacetSearchConfig" component="base" merge-by="type" parent="GenericItem">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>name</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context type="SolrIndexedCoresRecord" component="base" merge-by="type" parent="GenericItem">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>coreName+ ' ' +indexName</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context type="SolrUpdateStopWordsCronJob" component="base" merge-by="type" parent="CronJob">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>solrFacetSearchConfig+ ' ' +language</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+    <context type="SolrValueRange" component="base" merge-by="type" parent="GenericItem">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>name</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+	<context type="SolrValueRangeSet" component="base" merge-by="type" parent="GenericItem">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>name</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context type="SolrServerConfig" component="base" merge-by="type" parent="GenericItem">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>name</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context type="SolrAbstractKeywordRedirect" component="base" merge-by="type" parent="GenericItem">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>hmcLabel</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context type="ComposedIndexedType" component="base" merge-by="type" parent="GenericItem">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>indexedType</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context type="SolrIndexConfig" component="base" merge-by="type" parent="GenericItem">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>name</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+    <context type="SolrIndexerQuery" component="base" merge-by="type" parent="GenericItem">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>identifier</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="SolrSort" component="base" merge-by="type" parent="GenericItem">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>code</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="SolrSortField" component="base" merge-by="type" parent="GenericItem">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>fieldName + ' (' + {ascending ? 'asc' : 'desc'} + ')'</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+
+    <context merge-by="type" type="SolrFacetSearchConfig" component="create-wizard">
+        <wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="SolrFacetSearchConfigWizard" title="create.title(ctx.TYPE_CODE)">
+            <wz:prepare id="solrIndexerJobPrepare">
+                <wz:initialize property="newConf" type="ctx.TYPE_CODE"/>
+            </wz:prepare>
+            <wz:step id="step1" label="create.solrFacetSearchConfig.essential.label" sublabel="create.solrFacetSearchConfig.essential.sublabel">
+                <wz:content id="step1.content">
+                    <wz:property-list root="newConf">
+                        <wz:property qualifier="name"/>
+                        <wz:property qualifier="solrSearchConfig"/>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step1.navigation">
+                    <wz:cancel/>
+                    <wz:next visible="!#empty(newConf.name) AND newConf.solrSearchConfig != null"/>
+                    <wz:done visible="!#empty(newConf.name) AND newConf.solrSearchConfig != null AND newConf.solrIndexedTypes != null AND newConf.solrServerConfig != null AND newConf.solrIndexConfig != null">
+                        <wz:save property="newConf"/>
+                    </wz:done>
+                </wz:navigation>
+            </wz:step>
+            <wz:step id="step2" label="create.solrFacetSearchConfig.search.label" sublabel="create.solrFacetSearchConfig.search.sublabel">
+                <wz:content id="step2.content">
+                    <wz:property-list root="newConf">
+                        <wz:property qualifier="solrIndexedTypes"/>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step2.navigation">
+                    <wz:cancel/>
+                    <wz:back/>
+                    <wz:next visible="newConf.solrIndexedTypes != null"/>
+                    <wz:done visible="!#empty(newConf.name) AND newConf.solrSearchConfig != null AND newConf.solrIndexedTypes != null AND newConf.solrServerConfig != null AND newConf.solrIndexConfig != null">
+                        <wz:save property="newConf"/>
+                    </wz:done>
+                </wz:navigation>
+            </wz:step>
+            <wz:step id="step3" label="create.solrFacetSearchConfig.solr.label" sublabel="create.solrFacetSearchConfig.solr.sublabel">
+                <wz:content id="step3.content">
+                    <wz:property-list root="newConf">
+                        <wz:property qualifier="solrServerConfig"/>
+                        <wz:property qualifier="solrIndexConfig"/>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step3.navigation">
+                    <wz:cancel/>
+                    <wz:back/>
+                    <wz:next visible="false"/>
+                    <wz:done visible="!#empty(newConf.name) AND newConf.solrSearchConfig != null AND newConf.solrIndexedTypes != null AND newConf.solrServerConfig != null AND newConf.solrIndexConfig != null">
+                        <wz:save property="newConf"/>
+                    </wz:done>
+                </wz:navigation>
+            </wz:step>
+        </wz:flow>
+    </context>
+    <context merge-by="type" type="SolrIndexedType" component="create-wizard">
+        <wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="SolrIndexedTypeWizard" title="create.title(ctx.TYPE_CODE)">
+            <wz:prepare id="solrIndexedTypePrepare">
+                <wz:initialize property="newType" type="ctx.TYPE_CODE"/>
+            </wz:prepare>
+            <wz:step id="step1" label="create.solrIndexedType.essential.label" sublabel="create.solrIndexedType.essential.sublabel">
+                <wz:content id="step1.content">
+                    <wz:property-list root="newType">
+                        <wz:property qualifier="identifier"/>
+                        <wz:property qualifier="type"/>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step1.navigation">
+                    <wz:cancel/>
+                    <wz:next visible="!#empty(newType.identifier) AND newType.type != null"/>
+                    <wz:done visible="!#empty(newType.identifier) AND newType.type != null">
+                        <wz:save property="newType"/>
+                    </wz:done>
+                </wz:navigation>
+            </wz:step>
+            <wz:step id="step2" label="create.solrIndexedType.properties.label" sublabel="create.solrIndexedType.properties.sublabel">
+                <wz:content id="step2.content">
+                    <wz:property-list root="newType">
+                        <wz:property qualifier="solrIndexedProperties" editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"/>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step2.navigation">
+                    <wz:cancel/>
+                    <wz:back/>
+                    <wz:next visible="!#empty(newType.identifier) AND newType.type != null"/>
+                    <wz:done visible="!#empty(newType.identifier) AND newType.type != null">
+                        <wz:save property="newType"/>
+                    </wz:done>
+                </wz:navigation>
+            </wz:step>
+            <wz:step id="step3" label="create.solrIndexedType.queries.label" sublabel="create.solrIndexedType.queries.sublabel">
+                <wz:content id="step3.content">
+                    <wz:property-list root="newType">
+                        <wz:property qualifier="solrIndexerQueries" editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"/>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step3.navigation">
+                    <wz:cancel/>
+                    <wz:back/>
+                    <wz:next visible="false"/>
+                    <wz:done visible="!#empty(newType.identifier) AND newType.type != null">
+                        <wz:save property="newType"/>
+                    </wz:done>
+                </wz:navigation>
+            </wz:step>
+        </wz:flow>
+    </context>
+    <context merge-by="type" type="SolrValueRangeSet" component="create-wizard">
+        <wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="SolrValueRangeSetWizard" title="create.title(ctx.TYPE_CODE)">
+            <wz:prepare id="solrValueRangeSetPrepare">
+                <wz:initialize property="newRange" type="ctx.TYPE_CODE"/>
+            </wz:prepare>
+            <wz:step id="step1" label="create.solrValueRangeSet.essential.label" sublabel="create.solrValueRangeSet.essential.sublabel">
+                <wz:content id="step1.content">
+                    <wz:property-list root="newRange">
+                        <wz:property qualifier="name"/>
+                        <wz:property qualifier="type"/>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step1.navigation">
+                    <wz:cancel/>
+                    <wz:next visible="!#empty(newRange.name) AND !#empty(newRange.type)"/>
+                    <wz:done visible="!#empty(newRange.name) AND !#empty(newRange.type)">
+                        <wz:save property="newRange"/>
+                    </wz:done>
+                </wz:navigation>
+            </wz:step>
+            <wz:step id="step2" label="create.solrValueRangeSet.ranges.label" sublabel="create.solrValueRangeSet.ranges.sublabel">
+                <wz:content id="step2.content">
+                    <wz:property-list root="newRange">
+                        <wz:property qualifier="solrValueRanges"/>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step2.navigation">
+                    <wz:cancel/>
+                    <wz:back/>
+                    <wz:done visible="!#empty(newRange.name) AND !#empty(newRange.type)">
+                        <wz:save property="newRange"/>
+                    </wz:done>
+                </wz:navigation>
+            </wz:step>
+        </wz:flow>
+    </context>
+    <context merge-by="type" type="SolrIndexedCoresRecord" component="create-wizard">
+        <wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="SolrIndexedCoresRecordWizard" title="create.title(ctx.TYPE_CODE)">
+            <wz:prepare id="solrIndexedCoresRecordPrepare">
+                <wz:initialize property="newRecord" type="ctx.TYPE_CODE"/>
+            </wz:prepare>
+            <wz:step id="step1" label="create.solrIndexedCoresRecord.essential.label" sublabel="create.solrIndexedCoresRecord.essential.sublabel">
+                <wz:content id="step1.content">
+                    <wz:property-list root="newRecord">
+                        <wz:property qualifier="coreName"/>
+                        <wz:property qualifier="indexName"/>
+                        <wz:property qualifier="serverMode"/>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step1.navigation">
+                    <wz:cancel/>
+                    <wz:next visible="!#empty(newRecord.coreName) AND !#empty(newRecord.indexName) AND newRecord.serverMode != null"/>
+                    <wz:done visible="!#empty(newRecord.coreName) AND !#empty(newRecord.indexName) AND newRecord.serverMode != null">
+                        <wz:save property="newRecord"/>
+                    </wz:done>
+                </wz:navigation>
+            </wz:step>
+            <wz:step id="step2" label="create.solrIndexedCoresRecord.operations.label" sublabel="create.solrIndexedCoresRecord.operations.sublabel">
+                <wz:content id="step2.content">
+                    <wz:property-list root="newRecord">
+                        <wz:property qualifier="indexOperations" editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"/>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step2.navigation">
+                    <wz:cancel/>
+                    <wz:back/>
+                    <wz:next visible="false"/>
+                    <wz:done visible="!#empty(newRecord.coreName) AND !#empty(newRecord.indexName) AND newRecord.serverMode != null">
+                        <wz:save property="newRecord"/>
+                    </wz:done>
+                </wz:navigation>
+            </wz:step>
+        </wz:flow>
+    </context>
+    <context merge-by="type" type="SolrSynonymConfig" component="create-wizard">
+        <wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="SolrSynonymConfigWizard" title="create.title(ctx.TYPE_CODE)">
+            <wz:prepare id="solrSynonymConfigPrepare">
+                <wz:initialize property="newItem" type="ctx.TYPE_CODE"/>
+            </wz:prepare>
+            <wz:step id="step1" label="create.solrSynonymConfig.essential.label" sublabel="create.solrSynonymConfig.essential.sublabel">
+                <wz:content id="step1.content">
+                    <wz:property-list root="newItem">
+                        <wz:property qualifier="synonymFrom"/>
+                        <wz:property qualifier="synonymTo"/>
+                        <wz:property qualifier="language"/>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step1.navigation">
+                    <wz:cancel/>
+                    <wz:done visible="!#empty(newItem.synonymFrom) AND newItem.language != null">
+                        <wz:save property="newItem"/>
+                    </wz:done>
+                </wz:navigation>
+            </wz:step>
+        </wz:flow>
+    </context>
+    <context merge-by="type" type="SolrStopWord" component="create-wizard">
+        <wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="SolrStopWordWizard" title="create.title(ctx.TYPE_CODE)">
+            <wz:prepare id="solrStopWordPrepare">
+                <wz:initialize property="newItem" type="ctx.TYPE_CODE"/>
+            </wz:prepare>
+            <wz:step id="step1" label="create.solrStopWord.essential.label" sublabel="create.solrStopWord.essential.sublabel">
+                <wz:content id="step1.content">
+                    <wz:property-list root="newItem">
+                        <wz:property qualifier="StopWord"/>
+                        <wz:property qualifier="language"/>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step1.navigation">
+                    <wz:cancel/>
+                    <wz:done visible="!#empty(newItem.StopWord) AND newItem.language != null">
+                        <wz:save property="newItem"/>
+                    </wz:done>
+                </wz:navigation>
+            </wz:step>
+        </wz:flow>
+    </context>
+    <context merge-by="type" type="SolrFacetSearchKeywordRedirect" component="create-wizard">
+        <wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="SolrFacetSearchKeywordRedirectWizard" title="create.title(ctx.TYPE_CODE)">
+            <wz:prepare id="solrFacetSearchKeywordRedirectPrepare">
+                <wz:initialize property="newItem" type="ctx.TYPE_CODE"/>
+            </wz:prepare>
+            <wz:step id="step1" label="create.solrFacetSearchKeywordRedirect.essential.label" sublabel="create.solrFacetSearchKeywordRedirect.essential.sublabel">
+                <wz:content id="step1.content">
+                    <wz:property-list root="newItem">
+                        <wz:property qualifier="facetSearchConfig"/>
+                        <wz:property qualifier="matchType"/>
+                        <wz:property qualifier="keyword"/>
+                        <wz:property qualifier="ignoreCase"/>
+                        <wz:property qualifier="redirect"/>
+                        <wz:property qualifier="language"/>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step1.navigation">
+                    <wz:cancel/>
+                    <wz:done visible="newItem.facetSearchConfig != null AND newItem.matchType != null AND !#empty(newItem.keyword) AND newItem.ignoreCase != null AND newItem.redirect != null AND newItem.language != null">
+                        <wz:save property="newItem"/>
+                    </wz:done>
+                </wz:navigation>
+            </wz:step>
+        </wz:flow>
+    </context>
+    <context merge-by="type" type="SolrIndexedProperty" component="create-wizard">
+        <wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="SolrIndexedPropertyWizard" title="create.title(ctx.TYPE_CODE)">
+            <wz:prepare id="solrIndexedPropertyPrepare">
+                <wz:initialize property="newItem" type="ctx.TYPE_CODE"/>
+            </wz:prepare>
+            <wz:step id="step1" label="create.solrIndexedProperty.essential.label" sublabel="create.solrIndexedProperty.essential.sublabel">
+                <wz:content id="step1.content">
+                    <wz:property-list root="newItem">
+                        <wz:property qualifier="name"/>
+                        <wz:property qualifier="type"/>
+                        <wz:property qualifier="facet"/>
+                        <wz:property qualifier="multiValue"/>
+                        <wz:property qualifier="currency"/>
+                        <wz:property qualifier="localized"/>
+                        <wz:property qualifier="useForSpellchecking"/>
+                        <wz:property qualifier="useForAutocomplete"/>
+                        <wz:property qualifier="includeInResponse"/>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step1.navigation">
+                    <wz:cancel/>
+                    <wz:next visible="!#empty(newItem.name) AND newItem.type != null AND newItem.facet != null AND newItem.multiValue != null AND newItem.currency != null AND newItem.localized != null AND newItem.useForSpellchecking != null AND newItem.useForAutocomplete != null"/>
+                    <wz:done visible="!#empty(newItem.name) AND newItem.type != null AND newItem.facet != null AND newItem.multiValue != null AND newItem.currency != null AND newItem.localized != null AND newItem.useForSpellchecking != null AND newItem.useForAutocomplete != null">
+                        <wz:save property="newItem"/>
+                    </wz:done>
+                </wz:navigation>
+            </wz:step>
+            <wz:step id="step2" label="create.solrIndexedProperty.optional.label" sublabel="create.solrIndexedProperty.optional.sublabel">
+                <wz:content id="step1.content">
+                    <wz:property-list root="newItem">
+                        <wz:property qualifier="priority"/>
+                        <wz:property qualifier="facetType"/>
+                        <wz:property qualifier="sortableType"/>
+                        <wz:property qualifier="rangeSet"/>
+                        <wz:property qualifier="facetDisplayNameProvider"/>
+                        <wz:property qualifier="customFacetSortProvider"/>
+                        <wz:property qualifier="fieldValueProvider"/>
+                        <wz:property qualifier="valueProviderParameter"/>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step1.navigation">
+                    <wz:cancel/>
+                    <wz:back/>
+                    <wz:done visible="!#empty(newItem.name) AND newItem.type != null AND newItem.facet != null AND newItem.multiValue != null AND newItem.currency != null AND newItem.localized != null AND newItem.useForSpellchecking != null AND newItem.useForAutocomplete != null">
+                        <wz:save property="newItem"/>
+                    </wz:done>
+                </wz:navigation>
+            </wz:step>
+        </wz:flow>
+    </context>
+    <context merge-by="type" type="SolrIndexerQuery" component="create-wizard">
+        <wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="SolrIndexerQueryWizard" title="create.title(ctx.TYPE_CODE)">
+            <wz:prepare id="solrIndexerQueryPrepare">
+                <wz:initialize property="newItem" type="ctx.TYPE_CODE"/>
+            </wz:prepare>
+            <wz:step id="step1" label="create.solrIndexerQuery.essential.label" sublabel="create.solrIndexerQuery.essential.sublabel">
+                <wz:content id="step1.content">
+                    <wz:property-list root="newItem">
+                        <wz:property qualifier="identifier"/>
+                        <wz:property qualifier="type"/>
+                        <wz:property qualifier="query"/>
+                        <wz:property qualifier="injectCurrentDate"/>
+                        <wz:property qualifier="injectCurrentTime"/>
+                        <wz:property qualifier="injectLastIndexTime"/>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step1.navigation">
+                    <wz:cancel/>
+                    <wz:next visible="!#empty(newItem.identifier) AND newItem.type != null AND !#empty(newItem.query) AND newItem.injectCurrentDate != null AND newItem.injectCurrentTime != null AND newItem.injectLastIndexTime != null"/>
+                    <wz:done visible="!#empty(newItem.identifier) AND newItem.type != null AND !#empty(newItem.query) AND newItem.injectCurrentDate != null AND newItem.injectCurrentTime != null AND newItem.injectLastIndexTime != null">
+                        <wz:save property="newItem"/>
+                    </wz:done>
+                </wz:navigation>
+            </wz:step>
+            <wz:step id="step2" label="create.solrIndexerQuery.optional.label" sublabel="create.solrIndexerQuery.optional.sublabel">
+                <wz:content id="step2.content">
+                    <wz:property-list root="newItem">
+                        <wz:property qualifier="user"/>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step2.navigation">
+                    <wz:cancel/>
+                    <wz:back/>
+                    <wz:done visible="!#empty(newItem.identifier) AND newItem.type != null AND !#empty(newItem.query) AND newItem.injectCurrentDate != null AND newItem.injectCurrentTime != null AND newItem.injectLastIndexTime != null">
+                        <wz:save property="newItem"/>
+                    </wz:done>
+                </wz:navigation>
+            </wz:step>
+        </wz:flow>
+    </context>
+    <context type="SolrIndexerHotUpdateWizard" component="create-wizard">
+        <wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="solrIndexerHotUpdateWizard" title="create.title(ctx.TYPE_CODE)">
+            <wz:prepare id="prepare">
+                <wz:initialize property="newItem" type="SolrIndexerHotUpdateCronJob"/>
+            </wz:prepare>
+            <wz:step id="step1" label="create.indexerhotupdate.solrfacetsearch.label" sublabel="create.indexerhotupdate.solrfacetsearch.sublabel">
+                <wz:content>
+                    <wz:custom-view id="step1.content.customView" lang="zul">
+							  <wz:renderer spring-bean="solrHotUpdateIndexerStepOne" />
+                    </wz:custom-view>
+                </wz:content>
+                <wz:navigation id="step1.navigation">
+                    <wz:cancel/>
+                    <wz:next visible="newItem.facetSearchConfig != null"/>
+                </wz:navigation>
+            </wz:step>
+            <wz:step id="step2" label="create.indexerhotupdate.type.label" sublabel="create.indexerhotupdate.type.sublabel">
+                <wz:content>
+                    <wz:custom-view id="step2.content.customView" lang="zul">
+							  <wz:renderer spring-bean="solrHotUpdateIndexerStepTwo" />
+						  </wz:custom-view>
+                </wz:content>
+                <wz:navigation id="step2.navigation">
+                    <wz:cancel/>
+                    <wz:next visible="newItem.indexTypeName != null AND newItem.indexerOperation != null"/>
+                    <wz:back/>
+                </wz:navigation>
+            </wz:step>
+            <wz:step id="step3" label="create.indexerhotupdate.items.label" sublabel="create.indexerhotupdate.items.sublabel">
+                <wz:content>
+                    <wz:custom-view id="step3.content.customView" lang="zul">
+							  <wz:renderer spring-bean="solrHotUpdateIndexerStepThree" />
+						  </wz:custom-view>
+                </wz:content>
+                <wz:navigation id="step3.navigation">
+                    <wz:cancel visible="finished EQ false"/>
+                    <wz:back visible="finished EQ false"/>
+                    <wz:done visible="finished EQ true"/>
+                </wz:navigation>
+            </wz:step>
+        </wz:flow>
+    </context>
+    <context type="SolrIndexerOperationWizard" component="create-wizard">
+        <wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="solrIndexerOperationWizard" title="create.title(ctx.TYPE_CODE)">
+            <wz:prepare id="prepare">
+                <wz:initialize property="newItem" type="SolrIndexerCronJob"/>
+            </wz:prepare>
+            <wz:step id="step1" label="create.indexeroperation.indexer.label" sublabel="create.indexeroperation.indexer.sublabel">
+                <wz:content>
+                    <wz:custom-view id="step1.content.customView" lang="zul">
+                    	<wz:renderer spring-bean="solrIndexerOperationStepOne" />                    	
+                    </wz:custom-view>
+                </wz:content>
+                <wz:navigation id="step1.navigation">
+                    <wz:cancel/>
+                    <wz:done visible="finished EQ true"/>
+                </wz:navigation>
+            </wz:step>
+        </wz:flow>
+    </context>
+    <context type="SolrIndexConfig" component="create-wizard">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="solrIndexConfigWizard" title="create.title(ctx.TYPE_CODE)">
+			<wz:prepare id="SolrIndexConfigPrepare">
+				<wz:initialize property="newSolrIndexConfig" type="ctx.TYPE_CODE"/>
+			</wz:prepare>
+			<wz:step id="step1">
+				<wz:content id="step1.content">
+					<wz:property-list root="newSolrIndexConfig">
+						<wz:property qualifier="name"/>
+						<wz:property qualifier="batchSize"/>
+						<wz:property qualifier="exportPath"/>
+						<wz:property qualifier="numberOfThreads"/>
+						<wz:property qualifier="indexMode"/>
+						<wz:property qualifier="commitMode"/>
+						<wz:property qualifier="optimizeMode"/>
+						<wz:property qualifier="ignoreErrors"/>
+						<wz:property qualifier="legacyMode"/>
+						<wz:property qualifier="maxRetries"/>
+						<wz:property qualifier="maxBatchRetries"/>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel/>
+					<wz:done visible="!#empty(newSolrIndexConfig.name) and newSolrIndexConfig.batchSize != null and newSolrIndexConfig.numberOfThreads != null">
+						<wz:save property="newSolrIndexConfig"/>
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>	
+	<context type="SolrServerConfig" component="create-wizard">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="SolrServerConfigWizard" title="create.title(ctx.TYPE_CODE)">
+			<wz:prepare id="SolrServerConfigPrepare">
+				<wz:initialize property="newSolrServerConfig" type="ctx.TYPE_CODE"/>
+			</wz:prepare>
+			<wz:step id="step1">
+				<wz:content id="step1.content">
+					<wz:property-list root="newSolrServerConfig">
+						<wz:property qualifier="name"/>
+						<wz:property qualifier="mode"/>
+						<wz:property qualifier="embeddedMaster"/>
+						<wz:property qualifier="aliveCheckInterval"/>
+						<wz:property qualifier="connectionTimeout"/>
+						<wz:property qualifier="socketTimeout"/>
+						<wz:property qualifier="maxTotalConnections"/>
+						<wz:property qualifier="maxTotalConnectionsPerHostConfig"/>
+						<wz:property qualifier="tcpNoDelay"/>
+						<wz:property qualifier="maxTotalConnectionsPerHostConfig"/>
+						<wz:property qualifier="solrEndpointUrls"/>
+						<wz:property qualifier="useMasterNodeExclusivelyForIndexing"/>				
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel/>
+					<wz:done visible="!#empty(newSolrServerConfig.name) and newSolrServerConfig.mode != null and newSolrServerConfig.embeddedMaster != null and newSolrServerConfig.tcpNoDelay != null and newSolrServerConfig.useMasterNodeExclusivelyForIndexing != null">
+						<wz:save property="newSolrServerConfig"/>
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>		
+	<context type="SolrSearchConfig" component="create-wizard">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="SolrSearchConfigWizard" title="create.title(ctx.TYPE_CODE)">
+			<wz:prepare id="SolrSearchConfigPrepare">
+				<wz:initialize property="newSolrSearchConfig" type="ctx.TYPE_CODE"/>
+			</wz:prepare>
+			<wz:step id="step1">
+				<wz:content id="step1.content">
+					<wz:property-list root="newSolrSearchConfig">
+						<wz:property qualifier="pageSize"/>
+						<wz:property qualifier="defaultSortOrder"/>
+						<wz:property qualifier="description"/>
+						<wz:property qualifier="legacyMode"/>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel/>
+					<wz:done visible="newSolrSearchConfig.pageSize != null">
+						<wz:save property="newSolrSearchConfig"/>
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>	
+</config>

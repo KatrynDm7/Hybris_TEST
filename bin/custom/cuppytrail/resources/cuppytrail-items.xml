@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+-->
+
+<items   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:noNamespaceSchemaLocation="items.xsd">
+	<enumtypes>
+		<enumtype code="StadiumType" autocreate="true" generate="true" dynamic="false">
+			<value code="openair"/>
+			<value code="enclosed"/>
+		</enumtype>
+		<enumtype code="StadiumAccess" autocreate="true" generate="true" dynamic="true">
+			<value code="road"/>
+			<value code="rail"/>
+			<value code="plane"/>
+		</enumtype>
+	</enumtypes>
+
+	<relations>
+		<relation code="StadiumMatchRelation" localized="false" generate="true" autocreate="true">
+			<sourceElement type="Stadium" qualifier="stadium" cardinality="one" />
+			<targetElement type="Match" qualifier="matches" cardinality="many"/>
+		</relation>
+	</relations>
+
+	<itemtypes>
+		<itemtype code="Stadium" generate="true" autocreate="true">
+			<deployment table="CuppyTrailStadium" typecode="10123" />
+			<attributes>
+				<attribute qualifier="code" type="java.lang.String" >
+					<persistence type="property"/>
+					<modifiers optional="false" unique="true"/>
+				</attribute>
+				<attribute qualifier="capacity" type="java.lang.Integer">
+					<description>Capacity</description>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="StadiumType" type="StadiumType">
+					<persistence type="property"/>
+					<defaultvalue>em().getEnumerationValue("StadiumType","openair")</defaultvalue>
+				</attribute>
+			</attributes>
+		</itemtype>
+	</itemtypes>
+</items>

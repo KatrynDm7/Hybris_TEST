@@ -1,0 +1,306 @@
+<?xml version="1.0"?>
+
+
+<project name="install" default="build">
+	
+	<property name="rootPackageFolder" value="../../../../bin/ext-template/yb2bacceleratorstorefront/web/src/de/hybris/platform/yb2bacceleratorstorefront/controllers"/>
+	
+	<property name="rootJsFolder" value="../../../../bin/ext-template/yb2bacceleratorstorefront/web/webroot/_ui/desktop/common/js"/>
+	
+	<target name="build" description="left empty">
+	</target>
+	
+	
+	<target name="all" depends="abstractController,accountPageController,checkoutController,singleStepCheckoutController,cartPageController,addToCartController,miniCartController" description="build and deploy complete extension">
+	</target>
+	
+	<!-- =================== modify abstractPageCotroller =========================-->
+	<target name="abstractController">
+		
+		<property name="abstractControllerFile" value="${rootPackageFolder}/AbstractController.java"/>
+		
+		<!-- read current file content -->
+		<loadresource property="abstractControllerClassOriginal">
+			<file file="${abstractControllerFile}"/>
+		</loadresource>
+		
+		<!-- method to be injected to the controller-->
+		<loadresource property="methodsToAddToAbstractController">
+			<file file="resources/ysapordermgmtb2baddon/installsource/abstractControllerChanges.txt"/>
+		</loadresource>
+		
+		<property name="lineSeparator" value="${line.separator}"/>
+		
+		<property name="closeParenthesis" value="}"/>
+			
+		<!-- used to check if method alread added-->
+		<property name="checkIfMethodNameAlreadyAdded" value="protected String readPrefixRootFolder()"/>
+		
+		<property name="abstractControllerClassResult" value= "${abstractControllerClassOriginal}"/>
+		
+		<script language="javascript">
+			if (abstractControllerClassResult.indexOf(checkIfMethodNameAlreadyAdded) == -1) {
+				abstractControllerClassResult = abstractControllerClassOriginal.substring(0,abstractControllerClassOriginal.lastIndexOf("}")) 
+																+ methodsToAddToAbstractController + lineSeparator + closeParenthesis;
+					
+			}
+			
+			project.setProperty("abstractControllerClassResult", abstractControllerClassResult);
+			
+		</script>
+		<delete file="${abstractControllerFile}"/>
+		<concat destfile="${abstractControllerFile}" append="true">${abstractControllerClassResult}</concat>
+	</target>
+	
+	
+	<target name="accountPageController">
+			
+			<property name="accountPageControllerFile" value="${rootPackageFolder}/pages/AccountPageController.java"/>
+			
+			<!-- read current file content -->
+			<loadresource property="accountPageControllerClassOriginal">
+				<file file="${accountPageControllerFile}"/>
+			</loadresource>
+			
+			<!-- code to change in : public String orders()-->
+			<property name="originalOrdersMethodCode" value = "ControllerConstants.Views.Pages.Account.AccountOrderHistoryPage"/>
+			<property name="newOrdersMethodCode" value = "readPrefixRootFolder() + ControllerConstants.Views.Pages.Account.AccountOrderHistoryPage"/>
+			
+			<!-- code to change in : public String order() and public String replenishmentOrderDetail()-->
+			<property name="originalOrderMethodCode" value = "ControllerConstants.Views.Pages.Account.AccountOrderPage"/>
+			<property name="newOrderMethodCode" value = "readPrefixRootFolder() + ControllerConstants.Views.Pages.Account.AccountOrderPage"/>
+					
+			<property name="accountPageControllerClassResult" value= "${accountPageControllerClassOriginal}"/>
+			
+			<script language="javascript">
+				
+				if (accountPageControllerClassResult.indexOf(newOrdersMethodCode) == -1)
+				 {
+					accountPageControllerClassResult = accountPageControllerClassResult.split(originalOrdersMethodCode).join(newOrdersMethodCode);
+				}
+				
+				if (accountPageControllerClassResult.indexOf(newOrderMethodCode) == -1)
+				{
+					accountPageControllerClassResult = accountPageControllerClassResult.split(originalOrderMethodCode).join(newOrderMethodCode);
+				}
+				
+				project.setProperty("accountPageControllerClassResult", accountPageControllerClassResult);
+				
+			</script>
+			<delete file="${accountPageControllerFile}"/>
+			<concat destfile="${accountPageControllerFile}" append="true">${accountPageControllerClassResult}</concat>
+		</target>
+	
+	<target name="checkoutController">
+			
+			<property name="checkoutControllerFile" value="${rootPackageFolder}/pages/checkout/CheckoutController.java"/>
+			
+			<!-- read current file content -->
+			<loadresource property="checkoutControllerClassOriginal">
+				<file file="${checkoutControllerFile}"/>
+			</loadresource>
+			
+			<!-- code to change in : public String orderConfirmation()-->
+			<property name="originalOrderConfirmationMethodCode" value = "ControllerConstants.Views.Pages.Checkout.CheckoutConfirmationPage"/>
+			<property name="newOrderConfirmationMethodCode" value = "readPrefixRootFolder() + ControllerConstants.Views.Pages.Checkout.CheckoutConfirmationPage"/>
+			
+			<property name="checkoutControllerClassResult" value= "${checkoutControllerClassOriginal}"/>
+			
+			<script language="javascript">
+				
+			
+				if (checkoutControllerClassOriginal.indexOf(newOrderConfirmationMethodCode) == -1)
+				 {
+				checkoutControllerClassResult = checkoutControllerClassResult.split(originalOrderConfirmationMethodCode).join(newOrderConfirmationMethodCode);
+				}
+				
+				project.setProperty("checkoutControllerClassResult", checkoutControllerClassResult);
+				
+			</script>
+			<delete file="${checkoutControllerFile}"/>
+			<concat destfile="${checkoutControllerFile}" append="true">${checkoutControllerClassResult}</concat>
+	</target>
+	
+	<target name="singleStepCheckoutController">
+				
+				<property name="singleStepCheckoutControllerFile" value="${rootPackageFolder}/pages/checkout/SingleStepCheckoutController.java"/>
+				
+				<!-- read current file content -->
+				<loadresource property="singleStepCheckoutControllerClassOriginal">
+					<file file="${singleStepCheckoutControllerFile}"/>
+				</loadresource>
+				
+				<!-- code to change in : public String orderConfirmation()-->
+				<property name="originalCheckoutSummaryMethodCode" value = "ControllerConstants.Views.Pages.SingleStepCheckout.CheckoutSummaryPage"/>
+				<property name="newCheckoutSummaryMethodCode" value = "readPrefixRootFolder() + ControllerConstants.Views.Pages.SingleStepCheckout.CheckoutSummaryPage"/>
+				
+				<property name="singleStepCheckoutControllerClassResult" value= "${singleStepCheckoutControllerClassOriginal}"/>
+				
+				<script language="javascript">
+					
+				
+					if (singleStepCheckoutControllerClassOriginal.indexOf(newCheckoutSummaryMethodCode) == -1)
+					{
+						singleStepCheckoutControllerClassResult = singleStepCheckoutControllerClassResult.split(originalCheckoutSummaryMethodCode).join(newCheckoutSummaryMethodCode);
+					}
+					
+					project.setProperty("singleStepCheckoutControllerClassResult", singleStepCheckoutControllerClassResult);
+					
+				</script>
+				<delete file="${singleStepCheckoutControllerFile}"/>
+				<concat destfile="${singleStepCheckoutControllerFile}" append="true">${singleStepCheckoutControllerClassResult}</concat>
+		</target>
+	
+	<target name="cartPageController">
+				
+				<property name="cartPageControllerFile" value="${rootPackageFolder}/pages/CartPageController.java"/>
+				
+				<!-- read current file content -->
+				<loadresource property="cartPageControllerClassOriginal">
+					<file file="${cartPageControllerFile}"/>
+				</loadresource>
+				
+				<!-- code to change in : public String showCart()-->
+				<property name="originalShowCartMethodCode" value = "Views.Pages.Cart.CartPage"/>
+				<property name="newShowCartMethodCode" value = "readPrefixRootFolder() + Views.Pages.Cart.CartPage"/>
+		
+				<!-- code to change in : protected String getViewWithBindingErrorMessages()-->
+				<property name="originalViewWithBindingErrorMessagesMethodCode" value = "Views.Fragments.Cart.AddToCartPopup"/>
+				<property name="newViewWithBindingErrorMessagesMethodCode" value = "readPrefixRootFolder() + Views.Fragments.Cart.AddToCartPopup"/>
+				
+				<property name="cartPageControllerClassResult" value= "${cartPageControllerClassOriginal}"/>
+				
+				<script language="javascript">
+					
+				
+					if (cartPageControllerClassOriginal.indexOf(newShowCartMethodCode) == -1)
+					{
+						cartPageControllerClassResult = cartPageControllerClassOriginal.split(originalShowCartMethodCode).join(newShowCartMethodCode);
+					}
+					
+					if (cartPageControllerClassResult.indexOf(newViewWithBindingErrorMessagesMethodCode) == -1)
+					{
+						cartPageControllerClassResult = cartPageControllerClassResult.split(originalViewWithBindingErrorMessagesMethodCode).join(newViewWithBindingErrorMessagesMethodCode);
+					}
+					
+					project.setProperty("cartPageControllerClassResult", cartPageControllerClassResult);
+					
+				</script>
+				<delete file="${cartPageControllerFile}"/>
+				<concat destfile="${cartPageControllerFile}" append="true">${cartPageControllerClassResult}</concat>
+		</target>
+	
+	<target name="addToCartController">
+				
+			<property name="addToCartControllerFile" value="${rootPackageFolder}/misc/AddToCartController.java"/>
+			
+			<!-- read current file content -->
+			<loadresource property="addToCartControllerClassOriginal">
+				<file file="${addToCartControllerFile}"/>
+			</loadresource>
+			
+			<!-- code to change in : public String showCart()-->
+			<property name="originalAddToCartMethodCode" value = "ControllerConstants.Views.Fragments.Cart.AddToCartPopup"/>
+			<property name="newAddToCartMethodCode" value = "readPrefixRootFolder() + ControllerConstants.Views.Fragments.Cart.AddToCartPopup"/>
+			
+			<property name="addToCartControllerClassResult" value= "${addToCartControllerClassOriginal}"/>
+			
+			<script language="javascript">
+				
+			
+				if (addToCartControllerClassOriginal.indexOf(newAddToCartMethodCode) == -1)
+				{
+					addToCartControllerClassResult = addToCartControllerClassOriginal.split(originalAddToCartMethodCode).join(newAddToCartMethodCode);
+				}
+				
+				project.setProperty("addToCartControllerClassResult", addToCartControllerClassResult);
+				
+			</script>
+			<delete file="${addToCartControllerFile}"/>
+			<concat destfile="${addToCartControllerFile}" append="true">${addToCartControllerClassResult}</concat>
+	</target>
+	
+	<target name="miniCartController">
+			
+			<property name="miniCartControllerFile" value="${rootPackageFolder}/misc/MiniCartController.java"/>
+			
+			<!-- read current file content -->
+			<loadresource property="miniCartControllerClassOriginal">
+				<file file="${miniCartControllerFile}"/>
+			</loadresource>
+			
+			<!-- code to change in : public String showCart()-->
+			<property name="originalRolloverMiniCartPopupMethodCode" value = "ControllerConstants.Views.Fragments.Cart.CartPopup"/>
+			<property name="newRolloverMiniCartPopupMethodCode" value = "readPrefixRootFolder() + ControllerConstants.Views.Fragments.Cart.CartPopup"/>
+			
+			<property name="miniCartControllerClassResult" value= "${miniCartControllerClassOriginal}"/>
+			
+			<script language="javascript">
+				
+			
+			if (miniCartControllerClassOriginal.indexOf(newRolloverMiniCartPopupMethodCode) == -1)
+			{
+				miniCartControllerClassResult = miniCartControllerClassOriginal.split(originalRolloverMiniCartPopupMethodCode).join(newRolloverMiniCartPopupMethodCode);
+			}
+				
+			project.setProperty("miniCartControllerClassResult", miniCartControllerClassResult);
+				
+			</script>
+			<delete file="${miniCartControllerFile}"/>
+			<concat destfile="${miniCartControllerFile}" append="true">${miniCartControllerClassResult}</concat>
+	</target>
+	
+	<!-- ================  update javascript files ============ -->
+	<target name="copyjavascript"></target>
+	
+	
+	
+	<!-- ========  copy file : acc.negotiatequote.js =======-->
+	<!-- location : bin/ext-template/yb2bacceleratorstorefront/web/webroot/_ui/desktop/common/js/ -->
+	<target name="copyextensioninfo"> </target>
+	
+	
+	
+	<!-- ========  copy file : acc.cartremoveitem.js =======-->
+	<!-- location : bin/ext-template/yb2bacceleratorstorefront/web/webroot/_ui/desktop/common/js/ -->
+	
+	
+	<!-- ========  copy file : extensioninfo.xml =======-->
+	<!-- location : /yb2bacceleratorstorefront/extensioninfo.xml -->
+	
+	
+	<target name="negotiatequote">
+				
+				<property name="negotiatequoteFile" value="${rootJsFolder}/acc.negotiatequote.js"/>
+				
+				<!-- read current file content -->
+				<loadresource property="negotiatequoteFileOriginal">
+					<file file="${negotiatequoteFile}"/>
+				</loadresource>
+		
+		<property name="originalRolloverMiniCartPopupMethodCode">
+							
+				
+				<!-- code to change in : public String showCart()-->
+				<property name="newRolloverMiniCartPopupMethodCode" value = "readPrefixRootFolder() + ControllerConstants.Views.Fragments.Cart.CartPopup"/>
+				
+				<property name="miniCartControllerClassResult" value= "${miniCartControllerClassOriginal}"/>
+				
+				<script language="javascript">
+					
+				
+				if (miniCartControllerClassOriginal.indexOf(newRolloverMiniCartPopupMethodCode) == -1)
+				{
+					miniCartControllerClassResult = miniCartControllerClassOriginal.split(originalRolloverMiniCartPopupMethodCode).join(newRolloverMiniCartPopupMethodCode);
+				}
+					
+				project.setProperty("miniCartControllerClassResult", miniCartControllerClassResult);
+					
+				</script>
+				<delete file="${miniCartControllerFile}"/>
+				<concat destfile="${miniCartControllerFile}" append="true">${miniCartControllerClassResult}</concat>
+		</target>
+	
+	
+</project>
+

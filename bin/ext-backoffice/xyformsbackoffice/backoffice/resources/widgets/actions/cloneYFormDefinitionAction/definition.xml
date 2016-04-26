@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+<action-definition id="de.hybris.platform.xyformsbackoffice.actions.clone"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/action-definition.xsd">
+ 
+   <name>Clone yForm Definition</name>
+   <description>Clones a yForm Definition</description>
+	<author>hybris</author>
+	<version>1.0</version>
+	<actionClassName>de.hybris.platform.xyformsbackoffice.actions.clone.CloneYFormDefinitionAction</actionClassName>
+	
+	<sockets>		
+		<output id="context" type="java.lang.Object" />
+	</sockets>
+	
+	<inputType>de.hybris.platform.xyformsservices.model.YFormDefinitionModel</inputType>
+	<outputType>java.lang.String</outputType>
+   
+	<iconUri>icons/icon_action_clone_default.png</iconUri>
+	<iconDisabledUri>icons/icon_action_clone_disabled.png</iconDisabledUri>
+ 
+</action-definition>

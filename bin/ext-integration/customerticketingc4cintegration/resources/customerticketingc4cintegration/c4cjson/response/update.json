@@ -1,0 +1,22 @@
+{
+    "d": {
+        "results": {
+            "__metadata": {
+                "uri": "https://server:port/path/NotesCollection('00163E06B0301EE58C8790BB4682A6EF')",
+                "type": "ZSERVICETICKET.Notes"
+            },
+            "AuthorName": "",
+            "AuthorUUID": null,
+            "CreatedBy": "User",
+            "CreatedOn": "\\/Date(1437547221473)\\/",
+            "LanguageCode": "",
+            "LastUpdatedBy": "User",
+            "ObjectID": "00163E06B0301EE58C8790BB4682A6EF",
+            "ParentObjectID": "00163E06B0301EE58C876B86EBFF2654",
+            "ServiceRequestExternalKey": "",
+            "Text": "Update description",
+            "TypeCode": "10007",
+            "UpdatedOn": "\\/Date(1437547221473)\\/"
+        }
+    }
+}

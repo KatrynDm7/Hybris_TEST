@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<config xmlns="http://www.hybris.com/cockpit/config"
+        xmlns:y="http://www.hybris.com/cockpit/config/hybris"
+		xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config"
+		xmlns:list-view="http://www.hybris.com/cockpitng/component/listView"
+        xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea"
+        xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch"
+        xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch"
+        >
+
+	<context component="explorer-tree" merge-by="module">
+		<explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
+			<explorer-tree:navigation-node id="hmc_treenode_medias">
+				<explorer-tree:type-node code="ConversionGroup" id="hmc_typenode_conversiongroup"/>
+			</explorer-tree:navigation-node>
+		</explorer-tree:explorer-tree>
+	</context>
+
+    <context type="MediaMetaData" component="base">
+        <y:base>
+            <y:labels>
+                <y:label>groupName+ ' - ' +code+ ' - ' +value</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="ConversionErrorLog" component="base">
+        <y:base>
+            <y:labels>
+                <y:label>modifiedtime+ ' - ' +targetFormat.qualifier+ ' - ' +errorMessage.substring(0,errorMessage.length()>50?50:errorMessage.length()) +' ...'</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+	<context type="ConversionGroup" component="base">
+		<y:base>
+			<y:labels>
+				<y:label>name</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+    <context merge-by="type" parent="Item" type="MediaMetaData" component="simple-search">
+        <simple-search:simple-search>
+            <simple-search:field name="groupName"/>
+            <simple-search:field name="code"/>
+            <simple-search:field name="value"/>
+        </simple-search:simple-search>
+    </context>
+    <context merge-by="type" parent="Item" type="ConversionErrorLog" component="simple-search">
+        <simple-search:simple-search>
+            <simple-search:field name="modifiedtime"/>
+            <simple-search:field name="targetFormat"/>
+            <simple-search:field name="errorMessage"/>
+        </simple-search:simple-search>
+    </context>
+	<context merge-by="type" parent="Item" type="ConversionGroup" component="simple-search">
+		<simple-search:simple-search>
+			<simple-search:field name="code"/>
+			<simple-search:field name="name"/>
+		</simple-search:simple-search>
+	</context>
+
+    <context merge-by="type" parent="GenericItem" type="MediaContainer" component="editor-area">
+        <editorArea:editorArea name="">
+            <editorArea:essentials>
+                <editorArea:essentialSection name="hmc.essential" merge-mode="append">
+                    <editorArea:attribute qualifier="conversionGroup" />
+                    <editorArea:attribute qualifier="conversionStatus" />
+                </editorArea:essentialSection>
+            </editorArea:essentials>
+            <editorArea:tab name="hmc.tab.mediacontainer.commons">
+                <editorArea:section name="hmc.tab.mediacontainer.properties" merge-mode="append">
+                    <editorArea:attribute qualifier="medias" editor="com.hybris.cockpitng.editor.decoratededitor(com.hybris.cockpitng.editor.defaultmultireferenceeditor,{convertDeleteMediasFromMediaContainerEditor})"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.tab.mediacontainer.conversionerrors">
+                    <editorArea:attribute qualifier="conversionErrorLog"/>
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab name="hmc.tab.mediacontainer.metadata" merge-mode="append">
+                <editorArea:section name="hmc.tab.mediacontainer.metadata">
+                    <editorArea:attribute qualifier="metaData" editor="com.hybris.cockpitng.editor.decoratededitor(com.hybris.cockpitng.editor.defaultmultireferenceeditor,{extractDeleteMetadataFromMediaContainerEditor})"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="AbstractMedia" type="Media" component="editor-area">
+        <editorArea:editorArea name="">
+            <editorArea:tab name="hmc.tab.media.metadata">
+                <editorArea:section name="hmc.tab.media.metadata">
+                    <editorArea:attribute qualifier="metaData" editor="com.hybris.cockpitng.editor.decoratededitor(com.hybris.cockpitng.editor.defaultmultireferenceeditor,{extractDeleteMetadataEditor})"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="MediaFormat" type="ConversionMediaFormat" component="editor-area">
+        <editorArea:editorArea name="hmc.tab.media.metadata">
+            <editorArea:tab name="hmc.tab.mediafolder.conversion" >
+                <editorArea:section name="hmc.tab.mediafolder.conversion">
+                    <editorArea:attribute qualifier="conversion"/>
+                    <editorArea:attribute qualifier="conversionStrategy"/>
+                    <editorArea:attribute qualifier="inputFormat"/>
+                    <editorArea:attribute qualifier="mediaAddOns"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+	<context merge-by="type" parent="GenericItem" type="ConversionGroup" component="editor-area">
+		<editorArea:editorArea name="">
+			<editorArea:essentials>
+				<editorArea:essentialSection name="hmc.essential" merge-mode="append">
+					<editorArea:attribute qualifier="code" />
+				</editorArea:essentialSection>
+			</editorArea:essentials>
+			<editorArea:tab name="hmc.tab.mediacontainer.commons">
+				<editorArea:section name="hmc.tab.mediacontainer.properties" merge-mode="append">
+					<editorArea:attribute qualifier="name"/>
+					<editorArea:attribute qualifier="supportedFormats"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+
+    <context type="Media" component="advanced-search" merge-by="type" parent="AbstractMedia">
+        <advanced-search:advanced-search>
+            <advanced-search:field-list>
+                <advanced-search:field name="metaDataDataPK" selected="false"/>
+                <advanced-search:field name="original" selected="false"/>
+                <advanced-search:field name="originalDataPK" selected="false"/>
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
+	<context type="ConversionGroup" component="advanced-search" merge-by="type" parent="Item">
+		<advanced-search:advanced-search>
+			<advanced-search:field-list>
+				<advanced-search:field name="code" selected="true"/>
+				<advanced-search:field name="name" selected="true"/>
+				<advanced-search:field name="comments" selected="false"/>
+				<advanced-search:field name="owner" selected="false"/>
+				<advanced-search:field name="PK" selected="false"/>
+				<advanced-search:field name="supportedFormats" selected="false"/>
+				<advanced-search:field name="creationtime" selected="false"/>
+				<advanced-search:field name="modifiedtime" selected="false"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+
+	<context type="ConversionGroup" component="create-wizard">
+		<wz:flow id="ConversionGroupWizard" title="create.title(ctx.TYPE_CODE)">
+			<wz:prepare id="triggerPrepare">
+				<wz:initialize property="newConversionGroup" type="ctx.TYPE_CODE"/>
+			</wz:prepare>
+			<wz:step id="step1" label="create.discountrow.essential.label">
+				<wz:content id="step1.content">
+					<wz:property-list root="newConversionGroup">
+						<wz:property qualifier="code"/>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel/>
+					<wz:done>
+						<wz:save property="newConversionGroup"/>
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+
+	<context merge-by="type" parent="Item" type="ConversionGroup" component="listview">
+		<list-view:list-view>
+			<list-view:column qualifier="code"/>
+			<list-view:column qualifier="name"/>
+		</list-view:list-view>
+	</context>
+
+</config>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list-view unassigned-group-name="Other">
+	<group name="General">
+		<property qualifier="Hyend2PrecedenceRule.fromDimension" visible="true" />
+		<property qualifier="Hyend2PrecedenceRule.dimensionValueItem" visible="true"/>
+		<property qualifier="Hyend2PrecedenceRule.dimensionValueString" visible="true"/>
+		<property qualifier="Hyend2PrecedenceRule.to" visible="true"/>
+		<property qualifier="Hyend2PrecedenceRule.ruleType" visible="true"/>
+	</group>
+</list-view>

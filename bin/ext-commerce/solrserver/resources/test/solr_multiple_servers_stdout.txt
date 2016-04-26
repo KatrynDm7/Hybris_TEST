@@ -1,0 +1,20 @@
+Found 3 Solr nodes:
+
+Solr process 123 from /Users/112233/hybris/yenvs/startsolr/sources/search-and-nav/solrserver/resources/solr/bin/solr-8984.pid not found.
+
+Solr process 1234 running on port 9991
+{
+  "solr_home":"/Users/112233/hybris/search-and-nav/solrserver/resources/solr/server/solr1/",
+  "version":"5.1.0 1672403 - timpotter - 2015-04-09 10:37:54",
+  "startTime":"2015-06-08T13:33:05.644Z",
+  "uptime":"0 days, 0 hours, 1 minutes, 52 seconds",
+  "memory":"29.2 MB (%0.7) of 490.7 MB"}
+
+
+Solr process 12345 running on port 9992
+{
+  "solr_home":"/Users/112233/hybris/search-and-nav/solrserver/resources/solr/server/solr2/",
+  "version":"5.1.0 1672403 - timpotter - 2015-04-09 10:37:54",
+  "startTime":"2015-06-08T13:33:13.057Z",
+  "uptime":"0 days, 0 hours, 1 minutes, 45 seconds",
+  "memory":"28.1 MB (%0.7) of 490.7 MB"}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="DisableRuleGeoArea.areaCode"/>
+			<property qualifier="DisableRuleGeoArea.areaName"/>
+		</search-properties>
+		<sort-properties>
+			<property qualifier="DisableRuleGeoArea.areaCode"/>
+			<property qualifier="DisableRuleGeoArea.areaName"/>
+		</sort-properties>
+	</search>
+	<label spring-bean="disableRuleGeoAreaLabelProvider"/>
+</base>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="Match.id" />
+			<property qualifier="Match.homeTeam" />
+			<property qualifier="Match.guestTeam" />
+		</search-properties>
+		<sort-properties>
+			<property qualifier="Match.id" />
+			<property qualifier="Match.homeTeam" />
+			<property qualifier="Match.guestTeam" />
+		</sort-properties>
+	</search>
+	<label>
+		<property qualifier="Match.id"/>
+		<property qualifier="Match.homeTeam.isocode" />
+		<property qualifier="Match.guestTeam.isocode" />
+	</label>
+</base>

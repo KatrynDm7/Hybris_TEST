@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="output" path="eclipsebin/notused"/>
+
+				
+				
+				
+				
+				
+				
+				
+				
+		<attributes>
+			<attribute name="javadoc_location" value="https://download.hybris.com/api/5.7.0"/>
+		</attributes>
+				
+				
+	<classpathentry exported="false" kind="src" path="/platform" />
+	<classpathentry exported="true" kind="lib" path="lib/microsoft-windowsazure-api-0.4.6.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/powermock-api-mockito-1.6.1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/powermock-api-support-1.6.1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/powermock-core-1.6.1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/powermock-module-junit4-1.6.1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/powermock-module-junit4-common-1.6.1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/powermock-reflect-1.6.1.jar" />
+	<classpathentry exported="true" kind="lib" path="bin/azurecloudserver.jar" >
+		<attributes>
+			<attribute name="javadoc_location" value="https://download.hybris.com/api/5.7.0"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="resources" />
+	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="testsrc" />
+				
+</classpath>
+				

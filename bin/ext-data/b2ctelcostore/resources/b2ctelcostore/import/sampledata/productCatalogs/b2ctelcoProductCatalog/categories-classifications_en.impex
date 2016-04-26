@@ -1,0 +1,81 @@
+#******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
+# ImpEx for Importing Classification Categories into B2C Telco Store 
+
+# Macros / Replacement Parameter definitions
+$productCatalog=b2ctelcoProductCatalog
+$productCatalogName=B2C Telco Product Catalog
+$classCatalogVersion=catalogversion(catalog(id[default='b2ctelcoClassification']),version[default='1.0'])[unique=true,default='b2ctelcoClassification:1.0']
+$classSystemVersion=systemVersion(catalog(id[default='b2ctelcoClassification']),version[default='1.0'])[unique=true]
+
+# Language
+$lang=en
+
+$systemName=b2ctelcoClassification;
+$systemVersion=1.0;
+
+INSERT_UPDATE ClassificationSystem; id[unique=true]; name[lang=$lang];
+;$systemName;B2C Telco Classification System;
+
+# ImpEx for Importing Category Classifications into telco Store
+
+# Insert Classifications
+UPDATE ClassificationClass;$classCatalogVersion;code[unique=true];name[lang=$lang]
+;;mobilephoneclassification;Telco Products
+;;accessoryclassification;Telco Accessories
+;;serviceplanclassification;Service Plans
+
+
+# Insert Classification Attributes
+UPDATE ClassificationAttribute;code[unique=true];name[lang=$lang];$classSystemVersion
+;featurecompatibility;Feature Compatibility
+;mobileplatform; Operating System
+;storage; Storage
+;camera; Has Camera
+;gps; Has GPS
+;keyboard; Has Keyboard
+;formfactor; Form Factor
+;displayresolution; Display Resolution
+;displaysize; Display size
+;touchscreen; Has touchScreen
+;color; Color
+;colorcompatibility;Other Available Colors
+;height; Height
+;weight; Weight
+;width; Width
+;depth; Depth
+;bands; Bands
+;vendorcompatibility; Vendor Compatibility
+
+INSERT_UPDATE ClassificationAttributeValue;code[unique=true]; name[lang=$lang];$classSystemVersion
+;feature_bt10;Bluetooth Version 1.0
+;feature_bt20;Bluetooth Version 2.0
+;feature_bt21;Bluetooth Version 2.1
+;feature_usb1;USB 1.1
+;feature_usb2;USB 2.0
+;feature_microsd;MicroSD
+;feature_sdhc;Secure Digital High-Capacity
+;feature_memorystickmicro;Memory Stick Micro (M2)
+;feature_multimediacard;MultiMediaCard (MMC)
+;feature_microsdhc;Micro Secure Digital High-Capacity
+;feature_8pinmicrosd;8-pin microSD
+;platform_ios;IOS
+;platform_android;Android
+;platform_rim;Blackbery
+;platform_symbian;Symbian OS
+;platform_ms;Windows Mobile
+;band_dualband;Dual-Band
+;band_triband;Tri-Band
+;band_quadband;Quad-Band
+;band_umts;UMTS
+;band_lte;LTE
+;formfactor_slider;Slider
+;formfactor_bar;Bar
+;formfactor_clamshell;Clamshell
+;gps_true;GPS
+;gps_false;No GPS
+;camera_true;Camera
+;camera_false;No Camera
+;touchscreen_true;Touchscreen
+;touchscreen_false;No Touchscreen
+;keyboard_true;Keyboard
+;keyboard_false;No Keyboard

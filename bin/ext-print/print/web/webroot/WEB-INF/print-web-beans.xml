@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://cxf.apache.org/jaxws
+						http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<import resource="classpath:META-INF/cxf/cxf.xml"/>
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+
+	<bean id="binaryDataInInterceptor" class="de.hybris.platform.print.comet.soap.BinaryDataInInterceptor"/>
+	<bean id="binaryDataOutInterceptor" class="de.hybris.platform.print.comet.soap.BinaryDataOutInterceptor"/>
+	<bean id="newLineOutInterceptor" class="de.hybris.platform.print.comet.soap.NewLineOutInterceptor"/>
+	<bean id="cxf" class="org.apache.cxf.bus.spring.SpringBus">
+	    <property name="outInterceptors">
+           <list>
+			  <ref bean="binaryDataOutInterceptor"/>
+              <ref bean="newLineOutInterceptor"/>
+           </list>
+        </property>
+        <property name="inInterceptors">
+           <list>
+              <ref bean="binaryDataInInterceptor"/>
+           </list>
+        </property>
+	</bean>
+
+	<jaxws:endpoint
+		id="CometService"
+		implementor="de.hybris.platform.print.comet.soap.DefaultCometService"
+		address="/CometService">
+	</jaxws:endpoint>
+
+</beans>

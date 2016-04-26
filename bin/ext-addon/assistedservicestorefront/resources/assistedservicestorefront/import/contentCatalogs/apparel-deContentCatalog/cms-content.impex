@@ -1,0 +1,24 @@
+$contentCatalog=apparel-deContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$jarResourceCms=jar:de.hybris.platform.assistedservicestorefront.constants.AssistedservicestorefrontConstants&/assistedservicestorefront/import/cockpit/cmscockpit
+$addonExtensionName=assistedservicestorefront
+
+# CMS Assisted Service Component
+INSERT_UPDATE AssistedServiceComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;AssistedServiceComponent;Assisted Service Component;AssistedServiceComponent
+
+# CMS Assisted Service Sub-Components
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;&componentRef
+;;ASMLoginComponent;Assisted Service Agent Login Component;/WEB-INF/views/addons/$addonExtensionName/desktop/fragments/asmLoginComponent.jsp;ASMLoginComponent
+;;ASMEmulateUserComponent;Assisted Service Agent Emulate User Component;/WEB-INF/views/addons/$addonExtensionName/desktop/fragments/asmEmulateUserComponent.jsp;ASMEmulateUserComponent
+;;ASMBindComponent;Assisted Service Bind User/Cart Component;/WEB-INF/views/addons/$addonExtensionName/desktop/fragments/asmBindComponent.jsp;ASMBindComponent
+;;ASMHeaderComponent;Assisted Service Header Component;/WEB-INF/views/addons/$addonExtensionName/desktop/fragments/asmHeaderComponent.jsp;ASMHeaderComponent
+;;ASMFooterComponent;Assisted Service Footer Component;/WEB-INF/views/addons/$addonExtensionName/desktop/fragments/asmFooterComponent.jsp;ASMFooterComponent
+
+# CMS Assisted Service Extends
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;&componentRef
+;;AccountOrderDetailsTotalsComponent;Account Order Details Order Totals Component;/WEB-INF/views/addons/$addonExtensionName/desktop/updates/accountOrderDetailOrderTotals.jsp;AccountOrderDetailsTotalsComponent
+ 
+# Content Slots
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
+;;TopHeaderSlot;true;AssistedServiceComponent

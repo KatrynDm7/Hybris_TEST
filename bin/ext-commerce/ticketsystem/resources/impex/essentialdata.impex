@@ -1,0 +1,19 @@
+INSERT_UPDATE Domain;code[unique=true];name;
+;ticketSystemDomain;Ticket System Domain;
+
+
+INSERT_UPDATE Component;code[unique=true];name;domain[unique=true](code)
+;ticketSystem;Ticket System;ticketSystemDomain
+
+INSERT_UPDATE CommentType;code[unique=true];name;domain[unique=true](code);metaType(code)
+;ticketCreationEvent;Ticket Created Event;ticketSystemDomain;CsCustomerEvent
+;ticketChangeEvent;Ticket Changed Event;ticketSystemDomain;CsTicketEvent;
+;customerNote;Customer Note;ticketSystemDomain;CsCustomerEvent
+;ticketAssignedEvent;Ticket Assigned Event;ticketSystemDomain;CsTicketEvent;
+;ticketResolutionEvent;Ticket Resolved Event;ticketSystemDomain;CsTicketResolutionEvent
+;customerEmail;Customer Email;ticketSystemDomain;CsCustomerEvent
+
+# Create the fraudAgentGroup which new fraud tickets will be automatically assigned to
+INSERT_UPDATE CsAgentGroup;uid[unique=true];locName[lang=en];name;emailDistributionList;
+;csagentmanagergroup;CS Agent Group Manager;CS Agent Group Manager;
+;fraudAgentGroup;Fraud Agent Group;

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Repository>
+    <RepositoryVersion>1.0.0</RepositoryVersion>
+    <Functions>
+        <Function functionName="BAPI_CREDITCHECK" executionOrder="1">
+            <Tables>
+                <Table tableName="BAPI_CREDITLINES_TAB" name="ET_CREDITLINES">
+                    <LineType name="BAPI_CREDITLINES">
+                        <ElementMetaData name="CREDITGROUP" description="Credit group sales order" fieldType="CHAR" maxLength="2"/>
+                        <ElementMetaData name="PAYER" description="Customer Number" fieldType="CHAR" maxLength="10"/>
+                        <ElementMetaData name="RISK_CATEG" description="Credit management: Risk category" fieldType="CHAR" maxLength="3"/>
+                        <ElementMetaData name="SALES_ORG" description="Sales Organization" fieldType="CHAR" maxLength="4"/>
+                        <ElementMetaData name="DIS_CHANNEL" description="Distribution Channel" fieldType="CHAR" maxLength="2"/>
+                        <ElementMetaData name="DIVISION" description="Division" fieldType="CHAR" maxLength="2"/>
+                        <ElementMetaData name="C_CTR_AREA" description="Credit control area" fieldType="CHAR" maxLength="4"/>
+                        <ElementMetaData name="CURRENCY" description="Currency Key" fieldType="CHAR" maxLength="5"/>
+                        <ElementMetaData name="NET_VALUE" description="Net Value in Document Currency" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                        <ElementMetaData name="TAX_VALUE" description="Tax amount in document currency" fieldType="BCD" maxLength="7" BCD-Decimals="2"/>
+                        <ElementMetaData name="TOTAL_VALUE" description="Net Value in Document Currency" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                        <ElementMetaData name="CALL_COUNTER" description="Natural Number" fieldType="INT" maxLength="4"/>
+                        <ElementMetaData name="CALL_COUNTER2" description="Natural Number" fieldType="INT" maxLength="4"/>
+                        <ElementMetaData name="ID" description="Message Class" fieldType="CHAR" maxLength="20"/>
+                        <ElementMetaData name="NUMBER" description="Message Number" fieldType="NUM" maxLength="3"/>
+                        <ElementMetaData name="MESSAGE" description="Message Text" fieldType="CHAR" maxLength="220"/>
+                        <ElementMetaData name="LOG_NO" description="Application log: log number" fieldType="CHAR" maxLength="20"/>
+                        <ElementMetaData name="LOG_MSG_NO" description="Application log: Internal message serial number" fieldType="NUM" maxLength="6"/>
+                        <ElementMetaData name="MESSAGE_V1" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="MESSAGE_V2" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="MESSAGE_V3" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="MESSAGE_V4" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="ERROR" description="Single-Character Indicator" fieldType="CHAR" maxLength="1"/>
+                        <ElementMetaData name="WARNING" description="Single-Character Indicator" fieldType="CHAR" maxLength="1"/>
+                    </LineType>
+                </Table>
+                <Table tableName="BAPI_CREDITLINES_TAB" name="IT_CREDITLINES">
+                    <LineType name="BAPI_CREDITLINES">
+                        <ElementMetaData name="CREDITGROUP" description="Credit group sales order" fieldType="CHAR" maxLength="2"/>
+                        <ElementMetaData name="PAYER" description="Customer Number" fieldType="CHAR" maxLength="10"/>
+                        <ElementMetaData name="RISK_CATEG" description="Credit management: Risk category" fieldType="CHAR" maxLength="3"/>
+                        <ElementMetaData name="SALES_ORG" description="Sales Organization" fieldType="CHAR" maxLength="4"/>
+                        <ElementMetaData name="DIS_CHANNEL" description="Distribution Channel" fieldType="CHAR" maxLength="2"/>
+                        <ElementMetaData name="DIVISION" description="Division" fieldType="CHAR" maxLength="2"/>
+                        <ElementMetaData name="C_CTR_AREA" description="Credit control area" fieldType="CHAR" maxLength="4"/>
+                        <ElementMetaData name="CURRENCY" description="Currency Key" fieldType="CHAR" maxLength="5"/>
+                        <ElementMetaData name="NET_VALUE" description="Net Value in Document Currency" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                        <ElementMetaData name="TAX_VALUE" description="Tax amount in document currency" fieldType="BCD" maxLength="7" BCD-Decimals="2"/>
+                        <ElementMetaData name="TOTAL_VALUE" description="Net Value in Document Currency" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                        <ElementMetaData name="CALL_COUNTER" description="Natural Number" fieldType="INT" maxLength="4"/>
+                        <ElementMetaData name="CALL_COUNTER2" description="Natural Number" fieldType="INT" maxLength="4"/>
+                        <ElementMetaData name="ID" description="Message Class" fieldType="CHAR" maxLength="20"/>
+                        <ElementMetaData name="NUMBER" description="Message Number" fieldType="NUM" maxLength="3"/>
+                        <ElementMetaData name="MESSAGE" description="Message Text" fieldType="CHAR" maxLength="220"/>
+                        <ElementMetaData name="LOG_NO" description="Application log: log number" fieldType="CHAR" maxLength="20"/>
+                        <ElementMetaData name="LOG_MSG_NO" description="Application log: Internal message serial number" fieldType="NUM" maxLength="6"/>
+                        <ElementMetaData name="MESSAGE_V1" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="MESSAGE_V2" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="MESSAGE_V3" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="MESSAGE_V4" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="ERROR" description="Single-Character Indicator" fieldType="CHAR" maxLength="1"/>
+                        <ElementMetaData name="WARNING" description="Single-Character Indicator" fieldType="CHAR" maxLength="1"/>
+                    </LineType>
+                </Table>
+            </Tables>
+        </Function>
+        <Function functionName="BAPI_CREDITCHECK" executionOrder="2">
+            <Tables>
+                <Table tableName="BAPI_CREDITLINES_TAB" name="ET_CREDITLINES">
+                    <LineType name="BAPI_CREDITLINES">
+                        <ElementMetaData name="CREDITGROUP" description="Credit group sales order" fieldType="CHAR" maxLength="2"/>
+                        <ElementMetaData name="PAYER" description="Customer Number" fieldType="CHAR" maxLength="10"/>
+                        <ElementMetaData name="RISK_CATEG" description="Credit management: Risk category" fieldType="CHAR" maxLength="3"/>
+                        <ElementMetaData name="SALES_ORG" description="Sales Organization" fieldType="CHAR" maxLength="4"/>
+                        <ElementMetaData name="DIS_CHANNEL" description="Distribution Channel" fieldType="CHAR" maxLength="2"/>
+                        <ElementMetaData name="DIVISION" description="Division" fieldType="CHAR" maxLength="2"/>
+                        <ElementMetaData name="C_CTR_AREA" description="Credit control area" fieldType="CHAR" maxLength="4"/>
+                        <ElementMetaData name="CURRENCY" description="Currency Key" fieldType="CHAR" maxLength="5"/>
+                        <ElementMetaData name="NET_VALUE" description="Net Value in Document Currency" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                        <ElementMetaData name="TAX_VALUE" description="Tax amount in document currency" fieldType="BCD" maxLength="7" BCD-Decimals="2"/>
+                        <ElementMetaData name="TOTAL_VALUE" description="Net Value in Document Currency" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                        <ElementMetaData name="CALL_COUNTER" description="Natural Number" fieldType="INT" maxLength="4"/>
+                        <ElementMetaData name="CALL_COUNTER2" description="Natural Number" fieldType="INT" maxLength="4"/>
+                        <ElementMetaData name="ID" description="Message Class" fieldType="CHAR" maxLength="20"/>
+                        <ElementMetaData name="NUMBER" description="Message Number" fieldType="NUM" maxLength="3"/>
+                        <ElementMetaData name="MESSAGE" description="Message Text" fieldType="CHAR" maxLength="220"/>
+                        <ElementMetaData name="LOG_NO" description="Application log: log number" fieldType="CHAR" maxLength="20"/>
+                        <ElementMetaData name="LOG_MSG_NO" description="Application log: Internal message serial number" fieldType="NUM" maxLength="6"/>
+                        <ElementMetaData name="MESSAGE_V1" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="MESSAGE_V2" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="MESSAGE_V3" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="MESSAGE_V4" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="ERROR" description="Single-Character Indicator" fieldType="CHAR" maxLength="1"/>
+                        <ElementMetaData name="WARNING" description="Single-Character Indicator" fieldType="CHAR" maxLength="1"/>
+                    </LineType>
+                    <Row>
+                        <RowElement>01</RowElement>
+                        <RowElement>0000001000</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement>1000</RowElement>
+                        <RowElement>10</RowElement>
+                        <RowElement>00</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement>EUR</RowElement>
+                        <RowElement>5000.00</RowElement>
+                        <RowElement>1000.00</RowElement>
+                        <RowElement>0.00</RowElement>
+                        <RowElement>0</RowElement>
+                        <RowElement>1</RowElement>
+                        <RowElement>V1</RowElement>
+                        <RowElement>152</RowElement>
+                        <RowElement>Dynamic credit check has been exceeded</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement>000000</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                        <RowElement>    NOK</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement>X</RowElement>
+                        <RowElement></RowElement>
+                    </Row>
+                </Table>
+                <Table tableName="BAPI_CREDITLINES_TAB" name="IT_CREDITLINES">
+                    <LineType name="BAPI_CREDITLINES">
+                        <ElementMetaData name="CREDITGROUP" description="Credit group sales order" fieldType="CHAR" maxLength="2"/>
+                        <ElementMetaData name="PAYER" description="Customer Number" fieldType="CHAR" maxLength="10"/>
+                        <ElementMetaData name="RISK_CATEG" description="Credit management: Risk category" fieldType="CHAR" maxLength="3"/>
+                        <ElementMetaData name="SALES_ORG" description="Sales Organization" fieldType="CHAR" maxLength="4"/>
+                        <ElementMetaData name="DIS_CHANNEL" description="Distribution Channel" fieldType="CHAR" maxLength="2"/>
+                        <ElementMetaData name="DIVISION" description="Division" fieldType="CHAR" maxLength="2"/>
+                        <ElementMetaData name="C_CTR_AREA" description="Credit control area" fieldType="CHAR" maxLength="4"/>
+                        <ElementMetaData name="CURRENCY" description="Currency Key" fieldType="CHAR" maxLength="5"/>
+                        <ElementMetaData name="NET_VALUE" description="Net Value in Document Currency" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                        <ElementMetaData name="TAX_VALUE" description="Tax amount in document currency" fieldType="BCD" maxLength="7" BCD-Decimals="2"/>
+                        <ElementMetaData name="TOTAL_VALUE" description="Net Value in Document Currency" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                        <ElementMetaData name="CALL_COUNTER" description="Natural Number" fieldType="INT" maxLength="4"/>
+                        <ElementMetaData name="CALL_COUNTER2" description="Natural Number" fieldType="INT" maxLength="4"/>
+                        <ElementMetaData name="ID" description="Message Class" fieldType="CHAR" maxLength="20"/>
+                        <ElementMetaData name="NUMBER" description="Message Number" fieldType="NUM" maxLength="3"/>
+                        <ElementMetaData name="MESSAGE" description="Message Text" fieldType="CHAR" maxLength="220"/>
+                        <ElementMetaData name="LOG_NO" description="Application log: log number" fieldType="CHAR" maxLength="20"/>
+                        <ElementMetaData name="LOG_MSG_NO" description="Application log: Internal message serial number" fieldType="NUM" maxLength="6"/>
+                        <ElementMetaData name="MESSAGE_V1" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="MESSAGE_V2" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="MESSAGE_V3" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="MESSAGE_V4" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="ERROR" description="Single-Character Indicator" fieldType="CHAR" maxLength="1"/>
+                        <ElementMetaData name="WARNING" description="Single-Character Indicator" fieldType="CHAR" maxLength="1"/>
+                    </LineType>
+                    <Row>
+                        <RowElement>01</RowElement>
+                        <RowElement>0000001000</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement>1000</RowElement>
+                        <RowElement>10</RowElement>
+                        <RowElement>00</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement>EUR</RowElement>
+                        <RowElement>5000.00</RowElement>
+                        <RowElement>1000.00</RowElement>
+                        <RowElement>0.00</RowElement>
+                        <RowElement>0</RowElement>
+                        <RowElement>0</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement>000</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                        <RowElement>000000</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                    </Row>
+                </Table>
+            </Tables>
+        </Function>
+    </Functions>
+</Repository>

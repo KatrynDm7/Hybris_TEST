@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	    http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config />
+
+	<!-- Spring Integration -->
+	<import resource="b2ctelcoservices-spring-integration-telco.xml"/>
+	
+	<!-- SystemSetup for the b2ctelcoservices -->
+	<bean id="b2ctelcoAcceleratorCoreSystemSetup" class="de.hybris.platform.b2ctelcoservices.setup.CoreSystemSetup"
+	       parent="abstractCoreSystemSetup">
+		<property name="typeService" ref="typeService"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="userService" ref="userService"/>
+	</bean>
+
+	<!-- Solr field value providers -->
+	<bean id="b2ctelcoCategorySource" parent="abstractCategorySource">
+		<property name="rootCategory" value="1"/>
+		<!-- '1' is the root icecat category -->
+	</bean>
+	<bean id="b2ctelcoBrandCategorySource" parent="abstractCategorySource">
+		<property name="rootCategory" value="brands"/>
+		<!-- 'brands' is the root of the brands hierarchy -->
+	</bean>
+
+	<bean id="b2cabstractCategoryCodeValueProvider" abstract="true"
+		  class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.CategoryCodeValueProvider"
+		  parent="abstractPropertyFieldValueProvider" >
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
+	</bean>
+
+	<bean id="b2cabstractCategoryNameValueProvider" abstract="true"
+		  class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.CategoryNameValueProvider"
+		  parent="abstractPropertyFieldValueProvider" >
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
+	</bean>
+
+	<bean id="b2ctelcoCategoryCodeValueProvider" parent="b2cabstractCategoryCodeValueProvider">
+		<property name="categorySource" ref="b2ctelcoCategorySource"/>
+	</bean>
+	<bean id="b2ctelcoBrandCategoryCodeValueProvider" parent="b2cabstractCategoryCodeValueProvider">
+		<property name="categorySource" ref="b2ctelcoBrandCategorySource"/>
+	</bean>
+	<bean id="b2ctelcoCategoryNameValueProvider" parent="b2cabstractCategoryNameValueProvider">
+		<property name="categorySource" ref="b2ctelcoCategorySource"/>
+	</bean>
+	<bean id="b2ctelcoBrandCategoryNameValueProvider" parent="b2cabstractCategoryNameValueProvider">
+		<property name="categorySource" ref="b2ctelcoBrandCategorySource"/>
+	</bean>
+
+	<!-- Actions -->
+
+	<bean id="sendDeliveryMessageAction" class="de.hybris.platform.b2ctelcoservices.actions.SendDeliveryMessageActionStub"  parent="abstractAction"/>
+
+	<alias alias="guidedSellingService" name="defaultGuidedSellingService"/>
+	<bean id="defaultGuidedSellingService" class="de.hybris.platform.b2ctelcoservices.bundle.impl.DefaultGuidedSellingService" >
+		<property name="bundleTemplateService" ref="bundleTemplateService"/>
+		<property name="bundleComponentEditableChecker" ref="cartBundleComponentEditableChecker" />			
+	</bean>	
+	
+	<alias name="defaultConsignmentService" alias="consignmentService"/>
+
+	<!-- Compatibility Service -->
+	<alias name="defaultCompatibilityService" alias="compatibilityService"/>
+	<bean id="defaultCompatibilityService" class="de.hybris.platform.b2ctelcoservices.services.impl.DefaultCompatibilityService">
+	     <property name="classificationService" ref="classificationService" />
+	     <property name="productService" ref="productService" />
+	     <property name="genericSearchService" ref="genericSearchService" />
+	     <property name="modelService" ref="modelService" />    
+	     <property name="classificationClassCode" value="accessoryclassification" />
+	     <property name="classificationAttributeCode" value="vendorcompatibility" />
+	     <property name="productsFeaturesDao" ref="productsFeaturesDao" />
+	</bean>
+			
+	<bean id="productReviewCountValueProvider" class="de.hybris.platform.b2ctelcoservices.search.solrfacetsearch.provider.impl.ProductReviewCountValueProvider" parent="abstractPropertyFieldValueProvider" >
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+		<property name="customerReviewService" ref="customerReviewService"/>
+	</bean>
+	
+	<alias name="defaultProductsFeaturesDao" alias="productsFeaturesDao" />
+	<bean id="defaultProductsFeaturesDao" class="de.hybris.platform.b2ctelcoservices.daos.impl.DefaultProductsFeaturesDao" parent="abstractItemDao" >	
+		<property name="typeService" ref="typeService" />
+	</bean>
+	
+	<alias alias="uiExperienceService" name="telcoUiExperienceService"/>
+	<bean id="telcoUiExperienceService" parent="defaultUiExperienceService"
+		class="de.hybris.platform.b2ctelcoservices.uiexperience.impl.TelcoUiExperienceService">
+		<property name="baseStoreService" ref="baseStoreService"/>
+	</bean>
+	
+    <alias alias="constraintDao" name="customConstraintDao" />
+	<bean id="customConstraintDao" class="de.hybris.platform.b2ctelcoservices.validation.dao.impl.CustomConstraintDao"
+		parent="abstractItemDao" />
+			
+	<bean id="b2ctelcoBundleProductModelUrlResolver"
+			class="de.hybris.platform.commerceservices.url.impl.DefaultProductModelUrlResolver">
+		<property name="threadContextService" ref="threadContextService"/>
+		<property name="commerceCategoryService" ref="commerceCategoryService"/>
+		<property name="baseSiteService" ref="baseSiteService"/>
+		<property name="defaultPattern" value="/bundle/view-plans/{product-code}"/>
+	</bean>
+	
+	<alias alias="geoServiceWrapper" name="b2ctelcoMockGeoWebServiceWrapper" />
+	<bean id="b2ctelcoMockGeoWebServiceWrapper"
+		class="de.hybris.platform.b2ctelcoservices.services.impl.B2CTelcoMockGeoWebServiceWrapper"
+		parent="defaultCommerceMockGeoWebServiceWrapper" />
+	
+	<alias alias="countryIsoGPSLocationMap" name="b2ctelcoCountryIsoGPSLocationMap"/>
+	<bean id="b2ctelcoCountryIsoGPSLocationMap" class="org.springframework.beans.factory.config.MapFactoryBean">
+		<property name="sourceMap">
+			<map merge="true" key-type="java.lang.String" value-type="de.hybris.platform.storelocator.GPS">
+				<entry key="DEFAULT">
+					<bean class="de.hybris.platform.storelocator.impl.DefaultGPS">
+						<constructor-arg value="0D"/>
+						<constructor-arg value="0D"/>
+					</bean>
+				</entry>
+				<entry key="CN">
+					<bean class="de.hybris.platform.storelocator.impl.DefaultGPS">
+						<constructor-arg value="35.0000D"/>
+						<constructor-arg value="103.0000D"/>
+					</bean>
+				</entry>
+				<entry key="JP">
+					<bean class="de.hybris.platform.storelocator.impl.DefaultGPS">
+						<constructor-arg value="35.7091D"/>
+						<constructor-arg value="139.6732D"/>
+					</bean>
+				</entry>
+				<entry key="US">
+					<bean class="de.hybris.platform.storelocator.impl.DefaultGPS">
+						<constructor-arg value="40.112702D"/>
+						<constructor-arg value="-96.097352D"/>
+					</bean>
+				</entry>
+				<entry key="GB">
+					<bean class="de.hybris.platform.storelocator.impl.DefaultGPS">
+						<constructor-arg value="51.513779D"/>
+						<constructor-arg value="-0.1167D"/>
+					</bean>
+				</entry>
+				<entry key="GG">
+					<bean class="de.hybris.platform.storelocator.impl.DefaultGPS">
+						<constructor-arg value="55.8642D"/>
+						<constructor-arg value="-4.258D"/>
+					</bean>
+				</entry>
+				<entry key="IM">
+					<bean class="de.hybris.platform.storelocator.impl.DefaultGPS">
+						<constructor-arg value="54.181727D"/>
+						<constructor-arg value="-4.551086D"/>
+					</bean>
+				</entry>
+				<entry key="JE">
+					<bean class="de.hybris.platform.storelocator.impl.DefaultGPS">
+						<constructor-arg value="52.531917D"/>
+						<constructor-arg value="-0.47238D"/>
+					</bean>
+				</entry>
+				<entry key="DE">
+					<bean class="de.hybris.platform.storelocator.impl.DefaultGPS">
+						<constructor-arg value="52.514524D"/>
+						<constructor-arg value="13.35029D"/>
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="resetDeliveryMethodOnAddToCartMethodHook" class="de.hybris.platform.b2ctelcoservices.hook.impl.ResetDeliveryMethodOnAddToCartMethodHook">
+		<property name="cartService" ref="cartService"/>
+	</bean>
+	
+	<bean id="resetDeliveryMethodOnAddToCartMethodHookMergeDirective" depends-on="commerceAddToCartMethodHooks" parent="listMergeDirective">
+    	<property name="add" ref="resetDeliveryMethodOnAddToCartMethodHook"/>
+   	</bean>
+   	
+	<bean id="resetDeliveryMethodOnUpdateCartEntryHook" class="de.hybris.platform.b2ctelcoservices.hook.impl.ResetDeliveryMethodOnUpdateCartEntryHook">
+		<property name="cartService" ref="cartService"/>
+	</bean>
+	
+	<bean id="resetDeliveryMethodOnUpdateCartMethodHookMergeDirective" depends-on="commerceUpdateCartEntryMethodHooks" parent="listMergeDirective">
+    	<property name="add" ref="resetDeliveryMethodOnUpdateCartEntryHook"/>
+   	</bean>
+   	
+   <!-- Override Default Commerce Cart Merging Strategy -->
+	<alias name="b2ctelcoCommerceCartMergingStrategy" alias="commerceCartMergingStrategy"/>
+	<bean id="b2ctelcoCommerceCartMergingStrategy"
+			class="de.hybris.platform.b2ctelcoservices.order.impl.B2ctelcoCommerceCartMergingStrategy"
+			parent="abstractCommerceCartStrategy">
+	</bean>
+
+   
+   	
+</beans>

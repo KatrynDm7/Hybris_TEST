@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<process xmlns="http://www.hybris.de/xsd/processdefinition" start="initialCalculateRefundAmountAction"
+         name="return-process" processClass="de.hybris.platform.warehousing.model.ReturnProcessModel">
+
+    <action id="initialCalculateRefundAmountAction" bean="initialCalculateRefundAmountAction">
+        <transition name="OK" to="confirmOrCancelRefundAction"/>
+    </action>
+
+    <wait id="confirmOrCancelRefundAction" prependProcessCode="true" then="failed">
+        <case event="ConfirmOrCancelRefundEvent">
+            <choice id="captureRefund" then="captureRefundAction"/>
+            <choice id="taxReverse" then="taxReverseAction"/>
+            <choice id="cancelReturn" then="cancelReturnAction"/>
+        </case>
+    </wait>
+
+    <action id="captureRefundAction" bean="captureRefundAction">
+        <transition name="OK" to="successCaptureAction"/>
+        <transition name="NOK" to="failCaptureAction"/>
+    </action>
+
+    <wait id="failCaptureAction" prependProcessCode="true" then="failed">
+        <case event="FailCaptureActionEvent">
+            <choice id="bypassCapture" then="taxReverseAction"/>
+            <choice id="cancelReturn" then="cancelReturnAction"/>
+        </case>
+    </wait>
+
+    <action id="successCaptureAction" bean="successCaptureAction">
+        <transition name="OK" to="taxReverseAction"/>
+    </action>
+
+    <action id="taxReverseAction" bean="taxReverseAction">
+        <transition name="OK" to="successTaxReverseAction"/>
+        <transition name="NOK" to="failTaxReverseAction"/>
+    </action>
+
+    <wait id="failTaxReverseAction" then="inventoryUpdateAction" prependProcessCode="true">
+        <event>FailTaxReverseEvent</event>
+    </wait>
+
+    <action id="successTaxReverseAction" bean="successTaxReverseAction">
+        <transition name="OK" to="inventoryUpdateAction"/>
+    </action>
+
+    <action id="inventoryUpdateAction" bean="inventoryUpdateAction">
+        <transition name="OK" to="success"/>
+    </action>
+    
+    <action id="cancelReturnAction" bean="cancelReturnAction">
+    	<transition name="OK" to="success" />
+    </action>
+
+    <end id="failed" state="FAILED">Return issue detected.</end>
+    <end id="success" state="SUCCEEDED">Return process ended as expected.</end>
+</process>

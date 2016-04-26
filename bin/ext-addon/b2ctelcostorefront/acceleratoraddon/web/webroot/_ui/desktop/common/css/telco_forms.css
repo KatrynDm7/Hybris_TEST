@@ -1,0 +1,94 @@
+.control-group textarea,
+.control-group select,
+.control-group input[type="text"],
+.control-group input[type="password"],
+.control-group input[type="datetime"],
+.control-group input[type="datetime-local"],
+.control-group input[type="date"],
+.control-group input[type="month"],
+.control-group input[type="time"],
+.control-group input[type="week"],
+.control-group input[type="number"],
+.control-group input[type="email"],
+.control-group input[type="url"],
+.control-group input[type="search"],
+.control-group input[type="tel"],
+.control-group input[type="color"],
+.control-group .uneditable-input {
+    border: 1px solid #dbdad7;
+    border-radius: 3px;
+    height: 40px;
+    box-shadow: none;
+    margin-bottom: 10px;
+}
+.control-group textarea {
+    height: 175px;
+}
+.control-group label, .control-group input[type="text"], .control-group button, .control-group select, .control-group textarea, fieldset legend {
+    font-family: Trebuchet MS,Helvetica,Arial,sans-serif;
+    font-size: 16px;
+}
+.control-group label, fieldset legend {
+    font-weight: bold;
+    padding: 25px 0 8px;
+    margin: 0;
+}
+.required.right {
+    font-size: .75em;
+    font-weight: bold;
+    float: none !important;
+    margin-left: 0;
+    margin-bottom: 10px;
+    max-width: 100%;
+}
+form button.positive {
+    float: right;
+    margin: 15px 0;
+}
+.form-additionals .control-group .control-label {
+    font-weight: 400;
+    margin: 25px 0 50px;
+}
+.form-additionals .control-group .control-label input,
+#paymentDetailsForm input[type="checkbox"],
+.create_update_payment_form input[type="checkbox"] {
+    margin-right: 10px;
+    position: relative;
+    top: -1px;
+}
+.create_update_payment_form .cardForm #startDate {
+    clear: both;
+}
+.create_update_payment_form .cardForm #startDate[hidden="hidden"] + .cardDate {
+    clear: both;
+}
+.pstrength-minchar {
+    font-size: 12px;
+    font-style: italic;
+    padding-left: 5px;
+}
+.pstrength-info {
+    font-size: .875em;
+    font-weight: bold;
+}
+.control-group .help-inline {
+    font-size: .75em;
+}
+form .form-actions {
+    clear: both;
+    border-top: 1px solid #dbdad7;
+    padding-bottom: 5px;
+    overflow: hidden;
+    margin-top: 45px;
+}
+form .form-actions a {
+    display: inline-block;
+    background-color: transparent;
+    color: #0073e4;
+    padding: 0;
+    line-height: 43px;
+    margin: 15px 0;
+}
+.control-group.error input {
+    border-color: #c90400;
+}

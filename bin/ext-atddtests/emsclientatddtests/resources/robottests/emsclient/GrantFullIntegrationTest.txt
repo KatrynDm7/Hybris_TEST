@@ -1,0 +1,212 @@
+*** Settings ***
+Resource    emsclientatddtests/Checkout_Keywords.txt
+Resource    emsclientatddtests/EmsServer_Keywords.txt
+Resource    entitlements/Entitlement_Keywords.txt
+Resource    commerce/CommerceServices_Keywords.txt
+Resource    common/EntitlementStartup_Keywords.txt
+Resource    atdd/keywords/entitlements-test/settings_keywords.txt
+Resource    emsclientatddtests/EntitlementFacades_Keywords.txt
+Resource    emsclientatddtests/LocalCommerceServices_Keywords.txt
+
+
+Suite Setup       start emsserver
+Suite Teardown    stop emsserver
+
+Test Setup        prepare emsclientatddtests test setup
+Test Teardown     reset grants
+
+
+*** Test Cases ***
+Test_GrantFullIntegrationTest_SimpleEntitlement
+	[Documentation]    Create product with non-metered entitlement, buy it, then check for grants
+	for product "PRODUCT01" add non metered entitlement "NME1" without conditions
+    ${userId} =    generate random id
+    USING_HYBRIS_API create customer "${userId}"
+    WITH_LOCAL_COMMERCESERVICES_WORKAROUND login customer with id "${userId}"
+    set payment and delivery details for current customer
+    add product "PRODUCT01" to cart
+    ${order} =    do checkout for current customer
+    verify grants of "${userId}" xml are equal to "<entitlements><entitlement><grantTime/><status>ACTIVE</status><id>NME1</id><startTime/><description>Access to Non-Metered Entitlement 1</description><name>Non-Metered Entitlement 1</name><quantity>0</quantity></entitlement></entitlements>" ignoring time
+
+Test_GrantFullIntegrationTest_StringCondition
+	[Documentation]    Create product having non-metered entitlement with string conidition, buy it, then check for grants
+	for product "PRODUCT01" add non metered entitlement "NME1" with stringCondition "test"
+    ${userId} =    generate random id
+    USING_HYBRIS_API create customer "${userId}"
+    WITH_LOCAL_COMMERCESERVICES_WORKAROUND login customer with id "${userId}"
+    set payment and delivery details for current customer
+    add product "PRODUCT01" to cart
+    ${order} =    do checkout for current customer
+    verify grants of "${userId}" xml are equal to "<entitlements><entitlement><grantTime/><status>ACTIVE</status><id>NME1</id><conditionString>test</conditionString><startTime/><description>Access to Non-Metered Entitlement 1</description><name>Non-Metered Entitlement 1</name><quantity>0</quantity></entitlement></entitlements>" ignoring time
+
+Test_GrantFullIntegartionTest_PathCondition
+	[Documentation]    Create product having non-metered entitlement with path conidition, buy it, then check for grants
+	for product "PRODUCT01" add non metered entitlement "NME1" with pathCondition "/video/clips"
+    ${userId} =    generate random id
+    USING_HYBRIS_API create customer "${userId}"
+    WITH_LOCAL_COMMERCESERVICES_WORKAROUND login customer with id "${userId}"
+    set payment and delivery details for current customer
+    add product "PRODUCT01" to cart
+    ${order} =    do checkout for current customer
+    verify grants of "${userId}" xml are equal to "<entitlements><entitlement><grantTime/><conditionPath>/video/clips</conditionPath><status>ACTIVE</status><id>NME1</id><startTime/><description>Access to Non-Metered Entitlement 1</description><name>Non-Metered Entitlement 1</name><quantity>0</quantity></entitlement></entitlements>" ignoring time
+
+Test_GrantFullIntegrationTest_GeoCondition
+	[Documentation]    Create product having non-metered entitlement with geo conidition, buy it, then check for grants
+	for product "PRODUCT01" add non metered entitlement "NME1" with geoCondition "Germany"
+    ${userId} =    generate random id
+    USING_HYBRIS_API create customer "${userId}"
+    WITH_LOCAL_COMMERCESERVICES_WORKAROUND login customer with id "${userId}"
+    set payment and delivery details for current customer
+    add product "PRODUCT01" to cart
+    ${order} =    do checkout for current customer
+    verify grants of "${userId}" xml are equal to "<entitlements><entitlement><grantTime/><status>ACTIVE</status><id>NME1</id><conditionGeo class='list'><string>Germany</string></conditionGeo><startTime/><description>Access to Non-Metered Entitlement 1</description><name>Non-Metered Entitlement 1</name><quantity>0</quantity></entitlement></entitlements>" ignoring time
+
+Test_GrantFullIntegrationTest_Timeframe
+	[Documentation]    Create product having non-metered entitlement with timeframe condition, buy it, then check for grants
+	for product "PRODUCT01" add non metered entitlement "NME1" with conditionTimeframe having timeUnit "day", start "2" and duration "1"
+    ${userId} =    generate random id
+    USING_HYBRIS_API create customer "${userId}"
+    WITH_LOCAL_COMMERCESERVICES_WORKAROUND login customer with id "${userId}"
+    set payment and delivery details for current customer
+    add product "PRODUCT01" to cart
+    ${order} =    do checkout for current customer
+    verify grants of "${userId}" xml are equal to "<entitlements><entitlement><grantTime/><endTime/><status>ACTIVE</status><id>NME1</id><startTime/><description>Access to Non-Metered Entitlement 1</description><name>Non-Metered Entitlement 1</name><quantity>0</quantity></entitlement></entitlements>" ignoring time
+
+Test_GrantFullIntegrationTest_Timeframe_Open
+	[Documentation]    Create product having non-metered entitlement with open timeframe, buy it, then check for grants
+	for product "PRODUCT01" add non metered entitlement "NME1" with conditionTimeframe having timeUnit "day", start "2" and duration ""
+    ${userId} =    generate random id
+    USING_HYBRIS_API create customer "${userId}"
+    WITH_LOCAL_COMMERCESERVICES_WORKAROUND login customer with id "${userId}"
+    set payment and delivery details for current customer
+    add product "PRODUCT01" to cart
+    ${order} =    do checkout for current customer
+    verify grants of "${userId}" xml are equal to "<entitlements><entitlement><grantTime/><status>ACTIVE</status><id>NME1</id><startTime/><description>Access to Non-Metered Entitlement 1</description><name>Non-Metered Entitlement 1</name><quantity>0</quantity></entitlement></entitlements>" ignoring time
+
+Test_GrantFullIntegrationTest_Timeframe_ZeroDuration
+	[Documentation]    Test timeframe with duration of 0
+	for product "PRODUCT01" add non metered entitlement "NME1" with conditionTimeframe having timeUnit "day", start "1" and duration "0"
+    ${userId} =    generate random id
+    USING_HYBRIS_API create customer "${userId}"
+    WITH_LOCAL_COMMERCESERVICES_WORKAROUND login customer with id "${userId}"
+    set payment and delivery details for current customer
+    add product "PRODUCT01" to cart
+    ${order} =    do checkout for current customer
+    verify grants of "${userId}" xml are equal to "<entitlements><entitlement><grantTime/><status>ACTIVE</status><id>NME1</id><startTime/><description>Access to Non-Metered Entitlement 1</description><name>Non-Metered Entitlement 1</name><quantity>0</quantity></entitlement></entitlements>" ignoring time
+
+Test_GrantFullIntegrationTest_Timeframe_NoUnit
+	[Documentation]    Test timeframe without time unit
+	for product "PRODUCT01" add non metered entitlement "NME1" with conditionTimeframe having timeUnit "", start "2" and duration "1"
+    ${userId} =    generate random id
+    USING_HYBRIS_API create customer "${userId}"
+    WITH_LOCAL_COMMERCESERVICES_WORKAROUND login customer with id "${userId}"
+    set payment and delivery details for current customer
+    add product "PRODUCT01" to cart
+    ${order} =    do checkout for current customer
+    verify grants of "${userId}" xml are equal to "<entitlements><entitlement><grantTime/><status>ACTIVE</status><id>NME1</id><startTime/><description>Access to Non-Metered Entitlement 1</description><name>Non-Metered Entitlement 1</name><quantity>0</quantity></entitlement></entitlements>" ignoring time
+
+Test_GrantFullIntegrationTest_Timeframe_UnitOnly
+	[Documentation]    Test timeframe without start time and duration
+	for product "PRODUCT01" add non metered entitlement "NME1" with conditionTimeframe having timeUnit "day", start "" and duration ""
+    ${userId} =    generate random id
+    USING_HYBRIS_API create customer "${userId}"
+    WITH_LOCAL_COMMERCESERVICES_WORKAROUND login customer with id "${userId}"
+    set payment and delivery details for current customer
+    add product "PRODUCT01" to cart
+    ${order} =    do checkout for current customer
+    verify grants of "${userId}" xml are equal to "<entitlements><entitlement><grantTime/><status>ACTIVE</status><id>NME1</id><startTime/><description>Access to Non-Metered Entitlement 1</description><name>Non-Metered Entitlement 1</name><quantity>0</quantity></entitlement></entitlements>" ignoring time
+
+Test_GrantFullIntegrationTest_MeteredEntitlement
+	[Documentation]    Create product having metered entitlement, buy it, then check for grants
+	for product "PRODUCT01" add metered entitlement "ME1" with quantity "10"
+    ${userId} =    generate random id
+    USING_HYBRIS_API create customer "${userId}"
+    WITH_LOCAL_COMMERCESERVICES_WORKAROUND login customer with id "${userId}"
+    set payment and delivery details for current customer
+    add product "PRODUCT01" to cart
+    ${order} =    do checkout for current customer
+    verify grants of "${userId}" xml are equal to "<entitlements><entitlement><grantTime/><status>ACTIVE</status><id>ME1</id><startTime/><description>Access to Metered Entitlement 1</description><name>Metered Entitlement 1</name><quantity>10</quantity></entitlement></entitlements>" ignoring time
+
+Test_GrantFullIntegrationTest_MeteredEntitlement_ZeroQuantity
+	[Documentation]    Quantity of zero is legal and means "tracked but unlimited"
+	for product "PRODUCT01" add metered entitlement "ME1" with quantity "0"
+    ${userId} =    generate random id
+    USING_HYBRIS_API create customer "${userId}"
+    WITH_LOCAL_COMMERCESERVICES_WORKAROUND login customer with id "${userId}"
+    set payment and delivery details for current customer
+    add product "PRODUCT01" to cart
+    ${order} =    do checkout for current customer
+    verify grants of "${userId}" xml are equal to "<entitlements><entitlement><grantTime/><status>ACTIVE</status><id>ME1</id><startTime/><description>Access to Metered Entitlement 1</description><name>Metered Entitlement 1</name><quantity>0</quantity></entitlement></entitlements>" ignoring time
+
+Test_GrantFullIntegrationTest_MeteredEntitlement_QuantityOfMinusOne
+	[Documentation]    Quantity of minus one is translated to zero
+	for product "PRODUCT01" add metered entitlement "ME1" with quantity "-1"
+    ${userId} =    generate random id
+    USING_HYBRIS_API create customer "${userId}"
+    WITH_LOCAL_COMMERCESERVICES_WORKAROUND login customer with id "${userId}"
+    set payment and delivery details for current customer
+    add product "PRODUCT01" to cart
+    ${order} =    do checkout for current customer
+    verify grants of "${userId}" xml are equal to "<entitlements><entitlement><grantTime/><status>ACTIVE</status><id>ME1</id><startTime/><description>Access to Metered Entitlement 1</description><name>Metered Entitlement 1</name><quantity>0</quantity></entitlement></entitlements>" ignoring time
+
+Test_GrantFullIntegrationTest_MeteredEntitlement_NoQuantity
+	[Documentation]    Default quantity is 0
+	for product "PRODUCT01" add metered entitlement "ME1" with quantity ""
+    ${userId} =    generate random id
+    USING_HYBRIS_API create customer "${userId}"
+    WITH_LOCAL_COMMERCESERVICES_WORKAROUND login customer with id "${userId}"
+    set payment and delivery details for current customer
+    add product "PRODUCT01" to cart
+    ${order} =    do checkout for current customer
+    verify grants of "${userId}" xml are equal to "<entitlements><entitlement><grantTime/><status>ACTIVE</status><id>ME1</id><startTime/><description>Access to Metered Entitlement 1</description><name>Metered Entitlement 1</name><quantity>0</quantity></entitlement></entitlements>" ignoring time
+
+Test_GrantFullIntegrationTest_MeteredEntitlement_Path
+	[Documentation]    Create product having metered entitlement with path, buy it, then check for grants
+	for product "PRODUCT01" add metered entitlement "ME1" with quantity "10" with pathCondition "path"
+    ${userId} =    generate random id
+    USING_HYBRIS_API create customer "${userId}"
+    WITH_LOCAL_COMMERCESERVICES_WORKAROUND login customer with id "${userId}"
+    set payment and delivery details for current customer
+    add product "PRODUCT01" to cart
+    ${order} =    do checkout for current customer
+    verify grants of "${userId}" xml are equal to "<entitlements><entitlement><grantTime/><status>ACTIVE</status><id>ME1</id><conditionPath>path</conditionPath><startTime/><description>Access to Metered Entitlement 1</description><name>Metered Entitlement 1</name><quantity>10</quantity></entitlement></entitlements>" ignoring time
+
+Test_GrantFullIntegrationTest_MeteredEntitlement_Timeframe
+	[Documentation]    Create product having metered entitlement with timeframe condition, buy it, then check for grants
+	for product "PRODUCT01" add metered entitlement "ME1" with quantity "10" and timeunit values timeunit "day" start time "1" and duration "2"
+    ${userId} =    generate random id
+    USING_HYBRIS_API create customer "${userId}"
+    WITH_LOCAL_COMMERCESERVICES_WORKAROUND login customer with id "${userId}"
+    set payment and delivery details for current customer
+    add product "PRODUCT01" to cart
+    ${order} =    do checkout for current customer
+    verify grants of "${userId}" xml are equal to "<entitlements><entitlement><grantTime/><endTime/><status>ACTIVE</status><id>ME1</id><startTime/><description>Access to Metered Entitlement 1</description><name>Metered Entitlement 1</name><quantity>10</quantity></entitlement></entitlements>" ignoring time
+
+Test_GrantFullIntegrationTest_Full
+	[Documentation]    Create product having metered entitlement with all supported conditions, buy it, then check for grants
+	for product "PRODUCT01" add metered entitlement "ME1" with quantity "10" with stringCondition "str" and pathCondition "path" and geoCondition "Germany" and timeunit "day" andd starttime "1" and duration "2"
+    ${userId} =    generate random id
+    USING_HYBRIS_API create customer "${userId}"
+    WITH_LOCAL_COMMERCESERVICES_WORKAROUND login customer with id "${userId}"
+    set payment and delivery details for current customer
+    add product "PRODUCT01" to cart
+    ${order} =    do checkout for current customer
+    verify grants of "${userId}" xml are equal to "<entitlements>
+       <entitlement>
+         <grantTime/>
+         <status>ACTIVE</status>
+         <id>ME1</id>
+         <startTime/>
+         <endTime/>
+         <conditionString>str</conditionString>
+         <conditionPath>path</conditionPath>
+         <conditionGeo class='list'>
+           <string>Germany</string>
+         </conditionGeo>
+         <description>Access to Metered Entitlement 1</description>
+         <name>Metered Entitlement 1</name>
+         <quantity>10</quantity>
+       </entitlement>
+     </entitlements>" ignoring time
+
+

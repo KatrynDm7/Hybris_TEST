@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2009 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+
+    <extension name="cuppy"
+               abstractclassprefix="Generated"
+               classprefix="Cuppy"
+               managername="CuppyManager"
+               managersuperclass="de.hybris.platform.jalo.extension.Extension"
+               description="CuppY"
+               usemaven="false"
+            >
+        <requires-extension name="cockpit" version="[4.2.1,)"/>
+
+        <coremodule packageroot="de.hybris.platform.cuppy"
+                    manager="de.hybris.platform.jalo.extension.GenericManager"
+                    generated="true"
+                />
+        <webmodule jspcompile="false"
+                   webroot="/cuppy"
+                />
+        <hmcmodule extensionclassname="de.hybris.platform.cuppy.hmc.CuppyHMCExtension"/>
+    </extension>
+
+</extensioninfo>

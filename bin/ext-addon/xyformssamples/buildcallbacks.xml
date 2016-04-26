@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<project name="xyformssamples_buildcallbacks">
+	
+   <target name="install.xyformssamples" description="Installing the xyformssamples AddOn">
+       <sequential>
+       	  <xyformsstorefrontcommons_check_storefront />
+           <xyformsstorefrontcommons_install_addons addon="xyformssamples" />
+           <xyformsstorefrontcommons_copy_orbeon_config_from_extension extension="xyformssamples" />
+       </sequential>
+   </target>
+
+</project>

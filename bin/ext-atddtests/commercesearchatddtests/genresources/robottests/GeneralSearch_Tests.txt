@@ -1,0 +1,19 @@
+*** Settings ***
+Library           de.hybris.platform.atddimpex.keywords.ImpexKeywordLibrary
+Library           de.hybris.platform.commerceservicesatddtests.keywords.CommerceServicesKeywordLibrary
+Library           de.hybris.platform.commercesearch.atdd.keywords.CommerceSearchKeywordLibrary
+Resource		  impex/Impex_Keywords.txt
+Resource		  commerce/CommerceServices_Keywords.txt
+Resource		  commercesearch/CommerceSearch_Keywords.txt
+Test Setup		  commercesearch suite setup
+Test Teardown	  commercesearch suite teardown
+
+
+*** Test Cases ***
+Test_That_Category_Has_Products
+    [Documentation]    Checks that a category with code 575 has products (electronics/digital cameras in test data)
+    prepare session	electronics    
+    create product "P1" in category "575" with price "99,99 USD"
+    update solr index
+    check category has products   575
+    

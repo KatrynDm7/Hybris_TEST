@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config xmlns="http://www.hybris.com/cockpit/config">
+    
+    <context merge-by="module" type="SAPConfiguration" component="editor-area" parent="auto">
+           <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+        	<editorArea:essentials xmlns="http://www.hybris.com/cockpitng/component/editorArea">
+                <essentialSection name="hmc.essential">
+                    <attribute qualifier="core_name"/>
+                </essentialSection>
+            </editorArea:essentials>
+            <editorArea:tab xmlns="http://www.hybris.com/cockpitng/component/editorArea" name="hmc.tab.saporder.asynchronous" position="6">
+                <editorArea:section name="hmc.section.saporderexchange.conditiontypes">
+	                
+		                <editorArea:attribute qualifier="saporderexchange_itemPriceConditionType"/>
+						<editorArea:attribute qualifier="saporderexchange_paymentCostConditionType"/>
+						<editorArea:attribute qualifier="saporderexchange_deliveryCostConditionType"/>
+					
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    
+</config>

@@ -1,0 +1,24 @@
+*** Settings ***
+Library           de.hybris.platform.atddimpex.keywords.ImpexKeywordLibrary
+Library			  de.hybris.platform.commerceservicesatddtests.keywords.CommerceServicesKeywordLibrary
+Library			  de.hybris.platform.financialacceleratorstorefrontatddtests.quotation.keywords.QuotationKeywordLibrary
+Library			  de.hybris.platform.financialacceleratorstorefrontatddtests.insurance.keywords.InsuranceKeywordLibrary
+
+*** Keywords ***
+import sampledata
+    [Documentation]    Imports the insurance quotation test data
+    import impex from resource    /impex/insuranceQuotationTestData.csv
+    prepare session    testSite
+    
+prepare insurance session data using delimiter "${delimiter}" for given attributes "@{sessionAttributes}" 
+	[Documentation]    Key word to bind the given attributes to the session cart. The example format of the argument as, 
+	...                name1:value1    name2:value2...    nameN:valueN with the ${delimiter} = ":" which is used to separate the name value pair.	  
+	prepare insurance session    ${delimiter}	@{sessionAttributes}
+
+verify quote that "${xPath}" evaluates to "${expectedXml}"
+	[Documentation]    Verifies that the XPath evaluates to the expected XML to verify InsuranceQuote in the session cart.		  
+	verify quote xml    ${xPath}    ${expectedXml}
+
+verify the quotation which matches "${expectedXml}"
+	[Documentation]   Verifies that XML for InsuranceQuote matches the expected XML	
+	verify quote that "cart/insuranceQuote" evaluates to "${expectedXml}"	

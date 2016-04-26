@@ -1,0 +1,2022 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config xmlns="http://www.hybris.com/cockpit/config">
+	<context merge-by="module" parent="auto" component="explorer-tree">
+		<explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
+			<explorer-tree:navigation-node id="hmc_treenode_marketing">
+				<explorer-tree:type-node code="PromotionGroup" id="hmc_type_tree_promotiongroup" />
+				<explorer-tree:navigation-node id="hmc_type_tree_abstractpromotion" />
+			</explorer-tree:navigation-node>
+		</explorer-tree:explorer-tree>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="AbstractPromotionRestriction" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="restrictionType" />
+			<list-view:column qualifier="renderedDescription" />
+		</list-view:list-view>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="PromotionGroup" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="Identifier" />
+		</list-view:list-view>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="AbstractPromotion" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="promotionType" />
+			<list-view:column qualifier="code" />
+			<list-view:column qualifier="title" />
+			<list-view:column qualifier="enabled" />
+			<list-view:column qualifier="priority" />
+		</list-view:list-view>
+	</context>
+	<context merge-by="type" parent="ProductPromotion" type="ProductPercentageDiscountPromotion" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.promotion.properties">
+				<editorArea:section name="hmc.section.promotion.description">
+					<editorArea:custom>
+						<editorArea:default>
+         		 			    <![CDATA[<div>[hmc.text.productpercentagediscountpromotion.detaileddescription]</div>]]>
+						</editorArea:default>
+					</editorArea:custom>
+				</editorArea:section>
+				<editorArea:section name="hmc.section.promotion.prices">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="percentageDiscount"
+						description="hmc.text.productpercentagediscountpromotion.percentagediscount" />
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.promotion.messages">
+				<editorArea:section name="hmc.section.promotion.messages" description="hmc.text.promotion.messages.overview">
+					<editorArea:panel name="productpercentagediscountpromotion.messagefired" description="hmc.text.productpercentagediscountpromotion.messagefired">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageFired">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>4</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:custom>
+							<editorArea:default><![CDATA[<div>[hmc.text.productpercentagediscountpromotion.messagefiredargs]</div>]]></editorArea:default>
+						</editorArea:custom>						
+					</editorArea:panel>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="ProductPromotion" type="ProductPerfectPartnerBundlePromotion" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.promotion.properties">
+				<editorArea:section name="hmc.section.promotion.description">
+					<editorArea:custom>
+						<editorArea:default><![CDATA[<div>[hmc.text.productperfectpartnerbundlepromotion.detaileddescription]</div>]]></editorArea:default>
+					</editorArea:custom>
+				</editorArea:section>
+				<editorArea:section name="hmc.section.promotion.products" merge-mode="replace">
+					<editorArea:panel name="productperfectpartnerbundlepromotion.qualifyingproducts">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="baseProduct"
+							description="hmc.text.productperfectpartnerbundlepromotion.baseproduct" />
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="partnerProducts"
+							description="hmc.text.productperfectpartnerbundlepromotion.partnerproducts" />
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="qualifyingCount"
+							description="hmc.text.productperfectpartnerbundlepromotion.qualifyingcount" />
+					</editorArea:panel>
+				</editorArea:section>
+				<editorArea:section name="hmc.section.promotion.prices">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="bundlePrices"
+						description="hmc.text.productperfectpartnerbundlepromotion.bundleprices" />
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.promotion.messages">
+				<editorArea:section name="hmc.section.promotion.messages" description="hmc.text.promotion.messages.overview">
+					<editorArea:panel name="productperfectpartnerbundlepromotion.messagefired" description="hmc.text.productperfectpartnerbundlepromotion.messagefired">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageFired">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>4</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:custom>
+							<editorArea:default><![CDATA[<div>[hmc.text.productperfectpartnerbundlepromotion.messagefiredargs]</div>]]></editorArea:default>
+						</editorArea:custom>												
+					</editorArea:panel>
+					<editorArea:panel name="productperfectpartnerbundlepromotion.messagecouldhavefired" description="hmc.text.productperfectpartnerbundlepromotion.messagecouldhavefired">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageCouldHaveFired">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>4</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:custom>
+							<editorArea:default><![CDATA[<div>[hmc.text.productperfectpartnerbundlepromotion.messagecouldhavefiredargs]</div>]]></editorArea:default>
+						</editorArea:custom>												
+					</editorArea:panel>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="PromotionQuantityAndPricesRow" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.promotion.properties">
+				<editorArea:section name="hmc.section.promotion.prices">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="quantity" />
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="prices" />
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="AbstractPromotionRestriction" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:essentials>
+				<editorArea:essentialSection name="hmc.essential">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="promotion" />
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="descriptionPattern" />
+				</editorArea:essentialSection>
+			</editorArea:essentials>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="AbstractPromotionRestriction" type="PromotionProductRestriction" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.restriction.properties">
+				<editorArea:section name="hmc.section.restriction.products">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="products" />
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="ProductPromotion" type="ProductBundlePromotion" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.promotion.properties">
+				<editorArea:section name="hmc.section.promotion.description">
+					<editorArea:custom>
+						<editorArea:default><![CDATA[<div>[hmc.text.productbundlepromotion.detaileddescription]</div>]]></editorArea:default>
+					</editorArea:custom>
+				</editorArea:section>
+				<editorArea:section name="hmc.section.promotion.prices">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="bundlePrices"
+						description="hmc.text.productbundlepromotion.bundleprices" />
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.promotion.messages">
+				<editorArea:section name="hmc.section.promotion.messages" description="hmc.text.promotion.messages.overview">
+					<editorArea:panel name="productbundlepromotion.messagefired" description="hmc.text.productbundlepromotion.messagefired">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageFired">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>4</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:custom>
+							<editorArea:default><![CDATA[<div>[hmc.text.productbundlepromotion.messagefiredargs]</div>]]></editorArea:default>
+						</editorArea:custom>
+					</editorArea:panel>
+					<editorArea:panel name="productbundlepromotion.messagecouldhavefired" description="hmc.text.productbundlepromotion.messagecouldhavefired">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageCouldHaveFired">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>4</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:custom>
+							<editorArea:default><![CDATA[<div>[hmc.text.productbundlepromotion.messagecouldhavefiredargs]</div>]]></editorArea:default>
+						</editorArea:custom>
+					</editorArea:panel>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="ProductPromotion" type="ProductPerfectPartnerPromotion" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.promotion.properties">
+				<editorArea:section name="hmc.section.promotion.description">
+					<editorArea:custom>
+						<editorArea:default><![CDATA[<div>[hmc.text.productperfectpartnerpromotion.detaileddescription]</div>]]></editorArea:default>
+					</editorArea:custom>
+				</editorArea:section>				
+				<editorArea:section name="hmc.section.promotion.products">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="partnerProducts"
+						description="hmc.text.productperfectpartnerpromotion.partnerproducts" />
+				</editorArea:section>
+				<editorArea:section name="hmc.section.promotion.prices">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="partnerPrices"
+						description="hmc.text.productperfectpartnerpromotion.partnerprices" />
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.promotion.messages">
+				<editorArea:section name="hmc.section.promotion.messages" description="hmc.text.promotion.messages.overview">
+					<editorArea:panel name="productperfectpartnerpromotion.messagefired" description="hmc.text.productperfectpartnerpromotion.messagefired">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageFired">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>4</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:custom>
+							<editorArea:default><![CDATA[<div>[hmc.text.productperfectpartnerpromotion.messagefiredargs]</div>]]></editorArea:default>
+						</editorArea:custom>						
+					</editorArea:panel>
+					<editorArea:panel name="productperfectpartnerpromotion.messagecouldhavefired" description="hmc.text.productperfectpartnerpromotion.messagecouldhavefired">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageCouldHaveFired">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>4</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:custom>
+							<editorArea:default><![CDATA[<div>[hmc.text.productperfectpartnerpromotion.messagecouldhavefiredargs]</div>]]></editorArea:default>
+						</editorArea:custom>				
+					</editorArea:panel>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="module" type="Product" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.product.categorysystem">
+				<editorArea:section name="hmc.section.product.productreferences">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="promotions" />
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="ProductPromotion" type="ProductBOGOFPromotion" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.promotion.properties">
+				<editorArea:section name="hmc.section.promotion.description">
+					<editorArea:custom>
+						<editorArea:default><![CDATA[<div>[hmc.text.productbogofpromotion.detaileddescription]</div>]]></editorArea:default>
+					</editorArea:custom>
+				</editorArea:section>				
+				<editorArea:section name="hmc.section.promotion.products" merge-mode="replace">
+					<editorArea:panel name="hmc.panel.promotion.products" description="hmc.text.productpromotion.qualifyingproductscategories">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="products" />
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="categories" />
+					</editorArea:panel>
+					<editorArea:panel name="productbogofpromotion.qualifyingoverview" description="hmc.text.productbogofpromotion.qualifyingoverview">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="qualifyingCount"
+							description="hmc.text.productbogofpromotion.qualifyingcount" />
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="freeCount"
+							description="hmc.text.productbogofpromotion.freecount" />
+					</editorArea:panel>
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.promotion.messages">
+				<editorArea:section name="hmc.section.promotion.messages" description="hmc.text.promotion.messages.overview">
+					<editorArea:panel name="hmc.text.productbogofpromotion.messagefired" description="hmc.text.productbogofpromotion.messagefired">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageFired">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>4</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:custom>
+							<editorArea:default><![CDATA[<div>[hmc.text.productbogofpromotion.messagefiredargs]</div>]]></editorArea:default>
+						</editorArea:custom>							
+					</editorArea:panel>
+					<editorArea:panel name="hmc.text.productbogofpromotion.messagecouldhavefired" description="hmc.text.productbogofpromotion.messagecouldhavefired">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageCouldHaveFired">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>4</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:custom>
+							<editorArea:default><![CDATA[<div>[hmc.text.productbogofpromotion.messagecouldhavefiredargs]</div>]]></editorArea:default>
+						</editorArea:custom>													
+					</editorArea:panel>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="OrderPromotion" type="OrderThresholdFreeVoucherPromotion" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.promotion.properties">
+				<editorArea:section name="hmc.section.promotion.description">
+					<editorArea:custom>
+						<editorArea:default><![CDATA[<div>[hmc.text.orderthresholdfreevoucherpromotion.detaileddescription]</div>]]></editorArea:default>
+					</editorArea:custom>		
+				</editorArea:section>			
+				<editorArea:section name="hmc.section.promotion.prices">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="thresholdTotals"
+						description="hmc.text.orderthresholdfreevoucherpromotion.thresholdtotals" />
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="freeVoucher"
+						description="hmc.text.orderthresholdfreevoucherpromotion.freevoucher" />
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.promotion.messages">
+				<editorArea:section name="hmc.section.promotion.messages" description="hmc.text.promotion.messages.overview">
+					<editorArea:panel name="orderthresholdfreevoucherpromotion.messagefired" description="hmc.text.orderthresholdfreevoucherpromotion.messagefired">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageFired">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>4</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:custom>
+							<editorArea:default><![CDATA[<div>[hmc.text.orderthresholdfreevoucherpromotion.messagefiredargs]</div>]]></editorArea:default>
+						</editorArea:custom>																			
+					</editorArea:panel>
+					<editorArea:panel name="orderthresholdfreevoucherpromotion.messagecouldhavefired" description="hmc.text.orderthresholdfreevoucherpromotion.messagecouldhavefired">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageCouldHaveFired">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>4</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:custom>
+							<editorArea:default><![CDATA[<div>[hmc.text.orderthresholdfreevoucherpromotion.messagecouldhavefiredargs]</div>]]></editorArea:default>
+						</editorArea:custom>																									
+					</editorArea:panel>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="ProductPromotion" type="ProductMultiBuyPromotion" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.promotion.properties">
+				<editorArea:section name="hmc.section.promotion.description" >
+					<editorArea:custom>
+						<editorArea:default><![CDATA[<div>[hmc.text.productmultibuypromotion.detaileddescription]</div>]]></editorArea:default>
+					</editorArea:custom>				
+				</editorArea:section>				
+				<editorArea:section name="hmc.section.promotion.products">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="qualifyingCount"
+						description="hmc.text.productmultibuypromotion.qualifyingcount" />
+				</editorArea:section>
+				<editorArea:section name="hmc.section.promotion.prices">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="bundlePrices"
+						description="hmc.text.productmultibuypromotion.bundleprices" />
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.promotion.messages">
+				<editorArea:section name="hmc.section.promotion.messages" description="hmc.text.promotion.messages.overview">
+					<editorArea:panel name="productmultibuypromotion.messagefired" description="hmc.text.productmultibuypromotion.messagefired">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageFired">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>4</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:custom>
+							<editorArea:default><![CDATA[<div>[hmc.text.productmultibuypromotion.messagefiredargs]</div>]]></editorArea:default>
+						</editorArea:custom>																									
+					</editorArea:panel>
+					<editorArea:panel name="productmultibuypromotion.messagecouldhavefired" description="hmc.text.productmultibuypromotion.messagecouldhavefired">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageCouldHaveFired">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>4</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:custom>
+							<editorArea:default><![CDATA[<div>[hmc.text.productmultibuypromotion.messagecouldhavefiredargs]</div>]]></editorArea:default>
+						</editorArea:custom>																									
+					</editorArea:panel>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="OrderPromotion" type="OrderThresholdChangeDeliveryModePromotion" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.promotion.properties">
+				<editorArea:section name="hmc.section.promotion.description">
+					<editorArea:custom>
+						<editorArea:default><![CDATA[<div>[hmc.text.orderthresholdchangedeliverypromotion.detaileddescription]</div>]]></editorArea:default>
+					</editorArea:custom>		
+				</editorArea:section>
+				<editorArea:section name="hmc.section.promotion.deliverymode">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="deliveryMode"
+						description="hmc.text.orderthresholdchangedeliverypromotion.deliverymode" />
+				</editorArea:section>
+				<editorArea:section name="hmc.section.promotion.prices">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="thresholdTotals"
+						description="hmc.text.orderthresholdchangedeliverypromotion.thresholdtotals" />
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.promotion.messages">
+				<editorArea:section name="hmc.section.promotion.messages" description="hmc.text.promotion.messages.overview">
+					<editorArea:panel name="orderthresholdchangedeliverymodepromotion.messagefired" description="hmc.text.orderthresholdchangedeliverypromotion.messagefired">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageFired">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>4</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:custom>
+							<editorArea:default><![CDATA[<div>[hmc.text.orderthresholdchangedeliverypromotion.messagefiredargs]</div>]]></editorArea:default>
+						</editorArea:custom>																															
+					</editorArea:panel>
+					<editorArea:panel name="orderthresholdchangedeliverymodepromotion.messagecouldhavefired" description="hmc.text.orderthresholdchangedeliverypromotion.messagecouldhavefired">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageCouldHaveFired">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>4</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:custom>
+							<editorArea:default><![CDATA[<div>[hmc.text.orderthresholdchangedeliverypromotion.messagecouldhavefiredargs]</div>]]></editorArea:default>
+						</editorArea:custom>																															
+					</editorArea:panel>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="AbstractPromotion" type="ProductPromotion" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.promotion.properties">
+				<editorArea:section name="hmc.section.promotion.products" description="hmc.text.productpromotion.qualifyingproductscategories">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="products" />
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="categories" />
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.promotion.media">
+				<editorArea:section name="hmc.section.promotion.media">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="productBanner"
+						description="hmc.text.productpromotion.productbanner" />
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="module" type="AbstractOrder" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:customTab name="hmc.tab.abstractorder.promotions" spring-bean="promotionsTabEditorAreaRenderer">
+			</editorArea:customTab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="OrderPromotion" type="OrderThresholdDiscountPromotion" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.promotion.properties">
+				<editorArea:section name="hmc.section.promotion.description">
+					<editorArea:custom>
+						<editorArea:default><![CDATA[<div>[hmc.text.orderthresholddiscountpromotion.detaileddescription]</div>]]></editorArea:default>
+					</editorArea:custom>		
+				</editorArea:section>
+				<editorArea:section name="hmc.section.promotion.prices">
+					<editorArea:panel name="hmc.panel.promotion.prices">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="thresholdTotals"
+							description="hmc.text.orderthresholddiscountpromotion.thresholdtotals" />
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="discountPrices"
+							description="hmc.text.orderthresholddiscountpromotion.discountPrices" />
+					</editorArea:panel>
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.promotion.messages">
+				<editorArea:section name="hmc.section.promotion.messages" description="hmc.text.promotion.messages.overview">
+					<editorArea:panel name="orderthresholddiscountpromotion.messagefired" description="hmc.text.orderthresholddiscountpromotion.messagefired">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageFired">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>4</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:custom>
+							<editorArea:default><![CDATA[<div>[hmc.text.orderthresholddiscountpromotion.messagefiredargs]</div>]]></editorArea:default>
+						</editorArea:custom>																																					
+					</editorArea:panel>
+					<editorArea:panel name="orderthresholddiscountpromotion.messagecouldhavefired" description="hmc.text.orderthresholddiscountpromotion.messagecouldhavefired">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageCouldHaveFired">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>4</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:custom>
+							<editorArea:default><![CDATA[<div>[hmc.text.orderthresholddiscountpromotion.messagecouldhavefiredargs]</div>]]></editorArea:default>
+						</editorArea:custom>																																					
+					</editorArea:panel>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="PromotionGroup" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:essentials>
+				<editorArea:essentialSection name="hmc.essential">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="Identifier" />
+				</editorArea:essentialSection>
+			</editorArea:essentials>
+			<editorArea:tab name="hmc.tab.promotiongroup.properties">
+				<editorArea:section name="hmc.section.promotiongroup.promotions">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="Promotions"
+						editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor">
+						<editorArea:editor-parameter>
+							<editorArea:name>listConfigContext</editorArea:name>
+							<editorArea:value>referenceListView</editorArea:value>
+						</editorArea:editor-parameter>
+					</editorArea:attribute>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="AbstractPromotion" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:essentials>
+				<editorArea:essentialSection name="hmc.essential">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="code" />
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="title" />
+				</editorArea:essentialSection>
+			</editorArea:essentials>
+			<editorArea:tab name="hmc.tab.promotion.properties">
+				<editorArea:section name="hmc.section.promotion.description" />
+				<editorArea:section name="hmc.section.promotion.details">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="PromotionGroup" />
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="description" />
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="priority"
+						description="hmc.text.promotion.priority" />
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="enabled"
+						editor="com.hybris.cockpitng.editor.boolean.checkbox" />
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.promotion.restrictions">
+				<editorArea:section name="hmc.section.promotion.restrictions">
+					<editorArea:panel name="promotion.daterange" description="hmc.text.promotion.daterange">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="startDate" />
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="endDate" />
+					</editorArea:panel>
+					<editorArea:panel name="promotion.restrictions" description="hmc.text.promotion.restrictions">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="restrictions"
+							editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor">
+							<editorArea:editor-parameter>
+								<editorArea:name>listConfigContext</editorArea:name>
+								<editorArea:value>referenceListView</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+					</editorArea:panel>
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.promotion.media">
+				<editorArea:section name="hmc.section.promotion.media">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="detailsURL"
+						description="hmc.text.promotion.detailsurl" />
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="ProductPromotion" type="ProductOneToOnePerfectPartnerPromotion" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.promotion.properties">
+				<editorArea:section name="hmc.section.promotion.description">
+					<editorArea:custom>
+						<editorArea:default><![CDATA[<div>[hmc.text.productonetooneperfectpartnerpromotion.detaileddescription]</div>]]></editorArea:default>
+					</editorArea:custom>
+				</editorArea:section>				
+				<editorArea:section name="hmc.section.promotion.products" merge-mode="replace">
+					<editorArea:panel name="productonetooneperfectpartnerpromotion.qualifyingproducts" description="hmc.text.productonetooneperfectpartnerpromotion.qualifyingproducts">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="baseProduct" />
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="partnerProduct" />
+					</editorArea:panel>
+				</editorArea:section>
+				<editorArea:section name="hmc.section.promotion.prices">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="bundlePrices"
+						description="hmc.text.productonetooneperfectpartnerpromotion.bundleprices" />
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.promotion.messages">
+				<editorArea:section name="hmc.section.promotion.messages" description="hmc.text.promotion.messages.overview">
+					<editorArea:panel name="productonetooneperfectpartnerpromotion.messagefired" description="hmc.text.productonetooneperfectpartnerpromotion.messagefired">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageFired">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>4</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:custom>
+							<editorArea:default><![CDATA[<div>[hmc.text.productonetooneperfectpartnerpromotion.messagefiredargs]</div>]]></editorArea:default>
+						</editorArea:custom>																																					
+					</editorArea:panel>
+					<editorArea:panel name="productonetooneperfectpartnerpromotion.messagecouldhavefired" description="hmc.text.productonetooneperfectpartnerpromotion.messagecouldhavefired">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageCouldHaveFired">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>4</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:custom>
+							<editorArea:default><![CDATA[<div>[hmc.text.productonetooneperfectpartnerpromotion.messagecouldhavefiredargs]</div>]]></editorArea:default>
+						</editorArea:custom>																																											
+					</editorArea:panel>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="OrderPromotion" type="OrderThresholdPerfectPartnerPromotion" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.promotion.properties">
+				<editorArea:section name="hmc.section.promotion.description">
+					<editorArea:custom>
+						<editorArea:default><![CDATA[<div>[hmc.text.orderthresholdperfectpartnerpromotion.detaileddescription]</div>]]></editorArea:default>
+					</editorArea:custom>
+				</editorArea:section>								
+				<editorArea:section name="hmc.section.promotion.products">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="discountProduct"
+						description="hmc.text.orderthresholdperfectpartnerpromotion.discountproduct" />
+				</editorArea:section>
+				<editorArea:section name="hmc.section.promotion.prices">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="productPrices"
+						description="hmc.text.orderthresholdperfectpartnerpromotion.productprices" />
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="thresholdTotals"
+						description="hmc.text.orderthresholdperfectpartnerpromotion.thresholdtotals" />
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="includeDiscountedPriceInThreshold"
+						editor="com.hybris.cockpitng.editor.boolean.checkbox" description="hmc.text.orderthresholdperfectpartnerpromotion.includediscountedpriceinthreshold" />
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.promotion.messages">
+				<editorArea:section name="hmc.section.promotion.messages" description="hmc.text.promotion.messages.overview">
+					<editorArea:panel name="orderthresholdperfectpartnerpromotion.messagefired" description="hmc.text.orderthresholdperfectpartnerpromotion.messagefired">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageFired">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>4</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:custom>
+							<editorArea:default><![CDATA[<div>[hmc.text.orderthresholdperfectpartnerpromotion.messagefiredargs]</div>]]></editorArea:default>
+						</editorArea:custom>																																																	
+					</editorArea:panel>
+					<editorArea:panel name="orderthresholdperfectpartnerpromotion.messagecouldhavefired" description="hmc.text.orderthresholdperfectpartnerpromotion.messagecouldhavefired">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageCouldHaveFired">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>4</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:custom>
+							<editorArea:default><![CDATA[<div>[hmc.text.orderthresholdperfectpartnerpromotion.messagecouldhavefiredargs]</div>]]></editorArea:default>
+						</editorArea:custom>																																																	
+					</editorArea:panel>
+					<editorArea:panel name="orderthresholdperfectpartnerpromotion.messageproductnothreshold" description="hmc.text.orderthresholdperfectpartnerpromotion.messageproductnothreshold">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageProductNoThreshold">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>4</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:custom>
+							<editorArea:default><![CDATA[<div>[hmc.text.orderthresholdperfectpartnerpromotion.messageproductnothresholdargs]</div>]]></editorArea:default>
+						</editorArea:custom>																																																	
+					</editorArea:panel>
+					<editorArea:panel name="orderthresholdperfectpartnerpromotion.messagethresholdnoproduct" description="hmc.text.orderthresholdperfectpartnerpromotion.messagethresholdnoproduct">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageThresholdNoProduct">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>4</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:custom>
+							<editorArea:default><![CDATA[<div>[hmc.text.orderthresholdperfectpartnerpromotion.messagethresholdnoproductargs]</div>]]></editorArea:default>
+						</editorArea:custom>																																																	
+					</editorArea:panel>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="OrderPromotion" type="OrderThresholdFreeGiftPromotion" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.promotion.properties">
+				<editorArea:section name="hmc.section.promotion.description">
+					<editorArea:custom>
+						<editorArea:default><![CDATA[<div>[hmc.text.orderthresholdfreegiftpromotion.detaileddescription]</div>]]></editorArea:default>
+					</editorArea:custom>
+				</editorArea:section>				
+				<editorArea:section name="hmc.section.promotion.products">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="giftProduct"
+						description="hmc.text.orderthresholdfreegiftpromotion.giftproduct" />
+				</editorArea:section>
+				<editorArea:section name="hmc.section.promotion.prices">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="thresholdTotals"
+						description="hmc.text.orderthresholdfreegiftpromotion.thresholdtotals" />
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.promotion.messages">
+				<editorArea:section name="hmc.section.promotion.messages" description="hmc.text.promotion.messages.overview">
+					<editorArea:panel name="orderthresholdfreegiftpromotion.messagefired" description="hmc.text.orderthresholdfreegiftpromotion.messagefired">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageFired">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>4</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:custom>
+							<editorArea:default><![CDATA[<div>[hmc.text.orderthresholdfreegiftpromotion.messagefiredargs]</div>]]></editorArea:default>
+						</editorArea:custom>																																																							
+					</editorArea:panel>
+					<editorArea:panel name="orderthresholdfreegiftpromotion.messagecouldhavefired" description="hmc.text.orderthresholdfreegiftpromotion.messagecouldhavefired">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageCouldHaveFired">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>4</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:custom>
+							<editorArea:default><![CDATA[<div>[hmc.text.orderthresholdfreegiftpromotion.messagecouldhavefiredargs]</div>]]></editorArea:default>
+						</editorArea:custom>																																																					
+					</editorArea:panel>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="ProductPromotion" type="ProductSteppedMultiBuyPromotion" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.promotion.properties">
+				<editorArea:section name="hmc.section.promotion.description">
+					<editorArea:custom>
+						<editorArea:default><![CDATA[<div>[hmc.text.productsteppedmultibuypromotion.detaileddescription]</div>]]></editorArea:default>
+					</editorArea:custom>
+				</editorArea:section>								
+				<editorArea:section name="hmc.section.promotion.prices" description="hmc.text.productsteppedmultibuypromotion.qualifyingcountsandbundleprices">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="qualifyingCountsAndBundlePrices"
+						editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor">
+						<editorArea:editor-parameter>
+							<editorArea:name>listConfigContext</editorArea:name>
+							<editorArea:value>referenceListView</editorArea:value>
+						</editorArea:editor-parameter>
+					</editorArea:attribute>
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.promotion.messages">
+				<editorArea:section name="hmc.section.promotion.messages" description="hmc.text.promotion.messages.overview">
+					<editorArea:panel name="productsteppedmultibuypromotion.messagefired" description="hmc.text.productsteppedmultibuypromotion.messagefired">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageFired">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>4</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:custom>
+							<editorArea:default><![CDATA[<div>[hmc.text.productsteppedmultibuypromotion.messagefiredargs]</div>]]></editorArea:default>
+						</editorArea:custom>																																																											
+					</editorArea:panel>
+					<editorArea:panel name="productsteppedmultibuypromotion.messagecouldhavefired" description="hmc.text.productsteppedmultibuypromotion.messagecouldhavefired">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageCouldHaveFired">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>4</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:custom>
+							<editorArea:default><![CDATA[<div>[hmc.text.productsteppedmultibuypromotion.messagecouldhavefiredargs]</div>]]></editorArea:default>
+						</editorArea:custom>																																																											
+					</editorArea:panel>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="AbstractPromotionRestriction" type="PromotionUserRestriction" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.restriction.properties">
+				<editorArea:section name="hmc.section.restriction.users">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="users" />
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="positive">
+						<editorArea:editor-parameter>
+							<editorArea:name>trueLabel</editorArea:name>
+							<editorArea:value>promotionuserrestriction.positive.true</editorArea:value>
+						</editorArea:editor-parameter>
+						<editorArea:editor-parameter>
+							<editorArea:name>falseLabel</editorArea:name>
+							<editorArea:value>promotionuserrestriction.positive.false</editorArea:value>
+						</editorArea:editor-parameter>
+					</editorArea:attribute>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="ProductPromotion" type="ProductFixedPricePromotion" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.promotion.properties">
+				<editorArea:section name="hmc.section.promotion.description">
+					<editorArea:custom>
+						<editorArea:default><![CDATA[<div>[hmc.text.productfixedpricepromotion.detaileddescription]</div>]]></editorArea:default>
+					</editorArea:custom>
+				</editorArea:section>								
+				<editorArea:section name="hmc.section.promotion.prices">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="productFixedUnitPrice"
+						description="hmc.text.productfixedpricepromotion.productfixedunitprice" />
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.promotion.messages">
+				<editorArea:section name="hmc.section.promotion.messages" description="hmc.text.promotion.messages.overview">
+					<editorArea:panel name="productfixedpricepromotion.messagefired" description="hmc.text.productfixedpricepromotion.messagefired">
+						<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="messageFired">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>4</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:custom>
+							<editorArea:default><![CDATA[<div>[hmc.text.productfixedpricepromotion.messagefiredargs]</div>]]></editorArea:default>
+						</editorArea:custom>																																																																	
+					</editorArea:panel>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="ProductPromotion" type="ProductPercentageDiscountPromotion" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list />
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="ProductPromotion" type="ProductPerfectPartnerBundlePromotion" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list />
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="PromotionQuantityAndPricesRow" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list />
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="AbstractPromotionRestriction" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="promotion"
+					selected="true" />
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments"
+					selected="false" />
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime"
+					selected="false" />
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype"
+					selected="false" />
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime"
+					selected="false" />
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner"
+					selected="false" />
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long"
+					name="pk" selected="false" />
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="AbstractPromotionRestriction" type="PromotionProductRestriction" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list />
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="ProductPromotion" type="ProductBundlePromotion" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list />
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="ProductPromotion" type="ProductPerfectPartnerPromotion" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list />
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="module" type="Product" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list />
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="ProductPromotion" type="ProductBOGOFPromotion" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list />
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="OrderPromotion" type="OrderThresholdFreeVoucherPromotion" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list />
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="ProductPromotion" type="ProductMultiBuyPromotion" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list />
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="OrderPromotion" type="OrderThresholdChangeDeliveryModePromotion" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list />
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="AbstractPromotion" type="ProductPromotion" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list />
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="module" parent="auto" type="Item" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list />
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="module" type="AbstractOrder" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list />
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="OrderPromotion" type="OrderThresholdDiscountPromotion" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list />
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="PromotionGroup" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="Identifier"
+					selected="true" />
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments"
+					selected="false" />
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime"
+					selected="false" />
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype"
+					selected="false" />
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime"
+					selected="false" />
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner"
+					selected="false" />
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long"
+					name="pk" selected="false" />
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="AbstractPromotion" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="PromotionGroup"
+					selected="false" />
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="code"
+					selected="true" />
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="description"
+					selected="false" />
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="detailsURL"
+					selected="false" />
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="enabled"
+					selected="true" />
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="endDate"
+					selected="false" />
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="immutableKey"
+					selected="false" />
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="immutableKeyHash"
+					selected="true" />
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="priority"
+					selected="false" />
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="startDate"
+					selected="false" />
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="title"
+					selected="true" />
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments"
+					selected="false" />
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime"
+					selected="false" />
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype"
+					selected="false" />
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime"
+					selected="false" />
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner"
+					selected="false" />
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long"
+					name="pk" selected="false" />
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="ProductPromotion" type="ProductOneToOnePerfectPartnerPromotion" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list />
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="OrderPromotion" type="OrderThresholdPerfectPartnerPromotion" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list />
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="OrderPromotion" type="OrderThresholdFreeGiftPromotion" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list />
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="ProductPromotion" type="ProductSteppedMultiBuyPromotion" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list />
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="AbstractPromotionRestriction" type="PromotionUserRestriction" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list />
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="ProductPromotion" type="ProductFixedPricePromotion" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list />
+		</advanced-search:advanced-search>
+	</context>
+	<context type="AbstractPromotionRestriction" component="base" parent="GenericItem" merge-by="type">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>restrictionType+ ' - ' +renderedDescription</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context type="PromotionGroup" component="base" parent="GenericItem" merge-by="type">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>identifier</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context type="AbstractPromotion" component="base" parent="GenericItem" merge-by="type">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>title!=null?code+' - '+title:code</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context type="PromotionPriceRow" component="base" parent="GenericItem" merge-by="type">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>currency.symbol+ ' - ' +price</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context type="PromotionQuantityAndPricesRow" component="base" parent="GenericItem" merge-by="type">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>'Quantity: '+quantity + ' (PK: '+pk+')'</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+
+	<!-- REFERENCE LIST VIEW -->
+	<context type="AbstractPromotion" component="referenceListView">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="promotionType" />
+			<list-view:column qualifier="code" />
+			<list-view:column qualifier="title" />
+		</list-view:list-view>
+	</context>
+	<context type="PromotionQuantityAndPricesRow" component="referenceListView">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="quantity" />
+			<list-view:column qualifier="prices" />
+		</list-view:list-view>
+	</context>
+	<context type="AbstractPromotionRestriction" component="referenceListView">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="restrictionType" />
+			<list-view:column qualifier="renderedDescription" />
+		</list-view:list-view>
+	</context>
+
+	<!-- CREATE WIZARD -->
+	<context merge-by="type" type="PromotionGroup" component="create-wizard">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="PromotionGroupWizard" title="create.title(ctx.TYPE_CODE)">
+			<wz:prepare id="PromotionGroupPrepare">
+				<wz:initialize property="newPromotionGroup" type="ctx.TYPE_CODE" />
+			</wz:prepare>
+			<wz:step id="step1">
+				<wz:content id="step1.content">
+					<wz:property-list root="newPromotionGroup">
+						<wz:property qualifier="Identifier" />
+						<wz:property qualifier="Promotions" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel />
+					<wz:done>
+						<wz:save property="newPromotionGroup" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+	<context merge-by="type" type="AbstractPromotionRestriction" component="create-wizard">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="PromotionRestrictionWizard" title="create.title(ctx.TYPE_CODE)">
+			<wz:prepare id="PromotionRestrictionPrepare">
+				<wz:initialize property="newPromotionRestriction" type="ctx.TYPE_CODE" />
+			</wz:prepare>
+			<wz:step id="step1">
+				<wz:content id="step1.content">
+					<wz:property-list root="newPromotionRestriction">
+						<wz:property qualifier="descriptionPattern" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel />
+					<wz:done>
+						<wz:save property="newPromotionRestriction" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+	<context merge-by="type" type="PromotionProductRestriction" component="create-wizard">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="PromotionProductRestrictionWizard" title="create.title(ctx.TYPE_CODE)">
+			<wz:step id="step1">
+				<wz:content id="step1.content">
+					<wz:property-list root="newPromotionRestriction">
+						<wz:property qualifier="products" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel />
+					<wz:done>
+						<wz:save property="newPromotionRestriction" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+	<context merge-by="type" type="PromotionUserRestriction" component="create-wizard">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="PromotionUserRestrictionWizard" title="create.title(ctx.TYPE_CODE)">
+			<wz:step id="step1">
+				<wz:content id="step1.content">
+					<wz:property-list root="newPromotionRestriction">
+						<wz:property qualifier="users" />
+						<wz:property qualifier="positive">
+							<wz:editor-parameter>
+								<wz:name>trueLabel</wz:name>
+								<wz:value>promotionuserrestriction.positive.true</wz:value>
+							</wz:editor-parameter>
+							<wz:editor-parameter>
+								<wz:name>falseLabel</wz:name>
+								<wz:value>promotionuserrestriction.positive.false</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel />
+					<wz:done>
+						<wz:save property="newPromotionRestriction" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+	<context merge-by="type" type="PromotionQuantityAndPricesRow" component="create-wizard">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="PromotionQuantityAndPricesRowWizard" title="create.title(ctx.TYPE_CODE)">
+			<wz:prepare id="PromotionQuantityAndPricesRowPrepare">
+				<wz:initialize property="newPromotionQuantityAndPricesRow" type="ctx.TYPE_CODE" />
+			</wz:prepare>
+			<wz:step id="step1">
+				<wz:content id="step1.content">
+					<wz:property-list root="newPromotionQuantityAndPricesRow">
+						<wz:property qualifier="quantity" />
+						<wz:property qualifier="prices" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel />
+					<wz:done>
+						<wz:save property="newPromotionQuantityAndPricesRow" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+
+	<!-- PROMOTIONS CREATE WIZARD -->
+	<context merge-by="type" type="AbstractPromotion" component="create-wizard">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="AbstractPromotionWizard" title="create.title(ctx.TYPE_CODE)">
+			<wz:prepare id="newPromotionPrepare">
+				<wz:initialize property="newPromotion" type="ctx.TYPE_CODE" />
+			</wz:prepare>
+			<wz:step id="step.essential" label="create.promotion.essential.label">
+				<wz:content id="step.essential.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="code" />
+						<wz:property qualifier="title" />
+						<wz:property qualifier="PromotionGroup" />
+						<wz:property qualifier="description" />
+						<wz:property qualifier="priority" description="hmc.text.promotion.priority" />
+						<wz:property qualifier="enabled" editor="com.hybris.cockpitng.editor.boolean.checkbox" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.essential.navigation">
+					<wz:cancel />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+			<wz:step id="step.restriction" label="create.promotion.restriction.label">
+				<wz:content id="step.restriction.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="startDate" description="hmc.text.promotion.daterange" />
+						<wz:property qualifier="endDate" description="hmc.text.promotion.daterange" />
+						<wz:property qualifier="restrictions" description="hmc.text.promotion.restrictions" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.restriction.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+			<wz:step id="step.media" label="create.promotion.media.label">
+				<wz:content id="step.media.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="detailsURL" description="hmc.text.promotion.detailsurl" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.media.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+
+	<context merge-by="type" parent="AbstractPromotion" type="ProductPromotion" component="create-wizard">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="ProductPromotionWizard" title="create.title(ctx.TYPE_CODE)">
+			<wz:step id="step.qualifyingproduct" position="1" label="create.promotion.qualifyingproduct.label">
+				<wz:info label="hmc.text.productpromotion.qualifyingproductscategories" position="top" />
+				<wz:content id="step.qualifyingproduct.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="products" description="hmc.text.productpromotion.qualifyingproductscategories" />
+						<wz:property qualifier="categories" description="hmc.text.productpromotion.qualifyingproductscategories" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.qualifyingproduct.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+			<wz:step id="step.media" label="create.promotion.media.label">
+				<wz:content id="step.media.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="productBanner" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.media.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+
+	<context merge-by="type" parent="ProductPromotion" type="ProductPercentageDiscountPromotion" component="create-wizard">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="ProductPercentageDiscountPromotionWizard"
+			title="create.title(ctx.TYPE_CODE)">
+			<wz:step id="step.prices" position="2" label="create.promotion.prices.label">
+				<wz:content id="step.prices.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="percentageDiscount" description="hmc.text.productpercentagediscountpromotion.percentagediscount" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.prices.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+			<wz:step id="step.messages" position="4" label="create.promotion.messages.label">
+				<wz:content id="step.messages.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="messageFired" description="hmc.text.productpercentagediscountpromotion.messagefired">
+							<wz:editor-parameter>
+								<wz:name>rows</wz:name>
+								<wz:value>3</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.messages.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+
+	<context merge-by="type" parent="ProductPromotion" type="ProductPerfectPartnerBundlePromotion" component="create-wizard">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="ProductPerfectPartnerBundlePromotionWizard"
+			title="create.title(ctx.TYPE_CODE)">
+			<wz:step id="step.qualifyingproduct" position="1" merge-mode="replace" label="create.promotion.qualifyingproduct.label">
+				<wz:content id="step.qualifyingproduct.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="baseProduct" description="hmc.text.productperfectpartnerbundlepromotion.baseproduct" />
+						<wz:property qualifier="partnerProducts" description="hmc.text.productperfectpartnerbundlepromotion.partnerproducts" />
+						<wz:property qualifier="qualifyingCount" description="hmc.text.productperfectpartnerbundlepromotion.qualifyingcount" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.qualifyingproduct.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+			<wz:step id="step.messages" position="3" label="create.promotion.messages.label">
+				<wz:content id="step.messages.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="messageFired" description="hmc.text.productperfectpartnerbundlepromotion.messagefired">
+							<wz:editor-parameter>
+								<wz:name>rows</wz:name>
+								<wz:value>3</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+						<wz:property qualifier="messageCouldHaveFired" description="hmc.text.productperfectpartnerbundlepromotion.messagecouldhavefired">
+							<wz:editor-parameter>
+								<wz:name>rows</wz:name>
+								<wz:value>3</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.messages.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+
+	<context merge-by="type" parent="ProductPromotion" type="ProductBundlePromotion" component="create-wizard">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="ProductBundlePromotionWizard" title="create.title(ctx.TYPE_CODE)">
+			<wz:step id="step.prices" position="2" label="create.promotion.prices.label">
+				<wz:content id="step.prices.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="bundlePrices" description="hmc.text.productbundlepromotion.bundleprices" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.prices.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+			<wz:step id="step.messages" position="4" label="create.promotion.messages.label">
+				<wz:content id="step.messages.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="messageFired" description="hmc.text.productbundlepromotion.messagefired">
+							<wz:editor-parameter>
+								<wz:name>rows</wz:name>
+								<wz:value>3</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+						<wz:property qualifier="messageCouldHaveFired" description="hmc.text.productbundlepromotion.messagecouldhavefired">
+							<wz:editor-parameter>
+								<wz:name>rows</wz:name>
+								<wz:value>3</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.messages.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+
+	<context merge-by="type" parent="ProductPromotion" type="ProductPerfectPartnerPromotion" component="create-wizard">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="ProductPerfectPartnerPromotionWizard"
+			title="create.title(ctx.TYPE_CODE)">
+			<wz:step id="step.qualifyingproduct" position="1" label="create.promotion.qualifyingproduct.label">
+				<wz:content id="step.qualifyingproduct.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="partnerProducts" description="hmc.text.productperfectpartnerpromotion.partnerproducts" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.qualifyingproduct.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+			<wz:step id="step.prices" position="2" label="create.promotion.prices.label">
+				<wz:content id="step.prices.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="partnerPrices" description="hmc.text.productperfectpartnerpromotion.partnerprices" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.prices.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+			<wz:step id="step.messages" position="4" label="create.promotion.messages.label">
+				<wz:content id="step.messages.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="messageFired" description="hmc.text.productperfectpartnerpromotion.messagefired">
+							<wz:editor-parameter>
+								<wz:name>rows</wz:name>
+								<wz:value>3</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+						<wz:property qualifier="messageCouldHaveFired" description="hmc.text.productperfectpartnerpromotion.messagecouldhavefired">
+							<wz:editor-parameter>
+								<wz:name>rows</wz:name>
+								<wz:value>3</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.messages.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+
+	<context merge-by="type" parent="ProductPromotion" type="ProductBOGOFPromotion" component="create-wizard">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="ProductBOGOFPromotionWizard" title="create.title(ctx.TYPE_CODE)">
+			<wz:step id="step.qualifyingproduct" position="1" label="create.promotion.qualifyingproduct.label">
+				<wz:content id="step.qualifyingproduct.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="qualifyingCount" description="hmc.text.productbogofpromotion.qualifyingcount" />
+						<wz:property qualifier="freeCount" description="hmc.text.productbogofpromotion.freecount" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.qualifyingproduct.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+			<wz:step id="step.messages" position="3" label="create.promotion.messages.label">
+				<wz:content id="step.messages.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="messageFired" description="hmc.text.productbogofpromotion.messagefired">
+							<wz:editor-parameter>
+								<wz:name>rows</wz:name>
+								<wz:value>3</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+						<wz:property qualifier="messageCouldHaveFired" description="hmc.text.productbogofpromotion.messagecouldhavefired">
+							<wz:editor-parameter>
+								<wz:name>rows</wz:name>
+								<wz:value>3</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.messages.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+
+	<context merge-by="type" parent="ProductPromotion" type="ProductMultiBuyPromotion" component="create-wizard">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="ProductMultiBuyPromotionWizard" title="create.title(ctx.TYPE_CODE)">
+			<wz:step id="step.qualifyingproduct" position="1" label="create.promotion.qualifyingproduct.label">
+				<wz:content id="step.qualifyingproduct.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="qualifyingCount" description="hmc.text.productmultibuypromotion.qualifyingcount" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.qualifyingproduct.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+			<wz:step id="step.prices" position="2" label="create.promotion.prices.label">
+				<wz:content id="step.prices.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="bundlePrices" description="hmc.text.productmultibuypromotion.bundleprices" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.prices.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+			<wz:step id="step.messages" position="4" label="create.promotion.messages.label">
+				<wz:content id="step.messages.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="messageFired" description="hmc.text.productmultibuypromotion.messagefired">
+							<wz:editor-parameter>
+								<wz:name>rows</wz:name>
+								<wz:value>3</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+						<wz:property qualifier="messageCouldHaveFired" description="hmc.text.productmultibuypromotion.messagecouldhavefired">
+							<wz:editor-parameter>
+								<wz:name>rows</wz:name>
+								<wz:value>3</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.messages.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+
+	<context merge-by="type" parent="ProductPromotion" type="ProductOneToOnePerfectPartnerPromotion" component="create-wizard">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="ProductOneToOnePerfectPartnerPromotionWizard"
+			title="create.title(ctx.TYPE_CODE)">
+			<wz:step id="step.qualifyingproduct" position="1" merge-mode="replace" label="create.promotion.qualifyingproduct.label">
+				<wz:content id="step.qualifyingproduct.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="baseProduct" description="hmc.text.productonetooneperfectpartnerpromotion.baseproduct" />
+						<wz:property qualifier="partnerProduct" description="hmc.text.productonetooneperfectpartnerpromotion.partnerproduct" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.qualifyingproduct.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+			<wz:step id="step.prices" position="2" label="create.promotion.prices.label">
+				<wz:content id="step.prices.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="bundlePrices" description="hmc.text.productonetooneperfectpartnerpromotion.bundleprices" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.prices.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+			<wz:step id="step.messages" position="4" label="create.promotion.messages.label">
+				<wz:content id="step.messages.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="messageFired" description="hmc.text.productonetooneperfectpartnerpromotion.messagefired">
+							<wz:editor-parameter>
+								<wz:name>rows</wz:name>
+								<wz:value>3</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+						<wz:property qualifier="messageCouldHaveFired" description="hmc.text.productonetooneperfectpartnerpromotion.messagecouldhavefired">
+							<wz:editor-parameter>
+								<wz:name>rows</wz:name>
+								<wz:value>3</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.messages.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+
+	<context merge-by="type" parent="ProductPromotion" type="ProductSteppedMultiBuyPromotion" component="create-wizard">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="ProductSteppedMultiBuyPromotionWizard"
+			title="create.title(ctx.TYPE_CODE)">
+			<wz:step id="step.prices" position="2" label="create.promotion.prices.label">
+				<wz:content id="step.prices.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="qualifyingCountsAndBundlePrices" description="hmc.text.productsteppedmultibuypromotion.qualifyingcountsandbundleprices"
+							editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor">
+							<wz:editor-parameter>
+								<wz:name>listConfigContext</wz:name>
+								<wz:value>referenceListView</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.prices.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+			<wz:step id="step.messages" position="4" label="create.promotion.messages.label">
+				<wz:content id="step.messages.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="messageFired" description="hmc.text.productsteppedmultibuypromotion.messagefired">
+							<wz:editor-parameter>
+								<wz:name>rows</wz:name>
+								<wz:value>3</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+						<wz:property qualifier="messageCouldHaveFired" description="hmc.text.productsteppedmultibuypromotion.messagecouldhavefired">
+							<wz:editor-parameter>
+								<wz:name>rows</wz:name>
+								<wz:value>3</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.messages.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+
+	<context merge-by="type" parent="ProductPromotion" type="ProductFixedPricePromotion" component="create-wizard">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="ProductFixedPricePromotionWizard" title="create.title(ctx.TYPE_CODE)">
+			<wz:step id="step.prices" position="2" label="create.promotion.prices.label">
+				<wz:content id="step.prices.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="productFixedUnitPrice" description="hmc.text.productfixedpricepromotion.productfixedunitprice" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.prices.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+			<wz:step id="step.messages" position="4" label="create.promotion.messages.label">
+				<wz:content id="step.messages.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="messageFired" description="hmc.text.productfixedpricepromotion.messagefired">
+							<wz:editor-parameter>
+								<wz:name>rows</wz:name>
+								<wz:value>3</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.messages.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+
+	<context merge-by="type" parent="OrderPromotion" type="OrderThresholdDiscountPromotion" component="create-wizard">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="OrderThresholdDiscountPromotionWizard"
+			title="create.title(ctx.TYPE_CODE)">
+			<wz:step id="step.prices" position="1" label="create.promotion.prices.label">
+				<wz:content id="step.prices.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="thresholdTotals" description="hmc.text.orderthresholddiscountpromotion.thresholdtotals" />
+						<wz:property qualifier="discountPrices" description="hmc.text.orderthresholddiscountpromotion.discountPrices" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.prices.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+			<wz:step id="step.messages" position="3" label="create.promotion.messages.label">
+				<wz:content id="step.messages.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="messageFired" description="hmc.text.orderthresholddiscountpromotion.messagefired">
+							<wz:editor-parameter>
+								<wz:name>rows</wz:name>
+								<wz:value>3</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+						<wz:property qualifier="messageCouldHaveFired" description="hmc.text.orderthresholddiscountpromotion.messagecouldhavefired">
+							<wz:editor-parameter>
+								<wz:name>rows</wz:name>
+								<wz:value>3</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.messages.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+
+	<context merge-by="type" parent="OrderPromotion" type="OrderThresholdChangeDeliveryModePromotion" component="create-wizard">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="OrderThresholdChangeDeliveryModePromotionWizard"
+			title="create.title(ctx.TYPE_CODE)">
+			<wz:step id="step.deliverymode" position="1" label="create.promotion.deliverymode.label">
+				<wz:content id="step.deliverymode.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="deliveryMode" description="hmc.text.orderthresholdchangedeliverypromotion.deliverymode" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.deliverymode.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+			<wz:step id="step.prices" position="2" label="create.promotion.prices.label">
+				<wz:content id="step.prices.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="thresholdTotals" description="hmc.text.orderthresholdchangedeliverypromotion.thresholdtotals" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.prices.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+			<wz:step id="step.messages" position="4" label="create.promotion.messages.label">
+				<wz:content id="step.messages.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="messageFired" description="hmc.text.orderthresholdchangedeliverypromotion.messagefired">
+							<wz:editor-parameter>
+								<wz:name>rows</wz:name>
+								<wz:value>3</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+						<wz:property qualifier="messageCouldHaveFired" description="hmc.text.orderthresholdchangedeliverypromotion.messagecouldhavefired">
+							<wz:editor-parameter>
+								<wz:name>rows</wz:name>
+								<wz:value>3</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.messages.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+
+	<context merge-by="type" parent="OrderPromotion" type="OrderThresholdPerfectPartnerPromotion" component="create-wizard">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="OrderThresholdPerfectPartnerPromotionWizard"
+			title="create.title(ctx.TYPE_CODE)">
+			<wz:step id="step.qualifyingproduct" position="1" label="create.promotion.qualifyingproduct.label">
+				<wz:content id="step.qualifyingproduct.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="discountProduct" description="hmc.text.orderthresholdperfectpartnerpromotion.discountproduct" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.qualifyingproduct.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+			<wz:step id="step.prices" position="2" label="create.promotion.prices.label">
+				<wz:content id="step.prices.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="productPrices" description="hmc.text.orderthresholdperfectpartnerpromotion.productprices" />
+						<wz:property qualifier="thresholdTotals" description="hmc.text.orderthresholdperfectpartnerpromotion.thresholdtotals" />
+						<wz:property qualifier="includeDiscountedPriceInThreshold" editor="com.hybris.cockpitng.editor.boolean.checkbox"
+							description="hmc.text.orderthresholdperfectpartnerpromotion.includediscountedpriceinthreshold" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.prices.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+			<wz:step id="step.messages" position="4" label="create.promotion.messages.label">
+				<wz:content id="step.messages.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="messageFired" description="hmc.text.orderthresholdperfectpartnerpromotion.messagefired">
+							<wz:editor-parameter>
+								<wz:name>rows</wz:name>
+								<wz:value>3</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+						<wz:property qualifier="messageCouldHaveFired" description="hmc.text.orderthresholdperfectpartnerpromotion.messagecouldhavefired">
+							<wz:editor-parameter>
+								<wz:name>rows</wz:name>
+								<wz:value>3</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+						<wz:property qualifier="messageProductNoThreshold" description="hmc.text.orderthresholdperfectpartnerpromotion.messageproductnothreshold">
+							<wz:editor-parameter>
+								<wz:name>rows</wz:name>
+								<wz:value>3</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+						<wz:property qualifier="messageThresholdNoProduct" description="hmc.text.orderthresholdperfectpartnerpromotion.messagethresholdnoproduct">
+							<wz:editor-parameter>
+								<wz:name>rows</wz:name>
+								<wz:value>3</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.messages.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+
+	<context merge-by="type" parent="OrderPromotion" type="OrderThresholdFreeGiftPromotion" component="create-wizard">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="OrderThresholdFreeGiftPromotionWizard"
+			title="create.title(ctx.TYPE_CODE)">
+			<wz:step id="step.qualifyingproduct" position="1" merge-mode="replace" label="create.promotion.qualifyingproduct.label">
+				<wz:content id="step.qualifyingproduct.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="giftProduct" description="hmc.text.orderthresholdfreegiftpromotion.giftproduct" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.qualifyingproduct.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+			<wz:step id="step.prices" position="2" label="create.promotion.prices.label">
+				<wz:content id="step.prices.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="thresholdTotals" description="hmc.text.orderthresholdfreegiftpromotion.thresholdtotals" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.prices.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+			<wz:step id="step.messages" position="4" label="create.promotion.messages.label">
+				<wz:content id="step.messages.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="messageFired" description="hmc.text.orderthresholdfreegiftpromotion.messagefired">
+							<wz:editor-parameter>
+								<wz:name>rows</wz:name>
+								<wz:value>3</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+						<wz:property qualifier="messageCouldHaveFired" description="hmc.text.orderthresholdfreegiftpromotion.messagecouldhavefired">
+							<wz:editor-parameter>
+								<wz:name>rows</wz:name>
+								<wz:value>3</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.messages.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+	<context merge-by="type" parent="OrderPromotion" type="OrderThresholdFreeVoucherPromotion" component="create-wizard">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="OrderThresholdFreeVoucherPromotionWizard"
+			title="create.title(ctx.TYPE_CODE)">
+			<wz:step id="step.prices" position="1" label="create.promotion.prices.label">
+				<wz:content id="step.prices.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="thresholdTotals" description="hmc.text.orderthresholdfreevoucherpromotion.thresholdtotals" />
+						<wz:property qualifier="freeVoucher" description="hmc.text.orderthresholdfreevoucherpromotion.freevoucher" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.prices.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+			<wz:step id="step.messages" position="3" label="create.promotion.messages.label">
+				<wz:content id="step.messages.content">
+					<wz:property-list root="newPromotion">
+						<wz:property qualifier="messageFired" description="hmc.text.orderthresholdfreevoucherpromotion.messagefired">
+							<wz:editor-parameter>
+								<wz:name>rows</wz:name>
+								<wz:value>3</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+						<wz:property qualifier="messageCouldHaveFired" description="hmc.text.orderthresholdfreevoucherpromotion.messagecouldhavefired">
+							<wz:editor-parameter>
+								<wz:name>rows</wz:name>
+								<wz:value>3</wz:value>
+							</wz:editor-parameter>
+						</wz:property>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step.messages.navigation">
+					<wz:cancel />
+					<wz:back />
+					<wz:next visible="!#empty(newPromotion.code)" />
+					<wz:done visible="!#empty(newPromotion.code)">
+						<wz:save property="newPromotion" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+
+	<context merge-by="module" type="AbstractOrder" component="editorareaactions">
+		<y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:group qualifier="common">
+				<y:label>actiongroup.common</y:label>
+				<y:action action-id="de.hybris.platform.promotions.action.calculatewithpromotionsaction" property="currentObject"
+					output-property="currentObject" />
+			</y:group>
+		</y:actions>
+	</context>
+
+</config>

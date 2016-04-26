@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wizard-config showPrefilledValues="false" selectMode="true" createMode="true" createWithinPopup="false" createWithinEditor="false">
+	<displayed-properties>
+		<group qualifier="generalIndexSchema">
+			<label key="config.general.mandatorydata" />
+			<property qualifier="Hyend2IndexSchema.name" />		
+			<property qualifier="Hyend2IndexSchema.active"/>	
+			<property qualifier="Hyend2IndexSchema.casConfiguration"/>
+		</group>
+		<group qualifier="IndexSchemaLangCurr" initially-opened="true">
+			<label key="hyend2.languagesandcurrencies" />
+			<property qualifier="Hyend2IndexSchema.languages" />		
+			<property qualifier="Hyend2IndexSchema.currencies"/>	
+		</group>
+		<group qualifier="IndexSchemaCatalogVersion">
+			<label key="hyend2.catalogversions" />
+			<property qualifier="Hyend2IndexSchema.catalogVersions" />		
+		</group>
+	</displayed-properties>
+</wizard-config>

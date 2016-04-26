@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<!-- WARNING: This is the Spring WEB configuration file. If you want to replace 
+	items or managers you have to do this from the extensions core configuration 
+	file (ycommercewebservices/resources/ycommercewebservices-spring.xml) -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:annotation-config/>
+
+	<!-- Uncomment to enable version v1 -->
+	<!--<import resource="config/v1-web-spring.xml"/>-->
+
+	<import resource="config/v2-web-spring.xml"/>
+
+	<!-- don't change the order, it needs to be at the end -->
+	<import resource="config/common-web-spring.xml"/>
+
+</beans>

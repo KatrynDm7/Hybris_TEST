@@ -1,0 +1,67 @@
+button.z-button.cancelorder {
+    background-image: url("images/icon_action_cancel_active.png");
+	background-color: #FFFFFF;
+	width: 30px;
+	border: 1px solid #C0C0C0;
+	background-position: center;
+}
+
+button.z-button.cancelorder:hover {
+   background-image: url("images/icon_action_cancel_hover.png");
+   background-color: #085ABC;
+}
+
+button.z-button.cancelorder.disabled {
+    background-image: url("images/icon_action_cancel_disabled.png");
+}
+
+button.z-button.cancelorder.disabled:hover {
+    background-color: #F6F6F6;
+    border: 1px solid #C0C0C0;
+}
+
+button.z-button.fraudbutton{
+	background-color: #FFFFFF;
+	width: 30px;
+	border: 1px solid #C0C0C0;
+	background-position: center;
+	margin-right: 5px;
+}
+
+button.z-button.acceptfrauditem {
+     background-image: url("images/icon_action_accept_active.png");
+     border: 1px solid #485470;
+ }
+
+button.z-button.acceptfrauditem:hover {
+    background-image: url("images/icon_action_accept_hover.png");
+    background-color: #085ABC;
+}
+
+button.z-button.rejectfrauditem {
+    background-image: url("images/icon_action_reject_active.png");
+    border: 1px solid #485470;
+}
+
+button.z-button.rejectfrauditem:hover {
+    background-image: url("images/icon_action_reject_hover.png");
+    background-color: #085ABC;
+}
+
+button.z-button.acceptfrauditem.disabled {
+    background-image: url("images/icon_action_accept_disabled.png");
+}
+
+button.z-button.acceptfrauditem.disabled:hover {
+    background-color: #F6F6F6;
+    border: 1px solid #485470;
+}
+
+button.z-button.rejectfrauditem.disabled {
+    background-image: url("images/icon_action_reject_disabled.png");
+}
+
+button.z-button.rejectfrauditem.disabled:hover {
+    background-color: #F6F6F6;
+    border: 1px solid #485470;
+}

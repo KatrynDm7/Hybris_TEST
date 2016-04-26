@@ -1,0 +1,18 @@
+*** Settings ***
+Test Setup        import user carts sample data 
+Test Teardown     reset system
+Resource		  commerce/SubscriptionCommerce_Keywords.txt
+Resource		  subscriptionservices/SubscriptionCarts_Keywords.txt
+
+*** Variables ***
+
+### user and site:
+${uid}=    customer
+${site}=    testSite
+${baseStoreId}=    testStore
+
+*** Test Cases ***
+Test_Cart_Query
+    ${cartList}=    get carts for user with id "${uid}" and site "${site}"
+    ${length}=    Get Length    ${cartList}
+    Should be Equal As Numbers    ${length}   1

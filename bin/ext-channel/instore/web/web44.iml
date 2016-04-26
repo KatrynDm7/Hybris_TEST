@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="web" name="Web">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/webroot/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/webroot" relative="/" />
+        </webroots>
+        <sourceRoots />
+      </configuration>
+    </facet>
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/webroot/WEB-INF/instore-web-spring.xml</file>
+          <file>file://$MODULE_DIR$/webroot/WEB-INF/instore-spring-filter.xml</file>
+          <file>file://$MODULE_DIR$/webroot/WEB-INF/instore-spring-security.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/testsrc" isTestSource="true" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="bin1" level="project" />
+    <orderEntry type="library" name="lib74" level="project" />
+    <orderEntry type="library" name="lib67" level="project" />
+    <orderEntry type="library" name="lib33" level="project" />
+    <orderEntry type="library" name="catalogserver" level="project" />
+    <orderEntry type="library" name="lib12" level="project" />
+    <orderEntry type="library" name="lib4" level="project" />
+    <orderEntry type="library" name="lib37" level="project" />
+    <orderEntry type="library" name="lib48" level="project" />
+    <orderEntry type="library" name="basecommerceserver" level="project" />
+    <orderEntry type="library" name="lib72" level="project" />
+    <orderEntry type="library" name="classificationsystemsserver" level="project" />
+    <orderEntry type="library" name="lib26" level="project" />
+    <orderEntry type="library" name="coreserver" level="project" />
+    <orderEntry type="library" name="lib61" level="project" />
+    <orderEntry type="library" name="lib44" level="project" />
+    <orderEntry type="library" name="jetty-runner" level="project" />
+    <orderEntry type="library" name="instoreserver" level="project" />
+    <orderEntry type="module" module-name="classificationsystems" />
+    <orderEntry type="module" module-name="commercefacades" />
+    <orderEntry type="module" module-name="basecommerce" />
+    <orderEntry type="module" module-name="platformservices" />
+    <orderEntry type="module" module-name="bootstrap" />
+    <orderEntry type="module" module-name="web58" />
+  </component>
+</module>

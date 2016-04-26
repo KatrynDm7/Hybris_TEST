@@ -1,0 +1,135 @@
+# ImPex for Importing Product Media into Insurance Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=financialProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$data_sheet=data_sheet(code, $catalogVersion)
+$thumbnails=thumbnails(code, $catalogVersion)
+
+$siteResource=jar:de.hybris.platform.financialstore.constants.FinancialStoreConstants&/financialstore/import/sampledata/productCatalogs/$productCatalog
+$media=@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]
+
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];$media;mime[default='application/pdf'];$catalogVersion;folder(qualifier)
+;;event_policy_doc_pdf;$siteResource/pdf/Policy_Document.pdf;;;policy-document
+
+UPDATE Product;code[unique=true];$data_sheet;$catalogVersion
+;WED_2STAR;event_policy_doc_pdf;
+;WED_3STAR;event_policy_doc_pdf;
+;WED_4STAR;event_policy_doc_pdf;
+;WED_5STAR;event_policy_doc_pdf;
+
+# Create medias
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];$media;mime[default='image/png'];$catalogVersion;folder(qualifier)
+;40Wx40H_policy;/40Wx40H/travel_policy      ;$siteResource/images/40Wx40H/40_40px_travel_policy.png;;;images
+;40Wx40H_quote;/40Wx40H/travel_quote        ;$siteResource/images/40Wx40H/40_40px_travel_quote.png;;;images
+
+;40Wx40H_policy;/40Wx40H/event_policy     ;$siteResource/images/40Wx40H/40_40px_event_policy.png;;;images
+;40Wx40H_quote;/40Wx40H/event_quote       ;$siteResource/images/40Wx40H/40_40px_event_quote.png;;;images
+
+;40Wx40H_policy;/40Wx40H/homeowner_policy       ;$siteResource/images/40Wx40H/40_40px_homeowner_policy.png;;;images
+;40Wx40H_quote;/40Wx40H/homeowner_quote       ;$siteResource/images/40Wx40H/40_40px_homeowner_quote.png;;;images
+
+;40Wx40H_policy;/40Wx40H/renters_policy       ;$siteResource/images/40Wx40H/40_40px_renters_policy.png;;;images
+;40Wx40H_quote;/40Wx40H/renters_quote       ;$siteResource/images/40Wx40H/40_40px_renters_quote.png;;;images
+
+;40Wx40H_policy;/40Wx40H/auto_policy    ;$siteResource/images/40Wx40H/40_40px_auto_policy.png;;;images
+;40Wx40H_quote;/40Wx40H/auto_quote    ;$siteResource/images/40Wx40H/40_40px_auto_quote.png;;;images
+
+;40Wx40H_policy;/40Wx40H/life_policy    ;$siteResource/images/40Wx40H/40_40px_life_policy.png;;;images
+;40Wx40H_quote ;/40Wx40H/life_quote     ;$siteResource/images/40Wx40H/40_40px_life_quote.png ;;;images
+
+#Medias for Option Products 
+;96Wx96H;/96Wx96H/options_event_excess_waiver		;$siteResource/images/96Wx96H/96_96px_option_event_excess_waiver.png;;;images
+;96Wx96H;/96Wx96H/options_event_supplier_failure	;$siteResource/images/96Wx96H/96_96px_option_event_supplier_failure.png;;;images
+;96Wx96H;/96Wx96H/options_event_venue				;$siteResource/images/96Wx96H/96_96px_option_event_venue.png;;;images
+
+;96Wx96H;/96Wx96H/options_property_accomodation		;$siteResource/images/96Wx96H/96_96px_option_property_accomodation.png;;;images
+;96Wx96H;/96Wx96H/options_property_bike				;$siteResource/images/96Wx96H/96_96px_option_property_bike.png;;;images
+;96Wx96H;/96Wx96H/options_property_flood			;$siteResource/images/96Wx96H/96_96px_option_property_flood.png;;;images
+;96Wx96H;/96Wx96H/options_property_jewellery		;$siteResource/images/96Wx96H/96_96px_option_property_jewellery.png;;;images
+
+;96Wx96H;/96Wx96H/options_travel_business			;$siteResource/images/96Wx96H/96_96px_option_travel_business.png;;;images
+;96Wx96H;/96Wx96H/options_travel_golf				;$siteResource/images/96Wx96H/96_96px_option_travel_golf.png;;;images
+;96Wx96H;/96Wx96H/options_travel_hazardous			;$siteResource/images/96Wx96H/96_96px_option_travel_hazardous.png;;;images
+;96Wx96H;/96Wx96H/options_travel_value				;$siteResource/images/96Wx96H/96_96px_option_travel_value.png;;;images
+;96Wx96H;/96Wx96H/options_travel_winter				;$siteResource/images/96Wx96H/96_96px_option_travel_winter.png;;;images
+
+;96Wx96H;/96Wx96H/options_auto_5_year_guarantee	    ;$siteResource/images/96Wx96H/96_96px_option_auto_5_year_guarantee.png;;;images
+;96Wx96H;/96Wx96H/options_auto_breakdown_cover		;$siteResource/images/96Wx96H/96_96px_option_auto_break_down.png;;;images
+;96Wx96H;/96Wx96H/options_auto_key_protection		;$siteResource/images/96Wx96H/96_96px_option_auto_key_protection.png;;;images
+;96Wx96H;/96Wx96H/options_auto_legal_expense		;$siteResource/images/96Wx96H/96_96px_option_auto_legal_expense.png;;;images
+;96Wx96H;/96Wx96H/options_auto_telemetric_device	;$siteResource/images/96Wx96H/96_96px_option_auto_telemetric_device.png;;;images
+
+;96Wx96H;/96Wx96H/options_life_payment_protection   ;$siteResource/images/96Wx96H/96_96px_option_life_payment_protection.png;;;images
+;96Wx96H;/96Wx96H/options_life_premium_protection   ;$siteResource/images/96Wx96H/96_96px_option_life_premium_protection.png;;;images
+;96Wx96H;/96Wx96H/options_life_renewal              ;$siteResource/images/96Wx96H/96_96px_option_life_renewal.png;;;images
+
+UPDATE Product;code[unique=true];$thumbnails;$catalogVersion
+;PRO_PROPERTY_HOMEOWNERS			;/40Wx40H/homeowner_policy,/40Wx40H/homeowner_quote;
+;PRO_PROPERTY_HOMEOWNERS_MONTHLY	;/40Wx40H/homeowner_policy,/40Wx40H/homeowner_quote;
+
+;PRO_PROPERTY_RENTERS				;/40Wx40H/renters_policy,/40Wx40H/renters_quote;
+;PRO_PROPERTY_RENTERS_MONTHLY		;/40Wx40H/renters_policy,/40Wx40H/renters_quote;
+
+;WED_2STAR  ;/40Wx40H/event_policy,/40Wx40H/event_quote;
+;WED_3STAR  ;/40Wx40H/event_policy,/40Wx40H/event_quote;
+;WED_4STAR  ;/40Wx40H/event_policy,/40Wx40H/event_quote;
+;WED_5STAR  ;/40Wx40H/event_policy,/40Wx40H/event_quote;
+;TRA_SINGLE_BUDGET          ;/40Wx40H/travel_policy,/40Wx40H/travel_quote
+;TRA_SINGLE_SILVER          ;/40Wx40H/travel_policy,/40Wx40H/travel_quote
+;TRA_SINGLE_GOLD            ;/40Wx40H/travel_policy,/40Wx40H/travel_quote
+;TRA_ANNUAL_BUDGET          ;/40Wx40H/travel_policy,/40Wx40H/travel_quote
+;TRA_ANNUAL_SILVER          ;/40Wx40H/travel_policy,/40Wx40H/travel_quote
+;TRA_ANNUAL_GOLD            ;/40Wx40H/travel_policy,/40Wx40H/travel_quote
+;TRA_BACKPACKERS_BUDGET     ;/40Wx40H/travel_policy,/40Wx40H/travel_quote
+;TRA_BACKPACKERS_SILVER     ;/40Wx40H/travel_policy,/40Wx40H/travel_quote
+;TRA_BACKPACKERS_GOLD       ;/40Wx40H/travel_policy,/40Wx40H/travel_quote
+
+;AUTO_ANNUALLY ;/40Wx40H/auto_policy,/40Wx40H/auto_quote
+;AUTO_MONTHLY ;/40Wx40H/auto_policy,/40Wx40H/auto_quote
+;LIFE          ;/40Wx40H/life_policy,/40Wx40H/life_quote
+
+#Optional Products
+;WED_EXCESSWAIVER						;/96Wx96H/options_event_excess_waiver;
+;WED_PUBLICLIABILITY					;/96Wx96H/options_event_supplier_failure;
+;WED_VENUECOVER			    			;/96Wx96H/options_event_venue;
+
+;PRO_FLOOD_COVER_HOMEOWNERS				;/96Wx96H/options_property_flood;
+;PRO_TEMP_ACCOM_HOMEOWNERS				;/96Wx96H/options_property_accomodation;
+;PRO_JEWELRY_COVER_HOMEOWNERS			;/96Wx96H/options_property_jewellery;
+;PRO_BICYCLES_COVER_HOMEOWNERS			;/96Wx96H/options_property_bike;
+
+;PRO_TEMP_ACCOM_RENTERS					;/96Wx96H/options_property_accomodation;
+;PRO_JEWELRY_COVER_RENTERS				;/96Wx96H/options_property_jewellery;
+;PRO_BICYCLES_COVER_RENTERS				;/96Wx96H/options_property_bike;
+
+;PRO_FLOOD_COVER_HOMEOWNERS_MONTHLY		;/96Wx96H/options_property_flood;
+;PRO_TEMP_ACCOM_HOMEOWNERS_MONTHLY		;/96Wx96H/options_property_accomodation;
+;PRO_JEWELRY_COVER_HOMEOWNERS_MONTHLY	;/96Wx96H/options_property_jewellery;
+;PRO_BICYCLES_COVER_HOMEOWNERS_MONTHLY	;/96Wx96H/options_property_bike;
+
+;PRO_TEMP_ACCOM_RENTERS_MONTHLY			;/96Wx96H/options_property_accomodation;
+;PRO_JEWELRY_COVER_RENTERS_MONTHLY		;/96Wx96H/options_property_jewellery;
+;PRO_BICYCLES_COVER_RENTERS_MONTHLY		;/96Wx96H/options_property_bike;
+
+;TRA_EXCESS								;/96Wx96H/options_event_excess_waiver;
+;TRA_WINTER								;/96Wx96H/options_travel_winter
+;TRA_GOLF								;/96Wx96H/options_travel_golf
+;TRA_VALUABLES							;/96Wx96H/options_travel_value
+;TRA_BUSINESS							;/96Wx96H/options_travel_business
+;TRA_HAZARDOUS							;/96Wx96H/options_travel_hazardous
+
+;AUTO_LEGAL_EXPENSE_COVER_ANNUALLY      ;/96Wx96H/options_auto_legal_expense
+;AUTO_BREAKDOWN_COVER_ANNUALLY          ;/96Wx96H/options_auto_breakdown_cover
+;AUTO_KEY_PROTECTION_COVER_ANNUALLY     ;/96Wx96H/options_auto_key_protection
+;AUTO_5_YEAR_GUARANTEE_ANNUALLY         ;/96Wx96H/options_auto_5_year_guarantee	
+
+;AUTO_LEGAL_EXPENSE_COVER_MONTHLY       ;/96Wx96H/options_auto_legal_expense
+;AUTO_BREAKDOWN_COVER_MONTHLY           ;/96Wx96H/options_auto_breakdown_cover
+;AUTO_KEY_PROTECTION_COVER_MONTHLY      ;/96Wx96H/options_auto_key_protection
+;AUTO_5_YEAR_GUARANTEE_MONTHLY          ;/96Wx96H/options_auto_5_year_guarantee	
+;AUTO_TELEMETRY_INSTALLATION_MONTHLY    ;/96Wx96H/options_auto_telemetric_device
+
+;LIFE_PREMIUM_PROTECTION                ;/96Wx96H/options_life_premium_protection
+;LIFE_RENEWAL_OPTION                    ;/96Wx96H/options_life_renewal
+;LIFE_PAYMENT_PROTECTION_BENEFIT        ;/96Wx96H/options_life_payment_protection

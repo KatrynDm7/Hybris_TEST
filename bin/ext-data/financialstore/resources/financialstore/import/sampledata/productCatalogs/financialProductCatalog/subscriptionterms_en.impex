@@ -1,0 +1,11 @@
+# Impex for Subscription Terms - en
+#
+# ENGLISH LOCALIZATION
+#
+$lang=en
+
+UPDATE SubscriptionTerm;id[unique=true];name[lang=$lang]
+;annually;One Year Contract - Committed
+;single;Chosen number of days Contract - Committed
+;monthly;Monthly contract for 12 months - Committed
+;annualRenewable;Annual Renewable Contract - Committed

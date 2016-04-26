@@ -1,0 +1,4 @@
+$catalogversion=catalogversion(catalog(id),version)[unique=true,default='hwcatalog:Online${testId}']
+
+UPDATE Product;code[unique=true];$catalogversion;manufacturerName
+;00001;;updated_hybris

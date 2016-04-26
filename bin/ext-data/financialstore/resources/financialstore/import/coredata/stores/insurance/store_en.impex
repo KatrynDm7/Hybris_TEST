@@ -1,0 +1,10 @@
+#
+# Import the Insurance BaseStore
+#
+
+# Language
+$lang=en
+
+# Create Base Store
+UPDATE BaseStore;uid[unique=true];name[lang=$lang]
+ ;insurance;"Insurance Store"

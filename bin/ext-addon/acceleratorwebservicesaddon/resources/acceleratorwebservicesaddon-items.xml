@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<itemtypes>
+			<itemtype code="PaymentSubscriptionResult" autocreate="true"
+				generate="true"
+				jaloclass="de.hybris.platform.acceleratorwebservicesaddon.jalo.payment.PaymentSubscriptionResult">
+				<description>Used for storing subscription result.</description>
+				<deployment table="PaymentSubscResult" typecode="6230" />
+				<attributes>
+					<attribute qualifier="cartId" type="java.lang.String">
+						<persistence type="property" />
+						<modifiers unique="true" optional="false" initial="true"/>
+					</attribute>
+					<attribute qualifier="success" type="boolean">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+						<description>Define if subscription was successful.</description>
+					</attribute>				
+					<attribute qualifier="result" type="java.lang.Object">
+						<description>Serialized result object</description>
+						<modifiers read="true" write="true" search="false"/>
+						<persistence type="property">
+							<columntype database="oracle">
+								<value>BLOB</value>
+							</columntype>
+							<columntype>
+								<value>java.io.Serializable</value>
+							</columntype>
+						</persistence>
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="cartIdIdx" unique="true">
+						<key attribute="cartId"/>
+					</index>
+				</indexes>					
+			</itemtype>
+			
+			<itemtype code="OldPaymentSubscriptionResultRemovalCronJob" autocreate="true"
+					 generate="true" extends="CronJob"
+					 jaloclass="de.hybris.platform.acceleratorwebservicesaddon.jalo.payment.OldPaymentSubscriptionResultRemovalCronJob">
+			<attributes>
+				<attribute type="java.lang.Integer" qualifier="age">
+					<modifiers/>
+					<persistence type="property"/>
+					<defaultvalue>Integer.valueOf(86400)</defaultvalue>
+					<description>After specified number of seconds payment subscription result will be cleaned up. Default is 24 hour.</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+			
+	</itemtypes>
+</items>

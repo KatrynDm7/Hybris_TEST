@@ -1,0 +1,18 @@
+#Mon Jun 27 14:29:16 CEST 2011
+eclipse.preferences.version=1
+encoding//resources/cuppy/import/1LGer2010_setup.csv=UTF-8
+encoding//resources/cuppy/import/2LGer2010_setup.csv=UTF-8
+encoding//resources/cuppy/import/EC2008_bets_finals.csv=UTF-8
+encoding//resources/cuppy/import/EC2008_bets_preliminaries.csv=UTF-8
+encoding//resources/cuppy/import/EC2008_results_finals.csv=UTF-8
+encoding//resources/cuppy/import/EC2008_results_preliminaries.csv=UTF-8
+encoding//resources/cuppy/import/EC2008_setup.csv=UTF-8
+encoding//resources/cuppy/import/WC2006_setup.csv=UTF-8
+encoding//resources/cuppy/import/WWC2011_setup.csv=UTF-8
+encoding//resources/cuppy/templates/rankingMail_de.vm=UTF-8
+encoding//resources/cuppy/templates/rankingMail_en.vm=UTF-8
+encoding//resources/impex/essentialdataTemplates.impex=UTF-8
+encoding//web/webroot/WEB-INF/i3-label.properties=UTF-8
+encoding//web/webroot/WEB-INF/i3-label_de.properties=UTF-8
+encoding//web/webroot/WEB-INF/i3-label_pl.properties=UTF-8
+encoding/<project>=UTF-8

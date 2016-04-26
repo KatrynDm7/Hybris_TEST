@@ -1,0 +1,20 @@
+$contentCatalog=electronicsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;Section1DemoSlot;Section1 Slot for Demopage;true;CMSSampleSubmitComponent
+
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];styleAttributes
+;;DemoIdLink;DemoNameLink;/forms/demo;DemoRefLink;DemoComponLink;;
+
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;ContentPage1Template;Content Page 1 Template;layout/contentLayout1Page;ContentPage
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];previewImage(code, $contentCV)
+;;demoId;Sample Demo Page;ContentPage1Template;/forms/demo
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true];contentSlot(uid,$contentCV)[unique=true]
+;;Section1toDemo;Section1;demoId;Section1DemoSlot;
+
+INSERT_UPDATE YFormCMSComponent;$contentCV[unique=true];uid[unique=true];name;visible;&componentRef;formId;applicationId
+;;CMSSampleSubmitComponent;Demo Contact Controller;true;CMSSampleSubmitComponent;contact;yforms

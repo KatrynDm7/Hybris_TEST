@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2015 hybris AG All rights reserved. This software is the confidential and proprietary information 
+	of hybris ("Confidential Information"). You shall not disclose such Confidential Information and shall use it only in accordance with the terms 
+	of the license agreement you entered into with hybris. -->
+<config xmlns="http://www.hybris.com/cockpit/config">
+        
+	 <!-- payment transaction start -->
+    
+    <context type="PaymentTransaction" component="base" merge-by="type">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>requestId</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	
+	    <context type="PaymentTransactionEntry" component="base" merge-by="type">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>code</y:label>
+			</y:labels>
+		</y:base>
+	</context>	
+	
+	<context merge-by="module" parent="auto" type="AbstractOrder" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab xmlns="http://www.hybris.com/cockpitng/component/editorArea" name="hmc.payment_and_delivery" position="0">
+				<editorArea:section name="hmc.payment">
+					<editorArea:attribute qualifier="paymentTransactions"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	
+	<context merge-by="type" parent="PaymentTransaction" type="AlipayPaymentTransaction" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab xmlns="http://www.hybris.com/cockpitng/component/editorArea" name="backoffice.tab.alipaypaymenttransaction.properties">
+				<editorArea:section name="backoffice.section.alipaypaymenttransaction.details">
+					<editorArea:attribute qualifier="requestId" />
+					<editorArea:attribute qualifier="order" />
+					<editorArea:attribute qualifier="paymentProvider" />
+					<editorArea:attribute qualifier="latestTradeStatus" />
+					<editorArea:attribute qualifier="errorStatus" />
+					<editorArea:attribute qualifier="errorStatusTimestamp" />
+					<editorArea:attribute qualifier="latestRefundStatus" />
+					<editorArea:attribute qualifier="refundErrorStatus" />
+					<editorArea:attribute qualifier="refundErrorTimestamp" />
+					<editorArea:attribute qualifier="latestTransactionType" />
+					<editorArea:attribute qualifier="tradeAlipayNo" />
+					<editorArea:attribute qualifier="url" />
+				</editorArea:section>
+				<editorArea:section name="backoffice.section.alipaypaymenttransactionentry.details">
+					<editorArea:attribute qualifier="entries" />
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+
+	<context merge-by="type" parent="PaymentTransactionEntry" type="AlipayPaymentTransactionEntry" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab xmlns="http://www.hybris.com/cockpitng/component/editorArea" name="backoffice.tab.alipaypaymenttransaction.properties">
+				<editorArea:section name="backoffice.section.alipaypaymenttransactionentry.basic">
+					<editorArea:attribute qualifier="requestId" />
+					<editorArea:attribute qualifier="code" />
+					<editorArea:attribute qualifier="amount" />
+					<editorArea:attribute qualifier="type" />
+					<editorArea:attribute qualifier="transactionStatus" />
+					<editorArea:attribute qualifier="transactionStatusDetails" />
+				</editorArea:section>
+				<editorArea:section name="backoffice.section.alipaypaymenttransactionentry.trade">
+					<editorArea:attribute qualifier="tradeAlipayNo" />
+					<editorArea:attribute qualifier="paymentType" />
+					<editorArea:attribute qualifier="tradeStatus" />
+					<editorArea:attribute qualifier="notifyType" />
+					<editorArea:attribute qualifier="notifyId" />
+					<editorArea:attribute qualifier="buyerEmail" />
+
+					<editorArea:attribute qualifier="buyerId" />
+					<editorArea:attribute qualifier="body" />
+					<editorArea:attribute qualifier="gmtCreate" />
+					<editorArea:attribute qualifier="gmtPayment" />
+					<editorArea:attribute qualifier="gmtClose" />
+					<editorArea:attribute qualifier="isTotalFeeAdjust" />
+
+					<editorArea:attribute qualifier="useCoupon" />
+					<editorArea:attribute qualifier="outChannelType" />
+					<editorArea:attribute qualifier="outChannelAmount" />
+					<editorArea:attribute qualifier="flag_trade_locked" />
+					<editorArea:attribute qualifier="gmt_last_modified_time" />
+					<editorArea:attribute qualifier="operator_role" />
+
+					<editorArea:attribute qualifier="time_out" />
+					<editorArea:attribute qualifier="time_out_type" />
+					<editorArea:attribute qualifier="to_buyer_fee" />
+					<editorArea:attribute qualifier="to_seller_fee" />
+					<editorArea:attribute qualifier="additional_trade_status" />
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+
+
+	<!-- payment transaction end -->
+
+</config>

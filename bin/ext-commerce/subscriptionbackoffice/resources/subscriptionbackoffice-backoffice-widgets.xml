@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  --><widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widgets.xsd">
+
+    
+
+    <widget-connection inputId="input" outputId="nodeSelected" sourceWidgetId="subscriptionbackoffice-explorer-tree" targetWidgetId="subscriptionbackoffice-tree-node-adapter"/>
+    <widget-connection inputId="genericInput" outputId="true" sourceWidgetId="subscriptionbackoffice-tree-node-adapter" targetWidgetId="subscriptionbackoffice-typecode-extractor"/>
+    <widget-connection inputId="genericInput" outputId="true" sourceWidgetId="subscriptionbackoffice-tree-node-adapter" targetWidgetId="subscriptionbackoffice-search-enabler"/>
+    <widget-connection inputId="genericInput" outputId="false" sourceWidgetId="subscriptionbackoffice-tree-node-adapter" targetWidgetId="subscriptionbackoffice-search-disabler"/>
+    <widget-connection inputId="type" outputId="genericOutput" sourceWidgetId="subscriptionbackoffice-typecode-extractor" targetWidgetId="subscriptionbackoffice-search-logic"/>
+    <widget-connection inputId="enabled" outputId="genericOutput" sourceWidgetId="subscriptionbackoffice-search-enabler" targetWidgetId="subscriptionbackoffice-text-search"/>
+    <widget-connection inputId="enabled" outputId="genericOutput" sourceWidgetId="subscriptionbackoffice-search-disabler" targetWidgetId="subscriptionbackoffice-text-search"/>
+    <widget-connection inputId="searchtext" outputId="query" sourceWidgetId="subscriptionbackoffice-text-search" targetWidgetId="subscriptionbackoffice-search-logic"/>
+    <widget-connection inputId="pageable" outputId="pageable" sourceWidgetId="subscriptionbackoffice-search-logic" targetWidgetId="subscriptionbackoffice-simple-list"/>
+
+</widgets>

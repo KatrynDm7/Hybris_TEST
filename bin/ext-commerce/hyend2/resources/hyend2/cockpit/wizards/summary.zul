@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:h="http://www.w3.org/1999/xhtml" 
+		xmlns:zk="http://www.zkoss.org/2005/zk"
+		xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd ">
+		
+	<div style="text-align: left;">
+	
+					<div style="margin: 30px; margin-top: 20px; font-size: 10px;" onCreate="schemaConfigurationLabel.setValue(wizardBean.getIndexSchemaDescription());">
+			<hbox widths="80px,none">
+					<label value="${c:l('hyend2.exportwizard.schemaconfiguration')}"/>
+					<label width="150px" id="schemaConfigurationLabel" value=""></label>
+			</hbox>
+		</div>	
+		
+		<div style="margin: 30px; margin-top: 20px; font-size: 10px;" onCreate="exportLanguagesLabel.setValue(wizardBean.getLanguagesDescription());">
+			<hbox widths="80px,none">
+					<label value="${c:l('hyend2.exportwizard.exportlanguages')}"/>
+					<label width="150px" id="exportLanguagesLabel" value=""></label>
+			</hbox>
+		</div>	
+
+		<div style="margin: 30px; margin-top: 20px; font-size: 10px;" onCreate="box.setValue(wizardBean.getIndexOperation());">
+			<hbox  widths="80px,none">
+				<label value="${c:l('hyend2.exportwizard.indexoperation')}"/>
+					<combobox disabled="true" width="150px" id="box">
+					    <comboitem id="baseline" label="Baseline" />
+					    <comboitem id="partial" label="Partial" />
+					    <comboitem id="auto" label="Auto" />
+					</combobox>
+			</hbox>
+		</div>	
+
+		
+						<div style="margin: 30px; margin-top: 20px; font-size: 10px;" onCreate="fullItemList.setChecked(wizardBean.isFullItemList());">
+			<hbox widths="80px,none">
+				<label value="${c:l('hyend2.exportwizard.fullitemlist')}"/>
+				<checkbox width="150px" disabled="true" id="fullItemList" />
+			</hbox>
+</div>
+
+
+		
+
+		</div>
+</zk>

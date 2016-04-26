@@ -1,0 +1,25 @@
+# ImpEx for B2C Telco Stores
+# English localisations
+
+$lang=en
+
+$productCatalog=b2ctelcoProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$storeImage=storeImage(qualifier, $catalogVersion)
+
+$standardHours=b2ctelco-us-standard-hours
+
+UPDATE SpecialOpeningDay;openingSchedule(code)[unique=true];date[unique=true,dateformat=dd.MM.yyyy];name[lang=$lang];message[lang=$lang]
+
+UPDATE StoreLocatorFeature;code[unique=true];name[lang=$lang]
+;wheelchair;"Wheelchair Access"
+;creche;"Creche"
+;sundayWorkshops;"Sunday Workshops"
+;buyOnlinePickupInStore;"Buy Online Pick Up In Store"
+
+UPDATE PointOfService;name[unique=true];displayName;
+;Hybris Telco - Chicago Premium Outlets;Hybris Telco - Chicago Premium Outlets;
+;Hybris Telco - Chrysler Building;Hybris Telco - Chrysler Building;
+;Hybris Telco - San Francisco Center;Hybris Telco - San Francisco Center;
+;Hybris Telco - Seattle Premium Outlets;Hybris Telco - Seattle Premium Outlets;
+;Hybris Telco - Riverwalk Marketplace;Hybris Telco - Riverwalk Marketplace;

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ [y] hybris Platform
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<web-fragment xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="
+        http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-fragment_3_0.xsd" version="3.0">
+    <name>webfragment_backofficeContextClassloaderFilter</name>
+
+    <ordering>
+        <after>
+            <name>webfragment_springSecurityFilterChain</name>
+        </after>
+    </ordering>
+    <filter>
+        <filter-name>backofficeContextClassloaderFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>backofficeContextClassloaderFilter</filter-name>
+        <servlet-name>widgetLibResourceLoader</servlet-name>
+    </filter-mapping>
+</web-fragment>

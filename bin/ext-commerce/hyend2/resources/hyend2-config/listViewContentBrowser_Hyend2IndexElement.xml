@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list-view unassigned-group-name="Other">
+	<group name="General">
+		<property qualifier="Hyend2IndexElement.name" visible="true" />
+		<property qualifier="Hyend2IndexElement.properties" visible="true"/>
+		<property qualifier="Hyend2IndexElement.dimensions" visible="true"/>
+		<property qualifier="Hyend2IndexElement.categoryDimensions" visible="true"/>
+		<property qualifier="Hyend2IndexElement.indexSchemas" visible="true"/>
+	</group>
+</list-view>

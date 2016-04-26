@@ -1,0 +1,26 @@
+INSERT_UPDATE ProfilePicture;code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];catalogVersion(catalog(id),version)[default=Default:Online]
+;sternthaler;sternthaler.jpg;jar:/cuppy/import/profile/sternthaler.jpg
+
+INSERT_UPDATE Player;uid[unique=true];name;country(isocode);sessionLanguage(isocode);password;eMail;profilepicture(code);groups(uid);hmclogindisabled[default=true];confirmed[default=true,virtual=true]
+;ppetersonson_cuppy;Peter Petersonson;DE;de;1234;peter.petersonson@gmx.dk;;cuppyplayers
+;demo_cuppy;Klaus Demokunde;FR;en;1234;demo@kunde.de;;cuppyplayers
+;hweaving_cuppy;Hugo Weaving;AT;de;1234;a.smith@matrix.com;;cuppyplayers
+;sbrueck_cuppy;Sabine Brück;AT;de;1234;2653265637.2345732354634@t-online.de;;cuppyplayers
+;hpneumann_cuppy;Hans-Peter Neumann;PL;en;1234;quack@der-bruchpilot.de;;cuppyplayers
+;ahertz_cuppy;Anja Hertz;SE;en;1234;ahertz@na-du.de;;cuppyplayers
+;abrode_cuppy;Arin Brode;CH;de;1234;arin@wow-europe.com;;cuppyplayers
+;hschweiger_cuppy;Hubert Schweiger;NL;en;1234;h@schweiger.de;;cuppyplayers
+;dkaufmann_cuppy;Denny Kaufmann;US;en;1234;ich@denny-kaufmann.org;;cuppyplayers
+;kvitali_cuppy;Klaas Vitali;GB;en;1234;k.v@itali.it;;cuppyplayers
+;bpoweronoff_cuppy;Boris Poweronoff;DE;de;1234;reset@computer.com;;cuppyplayers
+;tbullet_cuppy;Toni Bullet;FR;en;1234;t.bul@let.de;;cuppyplayers
+;hjaehnig_cuppy;Hendrik Jähnig;NL;en;1234;hj@aen.ig;;cuppyplayers
+;mdigit_cuppy;Marc Digit;SE;en;1234;m.d@ig.it;;cuppyplayers
+;ovh_cuppy;Oliver von Höchdesgarden;CH;de;1234;o@v.h;;cuppyplayers
+;nvp_cuppy;Nadine von Paletzkie;GB;en;1234;n.v.p.@gmx.net;;cuppyplayers
+;ariel_cuppy;Ariel F. Lüdi;CH;de;1234;ariel@cuppy.de;;cuppyplayers
+;sternthaler;Icke T. aus B.;DE;de;1234;stern@thaler.de;sternthaler;cuppyplayers,cuppyadmins;false
+;pp;Pille;DE;de;1234;pille@mille.de;;cuppyplayers,cuppyadmins;false
+
+# INSERT_UPDATE News;content[lang=de];content[lang=en];competition[unique=true]
+# ;Wilkommen zu CuppY;Welcome to CuppY;;

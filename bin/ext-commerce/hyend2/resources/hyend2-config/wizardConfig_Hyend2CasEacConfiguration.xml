@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wizard-config showPrefilledValues="false" selectMode="true" createMode="true" createWithinPopup="false" createWithinEditor="false">
+	<displayed-properties>
+		<group qualifier="general">
+			<label key="cockpit.config.label.General" />
+			<property qualifier="Hyend2CasEacConfiguration.name" />		
+			<property qualifier="Hyend2CasEacConfiguration.active"/>	
+		</group>
+		<group qualifier="casConfig" initially-opened="true">
+			<label key="hyend2.casconfiguration" />
+			<property qualifier="Hyend2CasEacConfiguration.casHost" />		
+			<property qualifier="Hyend2CasEacConfiguration.casPort" />	
+			<property qualifier="Hyend2CasEacConfiguration.casAppName" />	
+		</group>
+		<group qualifier="eacConfig" initially-opened="true">
+			<label key="hyend2.eacconfiguration" />
+			<property qualifier="Hyend2CasEacConfiguration.eacHost" />		
+			<property qualifier="Hyend2CasEacConfiguration.eacPort" />	
+			<property qualifier="Hyend2CasEacConfiguration.eacAppName" />
+		</group>
+		<group qualifier="IndexSchemaCatalogVersion">
+			<label key="hyend2.languageconfiguration" />
+			<property qualifier="Hyend2CasEacConfiguration.availableLanguages" />		
+		</group>
+		<!--
+		<group qualifier="IndexSchemaIndexElements">
+			<label key="hyend2.exportconfiguration" />
+			<property qualifier="Hyend2CasEacConfiguration.autoBaseline" />		
+		</group>
+		-->
+	</displayed-properties>
+</wizard-config>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	
+	<bean id="parentModelLabelProvider" class="de.hybris.platform.cockpit.services.label.AbstractModelLabelProvider" scope="tenant" abstract="true">
+		<property name="modelService" ref="modelService" />
+	</bean>
+	
+	<bean id="hyend2indexElementLabelProvider" class="de.hybris.platform.hyend2.ui.labels.Hyend2IndexElementLabelProvider" scope="tenant" parent="parentModelLabelProvider"></bean>
+	
+	<bean id="hyend2indexSchemaLabelProvider" class="de.hybris.platform.hyend2.ui.labels.Hyend2IndexSchemaLabelProvider" scope="tenant" parent="parentModelLabelProvider"></bean>
+		
+	<bean id="hyend2casConfigurationLabelProvider" class="de.hybris.platform.hyend2.ui.labels.Hyend2CasConfigurationLabelProvider" scope="tenant" parent="parentModelLabelProvider"></bean>
+			
+	<bean id="hyend2propertyLabelProvider" class="de.hybris.platform.hyend2.ui.labels.Hyend2PropertyLabelProvider" scope="tenant" parent="parentModelLabelProvider"></bean>
+	
+	<bean id="hyend2dimensionLabelProvider" class="de.hybris.platform.hyend2.ui.labels.Hyend2DimensionLabelProvider" scope="tenant" parent="parentModelLabelProvider"></bean>
+		
+	<bean id="hyend2rangeLabelProvider" class="de.hybris.platform.hyend2.ui.labels.Hyend2RangeLabelProvider" scope="tenant" parent="parentModelLabelProvider">
+		<property name="i18nService" ref="commonI18NService"></property>
+	</bean>
+	
+	<bean id="hyend2rangeEntryLabelProvider" class="de.hybris.platform.hyend2.ui.labels.Hyend2RangeEntryLabelProvider" scope="tenant" parent="parentModelLabelProvider">
+		<property name="i18nService" ref="commonI18NService"></property>
+	</bean>
+		
+	<alias name="hyend2defaultPrecedenceRuleLabelProvider" alias="hyend2precedenceRuleLabelProvider"/>
+	<bean id="hyend2defaultPrecedenceRuleLabelProvider" class="de.hybris.platform.hyend2.ui.labels.Hyend2PrecedenceRuleLabelProvider" scope="tenant" parent="parentModelLabelProvider">
+		<property name="dimensionLabelProvider" ref="hyend2dimensionLabelProvider"></property>
+	</bean>	
+
+        <bean id="hyend2searchinterfaceLabelProvider" class="de.hybris.platform.hyend2.ui.labels.Hyend2SearchInterfaceLabelProvider" scope="tenant" parent="parentModelLabelProvider"></bean>		
+
+	<bean id="itemTypeHyend2Handler" class="de.hybris.platform.hyend2.model.attributehandlers.ItemTypeHandler"></bean>
+	
+	<bean id="ResolverSection" class="de.hybris.platform.hyend2.ui.ResolverSection" scope="prototype">
+		<property name="sectionRenderer" ref="resolverSectionRenderer"></property>
+	</bean>
+	
+	<bean id="resolverSectionRenderer" class="de.hybris.platform.hyend2.ui.ResolverSectionRenderer"></bean>
+	
+	<bean id="hyend2exportWizard" scope="prototype" class="de.hybris.platform.hyend2.ui.customgroups.ExportWizard">
+		<property name="title" value="hyend2.exportwizard.title"/>
+ 		<property name="defaultController" ref="hyend2ExportWizardController"/>
+		<property name="pages">
+			<list>
+				<ref bean="hyend2exportWizard_basicConfigurationPage"/>
+				<ref bean="hyend2exportWizard_itemListPage"/>
+				<ref bean="hyend2exportWizard_summaryPage"/>
+				<ref bean="hyend2exportWizard_statusPage"/>
+			</list>
+		</property>
+		<property name="pageRoot" value="classpath:hyend2/cockpit/wizards"/>
+	</bean>
+	
+	<bean id="hyend2ExportWizardController" class="de.hybris.platform.hyend2.ui.customgroups.ExportWizardDefaultController" scope="prototype">
+
+	</bean>
+	
+	<bean id="hyend2exportWizard_basicConfigurationPage" class="de.hybris.platform.cockpit.wizards.impl.DefaultPage" scope="prototype">
+		<property name="id" value="basicConfigurationPage"/>
+		<property name="title" value="hyend2.exportwizard.basicconf" />
+		<property name="componentURI" value="basicConfiguration.zul"/>
+	</bean>
+	
+	<bean id="hyend2exportWizard_itemListPage" class="de.hybris.platform.cockpit.wizards.impl.DefaultPage" scope="prototype">
+		<property name="id" value="itemListPage"/>
+		<property name="title" value="hyend2.exportwizard.itemlist" />
+		<property name="componentURI" value="itemList.zul"/>
+	</bean>
+	
+	<bean id="hyend2exportWizard_summaryPage" class="de.hybris.platform.cockpit.wizards.impl.DefaultPage" scope="prototype">
+		<property name="id" value="summaryPage"/>
+		<property name="title" value="hyend2.exportwizard.summary" />
+		<property name="componentURI" value="summary.zul"/>
+		<property name="controller" ref="exportWizardSummaryPageController"></property>
+	</bean>
+	
+	<bean id="hyend2exportWizard_statusPage" class="de.hybris.platform.cockpit.wizards.impl.DefaultPage" scope="prototype">
+		<property name="id" value="statusPage"/>
+		<property name="title" value="hyend2.exportwizard.status" />
+		<property name="componentURI" value="status.zul"/>
+	</bean>
+	
+	<bean id="exportWizardSummaryPageController" class="de.hybris.platform.hyend2.ui.customgroups.ExportWizardSummaryPageController" scope="prototype">
+		<property name="cronJobService" ref="cronJobService"></property>
+		<property name="modelService" ref="modelService"></property>
+	</bean>
+	
+	<bean id="hyend2LabelLocator" class="de.hybris.platform.cockpit.util.ConfigurableCockpitLabelLocator" scope="singleton" lazy-init="false">
+		<property name="resourceFolder" value="/hyend2/cockpit/localization/"/>
+	</bean>
+	
+</beans>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<advanced-search>
+	<group name="root" type="News">
+		<label lang="en">Suche nach...</label>
+		<label lang="de">Search for...</label>
+		<group name="general">
+			<label lang="de">Stammdaten</label>
+			<label lang="en">Properties</label>			
+			<property qualifier="News.creationtime" sort-enabled="true" visible="true"/>
+			<property qualifier="News.email" sort-enabled="true" visible="true"/>
+			<property qualifier="News.content" sort-enabled="true" visible="true"/>
+		</group>
+		<group name="other">
+			<label lang="de">Andere</label>
+			<label lang="en">Other</label>
+			<property qualifier="News.competition" sort-enabled="true" visible="false"/>
+		</group>		
+	</group>
+</advanced-search>

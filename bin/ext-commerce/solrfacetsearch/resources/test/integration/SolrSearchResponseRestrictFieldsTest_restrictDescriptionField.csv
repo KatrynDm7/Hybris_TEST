@@ -1,0 +1,5 @@
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);includeInResponse
+;testIndexedType${testId};description;text;false
+
+INSERT_UPDATE SolrSearchConfig;description[unique=true];pageSize;legacyMode;restrictFieldsInResponse
+;testSearchConfig${testId};20;false;true

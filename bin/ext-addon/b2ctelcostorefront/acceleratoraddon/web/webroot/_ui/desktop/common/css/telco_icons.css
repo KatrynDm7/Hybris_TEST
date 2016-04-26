@@ -1,0 +1,42 @@
+/* icons */
+.ico_telco_emptyCart, #cartItems .cartItem .cart-promotions-applied, .cartPromo li, .item_container_holder.promo li , .siteSearch .siteSearchSubmit, .productImage .productImagePrimary a.productImageZoomLink, .iconRemove, .ico_telco_dashboardActiveItem {
+    display: inline-block;
+    background-image: url(../images/telco_sprite.png);
+    background-repeat: no-repeat
+}
+
+.ico_telco_emptyCart {
+    background-position: -0px -102px;
+    height: 110px;
+    width: 124px
+}
+
+#cartItems .cartItem .cart-promotions-applied {
+    background-position: -0px -0px;
+    height: 28px;
+    width: 29px
+}
+
+.cartPromo li, .item_container_holder.promo li {
+    background-position: -0px -320px;
+    height: 27px;
+    width: 28px
+}
+
+.siteSearch .siteSearchSubmit, .productImage .productImagePrimary a.productImageZoomLink {
+    background-position: -28px -229px;
+    height: 17px;
+    width: 18px
+}
+
+.iconRemove {
+    background-position: -0px -230px;
+    height: 10px;
+    width: 10px
+}
+
+.ico_telco_dashboardActiveItem {
+    background-position: -12px -230px;
+    height: 8px;
+    width: 12px
+}

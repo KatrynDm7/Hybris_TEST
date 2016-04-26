@@ -1,0 +1,18 @@
+$contentCatalog=electronics-cnContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
+;;SocialWidgetSlot;Social Widget;true
+
+# CMS JiaThis Components
+INSERT_UPDATE JiaThisComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;JiaThis;Jia This;JiaThis
+
+INSERT_UPDATE ContentSlot; $contentCV[unique=true]; uid[unique=true] ; cmsComponents(&componentRef)
+                         ;                        ; SocialWidgetSlot ; JiaThis
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ProductDetailsPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SocialWidget;;JiaThisComponent;narrow
+						 					 
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ProductDetailsPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SocialWidget-ProductDetails;SocialWidget;;SocialWidgetSlot;true

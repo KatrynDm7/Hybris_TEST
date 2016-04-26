@@ -1,0 +1,31 @@
+.y-toolbar-leftslot .cng-action {
+	padding: 6px;
+    color: #485470;
+}
+
+.cng-action .z-hbox-separator {
+	background-color: inherit;
+}
+
+.cng-action:hover {
+	background-color: #6f7c91;
+	color: white;
+}
+
+button.z-button.declineitem {
+	background-image: url("images/icon_action_decline_default.png");
+	background-color: #FFFFFF;
+	width: 30px;
+	border: 1px solid #C0C0C0;
+	background-position: center;
+}
+
+button.z-button.declineitem:hover {
+	background-image: url("images/icon_action_decline_hover.png"); #
+	background-color: #085ABC;
+}
+
+.y-editor-area-attributes-cnt-max .z-groupbox-content .z-hbox, 
+.y-editor-area-attributes-cnt-max.z-groupbox-content table {
+	width: 100%;
+}

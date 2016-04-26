@@ -1,0 +1,33 @@
+#
+# Import CMS content for the Electronics site
+#
+
+$contentCatalog=electronicsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+# Language
+$lang=de
+
+# Content Pages
+UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+ ;;account;"Mein Konto"
+ ;;add-edit-address;"Adresse hinzufügen/bearbeiten"
+ ;;address-book;"Adressbuch"
+ ;;cartPage;"Ihr Warenkorb"
+ ;;checkout-login;"Zur Kasse gehen"
+ ;;faq;"Häufig gestellte Fragen"
+ ;;homepage;"Startseite"
+ ;;login;"Anmelden"
+ ;;multiStepCheckoutSummaryPage;"Bezahlen"
+ ;;notFound;"Nicht gefunden"
+ ;;order;"Bestellungsdetails"
+ ;;orderConfirmationPage;"Bestellbestätigung"
+ ;;orders;"Bestellverlauf"
+ ;;payment-details;"Zahlungsdetails"
+ ;;profile;"Profil"
+ ;;searchEmpty;"Keine Ergebnisse"
+ ;;storefinderPage;"Standortsuche"
+ ;;termsAndConditions;"Allgemeine Geschäftsbedingungen"
+ ;;update-email;"E-Mail aktualisieren"
+ ;;update-profile;"Profil aktualisieren"
+ ;;updatePassword;"Vergessenes Kennwort erneuern"

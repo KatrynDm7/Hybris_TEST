@@ -1,0 +1,2 @@
+INSERT_UPDATE SolrExtIndexerCronJob;code[unique=true];job(code)[unique=true];indexerOperation(code);indexedType;indexedProperties;query;queryParameterProvider;facetSearchConfig(name)
+;testSolrExtIndexerJob${testId};solrExtIndexerJob;delete;Product_testIndexedType${testId};;select PK from {Product as p} where {p.code} = '00001';simpleParameterProvider;testFacetSearchConfig${testId}

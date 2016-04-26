@@ -1,0 +1,17 @@
+*** Settings ***
+Library           de.hybris.platform.atddimpex.keywords.ImpexKeywordLibrary
+Library           de.hybris.platform.xyformatddtests.category.keywords.CategoryKeywordLibrary
+Library           de.hybris.platform.xyformatddtests.product.keywords.ProductKeywordLibrary
+
+*** Keywords ***
+import sampledata
+    [Documentation]    Imports the yform test data
+    import impex from resource    /impex/testAllYFormDefinitionsDynamicAttributes.csv 
+ 
+verify that category "${categoryCode}" has all "@{formDefinitionIds}" y form definitions
+    [Documentation]  Verify the Category has the references to all the YFormDefinitions that are assigned to itself and its supercategories
+    verify category has all y form definitions    ${categoryCode}    @{formDefinitionIds}
+    
+verify that product "${productCode}" has all "@{formDefinitionIds}" y form definitions
+    [Documentation]  Verify the Product has the references to all the YFormDefinitions that are assigned to all of its supercategories
+    verify product has all y form definitions    ${productCode}    @{formDefinitionIds}

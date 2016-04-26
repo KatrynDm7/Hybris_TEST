@@ -1,0 +1,20 @@
+<action-definition id="de.hybris.platform.cis.payment.action.resetfraudreportendtimeaction"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/action-definition.xsd">
+
+
+    <name>Reset CIS fraud report last end time</name>
+    <description>Set the </description>
+    <author>Hybris</author>
+    <version>0.1</version>
+
+    <actionClassName>de.hybris.platform.integration.cis.payment.backoffice.actions.ResetCisFraudReportCronJob</actionClassName>
+
+    <inputType>java.lang.Object</inputType>
+    <outputType>java.lang.Object</outputType>
+
+    <iconUri>icons/icon_time_reset.png</iconUri>
+    <iconDisabledUri>icons/icon_time_reset_disabled.png</iconDisabledUri>
+
+
+</action-definition>

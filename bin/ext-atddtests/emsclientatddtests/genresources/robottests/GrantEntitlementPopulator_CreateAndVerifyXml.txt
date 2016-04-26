@@ -1,0 +1,100 @@
+*** Settings ***
+Resource    emsclientatddtests/EmsServer_Keywords.txt
+Resource    emsclientatddtests/EntitlementFacades_Keywords.txt
+Resource    common/EntitlementStartup_Keywords.txt
+Resource    atdd/keywords/entitlements-test/settings_keywords.txt
+Resource    atdd/keywords/entitlements-test/check_entitlements_keywords.txt
+Resource    atdd/keywords/entitlements-test/builder_entitlements_keywords.txt
+
+
+Suite Setup    start emsserver
+Suite Teardown    stop emsserver
+
+Test Setup        import entitlement sampledata
+Test Teardown     reset grants
+
+*** Test Cases ***
+
+Test_GrantEntitlementPopulator_CreateAndVerifyXML_GrantTime
+    [Documentation]    Verifies addition of one simple grant with grant time
+    ...                All entitlement details(name) are defined in impex file: testEntitlements.csv
+    ${userId} =        generate random id
+    ${entitlement}=    create entitlement with entitlementType "ME1" for user "${userId}"
+    assign grant time "2014-01-01T00:00:00Z" to entitlement "${entitlement}"
+    grant entitlement "${entitlement}"
+    ensure there are "1" entitlements for user "${userId}"
+    verify grants of "${userId}" xml are equal to "<entitlements><entitlement><grantTime>2014-01-01 00:00:00.0 UTC</grantTime><status>ACTIVE</status><id>ME1</id><startTime>2014-01-01 00:00:00.0 UTC</startTime><description>Access to Metered Entitlement 1</description><name>Metered Entitlement 1</name><quantity>0</quantity></entitlement></entitlements>"
+
+Test_GrantEntitlementPopulator_CreateAndVerifyXML_StringCondition
+    [Documentation]    Verifies addition of one simple grant with string condition only
+    ...                All entitlement details(name) are defined in impex file: testEntitlements.csv
+    ${userId} =        generate random id
+    ${stringCondition}    Set Variable    "string" condition with parameters {"string":"stringCondition"}
+    ${entitlement}=    create entitlement with entitlementType "ME1" for user "${userId}"
+    assign grant time "2014-01-01T00:00:00Z" to entitlement "${entitlement}"
+    add condition "${stringCondition}" to entitlement "${entitlement}"
+    grant entitlement "${entitlement}"
+    ensure there are "1" entitlements for user "${userId}"
+    verify grants of "${userId}" xml are equal to "<entitlements><entitlement><grantTime>2014-01-01 00:00:00.0 UTC</grantTime><status>ACTIVE</status><id>ME1</id><startTime>2014-01-01 00:00:00.0 UTC</startTime><description>Access to Metered Entitlement 1</description><name>Metered Entitlement 1</name><quantity>0</quantity><conditionString>stringCondition</conditionString></entitlement></entitlements>"
+
+Test_GrantEntitlementPopulator_CreateAndVerifyXML_FullGrantData
+    [Documentation]    Verifies addition of one full grant (with all conditions)
+    ...                All entitlement details(name) are defined in impex file: testEntitlements.csv
+    ${userId} =        generate random id
+    ${stringCondition}    Set Variable    "string" condition with parameters {"string":"stringCondition"}
+    ${meteredCondition1} =         Set Variable        "metered" condition with parameters {"maxQuantity": "1", "allowOverage" : "false"}
+    ${pathCondition}    Set Variable    "path" condition with parameters {"path":"/root"}
+    ${timeframeCondition}    Set Variable    "timeframe" condition with parameters {"startTime":"2014-01-01T00:00:00Z","endTime":"2015-01-01T00:00:02Z"}
+    ${geoCondition}    Set Variable    "geo" condition with parameters {"geoPath":"Germany/Bavaria/Munich"}
+    ${entitlement}=    create entitlement with entitlementType "ME1" for user "${userId}"
+    add condition "${stringCondition}" to entitlement "${entitlement}"
+    add condition "${meteredCondition1}" to entitlement "${entitlement}"
+    add condition "${pathCondition}" to entitlement "${entitlement}"
+    add condition "${timeframeCondition}" to entitlement "${entitlement}"
+    add condition "${geoCondition}" to entitlement "${entitlement}"
+    assign grant time "2014-01-01T00:00:00Z" to entitlement "${entitlement}"
+    assign grantSourceId "grantSourceId1" to entitlement "${entitlement}"
+    assign grantSource "grantSource" to entitlement "${entitlement}"
+    grant entitlement "${entitlement}"
+    ensure there are "1" entitlements for user "${userId}"
+    verify grants of "${userId}" xml are equal to "<entitlements><entitlement><conditionPath>/root</conditionPath><grantTime>2014-01-01 00:00:00.0 UTC</grantTime><status>ACTIVE</status><conditionGeo class='list'><string>Germany/Bavaria/Munich</string></conditionGeo><endTime>2015-01-01 00:00:02.0 UTC</endTime><id>ME1</id><startTime>2014-01-01 00:00:00.0 UTC</startTime><description>Access to Metered Entitlement 1</description><name>Metered Entitlement 1</name><quantity>1</quantity><conditionString>stringCondition</conditionString></entitlement></entitlements>"
+
+Test_GrantEntitlementPopulator_CreateAndVerifyXML_TimePlusMetered
+    [Documentation]    Verifies time values in case grant has timeframe and metered conditions
+    ${userId} =        generate random id
+    ${meteredCondition1} =         Set Variable        "metered" condition with parameters {"maxQuantity": "1", "allowOverage" : "false"}
+    ${timeframeCondition}    Set Variable    "timeframe" condition with parameters {"startTime":"2015-01-01T00:00:00Z","endTime":"2016-01-01T00:00:02Z"}
+    ${entitlement}=    create entitlement with entitlementType "ME1" for user "${userId}"
+    add condition "${timeframeCondition}" to entitlement "${entitlement}"
+    add condition "${meteredCondition1}" to entitlement "${entitlement}"
+    assign grant time "2014-01-01T00:00:00Z" to entitlement "${entitlement}"
+    assign grantSourceId "grantSourceId1" to entitlement "${entitlement}"
+    assign grantSource "grantSource" to entitlement "${entitlement}"
+    grant entitlement "${entitlement}"
+    ensure there are "1" entitlements for user "${userId}"
+    verify grants of "${userId}" xml are equal to "<entitlements><entitlement><grantTime>2014-01-01 00:00:00.0 UTC</grantTime><status>ACTIVE</status><endTime>2016-01-01 00:00:02.0 UTC</endTime><id>ME1</id><startTime>2015-01-01 00:00:00.0 UTC</startTime><description>Access to Metered Entitlement 1</description><name>Metered Entitlement 1</name><quantity>1</quantity></entitlement></entitlements>"
+
+Test_GrantEntitlementPopulator_CreateAndVerifyXML_MeteredPlusTime
+    [Documentation]    Verifies time values in case grant has timeframe and metered conditions
+    ${userId} =        generate random id
+    ${meteredCondition1} =         Set Variable        "metered" condition with parameters {"maxQuantity": "1", "allowOverage" : "false"}
+    ${timeframeCondition}    Set Variable    "timeframe" condition with parameters {"startTime":"2015-01-01T00:00:00Z","endTime":"2016-01-01T00:00:02Z"}
+    ${entitlement}=    create entitlement with entitlementType "ME1" for user "${userId}"
+    add condition "${meteredCondition1}" to entitlement "${entitlement}"
+    add condition "${timeframeCondition}" to entitlement "${entitlement}"
+    assign grant time "2014-01-01T00:00:00Z" to entitlement "${entitlement}"
+    assign grantSourceId "grantSourceId1" to entitlement "${entitlement}"
+    assign grantSource "grantSource" to entitlement "${entitlement}"
+    grant entitlement "${entitlement}"
+    ensure there are "1" entitlements for user "${userId}"
+    verify grants of "${userId}" xml are equal to "<entitlements><entitlement><grantTime>2014-01-01 00:00:00.0 UTC</grantTime><status>ACTIVE</status><endTime>2016-01-01 00:00:02.0 UTC</endTime><id>ME1</id><startTime>2015-01-01 00:00:00.0 UTC</startTime><description>Access to Metered Entitlement 1</description><name>Metered Entitlement 1</name><quantity>1</quantity></entitlement></entitlements>"
+
+Test_Get_Grant_without_entitlements
+    [Documentation]    Grant without entitlements and check where it is in DB
+    ${userId} =        generate random id
+    ${grant} =         create entitlement with entitlementType "UNKNOWN_ENTITLEMENT" for user "${userId}"
+    ${grant} =         assign grant time "2014-07-03T13:41:07Z" to entitlement "${grant}"
+    grant entitlement "${grant}"
+	ensure there are "1" entitlements for user "${userId}"
+    verify grants of "${userId}" xml are equal to "<entitlements><entitlement><grantTime>2014-07-03 13:41:07.0 UTC</grantTime><status>ACTIVE</status><startTime>2014-07-03 13:41:07.0 UTC</startTime><quantity>0</quantity><name>UNKNOWN_ENTITLEMENT</name></entitlement></entitlements>"
+

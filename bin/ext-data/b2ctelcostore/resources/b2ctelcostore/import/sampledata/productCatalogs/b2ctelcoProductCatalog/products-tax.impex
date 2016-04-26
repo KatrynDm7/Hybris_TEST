@@ -1,0 +1,9 @@
+# ImpEx for Importing Product taxes into B2CTelco Store
+
+# Insert Product taxes for US
+INSERT_UPDATE ProductTaxCode;productCode[unique=true];taxCode;taxArea[unique=true]
+#;23191;PC080601;US
+
+# Insert Product taxes for JP
+INSERT_UPDATE ProductTaxCode;productCode[unique=true];taxCode;taxArea[unique=true]
+#;23191;PC080601;JP

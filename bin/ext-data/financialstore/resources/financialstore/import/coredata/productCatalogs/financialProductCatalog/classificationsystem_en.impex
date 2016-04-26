@@ -1,0 +1,12 @@
+# 
+# Import the Product Catalog and Classification Catalog
+#
+# ENGLISH LOCALIZATION
+#
+
+$lang=en
+
+$classificationCatalog=InsuranceClassification
+
+UPDATE ClassificationSystem;id[unique=true]; name[lang=$lang];
+;$classificationCatalog;Insurance ClassificationSystem

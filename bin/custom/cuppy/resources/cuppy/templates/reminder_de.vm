@@ -1,0 +1,30 @@
+<html>
+	<head>
+	</head>
+
+	<body>
+	Liebe(r) $ctx.player.name,<br/><br/>
+
+	auf folgende Spiele hast Du noch keinen Tipp abgegeben:<br/>
+	<table border="1">
+		<tr>
+			<th>Name</th>
+			<th>Anstoß</th>
+			<th>Gastgeber</th>
+			<th>Gast</th>
+		</tr>
+		#foreach( $match in $ctx.reminderMatches )
+		<tr>
+			<td>$match.name</td>
+			<td>$match.kickOffTime</td>
+			<td>$match.home</td>
+			<td>$match.guest</td>
+		</tr>
+		#end
+	</table>
+	
+	<br/><br/>Liebe Grüße,<br/>
+	Dein Cuppy-Team
+	</body>
+
+</html>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<!-- Root Response DTO with one c4c-object -->
+	<bean class="de.hybris.platform.customerticketingc4cintegration.data.ODataSingleResponseData">
+		<property name="d" type="ODataSingleResultsData"/>
+	</bean>
+
+	<!-- Root Response DTO with list c4c-objects -->
+	<bean class="de.hybris.platform.customerticketingc4cintegration.data.ODataListResponseData">
+		<property name="d" type="ODataListResultsData"/>
+	</bean>
+
+	<bean class="de.hybris.platform.customerticketingc4cintegration.data.ODataSingleResultsData">
+		<property name="results" type="ServiceRequestData"/>
+	</bean>
+
+	<bean class="de.hybris.platform.customerticketingc4cintegration.data.ODataListResultsData">
+		<property name="results" type="java.util.List&lt;ServiceRequestData&gt;"/>
+	</bean>
+
+	<bean class="de.hybris.platform.customerticketingc4cintegration.data.ServiceRequestData">
+		<property name="Name" type="String"/>
+		<property name="CustomerID" type="String"/>
+		<property name="ExternalCustomerID" type="String"/>
+		<property name="ExternalContactID" type="String"/>
+		<property name="DataOriginTypeCode" type="String"/>
+		<property name="ObjectID" type="String"/>
+		<property name="LastChangeDateTime" type="String"/>
+		<property name="CreationDateTime" type="String"/>
+		<property name="StatusCode" type="String"/>
+		<property name="Notes" type="java.util.List&lt;Note&gt;"/>
+		<property name="RelatedTransactions" type="java.util.List&lt;RelatedTransaction&gt;"/>
+	</bean>
+
+	<!-- Also used as Update request dto -->
+	<bean class="de.hybris.platform.customerticketingc4cintegration.data.Note">
+		<property name="Text" type="String"/>
+		<property name="TypeCode" type="String"/>
+		<property name="LanguageCode" type="String"/>
+		<property name="ParentObjectID" type="String"/>
+        <property name="CreatedOn" type="String"/>
+		<property name="CreatedBy" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.customerticketingc4cintegration.data.RelatedTransaction">
+		<property name="BusinessSystemID" type="String"/>
+		<property name="TypeCode" type="String"/>
+		<property name="RoleCode" type="String"/>
+		<property name="ID" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.user.data.CustomerData">
+		<property name="customerId" type="String"/>
+	</bean>
+	
+</beans>
+

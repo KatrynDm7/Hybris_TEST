@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:oxm="http://www.springframework.org/schema/oxm"
+	xmlns:util="http://www.springframework.org/schema/util"
+	
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	                    http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd
+	                    http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+	
+	<oxm:jaxb2-marshaller id="marshaller" contextPath="de.hybris.platform.cuppy.ws.openligadb.types"/>
+
+	<bean id="openLigaDBTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+		<property name="marshaller" ref="marshaller" />
+		<property name="unmarshaller" ref="marshaller" />
+		<property name="defaultUri" value="http://www.openligadb.de/Webservices/Sportsdata.asmx"/>
+		<property name="messageFactory" ref="messageFactory"/> 
+	</bean>
+	
+	<bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory">
+    	<description>A message factory to support SOAP 1.2</description>
+        <property name="soapVersion">
+            <util:constant static-field="org.springframework.ws.soap.SoapVersion.SOAP_12"/>
+        </property>
+    </bean>
+	
+
+</beans>

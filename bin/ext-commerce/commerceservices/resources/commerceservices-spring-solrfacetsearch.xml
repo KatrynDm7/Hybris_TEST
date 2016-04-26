@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2015 hybris AG All rights reserved.
+	This software is the confidential and proprietary information of hybris ("Confidential
+	Information"). You shall not disclose such Confidential Information and shall
+	use it only in accordance with the terms of the license agreement you entered
+	into with hybris. -->
+
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<alias name="defaultSetupSolrIndexerService" alias="setupSolrIndexerService" />
+	<bean id="defaultSetupSolrIndexerService" class="de.hybris.platform.commerceservices.setup.impl.DefaultSetupSolrIndexerService">
+		<property name="cronJobService" ref="cronJobService" />
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<bean id="migrateFacetSortAttributeEventListener" class="de.hybris.platform.commerceservices.event.MigrateFacetSortAttribute"
+		parent="abstractEventListener">
+		<property name="modelService" ref="modelService" />
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+		<property name="typeService" ref="typeService" />
+		<property name="facetSort2sortProvidersMapping">
+			<map>
+				<entry key="Alpha" value="facetNameSortProviderAscending" />
+			</map>
+		</property>
+	</bean>
+
+	<!-- Configuration related beans -->
+
+	<alias name="commerceIndexConfigConverter" alias="solrIndexConfigConverter" />
+	<bean id="commerceIndexConfigConverter" parent="defaultSolrIndexConfigConverter">
+		<property name="populators">
+			<list merge="true">
+				<ref bean="commerceIndexConfigPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultCommerceIndexConfigPopulator" alias="commerceIndexConfigPopulator" />
+	<bean id="defaultCommerceIndexConfigPopulator" class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.CommerceIndexConfigPopulator">
+		<property name="baseSiteService" ref="baseSiteService" />
+	</bean>
+
+	<alias name="commerceIndexedTypeConverter" alias="solrIndexedTypeConverter" />
+	<bean id="commerceIndexedTypeConverter" parent="defaultSolrIndexedTypeConverter">
+		<property name="populators">
+			<list merge="true">
+				<ref bean="commerceIndexedTypePopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultCommerceIndexedTypePopulator" alias="commerceIndexedTypePopulator" />
+	<bean id="defaultCommerceIndexedTypePopulator" class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.CommerceIndexedTypePopulator">
+		<property name="indexedTypeSortConverter" ref="indexedTypeSortConverter" />
+	</bean>
+
+	<alias name="commerceIndexedPropertyConverter" alias="indexedPropertyConverter" />
+	<bean id="commerceIndexedPropertyConverter" parent="defaultIndexedPropertyConverter">
+		<property name="populators">
+			<list merge="true">
+				<ref bean="commerceIndexedPropertyPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultCommerceIndexedPropertyPopulator" alias="commerceIndexedPropertyPopulator" />
+	<bean id="defaultCommerceIndexedPropertyPopulator" class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.CommerceIndexedPropertyPopulator" />
+
+	<alias name="defaultIndexedTypeSortConverter" alias="indexedTypeSortConverter" />
+	<bean id="defaultIndexedTypeSortConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commerceservices.search.solrfacetsearch.config.IndexedTypeSort" />
+		<property name="populators">
+			<list>
+				<ref bean="indexedTypeSortPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultIndexedTypeSortPopulator" alias="indexedTypeSortPopulator" />
+	<bean id="defaultIndexedTypeSortPopulator" class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.IndexedTypeSortPopulator">
+	</bean>
+
+	<alias name="defaultSolrFacetSearchConfigSelectionStrategy" alias="solrFacetSearchConfigSelectionStrategy" />
+	<bean id="defaultSolrFacetSearchConfigSelectionStrategy"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.strategies.impl.DefaultSolrFacetSearchConfigSelectionStrategy">
+		<property name="catalogVersionService" ref="catalogVersionService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="facetSearchConfigDao" ref="facetSearchConfigDao" />
+	</bean>
+
+	<!-- Search related beans -->
+
+	<alias name="defaultCommerceSolrAutocompleteService" alias="commerceAutocompleteService" />
+	<bean id="defaultCommerceSolrAutocompleteService"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.impl.DefaultSolrProductSearchAutocompleteService">
+		<property name="facetSearchConfigService" ref="facetSearchConfigService" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="solrAutoSuggestService" ref="solrAutoSuggestService" />
+		<property name="solrIndexedTypeCodeResolver" ref="solrIndexedTypeCodeResolver" />
+		<property name="solrFacetSearchConfigSelectionStrategy" ref="solrFacetSearchConfigSelectionStrategy" />
+	</bean>
+
+	<alias name="defaultCommerceProductSearchService" alias="commerceProductSearchService" />
+	<alias name="defaultCommerceSolrProductSearchService" alias="defaultCommerceProductSearchService" />
+	<bean id="defaultCommerceSolrProductSearchService" class="de.hybris.platform.commerceservices.search.solrfacetsearch.impl.DefaultSolrProductSearchService">
+		<property name="searchQueryPageableConverter" ref="commerceSearchQueryPageableConverter" />
+		<property name="searchRequestConverter" ref="commerceSolrSearchRequestConverter" />
+		<property name="searchResponseConverter" ref="commerceSolrSearchResponseConverter" />
+	</bean>
+
+	<alias name="defaultCommerceSearchQueryPageableConverter" alias="commerceSearchQueryPageableConverter" />
+	<bean id="defaultCommerceSearchQueryPageableConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commerceservices.search.solrfacetsearch.data.SolrSearchRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="commerceSearchSolrQueryPopulator" />
+				<ref bean="commerceSearchPagePopulator" />
+				<ref bean="commerceSearchSortPopulator" />
+				<ref bean="commerceSearchTextPopulator" />
+				<ref bean="commerceSearchFiltersPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultCommerceSearchSolrQueryPopulator" alias="commerceSearchSolrQueryPopulator" />
+	<bean id="defaultCommerceSearchSolrQueryPopulator" class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SearchSolrQueryPopulator">
+		<property name="catalogVersionService" ref="catalogVersionService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="facetSearchService" ref="facetSearchService" />
+		<property name="facetSearchConfigService" ref="facetSearchConfigService" />
+		<property name="solrFacetSearchConfigSelectionStrategy" ref="solrFacetSearchConfigSelectionStrategy" />
+	</bean>
+
+	<alias name="defaultCommerceSearchPagePopulator" alias="commerceSearchPagePopulator" />
+	<bean id="defaultCommerceSearchPagePopulator" class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SearchPagePopulator" />
+
+	<alias name="defaultCommerceSearchSortPopulator" alias="commerceSearchSortPopulator" />
+	<bean id="defaultCommerceSearchSortPopulator" class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SearchSortPopulator" />
+
+	<alias name="defaultCommerceSearchTextPopulator" alias="commerceSearchTextPopulator" />
+	<bean id="defaultCommerceSearchTextPopulator" class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SearchTextPopulator">
+		<property name="freeTextQueryBuilders">
+			<list>
+				<bean class="de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.DefaultFreeTextQueryBuilder">
+					<property name="propertyName" value="ean" />
+					<property name="boost" value="100" />
+				</bean>
+				<bean class="de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.DefaultFreeTextQueryBuilder">
+					<property name="propertyName" value="code" />
+					<property name="boost" value="90" />
+				</bean>
+				<bean class="de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.DefaultFreeTextQueryBuilder">
+					<property name="propertyName" value="name" />
+					<property name="boost" value="50" />
+				</bean>
+				<bean class="de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.DefaultFreeTextQueryBuilder">
+					<property name="propertyName" value="manufacturerName" />
+					<property name="boost" value="40" />
+				</bean>
+				<bean
+					class="de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.ClassificationFreeTextQueryBuilder">
+					<property name="boost" value="30" />
+				</bean>
+				<bean class="de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.DefaultFreeTextQueryBuilder">
+					<property name="propertyName" value="keywords" />
+					<property name="boost" value="20" />
+				</bean>
+				<bean class="de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.DefaultFreeTextQueryBuilder">
+					<property name="propertyName" value="categoryName" />
+					<property name="boost" value="10" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultCommerceSearchFiltersPopulator" alias="commerceSearchFiltersPopulator" />
+	<bean id="defaultCommerceSearchFiltersPopulator" class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SearchFiltersPopulator" />
+
+	<alias name="defaultCommerceSolrSearchRequestConverter" alias="commerceSolrSearchRequestConverter" />
+	<bean id="defaultCommerceSolrSearchRequestConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commerceservices.search.solrfacetsearch.data.SolrSearchResponse" />
+		<property name="populators">
+			<list>
+				<ref bean="solrSearchRequestResponsePopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultSolrSearchRequestResponsePopulator" alias="solrSearchRequestResponsePopulator" />
+	<bean id="defaultSolrSearchRequestResponsePopulator"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SolrSearchRequestResponsePopulator">
+		<property name="solrFacetSearchService" ref="solrFacetSearchService" />
+		<property name="solrKeywordRedirectService" ref="solrKeywordRedirectService" />
+	</bean>
+
+	<alias name="defaultCommerceSolrSearchResponseConverter" alias="commerceSolrSearchResponseConverter" />
+	<bean id="defaultCommerceSolrSearchResponseConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commerceservices.search.facetdata.ProductCategorySearchPageData" />
+		<property name="populators">
+			<list>
+				<ref bean="commerceSearchResponseQueryPopulator" />
+				<ref bean="commerceSearchResponsePaginationPopulator" />
+				<ref bean="commerceSearchResponseResultsPopulator" />
+				<ref bean="commerceSearchResponseFacetsPopulator" />
+				<ref bean="commerceSearchResponseFacetFilterPopulator" />
+				<ref bean="commerceSearchResponseFacetSortPopulator" />
+				<ref bean="commerceSearchResponseBreadcrumbsPopulator" />
+				<ref bean="commerceSearchResponseSortsPopulator" />
+				<ref bean="commerceSearchResponseFreeTextSearchPopulator" />
+				<ref bean="commerceSearchResponseCategoryCodePopulator" />
+				<ref bean="commerceSearchResponseSubCategoriesPopulator" />
+				<ref bean="commerceSearchResponseSpellingSuggestionPopulator" />
+				<ref bean="commerceSearchResponseKeywordRedirectPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultCommerceSearchResponseQueryPopulator" alias="commerceSearchResponseQueryPopulator" />
+	<bean id="defaultCommerceSearchResponseQueryPopulator" class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SearchResponseQueryPopulator" />
+
+	<alias name="defaultCommerceSearchResponsePaginationPopulator" alias="commerceSearchResponsePaginationPopulator" />
+	<bean id="defaultCommerceSearchResponsePaginationPopulator" class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SearchResponsePaginationPopulator" />
+
+	<alias name="defaultCommerceSearchResponseResultsPopulator" alias="commerceSearchResponseResultsPopulator" />
+	<bean id="defaultCommerceSearchResponseResultsPopulator" class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SearchResponseResultsPopulator">
+		<property name="searchResultConverter" ref="documentSearchResultConverter" />
+	</bean>
+	
+	<alias name="defaultDocumentSearchResultConverter" alias="documentSearchResultConverter" />
+	<bean id="defaultDocumentSearchResultConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commerceservices.search.resultdata.SearchResultValueData" />
+		<property name="populators">
+			<list>
+				<ref bean="documentSearchResultValuePopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultDocumentSearchResultValuePopulator" alias="documentSearchResultValuePopulator" />
+	<bean id="defaultDocumentSearchResultValuePopulator"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.DocumentSearchResultValuePopulator" />
+
+	<alias name="defaultSolrDocumentSearchResultConverter" alias="solrDocumentSearchResultConverter" />
+	<bean id="defaultSolrDocumentSearchResultConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commerceservices.search.resultdata.SearchResultValueData" />
+		<property name="populators">
+			<list>
+				<ref bean="solrDocumentSearchResultValuePopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultSolrDocumentSearchResultValuePopulator" alias="solrDocumentSearchResultValuePopulator" />
+	<bean id="defaultSolrDocumentSearchResultValuePopulator"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SolrDocumentSearchResultValuePopulator">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+	</bean>
+
+	<alias name="defaultCommerceSearchResponseFacetsPopulator" alias="commerceSearchResponseFacetsPopulator" />
+	<bean id="defaultCommerceSearchResponseFacetsPopulator" class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SearchResponseFacetsPopulator" />
+
+	<alias name="defaultCommerceSearchResponseFacetFilterPopulator" alias="commerceSearchResponseFacetFilterPopulator" />
+	<bean id="defaultCommerceSearchResponseFacetFilterPopulator"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SearchResponseFacetFilterPopulator" />
+
+	<alias name="defaultCommerceSearchResponseFacetSortPopulator" alias="commerceSearchResponseFacetSortPopulator" />
+	<bean id="defaultCommerceSearchResponseFacetSortPopulator" class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SearchResponseFacetSortPopulator" />
+
+	<alias name="defaultCommerceSearchResponseBreadcrumbsPopulator" alias="commerceSearchResponseBreadcrumbsPopulator" />
+	<bean id="defaultCommerceSearchResponseBreadcrumbsPopulator"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SearchResponseBreadcrumbsPopulator" />
+
+	<alias name="defaultCommerceSearchResponseSortsPopulator" alias="commerceSearchResponseSortsPopulator" />
+	<bean id="defaultCommerceSearchResponseSortsPopulator" class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SearchResponseSortsPopulator" />
+
+	<alias name="defaultCommerceSearchResponseFreeTextSearchPopulator" alias="commerceSearchResponseFreeTextSearchPopulator" />
+	<bean id="defaultCommerceSearchResponseFreeTextSearchPopulator"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SearchResponseFreeTextSearchPopulator" />
+
+	<alias name="defaultCommerceSearchResponseCategoryCodePopulator" alias="commerceSearchResponseCategoryCodePopulator" />
+	<bean id="defaultCommerceSearchResponseCategoryCodePopulator"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SearchResponseCategoryCodePopulator" />
+
+	<alias name="defaultCommerceSearchResponseSubCategoriesPopulator" alias="commerceSearchResponseSubCategoriesPopulator" />
+	<bean id="defaultCommerceSearchResponseSubCategoriesPopulator"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SearchResponseSubCategoriesPopulator">
+		<property name="commerceCategoryService" ref="commerceCategoryService" />
+	</bean>
+
+	<alias name="defaultCommerceSearchResponseSpellingSuggestionPopulator" alias="commerceSearchResponseSpellingSuggestionPopulator" />
+	<bean id="defaultCommerceSearchResponseSpellingSuggestionPopulator"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SearchResponseSpellingSuggestionPopulator" />
+
+	<alias name="defaultCommerceSearchResponseKeywordRedirectPopulator" alias="commerceSearchResponseKeywordRedirectPopulator" />
+	<bean id="defaultCommerceSearchResponseKeywordRedirectPopulator"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SearchResponseKeywordRedirectPopulator">
+		<property name="typeService" ref="typeService" />
+		<property name="keywordRedirectUrlResolvers">
+			<map>
+				<entry key="SolrProductRedirect" value-ref="productKeywordRedirectUrlResolver" />
+				<entry key="SolrCategoryRedirect" value-ref="categoryKeywordRedirectUrlResolver" />
+				<entry key="SolrURIRedirect" value-ref="uriKeywordRedirectUrlResolver" />
+			</map>
+		</property>
+	</bean>
+
+	<alias name="defaultProductKeywordRedirectUrlResolver" alias="productKeywordRedirectUrlResolver" />
+	<bean id="defaultProductKeywordRedirectUrlResolver"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.keywordredirect.impl.ProductKeywordRedirectUrlResolver">
+		<property name="productModelUrlResolver" ref="productModelUrlResolver" />
+	</bean>
+
+	<alias name="defaultCategoryKeywordRedirectUrlResolver" alias="categoryKeywordRedirectUrlResolver" />
+	<bean id="defaultCategoryKeywordRedirectUrlResolver"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.keywordredirect.impl.CategoryKeywordRedirectUrlResolver">
+		<property name="categoryModelUrlResolver" ref="categoryModelUrlResolver" />
+	</bean>
+
+	<alias name="defaultUriKeywordRedirectUrlResolver" alias="uriKeywordRedirectUrlResolver" />
+	<bean id="defaultUriKeywordRedirectUrlResolver"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.keywordredirect.impl.UriKeywordRedirectUrlResolver" />
+
+	<!-- Value providers -->
+
+	<bean id="commerceClassificationPropertyValueProvider"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.CommerceClassificationPropertyValueProvider"
+		parent="classificationPropertyValueProvider" />
+
+	<bean id="classificationPropertySplitValueProvider"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.ClassificationPropertySplitValueProvider"
+		parent="commerceClassificationPropertyValueProvider">
+		<property name="splitRegex" value="/" />
+	</bean>
+
+	<bean id="optionalModelPropertyFieldValueProvider"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.OptionalModelPropertyFieldValueProvider"
+		parent="modelPropertyFieldValueProvider">
+		<property name="commonI18NService" ref="commonI18NService" />
+	</bean>
+
+	<bean id="productReviewAverageRatingValueProvider"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.ProductReviewAverageRatingValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="customerReviewService" ref="customerReviewService" />
+	</bean>
+
+	<bean id="productKeywordsValueProvider" class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.ProductKeywordsValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="sessionService" ref="sessionService" />
+	</bean>
+
+	<bean id="abstractImageValueProvider" abstract="true"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.ImageValueProvider">
+		<property name="mediaService" ref="mediaService" />
+		<property name="mediaContainerService" ref="mediaContainerService" />
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+	</bean>
+
+	<alias name="defaultProductStockLevelStatusValueProvider" alias="productStockLevelStatusValueProvider" />
+	<bean id="defaultProductStockLevelStatusValueProvider"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.ProductStockLevelStatusValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="commerceStockService" ref="commerceStockService" />
+	</bean>
+
+	<bean id="productInStockFlagValueProvider"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.ProductInStockFlagValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="commerceStockService" ref="commerceStockService" />
+	</bean>
+
+	<bean id="productStoreStockValueProvider" class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.ProductStoreStockValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="commerceStockService" ref="commerceStockService" />
+	</bean>
+
+	<bean id="productPickupAvailabilityValueProvider"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.ProductPickupAvailabilityValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="pickupAvailabilityStrategy" ref="pickupAvailabilityStrategy" />
+	</bean>
+
+	<alias name="defaultCategorySource" alias="abstractCategorySource" />
+	<bean id="defaultCategorySource" abstract="true"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.DefaultCategorySource">
+		<property name="modelService" ref="modelService" />
+		<property name="categoriesQualifier" value="supercategories" />
+		<property name="includeClassificationClasses" value="false" />
+		<property name="categoryService" ref="categoryService" />
+	</bean>
+
+	<bean id="allCategoriesSource" parent="abstractCategorySource" />
+
+	<bean id="categoryPathValueProvider" class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.CategoryPathValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="categoryService" ref="categoryService" />
+		<property name="categorySource" ref="allCategoriesSource" />
+	</bean>
+
+	<!-- Value resolvers -->
+
+	<bean id="productAttributesValueResolver" class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.ProductAttributesValueResolver"
+		parent="modelAttributesValueResolver">
+		<property name="variantsService" ref="variantsService" />
+	</bean>
+
+	<bean id="productClassificationAttributesValueResolver"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.ProductClassificationAttributesValueResolver"
+		parent="abstractValueResolver">
+		<property name="qualifierProvider" ref="languageQualifierProvider" />
+		<property name="classificationService" ref="classificationService" />
+		<property name="valueFilters">
+			<list>
+				<ref bean="formatValueFilter" />
+				<ref bean="splitValueFilter" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="productPromotionAttributesValueResolver"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.ProductPromotionAttributesValueResolver"
+		parent="abstractValueResolver">
+		<property name="qualifierProvider" ref="languageQualifierProvider" />
+		<property name="promotionsService" ref="promotionsService" />
+		<property name="modelService" ref="modelService" />
+		<property name="typeService" ref="typeService" />
+		<property name="expressionEvaluator" ref="expressionEvaluator" />
+	</bean>
+
+	<bean id="productPricesValueResolver" class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.ProductPricesValueResolver"
+		parent="abstractValueResolver">
+		<property name="qualifierProvider" ref="currencyQualifierProvider" />
+		<property name="priceService" ref="priceService" />
+	</bean>
+
+	<bean id="productUrlsValueResolver" class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.ProductUrlsValueResolver"
+		parent="abstractValueResolver">
+		<property name="qualifierProvider" ref="languageQualifierProvider" />
+		<property name="urlResolver" ref="productModelUrlResolver" />
+	</bean>
+
+	<bean id="productKeywordsValueResolver" class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.ProductKeywordsValueResolver"
+		parent="abstractValueResolver">
+		<property name="qualifierProvider" ref="languageQualifierProvider" />
+	</bean>
+
+	<bean id="productImagesValueResolver" class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.ProductImagesValueResolver"
+		parent="abstractValueResolver" />
+
+	<!-- Other providers -->
+
+	<bean id="defaultTopValuesProvider" class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.DefaultTopValuesProvider" />
+
+	<bean id="pointOfServiceFacetDisplayNameProvider"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.PointOfServiceFacetDisplayNameProvider">
+		<property name="pointOfServiceService" ref="pointOfServiceService" />
+	</bean>
+
+	<alias name="commerceCategoryFacetDisplayNameProvider" alias="categoryFacetDisplayNameProvider" />
+	<bean id="commerceCategoryFacetDisplayNameProvider"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.CommerceCategoryFacetDisplayNameProvider">
+		<property name="categoryService" ref="categoryService" />
+	</bean>
+
+    <!-- Multi-Dimensional Products -->
+
+	<bean id="solrFirstVariantCategoryManager"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.SolrFirstVariantCategoryManager">
+		<property name="l10NService" ref="l10nService" />
+	</bean>
+
+	<bean id="genericVariantProductModelComparator"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.entity.GenericVariantProductModelComparator">
+		<property name="variantValueCategoryModelPriorityComparator" ref="variantValueCategoryModelPriorityComparator" />
+	</bean>
+
+	<bean id="variantValueCategoryModelPriorityComparator"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.entity.VariantValueCategoryModelPriorityComparator">
+		<property name="categoryService" ref="categoryService" />
+	</bean>
+
+	<bean id="variantValueCategoryModelSequenceComparator"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.entity.VariantValueCategoryModelSequenceComparator" />
+
+	<alias name="defaultFirstGenericVariantProductUrlValueProvider" alias="firstGenericVariantProductUrlValueProvider" />
+	<bean id="defaultFirstGenericVariantProductUrlValueProvider"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.FirstGenericVariantProductUrlValueProvider"
+		parent="abstractMultidimensionalProductFieldValueProvider">
+		<property name="productModelUrlResolver" ref="productModelUrlResolver" />
+		<property name="genericVariantProductModelComparator" ref="genericVariantProductModelComparator" />
+	</bean>
+
+	<alias name="defaultFirstVariantCategoryNameListValueProvider" alias="firstVariantCategoryNameListValueProvider" />
+	<bean id="defaultFirstVariantCategoryNameListValueProvider"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.FirstVariantCategoryNameListValueProvider"
+		parent="abstractMultidimensionalProductFieldValueProvider">
+		<property name="variantValueCategoryModelPriorityComparator" ref="variantValueCategoryModelPriorityComparator" />
+		<property name="variantValueCategoryModelSequenceComparator" ref="variantValueCategoryModelSequenceComparator" />
+		<property name="categoryManager" ref="solrFirstVariantCategoryManager" />
+	</bean>
+
+	<bean id="variantProductStockLevelStatusValueProvider"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.VariantProductStockLevelStatusValueProvider"
+		parent="defaultProductStockLevelStatusValueProvider">
+		<property name="productSource" ref="variantProductSource"></property>
+	</bean>
+
+	<bean id="abstractMultidimensionalProductFieldValueProvider" abstract="true"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.AbstractMultidimensionalProductFieldValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+	</bean>
+
+	<alias name="defaultMultidimentionalProductFlagValueProvider" alias="multidimentionalProductFlagValueProvider" />
+	<bean id="defaultMultidimentionalProductFlagValueProvider"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.MultidimentionalProductFlagValueProvider"
+		parent="abstractMultidimensionalProductFieldValueProvider" />
+
+	<alias name="defaultProductPriceRangeValueProvider" alias="productPriceRangeValueProvider" />
+	<bean id="defaultProductPriceRangeValueProvider" class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.ProductPriceRangeValueProvider"
+		parent="abstractMultidimensionalProductFieldValueProvider" />
+
+	<alias name="defaultVariantCategorySource" alias="variantCategorySource" />
+	<bean id="defaultVariantCategorySource" class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.VariantCategorySource"
+		parent="defaultCategorySource">
+		<property name="productSource" ref="variantProductSource"></property>
+	</bean>
+
+	<bean id="variantProductSource" class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.VariantProductSource" />
+
+	<!-- Prototype Beans for Data POJOs -->
+
+	<bean id="autocompleteSuggestion" class="de.hybris.platform.commerceservices.search.solrfacetsearch.data.AutocompleteSuggestion"
+		scope="prototype" />
+	<bean id="indexedPropertyValueData" class="de.hybris.platform.commerceservices.search.solrfacetsearch.data.IndexedPropertyValueData"
+		scope="prototype" />
+	<bean id="searchQueryPageableData" class="de.hybris.platform.commerceservices.search.solrfacetsearch.data.SearchQueryPageableData"
+		scope="prototype" />
+	<bean id="solrDocumentData" class="de.hybris.platform.commerceservices.search.solrfacetsearch.data.SolrDocumentData"
+		scope="prototype" />
+	<bean id="solrSearchQueryData" class="de.hybris.platform.commerceservices.search.solrfacetsearch.data.SolrSearchQueryData"
+		scope="prototype" />
+	<bean id="solrSearchQueryTermData" class="de.hybris.platform.commerceservices.search.solrfacetsearch.data.SolrSearchQueryTermData"
+		scope="prototype" />
+	<bean id="solrSearchRequest" class="de.hybris.platform.commerceservices.search.solrfacetsearch.data.SolrSearchRequest"
+		scope="prototype" />
+	<bean id="solrSearchResponse" class="de.hybris.platform.commerceservices.search.solrfacetsearch.data.SolrSearchResponse"
+		scope="prototype" />
+	<bean id="indexedTypeSort" class="de.hybris.platform.commerceservices.search.solrfacetsearch.config.IndexedTypeSort"
+		scope="prototype" />
+
+	<!--  Listeners -->
+
+	<bean id="commerceSessionInitializationListener"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.indexer.listeners.CommerceSessionInitializationListener">
+		<property name="baseSiteService" ref="baseSiteService" />
+	</bean>
+
+	<bean id="commerceSessionInitializationListenerDefinition" parent="solrListenerDefinition">
+		<property name="listener" ref="commerceSessionInitializationListener" />
+	</bean>
+</beans>

@@ -1,0 +1,12 @@
+# ImpEx for Promotions for B2C Telco Store
+
+# Language
+$lang=en
+
+# Import config properties into impex macros
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+
+# Load the storefront context root config param
+$storefrontContextRoot=$config-storefrontContextRoot
+
+

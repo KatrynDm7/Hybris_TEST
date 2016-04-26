@@ -1,0 +1,7 @@
+#parse( "impex-templates/commercesearchatddtests-common-macros.impex.vm" )
+#[[
+#% impex.setLocale( Locale.ENGLISH );
+INSERT Product;code[unique=true];$catalogVersion;unit(code);$prices;supercategories(code,$catalogVersion);$approved;
+]]#
+;${productCode};;pc;${price};${categoryCode};;;;;
+

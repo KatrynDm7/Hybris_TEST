@@ -1,0 +1,13 @@
+$catalog-id=testCatalog
+$catalog-version=Online
+$catalogversion=catalogversion(catalog(id[default=$catalog-id]),version[default=$catalog-version])[unique=true,default=$catalog-id:$catalog-version]
+
+INSERT_UPDATE Agent;uid[unique=true];categories(code, $catalogversion);name
+;test.test@test.com;category2;Test Test
+
+INSERT_UPDATE Address;&addrID;firstname;lastname;streetname[unique=true];town;email;fax;phone1;postalcode[unique=true];owner(Agent.uid)
+;Test.Test@test.com;Test_First_Name;Test_Last_Name;1 Dr Carlton B Goodlett Pl;San Francisco, CA 94102;test.test@test.com;(415) 512-2100;(415) 512-6754;1541253;test.test@test.com
+
+INSERT_UPDATE Agent;uid[unique=true];enquiry(&addrID)
+;test.test@test.com;Test.Test@test.com
+

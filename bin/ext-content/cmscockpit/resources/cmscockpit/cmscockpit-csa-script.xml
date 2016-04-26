@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2015 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+
+<!-- WARNING: This is the Spring WEB configuration file. If you want to replace 
+	items or managers you have to do this from the extensions core configuration 
+	file (cmscockpit/resources/cmscockpit-application-context.xml) -->
+
+<!-- WARNING: This file is imported in cmscockpit-web-spring.xml therefore you don't need
+	to list it in your deployment descriptor -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util.xsd"
+	default-autowire="byName">
+
+    <bean id="notifyIframeZKComponentScripts" class="de.hybris.platform.cmscockpit.session.script.config.impl.SingleJavaScriptFile">
+        <property name="group" value="LIVEEDIT_SCRIPT_FILE" />
+        <property name="script">
+            <value>cmscockpit/js/default_notify_zk_via_iframe.js</value>
+        </property>
+    </bean>
+
+	<!-- Callback Event Handler Registry -->
+	<alias name="defaultCallbackEventHandlerRegistry" alias="liveEditCallbackEventHandlerRegistry" />
+	<bean id="defaultCallbackEventHandlerRegistry" class="de.hybris.platform.cmscockpit.components.liveedit.impl.DefaultCallbackEventHandlerRegistry" />
+	<bean id="liveEditClick2EditCallbackEventHandler" class="de.hybris.platform.cmscockpit.callbackevents.DefaultEditComponentCallbackEventHandler" />
+	<bean id="liveEditUrlChangeCallbackEventHandler" class="de.hybris.platform.cmscockpit.callbackevents.UrlChangeCallbackEventHandler" >
+		<property name="urlChangeEventConverter" ref="urlChangeEventConverter" />
+	</bean>
+	
+	
+	<alias alias="liveEditCaptionButtonHandlers" name="defaultLiveEditCaptionButtonHandlers" />
+	<util:list id="defaultLiveEditCaptionButtonHandlers">
+		<ref bean="liveEditCaptionButtonHandler"/>
+		<ref bean="previewContextLiveEditCaptionButtonHandler" />
+		<ref bean="pageEditLiveEditCaptionButtonHandler" />
+	</util:list>
+	
+	<alias name="defaultLiveEditCaptionButtonHandler" alias="liveEditCaptionButtonHandler" />
+	<bean id="defaultLiveEditCaptionButtonHandler" class="de.hybris.platform.cmscockpit.session.impl.LiveEditContentBrowser$ActivateLiveEditCaptionButtonHandler" />
+	<alias name="defaultPreviewContextLiveEditCaptionButtonHandler" alias="previewContextLiveEditCaptionButtonHandler" />
+	<bean id="defaultPreviewContextLiveEditCaptionButtonHandler" class="de.hybris.platform.cmscockpit.session.impl.LiveEditContentBrowser$PreviewContextLiveEditCaptionButtonHandler" />
+	<alias name="defaultPageEditLiveEditCaptionButtonHandler" alias="pageEditLiveEditCaptionButtonHandler" />
+	<bean id="defaultPageEditLiveEditCaptionButtonHandler" class="de.hybris.platform.cmscockpit.session.impl.LiveEditContentBrowser$PageEditLiveEditCaptionButtonHandler" >
+		<property name="cmsAdminSiteService" ref="cmsAdminSiteService" />
+	</bean>
+	
+</beans>

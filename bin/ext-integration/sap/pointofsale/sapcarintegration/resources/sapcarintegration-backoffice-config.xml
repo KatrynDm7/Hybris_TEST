@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config xmlns="http://www.hybris.com/cockpit/config">
+    <context merge-by="module" parent="auto" component="explorer-tree">
+        <explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree"/>
+    </context>
+    <context type="SAPConfiguration" component="editor-area" parent="auto" merge-by="module">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea" xmlns="http://www.hybris.com/cockpitng/component/editorArea">
+            <tab name="hmc.tab.sapcarintegration">
+                <section name="hmc.section.sapcarintegration">
+                 
+                      <attribute qualifier="sapcarintegration_HTTPDestination"/>
+                      <attribute qualifier="sapcarintegration_client"/>
+                      <attribute qualifier="sapcarintegration_serviceName"/>
+                 
+                </section>
+            </tab>
+        </editorArea:editorArea>
+    </context>
+</config>

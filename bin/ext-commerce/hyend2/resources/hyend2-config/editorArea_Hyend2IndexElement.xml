@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>
+	
+	<group qualifier="Hyend2IndexElementGeneral" visible="true" initially-opened="true">
+		<label key="cockpit.config.label.General" />
+		<property qualifier="Hyend2IndexElement.name" />		
+		<property qualifier="Hyend2IndexElement.active" />	
+		<property qualifier="Hyend2IndexElement.type" >
+			<parameter>
+				<name>allowCreate</name>
+				<value>false</value>
+			</parameter>
+			<parameter>
+				<name>allowActivate</name>
+				<value>false</value>
+			</parameter>
+		</property>
+	</group>
+	
+	<group qualifier="Hyend2IndexElementSchemas" visible="true" initially-opened="true">
+		<label key="hyend2.schemas" />
+		<property qualifier="Hyend2IndexElement.indexSchemas" />		
+	</group>
+	
+	<group qualifier="Hyend2IndexElementProperties" visible="true" initially-opened="true">
+		<label key="config.wizardConfig.properties" />
+		<property qualifier="Hyend2IndexElement.properties"  editor="advancedListViewReferenceUIEditor">
+			<parameter>
+				<name>allowCreate</name>
+				<value>true</value>
+			</parameter>
+		</property>		
+	</group>
+	
+	<group qualifier="Hyend2IndexElementDimensions" visible="true" initially-opened="true">
+		<label key="hyend2.editorArea.dimensions" />
+		<property qualifier="Hyend2IndexElement.dimensions"  editor="advancedListViewReferenceUIEditor">
+			<parameter>
+				<name>allowCreate</name>
+				<value>true</value>
+			</parameter>
+			<parameter>
+				<name>restrictToCreateTypes</name>
+				<value>Hyend2Dimension</value>
+			</parameter>
+		</property>		
+		<property qualifier="Hyend2IndexElement.categoryDimensions"  editor="advancedListViewReferenceUIEditor">
+			<parameter>
+				<name>allowCreate</name>
+				<value>true</value>
+			</parameter>
+			<parameter>
+				<name>restrictToCreateTypes</name>
+				<value>Hyend2CategoryDimension</value>
+			</parameter>
+		</property>
+	</group>
+	
+	<group qualifier="Hyend2IndexElementQueries" visible="true" initially-opened="true">
+		<label key="hyend2.editorArea.queries" />
+		<property qualifier="Hyend2IndexElement.baselineQuery" >
+			<parameter>
+    			<name>rows</name>
+    			<value>4</value>
+   			</parameter>
+		</property>	
+		<property qualifier="Hyend2IndexElement.baselineQueryUser" >
+			<parameter>
+				<name>allowActivate</name>
+				<value>false</value>
+			</parameter>
+			<parameter>
+				<name>allowCreate</name>
+				<value>false</value>
+			</parameter>
+		</property>
+		<property qualifier="Hyend2IndexElement.updateQuery" >
+			<parameter>
+    			<name>rows</name>
+    			<value>4</value>
+   			</parameter>
+		</property>
+		<property qualifier="Hyend2IndexElement.updateQueryUser" >
+			<parameter>
+				<name>allowActivate</name>
+				<value>false</value>
+			</parameter>
+			<parameter>
+				<name>allowCreate</name>
+				<value>false</value>
+			</parameter>
+		</property>
+		<property qualifier="Hyend2IndexElement.deleteQuery" >
+			<parameter>
+    			<name>rows</name>
+    			<value>4</value>
+   			</parameter>
+		</property>
+		<property qualifier="Hyend2IndexElement.deleteQueryUser" >
+			<parameter>
+				<name>allowActivate</name>
+				<value>false</value>
+			</parameter>
+			<parameter>
+				<name>allowCreate</name>
+				<value>false</value>
+			</parameter>
+		</property>
+	</group>
+	
+</editor>

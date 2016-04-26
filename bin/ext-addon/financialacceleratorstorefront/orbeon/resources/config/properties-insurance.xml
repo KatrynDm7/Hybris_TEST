@@ -1,0 +1,66 @@
+<properties xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            xmlns:oxf="http://www.orbeon.com/oxf/processors">
+
+    <!-- buttons for insurance forms -->
+    <property as="xs:string"  name="oxf.fr.detail.buttons.insurance.*"                     value="save-final "/>
+   
+    <!-- Modified version of save-final process for insurance forms -->
+    <property as="xs:string"  name="oxf.fr.detail.process.save-final.insurance.*">
+       require-uploads 
+       then validate-all 
+       then save 
+       then navigate(uri =  "javascript:formPageNextPage()") 
+       recover error-message("database-error")
+    </property>
+    
+    <!-- Event-Form is going to have autosave -->
+    <property as="xs:integer" name="oxf.fr.detail.autosave-delay.insurance.Event-Form"   value="5000"/>
+    <property as="xs:integer" name="oxf.fr.detail.autosave-delay.insurance.TravelForm-TripDetails"   value="5000"/>
+    <property as="xs:integer" name="oxf.fr.detail.autosave-delay.insurance.TravelForm-TravellerInformation"   value="5000"/>
+    <property as="xs:integer" name="oxf.fr.detail.autosave-delay.insurance.PropertyForm-PropertyInformation-Homeowners"   value="5000"/>
+    <property as="xs:integer" name="oxf.fr.detail.autosave-delay.insurance.PropertyForm-PropertyInformation-Renters"   value="5000"/>
+    <property as="xs:integer" name="oxf.fr.detail.autosave-delay.insurance.PropertyForm-PersonalDetails"   value="5000"/>
+    <property as="xs:integer" name="oxf.fr.detail.autosave-delay.insurance.AutoForm-PersonalDetails"   value="5000"/>
+    <property as="xs:integer" name="oxf.fr.detail.autosave-delay.insurance.AutoForm-AutoDetails"   value="5000"/>
+    <property as="xs:integer" name="oxf.fr.detail.autosave-delay.insurance.LifeForm-LifeDetails"   value="5000"/>
+    <property as="xs:integer" name="oxf.fr.detail.autosave-delay.insurance.Insurance-ContactExpert"   value="5000"/>
+
+	<!-- Custom Java Script for every form in insurance-->
+	<property as="xs:string" name="oxf.fr.js.custom.uri.insurance.*"
+              value="/forms/insurance/session-gone.js"/>
+    
+    <!-- general CSS for every form in insurance-->
+    <property as="xs:string" name="oxf.fr.css.custom.uri.insurance.Event-Form"
+              value="/forms/insurance/checkoutpage/style.css"/>
+    <property as="xs:string" name="oxf.fr.css.custom.uri.insurance.TravelForm-TripDetails"
+              value="/forms/insurance/comparisonpage/style.css
+                    /forms/insurance/comparisonpage/travel-specific.css"/>
+    <property as="xs:string" name="oxf.fr.css.custom.uri.insurance.TravelForm-TravellerInformation"
+              value="/forms/insurance/checkoutpage/style.css"/>
+    <property as="xs:string" name="oxf.fr.css.custom.uri.insurance.PropertyForm-PropertyInformation-Homeowners"
+              value="/forms/insurance/comparisonpage/style.css
+                    /forms/insurance/comparisonpage/homeowners-specific.css"/>
+    <property as="xs:string" name="oxf.fr.css.custom.uri.insurance.PropertyForm-PropertyInformation-Renters"
+              value="/forms/insurance/comparisonpage/style.css
+                    /forms/insurance/comparisonpage/renters-specific.css"/>
+    <property as="xs:string" name="oxf.fr.css.custom.uri.insurance.PropertyForm-PersonalDetails"
+              value="/forms/insurance/checkoutpage/style.css"/>
+    <property as="xs:string" name="oxf.fr.css.custom.uri.insurance.Insurance-ContactExpert"
+              value="/forms/insurance/checkoutpage/style.css /forms/insurance/agentfinder/style.css"/>
+
+    <property as="xs:string" name="oxf.xforms.format.input.date" value="[D01]-[M01]-[Y]"/>
+    <property
+            as="xs:string"
+            name="oxf.fr.resource.*.*.en.detail.messages.form-validation-error"
+            value="There are &lt;span class='errorMessage_highlight'>validation errors&lt;/span>. Please retry once all fields have been properly filled-out."/>
+    <property as="xs:string" name="oxf.fr.css.custom.uri.insurance.AutoForm-PersonalDetails"
+              value="/forms/insurance/comparisonpage/style.css"/>
+    <property as="xs:string" name="oxf.fr.css.custom.uri.insurance.AutoForm-AutoDetails"
+              value="/forms/insurance/comparisonpage/style.css"/>
+    <property as="xs:string" name="oxf.fr.css.custom.uri.insurance.LifeForm-LifeDetails"
+                  value="/forms/insurance/comparisonpage/style.css
+                  /forms/insurance/comparisonpage/life-specific.css"/>
+    <property as="xs:string" name="oxf.fr.css.custom.uri.insurance.LifeForm-PersonalDetails"
+                      value="/forms/insurance/checkoutpage/style.css"/>
+</properties>
+

@@ -1,0 +1,17 @@
+$comp=ec2004
+
+#quarters
+update Match;id[unique=true];homeGoals;guestGoals;homeTeam(isocode);guestTeam(isocode);group(code,competition(code[default=$comp]))[unique=true]
+;25;6;5;POR;ENG;QUARTER
+;26;0;1;FRA;GRC;QUARTER
+;27;4;5;SWE;NLD;QUARTER
+;28;3;0;CZE;DEN;QUARTER
+
+#semi
+update Match;id[unique=true];homeGoals;guestGoals;homeTeam(isocode);guestTeam(isocode);group(code,competition(code[default=$comp]))[unique=true]
+;29;2;1;POR;NLD;SEMI
+;30;1;0;GRC;CZE;SEMI
+
+#finals
+update Match;id[unique=true];homeGoals;guestGoals;homeTeam(isocode);guestTeam(isocode);group(code,competition(code[default=$comp]))[unique=true]
+;31;0;1;POR;GRC;FINAL

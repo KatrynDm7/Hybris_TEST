@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="warehousingbackofficeLabelLocator" class="com.hybris.cockpitng.util.labels.ResourcesLabelLocator" scope="singleton" init-method="init" lazy-init="false">
+  		<property name="location" value="/warehousingbackoffice-backoffice-labels/"/>
+  		<property name="name" value="labels"/>
+  	</bean>
+
+    <alias name="mockPrintShippingLabelService" alias="printShippingLabelService"/>
+    <bean id="mockPrintShippingLabelService"
+          class="de.hybris.platform.warehousingbackoffice.services.printshippinglabel.impl.MockPrintShippingLabelService">
+        <property name="modelService" ref="modelService"/>
+        <property name="velocityRendererUtil" ref="velocityRendererUtil"/>
+        <property name="shippingLabelContext" ref="shippingLabelContext"/>
+    </bean>
+    
+    <bean id="velocityRendererUtil"
+          class="de.hybris.platform.warehousingbackoffice.actions.utils.VelocityRendererUtil">
+        <property name="rendererService" ref="rendererService"/>
+    </bean>
+
+    <alias name="defaultPrintPackLabelService" alias="printPackLabelService"/>
+    <bean id="defaultPrintPackLabelService"
+          class="de.hybris.platform.warehousingbackoffice.services.printpacklabel.impl.DefaultPrintPackLabelService">
+        <property name="velocityRendererUtil" ref="velocityRendererUtil"/>
+        <property name="packContext" ref="packContext"/>
+    </bean>
+
+	<alias name="defaultPrintPickListService" alias="printPickListService"/>
+    <bean id="defaultPrintPickListService" class="de.hybris.platform.warehousingbackoffice.services.printpicklist.impl.DefaultPrintPickListService">
+        <property name="velocityRendererUtil" ref="velocityRendererUtil"/>
+        <property name="pickSlipContext" ref="pickSlipContext"/>
+    </bean>
+    
+	<bean id="declineButtonCellRenderer" class="de.hybris.platform.warehousingbackoffice.renderers.DeclineButtonCellRenderer"></bean>
+
+	<bean id="productNestedAttributePanelRenderer" class="de.hybris.platform.omsbackoffice.renderers.NestedAttributePanelRenderer" parent="editorAreaPanelRenderer">
+        <property name="typeFacade" ref="typeFacade"/>
+        <property name="nestedAttributeUtils" ref="nestedAttributeUtils" />
+    </bean>
+</beans>

@@ -1,0 +1,142 @@
+$contentCatalog=financialContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$picture=media(code, $contentCV);
+$siteResource=jar:de.hybris.platform.financialstore.constants.FinancialStoreConstants&/financialstore/import/sampledata/contentCatalogs/$contentCatalog
+$xslfoResource=jar:de.hybris.platform.financialstore.constants.FinancialStoreConstants&/financialstore/import/document/pdf/$contentCatalog
+
+$addonExtensionName=financialacceleratorstorefront
+$jarResourceXslFoInsurance=jar:de.hybris.platform.financialstore.constants.FinancialStoreConstants&/$addonExtensionName/import/document/pdf
+
+# Language
+$lang=en
+
+
+# Category Pages
+UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+;;TravelInsurancesCategoryPage;Travel Insurances Category Page
+;;PropertyInsurancesHomeownersCategoryPage;Homeowners Property Insurances Category Page
+;;PropertyInsurancesRentersCategoryPage;Renters Property Insurances Category Page
+;;AutoInsurancesCategoryPage;Auto Insurances Category Page
+
+# CMS tabs components
+UPDATE CMSComparisonTabComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];
+;;singleTripComparisonTab;Single Trip;
+;;annualTripComparisonTab;Annual Trip;
+;;backpackingTripComparisonTab;Backpacking Trip;
+;;propertyHomeownersComparisonTab;Homeowners Property
+;;propertyRentersComparisonTab;Renters Property
+
+ # CMS Paragraph Component
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=en]
+;;TravelSection1Header;"<div class=""sectionHeader""><div class=""label"">Travel Information</div></div>";
+;;AutoSection1Header;"<div class=""sectionHeader""><div class=""label"">Auto Information</div></div>";
+;;AutoSection2Header;"<div class=""sectionHeader""><div class=""label"">Payment Frequency</div></div>";
+;;LifeSection1Header;"<div class=""sectionHeader""><div class=""label"">Coverage Information</div></div>";
+;;PropertyHomeownersSection1Header;"<div class=""sectionHeader""><div class=""label"">Homeowners Information</div></div>";
+;;PropertyRentersSection1Header;"<div class=""sectionHeader""><div class=""label"">Renters Information</div></div>";
+;;PropertySection2Header;"<div class=""sectionHeader""><div class=""label"">Payment Frequency</div></div>";
+
+# CMS components and Email velocity templates
+UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang,translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;insurances_travel                  ;"XslFo TravelPolicy Template";$jarResourceXslFoInsurance/xslfo-insurances_travel_$lang.vm
+;insurances_event                   ;"XslFo EventPolicy Template";$jarResourceXslFoInsurance/xslfo-insurances_event_$lang.vm
+;insurances_auto                    ;"XslFo AutoPolicy Template";$jarResourceXslFoInsurance/xslfo-insurances_auto_$lang.vm
+;insurances_property_homeowners     ;"XslFo Property Homeowners Policy Template";$jarResourceXslFoInsurance/xslfo-insurances_propertyhomeowner_$lang.vm
+;insurances_property_renters        ;"XslFo Property Renters Policy Template";$jarResourceXslFoInsurance/xslfo-insurances_propertyrenter_$lang.vm
+;insurances_life					;"XslFo Life Policy Template";$jarResourceXslFoInsurance/xslfo-insurances_life_$lang.vm
+
+# CMS CMSLinkImageComponent Components
+UPDATE CMSLinkImageComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];
+;;retrieve_quote_link;"Retrieve a Quote"
+;;event_get_a_quote_link;"Start a Quote"
+;;travel_get_a_quote_link;"Start a Quote"
+;;homeowner_get_a_quote_link;"Start a Quote"
+;;renters_get_a_quote_link;"Start a Quote"
+
+# CMS Paragraph Component
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
+;;travelCategoryLandingPageBannerText       ;"<div class=""subheader"">See your previously saved quotes</div><div class=""subcontent"">Already started or completed a quentionnaire? View all your saved in one your secure account area. Just sign in and continue!</div>"
+;;eventCategoryLandingPageBannerText        ;"<div class=""subheader"">See your previously saved quotes</div><div class=""subcontent"">Already started or completed a quentionnaire? View all your saved in one your secure account area. Just sign in and continue!</div>"
+;;homeownersCategoryLandingPageBannerText   ;"<div class=""subheader"">See your previously saved quotes</div><div class=""subcontent"">Already started or completed a quentionnaire? View all your saved in one your secure account area. Just sign in and continue!</div>"
+;;rentersCategoryLandingPageBannerText      ;"<div class=""subheader"">See your previously saved quotes</div><div class=""subcontent"">Already started or completed a quentionnaire? View all your saved in one your secure account area. Just sign in and continue!</div>"
+;;or_text                   ;"<div class=""jointext"">or</div>"
+
+
+# CMS tabs components
+UPDATE CMSTabParagraphComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];content[lang=$lang]
+;;oneColumnTab;"One Column";"<div id=""one_column"">
+                                 <div class=""section1"">
+                                     <h2>Main Title</h2>
+                                     <h3>Subtitle</h3>
+                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.
+                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.
+                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.
+                                     </p>
+                                     <h3>Subtitle</h3>
+                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.
+                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.
+                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.
+                                     </p>
+                                 </div>
+                                 <div class=""section2"">
+                                     <div class=""action_box"">
+                                         <h3>Our Complete Policy Details</h3>
+                                         <p>Here is copy of our full policy details, products, certificates and guarantees to view later at your own convenience.</p>
+                                         <p><a href=""#"">Key Features Document</a></p>
+                                     </div>
+                                 </div>
+                             </div>
+                             ";
+;;twoColumnTab;"Two Column";"<div id=""two_column"">
+                                 <table>
+                                     <tr>
+                                         <td class=""td1""></td>
+                                         <td class=""td2"">
+                                             <div class=""action_box"">
+                                                 <h3>Our Complete Policy Details</h3>
+                                                 <p>Here is copy of our full policy details, products, certificates and guarantees to view later at your own convenience.</p>
+                                                 <p><a href=""#"">Key Features Document</a></p>
+                                             </div>
+                                         </td>
+                                     </tr>
+                                     <tr>
+                                         <td class=""td1""></td>
+                                         <td class=""td2"">
+                                             <h2>Main Title</h2>
+                                         </td>
+                                     </tr>
+                                     <tr>
+                                        <td class=""td1"">
+                                             <div class=""row_block"">A simplified description of the fine print on the right</div>
+                                        </td>
+                                         <td class=""td2"">
+                                             <div class=""row_block"">
+                                                 <h3>Subtitle</h3>
+                                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.
+                                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.
+                                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.
+                                                 </p>
+                                             </div>
+                                             
+                                         </td>
+                                     </tr>
+                                     <tr>
+                                        <td class=""td1"">
+                                             <div class=""row_block"">A simplified description of the fine print on the right</div>
+                                        </td>
+                                         <td class=""td2"">
+                                             <div class=""row_block"">
+                                                 <h3>Subtitle</h3>
+                                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.
+                                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.
+                                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.
+                                                 </p>
+                                             </div>
+                                             
+                                         </td>
+                                     </tr>
+                                 </table>
+                             </div>
+                             ";
+;;loremipsum1Tab;"LOREM IPSUM"
+;;loremipsum2Tab;"LOREM IPSUM"

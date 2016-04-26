@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>	
+	<group qualifier="General" visible="true" initially-opened="true">
+		<label lang="en">Properties</label>
+		<label lang="de">Eigenschaften</label>
+		<property qualifier="Player.uid"/>
+		<property qualifier="Player.name"/>
+		<property qualifier="Player.eMail"/>
+		<property qualifier="Player.confirmed"/>
+		<property qualifier="Player.country"/>
+	</group>
+	<group qualifier="Advanced" visible="true" initially-opened="true">
+		<label lang="en">Advanced</label>
+		<label lang="de">Erweitert</label>
+		<property qualifier="Principal.profilePicture"/>
+		<property qualifier="Player.competitions"/>
+	</group>
+	
+	<group qualifier="admin" visible="true" initially-opened="false">
+		<label lang="en">Administration</label>
+		<label lang="de">Verwaltung</label>
+		<property qualifier="Item.pk" />
+		<property qualifier="Item.creationTime" />
+		<property qualifier="Item.modifiedtime" />
+	</group>
+	
+	<custom-group 
+		class="de.hybris.platform.cockpit.services.config.impl.UnassignedEditorSectionConfiguration" 
+		qualifier="unassigned"
+		initially-opened="false">
+		<label lang="de">Andere</label>
+		<label lang="en">Other</label>
+	</custom-group>
+</editor>

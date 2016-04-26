@@ -1,0 +1,81 @@
+<html>
+<head>
+	<style type='text/css'>@media screen, print {
+		table {
+			width: 96%;
+			margin: 25px 10px 0;
+		}
+
+		th {
+			padding: 5px 5px 5px 15px;
+			background-color: #ccc;
+			font-weight: bold;
+			border: 1px solid #aaa;
+			text-align: left;
+		}
+
+		td {
+			padding: 5px 0 5px 15px;
+		}
+
+		td.title {
+            vertical-align: top;
+            text-align: right;
+            font-weight: bold;
+        }
+	}</style>
+</head>
+<body>
+#foreach($packInfo in $ctx.consignment.packaginginfos)
+<table>
+	<tr>
+		<td colspan="2">
+			<h1>Mock Priority Mail</h1>
+		</td>
+		<td colspan="2">
+			<img src="/backoffice/widgetJarResource/de.hybris.platform.warehousingbackoffice.actions.printshippinglabelaction/icons/sample.jpg" />
+		</td>
+	</tr>
+    <tr>
+        <td colspan="2">${ctx.date}</td>
+        <td colspan="2">Page $foreach.count of $ctx.consignment.packaginginfos.size()</td>
+    </tr>
+    <tr>
+        <td colspan="4">$!{ctx.getLabel('trackingNumber')} $!{ctx.consignment.trackingID}</td>
+    </tr>
+	<tr>
+		<td colspan="3" class="title">$!{ctx.getLabel('packInfo')}</td>
+		<td>
+			$!{ctx.getLabel('packInfoWidth')} $!{packInfo.width}<br/>
+			$!{ctx.getLabel('packInfoHeight')} $!{packInfo.height}<br/>
+			$!{ctx.getLabel('packInfoLength')} $!{packInfo.length}
+		</td>
+	</tr>
+	<tr>
+		<td class="title">From</td>
+		<td colspan="3">
+            $!{ctx.consignment.deliveryPointOfService.address.firstname} $!{ctx.consignment.deliveryPointOfService.address.lastname}<br/>
+            $!{ctx.consignment.deliveryPointOfService.address.streetname}<br/>
+            $!{ctx.consignment.deliveryPointOfService.address.town}, $!{ctx.consignment.deliveryPointOfService.address.region} $!{ctx.consignment.deliveryPointOfService.address.postalcode}
+		</td>
+	</tr>
+	<tr>
+		<td class="title">Ship To</td>
+		<td colspan=3>
+            $!{ctx.consignment.shippingAddress.firstname} $!{ctx.consignment.shippingAddress.lastname}<br/>
+            $!{ctx.consignment.shippingAddress.streetname}<br/>
+            $!{ctx.consignment.shippingAddress.town}, $!{ctx.consignment.shippingAddress.region.name} $!{ctx.consignment.shippingAddress.postalcode}
+        </td>
+	</tr>
+	<tr>
+		<td colspan=4>
+			<p style="text-align:center;">
+				<img src="/backoffice/widgetJarResource/de.hybris.platform.warehousingbackoffice.actions.printshippinglabelaction/icons/barcode.gif" width="90%" />
+			</p>
+		</td>
+	</tr>
+</table>
+<hr>
+#end
+</body>
+</html>

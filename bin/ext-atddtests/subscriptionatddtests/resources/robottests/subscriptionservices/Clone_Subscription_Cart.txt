@@ -1,0 +1,69 @@
+*** Settings ***
+Test Setup        import commercecart sampledata
+Test Teardown    reset system
+Resource    commerce/CommerceServices_Keywords.txt
+Resource    commerce/SubscriptionCommerce_Keywords.txt
+Resource    subscriptionservices/SubscriptionProduct_Keywords.txt
+Resource    subscriptionservices/SubscriptionPricePlan_Keywords.txt
+
+
+*** Variables ***
+${customerId}=    testuser@saved-carts.com
+${saveCartName1}=    Saved Cart 1
+${saveCartDescription1}=    This is a saved cart.
+${clonedCartName}=    clonedCartName
+${clonedCartDescription}=    clonedCartDescription
+
+*** Test Cases ***
+
+Clone_Child_Subscription_Cart_FAIL
+        [Documentation]    Tests: attempt to clone NOT a master cart should raise an exception
+        create subscription product "SP1"
+        for product "SP1" add subscription priceplan "SPP1" with currency "USD"
+        for subscription priceplan "SPP1" add "onfirstbill" one time price of "10"
+        create customer "${customerId}" with currency "USD"
+        login customer with id "${customerId}"
+        ${sessionCart}=    get session cart
+        add product "SP1" to cart
+        
+        ${savedCartData}=    save cart with name "${saveCartName1}" and description "${saveCartDescription1}"
+        ${masterCart}=    get cart for code "${savedCartData.code}" and user "${customerId}"
+        
+        Run Keyword And Expect Error    *Only master carts can be cloned*
+        ...    clone saved cart with code "${masterCart.children[0].code}"
+        
+
+Clone_Saved_Subscription_Cart
+        [Documentation]    Tests: saves a customer cart with a subscription product which has entries in the master cart and the monthly cart and then clone it
+        ### Product SP1
+        create subscription product "SP1"
+        for product "SP1" add subscription priceplan "SPP1" with currency "USD"
+        for subscription priceplan "SPP1" add "onfirstbill" one time price of "10"
+        for subscription priceplan "SPP1" add recurring charge of "10" with cycle start "0"
+        ### Product SP2
+        create subscription product "SP2"
+        for product "SP2" add subscription priceplan "SPP2" with currency "USD"
+        for subscription priceplan "SPP2" add recurring charge of "20" with cycle start "0"
+        
+        create customer "${customerId}" with currency "USD"
+        login customer with id "${customerId}"
+        ${sessionCart}=    get session cart
+        
+        add product "SP1" to cart
+        add product "SP1" to cart
+        add product "SP2" to cart
+        add product "SP2" to cart
+        add product "SP2" to cart
+
+        verify that number of child carts is "2"
+        ${savedCartData}=    save cart with name "${saveCartName1}" and description "${saveCartDescription1}"
+        ${savedCart}=    get cart for code "${savedCartData.code}" and user "${customerId}"
+        ${savedCarts}=    get list of saved session carts
+        ${savedCartsSize}=    Get Length    ${savedCarts}
+        Should Be Equal As Numbers    ${savedCartsSize}    1
+        ${clonedCartData}=    clone saved cart with code "${savedCartData.code}" and set name "${clonedCartName}" and description "${clonedCartDescription}"
+        ${clonedCart}=    get cart for code "${clonedCartData.code}" and user "${customerId}"
+        ${savedCarts}=    get list of saved session carts
+        ${savedCartsSize}=    Get Length    ${savedCarts}
+        Should Be Equal As Numbers    ${savedCartsSize}    2
+        verify that cart with code "${savedCartData.code}" has been cloned properly into cart with code "${clonedCartData.code}" in terms of multi-carts

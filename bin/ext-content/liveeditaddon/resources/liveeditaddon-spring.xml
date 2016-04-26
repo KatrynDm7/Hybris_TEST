@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/util 
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<alias alias="liveeditaddonLabelLocator" name="defaultLiveeditaddonLabelLocator" />
+	<bean id="defaultLiveeditaddonLabelLocator" class="de.hybris.platform.cockpit.util.ConfigurableCockpitLabelLocator" scope="singleton" lazy-init="false">
+		<property name="resourceFolder" value="/liveeditaddon/localization/"/>
+	</bean> 
+	
+
+	<bean id="liveeditRestrictionCockpitImportConfigCtxID2FactoryMapMergeDirective" depends-on="cockpitImportConfig" parent="mapMergeDirective">
+		<property name="key" value="liveeditRestrictionEditorArea" />
+		<property name="value" value="editorConfigurationFactory" /> 
+		<property name="mapPropertyDescriptor" value="ctxID2FactoryMappings" />
+	</bean>
+    <!-- Load Sample Data -->
+    <bean id="liveeditaddonAddOnSampleDataEventListener" parent="abstractGenericAddOnSampleDataEventListener"  >
+        <property name="extensionName" value="liveeditaddon" />
+    </bean>
+
+
+    <!-- used in LiveEdit file upload -->
+    <alias alias="mediaTypeResolverMap" name="defaultMediaTypeResolverMap" />
+    <util:map id="defaultMediaTypeResolverMap" map-class="java.util.LinkedHashMap" >
+        <entry key="CMSImageComponent" value="CMSImageComponent.media"/>
+        <entry key="SimpleBannerComponent" value="AbstractBannerComponent.media"/>
+        <entry key="BannerComponent" value="AbstractBannerComponent.media"/>
+        <entry key="ImageMapComponent" value="AbstractBannerComponent.media"/>
+        <entry key="CategoryFeatureComponent" value="CategoryFeatureComponent.media" />
+        <entry key="ProductFeatureComponent" value="ProductFeatureComponent.media" />
+
+    </util:map>
+
+    <bean id="cmsComponentMediaTypesResolver" class="de.hybris.liveeditaddon.cms.media.DefaultCmsComponentMediaTypesResolver" />
+
+    <bean id="defaultCmsComponentMediaTypeRegistry" class="de.hybris.liveeditaddon.cms.media.CmsComponentMediaTypeMappingRegistry" >
+        <property name="mappings">
+            <ref bean="mediaTypeResolverMap" />
+        </property>
+    </bean>
+
+
+    <alias alias="cmsObjectService" name="defaultCmsObjectService" />
+    <bean id="defaultCmsObjectService" class="de.hybris.liveeditaddon.service.impl.DefaultCmsObjectService" >
+        <property name="cmsObjectDao" ref="cmsObjectDao" />
+    </bean>
+
+    <alias alias="cmsObjectDao" name="defaultCmsObjectDao" />
+    <bean id="defaultCmsObjectDao" parent="abstractItemDao" class="de.hybris.liveeditaddon.service.dao.impl.DefaultCmsObjectDao" />
+
+    <alias alias="deviceSupportService" name="defaultDeviceSupportService" />
+    <bean id="defaultDeviceSupportService" class="de.hybris.liveeditaddon.service.impl.DefaultDeviceSupportService">
+        <property name="deviceSupportDao" ref="deviceSupportDao" />
+    </bean>
+
+    <alias alias="deviceSupportDao" name="defaultDeviceSupportDao" />
+    <bean id="defaultDeviceSupportDao" class="de.hybris.liveeditaddon.service.dao.impl.DefaultDeviceSupportDao" />
+
+    <bean id="liveeditaddonCoreDataImportedEventListener" parent="abstractCoreDataImportedEventListener"  >
+        <property name="supportedChannels">
+            <list value-type="de.hybris.platform.commerceservices.enums.SiteChannel">
+                <value>B2C</value>
+                <value>B2B</value>
+            </list>
+        </property>
+        <property name="addonExtensionMetadata">
+            <bean class="de.hybris.platform.addonsupport.data.AddonExtensionMetadata">
+                <property name="suffixChannel" value="false" />
+                <property name="baseExtensionName" value="liveeditaddon" />
+            </bean>
+        </property>
+    </bean>
+
+</beans>

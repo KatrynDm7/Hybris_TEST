@@ -1,0 +1,19 @@
+*** Settings ***
+Test Setup        import sampledata
+Resource		  impex/Impex_Keywords.txt
+Resource          commerce/CommerceServices_Keywords.txt
+Resource          insurance/InsurancePolicy_Keywords.txt
+Resource          insurance/InsuranceQuotation_Keywords.txt
+Resource          bundleservices/Add_To_Cart_Keywords.txt
+
+*** Test Cases ***
+
+Test_Create_Insurance_Policy
+	[Documentation]    Test to create a InsurancePolicy after the order is placed.
+	create customer "test@test.com" with currency "USD"
+    login customer with id "test@test.com"
+    @{sessionAttributes}=    Create List    tripDestination:UK    tripStartDate:2014-12-01    tripEndDate:2014-12-20    NoOfDays:1    Travellers:1    tripDetailsTravellerAges:22
+    prepare insurance session data using delimiter ":" for given attributes "@{sessionAttributes}"   
+    add to cart product "SUBSCRIPTIONPRODUCT01" for component "ProductComponent1"    
+    verify the insurance policy creation
+    

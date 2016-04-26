@@ -1,0 +1,243 @@
+$lang='en'
+
+INSERT_UPDATE CsTicketEventEmailConfiguration;code[unique=true];recipientType(code);alteredAttributes(qualifier,enclosingType(ComposedType.code));eventType(code);subject;plainTextTemplate(code);htmlTemplate(code);
+#Ticket Creation
+;1;Customer;;ticketCreationEvent;Support Ticket Created;TickSystem_Customer_TicketCreated_Text;TickSystem_Customer_TicketCreated_HTML;
+;2;AssignedGroup;;ticketCreationEvent;Support Ticket Created;TickSystem_CSAgentmanager_TicketCreated_Text;TickSystem_CSAgentmanager_TicketCreated_HTML;
+
+#Assign Agent to the Ticket
+;3;AssignedAgent;assignedAgent:CsTicket;ticketAssignedEvent;Support Ticket Assigned;TickSystem_AssignedAgent_Assigned_Text;TickSystem_AssignedAgent_Assigned_HTML;
+;4;AssignedGroup;assignedAgent:CsTicket;ticketAssignedEvent;Support Ticket Assigned;TickSystem_AssignedAgent_Assigned_Text;TickSystem_AssignedAgent_Assigned_HTML;
+
+#Ticket Message Updates
+;5;Customer;;customerNote;${ctx.subject};TickSystem_Customer_CustomerEmail_Text;TickSystem_Customer_CustomerEmail_HTML;
+;6;AssignedAgent;;customerNote;${ctx.subject};TickSystem_csAgent_CustomerEmail_Text;TickSystem_csAgent_CustomerEmail_HTML;
+;7;AssignedGroup;;customerNote;${ctx.subject};TickSystem_csAgent_CustomerEmail_Text;TickSystem_csAgent_CustomerEmail_HTML;
+
+#Ticket State Change
+;8;Customer;;ticketChangeEvent;${ctx.subject};TickSystem_Customer_TicketStateChanged_Text;TickSystem_Customer_TicketStateChanged_HTML;
+;9;AssignedAgent;;ticketChangeEvent;${ctx.subject};TickSystem_csAgent_TicketStateChanged_Text;TickSystem_csAgent_TicketStateChanged_HTML;
+;10;AssignedGroup;;ticketChangeEvent;${ctx.subject};TickSystem_csAgent_TicketStateChanged_Text;TickSystem_csAgent_TicketStateChanged_HTML;
+
+;11;Customer;;ticketResolutionEvent;${ctx.subject};TickSystem_Customer_TicketStateChanged_Text;TickSystem_Customer_TicketStateChanged_HTML;
+;12;AssignedAgent;;ticketResolutionEvent;${ctx.subject};TickSystem_csAgent_TicketStateChanged_Text;TickSystem_csAgent_TicketStateChanged_HTML;
+;13;AssignedGroup;;ticketResolutionEvent;${ctx.subject};TickSystem_csAgent_TicketStateChanged_Text;TickSystem_csAgent_TicketStateChanged_HTML;
+
+#Customer Email from CS Cockpit
+;14;Customer;;customerEmail;${ctx.subject};TickSystem_Customer_CustomerEmail_Text;TickSystem_Customer_CustomerEmail_HTML;
+
+INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;description[lang=$lang];rendererType(code)[default='velocity'];templateScript[lang=$lang];
+
+###################################################################################################
+##
+## Email sent to customer when a new ticket is created
+##
+;TickSystem_Customer_TicketCreated_Text;de.hybris.platform.ticket.email.context.AbstractTicketContext;Ticket System Ticket Created Customer Plain Text Email;;"
+Dear ${ctx.name}
+
+A customer support ticket with the following reference number was created ${ctx.ticketId}.
+
+Please quote this reference number in all emails or phone calls with us.
+
+Thank you
+
+Your Customer Service Team
+";
+;TickSystem_Customer_TicketCreated_HTML;de.hybris.platform.ticket.email.context.AbstractTicketContext;Ticket System Ticket Created Customer HTML Email;;"
+<html>
+	<head></head>
+	<body>
+		<div>
+			<p>Dear ${ctx.name}</p>
+			<p>A customer support ticket with the following reference number was created ${ctx.ticketId}.</p>
+			<p>Please quote this reference number in all emails or phone calls with us.</p>
+			<p>Thank you</p>
+			<p>Your Customer Service Team</p>
+		</div>
+	</body>
+</html>
+";
+
+##
+## Email sent to CS Agent Manager when a new ticket is created
+##
+;TickSystem_CSAgentmanager_TicketCreated_Text;de.hybris.platform.ticket.email.context.AbstractTicketContext;Ticket System Ticket Created Customer Plain Text Email;;"
+Dear Customer Service Agent Manager
+
+The following customer support ticket ${ctx.ticketId} was created with the following message: 
+
+${ctx.text}
+
+Thank you
+Your Customer Service Team
+";
+;TickSystem_CSAgentmanager_TicketCreated_HTML;de.hybris.platform.ticket.email.context.AbstractTicketContext;Ticket System Ticket Created Customer HTML Email;;"
+<html>
+	<head></head>
+	<body>
+		<div>
+			<p>Dear Customer Service Agent Manager</p>
+			<p>The following customer support ticket ${ctx.ticketId} was created with the following message: ${ctx.htmlText}</p>
+			<p>Thank you</p>
+			<p>Your Customer Service Team</p>
+		</div>
+	</body>
+</html>
+";
+
+###################################################################################################
+##
+## Email sent to assigned agent when the CSR reassigns a ticket
+##
+;TickSystem_AssignedAgent_Assigned_Text;de.hybris.platform.ticket.email.context.AbstractTicketContext;Ticket System Ticket Assigned Plain Text Email;;"
+Dear Customer Service Agent
+
+The following customer support ticket was assigned to you: ${ctx.ticketId}
+
+Thank you
+
+Your Customer Service Team
+";
+
+;TickSystem_AssignedAgent_Assigned_HTML;de.hybris.platform.ticket.email.context.AbstractTicketContext;Ticket System Ticket Assigned HTML Email;;"
+<html>
+	<head></head>
+	<body>
+		<div>
+			<p>Dear Customer Service Agent</p>
+			<p>The following customer support ticket was assigned to you: ${ctx.ticketId}</p>
+			<p>Thank you</p>
+			<p>Your Customer Service Team</p>
+		</div>
+	</body>
+</html>
+";
+
+###################################################################################################
+##
+## Email sent to CS Agent when the message has been updated or added
+##
+;TickSystem_csAgent_CustomerEmail_Text;de.hybris.platform.ticket.email.context.AbstractTicketContext;Ticket System Customer Email Plain Text Email;;"
+Dear Customer Service Agent 
+
+The customer support ticket ${ctx.ticketId} was updated with the following message: 
+
+${ctx.text}
+
+Thank you
+
+Your Customer Service Team
+";
+;TickSystem_csAgent_CustomerEmail_HTML;de.hybris.platform.ticket.email.context.AbstractTicketContext;Ticket System Customer Email HTML Email;;"
+<html>
+	<head></head>
+	<body>
+		<div>
+			<p>Dear Customer Service Agent</p>
+			<p>The customer support ticket ${ctx.ticketId} was updated with the following message:</p>
+			<p>${ctx.htmlText}</p>
+			<p>Thank you</p>
+			<p>Your Customer Service Team</p>
+		</div>
+	</body>
+</html>
+";
+
+##
+## Email sent to customer when the message has been updated or added
+##
+;TickSystem_Customer_CustomerEmail_Text;de.hybris.platform.ticket.email.context.AbstractTicketContext;Ticket System Customer Email Plain Text Email;;"
+Dear ${ctx.name}
+
+Your customer support ticket was updated with the following message:
+
+${ctx.text}
+
+Please quote your reference number ${ctx.ticketId} in all further emails or phone calls with us.
+
+Thank you
+
+Your Customer Service Team
+";
+
+;TickSystem_Customer_CustomerEmail_HTML;de.hybris.platform.ticket.email.context.AbstractTicketContext;Ticket System Customer Email HTML Email;;"
+<html>
+	<head></head>
+	<body>
+		<div>
+			<p>Dear ${ctx.name}</p>
+			<p>Your customer support ticket was updated with the following message:</p>
+			<p>${ctx.htmlText}</p>
+			<p>Please quote your reference number ${ctx.ticketId} in all further emails or phone calls with us.</p>
+			<p>Thank you</p>
+			<p>Your Customer Service Team</p>
+		</div>
+	</body>
+</html>
+";
+
+
+###################################################################################################
+##
+## Email sent to customer when the ticket state has been changed
+##
+;TickSystem_Customer_TicketStateChanged_Text;de.hybris.platform.ticket.email.context.AbstractTicketContext;Ticket System Customer Email Plain Text Email;;"
+Dear ${ctx.name}
+
+Your customer support ticket was updated with the following message:
+
+${ctx.text}
+
+Please quote your reference number ${ctx.ticketId} in all further emails or phone calls with us.
+
+Thank you
+
+Your Customer Service Team
+";
+;TickSystem_Customer_TicketStateChanged_HTML;de.hybris.platform.ticket.email.context.AbstractTicketContext;Ticket System Customer Email HTML Email;;"
+<html>
+	<head></head>
+	<body>
+		<div>
+			<p>Dear ${ctx.name}</p>
+			<p>Your customer support ticket was updated with the following message:</p>
+			<p>${ctx.htmlText}</p>
+			<p>Please quote your reference number ${ctx.ticketId} in all further emails or phone calls with us.</p>
+			<p>Thank you</p>
+			<p>Your Customer Service Team</p>
+		</div>
+	</body>
+</html>
+";
+
+##
+## Email sent to CS Agent when the ticket state has been changed
+##
+;TickSystem_csAgent_TicketStateChanged_Text;de.hybris.platform.ticket.email.context.AbstractTicketContext;Ticket System Customer Email Plain Text Email;;"
+Dear Customer Service Agent
+
+The customer support ticket ${ctx.ticketId} was updated with the following message:
+
+${ctx.text}
+
+Please quote your reference number ${ctx.ticketId} in all further emails or phone calls with us.
+
+Thank you
+
+Your Customer Service Team
+";
+
+;TickSystem_csAgent_TicketStateChanged_HTML;de.hybris.platform.ticket.email.context.AbstractTicketContext;Ticket System Customer Email HTML Email;;"
+<html>
+	<head></head>
+	<body>
+		<div>
+			<p>Dear Customer Service Agent</p>
+			<p>The customer support ticket ${ctx.ticketId} was updated with the following message:</p>
+			<p>${ctx.htmlText}</p>
+			<p>Thank you</p>
+			<p>Your Customer Service Team</p>
+		</div>
+	</body>
+</html>
+";

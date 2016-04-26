@@ -1,0 +1,14 @@
+# we create a sample user
+
+INSERT_UPDATE Employee	;UID[unique=true]	;writableCatalogVersions(catalog(id),version)	;readableCatalogVersions(catalog(id),version)	;description			;name						;groups(uid)			;sessionLanguage(isocode)	;sessionCurrency(isocode)	;backOfficeLoginDisabled
+								;yformsmanager		;																;																;yForms Demo Manager	;yForms Demo Manager	;yformsmanagergroup	;en								;USD								;false
+								
+$START_USERRIGHTS
+Type			;UID				;MemberOfGroups		;Password	;Target				;read	;change	;create	;delete	;change_perm
+Employee		;yformsmanager	;yformsmanagergroup	;				;
+$END_USERRIGHTS
+
+# password for yformsmanager
+INSERT_UPDATE Employee	;uid[unique=true]	;@password[translator=de.hybris.platform.impex.jalo.translators.UserPasswordTranslator]
+								;yformsmanager		;*:yformsmanager
+

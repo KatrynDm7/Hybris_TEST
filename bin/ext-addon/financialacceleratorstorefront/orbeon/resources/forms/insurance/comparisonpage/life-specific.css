@@ -1,0 +1,64 @@
+span.xforms-items, span.xforms-items span {
+    width: auto!important;
+}
+
+.orbeon .xforms-select1-appearance-full label,
+.orbeon .xforms-select-appearance-full .xforms-items label {
+    margin-right: 2em;
+}
+
+.orbeon .second-person-smoke .xforms-items .radio > span,
+.orbeon .do-you-smoke .xforms-items .radio > span{
+    width: 100px!important;
+}
+.orbeon .second-person-smoke .xforms-items span:first-child .radio,
+.orbeon .do-you-smoke .xforms-items span:first-child .radio{
+    margin-left: 19px;
+}
+.orbeon .second-person-smoke .xforms-items label.radio input[type="radio"] + span,
+.orbeon .do-you-smoke .xforms-items label.radio input[type="radio"] + span{
+    padding-left: 0;
+    margin-top: 9px;
+}
+.orbeon .second-person-smoke .xforms-items span,
+.orbeon .do-you-smoke .xforms-items span {
+    display: inline-block;
+}
+.orbeon .second-person-smoke .xforms-items .radio,
+.orbeon .do-you-smoke .xforms-items .radio{
+    padding: 0;
+}
+
+.orbeon .second-person-smoke .xforms-items span span,
+.orbeon .do-you-smoke .xforms-items span span {
+    padding-top: 96px;
+    text-align: center;
+}
+
+.orbeon .second-person-smoke .xforms-items label > input,
+.orbeon .do-you-smoke .xforms-items label > input {
+    visibility: hidden;
+    position: absolute;
+}
+
+.orbeon .second-person-smoke .xforms-items span:first-child.xforms-selected span,
+.orbeon .do-you-smoke .xforms-items span:first-child.xforms-selected span {
+    background: url(images/life_form_non_smoking_clicked.png) center top no-repeat;
+}
+.orbeon .second-person-smoke .xforms-items span:first-child.xforms-deselected span,
+.orbeon .do-you-smoke .xforms-items span:first-child.xforms-deselected span {
+    background: url(images/life_form_non_smoking.png) center top no-repeat;
+}
+
+.orbeon .second-person-smoke .xforms-items span:nth-child(2).xforms-selected span,
+.orbeon .do-you-smoke .xforms-items span:nth-child(2).xforms-selected span {
+    background: url(images/life_form_smoking_clicked.png) center top no-repeat;
+}
+.orbeon .second-person-smoke .xforms-items span:nth-child(2).xforms-deselected span,
+.orbeon .do-you-smoke .xforms-items span:nth-child(2).xforms-deselected span {
+    background: url(images/life_form_smoking.png) center top no-repeat;
+}
+.page-LifeInsurancesCategoryPage .orbeon-portlet-body form,
+.page-LifeInsurancesCategoryPage #content .orbeon-portlet-body form .container {
+    margin-bottom: 0;
+}

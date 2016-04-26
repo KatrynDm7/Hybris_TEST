@@ -1,0 +1,17 @@
+$comp=ec2008
+
+#quarters
+update Match;id[unique=true];homeGoals;guestGoals;homeTeam(isocode);guestTeam(isocode);group(code,competition(code[default=$comp]))[unique=true]
+;25;2;3;POR;GER;QUARTER
+;26;1;1;CRO;TUR;QUARTER
+;27;1;3;NLD;RUS;QUARTER
+;28;0;0;ESP;ITA;QUARTER
+
+#semi
+update Match;id[unique=true];homeGoals;guestGoals;homeTeam(isocode);guestTeam(isocode);group(code,competition(code[default=$comp]))[unique=true]
+;29;3;2;GER;TUR;SEMI
+;30;0;3;RUS;ESP;SEMI
+
+#finals
+update Match;id[unique=true];homeGoals;guestGoals;homeTeam(isocode);guestTeam(isocode);group(code,competition(code[default=$comp]))[unique=true]
+;31;0;1;GER;ESP;FINAL

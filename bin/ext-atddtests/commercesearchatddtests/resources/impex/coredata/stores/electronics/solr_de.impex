@@ -1,0 +1,30 @@
+#
+# Import the Solr configuration for the Electronics store
+#
+
+# Index Type
+$solrIndexedType=electronicsProductType
+
+# Language
+$lang=de
+
+# Solr Indexed Property
+UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];displayName[lang=$lang]
+ ;$solrIndexedType;allPromotions;"Promotion"
+ ;$solrIndexedType;brand;"Marke"
+ ;$solrIndexedType;category;"Kategorie"
+ ;$solrIndexedType;code;"Code"
+ ;$solrIndexedType;description;"Beschreibung"
+ ;$solrIndexedType;manufacturerName;"Name des Herstellers"
+ ;$solrIndexedType;name;"Name"
+ ;$solrIndexedType;price;"Preis"
+ ;$solrIndexedType;summary;"Zusammenfassung"
+
+# Define the available sorts
+UPDATE SolrSort;indexedType(identifier)[unique=true];code[unique=true];name[lang=$lang]
+ ;$solrIndexedType;name-asc;"Name (aufsteigend)"
+ ;$solrIndexedType;name-desc;"Name (absteigend)"
+ ;$solrIndexedType;price-asc;"Preis (niedrigster oben)"
+ ;$solrIndexedType;price-desc;"Preis (höchster oben"
+ ;$solrIndexedType;relevance;"Relevanz"
+ ;$solrIndexedType;topRated;"Beliebteste"

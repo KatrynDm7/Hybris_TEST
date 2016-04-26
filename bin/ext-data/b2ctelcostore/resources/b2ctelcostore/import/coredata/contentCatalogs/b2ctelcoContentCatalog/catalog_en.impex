@@ -1,0 +1,10 @@
+#
+# Import the B2C Telco Content Catalog
+#
+
+# Language
+$lang=en
+
+# Create Content Catalog
+UPDATE ContentCatalog;id[unique=true];name[lang=$lang]
+ ;b2ctelcoContentCatalog;"B2C Telco Content Catalog"

@@ -1,0 +1,30 @@
+INSERT_UPDATE BaseSite;uid[unique=true];
+;testSite;
+
+INSERT_UPDATE Language;isocode[unique=true];active;
+;de;true;
+;en;true;
+
+UPDATE Language;isocode[unique=true];name[lang=de];name[lang=en];
+;de;Deutsch;German;
+;en;Englisch;English;
+
+
+INSERT_UPDATE Currency;isocode[unique=true];name[lang=de];name[lang=en];active;base;conversion;digits;symbol;
+;EUR;Euro;Euro;true;true;1;2;E;
+;USD;US-Dollar;US Dollar;true;false;1,38;2;$;
+
+
+INSERT_UPDATE UserGroup;uid[unique=true];groups(uid);
+;cockpitgroup;;
+;customergroup;;
+
+
+INSERT_UPDATE Customer;uid[unique=true];name;groups(uid);
+;customer;Customer;customergroup;
+;test.customer@asm.com;ASM Test Customer;customergroup;
+
+INSERT_UPDATE Cart;user(uid);code[unique=true];currency(isocode);date[dateformat=dd.MM.yyyy HH:mm:ss];net;calculated;site(uid);parent(code)
+;customer;parent;EUR;27.04.2010 00:00:00;false;false;testSite;;
+;customer;child;EUR;27.04.2010 00:00:00;false;false;testSite;parent;
+;customer;child2;EUR;27.04.2010 00:00:00;false;false;testSite;parent;

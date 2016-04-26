@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widgets.xsd">
+
+    
+
+    <widget-connection inputId="input" outputId="nodeSelected" sourceWidgetId="timedaccesspromotionsbackoffice-explorer-tree" targetWidgetId="timedaccesspromotionsbackoffice-tree-node-adapter"/>
+    <widget-connection inputId="genericInput" outputId="true" sourceWidgetId="timedaccesspromotionsbackoffice-tree-node-adapter" targetWidgetId="timedaccesspromotionsbackoffice-typecode-extractor"/>
+    <widget-connection inputId="genericInput" outputId="true" sourceWidgetId="timedaccesspromotionsbackoffice-tree-node-adapter" targetWidgetId="timedaccesspromotionsbackoffice-search-enabler"/>
+    <widget-connection inputId="genericInput" outputId="false" sourceWidgetId="timedaccesspromotionsbackoffice-tree-node-adapter" targetWidgetId="timedaccesspromotionsbackoffice-search-disabler"/>
+    <widget-connection inputId="type" outputId="genericOutput" sourceWidgetId="timedaccesspromotionsbackoffice-typecode-extractor" targetWidgetId="timedaccesspromotionsbackoffice-search-logic"/>
+    <widget-connection inputId="enabled" outputId="genericOutput" sourceWidgetId="timedaccesspromotionsbackoffice-search-enabler" targetWidgetId="timedaccesspromotionsbackoffice-text-search"/>
+    <widget-connection inputId="enabled" outputId="genericOutput" sourceWidgetId="timedaccesspromotionsbackoffice-search-disabler" targetWidgetId="timedaccesspromotionsbackoffice-text-search"/>
+    <widget-connection inputId="searchtext" outputId="query" sourceWidgetId="timedaccesspromotionsbackoffice-text-search" targetWidgetId="timedaccesspromotionsbackoffice-search-logic"/>
+    <widget-connection inputId="pageable" outputId="pageable" sourceWidgetId="timedaccesspromotionsbackoffice-search-logic" targetWidgetId="timedaccesspromotionsbackoffice-simple-list"/>
+
+</widgets>

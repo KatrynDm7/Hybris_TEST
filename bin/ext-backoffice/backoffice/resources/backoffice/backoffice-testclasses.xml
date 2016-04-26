@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testclasses><backoffice><testclass>com.hybris.backoffice.spring.security.BackofficeAuthenticationProviderTest</testclass><testclass>com.hybris.backoffice.daos.DefaultBackofficeRoleDaoTest</testclass></backoffice></testclasses>

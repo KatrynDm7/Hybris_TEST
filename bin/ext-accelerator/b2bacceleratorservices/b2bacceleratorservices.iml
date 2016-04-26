@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/resources/b2bacceleratorservices-spring.xml</file>
+          <file>file://$MODULE_DIR$/resources/b2bacceleratorservices-spring-test.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="bin1" level="project" />
+    <orderEntry type="library" name="lib33" level="project" />
+    <orderEntry type="library" name="lib12" level="project" />
+    <orderEntry type="library" name="b2bapprovalprocessserver" level="project" />
+    <orderEntry type="library" name="lib4" level="project" />
+    <orderEntry type="library" name="lib40" level="project" />
+    <orderEntry type="library" name="b2bcommerceserver" level="project" />
+    <orderEntry type="library" name="basecommerceserver" level="project" />
+    <orderEntry type="library" name="lib72" level="project" />
+    <orderEntry type="library" name="europe1server" level="project" />
+    <orderEntry type="library" name="ext" level="project" />
+    <orderEntry type="library" name="lib26" level="project" />
+    <orderEntry type="library" name="coreserver" level="project" />
+    <orderEntry type="library" name="processingserver" level="project" />
+    <orderEntry type="library" name="commercesearchserver" level="project" />
+    <orderEntry type="library" name="btgserver" level="project" />
+    <orderEntry type="library" name="promotionsserver" level="project" />
+    <orderEntry type="module" module-name="financialacceleratorstorefront" />
+    <orderEntry type="module" module-name="commerceservices" />
+    <orderEntry type="module" module-name="acceleratorservices" />
+    <orderEntry type="module" module-name="platformservices" />
+    <orderEntry type="module" module-name="promotions" />
+    <orderEntry type="module" module-name="bootstrap" />
+    <orderEntry type="module" module-name="btg" />
+    <orderEntry type="module" module-name="processing" />
+    <orderEntry type="module" module-name="commercesearch" />
+    <orderEntry type="module" module-name="core" />
+  </component>
+</module>

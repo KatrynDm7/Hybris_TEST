@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<configuration xmlns="hybris.de/schemas/hmc/generic"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="hybris.de/schemas/hmc/generic hmc.xsd">
+
+    <!-- Configuration for extension cuppytrail -->
+    <explorertree>
+        <group name="cuppytrailgroup">
+            <typeref type="Stadium"/>
+        </group>
+    </explorertree>
+
+    <type name="Stadium" mode="append">
+        <organizer>
+            <search mode="replace">
+                <condition attribute="code"/>
+                <condition attribute="capacity"/>
+                <condition attribute="matches"/>
+            </search>
+            <result>
+                <listview mode="replace">
+                    <itemlayout>
+                        <attribute name="code"/>
+                        <attribute name="capacity"/>
+                        <attribute name="matches"/>
+                    </itemlayout>
+                </listview>
+            </result>
+            <editor>
+                <essentials>
+                    <listlayout>
+                        <attribute name="code"/>
+                    </listlayout>
+                </essentials>
+                <tab name="tab.cuppytrail">
+                    <section name="section.cuppytrail">
+                        <listlayout>
+                            <attribute name="capacity"/>
+                            <attribute name="matches"/>
+                        </listlayout>
+                    </section>
+                </tab>
+            </editor>
+        </organizer>
+    </type>
+</configuration>

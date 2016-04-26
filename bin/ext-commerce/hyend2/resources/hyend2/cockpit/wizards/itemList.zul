@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:h="http://www.w3.org/1999/xhtml" 
+		xmlns:zk="http://www.zkoss.org/2005/zk"
+		xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd ">
+	<div style="text-align: left;">
+
+		<div height="20px"/>
+		<div style="margin: 30px; margin-top: 20px; font-size: 10px;" onCreate="fullItemList.setChecked(wizardBean.isFullItemList()); itemsList.setVisible(!wizardBean.isFullItemList());">
+			<hbox widths="80px,none">
+				<label value="${c:l('hyend2.exportwizard.fullitemlist')}"/>
+				<checkbox checked="true" id="fullItemList" onCheck='wizardBean.setFullItemList(self.isChecked()); itemsList.setVisible(!self.isChecked()); itemsList.update();'/>
+			</hbox>
+		</div>
+
+		<div style="margin: 30px; margin-top: 20px; font-size: 10px;" >
+				<div id="itemsList"	use="de.hybris.platform.cockpit.components.editor.CockpitEditorContainer" 
+						valueTypeCode="Item" editorCode="multi" editorValue='${wizardBean.itemsToExport}'
+						onValueChange='wizardBean.setItemsToExport(self.getEditorValue());' visible="false">
+					<custom-attributes allowCreate="false" displaySubtypes="true" allowActivate="true"
+						restrictToCreateTypes="${wizardBean.valueTypeCodes}" allowAutocompletion="false" 
+						autocompletionSearchType="${wizardBean.firstValueTypeCode}"/>
+				</div>
+		</div>
+	</div>		
+</zk>

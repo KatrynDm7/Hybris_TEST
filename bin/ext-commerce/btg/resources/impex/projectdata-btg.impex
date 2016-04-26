@@ -1,0 +1,6 @@
+# Old Result Cleanup CronJobs
+INSERT_UPDATE BTGResultCleaningCronJob;code[unique=true];job(code);resultMaxAge;resultScope(code);active;sessionLanguage(isoCode)[default=en]
+;btgResultCleaningCronJob;btgResultCleaningJob;86400;SESSION;false
+
+INSERT_UPDATE Trigger;cronJob(code)[unique=true];second;minute;hour;day;month;year;relative;active;maxAcceptableDelay
+;btgResultCleaningCronJob;0;30;3;-1;-1;-1;false;true;-1

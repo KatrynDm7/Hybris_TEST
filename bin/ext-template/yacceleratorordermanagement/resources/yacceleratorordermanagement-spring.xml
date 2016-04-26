@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+        
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+      
+    <import resource="yacceleratorordermanagement-process-definitions-spring.xml" />
+    
+    <context:annotation-config/>
+    
+    <!-- Listeners -->
+    <bean id="pickupConfirmationEventListener" class="de.hybris.platform.yacceleratorordermanagement.listeners.impl.PickupConfirmationEventListener" parent="abstractEventListener">
+        <property name="businessProcessService" ref="businessProcessService"/>
+    </bean>
+    
+    <bean id="createReturnEventListener" class="de.hybris.platform.yacceleratorordermanagement.events.CreateReturnEventListener" parent="abstractSiteEventListener">
+        <property name="businessProcessService" ref="businessProcessService"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="baseStoreService" ref="baseStoreService"/>
+    </bean>
+    
+    <!-- Converters -->
+    <bean id="deliveryAddressGeocodeConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.storelocator.data.AddressData"/>
+        <property name="populators">
+            <list merge="true">
+                <ref bean="deliveryAddressGeocodePopulator"/>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="deliveryAddressGeocodePopulator" class="de.hybris.platform.yacceleratorordermanagement.converters.AddressPopulator" />
+        
+    <!-- Order Check Service -->
+    <!-- Performs some basic validation for the order as part of the first stage of the process. -->
+    <alias name="defaultCheckOrderService" alias="checkOrderService"/>
+    <bean id="defaultCheckOrderService" class="de.hybris.platform.yacceleratorordermanagement.impl.DefaultCheckOrderService" />
+
+</beans>

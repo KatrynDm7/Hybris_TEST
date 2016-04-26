@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config />
+
+   <context:component-scan base-package="de.hybris.platform.xyformsstorefrontcommons" scope-resolver="de.hybris.platform.spring.IgnoreTenantScopeMetadataResolver"  />
+
+	<!-- Expose /acceleratoraddon/web/webroot/WEB-INF/messages/base.js.properties  resource bundle as javascript variables -->
+	<bean id="defaultXyformsstorefrontcommonsJavaScriptMessageResourceAccessor" parent="abstractJavaScriptMessageResourceAccessor">
+		<property name="addOnName" value="xyformsstorefrontcommons"/>
+	</bean>
+
+	<bean id="defaultXyformsstorefrontcommonsBeforeViewJsPropsHandlerAdaptee" parent="abstractBeforeViewJsPropsHandlerAdaptee" class="de.hybris.platform.addonsupport.interceptors.ExportJsPropertiesBeforeViewHandler">
+		<property name="messageSource" ref="defaultXyformsstorefrontcommonsJavaScriptMessageResourceAccessor"/>
+	</bean>
+
+	<bean id="getXyformsstorefrontcommonsBeforeViewHandler" parent="beforeViewHandlerAdapter">
+		<property name="adaptee">
+			<ref bean="defaultXyformsstorefrontcommonsBeforeViewJsPropsHandlerAdaptee"/>
+		</property>
+	</bean>
+	
+	<bean id="XyformsstorefrontcommonsBeforeViewHandlerListMergeDirective" depends-on="beforeViewHandlersList" parent="listMergeDirective">
+		<property name="add" ref="getXyformsstorefrontcommonsBeforeViewHandler"/>
+	</bean>
+
+    <!-- Orbeon CMS Component Renderers -->
+    <alias name="defaultYFormCMSComponentRenderer" alias="yFormCMSComponentRenderer"/>
+    <bean id="defaultYFormCMSComponentRenderer" parent="addOnJspIncludeCMSComponentRenderer"
+          class="de.hybris.platform.xyformsstorefrontcommons.renderer.YFormCMSComponentRenderer" />
+
+    <bean id="defaultYFormCMSComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="YFormCMSComponent" />
+        <property name="renderer" ref="yFormCMSComponentRenderer" />
+    </bean>
+</beans>

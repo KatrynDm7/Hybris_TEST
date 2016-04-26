@@ -1,0 +1,2 @@
+REMOVE SolrSynonymConfig;facetSearchConfig(name)[batchmode=true,unique=true]
+;testFacetSearchConfig${testId}

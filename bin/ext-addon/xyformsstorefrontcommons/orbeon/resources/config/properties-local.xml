@@ -1,0 +1,10 @@
+<properties xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            xmlns:oxf="http://www.orbeon.com/oxf/processors"
+            xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <xi:include href="oxf:/config/properties-common.xml"/>
+    <xi:include href="oxf:/config/properties-orbeon.xml"/>
+    <xi:include href="oxf:/config/properties-yforms.xml"/>
+
+</properties>
+

@@ -1,0 +1,81 @@
+#
+# Import the CMS content for the MAnage Subscriptions
+#
+$contentCatalog=b2ctelcoContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$jarResourceCms=jar:de.hybris.platform.subscriptionstorefront.constants.SubscriptionstorefrontConstants&/subscriptionstorefront/import/cockpits/cmscockpit/$contentCatalog
+$addonExtensionName=subscriptionstorefront
+
+# My Subscriptions Page Preview
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];altText;folder(qualifier)[default='images']
+;;subscriptions-preview;SubscriptionsPage.png;$jarResourceCms/SubscriptionsPage.png;image/png;hybris Accelerator;
+;;subscription-preview;SubscriptionPage.png;$jarResourceCms/SubscriptionPage.png;image/png;hybris Accelerator;
+;;subscriptionBillingActivity-preview;SubscriptionBillingActivityPage.png;$jarResourceCms/SubscriptionBillingActivityPage.png;image/png;hybris Accelerator;
+
+## Configure page for My Subscriptions
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+;;subscriptions;Manage My Subscriptions;AccountPageTemplate;/my-account/subscription
+;;subscription;Subscription Details Page;AccountPageTemplate;subscription
+;;subscriptionComparison;Subscription Comparison Page;AccountPageTemplate;subscriptionComparison
+;;subscriptionBillingActivity;Subscription Billing Activity Page;AccountPageTemplate;subscriptionBillingActivity
+
+UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $contentCV)
+;;subscriptions;subscriptions-preview
+;;subscription;subscription-preview
+;;subscriptionComparison;subscriptions-preview
+;;subscriptionBillingActivity;subscriptionBillingActivity-preview
+
+# CMS Link Components
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow']
+;;AccountSubscriptionsLink;AccountSubscriptionsLink;/my-account/subscription;AccountSubscriptionsLink;AccountSubscriptionsLink;
+;;AccountManageSubscriptionsLink;AccountManageSubscriptionsLink;/my-account/subscription;AccountManageSubscriptionsLink;AccountManageSubscriptionsLink;
+
+# CMS Navigation Nodes
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef)[mode=append];&nodeRef
+;AccountLeftNavNode;;My Subscriptions;SiteRootNode;AccountSubscriptionsLink;AccountLeftNavNode
+;AccountSubscriptionsNavNode;;Subscriptions;SiteRootNode;AccountManageSubscriptionsLink;AccountSubscriptionsNavNode
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;AccountSubscriptionComponent;Account My Subscriptions Component;/WEB-INF/views/addons/$addonExtensionName/desktop/pages/account/accountSubscriptionsPage.jsp;;AccountSubscriptionComponent
+;;AccountSubscriptionDetailsComponent;Account Subscription Component;/WEB-INF/views/addons/$addonExtensionName/desktop/pages/account/accountSubscriptionPage.jsp;;AccountSubscriptionDetailsComponent
+;;AccountSubscriptionComparisonComponent;Account Subscription Comparison Component;/WEB-INF/views/addons/$addonExtensionName/desktop/pages/account/accountUpgradeSubscriptionComparisonPage.jsp;;AccountSubscriptionComparisonComponent
+;;AccountSubscriptionBillingActivityComponent;Account Subscription Billing Activity Component;/WEB-INF/views/addons/$addonExtensionName/desktop/pages/account/accountSubscriptionBillingActivityPage.jsp;;AccountSubscriptionBillingActivityComponent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV);;;
+;;SideContent-subscriptions;Side Content Slot for My Subscriptions Listing;true;AccountLeftNavigationComponent;;;
+;;BodyContent-subscriptions;Body Content Slot for My Subscriptions Listing;true;AccountSubscriptionComponent;;;
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV);;;
+;;SideContent-subscription;Side Content Slot for Subscription Details;true;AccountLeftNavigationComponent;;;
+;;BodyContent-subscription;Body Content Slot for Subscription Details;true;AccountSubscriptionDetailsComponent;;;
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV);;;
+;;SideContent-subscriptionComparison;Side Content Slot for Subscription Comparison;true;AccountLeftNavigationComponent;;;
+;;BodyContent-subscriptionComparison;Body Content Slot for Subscription Comparison;true;AccountSubscriptionComparisonComponent;;;
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV);;;
+;;SideContent-subscriptionBillingActivity;Side Content Slot for Subscription Billing Activity;true;AccountLeftNavigationComponent;;;
+;;BodyContent-subscriptionBillingActivity;Body Content Slot for Subscription Billing Activity;true;AccountSubscriptionBillingActivityComponent;;;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='subscriptions'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-subscriptions;SideContent;;SideContent-subscriptions;;;
+;;BodyContent-subscriptions;BodyContent;;BodyContent-subscriptions;;;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='subscription'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-subscription;SideContent;;SideContent-subscription;;;
+;;BodyContent-subscription;BodyContent;;BodyContent-subscription;;;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='subscriptionComparison'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-subscriptionComparison;SideContent;;SideContent-subscriptionComparison;;;
+;;BodyContent-subscriptionComparison;BodyContent;;BodyContent-subscriptionComparison;;;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='subscriptionBillingActivity'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-subscriptionBillingActivity;SideContent;;SideContent-subscriptionBillingActivity;;;
+;;BodyContent-subscriptionBillingActivity;BodyContent;;BodyContent-subscriptionBillingActivity;;;
+
+INSERT_UPDATE AccountNavigationComponent;$contentCV[unique=true];uid[unique=true];name;navigationNode(&nodeRef);styleClass;&componentRef
+;;AccountSubscriptionsNavigationComponent;Account Subscriptions Navigation Component;AccountSubscriptionsNavNode;;AccountSubscriptionsNavigationComponent
+
+# Account Navigation Bar Component
+INSERT_UPDATE AccountNavigationCollectionComponent;$contentCV[unique=true];uid[unique=true];name;components(uid, $contentCV)[mode=append];&componentRef
+;;AccountHomepageComponent;Account Homepage Component;AccountSubscriptionsNavigationComponent;AccountHomepageComponent

@@ -1,0 +1,3 @@
+
+INSERT_UPDATE SolrIndexedType;identifier[unique=true];group;groupFieldName
+;testIndexedType${testId};true;manufacturerName

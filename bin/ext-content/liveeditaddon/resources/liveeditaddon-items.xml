@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+    <enumtypes>
+
+         <enumtype code="DeviceOrientation" autocreate="true" generate="true">
+            <value code="Horizontal"/>
+            <value code="Vertical"/>
+        </enumtype>
+        <enumtype code="CMSComponentAdminAction" generate="true" autocreate="true">
+            <value code="EDIT"/>
+            <value code="EDIT_POPUP"/>
+            <value code="CLONE"/>
+            <value code="REMOVE" />
+            <value code="REMOVE_CONTAINER" />
+            <value code="SYNC" />
+            <value code="INSPECTOR" />
+            <value code="HIDE" />
+            <value code="SHOW" />
+            <value code="ADD"/>
+            <value code="OVERRIDE"/>
+            <value code="MANAGE_PRODUCT_IMAGE"/>
+            <value code="RESTRICTIONS" />
+            <value code="EDIT_PRODUCT_REFERENCES" />
+            <value code="SHOW_ALL" />
+            <value code="MANAGE_MEDIA"/>
+			<value code="EDIT_NAVIGATION"/>
+            <value code="MANAGE_PRODUCT_FEATURE_IMAGE"/>
+        </enumtype>
+        <enumtype code="CMSComponentAdminActionGroup" generate="true" autocreate="true">
+            <value code="ROOT" />
+            <value code="EDITING" />
+            <value code="INFO" />
+            <value code="PUBLICATION" />
+            <value code="XSELL" />
+            <value code="SLOT" />
+        </enumtype>
+
+
+
+		<enumtype code="CMSMenuItemType" generate="true" autocreate="true">
+			<value code="CATEGORY"/>
+			<value code="NAVIGATION_STATE"/>
+			<value code="CONTENT_PAGE"/>
+			<value code="ARBITRARY_LINK"/>
+		</enumtype>
+
+
+
+		<enumtype code="MenuBannerSize" generate="true" autocreate="true">
+			<value code="SMALL"/>
+			<value code="MEDIUM"/>
+			<value code="LARGE"/>
+		</enumtype>
+
+    </enumtypes>
+
+    <itemtypes>
+
+        <itemtype code="ContentSlot" autocreate="false" generate="false">
+            <attributes>
+                <attribute qualifier="locked" type="java.lang.Boolean" generate="true">
+                    <persistence type="property"/>
+                    <defaultvalue>Boolean.TRUE</defaultvalue>
+                    <modifiers read="true" write="true" optional="true"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+
+        <itemtype code="DeviceSupport" autocreate="true" generate="true" jaloclass="de.hybris.liveeditaddon.jalo.DeviceSupport">
+            <deployment table="devicesupport" typecode="3500"/>
+
+            <attributes>
+                <attribute qualifier="code" type="java.lang.String">
+                    <modifiers unique="true" optional="false" initial="true"/>
+                    <persistence type="property" />
+                </attribute>
+                <attribute qualifier="name" type="localized:java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers optional="true"/>
+                    <description>Defines the name of device</description>
+                </attribute>
+                <attribute qualifier="width" type="java.lang.Integer">
+                    <persistence type="property"/>
+                    <modifiers optional="false"/>
+                    <defaultvalue>Integer.valueOf(320)</defaultvalue>
+                    <description>Defines the device viewport width size</description>
+                </attribute>
+                <attribute qualifier="height" type="java.lang.Integer">
+                    <persistence type="property"/>
+                    <modifiers optional="false"/>
+                    <defaultvalue>Integer.valueOf(568)</defaultvalue>
+                    <description>Defines the device viewport height size</description>
+                </attribute>
+                <attribute qualifier="Orientation" type="boolean">
+                    <persistence type="property"/>
+                    <modifiers optional="false"/>
+                    <defaultvalue>Boolean.TRUE</defaultvalue>
+                    <description>Defines if the device has orientation support like horizontal, vertical</description>
+                </attribute>
+                <attribute qualifier="supportedUiExperience" type="UiExperienceLevel">
+                    <persistence type="property"/>
+                    <modifiers optional="false"/>
+                    <description>Defines the ui experience level which is supported by this device</description>
+                </attribute>
+                <attribute qualifier="default" type="boolean">
+                    <persistence type="property"/>
+                    <modifiers optional="false" />
+                    <defaultvalue>Boolean.FALSE</defaultvalue>
+                    <description>Defines if the device is optional for current ui experience</description>
+                </attribute>
+            </attributes>
+            <indexes>
+                <index name="IdxDeviceSupportItem">
+                    <key attribute="code" />
+                    <key attribute="supportedUiExperience" />
+                </index>
+            </indexes>
+        </itemtype>
+
+        <typegroup name="Preview">
+            <itemtype code="PreviewData" autocreate="false" generate="false">
+                <attributes>
+                    <attribute qualifier="viewport" type="java.lang.String">
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="deviceSupport" type="DeviceSupport">
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="deviceOrientation" type="DeviceOrientation">
+                        <persistence type="property" />
+                        <defaultvalue>em().getEnumerationValue("DeviceOrientation", "VERTICAL")</defaultvalue>
+                    </attribute>
+                </attributes>
+            </itemtype>
+        </typegroup>
+
+    </itemtypes>
+</items>

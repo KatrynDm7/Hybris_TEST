@@ -1,0 +1,83 @@
+*** Settings ***
+Resource          commerce/CommerceServices_Keywords.txt
+Resource          customerticketingc4cintegration/Customer_Ticketing_Keywords.txt
+
+Test Setup        import ct sample data
+
+*** Variables ***
+
+${subject255}=    1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa2345
+
+*** Test Cases ***
+
+############################# TICKET DATA: ################################################
+#<bean class="de.hybris.platform.customerticketingfacade.data.StatusData">
+# <property name="id" type="String"/>
+#</bean>
+#
+# POSSIBLE STATUSES:
+#     OPEN / INPROCESS / COMPLETED / CLOSED
+#
+#<bean class="de.hybris.platform.customerticketingfacade.data.TicketData">
+# <property name="id" type="String"/>
+# <property name="customerId" type="String"/>
+# <property name="cartId" type="String"/>
+# <property name="subject" type="String"/>
+# <property name="message" type="String"/>
+# <property name="messageHistory" type="String"/>
+# <property name="creationDate" type="java.util.Date"/> 
+# <property name="lastModificationDate" type="java.util.Date"/>
+# <property name="status" type="StatusData"/>
+# <property name="availableStatusTransitions" type="java.util.List&lt;StatusData&gt;"/>
+#</bean>
+###########################################################################################
+
+Test_Create_Ticket_Subject_Empty_FAIL
+	[Documentation]    Testing creating ticket with empty Subject - expected to fail
+	Run Keyword And Expect Error    *Subject can't be empty
+	...    create ticket with title and message    ${EMPTY}    message1
+
+Test_Create_Ticket_Subject_256_FAIL
+	[Documentation]    Testing creating ticket with Subject>255 chars - expected to fail
+	Run Keyword And Expect Error    *Subject can't be longer than 255 chars
+	...    create ticket with title and message    ${subject255}6    message1
+
+Test_Create_Ticket_Message_Empty_FAIL
+	[Documentation]    Testing creating ticket with empty Message - expected to fail
+	Run Keyword And Expect Error    *Message can't be empty
+	...    create ticket with title and message    subject1    ${EMPTY}
+
+Test_Create_Ticket_Subject_255_PASS
+	[Documentation]    Testing creating ticket with Subject=255 chars - expected to pass
+	create ticket with title "${subject255}" and message "message1"
+
+Test_Create_Ticket_MultipleTickets
+	[Documentation]    Testing creating multiple tickets for the same customer
+	create ticket with title "Subject1" and message "Message1"
+	create ticket with title "Subject1" and message "Message1"
+
+Test_Create_Ticket_VerifyTicketFieldValues
+	[Documentation]    Testing creating new ticket and verifying the retrieved mock data
+	${ticket}=    create ticket with title "Subject1" and message "Message1"
+	#
+	Log    ticket.id=${ticket.id}
+	Log    ticket.customerId=${ticket.customerId}
+	Log    ticket.cartId=${ticket.cartId}
+	Log    ticket.subject=${ticket.subject}
+	Log    ticket.message=${ticket.message}
+	Log    ticket.messageHistory=${ticket.messageHistory}
+	Log    ticket.creationDate=${ticket.creationDate}
+	Log    ticket.lastModificationDate=${ticket.lastModificationDate}
+	Log    ticket.status.id=${ticket.status.id}
+	Log    ticket.availableStatusTransitions=${ticket.availableStatusTransitions}
+	#
+	Should Not Be Empty    ${ticket.id}
+	Should Be Equal    ${ticket.customerId}    ${EMPTY}
+	Should Be Equal As Strings    ${ticket.cartId}    None
+	Should Be Equal    ${ticket.subject}    Ticket subject
+	Should Be Equal As Strings    ${ticket.message}    None
+	Should Be Equal    ${ticket.messageHistory}    ${EMPTY}
+	Should Not Be Equal    ${ticket.creationDate}    ${EMPTY}
+    Should Not Be Equal    ${ticket.lastModificationDate}    ${EMPTY}
+	Should Be Equal    ${ticket.status.id}    OPEN
+	Should Not Be Empty    ${ticket.availableStatusTransitions}

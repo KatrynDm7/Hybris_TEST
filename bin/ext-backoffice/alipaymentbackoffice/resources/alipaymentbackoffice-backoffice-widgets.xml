@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widgets.xsd">
+
+    
+
+    <widget-connection inputId="input" outputId="nodeSelected" sourceWidgetId="alipaymentbackoffice-explorer-tree" targetWidgetId="alipaymentbackoffice-tree-node-adapter"/>
+    <widget-connection inputId="genericInput" outputId="true" sourceWidgetId="alipaymentbackoffice-tree-node-adapter" targetWidgetId="alipaymentbackoffice-typecode-extractor"/>
+    <widget-connection inputId="genericInput" outputId="true" sourceWidgetId="alipaymentbackoffice-tree-node-adapter" targetWidgetId="alipaymentbackoffice-search-enabler"/>
+    <widget-connection inputId="genericInput" outputId="false" sourceWidgetId="alipaymentbackoffice-tree-node-adapter" targetWidgetId="alipaymentbackoffice-search-disabler"/>
+    <widget-connection inputId="type" outputId="genericOutput" sourceWidgetId="alipaymentbackoffice-typecode-extractor" targetWidgetId="alipaymentbackoffice-search-logic"/>
+    <widget-connection inputId="enabled" outputId="genericOutput" sourceWidgetId="alipaymentbackoffice-search-enabler" targetWidgetId="alipaymentbackoffice-text-search"/>
+    <widget-connection inputId="enabled" outputId="genericOutput" sourceWidgetId="alipaymentbackoffice-search-disabler" targetWidgetId="alipaymentbackoffice-text-search"/>
+    <widget-connection inputId="searchtext" outputId="query" sourceWidgetId="alipaymentbackoffice-text-search" targetWidgetId="alipaymentbackoffice-search-logic"/>
+    <widget-connection inputId="pageable" outputId="pageable" sourceWidgetId="alipaymentbackoffice-search-logic" targetWidgetId="alipaymentbackoffice-simple-list"/>
+
+</widgets>

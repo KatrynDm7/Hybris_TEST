@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<project name="hybristransportandchange_buildcallbacks">
+
+	<target name="dir.check.other-script">
+		<condition property="dir.empty.other-script">
+			<equals arg1="${cts.changepackage.other-script}" arg2="" />
+		</condition>
+		<condition property="dir.exists.other-script">
+			<available file="${cts.changepackage.other-script}" type="dir"/>
+		</condition>
+	</target>
+
+	<target name="dir.check.installer">		
+		<condition property="dir.empty.installer">
+			<equals arg1="${cts.changepackage.installer}" arg2="" />
+		</condition>	
+		<condition property="dir.exists.installer">
+			<available file="${cts.changepackage.installer}" type="dir"/>
+		</condition>	
+		<fail message="Property &quot;cts.changepackage.installer&quot; must be set with a correct path" unless="dir.exists.installer"/>
+		<fail message="Property &quot;cts.changepackage.installer&quot; must be set with a correct path" if="dir.empty.installer" />
+	</target>
+
+	<target name="dir.check.db-package">
+		<condition property="dir.empty.db-package">
+			<equals arg1="${cts.changepackage.db-package}" arg2="" />
+		</condition>
+		<condition property="dir.exists.db-package">
+			<available file="${cts.changepackage.db-package}" type="dir"/>
+		</condition>
+	</target>
+
+	<target name="dir.check.media">
+		<condition property="dir.empty.media">
+					<equals arg1="${cts.changepackage.media}" arg2="" />
+				</condition>
+		<condition property="dir.exists.media">
+			<available file="${cts.changepackage.media}" type="dir"/>
+		</condition>
+	</target>
+
+	<target name="dir.check.config-path">
+		<condition property="dir.exists.config-path">
+			<available file="${cts.changepackage.config-path}" type="file"/>
+		</condition>
+		<fail message="Property &quot;cts.changepackage.config-path&quot; must be set with a correct path" unless="dir.exists.config-path"/>
+	</target>
+
+	<target name="dir.check.all-extensions-path">
+		<condition property="dir.exists.all-extensions-path">
+			<available file="${cts.changepackage.all-extensions-path}" type="file"/>
+		</condition>
+		<fail message="Property &quot;cts.changepackage.all-extensions-path&quot; must be set" unless="dir.exists.all-extensions-path"/>
+	</target>
+
+	<target name="prepare">
+		<property file="${ext.hybristransportandchange.path}/project.properties"/>
+		<tstamp>
+			<format property="TIME_NOW" pattern="yyyyMMddHHmmss"/>
+		</tstamp>
+		<input message="Choose a use-case" addproperty="use-case" validargs="customization,patch" defaultvalue="${cts.changepackage.use-case}"/>
+		<input message="Choose a mode" addproperty="update-type" validargs="update,init,none" defaultvalue="${cts.changepackage.update-type}"/>
+		<input message="What is the version of a change?" addproperty="change-version" defaultvalue="${cts.changepackage.change-version}"/>
+
+		<if>
+			<equals arg1="${use-case}" arg2="customization" />
+			<then>
+				<property name="use-case-short" value="OC"/>
+			</then>
+			<else>
+				<property name="use-case-short" value="PP"/>
+			</else>
+		</if>
+
+		<property name="file-name" value="${cts.changepackage.customer}_${cts.changepackage.project}_${change-version}_${use-case-short}_${TIME_NOW}.zip"/>
+		<mkdir dir="${cts.changepackage.working-directory}\${TIME_NOW}"/>
+		<mkdir dir="${cts.changepackage.working-directory}\${TIME_NOW}\TMP"/>
+	</target>
+
+	<target name="create.zip.other-script" depends="dir.check.other-script" if="dir.exists.other-script" unless="dir.empty.other-script">
+		<zip  destfile="${cts.changepackage.working-directory}\${TIME_NOW}\TMP\other-scripts.zip" basedir="${cts.changepackage.other-script}"/>
+	</target>
+
+	<target name="create.zip.installer" depends="dir.check.installer" if="dir.exists.installer">
+		<copy file="${ext.hybristransportandchange.path}/scripts/build.gradle" todir="${cts.changepackage.installer}\recipes\ctsimport_choose" overwrite="true"/>
+		<zip  destfile="${cts.changepackage.working-directory}\${TIME_NOW}\TMP\installers-package.zip" basedir="${cts.changepackage.installer}"/>
+	</target>
+
+	<target name="create.zip.db-package" depends="dir.check.db-package" if="dir.exists.db-package" unless="dir.empty.db-package">
+		<zip  destfile="${cts.changepackage.working-directory}\${TIME_NOW}\TMP\db-package.zip" basedir="${cts.changepackage.db-package}"/>
+	</target>
+
+	<target name="create.zip.media" depends="dir.check.media" if="dir.exists.media" unless="dir.empty.media">
+		<zip  destfile="${cts.changepackage.working-directory}\${TIME_NOW}\TMP\media-package.zip" basedir="${cts.changepackage.media}"/>
+	</target>
+
+	<target name="createzip" depends="prepare,dir.check.config-path,dir.check.all-extensions-path,create.zip.other-script,create.zip.installer,create.zip.db-package,create.zip.media">
+		<!--    copy files to TMP -->
+		<if>
+			<equals arg1="${use-case}" arg2="patch" />
+			<then>
+				<condition property="dir.exists.hybris-path">
+					<available file="${cts.changepackage.hybris-path}" type="file"/>
+				</condition>
+
+				<fail message="Property &quot;cts.changepackage.hybris-path&quot; must be set" unless="dir.exists.hybris-path"/>
+				<copy file="${cts.changepackage.hybris-path}" todir="${cts.changepackage.working-directory}\${TIME_NOW}\TMP"/>
+			</then>
+		</if>
+
+		<copy file="${ext.hybristransportandchange.path}/project.properties" todir="${cts.changepackage.working-directory}\${TIME_NOW}\TMP"/>
+		<copy file="${ext.hybristransportandchange.path}/blacklist.properties" todir="${cts.changepackage.working-directory}\${TIME_NOW}\TMP"/>
+		<propertyfile file="${cts.changepackage.working-directory}\${TIME_NOW}\TMP/project.properties">
+				<entry  key="cts.changepackage.update-type"  value="${update-type}" />
+				<entry  key="cts.changepackage.use-case"  value="${use-case}" />
+		</propertyfile>
+		<copy file="${cts.changepackage.config-path}" todir="${cts.changepackage.working-directory}\${TIME_NOW}\TMP"/>
+		<copy file="${cts.changepackage.all-extensions-path}" todir="${cts.changepackage.working-directory}\${TIME_NOW}\TMP"/>
+		
+		<!--   create ZIP out of TMP -->
+		<property name="file-path" value="${cts.changepackage.working-directory}/${TIME_NOW}/${file-name}"/>
+		<zip  destfile="${file-path}" basedir="${cts.changepackage.working-directory}\${TIME_NOW}\TMP"/>
+	</target>
+
+	<target name="export" depends="createzip">
+		<java classname="de.hybris.e2e.transport.AntExecutor" fork="true">
+			<classpath path="${ext.hybristransportandchange.path}/bin/hybristransportandchangeserver.jar"/>
+			<jvmarg line="-Djava.util.logging.config.file=${ext.hybristransportandchange.path}/logging.properties"/>
+			<arg line="${ext.hybristransportandchange.path}"/>
+			<arg line="${file-path}"/>
+		</java>
+	</target>
+
+	<!-- 
+	    Called whenever 'ant ear' is used. this callback can be used to modify the content of the ear file
+	
+	     ${ear.path}: 			path to ear
+	 -->
+	<macrodef name="hybristransportandchange_before_ear">
+		<sequential>
+
+			<!-- you can do anything before the EAR file is being packed -->
+
+		</sequential>
+	</macrodef>
+
+</project>

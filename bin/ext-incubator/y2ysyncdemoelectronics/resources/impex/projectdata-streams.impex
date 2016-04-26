@@ -1,0 +1,176 @@
+INSERT_UPDATE Y2YStreamConfigurationContainer; id[unique = true]; catalogVersion(catalog(id), version);
+; y2ySyncProducts             ; electronicsProductCatalog:Staged ;
+; y2ySyncMediasToZip          ; electronicsProductCatalog:Staged ;
+; y2ySyncMediasToDataHub      ; electronicsProductCatalog:Staged ;
+; y2ySyncClassificationSystem ; ElectronicsClassification:1.0    ;
+
+INSERT_UPDATE Y2YStreamConfiguration; streamId[unique = true]; container(id); itemTypeForStream(code); whereClause; versionSelectClause; catalogVersion(catalog(id), version); infoExpression[default = ''];
+; categoriesStream                     ; y2ySyncProducts             ; Category                       ; {catalogVersion}=?catalogVersion                                                                                         ;                 ;                                  ; "#{getCatalogVersion().getCatalog().getId()}:#{getCatalogVersion().getVersion()}|#{getCode()}" ;
+; productsStream                       ; y2ySyncProducts             ; Product                        ; {catalogVersion}=?catalogVersion                                                                                         ;                 ;                                  ; "#{getCatalogVersion().getCatalog().getId()}:#{getCatalogVersion().getVersion()}|#{getCode()}" ;
+; mediasStreamToDataHub                ; y2ySyncMediasToDataHub      ; Media                          ; {catalogVersion}=?catalogVersion                                                                                         ; {item.location} ;                                  ; "#{getCatalogVersion().getCatalog().getId()}:#{getCatalogVersion().getVersion()}|#{getCode()}" ;
+; mediasStreamToZip                    ; y2ySyncMediasToZip          ; Media                          ; {catalogVersion}=?catalogVersion                                                                                         ; {item.location} ;                                  ; "#{getCatalogVersion().getCatalog().getId()}:#{getCatalogVersion().getVersion()}|#{getCode()}" ;
+; mediaContainersStream                ; y2ySyncProducts             ; MediaContainer                 ; {catalogVersion}=?catalogVersion                                                                                         ;                 ;                                  ; "#{getCatalogVersion().getCatalog().getId()}:#{getCatalogVersion().getVersion()}|#{getQualifier()}" ;
+; productRefStream                     ; y2ySyncProducts             ; ProductReference               ; {source} IN ({{SELECT {p.PK} FROM {Product AS p} WHERE {p.catalogVersion}=?catalogVersion}})                             ;                 ;                                  ; "#{getQualifier()}|#{getSource().getCode()}:#{getSource().getCatalogVersion().getCatalog().getId()}:#{getSource().getCatalogVersion().getVersion()}|#{getTarget().getCode()}:#{getTarget().getCatalogVersion().getCatalog().getId()}:#{getTarget().getCatalogVersion().getVersion()}" ;
+; variantProductStream                 ; y2ySyncProducts             ; VariantProduct                 ; {catalogVersion}=?catalogVersion                                                                                         ;                 ;                                  ; "#{getCatalogVersion().getCatalog().getId()}:#{getCatalogVersion().getVersion()}|#{getCode()}|#{getBaseProduct().getCode()}" ;
+; electronicsColorVariantProductStream ; y2ySyncProducts             ; ElectronicsColorVariantProduct ; {catalogVersion}=?catalogVersion                                                                                         ;                 ;                                  ; "#{getBaseProduct().getCode()}|#{getCatalogVersion().getCatalog().getId()}:#{getCatalogVersion().getVersion()}|#{getCode()}|#{getColor()}" ;
+; classificationSystemStream           ; y2ySyncClassificationSystem ; ClassificationSystem           ; {PK}=?catalog                                                                                                            ;                 ;                                  ; "#{getId()}" ;
+; classificationSystemVersionStream    ; y2ySyncClassificationSystem ; ClassificationSystemVersion    ; {PK}=?catalogVersion                                                                                                     ;                 ;                                  ; "#{getCatalog().getId()}|#{getVersion()}" ;
+; classificationClassStream            ; y2ySyncClassificationSystem ; ClassificationClass            ; {catalogVersion}=?catalogVersion                                                                                         ;                 ;                                  ; "#{getCatalogVersion().getCatalog().getId()}:#{getCatalogVersion().getVersion()}|#{getCode()}" ;
+; productFeatureStream                 ; y2ySyncClassificationSystem ; ProductFeature                 ; {product} IN ({{SELECT {p.PK} FROM {Product AS p} WHERE {p.catalogVersion}=?catalogVersion}})                            ;                 ; electronicsProductCatalog:Staged ; "#{getLanguage().getIsocode()}|#{getProduct().getCode()}|#{getQualifier()}|#{getValuePosition()}" ;
+; classAttributeAssignmentStream       ; y2ySyncClassificationSystem ; ClassAttributeAssignment       ; {classificationClass} IN ({{SELECT {cc.PK} FROM {ClassificationClass AS cc} WHERE {cc.catalogVersion}=?catalogVersion}}) ;                 ;                                  ; "#{getClassificationAttribute().getCode()}:#{getClassificationAttribute().getSystemVersion().getCatalog().getId()}:#{getClassificationAttribute().getSystemVersion().getVersion()}|#{getClassificationClass().getCode()}:#{getClassificationClass().getCatalogVersion().getCatalog().getId()}:#{getClassificationClass().getCatalogVersion().getVersion()}|#{getSystemVersion().getCatalog().getId()}:#{getSystemVersion().getVersion()}" ;
+; classificationAttributeUnitStream    ; y2ySyncClassificationSystem ; ClassificationAttributeUnit    ; {systemVersion}=?catalogVersion                                                                                          ;                 ;                                  ; "#{getCode()}|#{getSystemVersion().getCatalog().getId()}:#{getSystemVersion().getVersion()}" ;
+; classificationAttributeStream        ; y2ySyncClassificationSystem ; ClassificationAttribute        ; {systemVersion}=?catalogVersion                                                                                          ;                 ;                                  ; "#{getCode()}|#{getSystemVersion().getCatalog().getId()}:#{getSystemVersion().getVersion()}" ;
+
+INSERT_UPDATE Y2YColumnDefinition; position[unique = true]; attributeDescriptor(enclosingType(code), qualifier); impexHeader; streamConfiguration(streamId)[unique = true]; columnName; language(isocode)
+# Category column definitions
+; 0  ; Category:code                                    ; code[unique=true] ; categoriesStream ; ; ;
+; 1  ; Category:catalogVersion                          ; catalogVersion(catalog(id), version)[unique=true] ; categoriesStream ; ; ;
+; 2  ; Category:name                                    ; name[lang=en] ; categoriesStream ; name_en ; en ;
+; 3  ; Category:name                                    ; name[lang=de] ; categoriesStream ; name_de ; de ;
+; 4  ; Category:description                             ; description[lang=en] ; categoriesStream ; description_en ; en ;
+; 5  ; Category:description                             ; description[lang=de] ; categoriesStream ; description_de ; de ;
+; 6  ; Category:supercategories                         ; supercategories(code, catalogVersion(catalog(id), version)) ; categoriesStream ; ; ;
+# Product column definitions
+; 0  ; Product:code                                     ; code[unique=true] ; productsStream ; ; ;
+; 1  ; Product:catalogVersion                           ; catalogVersion(catalog(id), version)[unique=true] ; productsStream ; ; ;
+; 2  ; Product:name                                     ; name[lang=en] ; productsStream ; name_en ; en ;
+; 3  ; Product:name                                     ; name[lang=de] ; productsStream ; name_de ; de ;
+; 4  ; Product:unit                                     ; unit(code) ; productsStream ; ; ;
+; 5  ; Product:approvalStatus                           ; approvalStatus(code) ; productsStream ; ; ;
+; 6  ; Product:description                              ; description[lang=en] ; productsStream ; description_en ; en ;
+; 7  ; Product:description                              ; description[lang=de] ; productsStream ; description_de ; de ;
+; 8  ; Product:ean                                      ; ean ; productsStream ; ; ;
+; 9  ; Product:variantType                              ; variantType(code) ; productsStream ; ; ;
+; 10 ; Product:manufacturerName                         ; manufacturerName ; productsStream ; ; ;
+; 11 ; Product:manufacturerAID                          ; manufacturerAID ; productsStream ; ; ;
+; 12 ; Product:supercategories                          ; supercategories(code, catalogVersion(catalog(id), version)) ; productsStream ; ; ;
+; 13 ; Product:picture                                  ; picture(code, catalogVersion(catalog(id), version)) ; productsStream ; ; ;
+; 14 ; Product:thumbnail                                ; thumbnail(code, catalogVersion(catalog(id), version)) ; productsStream ; ; ;
+; 15 ; Product:normal                                   ; normal(code, catalogVersion(catalog(id), version)) ; productsStream ; ; ;
+; 16 ; Product:detail                                   ; detail(code, catalogVersion(catalog(id), version)) ; productsStream ; ; ;
+; 17 ; Product:others                                   ; others(code, catalogVersion(catalog(id), version)) ; productsStream ; ; ;
+; 18 ; Product:thumbnails                               ; thumbnails(code, catalogVersion(catalog(id), version)) ; productsStream ; ; ;
+# Media column definitions
+; 0  ; Media:code                                       ; code[unique=true] ; mediasStreamToDataHub ; ; ;
+; 1  ; Media:catalogVersion                             ; catalogVersion(catalog(id), version)[unique=true] ; mediasStreamToDataHub ; ; ;
+; 2  ; Media:mediaFormat                                ; mediaFormat(qualifier) ; mediasStreamToDataHub ; ; ;
+; 3  ; Media:mediaContainer                             ; mediaContainer(qualifier, catalogVersion(catalog(id), version)) ; mediasStreamToDataHub ; ; ;
+; 4  ;                                                  ; @mediaData[translator=de.hybris.y2ysync.impex.PullMediaDataTranslator] ; mediasStreamToDataHub ; pullURL ; ;
+; 0  ; Media:code                                       ; code[unique=true] ; mediasStreamToZip ; ; ;
+; 1  ; Media:catalogVersion                             ; catalogVersion(catalog(id), version)[unique=true] ; mediasStreamToZip ; ; ;
+; 2  ; Media:mediaFormat                                ; mediaFormat(qualifier) ; mediasStreamToZip ; ; ;
+; 3  ; Media:mediaContainer                             ; mediaContainer(qualifier, catalogVersion(catalog(id), version)) ; mediasStreamToZip ; ; ;
+; 5  ;                                                  ; @media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator] ; mediasStreamToZip ; media ; ;
+# MediaContainer column definitions
+; 0  ; MediaContainer:qualifier                         ; qualifier[unique=true] ; mediaContainersStream ; ; ;
+; 1  ; MediaContainer:catalogVersion                    ; catalogVersion(catalog(id), version)[unique=true] ; mediaContainersStream ; ; ;
+# ProductReference column definitions
+; 0  ; ProductReference:qualifier                       ; qualifier ; productRefStream ; ; ;
+; 1  ; ProductReference:target                          ; target(code, catalogVersion(catalog(id), version))[unique=true] ; productRefStream ; ; ;
+; 2  ; ProductReference:source                          ; source(code, catalogVersion(catalog(id), version))[unique=true] ; productRefStream ; ; ;
+; 3  ; ProductReference:referenceType                   ; referenceType(code)[unique=true] ; productRefStream ; ; ;
+; 4  ; ProductReference:active                          ; active ; productRefStream ; ; ;
+; 5  ; ProductReference:preselected                     ; preselected ; productRefStream ; ; ;
+# VariantProduct column definitions
+; 0  ; VariantProduct:code                              ; code[unique=true] ; variantProductStream ; ; ;
+; 1  ; VariantProduct:catalogVersion                    ; catalogVersion(catalog(id), version)[unique=true] ; variantProductStream ; ; ;
+; 2  ; VariantProduct:baseProduct                       ; baseProduct(code, catalogVersion(catalog(id), version)) ; variantProductStream ; ; ;
+; 3  ; VariantProduct:name                              ; name[lang=en] ; variantProductStream ; name_en ; en ;
+; 4  ; VariantProduct:name                              ; name[lang=de] ; variantProductStream ; name_de ; de ;
+; 5  ; VariantProduct:unit                              ; unit(code) ; variantProductStream ; ; ;
+; 6  ; VariantProduct:approvalStatus                    ; approvalStatus(code) ; variantProductStream ; ; ;
+; 7  ; VariantProduct:description                       ; description[lang=en] ; variantProductStream ; description_en ; en ;
+; 8  ; VariantProduct:description                       ; description[lang=de] ; variantProductStream ; description_de ; de ;
+; 9  ; VariantProduct:ean                               ; ean ; variantProductStream ; ; ;
+; 10 ; VariantProduct:manufacturerName                  ; manufacturerName ; variantProductStream ; ; ;
+; 11 ; VariantProduct:manufacturerAID                   ; manufacturerAID ; variantProductStream ; ; ;
+; 12 ; VariantProduct:supercategories                   ; supercategories(code, catalogVersion(catalog(id), version)) ; variantProductStream ; ; ;
+; 13 ; VariantProduct:picture                           ; picture(code, catalogVersion(catalog(id), version)) ; variantProductStream ; ; ;
+; 14 ; VariantProduct:thumbnail                         ; thumbnail(code, catalogVersion(catalog(id), version)) ; variantProductStream ; ; ;
+; 15 ; VariantProduct:normal                            ; normal(code, catalogVersion(catalog(id), version)) ; variantProductStream ; ; ;
+; 16 ; VariantProduct:detail                            ; detail(code, catalogVersion(catalog(id), version)) ; variantProductStream ; ; ;
+; 17 ; VariantProduct:others                            ; others(code, catalogVersion(catalog(id), version)) ; variantProductStream ; ; ;
+; 18 ; VariantProduct:thumbnails                        ; thumbnails(code, catalogVersion(catalog(id), version)) ; variantProductStream ; ; ;
+# ElectronicsColorVariantProduct column definitions
+; 0  ; ElectronicsColorVariantProduct:code              ; code[unique=true] ; electronicsColorVariantProductStream ; ; ;
+; 1  ; ElectronicsColorVariantProduct:catalogVersion    ; catalogVersion(catalog(id), version)[unique=true] ; electronicsColorVariantProductStream ; ; ;
+; 2  ; ElectronicsColorVariantProduct:baseProduct       ; baseProduct(code, catalogVersion(catalog(id), version)) ; electronicsColorVariantProductStream ; ; ;
+; 3  ; ElectronicsColorVariantProduct:color             ; color ; electronicsColorVariantProductStream ; ; ;
+; 4  ; ElectronicsColorVariantProduct:name              ; name[lang=en] ; electronicsColorVariantProductStream ; name_en ; en ;
+; 5  ; ElectronicsColorVariantProduct:name              ; name[lang=de] ; electronicsColorVariantProductStream ; name_de ; de ;
+; 6  ; ElectronicsColorVariantProduct:unit              ; unit(code) ; electronicsColorVariantProductStream ; ; ;
+; 7  ; ElectronicsColorVariantProduct:approvalStatus    ; approvalStatus(code) ; electronicsColorVariantProductStream ; ; ;
+; 8  ; ElectronicsColorVariantProduct:description       ; description[lang=en] ; electronicsColorVariantProductStream ; description_en ; en ;
+; 9  ; ElectronicsColorVariantProduct:description       ; description[lang=de] ; electronicsColorVariantProductStream ; description_de ; de ;
+; 10 ; ElectronicsColorVariantProduct:ean               ; ean ; electronicsColorVariantProductStream ; ; ;
+; 11 ; ElectronicsColorVariantProduct:manufacturerName  ; manufacturerName ; electronicsColorVariantProductStream ; ; ;
+; 12 ; ElectronicsColorVariantProduct:manufacturerAID   ; manufacturerAID ; electronicsColorVariantProductStream ; ; ;
+; 13 ; ElectronicsColorVariantProduct:supercategories   ; supercategories(code, catalogVersion(catalog(id), version)) ; electronicsColorVariantProductStream ; ; ;
+; 14 ; ElectronicsColorVariantProduct:picture           ; picture(code, catalogVersion(catalog(id), version)) ; electronicsColorVariantProductStream ; ; ;
+; 15 ; ElectronicsColorVariantProduct:thumbnail         ; thumbnail(code, catalogVersion(catalog(id), version)) ; electronicsColorVariantProductStream ; ; ;
+; 16 ; ElectronicsColorVariantProduct:normal            ; normal(code, catalogVersion(catalog(id), version)) ; electronicsColorVariantProductStream ; ; ;
+; 17 ; ElectronicsColorVariantProduct:detail            ; detail(code, catalogVersion(catalog(id), version)) ; electronicsColorVariantProductStream ; ; ;
+; 18 ; ElectronicsColorVariantProduct:others            ; others(code, catalogVersion(catalog(id), version)) ; electronicsColorVariantProductStream ; ; ;
+; 19 ; ElectronicsColorVariantProduct:thumbnails        ; thumbnails(code, catalogVersion(catalog(id), version)) ; electronicsColorVariantProductStream ; ; ;
+# ClassificationSystem column definitions
+; 0  ; ClassificationSystem:id                          ; id[unique=true] ; classificationSystemStream ; uniqueId ; ;
+; 1  ; ClassificationSystem:name                        ; name[lang=en] ; classificationSystemStream ; name_en ; en ;
+; 2  ; ClassificationSystem:name                        ; name[lang=de] ; classificationSystemStream ; name_de ; de ;
+# ClassificationSystemVersion column definitions
+; 0  ; ClassificationSystemVersion:catalog              ; catalog(id)[unique=true] ; classificationSystemVersionStream ; ; ;
+; 1  ; ClassificationSystemVersion:version              ; version[unique=true] ; classificationSystemVersionStream ; ; ;
+; 2  ; ClassificationSystemVersion:active               ; active ; classificationSystemVersionStream ; ; ;
+; 3  ; ClassificationSystemVersion:inclPacking          ; inclPacking[virtual=true, default=true] ; classificationSystemVersionStream ; ; ;
+; 4  ; ClassificationSystemVersion:inclDuty             ; inclDuty[virtual=true, default=true] ; classificationSystemVersionStream ; ; ;
+; 5  ; ClassificationSystemVersion:inclFreight          ; inclFreight[virtual=true, default=true] ; classificationSystemVersionStream ; ; ;
+; 6  ; ClassificationSystemVersion:inclAssurance        ; inclAssurance[virtual=true, default=true] ; classificationSystemVersionStream ; ; ;
+# ClassificationClass column definitions
+; 0  ; ClassificationClass:code                         ; code[unique=true] ; classificationClassStream ; ; ;
+; 1  ; ClassificationClass:catalogVersion               ; catalogVersion(catalog(id), version)[unique=true] ; classificationClassStream ; ; ;
+; 2  ; ClassificationClass:name                         ; name[lang=en] ; classificationClassStream ; name_en ; en ;
+; 3  ; ClassificationClass:name                         ; name[lang=de] ; classificationClassStream ; name_de ; de ;
+; 4  ; ClassificationClass:description                  ; description[lang=en] ; classificationClassStream ; description_en ; en ;
+; 5  ; ClassificationClass:description                  ; description[lang=de] ; classificationClassStream ; description_de ; de ;
+; 6  ; ClassificationClass:supercategories              ; supercategories(code, catalogVersion(catalog(id), version)) ; classificationClassStream ; ; ;
+# ProductFeature column definitions
+; 0  ; ProductFeature:product                           ; product(code)[unique=true] ; productFeatureStream ; ; ;
+; 1  ; ProductFeature:qualifier                         ; qualifier[unique=true] ; productFeatureStream ; ; ;
+; 2  ; ProductFeature:language                          ; language(isocode)[unique=true] ; productFeatureStream ; ; ;
+; 3  ; ProductFeature:valuePosition                     ; valuePosition[unique=true] ; productFeatureStream ; ; ;
+; 4  ; ProductFeature:classificationAttributeAssignment ; classificationAttributeAssignment(classificationClass(code, catalogVersion(catalog(id), version)), classificationAttribute(code, systemVersion(catalog(id), version))) ; productFeatureStream ; ; ;
+; 5  ; ProductFeature:value                             ; value[translator=de.hybris.platform.catalog.jalo.classification.impex.ProductFeatureValueTranslator] ; productFeatureStream ; ; ;
+# ClassAttributeAssignment column definitions
+; 0  ; ClassAttributeAssignment:classificationClass     ; classificationClass(code, catalogVersion(catalog(id), version))[unique=true] ; classAttributeAssignmentStream ; ; ;
+; 1  ; ClassAttributeAssignment:classificationAttribute ; classificationAttribute(code, systemVersion(catalog(id), version))[unique=true] ; classAttributeAssignmentStream ; ; ;
+; 2  ; ClassAttributeAssignment:systemVersion           ; systemVersion(catalog(id), version)[unique=true] ; classAttributeAssignmentStream ; ; ;
+; 3  ; ClassAttributeAssignment:position                ; position ; classAttributeAssignmentStream ; ; ;
+; 4  ; ClassAttributeAssignment:attributeType           ; attributeType(code) ; classAttributeAssignmentStream ; ; ;
+; 5  ; ClassAttributeAssignment:multiValued             ; multiValued ; classAttributeAssignmentStream ; ; ;
+; 6  ; ClassAttributeAssignment:range                   ; range ; classAttributeAssignmentStream ; ; ;
+; 7  ; ClassAttributeAssignment:localized               ; localized ; classAttributeAssignmentStream ; ; ;
+; 8  ; ClassAttributeAssignment:unit                    ; unit(code, systemVersion(catalog(id), version)) ; classAttributeAssignmentStream ; ; ;
+# ClassificationAttributeUnit column definitions
+; 0  ; ClassificationAttributeUnit:code                 ; code[unique=true] ; classificationAttributeUnitStream ; ; ;
+; 1  ; ClassificationAttributeUnit:systemVersion        ; systemVersion(catalog(id), version)[unique=true] ; classificationAttributeUnitStream ; ; ;
+; 2  ; ClassificationAttributeUnit:symbol               ; symbol ; classificationAttributeUnitStream ; ; ;
+; 3  ; ClassificationAttributeUnit:unitType             ; unitType ; classificationAttributeUnitStream ; ; ;
+; 4  ; ClassificationAttributeUnit:name                 ; name[lang=en] ; classificationAttributeUnitStream ; name_en ; en ;
+; 5  ; ClassificationAttributeUnit:name                 ; name[lang=de] ; classificationAttributeUnitStream ; name_de ; de ;
+# ClassificationAttribute column definitions
+; 0  ; ClassificationAttribute:code                     ; code[unique=true] ; classificationAttributeStream ; ; ;
+; 1  ; ClassificationAttribute:systemVersion            ; systemVersion(catalog(id), version)[unique=true] ; classificationAttributeStream ; ; ;
+; 2  ; ClassificationAttribute:name                     ; name[lang=en] ; classificationAttributeStream ; name_en ; en ;
+; 3  ; ClassificationAttribute:name                     ; name[lang=de] ; classificationAttributeStream ; name_de ; de ;
+
+INSERT_UPDATE Y2YStreamConfiguration; streamId[unique = true]; excludedTypes(code);
+; productsStream       ; VariantProduct, ElectronicsColorVariantProduct ;
+; variantProductStream ; ElectronicsColorVariantProduct                 ;
+
+INSERT_UPDATE Y2YSyncJob; code[unique = true]; streamConfigurationContainer(id); syncType(code); sessionUser(uid);
+; y2ySyncToDataHubProductsJob             ; y2ySyncProducts             ; DataHub ; admin ;
+; y2ySyncToZipProductsJob                 ; y2ySyncProducts             ; Zip     ; admin ;
+; y2ySyncToDataHubClassificationSystemJob ; y2ySyncClassificationSystem ; DataHub ; admin ;
+; y2ySyncToZipClassificationSystemJob     ; y2ySyncClassificationSystem ; Zip     ; admin ;
+; y2ySyncMediasToDataHubJob               ; y2ySyncMediasToDataHub      ; DataHub ; admin ;
+; y2ySyncMediasToZipJob                   ; y2ySyncMediasToZip          ; Zip     ; admin ;
+

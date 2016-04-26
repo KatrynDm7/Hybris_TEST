@@ -1,0 +1,12 @@
+#
+# ENGLISH LOCALIZATION
+#
+
+$lang=en
+
+#Billing Frequency Updation
+UPDATE BillingFrequency;code[unique=true];nameInCart[lang=$lang];nameInOrder[lang=$lang];description[lang=$lang]
+;yearly;Yearly;;Yearly;
+;single;Single;;Single;
+;backpackers;Backpackers;;Backpackers;
+;monthly;Monthly;;Monthly;

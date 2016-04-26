@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+--><!--
+ All hybris buildcallbacks.xml macrodefinitions:
+ 
+ Build/Documentation
+ 
+	 before/after ant macro "clean"
+		 <macrodef name="ygroovy_before_clean"/>
+		 <macrodef name="ygroovy_after_clean"/>
+	 
+	 before/after ant macro "build"
+		 <macrodef name="ygroovy_before_build"/>
+		 <macrodef name="ygroovy_after_build"/>
+		 
+	 before/after ant macro "compile_core" - the core module of the extension
+		 <macrodef name="ygroovy_before_compile_core">
+		 <macrodef name="ygroovy_after_compile_core">
+	 
+	 before/after ant macro "compile_web" - the web module of the extension
+		 <macrodef name="ygroovy_before_compile_web" />
+		 <macrodef name="ygroovy_after_compile_web" />
+	 
+	 before/after ant macro "compile_hmc" - the hmc module of the extension
+		 <macrodef name="ygroovy_before_compile_hmc" />
+		 <macrodef name="ygroovy_after_compile_hmc" />
+ 
+ Preparing extension
+ 
+	 will be called in the beginning of the ant call and only once (also when using multiple 
+	 ant targets e.g. ant build yunittest)	
+		 <macrodef name="ygroovy_only_once_prepare"/>
+ 
+ Creating ear module/production
+ 
+	 before/after ant macro "ear"
+		 <macrodef name="ygroovy_before_ear"/>
+		 <macrodef name="ygroovy_after_ear"/>
+
+	 before/after ant macro "production" - for hybris server only
+		 <macrodef name="ygroovy_before_production" />
+		 <macrodef name="ygroovy_after_production" />
+ 
+ JUnit Test
+ 
+	 before/after ant macro "yunitinit" 
+		 <macrodef name="ygroovy_before_yunitinit" />
+		 <macrodef name="ygroovy_after_yunitinit" />
+	 
+	 before/after ant macro "yunit"
+		 <macrodef name="ygroovy_before_yunit" />
+		 <macrodef name="ygroovy_after_yunit" /> 
+		 
+ Distribution package
+ 
+ 	 before/after ant macro "dist" - internal target; only for use when platform is available in source code
+		 <macrodef name="ygroovy_after_dist"/>
+		 <macrodef name="ygroovy_before_dist"/>
+	 
+	 before/after ant macro "dist_copy" - internal target; only for use when platform is available in source code
+		 <macrodef name="ygroovy_before_dist_copy"/>
+		 <macrodef name="ygroovy_after_dist_copy"/>
+		  
+ 	 With these filters you can override the default extension filters defined in platform/resources/ant/dist/filtersets.xml
+ 	  	 <patternset id="extension.ygroovy.binary.filter">
+ 	  	  	 <patternset refid="extension.filter" />
+ 	  	  	 <exclude name="**/*-source.jar" />
+ 	  	 </patternset>
+ 	  	 <patternset id="extension.ygroovy.source.filter">
+ 	  	  	 <exclude name="**/bin/**" />
+ 	  	 </patternset>
+ 
+--><project name="ygroovy_buildcallbacks">
+
+
+    <macrodef name="ygroovy_before_build">
+        <sequential>
+            <!-- defines native file extension used by the nature of the extension -->
+            <property name="ext.ygroovy.native.file.extension" value="groovy"/>
+            <!-- defines source folder for groovy files -->
+            <property name="ext.ygroovy.additional.src.dir" value="groovysrc"/>
+            <!-- defines test source folder for groovy tests -->
+            <property name="ext.ygroovy.additional.testsrc.dir" value="groovytestsrc"/>
+            <!-- defines web source folder for groovy files -->
+            <property name="ext.ygroovy.additional.websrc.dir" value="web/groovysrc"/>
+            <!-- defines web test source folder for groovy tets -->
+            <property name="ext.ygroovy.additional.webtestsrc.dir" value="web/groovytestsrc"/>
+            <outofdate>
+                <sourcefiles>
+                    <fileset dir="${ext.ygroovy.path}">
+                        <include name="${ext.ygroovy.additional.src.dir}/**"/>
+                        <include name="${ext.ygroovy.additional.websrc.dir}/**"/>
+                    </fileset>
+                </sourcefiles>
+                <targetfiles path="${HYBRIS_TEMP_DIR}/touch/ygroovy_srctouch"/>
+                <sequential>
+                    <touch  mkdirs="true">
+                        <fileset dir="${ext.ygroovy.path}/${ext.ygroovy.additional.src.dir}"/>
+                        <fileset dir="${ext.ygroovy.path}/${ext.ygroovy.additional.websrc.dir}"/>
+                    </touch>
+                </sequential>
+            </outofdate>
+            <outofdate>
+                <sourcefiles>
+                    <fileset dir="${ext.ygroovy.path}">
+                        <include name="${ext.ygroovy.additional.testsrc.dir}/**"/>
+                        <include name="${ext.ygroovy.additional.webtestsrc.dir}/**"/>
+                    </fileset>
+                </sourcefiles>
+                <targetfiles path="${HYBRIS_TEMP_DIR}/touch/ygroovy_testsrctouch"/>
+                <sequential>
+                    <touch  mkdirs="true">
+                        <fileset dir="${ext.ygroovy.path}/${ext.ygroovy.additional.src.dir}"/>
+                        <fileset dir="${ext.ygroovy.path}/${ext.ygroovy.additional.websrc.dir}"/>
+                        <fileset dir="${ext.ygroovy.path}/${ext.ygroovy.additional.testsrc.dir}"/>
+                        <fileset dir="${ext.ygroovy.path}/${ext.ygroovy.additional.webtestsrc.dir}"/>
+                    </touch>
+                </sequential>
+            </outofdate>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="ygroovy_after_compile_core">
+        <sequential>
+            <groovynature_compile_core extname="ygroovy"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="ygroovy_after_compile_web">
+        <sequential>
+            <groovynature_compile_web extname="ygroovy"/>
+        </sequential>
+    </macrodef>
+
+</project>

@@ -1,0 +1,1 @@
+INSERT_UPDATE Product;code[unique=true];catalogversion(catalog(id),version)[unique=true];name[lang=en];approvalStatus(code);description[lang=en];productindexupdatedeleteproducttest;hwcatalog:Online${testId};nametesttwo;approved;descriptiontesttwo

@@ -1,0 +1,2 @@
+INSERT_UPDATE SolrSearchConfig;description[unique=true];pageSize;legacyMode;restrictFieldsInResponse
+;testSearchConfig${testId};20;false;true

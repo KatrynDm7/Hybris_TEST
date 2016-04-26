@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:util="http://www.springframework.org/schema/util"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context 
+           http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:annotation-config />
+	
+	<bean id="assistedservicestorefrontCoreDataImportedEventListener" parent="abstractCoreDataImportedEventListener">
+		<property name="supportedChannels">
+			<list value-type="de.hybris.platform.commerceservices.enums.SiteChannel">
+				<value>B2C</value>
+				<value>B2B</value>
+			</list>
+		</property>
+		<property name="addonExtensionMetadata">
+			<bean class=" de.hybris.platform.addonsupport.data.AddonExtensionMetadata">
+				<property name="suffixChannel" value="false" />
+				<property name="baseExtensionName" value="assistedservicestorefront" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="assistedservicestorefrontSampleDataEventListener" parent="abstractGenericAddOnSampleDataEventListener">
+		<property name="extensionName" value="assistedservicestorefront" />
+	</bean>
+
+ 	<!-- *** Restriction Evaluators *** -->
+	<bean id="assistedServiceSessionRestrictionEvaluator" class="de.hybris.platform.assistedservicestorefront.restrictions.AssistedServiceSessionRestrictionEvaluator"
+		scope="tenant">
+		<property name="defaultAssistedServiceFacade" ref="assistedServiceFacade" />
+	</bean>
+
+	<bean id="asmCMSUserGroupRestrictionEvaluator" class="de.hybris.platform.assistedservicestorefront.restrictions.ASMCMSUserGroupRestrictionEvaluator"
+          scope="tenant">
+        <property name="userService" ref="userService" />
+        <property name="sessionService" ref="sessionService"/>
+    </bean>	
+
+	<!-- *** Restriction Evaluator Mappings *** -->
+
+	<bean id="assistedServiceSessionRestrictionEvaluatorMapping" class="de.hybris.platform.cms2.servicelayer.services.evaluator.CMSRestrictionEvaluatorMapping"
+		scope="tenant">
+		<property name="restrictionTypeCode" value="AssistedServiceSessionRestriction" />
+		<property name="restrictionEvaluator" ref="assistedServiceSessionRestrictionEvaluator" />
+	</bean>
+		
+	<bean id="asmCMSUserGroupRestrictionEvaluatorMapping" class="de.hybris.platform.cms2.servicelayer.services.evaluator.CMSRestrictionEvaluatorMapping"
+          scope="tenant">
+        <property name="restrictionTypeCode" value="ASMCMSUserGroupRestriction" />
+        <property name="restrictionEvaluator" ref="asmCMSUserGroupRestrictionEvaluator" />
+    </bean>
+	
+	<alias name="defaultAssistedServiceRedirectStrategy" alias="assistedServiceRedirectStrategy"/>
+	<bean id="defaultAssistedServiceRedirectStrategy" class="de.hybris.platform.assistedservicestorefront.redirect.impl.DefaultAssistedServiceRedirectStrategy">
+		<property name="cartService" ref="cartService" />
+		<property name="userService" ref="userService" />
+	</bean>
+	
+	<bean id="assistedServicePathRestriction" abstract="true" class="de.hybris.platform.assistedservicestorefront.restrictions.AssistedServicePathRestriction">
+		<property name="userService" ref="userService" />
+		<property name="assistedServiceFacade" ref="assistedServiceFacade"/>
+	</bean>
+	
+	<alias name="defaultAsmSalesGroupRestrictedPathsList" alias="asmSalesGroupRestrictedPathsList" />
+	<util:list id="defaultAsmSalesGroupRestrictedPathsList" value-type="java.lang.String">
+		<value>/checkout/multi/summary/placeOrder</value>
+	</util:list>
+	
+	<alias name="defaultAsmAllAgentsRestrictedPathsList" alias="asmAllAgentsRestrictedPathsList" />
+	<util:list id="defaultAsmAllAgentsRestrictedPathsList" value-type="java.lang.String">
+		<value>/my-account/add-support-ticket</value>
+		<value>POST:/my-account/support-ticket/**</value>
+	</util:list>
+	
+	<bean id="assistedServiceSalesGroupPathRestriction" parent="assistedServicePathRestriction" class="de.hybris.platform.assistedservicestorefront.restrictions.AssistedServiceSalesGroupPathRestriction">
+		<property name="paths" ref="asmSalesGroupRestrictedPathsList" />
+	</bean>
+	
+	<bean id="assistedServiceAllAgentsPathRestriction" parent="assistedServicePathRestriction" class="de.hybris.platform.assistedservicestorefront.restrictions.AssitedServiceAllAgentsPathRestriction">
+		<property name="paths" ref="asmAllAgentsRestrictedPathsList" />
+	</bean>
+	
+	<alias name="defaultAssistedServicePathRestrictionsList" alias="assistedServicePathRestrictionsList" />
+	<util:list id="defaultAssistedServicePathRestrictionsList">
+		<ref bean="assistedServiceSalesGroupPathRestriction"/>
+		<ref bean="assistedServiceAllAgentsPathRestriction"/>
+	</util:list>
+	
+	<bean id="assistedServicePathRestrictionEvaluator" class="de.hybris.platform.assistedservicestorefront.restrictions.AssistedServicePathRestrictionEvaluator">
+		<property name="restrictions" ref="assistedServicePathRestrictionsList"/>
+	</bean>
+</beans>

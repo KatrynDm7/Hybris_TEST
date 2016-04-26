@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <context:component-scan base-package="de.hybris.platform.savedorderformsoccaddon.v2.controllers"/>
+
+    <alias alias="fieldSetBuilder" name="savedOrderFormsFieldSetBuilder"/>
+    <bean id="savedOrderFormsFieldSetBuilder" parent="defaultFieldSetBuilder">
+        <property name="defaultMaxFieldSetSize" value="500000"/>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.savedorderformsoccaddon.dto.OrderFormWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC"
+                       value="code,description,currency(BASIC),user(BASIC),entries(BASIC)"/>
+                <entry key="DEFAULT"
+                       value="code,description,currency(DEFAULT),user(DEFAULT),entries(DEFAULT)"/>
+                <entry key="FULL"
+                       value="code,description,currency(FULL),user(FULL),entries(FULL)"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.savedorderformsoccaddon.dto.OrderFormEntryWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC"
+                       value="sku,quantity"/>
+                <entry key="DEFAULT"
+                       value="sku,quantity"/>
+                <entry key="FULL"
+                       value="sku,quantity"/>
+            </map>
+        </property>
+    </bean>
+
+</beans>

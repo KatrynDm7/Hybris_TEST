@@ -1,0 +1,21 @@
+##******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
+$contentCatalog=powertoolsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+# Language
+$lang=en
+
+# Content Pages
+UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+;;add-support-ticket;"Add Support Ticket";
+;;support-tickets;"Support Tickets listing";
+;;update-support-ticket;"Update Support Ticket";
+
+# CMS Navigation Nodes
+UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+;;AccountSupportTicketHistoryNavNode;"Support Tickets"
+
+# CMS Link Components
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;AccountSupportTicketHistoryLink;"Support Tickets"
+;;AccountViewSupportTicketHistoryLink;"Manage your support tickets";

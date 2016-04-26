@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <alias name="defaultOrderFormReversePopulator" alias="orderFormReversePopulator" />
+    <bean id="defaultOrderFormReversePopulator" class="de.hybris.platform.savedorderforms.populator.OrderFormReversePopulator" >
+        <property name="commonI18NService" ref="commonI18NService"/>
+        <property name="userService" ref="userService"/>
+    </bean>
+
+    <alias name="defaultOrderFormConverter" alias="orderFormConverter"/>
+    <bean id="defaultOrderFormConverter" parent="abstractPopulatingConverter" >
+        <lookup-method name="createTarget" bean="orderFormData"/>
+        <property name="populators">
+            <list>
+                <ref bean="orderFormPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultOrderFormPopulator" alias="orderFormPopulator" />
+    <bean id="defaultOrderFormPopulator" class="de.hybris.platform.savedorderforms.populator.OrderFormPopulator" >
+        <property name="currencyConverter" ref="currencyConverter"/>
+        <property name="principalConverter" ref="principalConverter"/>
+    </bean>
+
+    <alias name="defaultOrderFormFacade" alias="orderFormFacade"/>
+    <bean id="defaultOrderFormFacade" class="de.hybris.platform.savedorderforms.api.orderform.impl.DefaultOrderFormFacade">
+        <property name="modelService" ref="modelService"/>
+        <property name="cartService" ref="cartService"/>
+        <property name="productService" ref="productService"/>
+        <property name="commerceCartService" ref="commerceCartService"/>
+        <property name="baseSiteService" ref="baseSiteService"/>
+        <property name="userService" ref="userService"/>
+        <property name="orderFormService" ref="orderFormService"/>
+        <property name="orderFormReversePopulator" ref="orderFormReversePopulator"/>
+        <property name="orderFormConverter" ref="orderFormConverter"/>
+    </bean>
+
+    <alias name="defaultOrderFormService" alias="orderFormService"/>
+    <bean id="defaultOrderFormService" class="de.hybris.platform.savedorderforms.services.impl.DefaultOrderFormService" parent="abstractBusinessService">
+        <property name="orderFormDao" ref="orderFormDao"/>
+    </bean>
+
+    <alias name="defaultOrderFormDao" alias="orderFormDao"/>
+    <bean id="defaultOrderFormDao" class="de.hybris.platform.savedorderforms.daos.impl.DefaultOrderFormDao">
+        <constructor-arg value="OrderForm"/>
+    </bean>
+
+    <!--  Bean declaration for Data classes with scope Prototype - START-->
+    <bean id="orderFormData" class="de.hybris.platform.savedorderforms.orderform.data.OrderFormData" scope="prototype" />
+    <!--  Bean declaration for Data classes with scope Prototype - END-->
+			
+</beans>

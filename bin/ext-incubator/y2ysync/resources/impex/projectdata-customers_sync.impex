@@ -1,0 +1,53 @@
+INSERT_UPDATE Y2YStreamConfigurationContainer; id[unique = true];
+; customersDataStreams ;
+
+INSERT_UPDATE Y2YStreamConfiguration; streamId[unique = true]; container(id); itemTypeForStream(code);
+; customersStream ; customersDataStreams ; Customer ;
+
+INSERT_UPDATE Y2YColumnDefinition; position[unique = true]; attributeDescriptor(enclosingType(code), qualifier); impexHeader; streamConfiguration(streamId)[unique = true, default = 'customersStream']; columnName;
+; 0  ; Customer:uid                    ; uid[unique=true]                                                                    ; ; ;
+; 1  ; Customer:customerID             ; customerID                                                                          ; ; ;
+; 2  ; Customer:creationtime           ; creationtime[dateformat=dd.MM.yyyy hh:mm:ss]                                       ; ; ;
+; 3  ; Customer:defaultPaymentAddress  ; defaultPaymentAddress[pkFromExternalImportKey=true, sourceSystemId=sourcePlatform]  ; ; ;
+; 4  ; Customer:defaultShipmentAddress ; defaultShipmentAddress[pkFromExternalImportKey=true, sourceSystemId=sourcePlatform] ; ; ;
+; 5  ; Customer:description            ; description                                                                         ; ; ;
+; 6  ; Customer:loginDisabled          ; loginDisabled                                                                       ; ; ;
+; 7  ; Customer:modifiedtime           ; modifiedtime[dateformat=dd.MM.yyyy hh:mm:ss]                                        ; ; ;
+; 8  ; Customer:name                   ; name                                                                                ; ; ;
+; 9  ; Customer:passwordAnswer         ; passwordAnswer                                                                      ; ; ;
+; 10 ; Customer:passwordQuestion       ; passwordQuestion                                                                    ; ; ;
+; 11 ; Customer:sessionCurrency        ; sessionCurrency                                                                     ; ; ;
+; 12 ; Customer:sessionLanguage        ; sessionLanguage                                                                     ; ; ;
+
+INSERT_UPDATE Y2YStreamConfiguration; streamId[unique = true]; container(id); itemTypeForStream(code); whereClause;
+; addressesStream ; customersDataStreams ; Address ; {item.original} IS NULL AND {item.owner} IN ({{ SELECT {PK} FROM {Customer} }}) ;
+
+INSERT_UPDATE Y2YColumnDefinition; position[unique = true]; attributeDescriptor(enclosingType(code), qualifier); impexHeader; streamConfiguration(streamId)[unique = true, default = 'addressesStream']; columnName;
+; 0  ; Address:pk               ; PK[cellDecorator=de.hybris.platform.impex.jalo.header.ExternalImportKeyCellDecorator, sourceSystemId=sourcePlatform, unique=true] ; ; ;
+; 1  ; Address:billingAddress   ; billingAddress ; ;
+; 2  ; Address:cellphone        ; cellphone ; ;
+; 3  ; Address:company          ; company ; ;
+; 4  ; Address:contactAddress   ; contactAddress ; ;
+; 5  ; Address:country          ; country(isocode) ; ;
+; 6  ; Address:email            ; email ; ;
+; 7  ; Address:firstname        ; firstname ; ;
+; 8  ; Address:lastname         ; lastname ; ;
+; 9  ; Address:middlename       ; middlename ; ;
+; 10 ; Address:phone1           ; phone1 ; ;
+; 11 ; Address:phone2           ; phone2 ; ;
+; 12 ; Address:pobox            ; pobox ; ;
+; 13 ; Address:postalcode       ; postalcode ; ;
+; 14 ; Address:region           ; region(country(isocode), isocode) ; ;
+; 15 ; Address:remarks          ; remarks ; ;
+; 16 ; Address:shippingAddress  ; shippingAddress ; ;
+; 17 ; Address:streetname       ; streetname ; ;
+; 18 ; Address:streetnumber     ; streetnumber ; ;
+; 19 ; Address:title            ; title ; ;
+; 20 ; Address:town             ; town ; ;
+; 21 ; Address:unloadingAddress ; unloadingAddress ; ;
+; 22 ; Address:creationtime     ; creationtime[dateformat=dd.MM.yyyy hh:mm:ss] ; ;
+; 23 ; Address:modifiedtime     ; modifiedtime[dateformat=dd.MM.yyyy hh:mm:ss] ; ;
+; 24 ; Address:owner            ; owner(Customer.uid) ; ;                                                                                                               ;
+
+INSERT_UPDATE Y2YSyncJob; code[unique = true]; streamConfigurationContainer(id); syncType(code);
+; y2ySyncCustomersJob ; customersDataStreams ; Zip ;

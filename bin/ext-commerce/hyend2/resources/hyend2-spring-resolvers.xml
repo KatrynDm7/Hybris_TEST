@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="spELpropertyResolver" class="de.hybris.platform.hyend2.resolvers.impl.SpELPropertyResolver" scope="tenant">
+	</bean>
+	
+	<bean id="categoriesTaxonomyResolver" class="de.hybris.platform.hyend2.resolvers.taxonomy.impl.CategoriesTaxonomyResolver" scope="tenant">
+		<property name="categoryService" ref="categoryService"></property>
+		<property name="categoryTaxonomomyStrategy" ref="categoryResolverStrategy">
+		</property>
+	</bean>
+	
+	<alias name="simpleCategoryResolverStrategy" alias="categoryResolverStrategy"/>
+	<bean id="fullPathCategoryResolverStrategy" class="de.hybris.platform.hyend2.resolvers.taxonomy.strategies.impl.FullPathCategoryTaxonomyResolverStrategy">
+		<property name="separator" value="|"></property>
+	</bean>
+	<bean id="simpleCategoryResolverStrategy" class="de.hybris.platform.hyend2.resolvers.taxonomy.strategies.impl.SimpleCategoryTaxonomyResolverStrategy"></bean>
+	
+	<bean id="classificationPropertyResolver" class="de.hybris.platform.hyend2.resolvers.impl.ClassificationPropertyResolver" scope="tenant">
+		<property name="classificationService" ref="classificationService"></property>
+	</bean>
+	
+	<bean id="userGroupsPropertyResolver" class="de.hybris.platform.hyend2.resolvers.impl.UserIdentifierPropertyResolver">
+		<property name="userService" ref="userService"></property>
+	</bean>
+	
+			<bean id="categoryResolver" class="de.hybris.platform.hyend2.resolvers.impl.DefaultCategoryResolver" scope="tenant">
+		<property name="flexibleSearchService" ref="flexibleSearchService"></property>
+		<property name="taxonomyResolverStrategy" ref="categoryResolverStrategy"></property>
+	</bean>
+	
+</beans>

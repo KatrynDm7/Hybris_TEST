@@ -1,0 +1,42 @@
+*** Settings ***
+Resource          emsclientatddtests/EmsServer_Keywords.txt
+Resource          emsclientatddtests/EmsClient_Keywords.txt
+Resource          emsclientatddtests/EntitlementFacades_Keywords.txt
+Resource          common/EntitlementStartup_Keywords.txt
+
+Suite Setup       start emsserver
+Suite Teardown    stop emsserver
+
+Test Setup        import entitlement sampledata
+Test Teardown     reset grants
+
+
+*** Test Cases ***
+# The common pattern of this suite is
+#     - prepare entitlement
+#     - grant it to a user
+#     - get grants of the user from EMS
+#     - check whether they are correct
+
+Test_GrantEntitlement_AndCheckUserGrants_Simple
+    [Documentation]     Basic entitlement without any conditions
+    ${path} =           Set variable    /movies/serials/futurama/the-beast-with-a-billion-backs
+    ${entitlement} =    build entitlement with id "NME1" and pathCondition "${path}"
+    ${grantId} =        grant entitlement "${entitlement}"
+    verify grants of "${entitlement.userId}" xml are equal to "<entitlements><entitlement><grantTime/><status>ACTIVE</status><id>NME1</id><quantity>0</quantity><startTime/><conditionPath>${path}</conditionPath><description>Access to Non-Metered Entitlement 1</description><name>Non-Metered Entitlement 1</name></entitlement></entitlements>" ignoring time
+
+
+Test_GrantUnknownEntitlement_AndCheckUserGrants
+    [Documentation]     The system have to process grants with unknown entitlementType without errors
+    ${path} =           Set variable    /movies/serials/futurama/the-beast-with-a-billion-backs
+    ${entitlement} =    build entitlement with id "UNKNOWN ENTITLEMENT" and pathCondition "${path}"
+    ${grantId} =        grant entitlement "${entitlement}"
+    verify grants of "${entitlement.userId}" xml are equal to "<entitlements><entitlement><grantTime/><status>ACTIVE</status><quantity>0</quantity><startTime/><conditionPath>${path}</conditionPath><name>UNKNOWN ENTITLEMENT</name></entitlement></entitlements>" ignoring time
+
+
+Test_GrantUnknownMeteredEntitlement_AndCheckUserGrants
+    [Documentation]     The system have to process grants with unknown entitlementType without errors
+    ${path} =           Set variable    /movies/serials/futurama/the-beast-with-a-billion-backs
+    ${entitlement} =    build entitlement with id "UNKNOWN ENTITLEMENT" with maxQuantity "10"
+    ${grantId} =        grant entitlement "${entitlement}"
+    verify grants of "${entitlement.userId}" xml are equal to "<entitlements><entitlement><grantTime/><status>ACTIVE</status><quantity>10</quantity><startTime/><name>UNKNOWN ENTITLEMENT</name></entitlement></entitlements>" ignoring time

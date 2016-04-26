@@ -1,0 +1,50 @@
+*** Settings ***
+Resource          atddrunner/AtddRunner_Keywords.txt
+Resource          c4ccustomeratddtests/C4cCustomer_Keywords.txt
+Resource          c4ccustomeratddtests/testdata_variables.txt
+
+Test Setup        import commercecart sampledata
+Test Teardown     reset system
+
+Suite Setup       start server "c4cIntegrationServer"
+Suite Teardown    stop server "c4cIntegrationServer"
+
+*** Test Cases ***
+C4CIntegration_Test_Verify_senderParty
+    [Documentation]    Verification of the SenderParty in the messageHeader of the SOAP message
+    ${userId} =    generate random id
+    ${firstName}    Set Variable    John
+    ${lastName}    Set Variable    Doe
+    create customer with uid "${userId}" and name "${firstName} ${lastName}"
+    create address for customer with uid "${userId}"
+    run cron job
+    ${xml}=    read data from c4c
+    ${senderParty}=    extract data from xml "${xml}" by xPath "//MessageHeader/SenderParty/InternalID[@schemeID='${senderschemeID}'][@schemeAgencyID='${senderschemeAgencyID}']"
+	Should Be Equal As Strings    ${senderParty}    ${senderInternalID}
+
+C4CIntegration_Verify_recipientParty
+    [Documentation]    Verification of the recipientParty in the messageHeader of the SOAP message
+    ${userId} =    generate random id
+    ${firstName}    Set Variable    John
+    ${lastName}    Set Variable    Doe
+    create customer with uid "${userId}" and name "${firstName} ${lastName}"
+    create address for customer with uid "${userId}"
+    run cron job
+    ${xml}=    read data from c4c
+    ${recipientParty}=    extract data from xml "${xml}" by xPath "//MessageHeader/RecipientParty/InternalID[@schemeID='${recipientschemeID}'][@schemeAgencyID='${recipientschemeAgencyID}']"
+    Should Be Equal As Strings    ${recipientParty}    ${recipientInternalID}
+	
+C4CIntegration_Verify_message_UUID
+    [Documentation]    Verify that the messageId sent inside the SOAP message equals the one passed as get parameter
+    ${userId} =    generate random id
+    ${firstName}    Set Variable    John
+    ${lastName}    Set Variable    Doe
+    create customer with uid "${userId}" and name "${firstName} ${lastName}"
+    create address for customer with uid "${userId}"
+    run cron job
+    send compositions call
+    send publications call
+    ${xml}=    read data from c4c
+    ${UUIDmessage}=    extract data from xml "${xml}" by xPath "//MessageHeader/UUID"
+    ${UUIDurl}=    get message URL
+    Should Contain    ${UUIDurl}    ${UUIDmessage}

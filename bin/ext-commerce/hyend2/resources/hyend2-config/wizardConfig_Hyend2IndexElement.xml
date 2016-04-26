@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wizard-config showPrefilledValues="false" selectMode="true" createMode="true" createWithinPopup="false" createWithinEditor="false">
+	<displayed-properties>
+		<group qualifier="generalIndexElement" initially-opened="true">
+			<label key="cockpit.config.label.General" />
+			<property qualifier="Hyend2IndexElement.name" />		
+			<property qualifier="Hyend2IndexElement.active"/>	
+			<property qualifier="Hyend2IndexElement.type">
+				<parameter name="allowActivate" value="false"/>
+				<parameter name="allowCreate" value="false"/>
+			</property>
+		</group>
+		<group qualifier="schemasIndexElement" initially-opened="true">
+			<label key="hyend2.schemas" />
+			<property qualifier="Hyend2IndexElement.indexSchemas" />		
+		</group>
+
+	</displayed-properties>
+</wizard-config>

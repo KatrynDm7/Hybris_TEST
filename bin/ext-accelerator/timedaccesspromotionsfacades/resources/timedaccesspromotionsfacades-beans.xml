@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+			
+	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">
+        <property name="specialPromotions"
+		          type="java.util.Collection&lt;de.hybris.platform.commercefacades.product.data.PromotionData>"/>
+    </bean>
+    
+	<bean class="de.hybris.platform.commercefacades.product.data.PromotionData">
+    	<property name="availableUnitsPerProduct" type="Long"/>
+    	<property name="availableUnitsPerUserAndProduct" type="Long"/>
+    	<property name="itemType" type="String"/>
+    	<property name="fixedPrice" type="PriceData"/>
+    	<property name="startBuyDate" type="java.util.Date"/>
+    	<property name="countDownTime" type="Long"/>
+    </bean>
+	
+	<bean class="de.hybris.platform.commerceservices.service.data.CommerceCartParameter">
+   	 	<property name="promotionCode" type="String">
+        	<description>Promotion Code</description>
+    	</property>
+	</bean>
+</beans>

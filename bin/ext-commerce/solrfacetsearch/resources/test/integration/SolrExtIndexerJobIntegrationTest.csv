@@ -1,0 +1,20 @@
+$catalogversion=catalogversion(catalog(id),version)[unique=true,default='hwcatalog:Online${testId}']
+$supercategories=supercategories(code,catalogversion(catalog(id[default='hwcatalog']),version[default='Online${testId}']))
+
+INSERT_UPDATE ServicelayerJob;code[unique=true];springId[unique=true]
+;solrExtIndexerJob;solrExtIndexerJob
+
+INSERT_UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];languages(isocode);active
+;hwcatalog;Online${testId};de,en;TRUE
+
+INSERT_UPDATE Category;code[unique=true];$catalogversion;name[lang=de];name[lang=en];$supercategories
+;test;;test_de;test_en;
+
+INSERT_UPDATE Product;code[unique=true];$catalogversion;$supercategories;approvalStatus(code);manufacturerName
+;00001;;test;approved;hybris
+
+INSERT_UPDATE SolrFacetSearchConfig;name[unique=true];catalogVersions(catalog(id),version)
+;testFacetSearchConfig${testId};hwcatalog:Online${testId}
+
+INSERT_UPDATE SolrExtIndexerCronJob;code[unique=true];job(code)[unique=true];indexerOperation(code);indexedType;indexedProperties;query;queryParameterProvider;facetSearchConfig(name);sessionUser(uid);sessionLanguage(isoCode)
+;testSolrExtIndexerJob${testId};solrExtIndexerJob;update;Product_testIndexedType${testId};;select PK from {Product as p} where {p.code} = '00001';;testFacetSearchConfig${testId};anonymous;en

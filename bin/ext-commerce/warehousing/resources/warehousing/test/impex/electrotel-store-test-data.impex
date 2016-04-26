@@ -1,0 +1,116 @@
+###########################################################################################
+#
+#	Electrotel International sells electronic goods in the United States and Canada.
+#
+#	In total, they have: 
+#		- 1 warehouse in New York to serve the east of US;
+#		- 1 warehouse in Quebec to serve the east of Canada;
+#		- 1 warehouse in Ontario to serve the central US and Canada.
+#
+#	The New York warehouse has 2 point-of-services: New York city and Syracuse.
+#	The Quebec warehouse has 2 point-of-services: Montreal and Quebec city.
+#	The Ontario warehouse does not have any point-of-service.  
+#
+###########################################################################################
+
+# Language
+$lang=en
+
+$usCurrency=USD
+$productCatalog=electronics
+$catalog-id=electronics-catalog-id
+$catalog-version=Online
+$onlineProduct=catalogVersion(catalog(id[$catalog-id]),version[$catalog-version])[unique=true,default='$catalog-id:$catalog-version']
+$storeCanada=ElectrotelCanada
+$storeUS=ElectrotelUSA
+$siteUid=ElectrotelInternationalSite
+$vendor=electrotel
+$prices=europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+
+# Currencies
+INSERT_UPDATE Currency;isocode[unique=true];name[lang=$lang];active;conversion;digits;symbol
+;USD;"US Dollar";true;1.5;2;"$"
+;CAD;"CA Dollar";true;1.5;2;"$"
+
+INSERT_UPDATE Country;isocode[unique=true];name[lang=$lang];active;;;;;;
+;US;United States;true;;;;;;
+;CA;Canada;true;;;;;;
+
+INSERT_UPDATE Zone;code[unique=true];countries(isocode)
+;usa;US
+;canada;CA
+
+INSERT_UPDATE Unit;unitType[unique=true];code[unique=true];name[lang=$lang];conversion;;;
+;unit;units;Units;1
+;pack;packages;Packages;1
+
+INSERT_UPDATE Catalog;id[unique=true];name[lang=$lang];defaultCatalog;;;;;;
+;$catalog-id;$catalog-id;true;;;;;;
+
+INSERT_UPDATE CatalogVersion; catalog(id)[unique=true]; version[unique=true];active;defaultCurrency(isocode);;;;;;
+;$catalog-id;$catalog-version;true;USD;;;;;;
+
+INSERT_UPDATE BaseStore;uid[unique=true];catalogs(id);currencies(isocode);net;taxGroup(code);defaultCurrency(isocode);languages(isocode);defaultLanguage(isocode);deliveryCountries(isocode);solrFacetSearchConfiguration(name);submitOrderProcessCode;paymentProvider
+;$storeCanada;$catalog-id;CAD;false;;CAD;en;en;CA;;order-process;Mockup
+;$storeUS;$catalog-id;USD;false;;USD;en;en;US;;order-process;Mockup
+
+INSERT_UPDATE BaseSite;uid[unique=true];stores(uid);channel(code)
+;$siteUid;$storeCanada,$storeUS;B2C
+
+## Products
+INSERT_UPDATE Product;code[unique=true];$onlineProduct;name[lang=$lang];unit(code);$prices;approvalStatus(code);owner(Principal.uid);startLineNumber
+;rechargeablebatteries;;rechargeable batteries;packages;7 USD;approved;admin;0
+;wirelessmouse;;wireless mouse;units;40 USD;approved;admin;0
+;batteriescharger;;rechargeable batteries charger;units;23 USD;approved;admin;0
+
+INSERT_UPDATE Vendor;code[unique=true]
+;$vendor
+
+## Warehouses
+INSERT_UPDATE Warehouse;code[unique=true];name[lang=$lang];;vendor(code);default
+;new_york;New York Warehouse;;$vendor;true
+;quebec;Quebec Warehouse;;$vendor;true
+;ontario;Ontario Warehouse;;$vendor;true
+
+INSERT_UPDATE BaseStore2WarehouseRel;source(uid)[unique=true];target(code)[unique=true]
+;$storeUS;new_york
+;$storeCanada;quebec
+;$storeCanada;ontario
+
+## Point-of-services
+INSERT_UPDATE PointOfService;name[unique=true];type(code);basestore(uid)[default=$storeCanada];
+;NewYork;STORE;$storeUS
+;Montreal;STORE;
+;Kingston;WAREHOUSE;
+
+INSERT_UPDATE PointOfService;name[unique=true];displayName;type(code);latitude;longitude;geocodeTimestamp[dateformat=dd-MM-yyyy];basestore(uid)[default=$storeCanada];warehouses(code);nearbyStoreRadius[default=2000]
+;NewYork;New York;STORE;40.7127;74.0059;29-04-2011;$storeUS;new_york
+;Montreal;Montreal;STORE;45.5017;73.5673;29-04-2011;$storeCanada;quebec
+;Kingston;Kingston;WAREHOUSE;44.2333;76.5000;29-04-2011;$storeCanada;ontario
+
+## POS Addresses
+INSERT_UPDATE Address;owner(PointOfService.name)[unique=true];streetname[unique=true];streetnumber[unique=true];postalcode[unique=true];duplicate[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress
+;NewYork;Fifth Avenue;111;12345;false;New York;US;false;false;true;false
+;Montreal;Peel Street;333;12345;false;Montreal;CA;false;false;true;false
+;Kingston;King Street;555;12345;false;Kingston;CA;false;false;true;false
+
+UPDATE PointOfService;name[unique=true];address(owner(PointOfService.name),streetname,streetnumber,postalcode,duplicate)
+;NewYork;NewYork:Fifth Avenue:111:12345:false
+;Montreal;Montreal:Peel Street:333:12345:false
+;Kingston;Kingston:King Street:555:12345:false
+
+## Product Stock Levels
+INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];reserved
+;3;new_york;notSpecified;0;-1;0;0;rechargeablebatteries;0
+;6;new_york;notSpecified;1;-1;0;0;wirelessmouse;0
+;50;quebec;notSpecified;1;-1;0;0;rechargeablebatteries;0
+;14;quebec;notSpecified;1;-1;0;0;wirelessmouse;0
+;2;quebec;notSpecified;1;-1;0;0;batteriescharger;0
+;10;ontario;notSpecified;1;-1;0;0;rechargeablebatteries;0
+;0;ontario;notSpecified;1;-1;0;0;wirelessmouse;0
+;100;ontario;notSpecified;1;-1;0;0;batteriescharger;0
+
+UPDATE Product;code[unique=true];$onlineProduct;stockLevels(productCode,warehouse(code));vendors(code)
+;rechargeablebatteries;;rechargeablebatteries:new_york,rechargeablebatteries:quebec,rechargeablebatteries:ontario
+;wirelessmouse;;wirelessmouse:new_york,wirelessmouse:quebec,wirelessmouse:ontario
+;batteriescharger;;batteriescharger:quebec,batteriescharger:ontario

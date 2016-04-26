@@ -1,0 +1,12 @@
+#
+# Update the Product Catalog Sync Job
+#
+
+$productCatalog=financialProductCatalog
+
+# adding itemtypes to the root types of the financialProductCatalog Sync Job
+UPDATE CatalogVersionSyncJob;code[unique=true];roottypes(code)[mode=append];
+# Remove DisableProductBundleRule and ChangeProductPriceBundleRule from the list as both of them are part-of BundleTempate in the 
+# items.xml configuration, and having them both in causes the Productcockpit synchronization validation issue, i.e. sync okay but 
+# indicator icon stays in Red and not turning to Green.
+;sync $productCatalog:Staged->Online;BundleTemplateStatus,BundleTemplate;

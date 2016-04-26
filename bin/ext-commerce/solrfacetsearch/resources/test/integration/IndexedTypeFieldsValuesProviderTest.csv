@@ -1,0 +1,2 @@
+INSERT_UPDATE SolrIndexedType;identifier[unique=true];type(code);indexName;valuesProvider
+;testIndexedType${testId};Product;testIndexedType${testId};mockupIndexTypeValuesProvider

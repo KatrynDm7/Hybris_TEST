@@ -1,0 +1,18 @@
+INSERT_UPDATE Catalog;id[unique=true];name[lang=de];name[lang=en]
+;testCatalogA;testCatalogA_de;testCatalogA_en
+;testCatalogB;testCatalogB_de;testCatalogB_en
+
+INSERT_UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];languages(isocode);active
+;testCatalogA;Online;en;TRUE
+;testCatalogA;Staged;en;FALSE
+;testCatalogB;Online;en;FALSE
+;testCatalogB;Staged;en;TRUE
+
+INSERT_UPDATE Product;code[unique=true];catalogversion(catalog(id),version)[unique=true];name[lang=en];approvalStatus(code)
+;product1;testCatalogA:Online;Test product 1;approved
+;product2;testCatalogA:Online;Test product 2;approved
+;product1;testCatalogB:Staged;Test product 1;approved
+;product2;testCatalogB:Staged;Test product 2;approved
+
+INSERT_UPDATE SolrFacetSearchConfig;name[unique=true];catalogVersions(catalog(id),version)
+;testFacetSearchConfig${testId};testCatalogA:Online,testCatalogB:Staged

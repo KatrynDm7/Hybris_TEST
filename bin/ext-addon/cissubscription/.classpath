@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="output" path="bin"/>
+
+				
+				
+				
+				
+				
+				
+				
+				
+	<classpathentry exported="false" kind="src" path="/platform" />
+	<classpathentry exported="true" kind="src" path="/cisclient" />
+	<classpathentry exported="true" kind="src" path="/subscriptioncockpits" />
+	<classpathentry exported="true" kind="lib" path="lib/hybris-cis-api-subscription-5.6.0.0.14.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/hybris-cis-subscription-rest-client-5.6.0.0.14.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/jstl-api-1.2.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/jstl-impl-1.2.jar" />
+	<classpathentry exported="true" kind="lib" path="resources" />
+	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="src" />
+	<classpathentry exported="false" output="eclipsebin/web/classes" kind="src" path="web/src" />
+	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="testsrc" />
+	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="gensrc" />
+				
+</classpath>
+				

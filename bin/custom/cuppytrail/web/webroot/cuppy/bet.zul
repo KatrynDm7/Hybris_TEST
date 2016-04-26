@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:h="http://www.w3.org/1999/xhtml" 
+		xmlns:zk="http://www.zkoss.org/2005/zk"
+		xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd ">
+		
+	<div width="100%" height="100%" style="position: absolute; top: 0; left: 0;">
+		<div style="position: absolute; width: 100%; top: 26px; bottom:0; overflow: auto; border-top: 1px solid #999;">
+			<div width="100%" sclass="bet contentPage">
+				<div use="de.hybris.platform.cuppy.web.components.BetComponent" height="90%" style="text-align: left;"
+						onCreate="self.init()"/>
+			</div>	
+		</div>
+	</div>
+</zk>

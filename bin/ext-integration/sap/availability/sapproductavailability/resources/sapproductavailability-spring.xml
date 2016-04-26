@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+    
+    <!-- define module access  -->
+	<bean id="sapProductAvailabilityConfigurationAccess" parent="sapCoreModuleConfigurationAccess">
+		<property name="moduleId" value="sapproductavailability" />		
+	</bean>
+	
+	<!-- define business object  -->
+	<alias alias="sapProductAvailabilityBO" name="sapProductAvailabilityBOImpl" />
+	<bean id="sapProductAvailabilityBOImpl" parent="sapCoreBusinessObject"
+		class="de.hybris.platform.sap.sapproductavailability.businessobject.impl.SapProductAvailabilityBOImpl">
+		<property name="moduleConfigurationAccess" ref="sapProductAvailabilityConfigurationAccess" />
+	</bean>
+	
+	<!-- define business object factory  -->
+	<alias alias="sapProductAvailabilityBOFactory" name="defaultSapProductAvailabilityBOFactory" />
+	<bean id="defaultSapProductAvailabilityBOFactory"
+		class="de.hybris.platform.sap.sapproductavailability.service.impl.DefaultSapProductAvailabilityBOFactory">
+		<property name="genericFactory" ref="sapCoreGenericFactory" />
+	</bean>
+	
+	<!-- define ERP back-end object  -->
+	<alias alias="sapProductAvailabilityBackendERP" name="defaultSapProductAvailabilityBackendERP" />
+	<bean id="defaultSapProductAvailabilityBackendERP"
+		class="de.hybris.platform.sap.sapproductavailability.backend.impl.SapProductAvailabilityBackendERP"
+		scope="sapSession" parent="sapCoreBackendObjectJCo">
+		
+	</bean>
+		
+	<!-- redefine commerceStockService -->	
+	<alias alias="commerceStockService" name="defaultSapProductAvailabilityService"/>
+	<bean id="defaultSapProductAvailabilityService" parent="defaultCommerceStockService"
+	      class="de.hybris.platform.sap.sapproductavailability.service.impl.DefaultSapProductAvailabilityService">		
+	      <property name="sapProductAvailabilityBOFactory" ref="sapProductAvailabilityBOFactory" />
+	      <property name="moduleConfigurationAccess" ref="sapProductAvailabilityConfigurationAccess" />
+	      <property name="userService" ref="userService"/>
+	
+	</bean>
+	 
+	 <alias alias="futureStockService" name="defaultSapFutureStockService"/>
+	 <bean id="defaultSapFutureStockService" parent="defaultFutureStockService"
+	      class="de.hybris.platform.sap.sapproductavailability.service.impl.DefaultSapFutureStockService">
+	       <property name="sapProductAvailabilityService" ref="commerceStockService"/>      
+	 </bean>
+	   
+	<bean id="sapProductAvailabilityCache"
+		class="de.hybris.platform.sap.sapproductavailability.backend.impl.SapProductAvailabilityCache">
+	</bean>
+	 						
+</beans>

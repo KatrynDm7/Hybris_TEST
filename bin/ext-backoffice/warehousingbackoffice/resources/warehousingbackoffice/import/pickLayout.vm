@@ -1,0 +1,115 @@
+<html>
+<head>
+    <style type='text/css'>@media screen, print {
+        table {
+            width: 96%;
+            margin: 25px 10px 0;
+        }
+
+        th {
+            padding: 5px 5px 5px 15px;
+            background-color: #ccc;
+            font-weight: bold;
+            border: 1px solid #aaa;
+            text-align: left;
+        }
+
+        td {
+            padding: 5px 0 5px 15px;
+        }
+
+        td.title {
+            vertical-align: top;
+            text-align: right;
+            font-weight: bold;
+        }
+    }</style>
+</head>
+<body>
+<table>
+    <tr>
+        <td colspan="3">
+            <img src="/backoffice/widgetJarResource/de.hybris.platform.warehousingbackoffice.actions.printpickslipaction/icons/hybris_logo.png" />
+        </td>
+        <td style="text-align:right;">
+			$!{ctx.date}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>$!{ctx.getLabel('order.id')}</strong>
+        </td>
+        <td>
+            <strong>$!{ctx.getLabel('order.date')}</strong>
+        </td>
+    </tr>
+    <tr>
+        <td>
+			$!{ctx.order.code}
+        </td>
+        <td>
+			$!{ctx.order.date}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4"><hr style="border-top: dotted 1px;" /></td>
+    </tr>
+    <tr>
+        <td colspan="4"></td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <strong>$!{ctx.getLabel('ship.to')} </strong><br/>
+			$!{ctx.consignment.shippingAddress.firstname} $!{ctx.consignment.shippingAddress.lastname}
+        </td>
+    </tr>
+    <tr>
+        <td>
+			$!{ctx.getLabel('shipping.address.line.1')} <br/>
+			$!{ctx.getLabel('shipping.address.line.2')} <br/>
+			$!{ctx.getLabel('shipping.address.city')} <br/>
+			$!{ctx.getLabel('shipping.address.postalCode')} <br/>
+			$!{ctx.getLabel('shipping.address.phone')} <br/>
+        </td>
+        <td>
+			$!{ctx.consignment.shippingAddress.line1} <br/>
+			$!{ctx.consignment.shippingAddress.line2} <br/>
+			$!{ctx.consignment.shippingAddress.town} <br/>
+			$!{ctx.consignment.shippingAddress.postalcode} <br/>
+			$!{ctx.consignment.shippingAddress.phone1} <br/>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4"><hr style="border-top: dotted 1px;" /></td>
+    </tr>
+</table>
+
+<table class='data'>
+    <tr>
+        <td colspan="6"><h1>$!{ctx.getLabel('customer.order')}</h1></td>
+    </tr>
+    <tr>
+        <th colspan="6"><strong>$!{ctx.getLabel('shipment.details')}</strong></th>
+    </tr>
+    <tr>
+        <th>$!{ctx.getLabel('product.count')}</th>
+        <th>$!{ctx.getLabel('product.code')}</th>
+        <th>$!{ctx.getLabel('product.image')}</th>
+        <th>$!{ctx.getLabel('product.description')}</th>
+        <th>$!{ctx.getLabel('product.binCode')}</th>
+        <th>$!{ctx.getLabel('product.quantity')}</th>
+    </tr>
+
+#foreach( $consignmentEntry in ${ctx.consignmentEntries} )
+    <tr>
+        <td>$foreach.count</td>
+        <td>$!{consignmentEntry.orderEntry.product.code}</td>
+        <td><img src="$!{ctx.getProductImageURL($consignmentEntry)}" /></td>
+        <td>$!{consignmentEntry.orderEntry.product.name}</td>
+        <td>$!{ctx.calculateBin($consignmentEntry)}</td>
+        <td>$!{consignmentEntry.quantityPending}</td>
+    </tr>
+#end
+</table>
+</body>
+</html>

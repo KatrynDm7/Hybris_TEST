@@ -1,0 +1,110 @@
+$productCatalog=financialProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+INSERT_UPDATE BundleTemplateStatus;id[unique=true];status(code)[default=approved];$catalogVersion
+;statuseventplan;
+;statustravelgplan;
+;statuspropertyplan;
+;statusautoplan;
+;statuslifeplan;
+
+# Insert BundleTemplates
+# - 1st level bundle templates: ;<package id>;
+# - 2st level bundle templates: ;<component id>;<package id>
+# - <package id> = <package name> without blanks
+# - <component id> = <component name> without blanks
+
+# Insert BundleTemplates
+INSERT_UPDATE BundleTemplate;id[unique=true];parentTemplate(id, version[default=1.0], $catalogVersion);version[default=1.0][unique=true];status(id, $catalogVersion);$catalogVersion;
+;WEDPLAN				;				;	;statuseventplan;
+;STAR_PLAN				;WEDPLAN		;	;statuseventplan;
+;STAR_PRODUCT			;WEDPLAN		;	;statuseventplan;
+
+# Insert BundleTemplates for TravelInsurance
+;TRA_PACKAGE			;				;	;statustravelgplan;
+;TRA_INSURANCE			;TRA_PACKAGE	;	;statustravelgplan;
+;TRA_OPTIONS			;TRA_PACKAGE	;	;statustravelgplan;
+
+# Homeowners Property Insurance
+;PRO_HOMEOWNERS_PACKAGE	 ;				        ;	;statuspropertyplan;
+;PRO_HOMEOWNERS_INSURANCE;PRO_HOMEOWNERS_PACKAGE;	;statuspropertyplan;
+;PRO_HOMEOWNERS_OPTIONS	 ;PRO_HOMEOWNERS_PACKAGE;	;statuspropertyplan;
+
+# Renters Property Insurance
+;PRO_RENTERS_PACKAGE	 ;				        ;	;statuspropertyplan;
+;PRO_RENTERS_INSURANCE   ;PRO_RENTERS_PACKAGE   ;	;statuspropertyplan;
+;PRO_RENTERS_OPTIONS	 ;PRO_RENTERS_PACKAGE   ;	;statuspropertyplan;
+
+# Homeowners Property Insurance for Monthly plan
+;PRO_HOMEOWNERS_PACKAGE_MONTHLY	 ;				        		;	;statuspropertyplan;
+;PRO_HOMEOWNERS_INSURANCE_MONTHLY;PRO_HOMEOWNERS_PACKAGE_MONTHLY;	;statuspropertyplan;
+;PRO_HOMEOWNERS_OPTIONS_MONTHLY	 ;PRO_HOMEOWNERS_PACKAGE_MONTHLY;	;statuspropertyplan;
+
+# Renters Property Insurance for Monthly plan
+;PRO_RENTERS_PACKAGE_MONTHLY	 ;				        		;	;statuspropertyplan;
+;PRO_RENTERS_INSURANCE_MONTHLY   ;PRO_RENTERS_PACKAGE_MONTHLY   ;	;statuspropertyplan;
+;PRO_RENTERS_OPTIONS_MONTHLY	 ;PRO_RENTERS_PACKAGE_MONTHLY   ;	;statuspropertyplan;
+
+# Auto Insurance for annually plan
+;AUTO_PACKAGE_ANNUALLY          ;                       ;   ;statusautoplan
+;AUTO_INSURANCE_ANNUALLY        ;AUTO_PACKAGE_ANNUALLY  ;   ;statusautoplan;
+;AUTO_INSURANCE_ANNUALLY_OPTIONS;AUTO_PACKAGE_ANNUALLY  ;   ;statusautoplan;
+
+# Auto Insurance for monthly plan
+;AUTO_PACKAGE_MONTHLY           ;                       ;   ;statusautoplan
+;AUTO_INSURANCE_MONTHLY         ;AUTO_PACKAGE_MONTHLY   ;   ;statusautoplan;
+
+# Mandatory Bundle for Auto
+;AUTO_MANDATORY				;AUTO_PACKAGE_MONTHLY	;	;statusautoplan;
+
+;AUTO_INSURANCE_MONTHLY_OPTIONS ;AUTO_PACKAGE_MONTHLY   ;   ;statusautoplan;
+
+# Life Insurance
+;LIFE_PACKAGE                   ;                       ;   ;statuslifeplan;
+;LIFE_PLAN                      ;LIFE_PACKAGE           ;   ;statuslifeplan;
+;LIFE_OPTIONS                   ;LIFE_PACKAGE           ;   ;statuslifeplan;
+
+# Set the child templates again to make sure that the sequence of child templates is correct
+UPDATE BundleTemplate;id[unique=true];version[default=1.0][unique=true];childTemplates(id,version[default=1.0],$catalogVersion);$catalogVersion
+;WEDPLAN						;	;STAR_PLAN,STAR_PRODUCT     ;
+;TRA_PACKAGE					;	;TRA_INSURANCE,TRA_OPTIONS  ;
+;PRO_HOMEOWNERS_PACKAGE			;	;PRO_HOMEOWNERS_INSURANCE,PRO_HOMEOWNERS_OPTIONS  ;
+;PRO_RENTERS_PACKAGE			;	;PRO_RENTERS_INSURANCE,PRO_RENTERS_OPTIONS        ;
+;PRO_HOMEOWNERS_PACKAGE_MONTHLY	;	;PRO_HOMEOWNERS_INSURANCE_MONTHLY,PRO_HOMEOWNERS_OPTIONS_MONTHLY  ;
+;PRO_RENTERS_PACKAGE_MONTHLY	;	;PRO_RENTERS_INSURANCE_MONTHLY,PRO_RENTERS_OPTIONS_MONTHLY        ;
+;AUTO_PACKAGE_ANNUALLY      	;	;AUTO_INSURANCE_ANNUALLY,AUTO_INSURANCE_ANNUALLY_OPTIONS          ;
+;AUTO_PACKAGE_MONTHLY	        ;	;AUTO_INSURANCE_MONTHLY,AUTO_MANDATORY,AUTO_INSURANCE_MONTHLY_OPTIONS            ;
+;LIFE_PACKAGE                   ;   ;LIFE_PLAN,LIFE_OPTIONS                           ;
+
+# Bundle Template product mapping
+UPDATE BundleTemplate;id[unique=true];version[default=1.0][unique=true];requiredBundleTemplates(id,version[default=1.0],$catalogVersion);products(code, $catalogVersion);$catalogVersion
+;STAR_PLAN		;	;               ;WED_2STAR,WED_3STAR,WED_4STAR,WED_5STAR;
+;STAR_PRODUCT	;	;STAR_PLAN      ;WED_EXCESSWAIVER,WED_PUBLICLIABILITY,WED_VENUECOVER;
+
+# Bundle Template product mapping for Travel Products 
+;TRA_INSURANCE	;	;               ;TRA_SINGLE_BUDGET,TRA_SINGLE_SILVER,TRA_SINGLE_GOLD,TRA_ANNUAL_BUDGET,TRA_ANNUAL_SILVER,TRA_ANNUAL_GOLD,TRA_BACKPACKERS_BUDGET,TRA_BACKPACKERS_SILVER,TRA_BACKPACKERS_GOLD;
+;TRA_OPTIONS	;	;TRA_INSURANCE  ;TRA_WINTER,TRA_GOLF,TRA_BUSINESS,TRA_VALUABLES,TRA_HAZARDOUS,TRA_EXCESS;
+
+# Bundle Tempalte product mapping for Property Products
+;PRO_HOMEOWNERS_INSURANCE	;	;                          ;PRO_PROPERTY_HOMEOWNERS;
+;PRO_HOMEOWNERS_OPTIONS	    ;	;PRO_HOMEOWNERS_INSURANCE  ;PRO_FLOOD_COVER_HOMEOWNERS,PRO_TEMP_ACCOM_HOMEOWNERS,PRO_JEWELRY_COVER_HOMEOWNERS,PRO_BICYCLES_COVER_HOMEOWNERS;
+
+;PRO_RENTERS_INSURANCE	    ;	;                          ;PRO_PROPERTY_RENTERS;
+;PRO_RENTERS_OPTIONS	    ;	;PRO_RENTERS_INSURANCE     ;PRO_TEMP_ACCOM_RENTERS,PRO_JEWELRY_COVER_RENTERS,PRO_BICYCLES_COVER_RENTERS;
+
+# Bundle Tempalte product mapping for Property Products for Monthly plan
+;PRO_HOMEOWNERS_INSURANCE_MONTHLY	;	;                          			;PRO_PROPERTY_HOMEOWNERS_MONTHLY;
+;PRO_HOMEOWNERS_OPTIONS_MONTHLY	    ;	;PRO_HOMEOWNERS_INSURANCE_MONTHLY  	;PRO_FLOOD_COVER_HOMEOWNERS_MONTHLY,PRO_TEMP_ACCOM_HOMEOWNERS_MONTHLY,PRO_JEWELRY_COVER_HOMEOWNERS_MONTHLY,PRO_BICYCLES_COVER_HOMEOWNERS_MONTHLY;
+
+;PRO_RENTERS_INSURANCE_MONTHLY	    ;	;                          			;PRO_PROPERTY_RENTERS_MONTHLY;
+;PRO_RENTERS_OPTIONS_MONTHLY	    ;	;PRO_RENTERS_INSURANCE_MONTHLY     	;PRO_TEMP_ACCOM_RENTERS_MONTHLY,PRO_JEWELRY_COVER_RENTERS_MONTHLY,PRO_BICYCLES_COVER_RENTERS_MONTHLY;
+
+;AUTO_INSURANCE_ANNUALLY        ;   ;                       ;AUTO_ANNUALLY
+;AUTO_INSURANCE_ANNUALLY_OPTIONS;   ;AUTO_INSURANCE_ANNUALLY;AUTO_LEGAL_EXPENSE_COVER_ANNUALLY,AUTO_BREAKDOWN_COVER_ANNUALLY,AUTO_KEY_PROTECTION_COVER_ANNUALLY,AUTO_5_YEAR_GUARANTEE_ANNUALLY
+
+;AUTO_INSURANCE_MONTHLY         ;   ;                       ;AUTO_MONTHLY
+;AUTO_INSURANCE_MONTHLY_OPTIONS ;   ;AUTO_INSURANCE_MONTHLY ;AUTO_LEGAL_EXPENSE_COVER_MONTHLY,AUTO_BREAKDOWN_COVER_MONTHLY,AUTO_KEY_PROTECTION_COVER_MONTHLY,AUTO_5_YEAR_GUARANTEE_MONTHLY
+
+;AUTO_MANDATORY					;	;AUTO_INSURANCE_MONTHLY	;AUTO_TELEMETRY_INSTALLATION_MONTHLY;
+;LIFE_PLAN                      ;   ;                       ;LIFE
+;LIFE_OPTIONS                   ;   ;LIFE_PLAN              ;LIFE_PREMIUM_PROTECTION,LIFE_RENEWAL_OPTION,LIFE_PAYMENT_PROTECTION_BENEFIT

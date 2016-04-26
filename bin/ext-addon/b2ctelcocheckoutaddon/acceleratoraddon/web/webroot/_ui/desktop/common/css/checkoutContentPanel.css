@@ -1,0 +1,518 @@
+.checkoutActions {
+    border-top: 1px solid #dbdad7;
+    overflow: hidden;
+    margin-top: 80px;
+}
+.checkoutActions a {
+    line-height: 4.7em;
+}
+.checkoutActions .button {
+    margin-top: 4px;
+}
+.checkoutActions .expressCheckoutCheckbox {
+    float: right;
+    margin: 22px 30px 0 0;
+}
+.userLogin,
+.userRegister {
+    border: medium none;
+    padding: 0 13px;
+    font-size: 16px;
+}
+.userLogin {
+    background-color: #f0efec;
+}
+.userRegister {
+    padding-right: 0;
+}
+.userLogin .description,
+.userRegister .description {
+    margin: 0;
+}
+.userLogin .headline,
+.userRegister .headline,
+#checkoutContentPanel .headline,
+.forgottenPwd .headline {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5em;
+    line-height: 2em;
+    font-weight: bold;
+    text-transform: none;
+    height: auto;
+    border-bottom: medium none;
+    margin-bottom: 10px;
+}
+a.password-forgotten {
+    text-decoration: none;
+    color: #0073e4;
+    display: block;
+    padding: 15px 0;
+    margin-top: 10px;
+}
+.forgottenPwd {
+    font-size: 16px;
+}
+
+/* checkout forms/pages */
+#checkoutContentPanel {
+    border: none;
+    font-size: 16px;
+    padding-left: 0;
+    padding-right: 0;
+    position: relative;
+}
+#checkoutContentPanel .control-group {
+    float: left;
+    width: 280px;
+    margin-bottom: 0;
+}
+#checkoutContentPanel #addressForm .control-group:nth-child(2n),
+#checkoutContentPanel .billingAddressForm .control-group:nth-child(2n-1),
+#countrySelector .control-group,
+#billingCountrySelector .control-group {
+    margin-right:20px;
+    clear: both;
+}
+#checkoutContentPanel .cardForm .control-group {
+    margin-right:20px;
+}
+#checkoutContentPanel .cardForm .control-group.error + .control-group + .control-group {
+    clear: both;
+}
+#checkoutContentPanel .control-group input,
+#checkoutContentPanel .control-group select {
+    margin-bottom: 0;
+}
+#checkoutContentPanel .form-additionals .control-group{
+    width:100%;
+}
+#checkoutContentPanel .i18nAddressForm,
+#checkoutContentPanel .billingAddressForm,
+#checkoutContentPanel .cardForm {
+    margin-right: -35px;
+}
+#checkoutContentPanel .cardForm {
+    padding-bottom: 60px;
+}
+#newBillingAddressFields.cardForm {
+    padding-bottom: 0;
+}
+#checkoutContentPanel .form-actions {
+    position: relative;
+    bottom: 0;
+}
+#checkoutProgress + .span-14 + .side-content-slot,
+#checkout-cart-details + .side-content-slot {
+    font-size: 13px;
+    margin-top: 80px;
+}
+#selectDeliveryMethodForm .delivery_method_item label {
+    line-height: 2.5em;
+}
+#b2ctelcocheckout-cart-details-btn {
+    color: #484848;
+    font-weight: normal;
+}
+/* payment */
+.cardForm {
+    overflow: hidden;
+    border-bottom: 1px solid #dbdad7;
+    margin-bottom: 45px;
+}
+.cardForm button.positive {
+    float: none;
+}
+fieldset.cardDate{
+    float:left;
+    width: 300px;
+    margin: 0;
+}
+fieldset.cardDate legend{
+    border: 0;
+    line-height: 20px;
+    margin-bottom: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #484848;
+    width: 280px;
+}
+fieldset.cardDate label{
+    display:none;
+}
+#checkoutContentPanel fieldset.cardDate .control-group{
+    width: 130px ;
+    margin:0 0 0 20px;
+}
+#checkoutContentPanel fieldset.cardDate legend + .control-group{
+    margin:0;
+}
+#paymentDetailsForm .description {
+    margin: 20px 0 30px;
+}
+.save_payment_details {
+    clear: both;
+    padding-top: 40px;
+}
+#newBillingAddressFields {
+    border: medium none;
+    margin: 0;
+    padding: 0;
+}
+/* final review */
+#checkoutContentPanel.summaryFlow {
+    padding: 0;
+}
+.summaryFlow {
+    margin-bottom: 80px;
+}
+.summaryFlow strong,
+.checkout_summary_flow h2 {
+    font-size: 1.143em;
+    line-height: 2.5em;
+    margin-bottom: 0;
+}
+.summaryFlowWrapper {
+    display: -ms-flex;
+    display: -webkit-flex;
+    display: flex;
+    font-size: .875em;
+    line-height: 1.75em;
+}
+.summaryFlowWrapper > .span-8{
+    border-bottom: 1px solid #dbdad7;
+    box-sizing: border-box;
+    margin-right: 25px;
+    position: relative;
+    width: 313px;
+}
+#checkoutContentPanel .summaryDeliveryAddress,
+#checkoutContentPanel .summaryDeliveryMode,
+#checkoutContentPanel .summaryPayment {
+    padding-bottom: 60px;
+}
+.summaryFlowWrapper > .span-8.last {
+    margin: 0;
+}
+#checkoutContentPanel .summaryFlowWrapper .editButton {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.summaryPayment .column {
+    width: 130px;
+}
+.summaryPayment .last {
+    margin-top: 40px;
+    padding-left: 20px;
+    width: 150px;
+}
+.summaryPayment .last strong {
+    font-size: 1em;
+    font-style: italic;
+    font-weight: normal;
+    line-height: 1.75em;
+}
+#placeOrderForm1 {
+    margin-bottom: 25px;
+    clear: both;
+    overflow: hidden;
+}
+#placeOrderForm1 .place-order {
+    margin: 0;
+}
+#placeOrderForm1 .terms {
+    float: right;
+    margin: 11px 30px 0 0;
+}
+#placeOrderForm1 + #checkout-cart-details {
+    display: block!important;
+}
+/* order confirmation */
+.checkout-confirmation h1 {
+    font-size: 1.714em;
+}
+.checkout-confirmation .your_order_mail,
+.checkout-confirmation .your_order_number {
+    font-weight: bold;
+}
+.checkout-confirmation .your_order p {
+    margin-bottom: 10px;
+}
+.checkout-confirmation .checkout_summary_flow {
+    line-height: 1.75em;
+    margin-top: 90px;
+    overflow: hidden;
+}
+.checkout-confirmation .checkout_summary_flow .last .column {
+    float: left;
+    margin-right: 30px;
+}
+.checkout-confirmation .checkout_summary_flow .last .column.last {
+    margin: 0;
+}
+.checkout-confirmation .checkout_summary_flow .last .column.last li:first-child {
+    font-style: italic;
+}
+/* cart styling */
+.your_cart-CartItems {
+    margin-top: 90px;
+}
+
+
+
+
+
+/* overlay during checkout */
+.summaryOverlay {
+    padding: 30px 40px;
+    font-size: 1.143em;
+    line-height: 1.75em;
+}
+.summaryOverlay .headline {
+    font-size: 1.5em;
+    line-height: 1em;
+    font-weight: bold;
+    margin-bottom: 25px;
+    border-bottom: none;
+}
+#savedAddressList .addressEntry {
+    overflow: hidden;
+    margin: 0;
+    border-bottom: none;
+}
+#savedAddressList .addressEntry + .addressEntry {
+    margin-top: 60px;
+}
+#savedAddressList .addressEntry ul {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #dbdad7;
+}
+#savedAddressList .addressEntry .positive {
+    float:right;
+    margin-right: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* maybe useful */
+.summaryOverlay .description{
+    margin:0 0 20px 0;
+}
+.summaryOverlay .control-group{
+    float:left;
+    width:387px;
+    margin-right:20px;
+}
+
+.summaryOverlay #summaryDeliveryAddressBook{
+    display:none;
+}
+
+.summaryPaymentOverlay form{
+    margin:0;
+}
+
+.summaryOverlay fieldset.cardDate{
+    width:387px;
+    float:left;
+    margin:0 20px 0 0;
+}
+
+.summaryOverlay fieldset.cardDate legend{
+    border: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 20px;
+    margin: 0 0 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 387px;
+}
+
+.summaryOverlay fieldset.cardDate .control-group{
+    width:183px ;
+    margin:0 0 0 20px;
+}
+
+.summaryOverlay fieldset.cardDate legend + .control-group{
+    margin:0;
+}
+
+
+.summaryOverlay fieldset.cardDate .control-group select{
+    margin-top:2px;
+}
+
+
+
+/* leftover from checkoutContentPanel - dont now yet if its necessary */
+#checkoutContentPanel .contentPanelRight,
+#checkoutContentPanel .contentPanelLeft{
+    width:244px;
+}
+#checkoutContentPanel .contentPanelLeft{
+    margin:0 20px 0 0;
+}
+#checkoutContentPanel .savedPaymentItem{
+    border: 1px dotted #A5A5A5;
+    margin:0 0 10px 0;
+}
+#checkoutContentPanel .form-additionals button{
+    clear:both;
+    width:50%;
+}
+#savedAddressListHolder,
+#savedPaymentListHolder{
+    display:none;
+}
+
+/*
+simplifyPickupPanel
+*/
+.simplifyPickupPanel{
+    border: 1px solid #999999;
+    padding: 15px 20px 5px 20px;
+    margin-bottom: 87px;
+}
+.simplifyPickupPanel .headline{
+    border-bottom: 1px solid #dbdad7;
+    font-size: 1.2857em;
+    font-weight: bold;
+    line-height: 1.33334em;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+.simplifyPickupPanel .headline .subtext {
+    font-size: .77778em;
+    display: block;
+    font-weight: normal;
+}
+.simplifyPickupPanel .description{
+    margin: 0 0 20px 0;
+    color: #999999;
+}
+.simplifyPickupPanel .content span{
+    display:block;
+    font-weight:normal;
+}
+.simplifyPickupPanel .content span.strong{
+    font-weight:bold;
+}
+.simplifyPickupPanel .content input{
+    float:left;
+}
+.simplifyPickupPanel .content span.pickupAdressList{
+    margin:0 0 20px 30px;
+}
+.simplifyPickupPanel .footline{
+    clear: both;
+    border-top: 1px solid #dbdad7;
+}
+.simplifyPickupPanel .footlineText{
+    float: left;
+    width: 50%;
+    padding-top: 12px;
+}
+
+
+#checkoutContentPanel .control-group.security{
+    width:150px;
+    margin:20px 0 0 0;
+}
+#checkoutContentPanel input.security{
+    width:50px;
+    float:left;
+}
+#checkoutContentPanel .security_code_what{
+    float:left;
+    display:block;
+    margin:7px;
+    line-height:30px;
+}
+
+
+
+
+
+
+#summaryDeliveryAddressBook .addressList{
+
+    margin:0 -20px 0 0;
+}
+#summaryDeliveryAddressBook .addressEntry{
+    float:left;
+    width:387px;
+    margin:0 20px 20px 0;
+    border-bottom: 1px dotted #A5A5A5;
+    padding: 0 0 20px 0;
+}
+#summaryDeliveryAddressBook .addressEntry.default{
+    background:#f8f8f8;
+}
+#summaryDeliveryAddressBook .addressEntry button{
+    float:none;
+
+}
+
+#savedPaymentList .paymentList{
+    margin:0 -20px 0 0;
+    max-height: 350px;
+    overflow: auto;
+}
+#savedPaymentList .paymentEntry{
+    float:left;
+    width:387px;
+    margin:0 20px 20px 0;
+    border-bottom: 1px solid #dbdad7;
+    padding: 0 0 20px 0;
+    position: relative;
+}
+#savedPaymentList .paymentEntry ul{
+    float:left;
+}
+#savedPaymentList .paymentEntry form{
+    clear:right;
+}
+#savedPaymentList .paymentEntry button{
+    margin: 0 0 20px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

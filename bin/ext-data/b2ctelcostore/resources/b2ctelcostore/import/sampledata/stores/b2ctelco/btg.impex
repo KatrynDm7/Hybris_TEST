@@ -1,0 +1,8 @@
+# ImpEx for Importing BTG configuration into B2C Telco Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=b2ctelcoProductCatalog
+$contentCatalog=b2ctelcoContentCatalog
+$productCatalogName=B2C Telco Product Catalog
+$productCatalogVersion=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true]
+$contentCatalogVersion=catalogVersion(catalog(id[default=$contentCatalog]),version[default='Staged'])[unique=true]

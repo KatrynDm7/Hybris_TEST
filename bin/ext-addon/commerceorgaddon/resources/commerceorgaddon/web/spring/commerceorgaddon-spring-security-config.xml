@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<security:http disable-url-rewriting="true" pattern="/my-company/**">
+
+		<security:session-management session-authentication-strategy-ref="fixation" />
+		
+		<security:anonymous username="anonymous" granted-authority="ROLE_ANONYMOUS"/>
+
+		<!-- SSL / AUTHENTICATED pages Organization management pages-->
+		<security:intercept-url pattern="/my-company*" access="ROLE_B2BADMINGROUP" requires-channel="https"/>
+		<security:intercept-url pattern="/my-company/**" access="ROLE_B2BADMINGROUP" requires-channel="https"/>
+
+		<security:form-login
+				login-page="/login"
+				authentication-failure-handler-ref="loginAuthenticationFailureHandler"
+				authentication-success-handler-ref="loginGuidAuthenticationSuccessHandler"/>
+
+
+		<security:logout logout-url="/logout" success-handler-ref="logoutSuccessHandler"/>
+
+		<security:port-mappings>
+			<security:port-mapping http="#{configurationService.configuration.getProperty('tomcat.http.port')}"
+								   https="#{configurationService.configuration.getProperty('tomcat.ssl.port')}"/>
+			<security:port-mapping http="80" https="443"/>
+			<!--security:port-mapping http="#{configurationService.configuration.getProperty('proxy.http.port')}"
+				https="#{configurationService.configuration.getProperty('proxy.ssl.port')}" /-->
+		</security:port-mappings>
+
+		<security:request-cache ref="httpSessionRequestCache"/>
+		
+		<security:access-denied-handler ref="b2bAccessDeniedHandler"/>
+
+	</security:http>
+	
+	<!-- Add to the excludeUrlSet so that the main http element ignores and passes over the matching to the above secuirity:http configuration -->
+	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetObject">
+			<ref bean="excludeUrlSet"/>
+		</property>
+		<property name="targetMethod">
+			<value>addAll</value>
+		</property>
+		<property name="arguments">
+			<util:set>
+				<value>/my-company/**</value>
+			</util:set>
+		</property>
+	</bean>
+	
+</beans>

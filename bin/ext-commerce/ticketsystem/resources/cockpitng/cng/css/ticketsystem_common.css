@@ -1,0 +1,11 @@
+@CHARSET "UTF-8";
+
+/*Icons for explorer tree */
+
+div.yw-explorerTree .y-tree-icon-hmc_type_tree_csticket .y-tree-icon {
+      background-image: url("images/0132_Ticket.png");
+}
+
+div.yw-explorerTree .y-tree-icon-CsTicketEventEmailConfiguration .y-tree-icon {
+      background-image: url("images/0133_Ticket-Event-Email-Configuration.png");
+}

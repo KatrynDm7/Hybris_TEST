@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hybrisconfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="resources/schemas/extensions.xsd">
+	<extensions>
+		<!-- 
+				All extensions located in ${HYBRIS_BIN_DIR}/platform/ext are automatically loaded. 
+				More information about how to configure available extensions can be found here : https://wiki.hybris.com/x/nZVzC
+		-->
+				
+		<path dir="${HYBRIS_BIN_DIR}" />
+		
+
+										
+		<!-- ext-platform-optional -->
+
+										
+		<!-- ext-platform-backoffice -->
+
+										
+		<!-- ext-incubator -->
+
+										
+		<!-- ext-commerce -->
+
+										
+		<!-- ext-backoffice -->
+
+										
+		<!-- ext-cockpit -->
+
+										
+		<!-- ext-channel -->
+
+										
+		<!-- ext-addon -->
+
+										
+		<!-- ext-supportability -->
+
+										
+		<!-- ext-content -->
+
+										
+		<!-- ext-integration -->
+
+										
+		<!-- ext-print -->
+
+										
+		<!-- ext-template -->
+		<extension name="yempty" />
+
+										
+		<!-- ext-atddtests -->
+
+										
+		<!-- ext-accelerator -->
+
+										
+		<!-- ext-data -->
+
+										
+		<!-- ext-eventtracking -->
+
+										
+		<!-- ext-integration/sap/adtreco -->
+
+										
+		<!-- ext-integration/sap/asynchronousOM -->
+
+										
+		<!-- ext-integration/sap/availability -->
+
+										
+		<!-- ext-integration/sap/pointofsale -->
+
+										
+		<!-- ext-integration/sap/creditCheck -->
+
+										
+		<!-- ext-integration/sap/masterdata -->
+
+										
+		<!-- ext-integration/sap/core -->
+
+										
+		<!-- ext-integration/sap/testsupport -->
+
+										
+		<!-- ext-integration/sap/synchronousPricing -->
+
+										
+		<!-- ext-integration/sap/sapprodreco -->
+
+										
+		<!-- ext-integration/sap/productconfig -->
+
+										
+		<!-- ext-integration/sap/synchronousOM -->
+
+				
+	</extensions>
+</hybrisconfig>

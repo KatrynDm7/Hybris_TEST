@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<project name="groovynature_buildcallbacks">
+    <property name="groovy.lib.dir" location="${ext.core.path}/lib"/>
+
+	<taskdef name="groovyc" classname="org.codehaus.groovy.ant.Groovyc" classpath="${groovy.lib.dir}/groovy-all-2.3.9.jar" />
+
+	<macrodef name="groovy_compile">
+		<element name="additionalclasspath" optional="true" />
+		<attribute name="memoryMaximumSize" default="64m" />
+		<attribute name="destdir" />
+		<attribute name="srcdir" />
+		<attribute name="extname"/>
+		<sequential>
+			<mkdir dir="@{destdir}"/>
+			<groovyc srcdir="@{srcdir}" fork="false" destdir="@{destdir}" includeAntRuntime="true" verbose="${build.verbose}" encoding="${build.encoding}">
+				<classpath>
+					<additionalclasspath />
+					<fileset dir="${ext.@{extname}.path}">
+						<include name="${ext.@{extname}.additional.src.dir}/**/*.class"/>
+						<include name="${ext.@{extname}.additional.testsrc.dir}/**/*.class"/>
+						<include name="${ext.@{extname}.additional.websrc.dir}/**/*.class"/>
+						<include name="${ext.@{extname}.additional.webtestsrc.dir}/**/*.class"/>
+					</fileset>
+					<pathelement path="${build.classpath}" />
+					<pathelement path="${HYBRIS_BOOTSTRAP_BIN_DIR}/models.jar" />
+					<fileset dir="${bundled.tomcat.home}">
+						<include name="lib/jsp-api.jar" />
+						<include name="lib/servlet-api.jar" />
+						<include name="lib/el-api.jar" />
+						<include name="lib/wrapper*.jar" />
+						<include name="lib/catalina.jar" />
+					</fileset>
+					<pathelement path="${HYBRIS_TEMP_DIR}/log4j" />
+                    <pathelement path="${ext.@{extname}.classpath}" />
+					<!-- for the log4j stuff -->
+				</classpath>
+			</groovyc>
+		</sequential>
+	</macrodef>
+
+    <macrodef name="groovynature_compile_core">
+        <attribute name="extname"/>
+        <sequential>
+            <if>
+                <isset property="ext.@{extname}.coremodule.available"/>
+                <then>
+                    <if>
+                        <istrue value="${ext.@{extname}.extension.coremodule.sourceavailable}"/>
+                        <then>
+	                        <groovy_compile srcdir="${ext.@{extname}.path}/groovysrc"
+	                                        destdir="${ext.@{extname}.path}/classes"
+	                                        extname="@{extname}"/>
+	                        <groovy_compile srcdir="${ext.@{extname}.path}/groovytestsrc"
+	                                        destdir="${ext.@{extname}.path}/classes"
+	                                        extname="@{extname}"/>
+                        </then>
+                    </if>
+                </then>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="groovynature_compile_web">
+        <attribute name="extname"/>
+        <sequential>
+            <if>
+                <isset property="ext.@{extname}.webmodule.available"/>
+                <then>
+                    <if>
+                        <istrue value="${ext.@{extname}.extension.webmodule.sourceavailable}"/>
+                        <then>
+	                        <groovy_compile srcdir="${ext.@{extname}.path}/web/groovysrc"
+	                                       destdir="${ext.@{extname}.path}/web/webroot/WEB-INF/classes"
+	                                       extname="@{extname}"/>
+	                        <groovy_compile srcdir="${ext.@{extname}.path}/web/groovytestsrc"
+	                                       destdir="${ext.@{extname}.path}/web/webroot/WEB-INF/classes"
+	                                       extname="@{extname}"/>
+                        </then>
+                    </if>
+                </then>
+            </if>
+        </sequential>
+    </macrodef>
+
+</project>

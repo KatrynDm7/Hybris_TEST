@@ -1,0 +1,49 @@
+# ImpEx for Solr for Insurance Store
+$indexedType=insuranceProductType
+$solrIndexedType=solrIndexedType(identifier[default=$indexedType])[unique=true]
+$facetSearchConfigName=insuranceIndex
+$contentCatalogName=financialContentCatalog
+$contentCatalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalogName]),CatalogVersion.version[default=Staged])[default=$contentCatalogName:Staged]
+$productCatalog=financialProductCatalog
+$productCatalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalog]),CatalogVersion.version[default=Staged])[default=$productCatalog:Staged]
+
+# Language
+$lang=en
+
+UPDATE SolrIndexedProperty;name[unique=true];$solrIndexedType;displayName[lang=$lang]
+
+# Redirect page URL (Must use INSERT_UPDATE here)
+UPDATE SolrURIRedirect;url[unique=true];&redirectRefID
+;"/cart";$contentCatalogName-redirectRefID-cart
+;"/cart";$contentCatalogName-redirectRefID-basket
+;"http://www.hybris.com/multichannel-accelerator";$contentCatalogName-redirectRefID-accelerator
+;"http://www.hybris.com/multichannel-accelerator";$contentCatalogName-redirectRefID-hymacc
+
+UPDATE SolrPageRedirect;redirectItem(uid,$contentCatalogVersion)[unique=true];&redirectRefID
+;faq;$contentCatalogName-redirectRefID-help
+;faq;$contentCatalogName-redirectRefID-shipping
+
+UPDATE SolrProductRedirect;redirectItem(code,$productCatalogVersion)[unique=true];&redirectRefID
+
+# Category Redirect (Must use INSERT_UPDATE here)
+INSERT_UPDATE SolrCategoryRedirect;redirectItem(code,$productCatalogVersion)[unique=true];&redirectRefID
+
+# Synonyms (Must use INSERT_UPDATE here)
+INSERT_UPDATE SolrSynonymConfig;facetSearchConfig(name)[unique=true,default=$facetSearchConfigName];language(isocode)[unique=true,default=$lang];synonymFrom[unique=true];synonymTo
+
+# Keyword Redirects (Must use INSERT_UPDATE here)
+INSERT_UPDATE SolrFacetSearchKeywordRedirect;facetSearchConfig(name)[unique=true,default=$facetSearchConfigName];language(isocode)[unique=true,default=$lang];keyword[unique=true];matchType(code)[unique=true];redirect(&redirectRefID);ignoreCase[default=true]
+ ;;;"accelerator";EXACT;$contentCatalogName-redirectRefID-accelerator;
+ ;;;"basket";EXACT;$contentCatalogName-redirectRefID-basket;
+ ;;;"cart";EXACT;$contentCatalogName-redirectRefID-cart;
+ ;;;"help";EXACT;$contentCatalogName-redirectRefID-help;
+ ;;;"hymacc";EXACT;$contentCatalogName-redirectRefID-hymacc;
+
+# Keyword Redirects (Must use INSERT_UPDATE here)
+INSERT_UPDATE SolrFacetSearchKeywordRedirect;facetSearchConfig(name)[unique=true,default=$facetSearchConfigName];language(isocode)[unique=true,default=$lang];keyword[unique=true];matchType(code)[unique=true];redirect(&redirectRefID);ignoreCase[default=true]
+
+INSERT_UPDATE SolrFacetSearchKeywordRedirect;facetSearchConfig(name)[unique=true,default=$facetSearchConfigName];language(isocode)[unique=true,default=$lang];keyword[unique=true];matchType(code)[unique=true];redirect(&redirectRefID);ignoreCase[default=true]
+
+# Starts With Keyword Redirects (Must use INSERT_UPDATE here)
+INSERT_UPDATE SolrFacetSearchKeywordRedirect;facetSearchConfig(name)[unique=true,default=$facetSearchConfigName];language(isocode)[unique=true,default=$lang];keyword[unique=true];matchType(code)[unique=true];redirect(&redirectRefID);ignoreCase[default=true]
+ ;;;"shipping";STARTS_WITH;$contentCatalogName-redirectRefID-shipping;

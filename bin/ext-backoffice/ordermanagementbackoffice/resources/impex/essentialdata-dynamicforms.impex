@@ -1,0 +1,126 @@
+INSERT_UPDATE Script; code[unique=true];content;active[default=true, unique=true]
+;evalCustomRefundAmount;"import de.hybris.platform.returns.model.RefundEntryModel;
+import de.hybris.platform.returns.ReturnService;
+import de.hybris.platform.returns.model.ReturnRequestModel;
+import com.hybris.backoffice.widgets.notificationarea.event.NotificationUtils;
+import com.hybris.backoffice.widgets.notificationarea.event.NotificationEvent;
+import de.hybris.platform.util.localization.Localization;
+
+def digits = context.order.currency.digits;
+def deliveryCost = new BigDecimal(context.order.deliveryCost);
+def newRefundAmount = context.customRefundAmount;
+def originalRefundAmount = context.originalRefundAmount;
+def initialRefundAmount = new BigDecimal(getTotalPrice());
+def includedRefundAmount = initialRefundAmount.add(deliveryCost);
+def excludingRefundAmount = initialRefundAmount;
+
+def returnService = spring.getBean 'returnService';
+
+if (newRefundAmount == null)
+{
+	newRefundAmount = new BigDecimal(0);
+}
+
+newRefundAmount = newRefundAmount.setScale(digits, BigDecimal.ROUND_HALF_DOWN)
+includedRefundAmount = includedRefundAmount.setScale(digits, BigDecimal.ROUND_HALF_DOWN)
+excludingRefundAmount = excludingRefundAmount.setScale(digits, BigDecimal.ROUND_HALF_DOWN)
+
+if(!isShippingAlreadyRefunded() && ( newRefundAmount == includedRefundAmount  || newRefundAmount == excludingRefundAmount ))
+{
+
+	if (context.refundShippingCost == null)
+	{
+		newRefundAmount = initialRefundAmount;
+	}
+	else if (context.refundShippingCost)
+	{
+		newRefundAmount = includedRefundAmount;
+	}
+	else
+	{
+		newRefundAmount = initialRefundAmount;
+	}
+	newRefundAmount = newRefundAmount.setScale(digits, BigDecimal.ROUND_HALF_DOWN);
+}
+newRefundAmount;
+
+boolean isShippingAlreadyRefunded()
+{
+	def isShippingAlreadyRefunded = false;
+	List<ReturnRequestModel> previousReturns = returnService.getReturnRequests(context.order.getCode());
+	previousReturns.each 
+	{ returnRequest -> 
+	if(!context.RMA.equals(returnRequest.getRMA()) && returnRequest.getRefundShippingCost())
+	{
+		isShippingAlreadyRefunded = true;
+	}
+	}
+	return isShippingAlreadyRefunded;
+}
+
+double getTotalPrice() 
+{
+	List <RefundEntryModel> refundEntries = (List<RefundEntryModel>)((ReturnRequestModel)context).getReturnEntries();
+	double sum = 0;
+	for (RefundEntryModel refundEntry : refundEntries)
+	{
+		sum+= refundEntry.getAmount();
+	}
+	return sum;
+}";true;
+;evalOrigRefundAmount;"import de.hybris.platform.returns.model.RefundEntryModel;
+import de.hybris.platform.returns.ReturnService;
+import de.hybris.platform.returns.model.ReturnRequestModel;
+import com.hybris.backoffice.widgets.notificationarea.event.NotificationUtils;
+import com.hybris.backoffice.widgets.notificationarea.event.NotificationEvent;
+import de.hybris.platform.util.localization.Localization;
+
+def SHIPPINGCOST_REFUND_FAILURE = 'ordermanagementbackoffice.returnrequest.refund.refundShippingCost.failure';
+def digits = context.order.currency.digits;
+def deliveryCost = new BigDecimal(context.order.deliveryCost);
+def originalRefundAmount = context.originalRefundAmount;
+
+def returnService = spring.getBean 'returnService';
+
+if(isShippingAlreadyRefunded())
+{
+	NotificationUtils.notifyUser(Localization.getLocalizedString(SHIPPINGCOST_REFUND_FAILURE),NotificationEvent.Type.FAILURE);
+	context.refundShippingCost=false;
+}
+else if (context.refundShippingCost)
+{
+	originalRefundAmount = new BigDecimal(getTotalPrice());
+	originalRefundAmount = originalRefundAmount.add(deliveryCost);   
+
+}
+else
+{
+	originalRefundAmount = new BigDecimal(getTotalPrice());   
+}
+
+originalRefundAmount =  originalRefundAmount.setScale(digits, BigDecimal.ROUND_HALF_DOWN);
+
+boolean isShippingAlreadyRefunded()
+{
+	def isShippingAlreadyRefunded = false;
+	List<ReturnRequestModel> previousReturns = returnService.getReturnRequests(context.order.getCode());
+	previousReturns.each 
+	{ returnRequest -> 
+    	if(!context.RMA.equals(returnRequest.getRMA()) && returnRequest.getRefundShippingCost())
+    	{
+        	isShippingAlreadyRefunded = true;
+    	}
+	}
+    return isShippingAlreadyRefunded;
+}
+
+double getTotalPrice() 
+{
+	List <RefundEntryModel> refundEntries = (List<RefundEntryModel>)((ReturnRequestModel)context).getReturnEntries();
+double sum = 0;
+for (RefundEntryModel refundEntry : refundEntries)
+{
+sum+= refundEntry.getAmount();
+}
+return sum;
+}";true

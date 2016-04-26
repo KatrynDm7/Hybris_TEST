@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<process xmlns="http://www.hybris.de/xsd/processdefinition" start="start" name="custUserTestProc">
+
+	<action id="start" bean="TestActionBean">
+		<transition name="OK" to="success"/>
+	</action>
+
+	<end id="success" state="SUCCEEDED">Everything was fine</end>
+</process>

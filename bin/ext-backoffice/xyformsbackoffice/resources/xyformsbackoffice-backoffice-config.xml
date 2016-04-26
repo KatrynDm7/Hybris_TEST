@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+<config xmlns="http://www.hybris.com/cockpit/config">
+	<!--Explorer Tree -->
+	<context component="explorer-tree" parent="auto" merge-by="module" principal="admin">
+		<explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
+			<explorer-tree:navigation-node id="hmc.yforms">
+				<explorer-tree:type-node code="YFormDefinition" id="YFormDefinition" />
+				<explorer-tree:type-node code="YFormData" id="YFormData" />
+			</explorer-tree:navigation-node>
+		</explorer-tree:explorer-tree>
+	</context>
+   <context component="explorer-tree" parent="auto" merge-by="module" principal="yformsmanagergroup">
+      <explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
+         <explorer-tree:navigation-node id="hmc.yforms">
+            <explorer-tree:type-node code="YFormDefinition" id="YFormDefinition" />
+         </explorer-tree:navigation-node>
+      </explorer-tree:explorer-tree>
+   </context>
+
+   <!-- Actions -->
+   <context merge-by="type" type="YFormDefinition" component="editorareaactions" principal="admin">
+      <y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+         <y:group qualifier="common">
+            <y:label>actiongroup.common</y:label>
+            <y:action action-id="de.hybris.platform.xyformsbackoffice.actions.archive" property="currentObject" />
+            <y:action action-id="de.hybris.platform.xyformsbackoffice.actions.clone" property="currentObject" />
+            <y:action action-id="de.hybris.platform.xyformsbackoffice.actions.edit" property="currentObject" />
+         </y:group>
+      </y:actions>
+   </context>
+
+   <!-- Actions -->
+   <context merge-by="type" type="YFormDefinition" component="editorareaactions" principal="yformsmanagergroup">
+      <y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+         <y:group qualifier="common">
+            <y:label>actiongroup.common</y:label>
+            <y:action action-id="de.hybris.platform.xyformsbackoffice.actions.clone" property="currentObject" />
+            <y:action action-id="de.hybris.platform.xyformsbackoffice.actions.edit" property="currentObject" />
+         </y:group>
+      </y:actions>
+   </context>
+
+	<!-- List View -->
+	<context merge-by="type" parent="GenericItem" type="YFormDefinition" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="applicationId" />
+			<list-view:column qualifier="formId" />
+			<list-view:column qualifier="version" />
+			<list-view:column qualifier="description" />
+		</list-view:list-view>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="YFormData" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="id" />
+			<list-view:column qualifier="type" />
+			<list-view:column qualifier="creationtime" />
+			<list-view:column qualifier="formDefinition" />
+		</list-view:list-view>
+	</context>
+
+	<context type="YFormDefinition" component="base">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>applicationId+' / '+formId+' / '+version</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+
+	<context type="YFormData" component="base">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>id+' / '+type</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+
+	<context type="YFormDataHistory" component="base">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>creationtime</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+
+	<!-- Simple Search -->
+	<context merge-by="type" parent="GenericItem" type="YFormDefinition" component="simple-search">
+		<simple-search:simple-search xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+			<simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="applicationId" />
+			<simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="formId" />
+		</simple-search:simple-search>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="YFormData" component="simple-search">
+		<simple-search:simple-search xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+			<simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="id" />
+		</simple-search:simple-search>
+	</context>
+
+	<!-- Advanced Search -->
+	<context merge-by="type" parent="GenericItem" type="YFormDefinition" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field name="applicationId" selected="true" operator="contains" />
+				<advanced-search:field name="formId" selected="true" operator="contains" />
+				<advanced-search:field name="description" selected="true" operator="contains" />
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="YFormData" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field name="id" selected="true" operator="contains" />
+				<advanced-search:field name="type" selected="true" operator="contains" />
+				<advanced-search:field name="content" selected="true" operator="contains" />
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+
+
+	<!-- Editor Area -->
+	<context merge-by="type" parent="GenericItem" type="YFormDefinition" component="editor-area" principal="admin">
+		<ea:editorArea xmlns:ea="http://www.hybris.com/cockpitng/component/editorArea" name="Default">
+			<ea:tab name="label.basic">
+				<ea:section name="label.basic" columns="2">
+					<ea:panel>
+						<ea:attribute qualifier="applicationId" readonly="true" />
+                  <ea:attribute qualifier="version" readonly="true" />
+					</ea:panel>
+					<ea:panel>
+                  <ea:attribute qualifier="formId" readonly="true" />
+					</ea:panel>
+				</ea:section>
+				<ea:section name="label.more" columns="2">
+               <ea:panel>
+   					<ea:attribute qualifier="title" />
+               </ea:panel>
+               <ea:panel>
+                  <ea:attribute qualifier="description" />
+               </ea:panel>
+				</ea:section>
+			</ea:tab>
+			<ea:tab name="label.advanced">
+				<ea:section name="label.content">
+					<ea:attribute qualifier="content" editor="com.hybris.cockpitng.editor.defaulttext"/>
+				</ea:section>
+            <ea:section name="label.status">
+               <ea:attribute qualifier="status" />
+            </ea:section>
+				<ea:section name="label.relationships" columns="2">
+               <ea:panel>
+   					<ea:attribute qualifier="categories" />
+               </ea:panel>
+               <ea:panel>
+                  <ea:attribute qualifier="data" />
+               </ea:panel>
+				</ea:section>
+			</ea:tab>
+		</ea:editorArea>
+	</context>
+
+   <context merge-by="type" parent="GenericItem" type="YFormDefinition" component="editor-area" principal="yformsmanagergroup">
+      <ea:editorArea xmlns:ea="http://www.hybris.com/cockpitng/component/editorArea" name="Default">
+         <ea:tab name="label.basic">
+            <ea:section name="label.basic">
+               <ea:attribute qualifier="applicationId" readonly="true" />
+               <ea:attribute qualifier="formId" readonly="true" />
+               <ea:attribute qualifier="version" readonly="true" />
+            </ea:section>
+            <ea:section name="label.more">
+               <ea:attribute qualifier="title" />
+               <ea:attribute qualifier="description" />
+            </ea:section>
+         </ea:tab>
+      </ea:editorArea>
+   </context>
+
+	<!-- Editor Area -->
+	<context merge-by="type" parent="GenericItem" type="YFormData" component="editor-area">
+		<ea:editorArea xmlns:ea="http://www.hybris.com/cockpitng/component/editorArea" name="Default">
+			<ea:tab name="label.basic">
+				<ea:section name="label.basic" columns="1">
+					<ea:attribute qualifier="id" readonly="true"/>
+					<ea:attribute qualifier="type" />
+				</ea:section>
+			</ea:tab>
+			<ea:tab name="label.advanced">
+				<ea:section name="label.content">
+					<ea:attribute qualifier="content" editor="com.hybris.cockpitng.editor.defaulttext"/>
+				</ea:section>
+				<ea:section name="label.relationships" columns="2">
+               <ea:panel>
+                  <ea:attribute qualifier="applicationId" />
+                  <ea:attribute qualifier="formDefinition" />
+               </ea:panel>
+               <ea:panel>
+                  <ea:attribute qualifier="formId" />
+   					<ea:attribute qualifier="history" />
+               </ea:panel>
+				</ea:section>
+			</ea:tab>
+		</ea:editorArea>
+	</context>
+
+   <!-- Create New YFormDefinition Wizard -->
+   <context type="YFormDefinition" component="create-wizard">
+      <wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="YFormDefinitionWizard" title="create.yformDefinition.title">
+         <wz:prepare id="yformDefinitionPrepare">
+            <wz:initialize property="newYFormDefinition" type="YFormDefinition" />
+            <wz:assign property="newYFormDefinition.version" value="1" />
+            <wz:assign property="newYFormDefinition.applicationId" value="ctx.template != null ? ctx.template.applicationId : ''" />
+            <wz:assign property="newYFormDefinition.formId" value="ctx.template != null ? ctx.template.formId : ''" />
+            <wz:assign property="newYFormDefinition.description" value="ctx.template != null ? ctx.template.description : ''" />
+            <wz:assign property="newYFormDefinition.title" value="ctx.template != null ?  ctx.template.title : 'Untitled Form'" />
+            <wz:assign property="newYFormDefinition.content" value="ctx.template != null ? ctx.template.content : null" />
+         </wz:prepare>
+         <wz:step id="step1" label="create.yformDefinition.essential.label" sublabel="create.yformDefinition.essential.sublabel">
+            <wz:info id="step1.intro" label="create.yformDefinition.essential.intro" position="top" />
+            <wz:content id="step1.content">
+               <wz:property-list root="newYFormDefinition">
+                  <wz:property qualifier="applicationId" type="java.lang.String" />
+                  <wz:property qualifier="formId" type="java.lang.String" />
+               </wz:property-list>
+            </wz:content>
+            <wz:navigation id="step1.navigation">
+               <wz:cancel />
+               <wz:next visible="!#empty(newYFormDefinition.applicationId) and (newYFormDefinition.applicationId!=null) and !#empty(newYFormDefinition.formId) and (newYFormDefinition.formId!=null) and !(newYFormDefinition.applicationId matches '^.*\s.*$') and !(newYFormDefinition.formId matches '^.*\s.*$')" />
+               <wz:done visible="!#empty(newYFormDefinition.applicationId) and (newYFormDefinition.applicationId!=null) and !#empty(newYFormDefinition.formId) and (newYFormDefinition.formId!=null) and !(newYFormDefinition.applicationId matches '^.*\s.*$') and !(newYFormDefinition.formId matches '^.*\s.*$')">
+                  <wz:save property="newYFormDefinition" />
+               </wz:done>
+            </wz:navigation>
+         </wz:step>
+         <wz:step id="step2" label="create.yformDefinition.descriptions.label" sublabel="create.yformDefinition.descriptions.sublabel">
+            <wz:content id="step2.content">
+               <wz:info id="step2.intro" label="create.yformDefinition.descriptions.intro" position="top" />
+               <wz:property-list root="newYFormDefinition">
+                  <wz:property qualifier="title" type="java.lang.String" />
+                  <wz:property qualifier="description" type="java.lang.String" />
+               </wz:property-list>
+            </wz:content>
+            <wz:navigation id="step2.navigation">
+               <wz:cancel />
+               <wz:back />
+               <wz:done>
+                  <wz:save property="newYFormDefinition" />
+               </wz:done>
+            </wz:navigation>
+         </wz:step>
+      </wz:flow>
+   </context>
+</config>

@@ -1,0 +1,43 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2000-2015 hybris AG
+# All rights reserved.
+# 
+# This software is the confidential and proprietary information of hybris
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with hybris.
+# -----------------------------------------------------------------------
+
+# you can put key/value pairs here.
+# Use Config.getParameter(..) to retrieve the values during runtime.
+
+xyformsstorefrontcommons.key=value
+
+# Specifies the location of the spring context file added automatically to the global platform application context.
+xyformsstorefrontcommons.application-context=xyformsstorefrontcommons-spring.xml
+
+# Orbeon context sharing
+#yacceleratorstorefront.tomcat60.context.crossContext=true
+
+# URLs that do not need CSRF verification
+csrf.allowed.url.patterns=/[^/]+(/[^?]*)+(sop/response)$,/[^/]+(/[^?]*)+(merchant_callback)$,/[^/]+(/[^?]*)+(hop/response)$,/[^/]+(/[^?]*)+(language)$,/[^/]+(/[^?]*)+(currency)$
+
+# These values are translated at build time and copied to properties-local.xml (orbeon)
+xyformsstorefrontcommons.orbeon.persistence-api.hostname=electronics.local
+xyformsstorefrontcommons.orbeon.persistence-api.port=${tomcat.ssl.port}
+xyformsstorefrontcommons.orbeon.persistence-api.webapp=/xyformsweb
+xyformsstorefrontcommons.orbeon.persistence-api.url.address=https://${xyformsstorefrontcommons.orbeon.persistence-api.hostname}:${xyformsstorefrontcommons.orbeon.persistence-api.port}${xyformsstorefrontcommons.orbeon.persistence-api.webapp}/fr/service/hybris
+
+xyformsstorefrontcommons.orbeon.keystoreFile=${bundled.tomcat.home}/lib/keystore
+xyformsstorefrontcommons.orbeon.keystorePass=123456
+
+yacceleratorstorefront.additionalWebSpringConfigs.xyformsstorefrontcommons=classpath:/xyformsstorefrontcommons/web/spring/xyformsstorefrontcommons-web-spring.xml
+
+storefront.supportedUiExperienceLevels.electronicstore=DESKTOP,MOBILE
+
+xyformsstorefrontcommons.javascript.paths.desktop=/desktop/common/js/xyformsstorefrontcommons.js
+xyformsstorefrontcommons.javascript.paths.mobile=/desktop/common/js/xyformsstorefrontcommons.js
+xyformsstorefrontcommons.css.paths.desktop=/desktop/common/css/xyformsstorefrontcommons.css
+xyformsstorefrontcommons.css.paths.mobile=/mobile/common/css/xyformsstorefrontcommons.css

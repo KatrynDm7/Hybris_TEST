@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2015 hybris AG All rights reserved.
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config />
+
+	<bean id="insuranceCheckoutSystemSetup"
+		class="de.hybris.platform.storefront.insurancecheckout.setup.InsuranceCheckoutSystemSetup"
+		parent="abstractCoreSystemSetup">
+    </bean>
+
+	<alias name="insuranceDeliveryModeLookupStrategy" alias="deliveryModeLookupStrategy"/>
+	<bean id="insuranceDeliveryModeLookupStrategy" parent="defaultDeliveryModeLookupStrategy"
+          class="de.hybris.platform.storefront.checkout.steps.delivery.InsuranceDeliveryModeLookupStrategy">
+		<property name="deliveryService" ref="deliveryService"/>
+	</bean>
+
+    <alias name="mockDeliveryAddressStrategy" alias="deliveryAddressStrategy"/>
+    <bean id="mockDeliveryAddressStrategy" class="de.hybris.platform.storefront.checkout.steps.address.impl.MockDeliveryAddressStrategy">
+    </bean>
+    
+    <alias name="defaultOrderEntryYFormDataDynamicAttributeHandler" alias="orderEntryYFormDataDynamicAttributeHandler"/>
+    <bean id="defaultOrderEntryYFormDataDynamicAttributeHandler" class="de.hybris.platform.storefront.checkout.dynamicattributes.OrderEntryYFormDataDynamicAttributeHandler">
+    	<property name="yformService" ref="yformService"/>
+    	<property name="insuranceCheckoutHelper" ref="insuranceCheckoutHelper"/>
+    </bean>
+    
+	<alias name="insuranceCreateOrderFromCartStrategy" alias="createOrderFromCartStrategy"/>
+	<bean id="insuranceCreateOrderFromCartStrategy" class="de.hybris.platform.storefront.checkout.strategy.impl.InsuranceCreateOrderFromCartStrategy" parent="defaultCreateOrderFromCartStrategy"/>
+
+    <alias name="defaultInsuranceYFormDataPreprocessorStrategy" alias="insuranceYFormDataPreprocessorStrategy"/>
+    <bean id="defaultInsuranceYFormDataPreprocessorStrategy" abstract="true" class="de.hybris.platform.storefront.checkout.strategy.impl.InsuranceYFormDataPreprocessorStrategy"/>
+
+    <alias name="defaultInsuranceReferenceIdTransformerYFormPreprocessorStrategy" alias="insuranceReferenceIdTransformerYFormPreprocessorStrategy"/>
+    <bean id="defaultInsuranceReferenceIdTransformerYFormPreprocessorStrategy" parent="insuranceYFormDataPreprocessorStrategy"/>
+    
+    <alias name="defaultTravelInsuranceTransformerYFormPreprocessorStrategy"
+           alias="travelInsuranceTransformerYFormPreprocessorStrategy"/>
+    <bean id="defaultTravelInsuranceTransformerYFormPreprocessorStrategy" parent="insuranceYFormDataPreprocessorStrategy"
+          class="de.hybris.platform.storefront.checkout.strategy.impl.TravelInsuranceTransformerYFormPreprocessorStrategy">
+        <property name="cartService" ref="cartService"/>
+        <property name="modelService" ref="modelService"/>
+    </bean>
+
+    <alias name="defaultForm2PreprocessorStrategyMap" alias="form2PreprocessorStrategyMap"/>
+    <util:map id="defaultForm2PreprocessorStrategyMap" key-type="java.lang.String"
+              value-type="de.hybris.platform.storefront.strategies.impl.InsuranceYFormDataPreprocessorStrategy">
+        <entry key="TravelForm-TravellerInformation" value-ref="travelInsuranceTransformerYFormPreprocessorStrategy"/>
+    </util:map>
+
+    <alias name="defaultInsuranceQuoteReviewFacade" alias="insuranceQuoteReviewFacade"/>
+    <bean id="defaultInsuranceQuoteReviewFacade" class="de.hybris.platform.storefront.checkout.facades.impl.DefaultInsuranceQuoteReviewFacade">
+        <property name="cartFacade" ref="cartFacade"/>
+        <property name="datetimeFormat" ref="globalDateFormat"/>
+        <property name="insuranceQuoteReviewDetailsPopulator" ref="insuranceQuoteReviewDetailsPopulator"/>
+        <property name="insuranceQuoteFacade" ref="quoteFacade"/>
+    </bean>
+    
+    <bean id="consignmentProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/financialcheckout/process/consignment-process.xml"/>
+	</bean>
+	
+    <bean id="embeddedFormXmlParser" class="de.hybris.platform.storefront.yforms.EmbeddedFormXmlParser"/>
+
+</beans>

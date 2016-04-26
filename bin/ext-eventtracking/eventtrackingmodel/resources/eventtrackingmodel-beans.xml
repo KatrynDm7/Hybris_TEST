@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+    <bean class="de.hybris.eventtracking.model.events.AbstractTrackingEvent" type="event">
+    	<property name="eventType" type="String"/>
+        <property name="pageUrl" type="String"/>
+        <property name="interactionTimestamp" type="String"/>
+        <property name="userId" type="String"/>
+        <property name="userEmail" type="String"/>
+        <property name="sessionId" type="String"/>
+		<property name="piwikId" type="String"/>
+		<property name="refUrl" type="String"/>
+    </bean>
+
+    <bean class="de.hybris.eventtracking.model.events.AbstractProductAwareTrackingEvent" type="event"
+        extends="de.hybris.eventtracking.model.events.AbstractTrackingEvent">
+        <property name="productId" type="String"/>
+        <property name="productName" type="String"/>
+    </bean>
+
+    <bean class="de.hybris.eventtracking.model.events.AbstractCartAwareTrackingEvent" type="event"
+        extends="de.hybris.eventtracking.model.events.AbstractTrackingEvent">
+        <property name="cartId" type="String"/>
+    </bean>
+
+    <bean class="de.hybris.eventtracking.model.events.AbstractProductAndCartAwareTrackingEvent" type="event"
+        extends="de.hybris.eventtracking.model.events.AbstractProductAwareTrackingEvent">
+        <property name="cartId" type="String"/>
+    </bean>
+
+    <bean class="de.hybris.eventtracking.model.events.PageViewEvent" type="event"
+        extends="de.hybris.eventtracking.model.events.AbstractTrackingEvent">
+    </bean>
+
+    <bean class="de.hybris.eventtracking.model.events.CategoryPageViewEvent" type="event"
+        extends="de.hybris.eventtracking.model.events.AbstractTrackingEvent">
+        <property name="categoryId" type="String"/>
+        <property name="categoryName" type="String"/>
+    </bean>
+
+    <bean class="de.hybris.eventtracking.model.events.ProductDetailPageViewEvent" type="event"
+        extends="de.hybris.eventtracking.model.events.AbstractProductAwareTrackingEvent">
+    </bean>
+
+    <bean class="de.hybris.eventtracking.model.events.ProductMediaViewEvent" type="event"
+        extends="de.hybris.eventtracking.model.events.AbstractProductAwareTrackingEvent">
+        <property name="productMediaType" type="String"/>
+    </bean>
+
+    <bean class="de.hybris.eventtracking.model.events.ProductReviewsViewEvent" type="event"
+        extends="de.hybris.eventtracking.model.events.AbstractProductAwareTrackingEvent">
+    </bean>
+
+    <bean class="de.hybris.eventtracking.model.events.CategoryBrowseEvent" type="event"
+        extends="de.hybris.eventtracking.model.events.CategoryPageViewEvent">
+    </bean>
+
+    <bean class="de.hybris.eventtracking.model.events.SearchEvent" type="event"
+        extends="de.hybris.eventtracking.model.events.AbstractTrackingEvent">
+        <property name="searchTerm" type="String"/>
+    </bean>
+
+    <bean class="de.hybris.eventtracking.model.events.RefineSearchEvent" type="event"
+        extends="de.hybris.eventtracking.model.events.AbstractTrackingEvent">
+    </bean>
+
+    <bean class="de.hybris.eventtracking.model.events.PageThroughSearchResultsEvent" type="event"
+        extends="de.hybris.eventtracking.model.events.AbstractTrackingEvent">
+    </bean>
+
+    <bean class="de.hybris.eventtracking.model.events.SearchNoResultsEvent" type="event"
+        extends="de.hybris.eventtracking.model.events.AbstractTrackingEvent">
+        <property name="searchTerm" type="String"/>
+    </bean>
+
+    <bean class="de.hybris.eventtracking.model.events.StoreLocationEnteredEvent" type="event"
+        extends="de.hybris.eventtracking.model.events.AbstractTrackingEvent">
+        <property name="postcode" type="String"/>
+    </bean>
+
+    <bean class="de.hybris.eventtracking.model.events.FindStoresNearMeEvent" type="event"
+        extends="de.hybris.eventtracking.model.events.AbstractTrackingEvent">
+    </bean>
+
+    <bean class="de.hybris.eventtracking.model.events.BannerClickEvent" type="event"
+        extends="de.hybris.eventtracking.model.events.AbstractTrackingEvent">
+        <property name="bannerId" type="String"/>
+    </bean>
+
+    <bean class="de.hybris.eventtracking.model.events.AddToCartEvent" type="event"
+        extends="de.hybris.eventtracking.model.events.AbstractProductAndCartAwareTrackingEvent">
+        <property name="quantity" type="String"/>
+    </bean>
+
+    <bean class="de.hybris.eventtracking.model.events.RemoveFromCartEvent" type="event"
+        extends="de.hybris.eventtracking.model.events.AbstractProductAndCartAwareTrackingEvent">
+    </bean>
+
+    <bean class="de.hybris.eventtracking.model.events.CartViewEvent" type="event"
+        extends="de.hybris.eventtracking.model.events.AbstractTrackingEvent">
+    </bean>
+
+    <bean class="de.hybris.eventtracking.model.events.ProceedToCheckoutEvent" type="event"
+        extends="de.hybris.eventtracking.model.events.AbstractCartAwareTrackingEvent">
+    </bean>
+
+    <bean class="de.hybris.eventtracking.model.events.PaymentDetailsEnteredEvent" type="event"
+        extends="de.hybris.eventtracking.model.events.AbstractTrackingEvent">
+    </bean>
+
+    <bean class="de.hybris.eventtracking.model.events.ShipmentDetailsEnteredEvent" type="event"
+        extends="de.hybris.eventtracking.model.events.AbstractTrackingEvent">
+    </bean>
+
+    <bean class="de.hybris.eventtracking.model.events.SuccessfulCheckoutEvent" type="event"
+        extends="de.hybris.eventtracking.model.events.AbstractCartAwareTrackingEvent">
+    </bean>
+
+    <bean class="de.hybris.eventtracking.model.events.CartAbandonedEvent" type="event"
+        extends="de.hybris.eventtracking.model.events.AbstractCartAwareTrackingEvent">
+        <property name="cartAbandonmentReason" type="String"/>
+    </bean>
+
+    <bean class="de.hybris.eventtracking.model.events.UnsuccessfulRegistrationEvent" type="event"
+        extends="de.hybris.eventtracking.model.events.AbstractTrackingEvent">
+    </bean>
+
+    <bean class="de.hybris.eventtracking.model.events.UnsuccessfulLoginEvent" type="event"
+        extends="de.hybris.eventtracking.model.events.AbstractTrackingEvent">
+    </bean>
+
+    <bean class="de.hybris.eventtracking.model.events.UnsuccessfulAddToCartEvent" type="event"
+        extends="de.hybris.eventtracking.model.events.AbstractTrackingEvent">
+    </bean>
+
+    <bean class="de.hybris.eventtracking.model.events.UnsuccessfulCheckoutEvent" type="event"
+        extends="de.hybris.eventtracking.model.events.AbstractTrackingEvent">
+    </bean>
+
+    <bean class="de.hybris.eventtracking.model.events.UnsuccessfulPaymentEvent" type="event"
+        extends="de.hybris.eventtracking.model.events.AbstractTrackingEvent">
+    </bean>
+
+    <bean class="de.hybris.eventtracking.model.events.ForgottenPasswordEvent" type="event"
+        extends="de.hybris.eventtracking.model.events.AbstractTrackingEvent">
+    </bean>
+
+	
+</beans>

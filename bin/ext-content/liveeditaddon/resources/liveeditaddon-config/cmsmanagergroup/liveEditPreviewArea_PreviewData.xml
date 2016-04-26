@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="editor.xsd">
+	<group qualifier="General">
+		<label key="cockpit.config.label.General" />
+		<property qualifier="PreviewData.user" />
+        <property qualifier="PreviewData.userGroup" />
+		<property qualifier="PreviewData.time">
+			<parameter>
+				<name>showExtrasMenu</name>
+				<value>true</value>
+			</parameter>
+		</property>
+		
+		
+		<property qualifier="PreviewData.language" editor="simple" />
+		<property qualifier="PreviewData.page" />
+		<property qualifier="PreviewData.uiExperience" editor="uiExperience" >
+			<parameter>
+				<name>allowedValuesList</name>
+				<value>uiExperienceValuesProvider</value>
+			</parameter>
+		</property>
+        <property qualifier="PreviewData.viewport" editor="viewport" >
+            <parameter>
+                <name>allowedValuesList</name>
+                <value>viewportValuesProvider</value>
+            </parameter>
+        </property>
+        <property qualifier="PreviewData.deviceSupport" editor="deviceSupport" >
+            <parameter>
+                <name>allowedValuesList</name>
+                <value>deviceSupportValuesProvider</value>
+            </parameter>
+        </property>
+        <property qualifier="PreviewData.deviceOrientation" editor="deviceOrientation" >
+            <parameter>
+                <name>allowedValuesList</name>
+                <value>deviceOrientationValuesProvider</value>
+            </parameter>
+        </property>
+	</group>
+</editor>

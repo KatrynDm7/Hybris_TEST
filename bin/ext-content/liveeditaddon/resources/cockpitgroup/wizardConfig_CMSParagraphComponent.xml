@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wizard-config showPrefilledValues="true" selectMode="true" createMode="true" displaySubtypes="true">
+	<displayed-properties>
+		<group qualifier="Properties" visible="true" initially-opened="true">
+			<label key="config.wizardConfig.properties" />
+			<property qualifier="CMSParagraphComponent.content" editorCode="wysiwyg" />
+		</group>
+	</displayed-properties>
+</wizard-config>

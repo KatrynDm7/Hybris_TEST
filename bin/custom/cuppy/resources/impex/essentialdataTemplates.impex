@@ -1,0 +1,9 @@
+INSERT_UPDATE  Media;code[unique=true]; catalogVersion(catalog(id),version);mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]
+;rankingMail_de;Default:Staged;plain/text;rankingMail_de.vm;jar:/cuppy/templates/rankingMail_de.vm
+;rankingMail_en;Default:Staged;plain/text;rankingMail_en.vm;jar:/cuppy/templates/rankingMail_en.vm
+;reminder_de;Default:Staged;plain/text;reminder_de.vm;jar:/cuppy/templates/reminder_de.vm
+;reminder_en;Default:Staged;plain/text;reminder_en.vm;jar:/cuppy/templates/reminder_en.vm
+
+INSERT_UPDATE RendererTemplate;code[unique=true];description[lang=de];description[lang=en];content(code,catalogVersion(catalog(id),version))[lang=de];content(code,catalogVersion(catalog(id),version))[lang=en];contextClass;outputMimeType;rendererType(itemtype(code),code)
+;rankingMail;Vorlage für die Ranking-Mail;Template for ranking mail;rankingMail_de:Default:Staged;rankingMail_en:Default:Staged;de.hybris.platform.cuppy.services.impl.RankingMailContext;plain/text;RendererTypeEnum:velocity
+;reminder;Vorlage für die Reminder-Mail;Template for reminder mail;reminder_de:Default:Staged;reminder_en:Default:Staged;de.hybris.platform.cuppy.services.impl.ReminderContext;plain/text;RendererTypeEnum:velocity

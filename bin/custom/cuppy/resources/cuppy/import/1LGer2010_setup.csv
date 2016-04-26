@@ -1,0 +1,69 @@
+#http://de.wikipedia.org/wiki/ISO-3166-1-Kodierliste;;;;;;;
+
+# set locale for the Match.date data
+#%impex.setLocale(Locale.GERMANY)
+
+$comp=1lger2010
+
+insert_update Competition;code[unique=true];name[lang=de];name[lang=en];name[lang=pl];type(code)
+;$comp;1. Bundesliga 2010;1. League Germany 2010;1. Bundesliga 2010;league
+
+# INSERT_UPDATE News;content[lang=de];content[lang=en];competition(code)[unique=true]
+# ;Willkommen zur 1. Bundelsiga 2010;Welcome to 1. League Germany 2010;$comp
+
+insert_update Group;competition(code)[unique=true,default=$comp];code[unique=true];name[lang=de];name[lang=en];multiplier;sequenceNumber;
+;;round1;Hinrunde;First Round;1;1;
+;;round2;Rückrunde;Second Round;1;2;
+;;rel1;Relegation 1. Liga;Relegation 1. League;1;3;
+;;rel2;Relegation 2. Liga;Relegation 2. League;1;4;
+
+insert_update CountryFlag;code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];catalogVersion(catalog(id),version)[default=Default:Online]
+;FCK;1_fc_kaiserslautern.png;jar:/cuppy/flags/de/1_fc_kaiserslautern.png
+;KOE;1_fc_koeln.png;jar:/cuppy/flags/de/1_fc_koeln.png
+;FCN;1_fc_nuernberg.png;jar:/cuppy/flags/de/1_fc_nuernberg.png
+;M05;1_fsv_mainz_05.png;jar:/cuppy/flags/de/1_fsv_mainz_05.png
+;HOF;1899_hoffenheim.png;jar:/cuppy/flags/de/1899_hoffenheim.png
+;B04;bayer_leverkusen.png;jar:/cuppy/flags/de/bayer_leverkusen.png
+;FCB;bayern_muenchen.png;jar:/cuppy/flags/de/bayern_muenchen.png
+;BVB;borussia_dortmund.png;jar:/cuppy/flags/de/borussia_dortmund.png
+;BMG;borussia_m_gladbach.png;jar:/cuppy/flags/de/borussia_m_gladbach.png
+;FFM;eintracht_frankfurt.png;jar:/cuppy/flags/de/eintracht_frankfurt.png
+;S04;fc_schalke_04.png;jar:/cuppy/flags/de/fc_schalke_04.png
+;STP;fc_st_pauli.png;jar:/cuppy/flags/de/fc_st_pauli.png
+;HSV;hamburger_sv.png;jar:/cuppy/flags/de/hamburger_sv.png
+;H96;hannover_96.png;jar:/cuppy/flags/de/hannover_96.png
+;SCF;sc_freiburg.png;jar:/cuppy/flags/de/sc_freiburg.png
+;VFB;vfb_stuttgart.png;jar:/cuppy/flags/de/vfb_stuttgart.png
+;WOB;vfl_wolfsburg.png;jar:/cuppy/flags/de/vfl_wolfsburg.png
+;BRE;werder_bremen.png;jar:/cuppy/flags/de/werder_bremen.png
+
+insert_update Team;isocode[unique=true];name[lang=de];flag(code);;;
+;FCK;1. FC Kaiserslautern;FCK
+;KOE;1. FC Köln;KOE
+;FCN;1. FC Nürnberg;FCN
+;M05;1. FSV Mainz 05;M05
+;HOF;1899 Hoffenheim;HOF
+;B04;Bayer Leverkusen;B04
+;FCB;FC Bayern München;FCB
+;BVB;Borussia Dortmund;BVB
+;BMG;Bor. Mönchengladbach;BMG
+;FFM;Eintracht Frankfurt;FFM
+;S04;FC Schalke 04;S04
+;STP;FC St. Pauli;STP
+;HSV;Hamburger SV;HSV
+;H96;Hannover 96;H96
+;SCF;SC Freiburg;SCF
+;VFB;VfB Stuttgart;VFB
+;WOB;VfL Wolfsburg;WOB
+;BRE;Werder Bremen;BRE
+
+insert_update Match;id[unique=true];matchday;date[dateformat='dd.MM.yy HH.mm'];group(code,competition(code[default=$comp]))[unique=true];homeTeam(isocode);guestTeam(isocode);location
+# will be gathered by webservice
+
+INSERT_UPDATE UpdateCompetitionCronJob;code[unique=true];job(code);singleExecutable;sessionLanguage(isocode);competition(code)
+;automatedUpdate1LGer2010;update1LGer2010Job;false;de;$comp
+;manualUpdate1LGer2010;update1LGer2010Job;false;de;$comp
+
+INSERT_UPDATE Trigger;cronjob(code)[unique=true];second;minute;hour;day;month;year;relative;active;maxAcceptableDelay
+#% afterEach: impex.getLastImportedItem().setActivationTime(new Date());
+;automatedUpdate1LGer2010;0;0;1;0;-1;-1;true;true;-1

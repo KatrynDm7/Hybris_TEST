@@ -1,0 +1,3 @@
+
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);facet;fieldValueProvider;multiValue;
+;testIndexedType${testId};category;string;;true;categoryCodeValueProvider;true;

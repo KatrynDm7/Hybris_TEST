@@ -1,0 +1,13 @@
+# Impex for Billing Plans - en
+#
+# ENGLISH LOCALIZATION
+#
+
+# Macros / Replacement Parameter definitions
+$lang=en
+
+UPDATE BillingPlan;id[unique=true];name[lang=$lang]
+;yearlyplan;Yearly Plan
+;singleplan;Chosen number of days
+;monthlyplan;Monthly Plan
+

@@ -1,0 +1,164 @@
+#
+# Import the Solr configuration for the B2CTelco store
+#
+$productCatalog=b2ctelcoProductCatalog
+$catalogVersions=catalogVersions(catalog(id),version);
+$serverConfigName=b2ctelcoSolrServerConfig
+$indexConfigName=b2ctelcoSolrIndexConfig
+$searchConfigName=b2ctelcoPageSize
+$facetSearchConfigName=b2ctelcoIndex
+$facetSearchConfigDescription=b2ctelco Solr Index
+$searchIndexNamePrefix=b2ctelco
+$solrIndexedType=b2ctelcoProductType
+$indexBaseSite=b2ctelco
+$indexLanguages=en
+$indexCurrencies=USD
+
+#
+# Setup the Solr server, indexer, and search configs
+#
+
+# Create the solr server configuration
+INSERT_UPDATE SolrServerConfig;name[unique=true];mode(code);embeddedMaster
+;$serverConfigName;standalone;false;
+
+INSERT_UPDATE SolrEndpointUrl;solrServerConfig(name)[unique=true];url[unique=true];master[unique=true,default=false]
+;$serverConfigName;http://localhost:8983/solr;true
+
+# Create the solr indexer configuration
+INSERT_UPDATE SolrIndexConfig;name[unique=true];batchSize;numberOfThreads;indexMode(code);
+;$indexConfigName;100;1;TWO_PHASE;
+
+# Create the faceted search configuration
+INSERT_UPDATE SolrSearchConfig;description[unique=true];pageSize
+;$searchConfigName;20
+
+#
+# Setup the indexed types, their properties, and the update queries
+#
+
+# Declare the indexed type Product
+INSERT_UPDATE SolrIndexedType;identifier[unique=true];type(code);variant;sorts(&sortRefID)
+;$solrIndexedType;Product;false;sortRef1,sortRef2,sortRef3,sortRef4,sortRef5,sortRef6
+
+INSERT_UPDATE SolrFacetSearchConfig;name[unique=true];description;indexNamePrefix;languages(isocode);currencies(isocode);solrServerConfig(name);solrSearchConfig(description);solrIndexConfig(name);solrIndexedTypes(identifier);enabledLanguageFallbackMechanism;$catalogVersions
+;$facetSearchConfigName;$facetSearchConfigDescription;$searchIndexNamePrefix;$indexLanguages;$indexCurrencies;$serverConfigName;$searchConfigName;$indexConfigName;$solrIndexedType;true;$productCatalog:Online,$productCatalog:Staged
+
+UPDATE BaseSite;uid[unique=true];solrFacetSearchConfiguration(name)
+;$indexBaseSite;$facetSearchConfigName
+
+# Define price range set
+INSERT_UPDATE SolrValueRangeSet;name[unique=true];qualifier;type;solrValueRanges(&rangeValueRefID)
+;b2ctelcoPriceRangeUSD;USD;double;rangeRefUSD1,rangeRefUSD2,rangeRefUSD3,rangeRefUSD4,rangeRefUSD5,rangeRefUSD6,rangeRefUSD7,rangeRefUSD8,rangeRefUSD9,rangeRefUSD10,rangeRefUSD11
+
+
+# Define price ranges
+INSERT_UPDATE SolrValueRange;&rangeValueRefID;solrValueRangeSet(name)[unique=true];name[unique=true];from;to
+;rangeRefUSD1;b2ctelcoPriceRangeUSD;    $0-$99.99;   0; 99.99
+;rangeRefUSD2;b2ctelcoPriceRangeUSD;  $100-$199.99;  100;199.99
+;rangeRefUSD3;b2ctelcoPriceRangeUSD; $200-$299.99; 200;299.99
+;rangeRefUSD4;b2ctelcoPriceRangeUSD; $300-$399.99; 300;399.99
+;rangeRefUSD5;b2ctelcoPriceRangeUSD; $400-$499.99; 400;499.99
+;rangeRefUSD6;b2ctelcoPriceRangeUSD; $500-$599.99; 500;599.99
+;rangeRefUSD7;b2ctelcoPriceRangeUSD; $600-$699.99; 600;699.99
+;rangeRefUSD8;b2ctelcoPriceRangeUSD; $700-$799.99; 700;799.99
+;rangeRefUSD9;b2ctelcoPriceRangeUSD; $800-$899.99; 800;899.99
+;rangeRefUSD10;b2ctelcoPriceRangeUSD; $900-$999.99; 900;999.99
+;rangeRefUSD11;b2ctelcoPriceRangeUSD;$1,000-$100,000;1000;1000000
+
+
+# Non-facet properties
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;valueProviderParameter
+;$solrIndexedType; code                   ;string ;            ;    ;    ;    ;true;true;springELValueProvider;code
+;$solrIndexedType; name                   ;text   ;sortabletext;    ;true;    ;true;true;springELValueProvider;getName(#lang)
+;$solrIndexedType; description            ;text   ;            ;    ;true;    ;    ;    ;;
+;$solrIndexedType; summary                ;text   ;            ;    ;true;    ;    ;    ;;
+;$solrIndexedType; manufacturerName       ;text   ;            ;    ;    ;    ;true;true;;
+;$solrIndexedType; manufacturerAID        ;string ;            ;    ;    ;    ;    ;    ;;
+;$solrIndexedType; ean                    ;string ;            ;    ;    ;    ;true;true;;
+;$solrIndexedType; priceValue             ;double ;            ;true;    ;    ;    ;    ;subscriptionProductPriceValueProvider;
+;$solrIndexedType; keywords               ;text   ;            ;    ;true;    ;true;true;productKeywordsValueProvider;
+;$solrIndexedType; reviewAvgRating        ;double ;            ;    ;true;    ;    ;    ;productReviewAverageRatingValueProvider;
+;$solrIndexedType; img-515Wx515H          ;string ;            ;    ;    ;    ;    ;    ;image515ValueProvider;
+;$solrIndexedType; img-300Wx300H          ;string ;            ;    ;    ;    ;    ;    ;image300ValueProvider;
+;$solrIndexedType; img-96Wx96H            ;string ;            ;    ;    ;    ;    ;    ;image96ValueProvider;
+;$solrIndexedType; img-65Wx65H            ;string ;            ;    ;    ;    ;    ;    ;image65ValueProvider;
+;$solrIndexedType; img-30Wx30H            ;string ;            ;    ;    ;    ;    ;    ;image30ValueProvider;
+;$solrIndexedType; url                    ;string ;            ;    ;true;    ;    ;    ;productUrlValueProvider;
+;$solrIndexedType; primaryPromotionCode   ;string ;            ;    ;    ;    ;    ;    ;promotionCodeValueProvider;
+;$solrIndexedType; primaryPromotionBanner ;string ;            ;    ;    ;    ;    ;    ;promotionImageValueProvider;
+;$solrIndexedType; stockLevelStatus       ;string ;            ;    ;    ;    ;    ;    ;productStockLevelStatusValueProvider;
+;$solrIndexedType; inStockFlag            ;boolean;            ;    ;    ;    ;    ;    ;productInStockFlagValueProvider;
+;$solrIndexedType; numberOfReviews        ;int    ;            ;    ;true;    ;    ;    ;productReviewCountValueProvider
+;$solrIndexedType; soldIndividually       ;boolean;            ;    ;    ;    ;    ;    ;
+;$solrIndexedType; bundleTemplates        ;string ;            ;    ;true;true;    ;    ;productBundleTemplatesValueProvider
+;$solrIndexedType; lowestBundlePriceValue ;double ;            ;true;    ;    ;    ;    ;lowestBundlePriceValueProvider
+;$solrIndexedType; billingTime            ;string ;            ;    ;true;    ;    ;    ;productBillingTimeValueProvider
+;$solrIndexedType; gps                    ;string ;            ;    ;true;    ;    ;    ;;
+;$solrIndexedType;camera                  ;string;              ;    ;true;    ;    ;   ;;
+;$solrIndexedType;keyboard                ;string;              ;    ;true;    ;    ;   ;
+;$solrIndexedType;touchscreen             ;string;              ;    ;true;    ;    ;   ;
+;$solrIndexedType; pickupAvailableFlag    ;boolean;            ;    ;    ;    ;    ;    ;productPickupAvailabilityValueProvider
+
+# Category fields
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);localized[default=false];multiValue[default=true];categoryField[default=true];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider
+;$solrIndexedType; categoryName     ;text   ;true;;;true;true;b2ctelcoCategoryNameValueProvider
+;$solrIndexedType; brandName        ;text   ;true;;;    ;    ;b2ctelcoBrandCategoryNameValueProvider
+
+# Category facets
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);multiValue[default=true];facet[default=true];facetType(code);facetSort(code);priority;categoryField[default=true];fieldValueProvider;facetDisplayNameProvider;visible[default=true]
+;$solrIndexedType; allCategories ;string;;;Refine;Alpha;-9999;;categoryCodeValueProvider;;false
+;$solrIndexedType; categoryPath  ;string;;;Refine;Alpha;-9999;;categoryPathValueProvider;;false
+;$solrIndexedType; category      ;string;;;Refine;Alpha;6000;;b2ctelcoCategoryCodeValueProvider;categoryFacetDisplayNameProvider
+;$solrIndexedType; brand         ;string;;;Refine;Alpha;5000;;b2ctelcoBrandCategoryCodeValueProvider;categoryFacetDisplayNameProvider
+
+# Other facet properties
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];facet[default=false];facetType(code);facetSort(code);priority;useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;facetDisplayNameProvider;customFacetSortProvider;rangeSets(name)
+;$solrIndexedType; price        ;double ; ;true ;    ;    ;true;MultiSelectOr;Alpha ;4000;    ;    ;productPriceValueProvider;;;b2ctelcoPriceRangeUSD
+;$solrIndexedType; allPromotions;string ; ;false;    ;true;true;MultiSelectOr;Alpha ;0   ;    ;    ;promotionCodeValueProvider;;;
+;$solrIndexedType; termLimit    ;string ; ;false;true;    ;true;MultiSelectOr;Alpha ;1000;    ;    ;termLimitValueProvider;;;
+
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];facet[default=true];facetType(code);facetSort(code);priority;visible;useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;facetDisplayNameProvider;customFacetSortProvider;topValuesProvider;rangeSets(name)
+;$solrIndexedType; availableInStores;string	;	 ;     ;     ;true ;     ;MultiSelectOr ;Custom;10000;true;     ;     ;productStoreStockValueProvider;pointOfServiceFacetDisplayNameProvider;distanceAttributeSortProvider
+
+# Create the queries that will be used to extract data for Solr
+INSERT_UPDATE SolrIndexerQuery;solrIndexedType(identifier)[unique=true];identifier[unique=true];type(code);injectCurrentDate[default=true];injectCurrentTime[default=true];injectLastIndexTime[default=true];query;user(uid)
+;$solrIndexedType;$searchIndexNamePrefix-fullQuery;full;;;false;"SELECT {PK} FROM {Product}";anonymous
+;$solrIndexedType;$searchIndexNamePrefix-updateQuery;update;;;;"
+SELECT DISTINCT tbl.pk, tbl.code FROM (
+	{{
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code
+		FROM {Product AS p LEFT JOIN CustomerReview AS cr ON {cr:product}={p:PK} }
+		WHERE {p:varianttype} IS NULL AND ({p:modifiedtime} >= ?lastIndexTime OR {cr:modifiedtime} >= ?lastIndexTime)
+	}}
+	UNION
+	{{
+		SELECT {p:PK}  AS pk, {p:code} AS code FROM {Product AS p} WHERE {p:code} IN (
+			{{
+				SELECT DISTINCT {sl:productCode} FROM {StockLevel AS sl} WHERE {sl:modifiedtime} >= ?lastIndexTime
+			}}
+		)
+	}}
+) tbl ORDER BY tbl.code
+";anonymous
+
+# Define the available sorts
+INSERT_UPDATE SolrSort;&sortRefID;indexedType(identifier)[unique=true];code[unique=true];useBoost
+;sortRef0;$solrIndexedType;stockAvailability;false
+;sortRef1;$solrIndexedType;relevance;true
+;sortRef2;$solrIndexedType;topRated;false
+;sortRef3;$solrIndexedType;name-asc;false
+;sortRef4;$solrIndexedType;name-desc;false
+;sortRef5;$solrIndexedType;price-asc;false
+;sortRef6;$solrIndexedType;price-desc;false
+
+# Define the sort fields
+INSERT_UPDATE SolrSortField;sort(indexedType(identifier),code)[unique=true];fieldName[unique=true];ascending[unique=true]
+;$solrIndexedType:relevance;inStockFlag;false
+;$solrIndexedType:relevance;score;false
+;$solrIndexedType:topRated;inStockFlag;false
+;$solrIndexedType:topRated;reviewAvgRating;false
+;$solrIndexedType:name-asc;name;true
+;$solrIndexedType:name-desc;name;false
+;$solrIndexedType:price-asc;lowestBundlePriceValue;true
+;$solrIndexedType:price-desc;lowestBundlePriceValue;false

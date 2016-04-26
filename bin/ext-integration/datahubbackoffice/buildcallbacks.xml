@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+--><!--
+ All hybris buildcallbacks.xml macrodefinitions:
+ 
+ Build/Documentation
+ 
+	 before/after ant macro "clean"
+		 <macrodef name="datahubbackoffice_before_clean"/>
+		 <macrodef name="datahubbackoffice_after_clean"/>
+	 
+	 before/after ant macro "build"
+		 <macrodef name="datahubbackoffice_before_build"/>
+		 <macrodef name="datahubbackoffice_after_build"/>
+		 
+	 before/after ant macro "compile_core" - the core module of the extension
+		 <macrodef name="datahubbackoffice_before_compile_core">
+		 <macrodef name="datahubbackoffice_after_compile_core">
+	 
+	 before/after ant macro "compile_web" - the web module of the extension
+		 <macrodef name="datahubbackoffice_before_compile_web" />
+		 <macrodef name="datahubbackoffice_after_compile_web" />
+	 
+	 before/after ant macro "compile_hmc" - the hmc module of the extension
+		 <macrodef name="datahubbackoffice_before_compile_hmc" />
+		 <macrodef name="datahubbackoffice_after_compile_hmc" />
+ 
+ Preparing extension
+ 
+	 will be called in the beginning of the ant call and only once (also when using multiple 
+	 ant targets e.g. ant build yunittest)	
+		 <macrodef name="datahubbackoffice_only_once_prepare"/>
+ 
+ Creating ear module/production
+ 
+	 before/after ant macro "ear"
+		 <macrodef name="datahubbackoffice_before_ear"/>
+		 <macrodef name="datahubbackoffice_after_ear"/>
+
+	 before/after ant macro "production" - for hybris server only
+		 <macrodef name="datahubbackoffice_before_production" />
+		 <macrodef name="datahubbackoffice_after_production" />
+ 
+ JUnit Test
+ 
+	 before/after ant macro "yunitinit" 
+		 <macrodef name="datahubbackoffice_before_yunitinit" />
+		 <macrodef name="datahubbackoffice_after_yunitinit" />
+	 
+	 before/after ant macro "yunit"
+		 <macrodef name="datahubbackoffice_before_yunit" />
+		 <macrodef name="datahubbackoffice_after_yunit" /> 
+		 
+ Distribution package
+ 
+ 	 before/after ant macro "dist" - internal target; only for use when platform is available in source code
+		 <macrodef name="datahubbackoffice_after_dist"/>
+		 <macrodef name="datahubbackoffice_before_dist"/>
+	 
+	 before/after ant macro "dist_copy" - internal target; only for use when platform is available in source code
+		 <macrodef name="datahubbackoffice_before_dist_copy"/>
+		 <macrodef name="datahubbackoffice_after_dist_copy"/>
+		  
+ 	 With these filters you can override the default extension filters defined in platform/resources/ant/dist/filtersets.xml
+ 	  	 <patternset id="extension.datahubbackoffice.binary.filter">
+ 	  	  	 <patternset refid="extension.filter" />
+ 	  	  	 <exclude name="**/*-source.jar" />
+ 	  	 </patternset>
+ 	  	 <patternset id="extension.datahubbackoffice.source.filter">
+ 	  	  	 <exclude name="**/bin/**" />
+ 	  	 </patternset>
+ 
+ Backoffice module
+ 
+ 	 before/after ant macro "backoffice" - internal target; only for use when extensin is a backoffice module 
+		 <macrodef name="datahubbackoffice_before_clean_backoffice"/>
+		 <macrodef name="datahubbackoffice_after_clean_backoffice"/>
+		 <macrodef name="datahubbackoffice_before_compile_backoffice"/>
+		 <macrodef name="datahubbackoffice_after_compile_backoffice"/>
+	
+-->
+<project name="datahubbackoffice_buildcallbacks">
+
+	<property name="datahub.backoffice.target" value="${ext.datahubbackoffice.path}/backoffice/classes" />
+	<property name="datahub.backoffice.lib" value="${ext.datahubbackoffice.path}/lib" />
+	<property name="datahub.backoffice.overlay" value="${ext.datahubbackoffice.path}/overlay" />
+	<property name="datahub.backoffice.resources" value="${ext.datahubbackoffice.path}/resources/" />
+
+	<if>
+		<not>
+			<available file="datahub.backoffice.overlay}" type="dir" />
+		</not>
+		<then>
+			<mkdir dir="${datahub.backoffice.overlay}" />
+		</then>
+	</if>
+
+	<macrodef name="datahubbackoffice_after_updateMavenDependencies">
+		<sequential>
+			<echo level="info" message="Moving downloaded datahub-ui-core*.jar file(s) to overlay folder" />
+			<prepareOverlayJar />
+		</sequential>
+	</macrodef>
+
+	<macrodef name="datahubbackoffice_after_clean">
+		<sequential>
+			<delete dir="${datahub.backoffice.target}" />
+		</sequential>
+	</macrodef>
+
+	<macrodef name="datahubbackoffice_before_compile_backoffice">
+		<sequential>
+			<echo level="info" message="Creating datahub-ui-core overlay" />
+			<layOutBaseUi />
+			<moveLocales from="${datahub.backoffice.target}/cockpitng/localization"
+						 to="${datahub.backoffice.resources}/datahubbackoffice-labels" />
+			<overwriteDataHubServers/>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="layOutBaseUi">
+		<sequential>
+			<prepareOverlayJar />
+			<unzip dest="${datahub.backoffice.target}" overwrite="false">
+				<fileset dir="${datahub.backoffice.overlay}">
+					<include name="*.jar" />
+				</fileset>
+			</unzip>
+		</sequential>
+	</macrodef>
+	
+	<macrodef name="prepareOverlayJar">
+		<sequential>
+			<pathconvert property="foundUiJar" setonempty="false">
+				<path>
+					<fileset dir="${datahub.backoffice.lib}" includes="datahub-ui-core*.jar" />
+				</path>
+			</pathconvert>
+			<if>
+				<isset property="foundUiJar"/>
+				<then>
+  	      <delete>
+  	        <fileset dir="${datahub.backoffice.overlay}" includes="datahub-ui-core*.jar" />
+  	      </delete>
+  	      <move todir="${datahub.backoffice.overlay}">
+  	        <fileset dir="${datahub.backoffice.lib}" includes="datahub-ui-core*.jar" />
+  	      </move>
+				</then>
+			</if>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="moveLocales">
+		<attribute name="from" />
+		<attribute name="to" />
+		<sequential>
+			<mkdir dir="@{to}" />
+			<move todir="@{to}">
+				<fileset dir="@{from}">
+					<include name="**/*" />
+				</fileset>
+			</move>
+			<delete dir="@{from}" />
+		</sequential>
+	</macrodef>
+
+	<macrodef name="overwriteDataHubServers">
+		<sequential>
+			<echo level="info" message="Overriding local datahub servers properties file"/>
+			<copy todir="${datahub.backoffice.target}" overwrite="true">
+				<fileset dir="${datahub.backoffice.resources}">
+					<include name="**/*servers.properties" />
+				</fileset>
+			</copy>
+		</sequential>
+	</macrodef>
+</project>

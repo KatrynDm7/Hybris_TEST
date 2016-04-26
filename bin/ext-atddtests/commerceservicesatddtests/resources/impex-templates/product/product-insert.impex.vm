@@ -1,0 +1,5 @@
+#parse( "impex-templates/common-macros.impex.vm" )
+#[[
+INSERT Product;code[unique=true];unit(code[unique=true,default=pieces]);$catalogversion
+]]#
+;${productCode};${unit}

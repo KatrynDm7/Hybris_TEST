@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<config xmlns="http://www.hybris.com/cockpit/config">
+
+	<context merge-by="module" type="B2BUnit" component="editorareaactions">
+		<y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:group qualifier="common">
+				<y:label>actiongroup.common</y:label>				
+				<y:action action-id="de.hybris.platform.b2bcommerce.backoffice.actions.disableb2bunitaction" property="currentObject"/>
+				<y:action action-id="de.hybris.platform.b2bcommerce.backoffice.actions.enableb2bunitaction" property="currentObject"/>
+				<y:action action-id="de.hybris.platform.b2bcommerce.backoffice.actions.generatereportingsetaction" property="currentObject"/>
+			</y:group>
+		</y:actions>
+	</context>
+	
+	<context merge-by="module" type="B2BCustomer" component="editorareaactions">
+		<y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:group qualifier="common">
+				<y:label>actiongroup.common</y:label>				
+				<y:action action-id="de.hybris.platform.b2bcommerce.backoffice.actions.disableb2bcustomeraction" property="currentObject"/>
+				<y:action action-id="de.hybris.platform.b2bcommerce.backoffice.actions.enableb2bcustomeraction" property="currentObject"/>
+			</y:group>
+		</y:actions>
+	</context>
+
+	<context merge-by="type"  parent="Customer" type="B2BCustomer"  component="create-wizard">
+        <wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="CustomerWizard">
+            <wz:step id="step1">
+                <wz:content id="step1.content">
+                    <wz:property-list root="newCust">
+                        <wz:property qualifier="email" type="java.lang.String"/>
+                    </wz:property-list>
+                </wz:content>
+            </wz:step>
+            <wz:step id="step3">
+                <wz:content id="step3.content">
+                    <wz:property-list root="newCust">
+                        <wz:property qualifier="defaultB2BUnit"/>
+                    </wz:property-list>
+                </wz:content>
+            </wz:step>
+        </wz:flow>
+    </context>
+    
+	<context component="create-wizard" merge-by="type" parent="UserGroup" type="B2BUserGroup">
+        <wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="UserGroupWizard">
+            <wz:step id="step1">
+                <wz:content id="step1.content">
+                    <wz:property-list root="newGrp">
+                        <wz:property qualifier="Unit"/>
+                    </wz:property-list>
+                </wz:content>
+            </wz:step>
+        </wz:flow>
+    </context>
+    
+    <context component="create-wizard" type="B2BUnit">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="B2BUnitWizard" title="create.title(ctx.TYPE_CODE)">
+			<wz:prepare id="groupPrepare">
+				<wz:initialize property="newGrp" type="ctx.TYPE_CODE"/>
+			</wz:prepare>
+			<wz:step id="step1" label="create.usergroup.general.label" sublabel="create.usergroup.general.sublabel">
+				<wz:content id="step1.content">
+					<wz:property-list root="newGrp">
+						<wz:property qualifier="uid" type="java.lang.String"/>
+						<wz:property qualifier="locName"/>
+						<wz:property qualifier="description" type="java.lang.String"/>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel/>
+					<wz:next visible="!#empty(newGrp.uid)"/>
+					<wz:done visible="!#empty(newGrp.uid)">
+						<wz:save property="newGrp"/>
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+			<wz:step id="step2" label="create.usergroup.readwrite.label" sublabel="create.usergroup.readwrite.sublabel">
+				<wz:content id="step2.content">
+					<wz:property-list root="newGrp">
+						<wz:property qualifier="readableLanguages"/>
+						<wz:property qualifier="writeableLanguages"/>
+						<wz:property qualifier="readableCatalogVersions"/>
+						<wz:property qualifier="writableCatalogVersions"/>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step2.navigation">
+					<wz:cancel/>
+					<wz:back/>
+					<wz:done>
+						<wz:save property="newGrp"/>
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+    
+</config>

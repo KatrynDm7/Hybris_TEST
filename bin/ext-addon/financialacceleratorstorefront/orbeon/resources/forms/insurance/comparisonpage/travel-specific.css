@@ -1,0 +1,69 @@
+.orbeon .fr-grid .ageoftraveller input[type="text"] {
+    width: 48% !important;
+    margin: 0 0 0 47px !important;
+}
+
+.orbeon .fr-grid label.ageoftraveller {
+    float: right;
+    margin-right: -33px;
+    padding-right: 18px;
+}
+
+.orbeon .fr-grid .ageoftraveller .xforms-alert {
+    width: 75px !important;
+    text-align: center;
+    margin-right: -27px;
+}
+.orbeon .fr-grid .ageoftraveller .xforms-alert {
+    float:none !important;
+    margin-left:20px !important;
+}
+
+.orbeon .ageoftraveller.xforms-label{
+    background-image: url("images/asterisk-bw.png");
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+.orbeon .fr-grid .ageoftraveller .xforms-label {
+    display: none;
+}
+.orbeon .fr-grid .ageoftraveller.xforms-control input[id*="age-1-control"],
+.orbeon .fr-grid .ageoftraveller.xforms-control input[id*="age-6-control"] {
+    margin-left: 54px !important;
+}
+.fr-grid.fr-grid-1.fr-norepeat td[colspan="4"] .ageoftraveller {
+    margin-right: -34px;
+}
+.page-TravelInsurancesCategoryPage .yCmsComponent.span-24.cms_disp-img_slot,
+.page-TravelInsurancesCategoryPage .tripInfos {
+    margin:0;
+    padding:0;
+}
+.page-TravelInsurancesCategoryPage .orbeon-portlet-body {
+    margin-left:0!important;
+}
+.page-TravelInsurancesCategoryPage .orbeon-portlet-body form,
+.page-TravelInsurancesCategoryPage .orbeon-portlet-body form .container {
+    margin-bottom:0!important;
+}
+.page-TravelInsurancesCategoryPage .orbeon-portlet-body .navbar {
+    display:none;
+}
+.page-TravelInsurancesCategoryPage .orbeon-portlet-body .fr-border {
+    box-shadow:0;
+    margin-bottom:0;
+}
+.page-TravelInsurancesCategoryPage .fr-grid .fr-grid-content:first-child {
+    padding-bottom:0 !important;
+}
+.page-TravelInsurancesCategoryPage .orbeon .container, 
+.page-TravelInsurancesCategoryPage .orbeon .navbar-static-top .container, 
+.page-TravelInsurancesCategoryPage .orbeon .navbar-fixed-top .container, 
+.page-TravelInsurancesCategoryPage .orbeon .navbar-fixed-bottom .container {
+    width:950px;
+}
+.page-TravelInsurancesCategoryPage .row .span12 {
+    width:auto !important;
+    min-height:0;
+}

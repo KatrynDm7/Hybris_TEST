@@ -1,0 +1,9 @@
+#Ant properties
+#Mon Nov 16 15:19:27 CET 2015
+builddate=20151116 1519
+description=atddrunner
+name=atddrunner
+releasedate=20150915 1445
+vendor=hybris
+version=5.7.0.3
+version.api=5.7.0

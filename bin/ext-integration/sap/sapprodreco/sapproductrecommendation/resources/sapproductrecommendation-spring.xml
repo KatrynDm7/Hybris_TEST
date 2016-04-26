@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2015 hybris AG All rights reserved. This software is the confidential and proprietary information 
+	of hybris ("Confidential Information"). You shall not disclose such Confidential Information and shall use it only in accordance with 
+	the terms of the license agreement you entered into with hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- The hybris platform provides one single Spring application context for beans located at the jalo layer. Each extension can add 
+		beans to this context by specifying them at this configuration file. You can use and/or redefine beans defined at configuration files 
+		of other extensions as well as adding new one. If you want to locate this file at a different location or want to use several files 
+		for better, structuring, please use the '<yourextension>.application-context' property at your project.properties file. There you can 
+		specify a comma separated list of files where first is tried to find a file per classpath and then per file system. If you want to 
+		configure beans for your web module please have a look at your web/webroot/WEB-INF/<extname>-web-spring.xml. -->
+
+
+	<bean class="com.sap.hybris.reco.common.util.HMCConfigurationReader" id="hmcConfigurationReader">
+		<property name="globalConfigurationService" ref="sapCoreSAPGlobalConfigurationService" />
+	</bean>
+	
+	<bean id="defaultSapRecommendationContextProvider" class="com.sap.hybris.reco.dao.RecommendationContext"
+		scope="prototype" />
+
+	<!-- Business Objects (BO) -->
+	<bean id="defaultSapProductRecommendationManagerBO" parent="sapCoreBusinessObject"
+		class="com.sap.hybris.reco.bo.impl.ProductRecommendationManagerBOImpl">
+		<property name="backendType" value="CEI" />
+		<property name="backendObject" ref="sapProductRecommendationManagerCEI" />
+	</bean>
+
+	<alias name="defaultSapRecommendationModelTypeReader" alias="sapRecommendationModelTypeReader" />
+	<bean class="com.sap.hybris.reco.bo.SAPRecommendationModelTypeReader" id="defaultSapRecommendationModelTypeReader">
+		<property name="accessBE" ref="recommendationEntityManagerCEI" />		
+	</bean>
+
+	<alias name="defaultSapRecommendationItemDSTypeReader" alias="sapRecommendationItemDSTypeReader" />
+	<bean class="com.sap.hybris.reco.bo.SAPRecommendationItemDSTypeReader" id="defaultSapRecommendationItemDSTypeReader">
+		<property name="accessBE" ref="recommendationEntityManagerCEI" />
+	</bean>
+
+	<alias name="defaultSapRecommendationScenarioReader" alias="sapRecommendationScenarioReader" />
+	<bean class="com.sap.hybris.reco.bo.SAPRecommendationScenarioReader" id="defaultSapRecommendationScenarioReader">
+		<property name="accessBE" ref="recommendationEntityManagerCEI" />
+	</bean>
+	
+	<alias name="defaultSapRecommendationTypeReader" alias="sapRecommendationTypeReader" />
+	<bean class="com.sap.hybris.reco.bo.SAPRecommendationTypeReader" id="defaultSapRecommendationTypeReader">
+		<property name="configuration" ref="hmcConfigurationReader" />
+	</bean>
+
+	<alias alias="sapProductRecommendationDefaultResultProvider" name="defaultProductRecommendationDefaultResultProvider"/>
+	<bean id="defaultProductRecommendationDefaultResultProvider" class="com.sap.hybris.reco.be.impl.DefaultProductRecommendationsValueProvider"/>
+	
+	<!-- Backend Objects (BE) -->
+	<bean id="sapProductRecommendationManagerCEI" class="com.sap.hybris.reco.be.impl.ProductRecommendationManagerCEI"
+		parent="sapCoreBackendObjectJCo" scope="sapSession">
+		<property name="configuration" ref="hmcConfigurationReader"></property>
+		<property name="sessionService" ref="sessionService"/>
+		<property name="retrieveWaitTimeoutMs" value="3000"/>
+		<property name="prefetchEnabled" value="true"/>
+		<property name="maxThreads" value="100" />
+		<property name="defaultResultProvider" ref="sapProductRecommendationDefaultResultProvider"/>
+	</bean>
+
+	<alias alias="recommendationEntityManagerCEI" name="defaultrecommendationEntityManagerCEI" />
+	<bean id="defaultrecommendationEntityManagerCEI" class="com.sap.hybris.reco.be.impl.RecommendationEntityManagerCEI">
+		<property name="clientService" ref="oDataClientService" />
+		<property name="configuration" ref="hmcConfigurationReader" />
+	</bean>
+
+</beans>

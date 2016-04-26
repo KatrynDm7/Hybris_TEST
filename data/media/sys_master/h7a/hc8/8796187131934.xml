@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<advanced-search>
+	<group name="root" type="PlayerPreferences">
+		<label lang="en">Suche nach...</label>
+		<label lang="de">Search for...</label>
+		<group name="general">
+			<label lang="de">Stammdaten</label>
+			<label lang="en">Properties</label>			
+			<property qualifier="PlayerPreferences.currentCompetition" sort-enabled="true" visible="true"/>
+		</group>
+	</group>
+</advanced-search>

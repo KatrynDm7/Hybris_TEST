@@ -1,0 +1,84 @@
+
+
+#Billing Event (Payment Event) creation.
+INSERT_UPDATE BillingEvent;code[unique=true];order;cartAware[default=false];
+;paynow;1;true
+;cancellationcoverage;2
+;eventclothingcoverage;3
+;deductible;4
+;eventmoneycoverage;6
+;rearrangementcoverage;7
+;decorationssundriescoverage;8
+;carstransportcoverage;9
+;photographyvideocoverage;10
+;failuresupplierscoverage;11
+;personalliabilitycoverage;12
+;excesswaivercoverage;13;true
+;venueCoverage;14;true
+;publicliability;15;true
+;increaselimitfailuresupplierandpublicliability;16;true
+;increaselimitfailuresupplier;17;
+
+#Travel Insurance BillingEvent
+;baggage;18
+;cancellation;19
+;medicalexpenses;20
+;repatriation;21
+;legalexpenses;22
+;curtailment;23
+;safi;25
+;hospitalbenefit;26
+;accommodationcover;27
+;delayeddeparture;28
+;supplierinsolvency;29
+;misseddeparture;30
+;petcare;31
+;personalmoney;32
+;wintersports;33;true
+;abandonmentcover;34
+;hijack;35
+;muggingbenefit;36
+;repaystudentloan;37
+;businesscover;38;true
+;valuablesextensioncover;39;true
+;hazardousactivitiescover;40;true
+;golfcover;41;true
+;personalaccident;42
+
+# Property Insurance BillingEvent
+;homeowners;43;true;
+;liabilitycover;44;
+;medicalpayments;45;
+;deductible;44;
+;windhaildeductible;45;
+;homeprotectorplus;46;true;
+;waterbackupcover;47;true;
+;floodcoverage;48;true;
+;identityfraudcoverage;50;true;
+;homecomputerandphonecoverage;51;true;
+;jewelrycoverage;52;true;
+
+# new property billing events
+;homeemergencycover;54;true;
+;depositreturnassistance;55;true;
+;tempaccomodationcover;56;true;
+;bicyclescover;54;true;
+
+;terminalillness;58
+;travellingabroad;59
+
+# Auto insurance billing event
+;courtesycover;60
+;breakdowncare;61
+;emergencyhelplineappraisal;62
+;uninsureddriverpromise;63
+;legalexpensecover;64;true;
+;keyprotectioncover;66;true;
+;5yearguarantee;67;true;
+;telemetryinstallation;68;true
+;breakdowncover;69;true;
+
+# Life insurance billing event
+;premiumprotection;70;true;
+;renewaloption;71;true;
+;paymentprotectionbenefit;72;true

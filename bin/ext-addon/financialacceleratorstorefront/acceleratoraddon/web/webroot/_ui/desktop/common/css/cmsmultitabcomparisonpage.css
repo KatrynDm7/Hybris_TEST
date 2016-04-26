@@ -1,0 +1,62 @@
+.sectionHeader{
+    font-size: 16px;
+    width:100%;
+    background-color: #f3f3f3;
+    display:block;
+    float:left;
+    font-weight: bold;
+}
+
+.sectionHeader .label{
+    padding: 10px 20px;
+}
+
+.CMSMultiComparisonTabContainer li.tab {
+    background-color: #a7a7a7;
+    font-size: 14px;
+    display: inline-block;
+    float: left;
+    width: 15%;
+    padding: 10px 20px;
+    margin-right: 5px;
+    border-right: 1px solid #e1e1e1;
+    cursor: pointer;
+}
+
+.CMSMultiComparisonTabContainer{
+    text-align:center;
+    height: auto;
+}
+
+.CMSMultiComparisonTabContainer li.tab.active {
+    background-color: #f3f3f3;
+}
+
+.CMSMultiComparisonTabContainer .content, .CMSMultiComparisonTabContainer .header{
+    width:100%;
+    display:block;
+    float:left;
+}
+
+.CMSMultiComparisonTabContainer .content{
+    min-height: 200px;
+    border-top: 1px solid #e1e1e1;
+}
+
+.CMSComparisonTabComponent, .CMSComparisonTabComponent .content{
+    width:100%;
+    display:block;
+    float:left;
+}
+
+.CMSComparisonTabComponent .body{
+    float: left;
+}
+
+.tabContent{
+    display:none;
+}
+
+.tabContent.active{
+    display: block;
+}

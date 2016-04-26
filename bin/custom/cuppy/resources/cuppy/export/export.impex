@@ -1,0 +1,35 @@
+"#% impex.setTargetFile( ""News.csv"" );"
+insert_update News;competition(code);content[lang=de];content[lang=en];content[lang=pl];creationtime[dateformat=dd.MM.yyyy hh:mm:ss,unique=true];eMail
+"#% impex.exportItems( ""News"" , false );"
+
+"#% impex.setTargetFile( ""ProfilePicture.csv"" );"
+insert_update Media;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];catalog(id)[allownull=true];catalogVersion(catalog(id),version)[unique=true,default=Default:Online];code[unique=true];mime;realfilename
+"#% impex.exportItemsFlexibleSearch( ""SELECT {m:PK} FROM {Media as m},{Player as p} WHERE {p:picture}={m:pk}"" );"
+
+"#% impex.setTargetFile( ""PlayerPreferences.csv"" );"
+insert PlayerPreferences;&preference;currentCompetition(code)
+"#% impex.exportItems( ""PlayerPreferences"" , false );"
+
+"#% impex.setTargetFile( ""Player.csv"" );"
+insert_update Player;@password[translator=de.hybris.platform.impex.jalo.translators.UserPasswordTranslator];confirmed;country(isocode);eMail;hmcLoginDisabled;loginDisabled;name;picture(catalogVersion(catalog(id),version),code);preferences(&preference);sessionLanguage(isocode);uid[unique=true]
+"#% impex.exportItems( ""Player"" , false );"
+
+"#% impex.setTargetFile( ""PrincipalGroupRelation.csv"" );"
+insert_update PrincipalGroupRelation;source(uid)[unique=true];target(uid)[unique=true]
+"#% impex.exportItems( ""PrincipalGroupRelation"" , false );"
+
+"#% impex.setTargetFile( ""MatchBet.csv"" );"
+insert_update MatchBet;creationtime[dateformat=dd.MM.yyyy hh:mm:ss];guestGoals;homeGoals;match(group(code,competition(code)),id)[unique=true];player(uid)[unique=true]
+"#% impex.exportItems( ""MatchBet"" , false );"
+
+"#% impex.setTargetFile( ""CompetitionPlayerRelation.csv"" );"
+insert_update CompetitionPlayerRelation;creationtime[dateformat=dd.MM.yyyy hh:mm:ss];language(isocode)[unique=true];qualifier;sequenceNumber;source(code)[unique=true];target(uid)[unique=true]
+"#% impex.exportItems( ""CompetitionPlayerRelation"" , false );"
+
+"#% impex.setTargetFile( ""TimePointStatistic.csv"" );"
+insert TimePointStatistic;playersOnlineCount
+"#% impex.exportItems( ""TimePointStatistic"" , false );"
+
+"#% impex.setTargetFile( ""OverallStatistic.csv"" );"
+insert OverallStatistic;playersOnlineMaxCount
+"#% impex.exportItems( ""OverallStatistic"" , false );"

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <alias name="defaultChangeDetectionService" alias="changeDetectionService"/>
+    <bean id="defaultChangeDetectionService" class="de.hybris.deltadetection.impl.DefaultChangeDetectionService">
+        <property name="flexibleSearchService" ref="flexibleSearchService"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="typeService" ref="typeService"/>
+    </bean>
+
+    <bean id="changeDetectionJobPerformable"
+          class="de.hybris.deltadetection.jobs.ChangeDetectionJobPerformable"
+          parent="abstractJobPerformable">
+        <property name="changeDetectionService" ref="changeDetectionService"/>
+        <property name="mediaService" ref="mediaService"/>
+    </bean>
+
+    <bean id="abstractChangeProcessorJobPerformable"
+          class="de.hybris.deltadetection.jobs.AbstractChangeProcessorJobPerformable" abstract="true"
+          parent="abstractJobPerformable">
+        <property name="changeDetectionService" ref="changeDetectionService"/>
+        <property name="mediaService" ref="mediaService"/>
+    </bean>
+
+    <bean id="consumeAllChangesJobPerformable"
+          class="de.hybris.deltadetection.jobs.ConsumeAllChangesJobPerformable"
+          parent="abstractChangeProcessorJobPerformable">
+    </bean>
+
+    <bean id="scriptChangeConsumptionJobPerformable"
+          class="de.hybris.deltadetection.jobs.ScriptChangeConsumptionJobPerformable"
+          parent="abstractChangeProcessorJobPerformable">
+        <property name="scriptingLanguagesService" ref="scriptingLanguagesService"/>
+    </bean>
+
+
+    <!-- Interceptors -->
+    <bean id="streamConfigurationInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor">
+            <bean class="de.hybris.deltadetection.interceptors.StreamConfigurationValidationInterceptor" >
+                <property name="typeService" ref="typeService"/>
+            </bean>
+        </property>
+        <property name="typeCode" value="StreamConfiguration"/>
+    </bean>
+</beans>

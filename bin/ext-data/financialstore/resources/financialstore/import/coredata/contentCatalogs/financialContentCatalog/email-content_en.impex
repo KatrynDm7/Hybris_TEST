@@ -1,0 +1,59 @@
+#
+# Import the CMS content for the Insurance site emails
+#
+$contentCatalog=financialContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+$financialEmailResource=jar:de.hybris.platform.financialstore.setup.FinancialStoreSystemSetup&/financialstore/import/emails
+
+# Import config properties into impex macros for modulegen
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+$emailResource=$config-emailResourceValue
+
+# Language
+$lang=en
+
+# CMS components and Email velocity templates
+UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang,translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+ ;insurance_Email_Customer_Registration_Body;"Customer Registration Email Body";$financialEmailResource/email-customerRegistrationBody.vm
+ ;insurance_Email_Customer_Registration_Subject;"Customer Registration Email Subject";$financialEmailResource/email-customerRegistrationSubject.vm
+ ;insurance_Email_Forgotten_Password_Body;"Forgotten Password Email Body";$financialEmailResource/email-forgottenPasswordBody.vm
+ ;insurance_Email_Forgotten_Password_Subject;"Forgotten Password Email Subject";$financialEmailResource/email-forgottenPasswordSubject.vm
+ ;insurance_Email_Order_Confirmation_Body;"Order Confirmation Email Body";$financialEmailResource/email-orderConfirmationBody.vm
+ ;insurance_Email_Order_Confirmation_Subject;"Order Confirmation Email Subject";$financialEmailResource/email-orderConfirmationSubject.vm 
+ ;insurance-BannerComponent-template;"CMSBannerComponent Template";$emailResource/email-bannerComponentTemplate.vm
+ ;insurance-CMSImageComponent-template;"CMSImageComponent Template";$emailResource/email-cmsImageComponentTemplate.vm
+ ;insurance-CMSLinkComponent-template;"CMSLinkComponent Template";$emailResource/email-cmsLinkComponentTemplate.vm
+ ;insurance-CMSParagraphComponent-template;"CMSParagraphComponent Template";$emailResource/email-cmsParagraphComponentTemplate.vm
+ ;insurance-SimpleBannerComponent-template;"CMSSimpleBannerComponent Template";$emailResource/email-bannerComponentTemplate.vm
+ ;insurance_Email_NotPickedUpConsignment_Canceled_Body;"Not Picked Up Consignment Canceled Email Body";$emailResource/email-notPickedUpConsignmentCanceledBody.vm
+ ;insurance_Email_NotPickedUpConsignment_Canceled_Subject;"Not Picked Up Consignment Canceled Email Subject";$emailResource/email-notPickedUpConsignmentCanceledSubject.vm
+ ;insurance_Email_Order_Cancelled_Body;"Order Cancelled Email Body";$emailResource/email-orderCancelledBody.vm
+ ;insurance_Email_Order_Cancelled_Subject;"Order Cancelled Email Subject";$emailResource/email-orderCancelledSubject.vm
+ ;insurance_Email_Order_Collection_Reminder_Body;"Order Collection Reminder Body";$emailResource/email-orderCollectionReminderBody.vm
+ ;insurance_Email_Order_Collection_Reminder_Subject;"Order Collection Reminder Subject";$emailResource/email-orderCollectionReminderSubject.vm
+ ;insurance_Email_Order_Move_To_CS_Body;"Order Move To CS Body";$emailResource/email-orderMoveToCsBody.vm
+ ;insurance_Email_Order_Move_To_CS_Subject;"Order Move To CS Subject";$emailResource/email-orderMoveToCsSubject.vm
+ ;insurance_Email_Order_Partially_Canceled_Body;"Order Partially Canceled Email Body";$emailResource/email-orderPartiallyCanceledBody.vm
+ ;insurance_Email_Order_Partially_Canceled_Subject;"Order Partially Canceled Email Subject";$emailResource/email-orderPartiallyCanceledSubject.vm
+ ;insurance_Email_Order_Partially_Refunded_Body;"Order Partially Refunded Email Body";$emailResource/email-orderPartiallyRefundedBody.vm
+ ;insurance_Email_Order_Partially_Refunded_Subject;"Order Partially Refunded Email Subject";$emailResource/email-orderPartiallyRefundedSubject.vm
+ ;insurance_Email_Order_Refund_Body;"Order Refund Email Body";$emailResource/email-orderRefundBody.vm
+ ;insurance_Email_Order_Refund_Subject;"Order Refund Email Subject";$emailResource/email-orderRefundSubject.vm
+ ;insurance_Email_Ready_For_Pickup_Body;"Ready For Pickup Email Body";$emailResource/email-readyForPickupBody.vm
+ ;insurance_Email_Ready_For_Pickup_Subject;"Ready For Pickup Email Subject";$emailResource/email-readyForPickupSubject.vm
+ ;insurance_Email_FindAgent_Subject;"FA Email Body";$financialEmailResource/email-FindAgent_Subject.vm
+ ;insurance_Email_FindAgent_Body;"FA Email Subject";$financialEmailResource/email-FindAgent_Body.vm
+
+# Email Pages
+UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];fromEmail[lang=$lang];fromName[lang=$lang]
+ ;;CustomerRegistrationEmail;"customerservices@hybris.com";"Customer Services Team"
+ ;;ForgottenPasswordEmail;"customerservices@hybris.com";"Customer Services Team"
+ ;;OrderCancelledEmail;"customerservices@hybris.com";"Customer Services Team"
+ ;;OrderCollectionReminderEmail;"customerservices@hybris.com";"Customer Services Team"
+ ;;OrderConfirmationEmail;"customerservices@hybris.com";"Customer Services Team"
+ ;;OrderMoveToCsEmail;"customerservices@hybris.com";"Customer Services Team"
+ ;;OrderPartiallyCanceledEmail;"customerservices@hybris.com";"Customer Services Team"
+ ;;OrderPartiallyRefundedEmail;"customerservices@hybris.com";"Customer Services Team"
+ ;;OrderRefundEmail;"customerservices@hybris.com";"Customer Services Team"
+ ;;ReadyForPickupEmail;"customerservices@hybris.com";"Customer Services Team"

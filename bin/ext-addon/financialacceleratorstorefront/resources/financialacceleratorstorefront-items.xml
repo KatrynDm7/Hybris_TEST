@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+    <relations>
+        <relation code="ComparisonPanelCMSComponents2ProductRel" generate="true" localized="false" autocreate="true">
+            <description>This relation links ComparisonPanelCMSComponent with one or more product.</description>
+            <deployment table="ComparPanelComps2ProdRel" typecode="6350"/>
+            <sourceElement qualifier="comparisonPanelCMSComponents" type="ComparisonPanelCMSComponent" cardinality="many">
+                <modifiers read="true" write="true" search="true" optional="true"/>
+            </sourceElement>
+            <targetElement qualifier="products" type="Product" cardinality="many" collectiontype="list" ordered="true">
+                <modifiers read="true" write="true" search="true" optional="true"/>
+            </targetElement>
+        </relation>
+        
+        <relation code="CPanelProduct2ParagraphComponent" generate="true" localized="false" autocreate="true">
+            <description>This relation links Products that depends on other mandatory bundle products.</description>
+            <deployment table="CompPanel2MandBdlProdRel" typecode="6352"/>
+            <sourceElement qualifier="comparisonPanelProducts" type="ComparisonPanelCMSComponent" cardinality="many">
+                <modifiers read="true" write="true" search="true" optional="true"/>
+            </sourceElement>
+            <targetElement qualifier="mandatoryBundleProducts" type="Product" cardinality="many" collectiontype="list" ordered="true">
+                <modifiers read="true" write="true" search="true" optional="true"/>
+            </targetElement>
+        </relation>
+        
+        <relation code="AllOurServiceComponent2LinkImgRel" generate="true" localized="false" autocreate="true">
+            <description>This relation links CMSLinkImageComponent to a list.</description>
+            <deployment table="AOSComp2LinkImgRel" typecode="6355"/>
+            <sourceElement qualifier="collection" type="CMSAllOurServicesComponent" cardinality="many">
+                <modifiers read="true" write="true" search="true" optional="true"/>
+            </sourceElement>
+            <targetElement qualifier="linkImages" type="CMSLinkImageComponent" cardinality="many" collectiontype="list" ordered="true">
+                <modifiers read="true" write="true" search="true" optional="true"/>
+            </targetElement>
+        </relation>
+    </relations>
+
+</items>

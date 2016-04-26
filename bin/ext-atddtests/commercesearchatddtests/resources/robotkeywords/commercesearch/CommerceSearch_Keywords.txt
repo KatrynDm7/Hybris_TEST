@@ -1,0 +1,169 @@
+*** Settings ***
+Library           de.hybris.platform.atddimpex.keywords.ImpexKeywordLibrary
+Library           de.hybris.platform.commerceservicesatddtests.keywords.CommerceServicesKeywordLibrary
+Library           de.hybris.platform.commercesearch.atdd.keywords.CommerceSearchKeywordLibrary
+Resource		  impex/Impex_Keywords.txt
+
+
+*** Keywords ***
+commercesearch suite setup
+    [Documentation]    Setting up before the test case runs
+    Comment	Bootstrapping configuration
+    import test configuration
+    
+commercesearch suite teardown
+    [Documentation]    Cleaning up after the test case finishes
+    Comment	Cleaning up
+
+import test configuration
+    [Documentation]    Sets up Core data for an Electronics Store, including Site, Store and Solr configuration
+    import impex from resource	impex/coredata/common/countries.impex
+    import impex from resource	impex/coredata/common/users.impex
+    import impex from resource	impex/coredata/common/essential-data.impex
+    import impex from resource	impex/coredata/common/delivery-modes.impex
+    import impex from resource	impex/coredata/common/themes.impex
+    import impex from resource	impex/coredata/productCatalogs/electronicsProductCatalog/catalog.impex
+    import impex from resource	impex/coredata/productCatalogs/electronicsProductCatalog/catalog_en.impex
+    import impex from resource	impex/coredata/productCatalogs/electronicsProductCatalog/categories.impex
+    import impex from resource	impex/coredata/productCatalogs/electronicsProductCatalog/categories_en.impex
+    import impex from resource	impex/coredata/contentCatalogs/electronicsContentCatalog/catalog.impex
+    import impex from resource	impex/coredata/contentCatalogs/electronicsContentCatalog/catalog_en.impex
+    import impex from resource	impex/coredata/stores/electronics/store.impex
+    import impex from resource	impex/coredata/stores/electronics/store_en.impex
+    import impex from resource	impex/coredata/stores/electronics/site.impex
+    import impex from resource	impex/coredata/stores/electronics/site_en.impex
+    import impex from resource	impex/coredata/stores/electronics/solr.impex
+    import impex from resource	impex/coredata/stores/electronics/solr_en.impex
+    
+
+create review for product "${productCode:[^"]+}" with rating "${ratingValue}"
+    [Documentation]    Creates a review for product with given rating value
+    @{binding}    create list    productCode    ${productCode}	ratingValue	${ratingValue}
+	 ${templateName}=    Set Variable    impex-templates/product/customer-review-with-rating-insert.impex.vm
+    ${impEx}=    generate impex from template    ${templateName}    @{binding}
+    import impex "${impEx}" use template "${templateName}"
+
+
+create product "${productCode:[^"]+}" in category "${categoryCode}" with price "${price}"
+    [Documentation]    Creates a product with the given code in the given category, with price information
+    @{binding}    create list    productCode    ${productCode}	categoryCode	${categoryCode}	price	${price}
+    ${templateName}=    Set Variable    impex-templates/product/product-with-category-insert.impex.vm
+    ${impEx}=    generate impex from template    ${templateName}    @{binding}
+    import impex "${impEx}" use template "${templateName}"
+
+create product "${productCode:[^"]+}" in category "${categoryCode}" with price "${price}" which is in stock
+	[Documentation]    Creates a product with the given code in the given category, with price and stock information
+	@{binding}    create list    productCode    ${productCode}	categoryCode	${categoryCode}	price	${price}
+    ${templateName}=    Set Variable    impex-templates/product/product-with-category-insert.impex.vm
+    ${impEx}=    generate impex from template    ${templateName}    @{binding}
+    import impex "${impEx}" use template "${templateName}"
+    set in stock	${productCode}	true
+
+create product "${productCode:[^"]+}" in category "${categoryCode}" with price "${price}" which is out of stock
+	[Documentation]    Creates a product with the given code in the given category, with price and stock information
+	@{binding}    create list    productCode    ${productCode}	categoryCode	${categoryCode}	price	${price}
+    ${templateName}=    Set Variable    impex-templates/product/product-with-category-insert.impex.vm
+    ${impEx}=    generate impex from template    ${templateName}    @{binding}
+    import impex "${impEx}" use template "${templateName}"
+    set in stock	${productCode}	false
+    
+create a boost rule for field "${fieldName}" for value "${fieldValue}" with strength ${boostStrength} and operator ${operator} in category "${categoryCode}"
+	[Documentation] 	Creates a boost rule in a category search profile
+	create category boost rule	${fieldName}	${fieldValue}	${boostStrength}	${categoryCode}	${operator}
+
+create a global boost rule for field "${fieldName}" for value "${fieldValue}" with strength ${boostStrength} and operator ${operator}
+	[Documentation] 	Creates a boost rule in a global search profile
+	create global boost rule	${fieldName}	${fieldValue}	${boostStrength}	${operator}
+
+make product "${productCode}" a hero in category "${categoryCode}" 
+    [Documentation]    Assigns the given product to the next free hero spot in the given category
+    add product to heroes	${categoryCode}		${productCode}
+
+remove product "${productCode}" from heroes in category "${categoryCode}" 
+    [Documentation]    Removes the given product from this category's heroes
+    remove product from heroes	${categoryCode}		${productCode}
+    
+check that product "${productCode}" is first in category "${categoryCode}" with default order
+	[Documentation]		Validates that the given product comes out on top of the search results when no explicit sort is given
+	check product is first result	${categoryCode}		${productCode}
+	
+check that product "${productCode}" is first in category "${categoryCode}" when sorting by "${sortOrder}"
+	[Documentation]		Validates that the given product comes out on top of the search results when sorting by the given key
+	check product is first result	${categoryCode}		${productCode}		${sortOrder}
+	
+check that product "${productCode}" is not first in category "${categoryCode}" with default order
+	[Documentation]		Validates that the given product comes out second or lower in the search results when no explicit sort is given
+	check product is not first result	${categoryCode}		${productCode}
+	
+check that product "${productCode}" is not first in category "${categoryCode}" when sorting by "${sortOrder}"
+	[Documentation]		Validates that the given product comes out second or lower in the search results when sorting by the given key
+	check product is not first result	${categoryCode}		${productCode} 	${sortOrder}
+	
+check that facet "${facetName}" is at position ${facetPosition} in category "${categoryCode}"
+	[Documentation]		Validates that a facet is at a particular position
+	check facet is in position	${facetName}	${facetPosition}	${categoryCode}
+
+check that facet "${facetName}" is invisible for the global configuration
+	[Documentation]		Validates that a facet is invisible for the global configuration
+	check facet is invisible for global configuration	${facetName}
+
+check that facet "${facetName}" is visible for the global configuration
+	[Documentation]		Validates that a facet is visible for the global configuration
+	check facet is visible for global configuration	${facetName}
+
+check that facet "${facetName}" is invisible for category "${categoryCode}"
+	[Documentation]		Validates that a facet is invisible for a category
+	check facet is invisible for category	${facetName}	${categoryCode}
+
+check that facet "${facetName}" is visible for category "${categoryCode}"
+	[Documentation]		Validates that a facet is visible for a category
+	check facet is visible for category	${facetName}	${categoryCode}
+
+create guided navigation for category "${categoryCode}"
+	[Documentation]    Creates guided navigation holder for facet reconfigurations
+	@{binding}    create list    categoryCode    ${categoryCode}	
+    ${templateName}=    Set Variable    impex-templates/product/category-search-profile-insert.impex.vm
+    ${impEx}=    generate impex from template    ${templateName}    @{binding}
+    import impex "${impEx}" use template "${templateName}"
+
+give facet "${facetName:[^"]+}" the visibility ${visible} for the global configuration
+	[Documentation]    Makes the given facet visible or invisible for global configuration
+   @{binding}    create list    facetName    ${facetName}	visible	${visible}
+   ${templateName}=    Set Variable    impex-templates/product/solr-indexed-property-visibility-update.impex.vm
+	${impEx}=    generate impex from template    ${templateName}    @{binding}
+	import impex "${impEx}" use template "${templateName}"
+
+give facet "${facetName:[^"]+}" the priority ${priority} in category "${categoryCode}"
+	[Documentation]    Creates facet reconfiguration with the given priority for a category
+	@{binding}    create list    facetName    ${facetName}	priority	${priority}	categoryCode	${categoryCode}
+    ${templateName}=    Set Variable    impex-templates/product/facet-reconfiguration-insert.impex.vm
+    ${impEx}=    generate impex from template    ${templateName}    @{binding}
+    import impex "${impEx}" use template "${templateName}"
+    
+give facet "${facetName}" the priority ${priority} globally
+	[Documentation]		Sets the facet priority (used for ordering) globally
+	set global facet priority	${facetName}	${priority}
+
+toggle facet "${facetName}" visibility globally
+	[Documentation]    Toggles facet visibility for global configuration
+	toggle facet global visibility	${facetName}
+
+toggle facet "${facetName}" visibility for category "${categoryCode}"
+	[Documentation]    Toggles facet visibility for the given category
+   toggle facet visibility for a category	${facetName}	${categoryCode}
+
+move facet "${facetName}" below "${stationaryFacetName}" in category "${categoryCode}"
+	[Documentation]		Move facet below other facet in selected category
+	move facet below other facet for selected category	${facetName}	${stationaryFacetName}	${categoryCode}
+
+move facet "${facetName}" above "${stationaryFacetName}" in category "${categoryCode}"
+	[Documentation]		Move above below other facet in selected category
+	move facet above other facet for selected category	${facetName}	${stationaryFacetName}	${categoryCode}
+
+move global facet "${facetName}" above "${stationaryFacetName}"
+	[Documentation]		Move above below other facet for the global configuration
+	move facet above other facet for global configuration	${facetName}	${stationaryFacetName}
+
+move global facet "${facetName}" below "${stationaryFacetName}"
+	[Documentation]		Move below below other facet for the global configuration
+	move facet below other facet for global configuration	${facetName}	${stationaryFacetName}

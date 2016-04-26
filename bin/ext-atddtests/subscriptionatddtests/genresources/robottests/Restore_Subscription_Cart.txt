@@ -1,0 +1,289 @@
+*** Settings ***
+Test Setup        import commercecart sampledata
+Resource          commerce/CommerceServices_Keywords.txt
+Resource          commerce/SubscriptionCommerce_Keywords.txt
+Resource          subscriptionservices/SubscriptionProduct_Keywords.txt
+Resource          subscriptionservices/SubscriptionPricePlan_Keywords.txt
+
+*** Variables ***
+${customerId}=    testuser@saved-carts.com
+${customerId2}=    testuser2@saved-carts.com
+${saveCartName1}=    Saved Cart 1
+${saveCartDescription1}=    This is a saved cart No.1
+${saveCartName2}=    Saved Cart 2
+${saveCartDescription2}=    This is a saved cart No.2
+${expirationDays}=    30
+
+*** Test Cases ***
+
+### RETRIEVE MASTER CART:
+
+Test_Restore_Subscription_Cart_RestoreMasterCart_OneTimeCharge_Oncancellation_NoChildCart
+	[Documentation]    This test case tries to restore a master cart which should pass
+	create subscription product "SP1"
+	for product "SP1" add subscription priceplan "SPP1" with currency "USD"
+	for subscription priceplan "SPP1" add "oncancellation" one time price of "10"
+	create customer "${customerId}" with currency "USD"
+	login customer with id "${customerId}"
+	${sessionCart}=    get session cart
+	add product "SP1" to cart
+	# Verification of cart before save:
+	verify that number of child carts is "0"
+	Should Be Equal    ${sessionCart.name}    ${null}
+	Should Be Equal    ${sessionCart.description}    ${null}
+	Should Be Equal    ${sessionCart.saveTime}    ${null}
+	Should Be Equal    ${sessionCart.savedBy}    ${null}
+	Should Be Equal    ${sessionCart.expirationTime}    ${null}
+	${savedCart}=    save cart with name "${saveCartName1}" and description "${saveCartDescription1}"
+	restore saved cart with code  ${savedCart.code}
+	${sessionCart}=    get session cart
+	# Verification of restored cart after save:
+	Length Should Be    ${sessionCart.children}   0
+	Should Be Equal   ${sessionCart.name}   ${saveCartName1}
+	Should Be Equal    ${sessionCart.description}   ${saveCartDescription1}
+	Should Be Equal    ${sessionCart.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${sessionCart.saveTime}    ${null}
+	Should Not Be Equal    ${sessionCart.expirationTime}    ${null}
+	verify that date "${sessionCart.expirationTime}" is "${expirationDays}" days later than date "${sessionCart.saveTime}"
+
+Test_Restore_Subscription_Cart_RestoreMasterCart_OneTimeCharge_Paynow_NoChildCart
+	[Documentation]    This test case tries to restore a master cart which should pass
+	create subscription product "SP1"
+	for product "SP1" add subscription priceplan "SPP1" with currency "USD"
+	for subscription priceplan "SPP1" add "paynow" one time price of "10"
+	create customer "${customerId}" with currency "USD"
+	login customer with id "${customerId}"
+	${sessionCart}=    get session cart
+	add product "SP1" to cart
+	# Verification of cart before save:
+	verify that number of child carts is "0"
+	Should Be Equal    ${sessionCart.name}    ${null}
+	Should Be Equal    ${sessionCart.description}    ${null}
+	Should Be Equal    ${sessionCart.saveTime}    ${null}
+	Should Be Equal    ${sessionCart.savedBy}    ${null}
+	Should Be Equal    ${sessionCart.expirationTime}    ${null}
+	${savedCart}=    save cart with name "${saveCartName1}" and description "${saveCartDescription1}"
+	restore saved cart with code  ${savedCart.code}
+	${sessionCart}=    get session cart
+	# Verification of restored cart after save:
+	Length Should Be    ${sessionCart.children}   0
+	Should Be Equal   ${sessionCart.name}   ${saveCartName1}
+	Should Be Equal    ${sessionCart.description}   ${saveCartDescription1}
+	Should Be Equal    ${sessionCart.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${sessionCart.saveTime}    ${null}
+	Should Not Be Equal    ${sessionCart.expirationTime}    ${null}
+	verify that date "${sessionCart.expirationTime}" is "${expirationDays}" days later than date "${sessionCart.saveTime}"
+
+Test_Restore_Subscription_Cart_RestoreMasterCart_OneTimeCharge_Onfirstbill_1xChildCart
+	[Documentation]    This test case tries to restore a master cart which should pass
+	create subscription product "SP1"
+	for product "SP1" add subscription priceplan "SPP1" with currency "USD"
+	for subscription priceplan "SPP1" add "onfirstbill" one time price of "10"
+	create customer "${customerId}" with currency "USD"
+	login customer with id "${customerId}"
+	${sessionCart}=    get session cart
+	add product "SP1" to cart
+	# Verification of cart before save:
+	verify that number of child carts is "1"
+	Should Be Equal    ${sessionCart.name}    ${null}
+	Should Be Equal    ${sessionCart.description}    ${null}
+	Should Be Equal    ${sessionCart.saveTime}    ${null}
+	Should Be Equal    ${sessionCart.savedBy}    ${null}
+	Should Be Equal    ${sessionCart.expirationTime}    ${null}
+	${savedCart}=    save cart with name "${saveCartName1}" and description "${saveCartDescription1}"
+	restore saved cart with code  ${savedCart.code}
+	${sessionCart}=    get session cart
+	# Verification of restored cart after save:
+	Length Should Be    ${sessionCart.children}   1
+	Should Be Equal   ${sessionCart.name}   ${saveCartName1}
+	Should Be Equal    ${sessionCart.description}   ${saveCartDescription1}
+	Should Be Equal    ${sessionCart.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${sessionCart.saveTime}    ${null}
+	Should Not Be Equal    ${sessionCart.expirationTime}    ${null}
+	verify that date "${sessionCart.expirationTime}" is "${expirationDays}" days later than date "${sessionCart.saveTime}"
+
+Test_Restore_Subscription_Cart_RestoreMasterCart_RecurringCharge_1xChildCart
+	[Documentation]    This test case tries to restore a master cart which should pass
+	create subscription product "SP1"
+	for product "SP1" add subscription priceplan "SPP1" with currency "USD"
+	for subscription priceplan "SPP1" add recurring charge of "20" with cycle start "0"
+	create customer "${customerId}" with currency "USD"
+	login customer with id "${customerId}"
+	${sessionCart}=    get session cart
+	add product "SP1" to cart
+	# Verification of cart before save:
+	verify that number of child carts is "1"
+	Should Be Equal    ${sessionCart.name}    ${null}
+	Should Be Equal    ${sessionCart.description}    ${null}
+	Should Be Equal    ${sessionCart.saveTime}    ${null}
+	Should Be Equal    ${sessionCart.savedBy}    ${null}
+	Should Be Equal    ${sessionCart.expirationTime}    ${null}
+	${savedCart}=    save cart with name "${saveCartName1}" and description "${saveCartDescription1}"
+	restore saved cart with code  ${savedCart.code}
+	${sessionCart}=    get session cart
+	# Verification of restored cart after save:
+	Length Should Be    ${sessionCart.children}   1
+	Should Be Equal   ${sessionCart.name}   ${saveCartName1}
+	Should Be Equal    ${sessionCart.description}   ${saveCartDescription1}
+	Should Be Equal    ${sessionCart.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${sessionCart.saveTime}    ${null}
+	Should Not Be Equal    ${sessionCart.expirationTime}    ${null}
+	verify that date "${sessionCart.expirationTime}" is "${expirationDays}" days later than date "${sessionCart.saveTime}"
+
+Test_Restore_Subscription_Cart_RestoreMasterCart_OneTimeCharge_Onfirstbill_And_RecurringCharge_2xChildCart
+	[Documentation]    This test case tries to restore a master cart which should pass
+	create subscription product "SP1"
+	for product "SP1" add subscription priceplan "SPP1" with currency "USD"
+	for subscription priceplan "SPP1" add "onfirstbill" one time price of "10"
+	for subscription priceplan "SPP1" add recurring charge of "20" with cycle start "0"
+	create customer "${customerId}" with currency "USD"
+	login customer with id "${customerId}"
+	${sessionCart}=    get session cart
+	add product "SP1" to cart
+	# Verification of cart before save:
+	verify that number of child carts is "2"
+	Should Be Equal    ${sessionCart.name}    ${null}
+	Should Be Equal    ${sessionCart.description}    ${null}
+	Should Be Equal    ${sessionCart.saveTime}    ${null}
+	Should Be Equal    ${sessionCart.savedBy}    ${null}
+	Should Be Equal    ${sessionCart.expirationTime}    ${null}
+	${savedCart}=    save cart with name "${saveCartName1}" and description "${saveCartDescription1}"
+	restore saved cart with code  ${savedCart.code}	
+	${sessionCart}=    get session cart
+	# Verification of restored cart after save:
+	Length Should Be    ${sessionCart.children}   2
+	Should Be Equal   ${sessionCart.name}   ${saveCartName1}
+	Should Be Equal    ${sessionCart.description}   ${saveCartDescription1}
+	Should Be Equal    ${sessionCart.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${sessionCart.saveTime}    ${null}
+	Should Not Be Equal    ${sessionCart.expirationTime}    ${null}
+	verify that date "${sessionCart.expirationTime}" is "${expirationDays}" days later than date "${sessionCart.saveTime}"
+
+Test_Restore_Subscription_Cart_RestoreMasterCart_MultipleCarts
+	[Documentation]    This test case tries to restore a master cart which should pass
+	create customer "${customerId}" with currency "USD"
+	login customer with id "${customerId}"
+	# Create SP1:
+	create subscription product "SP1"
+	for product "SP1" add subscription priceplan "SPP1" with currency "USD"
+	for subscription priceplan "SPP1" add "onfirstbill" one time price of "10"
+	for subscription priceplan "SPP1" add recurring charge of "20" with cycle start "0"
+	# Create SP2:
+	create subscription product "SP2"
+	for product "SP2" add subscription priceplan "SPP2" with currency "USD"
+	for subscription priceplan "SPP2" add recurring charge of "20" with cycle start "0"
+	# Save Cart No.1:
+	${sessionCart}=    get session cart
+	add product "SP1" to cart
+	${savedCart1}=    save cart with name "${saveCartName1}" and description "${saveCartDescription1}"
+	# Save Cart No.2:
+	${sessionCart}=    create new session cart
+	add product "SP2" to cart
+	${savedCart2}=    save cart with name "${saveCartName2}" and description "${saveCartDescription2}"
+	# Verification of current sessionCart - Cart No.2:
+	Length Should Be    ${sessionCart.children}   1
+	Should Be Equal   ${sessionCart.name}   ${saveCartName2}
+	Should Be Equal    ${sessionCart.description}   ${saveCartDescription2}
+	Should Be Equal    ${sessionCart.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${sessionCart.saveTime}    ${null}
+	Should Not Be Equal    ${sessionCart.expirationTime}    ${null}
+	verify that date "${sessionCart.expirationTime}" is "${expirationDays}" days later than date "${sessionCart.saveTime}"
+	# Restoration and Verification of sessionCart - Cart No.1:
+	restore saved cart with code  ${savedCart1.code}
+	${sessionCart}=    get session cart
+	Length Should Be    ${sessionCart.children}   2
+	Should Be Equal   ${sessionCart.name}   ${saveCartName1}
+	Should Be Equal    ${sessionCart.description}   ${saveCartDescription1}
+	Should Be Equal    ${sessionCart.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${sessionCart.saveTime}    ${null}
+	Should Not Be Equal    ${sessionCart.expirationTime}    ${null}
+	verify that date "${sessionCart.expirationTime}" is "${expirationDays}" days later than date "${sessionCart.saveTime}"
+	# Restoration and Verification of sessionCart - Cart No.2:
+	restore saved cart with code  ${savedCart2.code}
+	${sessionCart}=    get session cart
+	Length Should Be    ${sessionCart.children}   1
+	Should Be Equal   ${sessionCart.name}   ${saveCartName2}
+	Should Be Equal    ${sessionCart.description}   ${saveCartDescription2}
+	Should Be Equal    ${sessionCart.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${sessionCart.saveTime}    ${null}
+	Should Not Be Equal    ${sessionCart.expirationTime}    ${null}
+	verify that date "${sessionCart.expirationTime}" is "${expirationDays}" days later than date "${sessionCart.saveTime}"
+
+Test_Restore_Subscription_Cart_RestoreMasterCart_MultipleCustomers
+	[Documentation]    This test case tries to restore a master cart which should pass
+	create customer "${customerId}" with currency "USD"
+	create customer "${customerId2}" with currency "USD"
+	create subscription product "SP1"
+	for product "SP1" add subscription priceplan "SPP1" with currency "USD"
+	for subscription priceplan "SPP1" add "onfirstbill" one time price of "10"
+	for subscription priceplan "SPP1" add recurring charge of "20" with cycle start "0"
+	# Save Cart No.1:
+	login customer with id "${customerId}"
+	${sessionCart}=    get session cart
+	add product "SP1" to cart
+	${savedCart1}=    save cart with name "${saveCartName1}" and description "${saveCartDescription1}"
+	# Save Cart No.2:
+	login customer with id "${customerId2}"
+	${sessionCart}=    create new session cart
+	add product "SP1" to cart
+	${savedCart2}=    save cart with name "${saveCartName2}" and description "${saveCartDescription2}"
+	# Verification of current sessionCart - Cart No.2:
+	Length Should Be    ${sessionCart.children}   2
+	Should Be Equal   ${sessionCart.name}   ${saveCartName2}
+	Should Be Equal    ${sessionCart.description}   ${saveCartDescription2}
+	Should Be Equal    ${sessionCart.savedBy.uid}   ${customerId2}
+	Should Not Be Equal    ${sessionCart.saveTime}    ${null}
+	Should Not Be Equal    ${sessionCart.expirationTime}    ${null}
+	verify that date "${sessionCart.expirationTime}" is "${expirationDays}" days later than date "${sessionCart.saveTime}"
+	# Restoration and Verification of sessionCart - Cart No.1:
+	restore saved cart with code  ${savedCart1.code}
+	${sessionCart}=    get session cart
+	Length Should Be    ${sessionCart.children}   2
+	Should Be Equal   ${sessionCart.name}   ${saveCartName1}
+	Should Be Equal    ${sessionCart.description}   ${saveCartDescription1}
+	Should Be Equal    ${sessionCart.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${sessionCart.saveTime}    ${null}
+	Should Not Be Equal    ${sessionCart.expirationTime}    ${null}
+	verify that date "${sessionCart.expirationTime}" is "${expirationDays}" days later than date "${sessionCart.saveTime}"
+	# Restoration and Verification of sessionCart - Cart No.2:
+	restore saved cart with code  ${savedCart2.code}
+	${sessionCart}=    get session cart
+	Length Should Be    ${sessionCart.children}   2
+	Should Be Equal   ${sessionCart.name}   ${saveCartName2}
+	Should Be Equal    ${sessionCart.description}   ${saveCartDescription2}
+	Should Be Equal    ${sessionCart.savedBy.uid}   ${customerId2}
+	Should Not Be Equal    ${sessionCart.saveTime}    ${null}
+	Should Not Be Equal    ${sessionCart.expirationTime}    ${null}
+	verify that date "${sessionCart.expirationTime}" is "${expirationDays}" days later than date "${sessionCart.saveTime}"
+
+### RESTORE CHILD CARTS - EXCEPTIONS:
+
+Test_Restore_Subscription_Cart_RestoreChildCart_OneTimeCharge_Onfirstbill_Exception
+	[Documentation]    This test case tries to restore a child cart which should fail
+	create subscription product "SP1"
+	for product "SP1" add subscription priceplan "SPP1" with currency "USD"
+	for subscription priceplan "SPP1" add "onfirstbill" one time price of "10"
+	create customer "${customerId}" with currency "USD"
+	login customer with id "${customerId}"
+	${sessionCart}=    get session cart
+	add product "SP1" to cart
+	verify that number of child carts is "1"
+	${savedCart}=    save cart with name "${saveCartName1}" and description "${saveCartDescription1}"
+	${onfirstbillCart}=    get cart data for billing time "onfirstbill" and master cart "${savedCart}"
+	Run Keyword And Expect Error    CommerceSaveCartException: The provided cart [*] is a child cart. Only master carts can be restored.
+	...    restore saved cart with code  ${onfirstbillCart.code}
+
+Test_Restore_Subscription_Cart_RestoreChildCart_RecurringCharge_Exception
+	[Documentation]    This test case tries to restore a child cart which should fail
+	create subscription product "SP1"
+	for product "SP1" add subscription priceplan "SPP1" with currency "USD"
+	for subscription priceplan "SPP1" add recurring charge of "20" with cycle start "0"
+	create customer "${customerId}" with currency "USD"
+	login customer with id "${customerId}"
+	${sessionCart}=    get session cart
+	add product "SP1" to cart
+	verify that number of child carts is "1"
+	${savedCart}=    save cart with name "${saveCartName1}" and description "${saveCartDescription1}"
+	${monthlyCart}=    get cart data for billing time "monthly" and master cart "${savedCart}"
+	Run Keyword And Expect Error    CommerceSaveCartException: The provided cart [*] is a child cart. Only master carts can be restored.
+	...    restore saved cart with code  ${monthlyCart.code}

@@ -1,0 +1,52 @@
+# ImpEx for Insurance Stores
+# English localisations
+
+$lang=en
+
+$productCatalog=financialProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$storeImage=storeImage(qualifier, $catalogVersion)
+
+$standardHours=insurance-japan-standard-hours
+$weekendHours=insurance-japan-weekend-hours
+
+UPDATE StoreLocatorFeature;code[unique=true];name[lang=$lang]
+;wheelchair;"Wheelchair Access"
+;creche;"Creche"
+;sundayWorkshops;"Sunday Workshops"
+;buyOnlinePickupInStore;"Buy Online Pick Up In Store"
+
+UPDATE SpecialOpeningDay;openingSchedule(code)[unique=true];date[unique=true,dateformat=dd.MM.yyyy];name[lang=$lang];message[lang=$lang]
+;$standardHours; 01.01.2015 ;"New Years Day";""
+;$standardHours; 14.01.2015 ;"Coming-of-age Day";""
+;$standardHours; 11.02.2015 ;"National Foundation Day";""
+;$standardHours; 20.03.2015 ;"Vernal Equinox Day";""
+;$standardHours; 29.04.2015 ;"Showa Day";""
+;$standardHours; 03.05.2015 ;"Constitution Memorial Day";""
+;$standardHours; 04.05.2015 ;"Greenery Day";""
+;$standardHours; 05.05.2015 ;"Childrens Day";""
+;$standardHours; 15.07.2015 ;"Marine Day";""
+;$standardHours; 16.09.2015 ;"Respect for the Aged Day";""
+;$standardHours; 23.09.2015 ;"Autumnal Equinox Day";""
+;$standardHours; 14.10.2015 ;"Health-Sports Day";""
+;$standardHours; 03.11.2015 ;"Culture Day";""
+;$standardHours; 23.11.2015 ;"Labour Thanksgiving Day";""
+;$standardHours; 23.12.2015 ;"The Emperor's Birthday";""
+
+;$weekendHours; 01.01.2015 ;"New Years Day";""
+;$weekendHours; 14.01.2015 ;"Coming-of-age Day";""
+;$weekendHours; 11.02.2015 ;"National Foundation Day";""
+;$weekendHours; 20.03.2015 ;"Vernal Equinox Day";""
+;$weekendHours; 29.04.2015 ;"Showa Day";""
+;$weekendHours; 03.05.2015 ;"Constitution Memorial Day";""
+;$weekendHours; 04.05.2015 ;"Greenery Day";""
+;$weekendHours; 05.05.2015 ;"Childrens Day";""
+;$weekendHours; 15.07.2015 ;"Marine Day";""
+;$weekendHours; 16.09.2015 ;"Respect for the Aged Day";""
+;$weekendHours; 23.09.2015 ;"Autumnal Equinox Day";""
+;$weekendHours; 14.10.2015 ;"Health-Sports Day";""
+;$weekendHours; 03.11.2015 ;"Culture Day";""
+;$weekendHours; 23.11.2015 ;"Labour Thanksgiving Day";""
+;$weekendHours; 23.12.2015 ;"The Emperor's Birthday";""
+
+UPDATE PointOfService;name[unique=true];displayName;

@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:stream="http://www.springframework.org/schema/integration/stream"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/task 
+		http://www.springframework.org/schema/task/spring-task.xsd
+		http://www.springframework.org/schema/integration
+		http://www.springframework.org/schema/integration/spring-integration.xsd
+		http://www.springframework.org/schema/integration/stream
+		http://www.springframework.org/schema/integration/spring-integration-stream.xsd">
+		
+	<!-- Data export -->
+           
+    <int:gateway  default-request-channel="indexSchemaChannel" id="exportGateway" service-interface="de.hybris.platform.hyend2.si.ExportGateway"/>      
+    
+    <int:channel id="indexSchemaChannel">
+<!--     	<int:interceptors>
+			<int:ref bean="hyendChannelInterceptor"/>
+		</int:interceptors>  -->
+    </int:channel>
+    
+    <int:header-enricher input-channel="indexSchemaChannel" output-channel="common.afterEnrich">
+    	<int:header name="indexSchema" expression="payload"></int:header>
+    </int:header-enricher>
+    
+    <int:channel id="common.afterEnrich"></int:channel>
+    
+    <int:recipient-list-router input-channel="common.afterEnrich">
+    	<int:recipient channel="dimvals.exportChannel" selector-expression="headers.exportContext.exportDimvals()"/>
+    	<int:recipient channel="schema.exportChannel" selector-expression="headers.exportContext.exportSchema()"/>
+    	<int:recipient channel="prules.exportChannel" selector-expression="headers.exportContext.exportPrules()"/>
+    	<int:recipient channel="data.exportChannel"/>
+    </int:recipient-list-router>
+    
+    <int:channel id="data.exportChannel"></int:channel>
+    
+    <int:header-enricher input-channel="data.exportChannel" output-channel="data.enrichRecordStoreType">
+    	<int:header name="recordStoreType" expression="T(de.hybris.platform.hyend2.recordstore.constants.RecordStoreType).DATA"></int:header>
+    	<int:header name="recordStoreConfig" expression="headers.recordStoreData.getRecordStoreConfig(headers.exportContext.locale, T(de.hybris.platform.hyend2.recordstore.constants.RecordStoreType).DATA)"></int:header>
+    </int:header-enricher>
+    
+    <int:channel id="data.enrichRecordStoreType"/>
+	
+	<int:service-activator ref="recordStoreCleaner" method="clear" input-channel="data.enrichRecordStoreType" output-channel="enrich1">
+	</int:service-activator>
+	
+	<int:channel id="enrich1"/>
+    
+    <int:transformer input-channel="enrich1" output-channel="queriesChannel" expression="payload.queries(headers.exportContext)"></int:transformer>
+    
+    <int:channel id="queriesChannel"></int:channel>
+    
+    <int:splitter input-channel="queriesChannel" output-channel="queryChannel"></int:splitter>
+    
+    <int:channel id="queryChannel"></int:channel>
+    
+    <int:service-activator input-channel="queryChannel" output-channel="itemListChannel" expression="headers.exportContext.itemsToExport.isEmpty() ? @exportQueryService.queryForPksToExport(payload) : headers.exportContext.itemsToExport"></int:service-activator>
+    
+    <int:channel id="itemListChannel"></int:channel>
+    
+    <int:splitter input-channel="itemListChannel" output-channel="itemFetchChannel"></int:splitter>
+    
+ 	<int:channel id="itemFetchChannel"/>
+ 	 	
+ 	<int:transformer input-channel="itemFetchChannel" output-channel="inputChannel" ref="itemFetchService" method="fetch"/>
+
+	<int:channel id="inputChannel">
+		<int:interceptors>
+			<int:ref bean="statisticsInterceptor"/>
+		</int:interceptors>
+	</int:channel>
+	
+	<int:recipient-list-router input-channel="inputChannel" apply-sequence="true">
+		<int:recipient channel="dimensionResolvement" />
+		<int:recipient channel="propertyResolvement"/>
+	</int:recipient-list-router>
+	
+	<int:channel id="propertyResolvement"/>
+	
+	<int:channel id="dimensionResolvement"/>
+	
+	<int:service-activator input-channel="propertyResolvement" output-channel="aggregatorChannel" ref="propertyResolvment" method="resolve"/>
+	
+	<int:service-activator input-channel="dimensionResolvement" output-channel="aggregatorChannel" ref="dimensionResolvment" method="resolve"/>
+	
+	<int:channel id="aggregatorChannel">
+	</int:channel>
+	
+	<int:aggregator input-channel="aggregatorChannel" ref="aggregatorToRecord" method="aggregateToRecord" output-channel="createRecord" >
+<!-- 		<int:poller task-executor="executor" fixed-rate="100" receive-timeout="${hyend2.export.poller.receiveTimeout}"></int:poller>
+ -->	</int:aggregator>
+	
+	<int:channel id="createRecord" >	
+		<int:interceptors>
+			<int:ref bean="hyendChannelInterceptor"/>
+		</int:interceptors>
+	</int:channel>
+	
+	<bean id="rstr" class="de.hybris.platform.hyend2.si.AggregatorReleaseStrategy"></bean>
+		
+ 	<int:aggregator  message-store="messageStore"  input-channel="createRecord" output-channel="afterAggregationOfRecords" send-partial-result-on-expiry="true"/>
+		
+	<bean id="reaper" class="org.springframework.integration.store.MessageGroupStoreReaper">
+   		<property name="messageGroupStore" ref="messageStore"/>
+ 	  	<property name="timeout" value="${hyend2.export.sendRecordsTimeout}"/>
+	</bean>
+	
+	<bean id="messageStore" class="org.springframework.integration.store.SimpleMessageStore">
+	</bean>
+	
+	<task:scheduled-tasks scheduler="scheduler" >	
+  		<task:scheduled ref="reaper" method="run" fixed-rate="${hyend2.export.timeToCheckNoRecords}" />
+	</task:scheduled-tasks>
+
+	<task:scheduler id="scheduler" />
+	
+	<int:channel id="afterAggregationOfRecords">
+<!-- 	<int:queue />
+ -->		
+ 		<int:interceptors>
+			<int:ref bean="hyendChannelInterceptor"/>
+		</int:interceptors>
+	</int:channel> 
+		
+	<int:service-activator input-channel="afterAggregationOfRecords" output-channel="common.countChannel" ref="recordSender" method="send">
+<!-- 		<int:poller fixed-rate="${hyend2.export.poller.fixedRate}" task-executor="executor" receive-timeout="${hyend2.export.poller.receiveTimeout}"/>
+ -->	</int:service-activator>
+	
+	<int:channel id="common.countChannel"></int:channel>
+	
+	<int:outbound-channel-adapter channel="common.countChannel" ref="eacTriggerEndpoint" method="send"></int:outbound-channel-adapter>
+	
+	<task:executor id="executor" pool-size="${hyend2.export.executor.poolSize}"/>
+	
+	<bean id="dimensionResolvment" class="de.hybris.platform.hyend2.si.data.DimensionResolvement">
+			<property name="propertyResolverService" ref="propertyResolverService"/>
+	</bean>
+	
+	<bean id="propertyResolvment" class="de.hybris.platform.hyend2.si.data.PropertyResolvement">
+		<property name="propertyResolverService" ref="propertyResolverService"/>
+	</bean>
+			
+	<bean id="aggregatorToRecord" class="de.hybris.platform.hyend2.si.data.AggregatorToRecord"/>
+	
+	<bean id="itemFetchService" class="de.hybris.platform.hyend2.si.data.FetchItem" scope="tenant">
+		<property name="modelService" ref="modelService"/>
+	</bean>
+	
+	<bean id="recordSender" class="de.hybris.platform.hyend2.si.RecordSender" scope="tenant">
+		<property name="endecaRecordStoreService" ref="endecaRecordStoreService"/>
+	</bean>
+	
+	<int:poller id="poller" fixed-delay="${hyend2.export.poller.fixedDelay}"  receive-timeout="${hyend2.export.poller.receiveTimeout}" default="true" />
+		
+	<bean id="hyendChannelInterceptor" class="de.hybris.platform.hyend2.aop.HyendChannelInterceptor" scope="tenant"/>
+	
+	<!-- Schema export -->	
+		
+	<int:channel id="schema.exportChannel"/>
+	
+	<int:header-enricher input-channel="schema.exportChannel" output-channel="schema.enrichRecordStoreType">
+    	<int:header name="recordStoreType" expression="T(de.hybris.platform.hyend2.recordstore.constants.RecordStoreType).SCHEMA"></int:header>
+   		<int:header name="recordStoreConfig" expression="headers.recordStoreData.getRecordStoreConfig(headers.exportContext.locale, T(de.hybris.platform.hyend2.recordstore.constants.RecordStoreType).SCHEMA)"></int:header>
+    </int:header-enricher>
+	
+	<int:channel id="schema.enrichRecordStoreType"/>
+	
+	<int:service-activator ref="recordStoreCleaner" method="clear" input-channel="schema.enrichRecordStoreType" output-channel="afterRecordStoreCleaning">
+	</int:service-activator>
+	
+	<int:channel id="afterRecordStoreCleaning"/>
+	
+	
+	
+	<int:transformer input-channel="afterRecordStoreCleaning" output-channel="indexElementChannel" expression="@propertyResolverService.getAllResolvables(payload,headers.exportContext)"/>
+	
+	<int:channel id="indexElementChannel">
+	</int:channel>
+	
+	<int:service-activator ref="schemaRecordsGenerator" method="generateSchemaRecords" input-channel="indexElementChannel" output-channel="dimvalsRecordsChannel"/>
+
+	<bean id="schemaRecordsGenerator" class="de.hybris.platform.hyend2.si.schema.SchemaRecordsGenerator"/>
+	
+	<!-- dimvals export -->
+	
+	<int:channel id="dimvals.exportChannel"/>
+	
+	<int:header-enricher input-channel="dimvals.exportChannel" output-channel="dimvals.enrichRecordStoreType">
+    	<int:header name="recordStoreType" expression="T(de.hybris.platform.hyend2.recordstore.constants.RecordStoreType).DIMVALS"></int:header>
+      	<int:header name="recordStoreConfig" expression="headers.recordStoreData.getRecordStoreConfig(headers.exportContext.locale, T(de.hybris.platform.hyend2.recordstore.constants.RecordStoreType).DIMVALS)"></int:header>
+    </int:header-enricher>
+    
+    <int:channel id="dimvals.enrichRecordStoreType"/>
+	
+	<int:service-activator ref="recordStoreCleaner" method="clear" input-channel="dimvals.enrichRecordStoreType" output-channel="enrich3">
+	</int:service-activator>
+	
+	<int:channel id="enrich3"/>
+	
+	<int:transformer expression="payload.indexElements.![dimensions]" input-channel="enrich3" output-channel="dimvalsDimensionsListChannel"/>
+	<int:channel id="dimvalsDimensionsListChannel"/>
+	<int:splitter input-channel="dimvalsDimensionsListChannel"  output-channel="dimvalsDimensionsChannel"/>
+	<int:channel id="dimvalsDimensionsChannel">
+
+	</int:channel>
+	<int:splitter input-channel="dimvalsDimensionsChannel"  output-channel="dimvalsDimensionChannel"/>
+	<int:channel id="dimvalsDimensionChannel"/>
+	<int:service-activator ref="dimvalsRecordsGenerator" input-channel="dimvalsDimensionChannel" output-channel="dimvalsRecordsChannel">
+	</int:service-activator>
+	<int:channel id="dimvalsRecordsChannel">
+				<int:interceptors>
+			<int:ref bean="statisticsInterceptor"/>
+		</int:interceptors>
+	</int:channel>
+	 <int:bridge input-channel="dimvalsRecordsChannel" output-channel="afterAggregationOfRecords"></int:bridge>
+	<bean id="dimvalsRecordsGenerator" class="de.hybris.platform.hyend2.si.taxonomy.TaxonomyRecordsGenerator" scope="tenant"/>
+
+	<bean id="statisticsInterceptor" class="de.hybris.platform.hyend2.si.StatisticsInterceptor" scope="tenant"></bean>
+	
+	<bean id="recordStoreCleaner" class="de.hybris.platform.hyend2.si.RecordStoreCleaner" scope="tenant">
+		<property name="endecaRecordStoreService" ref="endecaRecordStoreService"></property>
+	</bean>
+	
+	<bean id="eacTriggerEndpoint" class="de.hybris.platform.hyend2.si.EacTriggerOutboundGateway" scope="tenant">
+		<property name="recordStoreFactory" ref="recordStoreFactory"></property>
+	</bean>
+	
+	<!-- precedence rules export -->
+	
+	<int:channel id="prules.exportChannel"/>
+	
+	<int:header-enricher input-channel="prules.exportChannel" output-channel="prules.enrichRecordStoreType">
+    	<int:header name="recordStoreType" expression="T(de.hybris.platform.hyend2.recordstore.constants.RecordStoreType).PRULES"></int:header>
+      	<int:header name="recordStoreConfig" expression="headers.recordStoreData.getRecordStoreConfig(headers.exportContext.locale, T(de.hybris.platform.hyend2.recordstore.constants.RecordStoreType).PRULES)"></int:header>
+    </int:header-enricher>
+    
+    <int:channel id="prules.enrichRecordStoreType"/>
+    
+    <int:service-activator ref="recordStoreCleaner" method="clear" input-channel="prules.enrichRecordStoreType" output-channel="enrich4">
+	</int:service-activator>
+	
+	<int:channel id="enrich4"/>
+	
+	<int:transformer expression="payload.precedenceRules" input-channel="enrich4" output-channel="prulesListChannel"/>
+	
+	<int:channel id="prulesListChannel">
+		<int:interceptors>
+			<int:ref bean="statisticsInterceptor"/>
+		</int:interceptors>
+	</int:channel>
+	
+	<int:service-activator ref="convertPrulesToRecords" method="convert" input-channel="prulesListChannel" output-channel="afterAggregationOfRecords"></int:service-activator>
+		
+	<bean id="convertPrulesToRecords" class="de.hybris.platform.hyend2.si.prules.PrecedenceRulesToRecordsConverter"></bean>
+	
+</beans>

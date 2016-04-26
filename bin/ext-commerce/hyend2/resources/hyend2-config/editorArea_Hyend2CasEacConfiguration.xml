@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>
+	
+	<group qualifier="General"  initially-opened="true">
+		<label key="cockpit.config.label.General" />
+		<property qualifier="Hyend2CasEacConfiguration.name" visible="true" />
+		<property qualifier="Hyend2CasEacConfiguration.active" visible="true"/>
+	</group>
+	<group qualifier="SchemaConfigurations"  initially-opened="true">
+		<label key="hyend2.editorArea.schemaconfigurations" />
+		<property qualifier="Hyend2CasEacConfiguration.indexSchemas" visible="true" />
+	</group>
+	<group qualifier="CASConfiguration"  initially-opened="true">
+		<label key="hyend2.casconfiguration" />
+		<property qualifier="Hyend2CasEacConfiguration.casAppName" visible="true" />
+		<property qualifier="Hyend2CasEacConfiguration.casHost" visible="true" />
+		<property qualifier="Hyend2CasEacConfiguration.casPort" visible="true" />
+	</group>
+	<group qualifier="EACConfiguration"  initially-opened="true">
+		<label key="hyend2.eacconfiguration" />
+		<property qualifier="Hyend2CasEacConfiguration.eacAppName" visible="true" />
+		<property qualifier="Hyend2CasEacConfiguration.eacHost" visible="true" />
+		<property qualifier="Hyend2CasEacConfiguration.eacPort" visible="true" />
+	</group>
+	<group qualifier="LanguageConfiguration" initially-opened="true">
+		<label key="hyend2.languageconfiguration" />
+		<property qualifier="Hyend2CasEacConfiguration.availableLanguages" visible="true" editor="advancedListViewReferenceUIEditor"/>
+	</group>
+	<!--
+	<group qualifier="ExportConfiguration" initially-opened="true">
+		<label key="hyend2.exportconfiguration" />
+		<property qualifier="Hyend2CasEacConfiguration.autoBaseline" visible="true" />
+	</group>
+	-->
+</editor>

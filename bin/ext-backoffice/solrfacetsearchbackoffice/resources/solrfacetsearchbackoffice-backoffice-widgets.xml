@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widgets.xsd">
+
+    <widget-extension widgetId="explorerTree">
+        <widget id="solrWizardConditionEvaluator" widgetDefinitionId="com.hybris.cockpitng.conditionevaluator" slotId="cockpitWidgetChildrenInvisible" template="false">
+            <widget id="solrWizardPropertyExtractor" widgetDefinitionId="com.hybris.cockpitng.widgets.common.propextractor" slotId="cockpitWidgetChildrenInvisible" template="false">
+                <setting key="expression" type="String">id</setting>
+                <setting key="widgetStyleAttribute" type="String"></setting>
+                <setting key="widgetStyleClass" type="String"></setting>
+                <virtual-sockets/>
+            </widget>
+            <setting key="expression" type="String">#root.id EQ 'SolrIndexerOperationWizard' OR #root.id EQ 'SolrIndexerHotUpdateWizard'</setting>
+            <setting key="widgetStyleAttribute" type="String"></setting>
+            <setting key="widgetStyleClass" type="String"></setting>
+            <virtual-sockets/>
+        </widget>
+    </widget-extension>
+
+    <widget-connection sourceWidgetId="explorerTree" outputId="nodeSelected" targetWidgetId="solrWizardConditionEvaluator" inputId="input"/>
+    <widget-connection sourceWidgetId="solrWizardConditionEvaluator" outputId="true" targetWidgetId="solrWizardPropertyExtractor" inputId="genericInput"/>
+    <widget-connection sourceWidgetId="solrWizardPropertyExtractor" outputId="genericOutput" targetWidgetId="configurableFlow" inputId="contextType"/>
+
+    <widget-connection inputId="input" outputId="nodeSelected" sourceWidgetId="solrfacetsearchbackoffice-explorer-tree" targetWidgetId="solrfacetsearchbackoffice-tree-node-adapter"/>
+    <widget-connection inputId="genericInput" outputId="true" sourceWidgetId="solrfacetsearchbackoffice-tree-node-adapter" targetWidgetId="solrfacetsearchbackoffice-typecode-extractor"/>
+    <widget-connection inputId="genericInput" outputId="true" sourceWidgetId="solrfacetsearchbackoffice-tree-node-adapter" targetWidgetId="solrfacetsearchbackoffice-search-enabler"/>
+    <widget-connection inputId="genericInput" outputId="false" sourceWidgetId="solrfacetsearchbackoffice-tree-node-adapter" targetWidgetId="solrfacetsearchbackoffice-search-disabler"/>
+    <widget-connection inputId="type" outputId="genericOutput" sourceWidgetId="solrfacetsearchbackoffice-typecode-extractor" targetWidgetId="solrfacetsearchbackoffice-search-logic"/>
+    <widget-connection inputId="enabled" outputId="genericOutput" sourceWidgetId="solrfacetsearchbackoffice-search-enabler" targetWidgetId="solrfacetsearchbackoffice-text-search"/>
+    <widget-connection inputId="enabled" outputId="genericOutput" sourceWidgetId="solrfacetsearchbackoffice-search-disabler" targetWidgetId="solrfacetsearchbackoffice-text-search"/>
+    <widget-connection inputId="searchtext" outputId="query" sourceWidgetId="solrfacetsearchbackoffice-text-search" targetWidgetId="solrfacetsearchbackoffice-search-logic"/>
+    <widget-connection inputId="pageable" outputId="pageable" sourceWidgetId="solrfacetsearchbackoffice-search-logic" targetWidgetId="solrfacetsearchbackoffice-simple-list"/>
+
+</widgets>

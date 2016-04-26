@@ -1,0 +1,13 @@
+######
+## PARAMETERS REQUIRED FOR THIS SCRIPT
+##
+##   * contentCatalog   - content catalog id
+##   * addonExtensionName - extension name of the ui addon
+#######
+
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$jarResourceCmsCockpit=jar:de.hybris.platform.xyformsstorefrontcommons.constants.XyformsstorefrontcommonsConstants&/xyformsstorefrontcommons/import/cockpit/cmscockpit
+
+INSERT_UPDATE YFormCMSComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;formUrl;
+# example script is below.  Place the script to the desired storefront
+#;;orbeon_contact_form;Orbeon example contact form;orbeon_contact_form;formeg1;https://eadministracio.upc.edu/orbeon39/fr/orbeon/bookshelf/edit/5bba537614484bd9e33c97bfc7649889;

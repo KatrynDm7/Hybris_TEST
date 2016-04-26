@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<advanced-search>
+	<group name="root" type="Player">
+		<label lang="en">Suche nach...</label>
+		<label lang="de">Search for...</label>
+		<group name="general">
+			<label lang="de">Stammdaten</label>
+			<label lang="en">Properties</label>			
+			<property qualifier="Player.uid" sort-enabled="true" visible="true"/>
+			<property qualifier="Player.name" sort-enabled="true" visible="true"/>
+			<property qualifier="Player.eMail" sort-enabled="true" visible="true"/>
+			<property qualifier="Player.confirmed" sort-enabled="true" visible="true"/>
+			<property qualifier="Player.country" sort-enabled="true" visible="true"/>
+		</group>
+		<group name="other">
+			<label lang="de">Andere</label>
+			<label lang="en">Other</label>
+			<property qualifier="Player.matchBets" sort-enabled="true" visible="false"/>
+			<property qualifier="Player.sendNewsletter" sort-enabled="true" visible="false"/>		
+			<property qualifier="Player.competitions" sort-enabled="true" visible="false"/>
+		</group>		
+	</group>
+</advanced-search>

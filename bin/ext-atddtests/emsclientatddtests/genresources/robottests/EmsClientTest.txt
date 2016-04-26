@@ -1,0 +1,14 @@
+*** Settings ***
+Resource          emsclientatddtests/EmsClient_Keywords.txt
+Resource          atdd/keywords/entitlements-test/modify_entitlements_keywords.txt
+Resource          emsclientatddtests/EmsServer_Keywords.txt
+
+Suite Setup    start emsserver
+Suite Teardown    stop emsserver
+
+*** Test Cases ***
+Test_Get_Grant
+    [Documentation]    Grant an entitlement to EMS and check where it is in DB
+    ${grant} =         build entitlement with id "entitlementId"
+    ${grantId} =       grant entitlement "${grant}"
+    get entitlement with grantId "${grantId}" is "${true}"

@@ -1,0 +1,36 @@
+$catalog-id=testCatalog
+$catalog-version=Online
+$catalogversion=catalogversion(catalog(id[default=$catalog-id]),version[default=$catalog-version])[unique=true,default=$catalog-id:$catalog-version]
+
+INSERT_UPDATE Catalog;id[unique=true]
+;$catalog-id
+
+INSERT_UPDATE CatalogVersion; catalog(id)[unique=true]; version[unique=true]; active
+;$catalog-id;$catalog-version;true
+
+INSERT_UPDATE WeekdayOpeningDay;openingSchedule(code)[unique=true];dayOfWeek(code)[unique=true];openingTime[dateformat=hh:mm];closingTime[dateformat=hh:mm];
+;allPointeInsuranceServicesHours;MONDAY   ; 09:00; 17:00
+
+INSERT_UPDATE OpeningSchedule;code[unique=true];
+;allPointeInsuranceServicesHours
+
+INSERT_UPDATE PointOfService;name[unique=true];type(code);address(&addrID);openingSchedule(code)
+;Allpointe Insurance Services;AGENCY;allPointeInsuranceServicesAddress;allPointeInsuranceServicesHours
+
+INSERT_UPDATE Address;&addrID;owner(PointOfService.name)[unique=true];district[unique=true];streetnumber[unique=true];streetname;town;postalcode[unique=true];email;fax;phone1
+;allPointeInsuranceServicesAddress;Allpointe Insurance Services;Dogpatch, Potrero Hill;2565;3rd St;San Francisco;94107;allpointeinsuranceservices@hybris-insurance.com;(111) 123-1234;(888) 992-2244
+
+INSERT_UPDATE Address;&addrID;firstname;lastname;streetname[unique=true];town;email;fax;phone1;postalcode[unique=true];owner(PointOfService.name)
+;Aiden.Martinez;Aiden;Martinez;1 Dr Carlton B Goodlett Pl;San Francisco, CA 94102;Aiden.Martinez@insurance.com;(415) 512-2100;(415) 512-6754;1541253;Allpointe Insurance Services
+;Abigail.White;Abigail;White;10610 W Pico Blvd;Los Angeles, CA 90064;Abigail.White@insurance.com;(818) 512-2100;(818) 512-5335;;Allpointe Insurance Services
+
+# Insert Categories
+INSERT_UPDATE Category;code[unique=true];$catalogversion;name
+;insurances_travel;;Travel
+;insurances_property;;Property
+
+INSERT_UPDATE Agent;uid[unique=true];categories(code, $catalogversion);enquiry(&addrID);name
+;aiden.martinez@insurance.com;insurances_travel;Aiden.Martinez;Aiden Martinez
+;aid.martinez@insurance.com;insurances_travel;Aiden.Martinez;Aid Martinez
+;abigail.white@insurance.com;insurances_property;Abigail.White;Abigail White
+

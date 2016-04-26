@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd" >
+
+    <context:annotation-config />
+
+	<bean id="xyformsbackofficeLabelLocator" class="com.hybris.cockpitng.util.labels.ResourcesLabelLocator" scope="singleton" init-method="init" lazy-init="false">
+  		<property name="location" value="/xyformsbackoffice-backoffice-labels/"/>
+  		<property name="name" value="labels"/>
+  	</bean>
+
+   <bean id="yformsBackofficeConfigExtender" class="de.hybris.platform.xyformsbackoffice.core.YFormsBackofficeConfigExtender"
+         init-method="addAll" destroy-method="removeAll" lazy-init="false">
+      <property name="configurationService" ref="cockpitConfigurationService"/>
+      <property name="adapters">
+         <map>
+            <entry>
+               <key>
+                  <map>
+                     <entry key="component" value="editor-area"/>
+                  </map>
+               </key>
+               <ref bean="yformsEditorAreaConfigAdapter"/>
+            </entry>
+         </map>
+      </property>
+      <property name="adaptersToRemove">
+         <map>
+            <entry>
+               <key>
+                  <map>
+                     <entry key="component" value="editor-area"/>
+                  </map>
+               </key>
+               <ref bean="editorAtraConfigAdapter"/>
+            </entry>
+         </map>
+      </property>
+   </bean>
+
+   <bean class="com.hybris.cockpitng.dataaccess.util.DataAccessStrategyExtender" lazy-init="false" init-method="addAll"
+      destroy-method="removeAll">
+      <property name="fieldSearchFacadeStrategies">
+         <list>
+            <ref bean="yformsFieldSearchFacadeStrategy" />
+         </list>
+      </property>
+      <property name="fieldSearchFacadeStrategyRegistry" ref="fieldSearchFacadeStrategyRegistry" />
+   </bean>
+
+   <alias name="defaultYFormsEditorAreaConfigAdapter" alias="yformsEditorAreaConfigAdapter"/>
+   <bean id="defaultYFormsEditorAreaConfigAdapter" class="de.hybris.platform.xyformsbackoffice.core.adapters.YFormsEditorAreaConfigAdapter" parent="deafultEditorAtraConfigAdapter">
+      <property name="rolesNotAllowed" value="#{configurationService.configuration.getProperty('xyformsbackoffice.editorArea.administrationTab.rolesNotAllowed')}" />
+      <property name="types" value="#{configurationService.configuration.getProperty('xyformsbackoffice.editorArea.administrationTab.types')}" />
+      <property name="userService" ref="userService"/>
+      <property name="positionedSort" ref="positionedSortAlgorithm"/>
+   </bean>
+
+   <alias name="defaultYFormsFieldSearchFacadeStrategy" alias="yformsFieldSearchFacadeStrategy"/>
+   <bean id="defaultYFormsFieldSearchFacadeStrategy"
+       class="de.hybris.platform.xyformsbackoffice.core.DefaultYFormsFieldSearchFacadeStrategy" parent="defaultPlatformFieldSearchFacadeStrategy">
+      <property name="rolesNotAllowed" value="#{configurationService.configuration.getProperty('xyformsbackoffice.editorArea.advancedSearch.rolesNotAllowed')}" />
+      <property name="types" value="#{configurationService.configuration.getProperty('xyformsbackoffice.editorArea.advancedSearch.types')}" />
+      <property name="userService" ref="userService"/>
+   </bean>
+</beans>

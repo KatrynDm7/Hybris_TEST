@@ -1,0 +1,128 @@
+*** Settings ***
+Resource          commerce/CommerceServices_Keywords.txt
+Test Setup        import commerce sample data
+
+
+*** Variables ***
+
+### user and site:
+${customerId}=    testuser@saved-carts.com
+${customerId2}=    testuser2@saved-carts.com
+${saveCartName1}=    Saved Cart 1
+${saveCartDescription1}=    This is a saved cart
+${saveCartName2}=    Saved Cart 2
+${saveCartDescription2}=    This is an another saved cart
+${expirationDays}=    30
+
+*** Test Cases ***
+
+### CUSTOMER SESSION CART: 
+
+Test_Save_Multiple_Carts_CustomerSessionCart_Then_Restore_And_Update
+	[Documentation]    Save 2 Carts and then restore one and update it
+	${sessionCart}=    get session cart
+	create customer "${customerId}" with currency "USD"
+	login customer with id "${customerId}"
+	${savedCart}=    save cart with name "${saveCartName1}" and description "${saveCartDescription1}"
+	Should be Equal    ${savedCart.name}   ${saveCartName1}
+	Should be Equal    ${savedCart.description}   ${saveCartDescription1}
+	Should be Equal    ${savedCart.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${savedCart.saveTime}    ${null}
+	Should Not Be Equal    ${savedCart.expirationTime}    ${null}
+	verify that date "${savedCart.expirationTime}" is "${expirationDays}" days later than date "${savedCart.saveTime}"
+	# Create another session cart and save it
+	${sessionCart2}=    create new session cart
+	${savedCart2}=    save cart with name "${saveCartName2}" and description "${saveCartDescription2}"
+	Should be Equal    ${savedCart2.name}   ${saveCartName2}
+	Should be Equal    ${savedCart2.description}   ${saveCartDescription2}
+	Should be Equal    ${savedCart2.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${savedCart2.saveTime}    ${null}
+	Should Not Be Equal    ${savedCart2.expirationTime}    ${null}
+	verify that date "${savedCart2.expirationTime}" is "${expirationDays}" days later than date "${savedCart2.saveTime}"
+	restore saved cart with code  ${savedCart.code}
+	${restoredCart}=    get session cart
+	Should be Equal    ${restoredCart.name}   ${saveCartName1}
+	Should be Equal    ${restoredCart.description}   ${saveCartDescription1}
+	Should be Equal    ${restoredCart.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${restoredCart.saveTime}    ${null}
+	Should Not Be Equal    ${restoredCart.expirationTime}    ${null}
+	#Now update the restored cart
+	${updatedCart}=   save given cart with name and description    ${restoredCart.code}    New Name    New Description
+	Should be Equal    ${updatedCart.name}   New Name
+	Should be Equal    ${updatedCart.description}   New Description
+	Should be Equal    ${updatedCart.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${updatedCart.saveTime}    ${null}
+	Should Not Be Equal    ${updatedCart.expirationTime}    ${null}
+	verify that date "${updatedCart.expirationTime}" is "${expirationDays}" days later than date "${restoredCart.saveTime}"
+	
+	
+Test_Save_Multiple_Carts_CustomerSessionCart_Then_Retrive_And_Update
+	[Documentation]    Save 2 carts then retrieve one and update it without providing any name/description 
+	${sessionCart}=    get session cart
+	create customer "${customerId}" with currency "USD"
+	login customer with id "${customerId}"
+	${savedCart}=    save cart with name "${saveCartName1}" and description "${saveCartDescription1}"
+	Should be Equal    ${savedCart.name}   ${saveCartName1}
+	Should be Equal    ${savedCart.description}   ${saveCartDescription1}
+	Should be Equal    ${savedCart.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${savedCart.saveTime}    ${null}
+	Should Not Be Equal    ${savedCart.expirationTime}    ${null}
+	verify that date "${savedCart.expirationTime}" is "${expirationDays}" days later than date "${savedCart.saveTime}"
+	# Create another session cart and save it
+	${sessionCart2}=    create new session cart
+	${savedCart2}=    save cart with name "${saveCartName2}" and description "${saveCartDescription2}"
+	Should be Equal    ${savedCart2.name}   ${saveCartName2}
+	Should be Equal    ${savedCart2.description}   ${saveCartDescription2}
+	Should be Equal    ${savedCart2.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${savedCart2.saveTime}    ${null}
+	Should Not Be Equal    ${savedCart2.expirationTime}    ${null}
+	verify that date "${savedCart2.expirationTime}" is "${expirationDays}" days later than date "${savedCart2.saveTime}"
+	${retrievedCart}=    retrieve saved cart with code  ${savedCart.code}
+	Should be Equal    ${retrievedCart.name}   ${saveCartName1}
+	Should be Equal    ${retrievedCart.description}   ${saveCartDescription1}
+	Should be Equal    ${retrievedCart.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${retrievedCart.saveTime}    ${null}
+	Should Not Be Equal    ${retrievedCart.expirationTime}    ${null}
+	#Now update the retrieved cart
+	${updatedCart}=   save given cart with name and description    ${retrievedCart.code}    ${null}    ${null}
+	Should be Equal    ${updatedCart.name}   ${saveCartName1}
+	Should be Equal    ${updatedCart.description}   ${saveCartDescription1}
+	Should be Equal    ${updatedCart.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${updatedCart.saveTime}    ${null}
+	Should Not Be Equal    ${updatedCart.expirationTime}    ${null}
+	
+	
+Test_Save_Multiple_Carts_CustomerSessionCart_Then_Flag_For_Deletion
+	[Documentation]    Save 2 Carts then get list of saved carts and then flag a cart for deletion and get list of saved carts again 
+	${sessionCart}=    get session cart
+	create customer "${customerId}" with currency "USD"
+	login customer with id "${customerId}"
+	${savedCart}=    save cart with name "${saveCartName1}" and description "${saveCartDescription1}"
+	Should be Equal    ${savedCart.name}   ${saveCartName1}
+	Should be Equal    ${savedCart.description}   ${saveCartDescription1}
+	Should be Equal    ${savedCart.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${savedCart.saveTime}    ${null}
+	Should Not Be Equal    ${savedCart.expirationTime}    ${null}
+	verify that date "${savedCart.expirationTime}" is "${expirationDays}" days later than date "${savedCart.saveTime}"
+	# Create another session cart and save it
+	${sessionCart2}=    create new session cart
+	${savedCart2}=    save cart with name "${saveCartName2}" and description "${saveCartDescription2}"
+	Should be Equal    ${savedCart2.name}   ${saveCartName2}
+	Should be Equal    ${savedCart2.description}   ${saveCartDescription2}
+	Should be Equal    ${savedCart2.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${savedCart2.saveTime}    ${null}
+	Should Not Be Equal    ${savedCart2.expirationTime}    ${null}
+	verify that date "${savedCart2.expirationTime}" is "${expirationDays}" days later than date "${savedCart2.saveTime}"
+	#Verify that cart list size is 2
+	${cartList}=    Get list of saved session carts
+	Should Be Equal As Integers    ${cartList.size()}    2
+	#Now flag one of the carts for deletion
+	${flaggedCart}=    flag cart with code "${savedCart2.code}" for deletion
+	Should Be Equal    ${flaggedCart.name}    ${null}
+   Should Be Equal    ${flaggedCart.description}    ${null}
+   Should Be Equal    ${flaggedCart.saveTime}    ${null}
+   Should Be Equal    ${flaggedCart.savedBy}    ${null}
+   Should Be Equal    ${flaggedCart.expirationTime}    ${null}
+   #Verify again that cart list size is 1 after flagging the 2nd cart for deletion
+	${cartList}=    Get list of saved session carts
+	Should Be Equal As Integers    ${cartList.size()}    1

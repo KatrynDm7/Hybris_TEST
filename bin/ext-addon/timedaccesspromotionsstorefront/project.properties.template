@@ -1,0 +1,35 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform 
+# 
+# Copyright (c) 2000-2015 hybris AG
+# All rights reserved.
+#  
+# This software is the confidential and proprietary information of hybris 
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with hybris.
+#
+#  
+# -----------------------------------------------------------------------
+
+# you can put key/value pairs here.
+# Use Config.getParameter(..) to retrieve the values during runtime.
+
+timedaccesspromotionsstorefront.key=value
+
+# Specifies the location of the spring context file added automatically to the global platform application context.
+timedaccesspromotionsstorefront.application-context=timedaccesspromotionsstorefront-spring.xml
+
+ychinaacceleratorstorefront.additionalWebSpringConfigs.timedaccesspromotionsstorefront=classpath:/timedaccesspromotionsstorefront/web/spring/timedaccesspromotionsstorefront-web-spring.xml
+ychinaacceleratorstorefront.additionalWebSpringConfigs.addonsupport=classpath:/addonsupport/web/spring/addonsupport-b2c-web-spring.xml
+
+yacceleratorstorefront.additionalWebSpringConfigs.timedaccesspromotionsstorefront=classpath:/timedaccesspromotionsstorefront/web/spring/timedaccesspromotionsstorefront-web-spring.xml
+yacceleratorstorefront.additionalWebSpringConfigs.addonsupport=classpath:/addonsupport/web/spring/addonsupport-b2c-web-spring.xml
+
+storefront.supportedUiExperienceLevels.electronics=DESKTOP,MOBILE
+
+timedaccesspromotionsstorefront.javascript.paths.desktop=/desktop/common/js/acc.modalProgressBar.js;/desktop/common/js/countdownBox.js;/desktop/common/js/flashBuy.js
+timedaccesspromotionsstorefront.css.paths.desktop=/desktop/common/css/countdownBox.css;/desktop/common/css/flashBuy.css;/desktop/common/css/modalProgressBar.css
+
+#Wait time interval for flash buy promotion result retrieve, default value is 5000 in case this parameter is missing.
+timedaccesspromotionsstorefront.flashbuyshowresultintervalinMills=2000

@@ -1,0 +1,33 @@
+#
+# Import CMS content for the Electronics site
+#
+
+$contentCatalog=electronicsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+# Language
+$lang=ja
+
+# Content Pages
+UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+ ;;account;"マイ アカウント"
+ ;;add-edit-address;"住所の追加/編集"
+ ;;address-book;"住所"
+ ;;cartPage;"ショッピング カート"
+ ;;checkout-login;"支払いに進む"
+ ;;faq;"よくある質問"
+ ;;homepage;"ホームページ"
+ ;;login;"ログイン"
+ ;;multiStepCheckoutSummaryPage;"支払い"
+ ;;notFound;"見つかりません"
+ ;;order;"注文の詳細"
+ ;;orderConfirmationPage;"注文の確認"
+ ;;orders;"注文履歴"
+ ;;payment-details;"支払い方法"
+ ;;profile;"プロフィール"
+ ;;searchEmpty;"結果なし"
+ ;;storefinderPage;"StoreFinder"
+ ;;termsAndConditions;"利用条件"
+ ;;update-email;"メールアドレスの変更"
+ ;;update-profile;"プロフィールの編集"
+ ;;updatePassword;"パスワードをお忘れの方"

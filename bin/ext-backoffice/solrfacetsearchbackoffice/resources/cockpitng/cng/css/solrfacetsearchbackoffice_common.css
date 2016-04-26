@@ -1,0 +1,23 @@
+/*Icons for explorer tree */
+div.yw-explorerTree .y-tree-icon-hmc_type_tree_solrfacetsearchconfig .y-tree-icon {
+    background-image: url("images/0115_Facet-Research-Config.png");
+}
+
+div.yw-explorerTree .y-tree-icon-hmc_type_tree_solrindexedtype .y-tree-icon {
+    background-image: url("images/0119_SOLR-Item-types.png");
+}
+
+div.yw-explorerTree .y-tree-icon-hmc_type_tree_solrvaluerangeset .y-tree-icon {
+    background-image: url("images/0118_Ranges.png");
+}
+
+div.yw-explorerTree .y-tree-icon-SolrIndexerOperationWizard .y-tree-icon {
+    background-image: url("images/0117_Indexer-operation-wizard.png");
+}
+
+div.yw-explorerTree .y-tree-icon-SolrIndexerHotUpdateWizard .y-tree-icon {
+    background-image: url("images/0116_Indexer-hot-update-operation-wizard.png");
+}
+div.yw-explorerTree .y-tree-icon-SolrIndexedCoresRecord .y-tree-icon {
+    background-image: url("images/0120_SOLR-Record.png");
+}

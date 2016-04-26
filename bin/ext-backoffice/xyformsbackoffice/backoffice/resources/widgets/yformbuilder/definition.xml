@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<widget-definition id="de.hybris.platform.xyformsbackoffice.widgets.yformbuilder">
+   <name>[yForms] Form Builder</name>
+   <description>Displays Form Builder</description>
+   <version>1.0</version>
+
+   <sockets>
+      <input id="yformDefinition" type="de.hybris.platform.xyformsservices.model.YFormDefinitionModel" visibility="default"/>
+      <output id="yformDefinition" type="de.hybris.platform.xyformsservices.model.YFormDefinitionModel" visibility="default"/>
+   </sockets>
+   
+   <keywords>
+      <keyword>yForms</keyword>
+   </keywords>
+
+   <view src="yformbuilder.zul" />
+   <controller class="de.hybris.platform.xyformsbackoffice.widgets.yformbuilder.YFormBuilderController"/>
+   
+	<settings>
+		<setting key="width" type="String" default-value="87%"/>
+      <setting key="height" type="String" default-value="87%"/>
+      <setting key="closable" type="Boolean" default-value="true"/>
+      <setting key="sizable" type="Boolean" default-value="true" />
+      <setting key="draggable" type="String" default-value="false" />
+	</settings>
+
+</widget-definition>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+    <bean class="de.hybris.liveeditaddon.admin.ActionMenuRequestData">
+        <property name="previewTicket" type="java.lang.String" />
+        <property name="pageUid" type="java.lang.String" />
+        <property name="url" type="java.lang.String" />
+        <property name="productCode" type="java.lang.String" />
+        <property name="categoryCode" type="java.lang.String" />
+    </bean>
+
+    <bean class="de.hybris.liveeditaddon.admin.ComponentActionMenuRequestData" extends="de.hybris.liveeditaddon.admin.ActionMenuRequestData">
+        <property name="componentUid" type="java.lang.String" />
+        <property name="slotUid" type="java.lang.String" />
+    </bean>
+
+    <bean class="de.hybris.liveeditaddon.admin.ComponentAdminMenuItemData">
+        <property name="id" type="java.lang.String" />
+        <property name="enabled" type="java.lang.Boolean" />
+        <property name="visible" type="java.lang.Boolean" />
+        <property name="name" type="java.lang.String" />
+        <property name="addon" type="java.lang.String" />
+        <property name="pk" type="java.lang.Long" />
+        <property name="editItemPk" type="java.lang.Long" />
+
+    </bean>
+
+    <bean class="de.hybris.liveeditaddon.admin.ComponentAdminMenuActionData" extends="de.hybris.liveeditaddon.admin.ComponentAdminMenuItemData">
+        <property name="actionType" type="de.hybris.liveeditaddon.enums.CMSComponentAdminAction" />
+    </bean>
+
+    <bean class="de.hybris.liveeditaddon.admin.ComponentAdminMenuGroupData" extends="de.hybris.liveeditaddon.admin.ComponentAdminMenuItemData">
+        <property name="actionGroupType" type="de.hybris.liveeditaddon.enums.CMSComponentAdminActionGroup" />
+        <property name="items" type="java.util.List&lt;de.hybris.liveeditaddon.admin.ComponentAdminMenuItemData&gt;"/>
+    </bean>
+
+    <bean class="de.hybris.liveeditaddon.admin.SlotActionMenuRequestData" extends="de.hybris.liveeditaddon.admin.ActionMenuRequestData">
+        <property name="slotUid" type="java.lang.String" />
+        <property name="position" type="java.lang.String" />
+    </bean>
+
+
+</beans>

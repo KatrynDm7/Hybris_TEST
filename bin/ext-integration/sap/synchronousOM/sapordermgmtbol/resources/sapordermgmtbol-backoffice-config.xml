@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config xmlns="http://www.hybris.com/cockpit/config">
+    <context merge-by="module" parent="auto" type="SAPConfiguration" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab xmlns="http://www.hybris.com/cockpitng/component/editorArea" name="hmc.tab.sapordermgmt">
+                <section name="hmc.section.sapordermgmt">
+                	<attribute qualifier="sapordermgmt_enabled"/>
+                    <attribute qualifier="sapordermgmt_headerCondTypeFreight"/>
+                    <attribute qualifier="sapordermgmt_sourceFreight"/>
+                    <attribute qualifier="sapordermgmt_sourceNetWOFreight"/>
+                </section>
+                <section name="hmc.section.sapordermgmtsearch">
+                    <attribute qualifier="sapordermgmt_maxHits"/>
+                    <attribute qualifier="sapordermgmt_dateRange"/>
+                </section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+</config>

@@ -1,0 +1,30 @@
+*** Settings ***
+Library           de.hybris.platform.atddimpex.keywords.ImpexKeywordLibrary
+Library           de.hybris.platform.commerceservicesatddtests.keywords.CommerceServicesKeywordLibrary
+Library           de.hybris.platform.commercesearch.atdd.keywords.CommerceSearchKeywordLibrary
+Resource		  impex/Impex_Keywords.txt
+Resource		  commerce/CommerceServices_Keywords.txt
+Resource		  commercesearch/CommerceSearch_Keywords.txt
+Test Setup		  commercesearch suite setup
+Test Teardown	  commercesearch suite teardown
+
+
+*** Test Cases ***
+Test_Heroes_Not_Applied_To_Sorts
+    [Documentation]    Checks that hero products are not effective with when results are sorted by e.g. price
+    prepare session	electronics    
+    create product "P1" in category "575" with price "99,99 USD"
+    create product "P2" in category "575" with price "109,99 USD"
+    create product "P3" in category "575" with price "119,99 USD"
+    update solr index
+	check that product "P1" is first in category "575" when sorting by "price-asc"
+	check that product "P3" is first in category "575" when sorting by "price-desc"
+    make product "P2" a hero in category "575"
+    check that product "P2" is first in category "575" with default order
+    make product "P3" a hero in category "575"
+    check that product "P2" is first in category "575" with default order
+    remove product "P2" from heroes in category "575"
+    check that product "P3" is first in category "575" with default order
+    check that product "P1" is first in category "575" when sorting by "price-asc"
+    check that product "P3" is not first in category "575" when sorting by "price-asc"
+    

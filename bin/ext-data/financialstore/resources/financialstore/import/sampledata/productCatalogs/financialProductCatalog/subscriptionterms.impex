@@ -1,0 +1,9 @@
+
+# ImpEx for Subscription Terms
+INSERT_UPDATE SubscriptionTerm;id[unique=true];termOfServiceFrequency(code);termOfServiceNumber(code);termOfServiceRenewal(code);billingPlan(id);cancellable
+;annually;none;1;non_renewing;yearlyplan;false
+;single;none;1;non_renewing;singleplan;false
+;annualRenewable;annually;1;auto_renewing;yearlyplan;false
+;monthly;monthly;12;auto_renewing;monthlyplan;false
+
+

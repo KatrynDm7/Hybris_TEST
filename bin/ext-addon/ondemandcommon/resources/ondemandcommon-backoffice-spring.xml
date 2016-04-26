@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+           	http://www.springframework.org/schema/context
+		   	http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<import resource="ondemandcommon-spring.xml"/>
+	
+    <alias alias="orderOnDemandPricesHelper" name="defaultOrderOnDemandPricesHelper"/>
+    <bean id="defaultOrderOnDemandPricesHelper" class="de.hybris.platform.ondemandcommon.backoffice.helpers.OrderOnDemandPricesHelper">
+        <constructor-arg ref="ondemandTaxCalculationService" />
+        <constructor-arg ref="onDemandPromotionService" />
+    </bean>
+    
+    <alias alias="orderComponentRenderer" name="defaultOrderComponentRenderer"/>
+    <bean id="defaultOrderComponentRenderer" class="de.hybris.platform.ondemandcommon.backoffice.renderers.OrderComponentRenderer">
+        <constructor-arg ref="orderOnDemandPricesHelper" />
+    </bean>
+    
+	<alias alias="orderEntryComponentRenderer" name="defaultOrderEntryComponentRenderer"/>
+    <bean id="defaultOrderEntryComponentRenderer" class="de.hybris.platform.ondemandcommon.backoffice.renderers.OrderEntryComponentRenderer">
+        <constructor-arg ref="orderOnDemandPricesHelper" />
+    </bean>
+    
+</beans>

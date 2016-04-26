@@ -1,0 +1,5 @@
+INSERT_UPDATE Language;isocode[unique=true];name[lang=de];name[lang=en];fallbackLanguages(isocode);;;;
+;de;Deutsch;German;en
+
+INSERT_UPDATE SolrFacetSearchConfig;name[unique=true];catalogVersions(catalog(id),version);enabledLanguageFallbackMechanism
+;testFacetSearchConfig${testId};hwcatalog:Online${testId};true

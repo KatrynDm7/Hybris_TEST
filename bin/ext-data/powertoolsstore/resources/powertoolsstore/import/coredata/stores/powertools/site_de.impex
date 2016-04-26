@@ -1,0 +1,10 @@
+#
+# Import the CMS Site configuration for the Powertools store
+#
+
+# Language
+$lang=de
+
+# Create CMS Site
+UPDATE CMSSite;uid[unique=true];name[lang=$lang];locale[lang=$lang]
+ ;powertools;"Powertools-Website";de_DE

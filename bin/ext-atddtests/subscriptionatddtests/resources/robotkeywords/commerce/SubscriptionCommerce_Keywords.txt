@@ -1,0 +1,53 @@
+*** Settings ***
+Library           de.hybris.platform.atddimpex.keywords.ImpexKeywordLibrary
+Library			  de.hybris.platform.commerceservicesatddtests.keywords.CommerceServicesKeywordLibrary
+Library           de.hybris.platform.subscriptionatddtests.keywords.commerce.SubscriptionCommerceKeywordLibrary
+
+
+*** Keywords ***
+import commercecart sampledata
+    [Documentation]    Imports the commercecart test data
+    import impex from resource    /impex/testCommerceCart.csv
+    prepare session    testSite
+    prepare currency    USD
+
+reset system
+    [Documentation]    Resets the system attributes to the original values
+    reset system attributes
+    reset currency
+    
+verify that cart total for "${billingEvent}" is "${expectedTotal}"
+	[Documentation]    Verifies the cart total for the specified billing event
+	verify cart total for billing event    ${billingEvent}    ${expectedTotal}
+
+verify that number of child carts is "${expectedNumber}"
+    [Documentation]    Verifies the total number of carts
+    verify number of child carts    ${expectedNumber}
+    
+set cart currency to "${currency}"
+    [Documentation]    Changes the currency of the cart to the given one
+    set cart currency to    ${currency}
+
+for product "${productCode}" verify that the XML for prices matches "${expectedXml}"
+	[Documentation]   Verifies that XML for supscription term matches the expected XML
+    for product "${productCode}" verify that "product/price[@class='subscriptionPricePlan']" evaluates to "${expectedXml}"
+
+get cart for billing time "${billingTime}" and master cart "${masterCart}"
+    [Documentation]    finds the (child) cart model for the given billing time and master cart
+    ${cart}=    get cart for billing time and master cart    ${billingTime}    ${masterCart}
+    [Return]    ${cart}
+
+get cart data for billing time "${billingTime}" and master cart "${masterCart}"
+    [Documentation]    return the (child) saved cart data for the given billing time and master cart
+    ${cart}=    get cart data for billing time and master cart    ${billingTime}    ${masterCart}
+    [Return]    ${cart} 
+    
+get cart for code "${cartCode}" and user "${userUid}"
+    [Documentation]    return the cart for the given code and user id
+    ${cart}=    get cart for code and user    ${cartCode}    ${userUid}
+    [Return]    ${cart}  
+
+verify that cart with code "${savedCartDataCode:[^"]+}" has been cloned properly into cart with code "${clonedCartDataCode:[^"]+}" in terms of multi-carts
+    [Documentation]    Verifies that the original cart was cloned properly by comparing both carts and their entries in terms of multi-carts.
+    verify that cart with code "${savedCartDataCode}" has been cloned properly into cart with code "${clonedCartDataCode}"
+    verify cloned child carts    ${savedCartDataCode}    ${clonedCartDataCode}

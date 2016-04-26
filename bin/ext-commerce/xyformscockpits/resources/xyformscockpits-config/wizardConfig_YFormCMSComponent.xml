@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+<wizard-config showPrefilledValues="false" selectMode="true" createMode="true" createWithinPopup="false"	createWithinEditor="false">
+	<displayed-properties>
+      <group qualifier="Base" visible="true" initially-opened="true">
+         <label key="cockpit.config.label.General"/>
+         <property qualifier="YFormCMSComponent.formId" visible="false"/>
+         <property qualifier="YFormCMSComponent.applicationId" visible="false"/>
+      </group>
+		<group qualifier="Additional" visible="true" initially-opened="true">
+			<label key="xyformscockpits.common.label.additional" />
+			<property visible="true" qualifier="YFormCMSComponent.formDataId" />
+			<property visible="true" qualifier="YFormCMSComponent.action" />
+		</group>
+		<group qualifier="Component" visible="true" initially-opened="true">
+			<label key="xyformscockpits.common.label.component" />
+			<property visible="true" qualifier="YFormCMSComponent.name" />
+		</group>
+	</displayed-properties>
+</wizard-config>

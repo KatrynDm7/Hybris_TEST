@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config xmlns="http://www.hybris.com/cockpit/config">
+  
+    <context merge-by="type" parent="MobileReceiveGenericAction" type="MobileReceiveAndSendVoucherAction" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="voucher"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="MobileReceiveGenericAction" type="MobileReceiveAndSendVoucherAction" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.text.sms">
+                <editorArea:section name="hmc.text.voucher">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="voucher"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="message"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+</config>

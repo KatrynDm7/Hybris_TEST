@@ -1,0 +1,39 @@
+/*Icons for explorer tree */
+div.yw-explorerTree .y-tree-icon-hmc_type_tree_orderhistoryentry .y-tree-icon {
+    background-image: url("images/0129_Order-log-entry.png");
+}
+
+/*Icons for explorer tree */
+div.yw-explorerTree .y-tree-icon-Consignment .y-tree-icon {
+    background-image: url("images/0123_Consignment.png");
+}
+
+/*Icons for explorer tree */
+div.yw-explorerTree .y-tree-icon-ConsignmentEntry .y-tree-icon {
+    background-image: url("images/0122_Consignment-Entry.png");
+}
+
+/*Icons for explorer tree */
+div.yw-explorerTree .y-tree-icon-FraudReport .y-tree-icon {
+    background-image: url("images/0127_Fraud-Report.png");
+}
+
+/*Icons for explorer tree */
+div.yw-explorerTree .y-tree-icon-BaseStore .y-tree-icon {
+    background-image: url("images/0121_Base-Store.png");
+}
+
+/*Icons for explorer tree */
+div.yw-explorerTree .y-tree-icon-OrderCancelConfig .y-tree-icon {
+    background-image: url("images/0128_Order-Cancellation-Configuration.png");
+}
+
+/*Icons for explorer tree */
+div.yw-explorerTree .y-tree-icon-DeeplinkUrl .y-tree-icon {
+    background-image: url("images/0126_Deeplink-Url.png");
+}
+
+/*Icons for explorer tree */
+div.yw-explorerTree .y-tree-icon-DeeplinkUrlRule .y-tree-icon {
+    background-image: url("images/0125_Deeplink-Url-Rule.png");
+}

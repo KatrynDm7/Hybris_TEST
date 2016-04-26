@@ -1,0 +1,14 @@
+INSERT_UPDATE Language;isocode[unique=true];active;
+;de;true;
+;en;true;
+
+UPDATE Language;isocode[unique=true];name[lang=de];name[lang=en];
+;de;Deutsch;German;
+;en;Englisch;English;
+
+
+INSERT_UPDATE Currency;isocode[unique=true];name[lang=de, cellDecorator=eClassSuperCategoryDecorator, srcCell=1];name[lang=en];active;base;conversion;digits;symbol
+;CHF;Schweizer Franken;Swiss franc;true;false;0,6447;2;SFr.
+;EUR;Euro;Euro;true;true;1;2;€
+;USD;US-Dollar;US Dollar;true;false;1,38;2;$
+;GBP;Pfund Sterling;Pound Sterling;true;false;0,68;2;£

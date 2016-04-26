@@ -1,0 +1,106 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+						http://www.springframework.org/schema/aop 
+						http://www.springframework.org/schema/aop/spring-aop-3.1.xsd"
+	default-autowire="byName">
+
+
+	<!--<alias alias="UICockpitSession" name="Hyend2AdminCockpitSession"/>
+	<bean id="Hyend2AdminCockpitSession" parent="AdminCockpitSession">
+		<property name="availablePerspectives">
+			<list merge="true">
+				<ref bean="Hyend2AdminPerspective"/>
+			</list>
+		</property>
+	</bean>-->
+	
+	<bean id="Hyend2PerspectivePluginList" class="de.hybris.platform.cockpit.session.PerspectivePluginList" scope="session">
+		<property name="additionalPerspectives">
+			<list>
+				<ref bean="Hyend2AdminPerspective" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="Hyend2AdminPerspective" parent="AdminPerspective">
+		<property name="uid" value="cockpit.perspective.hyend2"/>
+		<property name="label" value="cockpit.perspective.hyend2"/>
+		
+		<property name="browserArea">
+			<bean parent="AdminBrowserArea">
+				<property name="rootSearchTypeCode" value="Hyend2IndexSchema"/>
+			</bean>
+		</property>
+		
+		<property name="navigationArea">
+			<bean parent="BaseNavigationArea" >
+				<property name="sections">
+					<list>
+						<ref bean="Hyend2TypeSelectorSection"/>						
+						
+						<!-- UNDO section -->
+						<bean class="de.hybris.platform.cockpit.components.navigationarea.NavigationPanelSection">
+							<property name="localizedLabel" value="navigationarea.history" />
+							<property name="visible" value="true" />
+							<property name="renderer">
+								<bean class="de.hybris.platform.cockpit.components.navigationarea.renderer.UndoSectionRenderer" />
+							</property>
+						</bean>				
+					</list>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="Hyend2TypeSelectorSection" parent="AdminTypeSelectorSection">
+		<property name="renderer" ref="Hyend2TypeSelectorSectionRenderer"/>
+	</bean>
+	
+	<bean id="Hyend2TypeSelectorSectionRenderer" parent="AdminTypeSelectorSectionRenderer">
+		<property name="typeCodes" value="Hyend2CasEacConfiguration,Hyend2IndexSchema,Hyend2IndexElement,Hyend2Property,Hyend2Dimension,Hyend2EndecaAttributeConfiguration,Hyend2PrecedenceRule,Hyend2Range,Hyend2SearchInterface"/>
+	</bean>
+	
+	<alias alias="precedenceRulesAllowedTypesStrategy" name="defaultPrecedenceRulesAllowedTypesStrategy"/>
+	<bean id="defaultPrecedenceRulesAllowedTypesStrategy" class="de.hybris.platform.hyend2.ui.strategies.PrecedenceRulesAllowedTypesStrategy">
+		<property name="flexibleSearchService" ref="flexibleSearchService"></property>
+		<property name="typeService" ref="cockpitTypeService"></property>
+	</bean>
+	
+	<bean id="genericCreateWizardPageMapping" class="de.hybris.platform.cockpit.wizards.generic.AdditionalPageMapping" 
+				scope="prototype">
+		<property name="pageMap">
+			<map>
+				<entry key="Media">
+					<list>
+						<bean class="de.hybris.platform.cockpit.wizards.generic.UploadMediaPage">
+							<property name="title" value="cockpit.wizard.createwidget.uploadpage.title"/>
+							<property name="id" value="uploadPage"/>
+							<property name="mediaService" ref="mediaService"/>
+						</bean>
+					</list>
+				</entry>
+				<entry key="Hyend2Range">
+					<list>
+						<bean class="de.hybris.platform.hyend2.ui.customgroups.AddRangeEntriesPage">
+							<property name="title" value="hyend2.cockpit.wizard.createrangeentries"/>
+							<property name="id" value="hyend2range"/>
+							<property name="controller">
+								<bean class="de.hybris.platform.hyend2.ui.customgroups.AddRangeEntriesController"></bean>
+							</property>
+						</bean>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<alias name="hyend2ExtendedSearchBrowser" alias="defaultExtendedSearchBrowserModel"/>
+	<bean id="hyend2ExtendedSearchBrowser" class="de.hybris.platform.hyend2.ui.Hyend2ExtendedSearchBrowserModel" scope="prototype">
+		<property name="showCreateButton" value="true"/>
+		<property name="allowDelete" value="true"/>
+	</bean>
+	
+</beans>

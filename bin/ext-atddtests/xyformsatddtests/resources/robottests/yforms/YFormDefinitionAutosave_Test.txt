@@ -1,0 +1,56 @@
+*** Settings ***
+Test Setup        import sampledata
+Resource          impex/Impex_Keywords.txt
+Resource          yformServices/YFormDefinitionAutosave_Keywords.txt
+
+*** Test Cases ***
+
+############
+### Get YFormData model
+############
+
+Test_Get_Data_Record
+    [Documentation]    verify YFormData model exists with given formDataId and DATA type
+    verify get y form data with "dataIdAutosave1" and type "DATA" exists
+
+Test_Get_Draft_Record
+    [Documentation]    verify YFormData model exists with given formDataId and DRAFT type
+    verify get y form data with "dataIdAutosave1" and type "DRAFT" exists
+
+############
+### Create and Update YFormData model
+############
+
+Test_Save_Data_Record_Without_Previous_Draft_Record
+    [Documentation]    verify save data record without previous draft record.
+    verify not existed y form data "dataIdAutosave0" with type "DATA" expect exception "YFormServiceException"
+    verify not existed y form data "dataIdAutosave0" with type "DRAFT" expect exception "YFormServiceException"
+    create or update y form data by "applicationId" and "testFormAutosave01" and "dataIdAutosave0" with type "DATA" and content "new content"
+    verify get y form data with "dataIdAutosave0" and type "DATA" exists
+
+Test_Save_Data_Record_With_Previous_Draft_Record
+    [Documentation]    verify save data record with previous draft record
+    create or update y form data by "applicationId" and "testFormAutosave01" and "dataIdAutosave3" with type "DRAFT" and content "new content"
+    verify get y form data with "dataIdAutosave3" and type "DRAFT" exists
+    verify not existed y form data "dataIdAutosave3" with type "DATA" expect exception "YFormServiceException"
+    create or update y form data by "applicationId" and "testFormAutosave01" and "dataIdAutosave3" with type "DATA" and content "new content"
+    verify get y form data with "dataIdAutosave3" and type "DATA" exists
+    verify not existed y form data "dataIdAutosave3" with type "DRAFT" expect exception "YFormServiceException"
+
+Test_Save_Draft_Record_Without_Previous_Data_Record
+    [Documentation]    verify save draft record without previous data record
+    verify not existed y form data "dataIdAutosave4" with type "DATA" expect exception "YFormServiceException"
+    create or update y form data by "applicationId" and "testFormAutosave01" and "dataIdAutosave4" with type "DRAFT" and content "new content"
+    verify get y form data with "dataIdAutosave4" and type "DRAFT" exists
+    verify not existed y form data "dataIdAutosave4" with type "DATA" expect exception "YFormServiceException"
+    
+Test_Save_Draft_Record_With_Previous_Data_Record
+    [Documentation]    verify save draft record with previous data record
+    verify not existed y form data "dataIdAutosave5" with type "DATA" expect exception "YFormServiceException"
+    create or update y form data by "applicationId" and "testFormAutosave01" and "dataIdAutosave5" with type "DATA" and content "new content"
+    verify get y form data with "dataIdAutosave5" and type "DATA" exists
+    verify not existed y form data "dataIdAutosave5" with type "DRAFT" expect exception "YFormServiceException"
+    create or update y form data by "applicationId" and "testFormAutosave01" and "dataIdAutosave5" with type "DRAFT" and content "new content"
+    verify get y form data with "dataIdAutosave5" and type "DATA" exists
+    verify get y form data with "dataIdAutosave5" and type "DRAFT" exists
+

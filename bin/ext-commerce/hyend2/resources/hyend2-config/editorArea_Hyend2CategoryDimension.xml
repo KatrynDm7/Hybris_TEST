@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>
+	
+	<group qualifier="Hyend2DimensionGeneral" visible="true" initially-opened="true">
+		<label key="cockpit.config.label.General" />
+		<property qualifier="Hyend2CategoryDimension.rootCategory" >
+			<parameter>
+				<name>allowCreate</name>
+				<value>false</value>
+			</parameter>
+			<parameter>
+				<name>allowActivate</name>
+				<value>false</value>
+			</parameter>
+		</property>	
+		<property qualifier="Hyend2CategoryDimension.displayName" />
+		<property qualifier="Hyend2CategoryDimension.exportId" />
+	</group>
+	
+	<group qualifier="Hyend2IndexElementsSection" visible="true" initially-opened="true">
+		<label key="hyend2.indexelements" />
+		<property qualifier="Hyend2CategoryDimension.indexElementsForCategoriesDims" />	
+	</group>
+	
+        <group qualifier="Hyend2EndecaSearchInterfacesSection" visible="true" initially-opened="true">
+                <label key="hyend2.searchinterfaceconfiguration" />
+                <property qualifier="Hyend2CategoryDimension.searchInterfaces" />
+        </group>
+
+	<group qualifier="Hyend2DimensionPropertySpecification" visible="true" initially-opened="true">
+		<label key="hyend2.dimensionspecification" />
+		<property qualifier="Hyend2CategoryDimension.resolver"  editor="propertyResolverEditor"/>	
+		<property qualifier="Hyend2CategoryDimension.resolverParameter" />
+		<property qualifier="Hyend2CategoryDimension.taxonomyResolver"  editor="taxonomyResolverEditor" />
+	</group>
+		
+	<group qualifier="Hyend2EndecaCategoryDimensionConfigurationSection" visible="true" initially-opened="true">
+		<label key="hyend2.endecadimensionconfiguration" />
+		<property qualifier="Hyend2CategoryDimension.endecaDimensionConfiguration" />	
+	</group>	
+</editor>

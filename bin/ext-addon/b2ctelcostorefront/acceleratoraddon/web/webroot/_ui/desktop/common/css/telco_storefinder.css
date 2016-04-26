@@ -1,0 +1,48 @@
+/* store finder */
+#storeFinder .searchPane,
+#storeDetail .detailPane {
+    border: 1px solid #dbdad7;
+    padding: 10px 20px;
+    width: 278px;
+}
+#storeFinder .searchPane .headline,
+#storeDetail .detailPane .headline {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5em;
+    line-height: 2em;
+    font-weight: bold;
+    text-transform: none;
+    height: auto;
+    border-bottom: medium none;
+    margin-bottom: 10px;
+}
+#storeFinder .storeMap,
+#storeDetail .storeMap {
+    width: 660px;
+}
+/* result list */
+#storeFinder .storeResultList {
+    padding-top: 40px;
+}
+#storeFinder .storeResultList .storeResultTable thead th,
+#storeFinder .storeResultList .storeResultTable > tbody > tr > td,
+.paginationBar.bottom {
+    border-style: solid;
+    border-color: #dbdad7;
+}
+#storeFinder .storeResultList .button {
+    margin: 0 25px 0 0;
+}
+#storeFinder .storeResultList .storeResultTable thead th {
+    font-family: 'Montserrat', sans-serif;
+    text-transform: none;
+}
+
+/* storefinder/bopis on productList page */
+.facetNavigation .findStoresNearMe {
+    background-color: #ffb800;
+}
+a.change_location-link {
+    font-size: 13px;
+    font-weight: normal;
+}

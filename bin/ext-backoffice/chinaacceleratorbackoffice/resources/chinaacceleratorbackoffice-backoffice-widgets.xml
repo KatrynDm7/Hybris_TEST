@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widgets.xsd">
+
+    <widget-connection sourceWidgetId="chinaacceleratorbackoffice-explorer-tree" outputId="nodeSelected" targetWidgetId="chinaacceleratorbackoffice-tree-node-adapter" inputId="input"/>
+    <widget-connection sourceWidgetId="chinaacceleratorbackoffice-tree-node-adapter" outputId="true" targetWidgetId="chinaacceleratorbackoffice-typecode-extractor" inputId="genericInput"/>
+    <widget-connection sourceWidgetId="chinaacceleratorbackoffice-tree-node-adapter" outputId="true" targetWidgetId="chinaacceleratorbackoffice-search-enabler" inputId="genericInput"/>
+    <widget-connection sourceWidgetId="chinaacceleratorbackoffice-tree-node-adapter" outputId="false" targetWidgetId="chinaacceleratorbackoffice-search-disabler" inputId="genericInput"/>
+    <widget-connection sourceWidgetId="chinaacceleratorbackoffice-typecode-extractor" outputId="genericOutput" targetWidgetId="chinaacceleratorbackoffice-search-logic" inputId="type"/>
+    <widget-connection sourceWidgetId="chinaacceleratorbackoffice-search-enabler" outputId="genericOutput" targetWidgetId="chinaacceleratorbackoffice-text-search" inputId="enabled"/>
+    <widget-connection sourceWidgetId="chinaacceleratorbackoffice-search-disabler" outputId="genericOutput" targetWidgetId="chinaacceleratorbackoffice-text-search" inputId="enabled"/>
+    <widget-connection sourceWidgetId="chinaacceleratorbackoffice-text-search" outputId="query" targetWidgetId="chinaacceleratorbackoffice-search-logic" inputId="searchtext"/>
+    <widget-connection sourceWidgetId="chinaacceleratorbackoffice-search-logic" outputId="pageable" targetWidgetId="chinaacceleratorbackoffice-simple-list" inputId="pageable"/>
+
+</widgets>

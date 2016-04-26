@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+		     http://www.springframework.org/schema/util 
+		     http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!-- Sourcing Strategies -->
+    <alias name="defaultSourcingFactorFactory" alias="sourcingFactorFactory"/>
+    <bean id="defaultSourcingFactorFactory" class="de.hybris.platform.warehousing.sourcing.factor.impl.DefaultSourcingFactorFactory" />
+
+    <alias name="defaultFitnessService" alias="fitnessService"/>
+    <bean id="defaultFitnessService" class="de.hybris.platform.warehousing.sourcing.fitness.impl.DefaultFitnessService">
+        <property name="fitnessComparator" ref="fitnessComparator"/>
+        <property name="fitnessEvaluatorFactory" ref="fitnessEvaluatorFactory"/>
+        <property name="sourcingFactorFactory" ref="sourcingFactorFactory"/>
+        <property name="fitnessNormalizerFactory" ref="fitnessNormalizerFactory"/>
+    </bean>
+
+    <alias name="defaultSourcingResultFactory" alias="sourcingResultFactory"/>
+    <bean id="defaultSourcingResultFactory" class="de.hybris.platform.warehousing.sourcing.result.impl.DefaultSourcingResultFactory"/>
+
+    <bean id="abstractSourcingStrategy" abstract="true"
+          class="de.hybris.platform.warehousing.sourcing.strategy.AbstractSourcingStrategy">
+        <property name="sourcingResultFactory" ref="sourcingResultFactory"/>
+        <property name="sourcingFactorFactory" ref="sourcingFactorFactory"/>
+        <property name="terminal" value="false"/>
+    </bean>
+
+    <alias name="defaultNoSplittingStrategy" alias="noSplittingStrategy"/>
+    <bean id="defaultNoSplittingStrategy" class="de.hybris.platform.warehousing.sourcing.strategy.impl.NoSplittingStrategy" parent="abstractSourcingStrategy">
+        <property name="fitnessCalculationService" ref="fitnessService"/>
+    </bean>
+
+    <alias name="defaultNoRestrictionsStrategy" alias="noRestrictionsStrategy"/>
+    <bean id="defaultNoRestrictionsStrategy" class="de.hybris.platform.warehousing.sourcing.strategy.impl.NoRestrictionsStrategy" parent="abstractSourcingStrategy">
+        <property name="fitnessService" ref="fitnessService"/>
+    </bean>
+
+    <alias name="defaultSourcingPickupStrategy" alias="pickupSourcingStrategy"/>
+    <bean id="defaultSourcingPickupStrategy" class="de.hybris.platform.warehousing.sourcing.strategy.impl.PickupStrategy" parent="abstractSourcingStrategy">
+        <property name="posSelectionStrategy" ref="posSelectionStrategy" />
+        <property name="terminal" value="true"/>
+    </bean>
+
+
+    <!-- Sourcing Strategy Mappers -->
+    <alias name="defaultSourcingStrategyService" alias="sourcingStrategyService"/>
+    <bean id="defaultSourcingStrategyService"
+          class="de.hybris.platform.warehousing.sourcing.strategy.impl.DefaultSourcingStrategyService">
+        <property name="defaultStrategies">
+            <list>
+                <ref bean="noSplittingStrategy"/>
+                <ref bean="noRestrictionsStrategy"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultSourcingStrategyMappers" alias="sourcingStrategyMappers"/>
+    <util:list id="defaultSourcingStrategyMappers">
+        <ref bean="pickupSourcingStrategyMapper"/>
+    </util:list>
+
+    <bean id="pickupSourcingStrategyMapper"
+          class="de.hybris.platform.warehousing.sourcing.strategy.mapper.impl.PickupSourcingStrategyMapper">
+        <property name="strategy" ref="pickupSourcingStrategy"/>
+    </bean>
+
+
+    <!-- Sourcing Filters -->
+    <bean id="abstractBaseSourcingLocationFilter" class="de.hybris.platform.warehousing.sourcing.filter.impl.AbstractBaseSourcingLocationFilter" abstract="true" />
+
+    <bean name="deliveryCountryLocationFilter"
+          class="de.hybris.platform.warehousing.sourcing.filter.impl.DeliveryCountrySourcingLocationFilter" parent="abstractBaseSourcingLocationFilter">
+        <!-- setting operator to NONE for the first filter -->
+        <property name="warehousingWarehouseService" ref="warehousingWarehouseService" />
+        <property name="filterResultOperator" value="NONE"/>
+    </bean>
+
+    <bean name="pickupLocationFilter"
+          class="de.hybris.platform.warehousing.sourcing.filter.impl.PickupSourcingLocationFilter" parent="abstractBaseSourcingLocationFilter">
+        <property name="filterResultOperator" value="OR"/>
+    </bean>
+
+    <bean name="availabilityLocationFilter" class="de.hybris.platform.warehousing.sourcing.filter.impl.AvailabilitySourcingLocationFilter"
+          parent="abstractBaseSourcingLocationFilter">
+       	<property name="warehouseStockService" ref="warehouseStockService" />
+        <property name="filterResultOperator" value="AND"/>
+    </bean>
+
+    <bean id="sourcingFilterProcessor" class="de.hybris.platform.warehousing.sourcing.filter.SourcingFilterProcessor">
+        <property name="filters">
+            <list>
+                <ref bean="deliveryCountryLocationFilter"/>
+                <ref bean="pickupLocationFilter"/>
+                <ref bean="availabilityLocationFilter"/>
+            </list>
+        </property>
+    </bean>
+
+	<bean id="reallocationFilterProcessor" class="de.hybris.platform.warehousing.sourcing.filter.SourcingFilterProcessor">
+		<property name="filters">
+			<list>
+				<ref bean="deliveryCountryLocationFilter" />
+				<ref bean="availabilityLocationFilter" />
+			</list>
+		</property>
+	</bean>
+
+    
+    <!-- Warehouse Services -->
+    <alias alias="warehousingWarehouseService" name="defaultWarehousingWarehouseService"/>
+    <bean id="defaultWarehousingWarehouseService" class="de.hybris.platform.warehousing.warehouse.service.impl.DefaultWarehousingWarehouseService">
+        <property name="warehousingWarehouseDao" ref="warehousingWarehouseDao"/>
+        <property name="warehouseDao" ref="warehouseDao" />
+    </bean>
+
+    <alias alias="warehousingWarehouseDao" name="defaultWarehousingWarehouseDao"/>
+    <bean id="defaultWarehousingWarehouseDao" class="de.hybris.platform.warehousing.warehouse.dao.impl.DefaultWarehousingWarehouseDao">
+        <property name="flexibleSearchService" ref="flexibleSearchService"/>
+    </bean>
+    
+    <alias alias="warehouseSelectionStrategy" name="warehousingWarehouseSelectionStrategy"/>
+    <bean id="warehousingWarehouseSelectionStrategy" class="de.hybris.platform.warehousing.atp.strategy.impl.WarehousingWarehouseSelectionStrategy" parent="defaultWarehouseSelectionStrategy"/>
+
+
+    <!-- Sourcing Context -->
+    <alias alias="sourcingContextFactory" name="defaultSourcingContextFactory"/>
+    <bean id="defaultSourcingContextFactory" class="de.hybris.platform.warehousing.sourcing.context.impl.DefaultSourcingContextFactory">
+        <property name="sourcingLocationPopulators">
+            <set>
+                <ref bean="distanceSourcingLocationPopulator"/>
+                <ref bean="availabilitySourcingLocationPopulator"/>
+                <ref bean="prioritySourcingLocationPopulator"/>
+            </set>
+        </property>
+    </bean>
+
+    <alias alias="distanceSourcingLocationPopulator" name="defaultDistanceSourcingLocationPopulator"/>
+    <bean id="defaultDistanceSourcingLocationPopulator" class="de.hybris.platform.warehousing.sourcing.context.populator.impl.DistanceSourcingLocationPopulator">
+    	<property name="posSelectionStrategy" ref="posSelectionStrategy" />
+    </bean>
+
+    <bean id="availabilitySourcingLocationPopulator" class="de.hybris.platform.warehousing.sourcing.context.populator.impl.AvailabilitySourcingLocationPopulator">
+        <property name="warehouseStockService" ref="warehouseStockService"/>
+    </bean>
+    
+    <bean id="prioritySourcingLocationPopulator" class="de.hybris.platform.warehousing.sourcing.context.populator.impl.PrioritySourcingLocationPopulator" />
+
+	<alias alias="posSelectionStrategy" name="firstPosSelectionStrategy"/>
+    <bean id="firstPosSelectionStrategy" class="de.hybris.platform.warehousing.sourcing.context.impl.FirstPosSelectionStrategy"/>
+    
+    <alias alias="warehouseStockService" name="defaultWarehouseStockService"/>
+    <bean id="defaultWarehouseStockService" class="de.hybris.platform.warehousing.atp.services.impl.DefaultWarehouseStockService">
+    	<property name="stockService" ref="stockService" />
+    	<property name="commerceStockLevelCalculationStrategy" ref="commerceStockLevelCalculationStrategy" />
+    </bean>
+
+    <!-- Order Entry Grouping -->
+    <alias alias="orderEntryGroupingService" name="defaultOrderEntryGroupingService"/>
+    <bean id="defaultOrderEntryGroupingService"
+          class="de.hybris.platform.warehousing.sourcing.context.grouping.impl.DefaultOrderEntryGroupingService"/>
+
+    <bean id="posOrderEntryMatcher"
+          class="de.hybris.platform.warehousing.sourcing.context.grouping.impl.PosOrderEntryMatcher"/>
+
+    <alias name="defaultOrderEntryMatchers" alias="orderEntryMatchers"/>
+    <util:list id="defaultOrderEntryMatchers">
+        <ref bean="posOrderEntryMatcher"/>
+    </util:list>
+
+
+    <!-- Fitness Evaluation -->
+    <bean id="distanceEvaluator"
+          class="de.hybris.platform.warehousing.sourcing.fitness.evaluation.impl.DistanceEvaluator"/>
+    <bean id="priorityEvaluator"
+          class="de.hybris.platform.warehousing.sourcing.fitness.evaluation.impl.PriorityEvaluator"/>
+    <bean id="allocationEvaluator"
+          class="de.hybris.platform.warehousing.sourcing.fitness.evaluation.impl.AllocationFitnessEvaluator"/>
+
+    <alias name="defaultFitnessEvaluatorMap" alias="fitnessEvaluatorMap"/>
+    <util:map id="defaultFitnessEvaluatorMap">
+        <entry value-ref="distanceEvaluator">
+            <key>
+                <util:constant
+                        static-field="de.hybris.platform.warehousing.data.sourcing.SourcingFactorIdentifiersEnum.DISTANCE"/>
+            </key>
+        </entry>
+        <entry value-ref="priorityEvaluator">
+            <key>
+                <util:constant
+                        static-field="de.hybris.platform.warehousing.data.sourcing.SourcingFactorIdentifiersEnum.PRIORITY"/>
+            </key>
+        </entry>
+        <entry value-ref="allocationEvaluator">
+            <key>
+                <util:constant
+                        static-field="de.hybris.platform.warehousing.data.sourcing.SourcingFactorIdentifiersEnum.ALLOCATION"/>
+            </key>
+        </entry>
+    </util:map>
+
+    <alias name="defaultFitnessEvaluatorFactory" alias="fitnessEvaluatorFactory"/>
+    <bean id="defaultFitnessEvaluatorFactory"
+          class="de.hybris.platform.warehousing.sourcing.fitness.evaluation.impl.DefaultFitnessEvaluatorFactory">
+        <property name="fitnessEvaluatorMap" ref="fitnessEvaluatorMap"/>
+    </bean>
+
+
+    <!-- Fitness Normalizing -->
+    <bean id="defaultNormalizer"
+          class="de.hybris.platform.warehousing.sourcing.fitness.normalize.impl.DefaultFitnessNormalizer"/>
+    <bean id="reverseNormalizer"
+          class="de.hybris.platform.warehousing.sourcing.fitness.normalize.impl.ReverseFitnessNormalizer"/>
+
+    <alias name="defaultFitnessNormalizerMap" alias="fitnessNormalizerMap"/>
+    <util:map id="defaultFitnessNormalizerMap">
+        <entry value-ref="reverseNormalizer">
+            <key>
+                <util:constant
+                        static-field="de.hybris.platform.warehousing.data.sourcing.SourcingFactorIdentifiersEnum.DISTANCE"/>
+            </key>
+        </entry>
+        <entry value-ref="reverseNormalizer">
+            <key>
+                <util:constant
+                        static-field="de.hybris.platform.warehousing.data.sourcing.SourcingFactorIdentifiersEnum.PRIORITY"/>
+            </key>
+        </entry>
+        <entry value-ref="reverseNormalizer">
+            <key>
+                <util:constant
+                        static-field="de.hybris.platform.warehousing.data.sourcing.SourcingFactorIdentifiersEnum.ALLOCATION"/>
+            </key>
+        </entry>
+    </util:map>
+
+    <alias name="defaultFitnessNormalizerFactory" alias="fitnessNormalizerFactory"/>
+    <bean id="defaultFitnessNormalizerFactory"
+          class="de.hybris.platform.warehousing.sourcing.fitness.normalize.impl.DefaultFitnessNormalizerFactory">
+        <property name="fitnessNormalizerMap" ref="fitnessNormalizerMap"/>
+    </bean>
+
+    <!-- Fitness Comparators -->
+    <bean id="fitnessComparator" class="de.hybris.platform.warehousing.sourcing.fitness.impl.FitnessComparator"/>
+
+
+    <!-- Sourcing Service -->
+    <alias alias="sourcingService" name="defaultSourcingService"/>
+    <bean id="defaultSourcingService" class="de.hybris.platform.warehousing.sourcing.impl.DefaultSourcingService">
+        <property name="sourcingContextFactory" ref="sourcingContextFactory"/>
+        <property name="sourcingFilterProcessor" ref="sourcingFilterProcessor"/>
+        <property name="orderEntryGroupingService" ref="orderEntryGroupingService"/>
+        <property name="orderEntryMatchers" ref="orderEntryMatchers"/>
+        <property name="sourcingStrategyService" ref="sourcingStrategyService"/>
+        <property name="sourcingStrategyMappers" ref="sourcingStrategyMappers"/>
+        <property name="sourcingResultFactory" ref="sourcingResultFactory"/>
+    </bean>
+
+
+    <!-- Allocation Service -->
+    <bean id="orderEntryAllocatedQuantityHandler" class="de.hybris.platform.warehousing.allocation.impl.OrderEntryAllocatedQuantityHandler">
+		<property name="inventoryEventService" ref="inventoryEventService"/>
+    </bean>
+    <bean id="consignmentEntryPendingQuantityHandler" class="de.hybris.platform.warehousing.allocation.impl.ConsignmentEntryPendingQuantityHandler"/>
+    <bean id="orderEntryPendingQuantityHandler" class="de.hybris.platform.warehousing.allocation.impl.OrderEntryPendingQuantityHandler"/>
+    <bean id="consignmentEntryDeclinedQuantityHandler" class="de.hybris.platform.warehousing.allocation.impl.ConsignmentEntryDeclinedQuantityHandler" />
+
+    <alias alias="allocationService" name="defaultAllocationService"/>
+    <bean id="defaultAllocationService" class="de.hybris.platform.warehousing.allocation.impl.DefaultAllocationService">
+        <property name="modelService" ref="modelService"/>
+        <property name="deliveryModeService" ref="deliveryModeService" />
+        <property name="posSelectionStrategy" ref="posSelectionStrategy"/>
+        <property name="timeService" ref="timeService"/>
+        <property name="consignmentEntryCommentService" ref="consignmentEntryCommentService"/>
+        <property name="inventoryEventService" ref="inventoryEventService"/>
+    </bean>
+
+    <!-- Cancellation Beans -->
+    <bean id="consignmentEntryCancelledQuantityHandler" class="de.hybris.platform.warehousing.cancellation.impl.ConsignmentEntryCancelledQuantityHandler" />
+    <bean id="orderEntryCancelledQuantityHandler" class="de.hybris.platform.warehousing.cancellation.impl.OrderEntryCancelledQuantityHandler" />
+    
+    <alias alias="consignmentSelectionStrategy" name="defaultConsignmentSelectionStrategy" />
+    <bean id="defaultConsignmentSelectionStrategy" class="de.hybris.platform.warehousing.cancellation.strategy.impl.DefaultConsignmentSelectionStrategy" />
+    
+    <alias alias="orderCancellationService" name="defaultOrderCancellationService" />
+    <bean id="defaultOrderCancellationService" class="de.hybris.platform.warehousing.cancellation.impl.DefaultOrderCancellationService">
+    	<property name="modelService" ref="modelService" />
+    	<property name="consignmentSelectionStrategy" ref="consignmentSelectionStrategy" />
+    	<property name="consignmentCancellationService" ref="consignmentCancellationService" />
+    	<property name="orderEntryCommentService" ref="orderEntryCommentService" />
+    </bean>
+    
+    <alias alias="consignmentCancellationService" name="defaultConsignmentCancellationService" />
+    <bean id="defaultConsignmentCancellationService" class="de.hybris.platform.warehousing.cancellation.impl.DefaultConsignmentCancellationService">
+    	<property name="modelService" ref="modelService" />
+    	<property name="consignmentEntryCommentService" ref="consignmentEntryCommentService"/>
+    </bean>
+
+   <bean id="cancellationInterceptor" class="de.hybris.platform.warehousing.cancellation.interceptor.CancellationInterceptor" scope="tenant" autowire="byName">
+        <property name="modelService" ref="modelService"/>
+        <property name="stockLevelSelectionStrategy" ref="stockLevelSelectionStrategy"/>
+        <property name="stockService" ref="stockService"/>
+        <property name="timeService" ref="timeService"/>
+    </bean>
+
+    <bean id="cancellationInterceptorMapping" scope="tenant"
+          class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="cancellationInterceptor"/>
+        <property name="typeCode" value="CancellationConsignmentEntryEvent"/>
+    </bean>
+
+	<!-- Shipping Beans -->
+	<bean id="consignmentEntryShippedQuantityHandler" class="de.hybris.platform.warehousing.shipping.impl.ConsignmentEntryShippedQuantityHandler" />
+	<bean id="orderEntryShippedQuantityHandler" class="de.hybris.platform.warehousing.shipping.impl.OrderEntryShippedQuantityHandler" />
+	
+	<alias alias="shippingService" name="defaultShippingService" />
+	<bean id="defaultShippingService" class="de.hybris.platform.warehousing.shipping.impl.DefaultShippingService">
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+    <!-- ATP (Available To Promise) -->
+    <alias alias="availableToPromiseDao" name="defaultAvailableToPromiseDao"/>
+    <bean id="defaultAvailableToPromiseDao" class="de.hybris.platform.warehousing.atp.dao.impl.DefaultAvailableToPromiseDao" parent="abstractItemDao"
+          scope="tenant"/>
+
+    <alias alias="commerceStockService" name="warehousingCommerceStockService"/>
+    <bean id="warehousingCommerceStockService" class="de.hybris.platform.warehousing.atp.services.impl.WarehousingCommerceStockService" parent="defaultCommerceStockService">
+        <property name="pickupWarehouseSelectionStrategy" ref="pickupWarehouseSelectionStrategy"/>
+    </bean>
+    
+    <alias alias="pickupWarehouseSelectionStrategy" name="defaultPickupWarehouseSelectionStrategy"/>
+    <bean id="defaultPickupWarehouseSelectionStrategy" class="de.hybris.platform.warehousing.atp.strategy.impl.DefaultPickupWarehouseSelectionStrategy"/>
+
+    <alias alias="stockLevelSelectionStrategy" name="defaultStockLevelSelectionStrategy"/>
+	<bean id="defaultStockLevelSelectionStrategy" class="de.hybris.platform.warehousing.atp.strategy.impl.DefaultStockLevelSelectionStrategy"/>
+
+    <alias alias="commerceStockLevelCalculationStrategy" name="warehousingAvailabilityCalculationStrategy"/>
+	<bean id="warehousingAvailabilityCalculationStrategy" parent="defaultCommerceStockLevelCalculationStrategy" class="de.hybris.platform.warehousing.atp.strategy.impl.WarehousingAvailabilityCalculationStrategy">
+		<property name="availableToPromiseDao" ref="availableToPromiseDao"/>
+		<property name="baseStoreService" ref="baseStoreService"/>
+	</bean>
+
+    <alias alias="inventoryEventDao" name="defaultInventoryEventDao"/>
+    <bean id="defaultInventoryEventDao" class="de.hybris.platform.warehousing.inventoryevent.dao.impl.DefaultInventoryEventDao" parent="abstractItemDao"
+          scope="tenant"/>
+
+    <alias alias="inventoryEventService" name="defaultInventoryEventService"/>
+    <bean id="defaultInventoryEventService" class="de.hybris.platform.warehousing.inventoryevent.service.impl.DefaultInventoryEventService">
+        <property name="inventoryEventDao" ref="inventoryEventDao"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="stockLevelSelectionStrategy" ref="stockLevelSelectionStrategy"/>
+        <property name="stockService" ref="stockService"/>
+        <property name="timeService" ref="timeService"/>
+    </bean>
+    
+    <alias alias="storePickupDao" name="warehousingStorePickupDao" />
+    <bean id="warehousingStorePickupDao" class="de.hybris.platform.warehousing.atp.dao.impl.WarehousingStorePickupDao" parent="defaultStorePickupDao" />
+
+	<!-- Business Process Services -->
+	<bean id="abstractWarehousingBusinessProcessService" class="de.hybris.platform.warehousing.process.AbstractWarehousingBusinessProcessService" abstract="true" parent="businessProcessService" />
+	
+	<alias name="defaultOrderBusinessProcessService" alias="orderBusinessProcessService"/>
+	<bean id="defaultOrderBusinessProcessService" class="de.hybris.platform.warehousing.process.impl.DefaultOrderProcessService" parent="abstractWarehousingBusinessProcessService">
+		<property name="baseStoreService" ref="baseStoreService" />
+	</bean>
+	
+	<alias name="defaultConsignmentBusinessProcessService" alias="consignmentBusinessProcessService"/>
+	<bean id="defaultConsignmentBusinessProcessService" class="de.hybris.platform.warehousing.process.impl.DefaultConsignmentProcessService" parent="abstractWarehousingBusinessProcessService">
+		<property name="consignmentProcessSuffix" value="_ordermanagement" />
+	</bean>
+
+    <alias name="defaultReturnBusinessProcessService" alias="returnBusinessProcessService"/>
+    <bean id="defaultReturnBusinessProcessService" class="de.hybris.platform.warehousing.process.impl.DefaultReturnProcessService" parent="abstractWarehousingBusinessProcessService">
+        <property name="baseStoreService" ref="baseStoreService" />
+    </bean>
+	
+
+	<!-- Returns -->
+	<bean id="orderEntryReturnedQuantityHandler" class="de.hybris.platform.warehousing.returns.impl.OrderEntryReturnedQuantityHandler" >
+		<property name="returnService" ref="returnService" />
+	</bean>
+	
+    <bean id="warehousingOrderEntryBasedReturnableCheck" class="de.hybris.platform.warehousing.returns.strategy.impl.WarehousingOrderEntryBasedReturnableCheck">
+        <property name="returnService" ref="returnService" />
+    </bean>
+	
+	<alias alias="returnService" name="warehousingReturnService" />
+	<bean id="warehousingReturnService" class="de.hybris.platform.warehousing.returns.service.impl.WarehousingReturnService" parent="defaultReturnService">
+		<property name="returnableChecks">
+            <list>
+                <ref bean="warehousingOrderEntryBasedReturnableCheck" />
+            </list>
+        </property>
+	</bean>
+
+    <alias name="defaultRefundAmountCalculationService"  alias="refundAmountCalculationService" />
+    <bean id="defaultRefundAmountCalculationService" class="de.hybris.platform.warehousing.returns.service.impl.DefaultRefundAmountCalculationService">
+        <property name="modelService" ref="modelService" />
+        <property name="returnService" ref="returnService"/>
+    </bean>
+	    
+	<!-- Interceptors -->
+	<bean id="consignmentPackagingInfoPrepareInterceptor" class="de.hybris.platform.warehousing.interceptor.ConsignmentPackagingInfoPrepareInterceptor">
+		<property name="modelService" ref="modelService" />
+		<property name="timeService" ref="timeService" />
+	</bean>
+	<bean id="consignmentPackagingInfoPrepareInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="consignmentPackagingInfoPrepareInterceptor"/>
+		<property name="typeCode" value="Consignment"/>
+	</bean>
+	
+	<!-- Comments -->	
+	<bean id="abstractWarehousingCommentService" class="de.hybris.platform.warehousing.comment.impl.AbstractWarehousingCommentService" abstract="true" parent="commentService">
+		<property name="timeService" ref="timeService" />
+		<property name="userService" ref="userService" />
+	</bean>
+	
+	<alias name="defaultOrderEntryCommentService" alias="orderEntryCommentService" />
+	<bean id="defaultOrderEntryCommentService" class="de.hybris.platform.warehousing.comment.impl.DefaultOrderEntryCommentService" parent="abstractWarehousingCommentService" />
+	
+	<alias name="defaultConsignmentEntryCommentService" alias="consignmentEntryCommentService" />
+	<bean id="defaultConsignmentEntryCommentService" class="de.hybris.platform.warehousing.comment.impl.DefaultConsignmentEntryCommentService" parent="abstractWarehousingCommentService" />
+	
+</beans>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="eclipsebin/notused"/>
+
+	<classpathentry exported="false" kind="src" path="/platform" />
+	<classpathentry exported="true" kind="src" path="/hmc" />
+	<classpathentry exported="true" kind="src" path="/cockpit" />
+	<classpathentry exported="true" kind="lib" path="lib/FastInfoset-1.2.7.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/axis-1.4.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/cxf-api-2.4.2.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/cxf-common-utilities-2.4.2.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/cxf-logger-workaround-3.0.1-SNAPSHOT.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/cxf-rt-bindings-soap-2.4.2.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/cxf-rt-bindings-xml-2.4.2.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/cxf-rt-core-2.4.2.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/cxf-rt-databinding-jaxb-2.4.2.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/cxf-rt-frontend-jaxws-2.4.2.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/cxf-rt-frontend-simple-2.4.2.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/cxf-rt-transports-common-2.4.2.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/cxf-rt-transports-http-2.4.2.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/cxf-rt-ws-addr-2.4.2.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/cxf-tools-common-2.4.2.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/jaxrpc-1.1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/neethi-3.0.1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/wsdl4j-1.6.2.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/xmlschema-core-2.0.jar" />
+	<classpathentry exported="true" kind="lib" path="bin/hyend2server.jar" >
+		<attributes>
+			<attribute name="javadoc_location" value="https://download.hybris.com/api/5.7.0"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="hmc/bin/hyend2hmc.jar" >
+		<attributes>
+			<attribute name="javadoc_location" value="https://download.hybris.com/api/5.7.0"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="resources" />
+	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="testsrc" />
+				
+</classpath>
+				

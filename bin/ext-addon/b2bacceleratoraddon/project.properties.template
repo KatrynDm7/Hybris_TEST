@@ -1,0 +1,59 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform 
+# 
+# Copyright (c) 2000-2015 hybris AG
+# All rights reserved.
+#  
+# This software is the confidential and proprietary information of hybris 
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with hybris.
+#
+#  
+# -----------------------------------------------------------------------
+
+# you can put key/value pairs here.
+# Use Config.getParameter(..) to retrieve the values during runtime.
+
+b2bacceleratoraddon.key=value
+
+# Specifies the location of the spring context file added automatically to the global platform application context.
+b2bacceleratoraddon.application-context=b2bacceleratoraddon-spring.xml
+
+yacceleratorstorefront.additionalWebSpringConfigs.b2bacceleratoraddon=classpath:/b2bacceleratoraddon/web/spring/b2bacceleratoraddon-web-spring.xml,classpath:/b2bacceleratoraddon/web/spring/multi-step-checkout-config.xml,classpath:/b2bacceleratoraddon/web/spring/b2bacceleratoraddon-spring-security-config.xml
+
+storefront.supportedUiExperienceLevels.electronics=DESKTOP,MOBILE
+storefront.supportedUiExperienceLevels.apparel-uk=DESKTOP,MOBILE
+storefront.supportedUiExperienceLevels.apparel-de=DESKTOP,MOBILE
+storefront.supportedUiExperienceLevels.powertools=DESKTOP
+
+b2bacceleratoraddon.javascript.paths.desktop=/desktop/common/js/b2bacceleratoraddon.js;/desktop/common/js/acc.paymenttype.js;/desktop/common/js/acc.checkoutsummary.js;/desktop/common/js/acc.search.js;/desktop/common/js/waypoints.min.js;/desktop/common/js/acc.approval.js;/desktop/common/js/acc.negotiatequote.js;/desktop/common/js/acc.quote.js;/desktop/common/js/acc.b2bcart.js
+
+b2bacceleratoraddon.javascript.paths.mobile=/desktop/common/js/b2bacceleratoraddon.js
+b2bacceleratoraddon.css.paths.desktop=/desktop/common/css/b2bacceleratoraddon.css
+b2bacceleratoraddon.css.paths.mobile=/mobile/common/css/b2bacceleratoraddon.css
+
+# For example you may setup a URL mapping as follows:
+# NOTE you should define your mapping in your config/local.properties rather
+# than here in the extension's properties file.
+website.powertools.http=http://powertools.local:9001/yacceleratorstorefront
+website.powertools.https=https://powertools.local:9002/yacceleratorstorefront
+
+###########
+# Qualified media URLs for each CMSWebSite used to load images and other media
+media.powertools.http=http://powertools.local:9001
+media.powertools.https=https://powertools.local:9002
+
+###########
+# Defines if the future stock availability is going to be used in the store front. 
+storefront.products.futurestock.enabled=true
+
+###########
+#defines the pageSize for advance search
+storefront.flexible.advance.search.pageSize=10
+
+#Type of pagination
+pagination.type=infiniteScroll
+
+storefront.advancedsearch.delimiter=,
+

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="eclipsebin/notused"/>
+
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+	<classpathentry exported="false" kind="src" path="/platform" />
+	<classpathentry exported="true" kind="lib" path="lib/scala-actors-2.11.5.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/scala-compiler-2.11.5.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/scala-library-2.11.5.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/scala-reflect-2.11.5.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/scala-xml_2.11-1.0.3.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/scalatest_2.11-2.2.3.jar" />
+	<classpathentry exported="true" kind="lib" path="resources" />
+	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="src" />
+	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="gensrc" />
+				
+</classpath>
+				

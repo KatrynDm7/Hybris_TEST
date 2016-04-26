@@ -1,0 +1,43 @@
+*** Settings ***
+Test Setup        import sampledata
+Resource		  impex/Impex_Keywords.txt
+Resource          commerce/CommerceServices_Keywords.txt
+Resource          insurance/InsuranceQuotation_Keywords.txt
+Resource          bundleservices/Add_To_Cart_Keywords.txt
+
+*** Test Cases ***
+Test_Create_Travel_Insurance_Quotation
+	[Documentation]    Test to create a InsuranceQuotation when the product is added to the cart..
+	create customer "test@test.com" with currency "USD"
+    login customer with id "test@test.com"
+    @{sessionAttributes}=    Create List    tripDestination:UK    tripStartDate:2014-12-01    tripEndDate:2014-12-20    NoOfDays:1    Travellers:1    tripDetailsTravellerAges:22
+    prepare insurance session data using delimiter ":" for given attributes "@{sessionAttributes}"
+    add to cart product "SUBSCRIPTIONPRODUCT01" for component "ProductComponent1"     
+    ${expectedXml}=    Set Variable     <insuranceQuote>   
+											    <tripNoOfTravellers>1</tripNoOfTravellers>
+											    <state>
+											      <code>UNBIND</code>
+											      <codeLowerCase>unbind</codeLowerCase>
+											    </state>
+											    <tripDestination>UK</tripDestination>
+											    <formattedStartDate>01-12-2014</formattedStartDate>
+											    <quoteType>
+											      <code>TRAVEL</code>
+											      <codeLowerCase>travel</codeLowerCase>
+											    </quoteType>
+											    <tripNoOfDays>1</tripNoOfDays>
+											    <tripTravellersAge class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+											      <c class="list">
+											        <string>22</string>
+											      </c>
+											      <list reference="../c"/>
+											    </tripTravellersAge>
+											    <tripEndDate>20-12-2014</tripEndDate>
+											    <tripStartDate>01-12-2014</tripStartDate>
+											    <quoteWorkflowStatus>
+                                                  <code>PENDING</code>
+                                                  <codeLowerCase>pending</codeLowerCase>
+                                                </quoteWorkflowStatus>
+										  </insuranceQuote>
+    verify the quotation which matches "${expectedXml}"
+    

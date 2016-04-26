@@ -1,0 +1,21 @@
+
+div.yw-explorerTree .y-tree-icon-SAPConfiguration .y-tree-icon-SAPConfiguration  {
+    background-image: url("images/0127_sap_basestore_configuration.png");
+}
+
+div.yw-explorerTree .y-tree-icon-SAPRFCDestination .y-tree-icon-SAPRFCDestination {
+    background-image: url("images/0130_rfc_destination.png");
+}
+
+div.yw-explorerTree .y-tree-icon-SAPHTTPDestination .y-tree-icon-SAPHTTPDestination {
+   background-image: url("images/0129_http_destination.png");
+}
+
+div.yw-explorerTree .y-tree-icon-SAPGlobalConfiguration .y-tree-icon-SAPGlobalConfiguration {
+    background-image: url("images/0128_sap_global_configuration.png");
+}
+
+
+div.yw-explorerTree .y-tree-icon-SAPAdministration .y-tree-icon-SAPAdministration {
+    background-image: url("images/0125_sap_administration_configuration.png");
+}

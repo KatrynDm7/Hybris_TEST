@@ -1,0 +1,17 @@
+# create a new page type for config UI
+INSERT_UPDATE CmsPageType;code[unique=true];restrictionTypes(code)
+;ProductConfigPage;CMSCategoryRestriction,CMSProductRestriction,CMSTimeRestriction,CMSUserRestriction,CMSUserGroupRestriction
+
+# modify existing page types to allow configurable product restriction
+INSERT_UPDATE CmsPageType;code[unique=true];restrictionTypes(code)[mode=append]
+;ProductPage;CMSConfigurableProductRestriction
+;CategoryPage;CMSConfigurableProductRestriction
+
+$START_USERRIGHTS;;;;;;;;;
+Type;UID;MemberOfGroups;Password;Target;read;change;create;remove;change_perm
+UserGroup;cmsmanagergroup;cockpitgroup,employeegroup;;;;;;;
+
+# cms2 items
+;;;;CMSConfigurableProductRestriction;;;+;+;+;
+
+$END_USERRIGHTS;;;;;

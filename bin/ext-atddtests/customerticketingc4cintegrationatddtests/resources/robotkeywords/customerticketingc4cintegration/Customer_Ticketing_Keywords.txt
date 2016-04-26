@@ -1,0 +1,38 @@
+**** Settings ***
+Library    de.hybris.platform.customerticketingc4cintegrationatddtests.keywords.CustomerTicketingKeywordLibrary
+Library    de.hybris.platform.atddimpex.keywords.ImpexKeywordLibrary
+Library    String
+
+*** Keywords ***
+
+generate userId
+    [Documentation]    generates a random user id as an email
+    ${randomString}=    Generate Random String    12    [LOWER]
+    Log    randomString= ${randomString}
+    ${userId}=    Set Variable    ${randomString}@test.com
+    [Return]    ${userId} 
+
+import ct sample data
+    [Documentation]    Imports the test data
+    import impex from resource    /impex/sampledata.impex
+    set test base site
+
+create ticket with title "${title}" and message "${message}"
+	[Documentation]    Create a ticket and return it
+	${ticket}=    create ticket with title and message    ${title}    ${message}
+	[Return]    ${ticket}
+
+get ticket details for ticketId "${ticketId}"
+    [Documentation]    return a ticket by id
+	${ticket}=    get ticket by id    ${ticketId}
+	[Return]    ${ticket}
+
+update ticket with ticketId "${ticketId}" and set status "${status}" and message "${message}"
+    [Documentation]    call ticket update by ticketId with status and massage
+    ${updatedT}=    update ticket by id with status and message    ${ticketId}    ${status}    ${message}
+    [Return]    ${updatedT}
+
+get list of tickets for current customer
+    [Documentation]    call getTickets
+    ${tickets}=    get tickets
+    [Return]    ${tickets}

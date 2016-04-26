@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>
+	
+	<group qualifier="Hyend2PropertyGeneral" visible="true" initially-opened="true">
+		<label key="cockpit.config.label.General" />
+		<property qualifier="Hyend2Property.attributeType" >
+			<parameter>
+				<name>allowCreate</name>
+				<value>false</value>
+			</parameter>
+			<parameter>
+				<name>allowActivate</name>
+				<value>false</value>
+			</parameter>
+		</property>		
+		<property qualifier="Hyend2Property.attribute" >
+			<parameter>
+				<name>allowCreate</name>
+				<value>false</value>
+			</parameter>
+			<parameter>
+				<name>allowActivate</name>
+				<value>false</value>
+			</parameter>
+		</property>	
+		<property qualifier="Hyend2Property.classificationAttribute" >
+			<parameter>
+				<name>allowCreate</name>
+				<value>false</value>
+			</parameter>
+			<parameter>
+				<name>allowActivate</name>
+				<value>false</value>
+			</parameter>
+		</property>
+		<property qualifier="Hyend2Property.displayName" />
+		<property qualifier="Hyend2Property.exportId" />
+	</group>
+	
+	<group qualifier="Hyend2IndexElementsSection" visible="true" initially-opened="true">
+		<label key="hyend2.indexelements" />
+		<property qualifier="Hyend2Property.indexElements" />	
+	</group>
+	
+        <group qualifier="Hyend2EndecaSearchInterfacesSection" visible="true" initially-opened="true">
+                <label key="hyend2.searchinterfaceconfiguration" />
+                <property qualifier="Hyend2Property.searchInterfaces" />
+        </group>
+
+	<group qualifier="Hyend2EndecaAttributeConfigurationSection" visible="true" initially-opened="true">
+		<label key="hyend2.endecaattributeconfiguration" />
+		<property qualifier="Hyend2Property.endecaAttributeConfiguration" />	
+	</group>
+	
+	<group qualifier="Hyend2PropertyPropertySpecification" visible="true" initially-opened="true">
+		<label key="hyend2.editorArea.propertyspecification" />
+		<property qualifier="Hyend2Property.endecaPropertyType" />	
+		<property qualifier="Hyend2Property.resolver" editor="propertyResolverEditor"/>	
+		<property qualifier="Hyend2Property.resolverParameter" />	
+	</group>
+	
+	<group qualifier="Hyend2PropertyRangesGroup" visible="true" initially-opened="true">
+		<label key="hyend2.editorArea.property.ranges" />
+		<property qualifier="Hyend2Property.ranges" />			
+	</group>
+
+</editor>

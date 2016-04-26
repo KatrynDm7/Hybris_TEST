@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+~ [y] hybris Platform
+~
+~ Copyright (c) 2000-2015 hybris AG
+~ All rights reserved.
+~
+~ This software is the confidential and proprietary information of hybris
+~ ("Confidential Information"). You shall not disclose such Confidential
+~ Information and shall use it only in accordance with the terms of the
+~ license agreement you entered into with hybris.
+-->
+
+<config xmlns="http://www.hybris.com/cockpit/config">
+
+    <!-- Explorer Tree-->
+	<context component="oms-explorer-tree">
+		<n:explorer-tree xmlns:n="http://www.hybris.com/cockpitng/config/explorertree">
+			<n:navigation-node id="ordermanagementbackoffice.treenode.orders">
+				<n:type-node id="ordermanagementbackoffice.typenode.order.open"/>
+                <n:type-node id="ordermanagementbackoffice.typenode.order.all" code="Order" />
+			</n:navigation-node>
+            <n:navigation-node id="ordermanagementbackoffice.treenode.returns">
+                <n:type-node id="ordermanagementbackoffice.typenode.create.return" />
+                <n:type-node id="ordermanagementbackoffice.typenode.all.returns" code="ReturnRequest" />
+            </n:navigation-node>
+		</n:explorer-tree>
+	</context>
+
+    <!--Simple Search -->
+    <context merge-by="type" parent="GenericItem" type="ReturnRequest" component="simple-search">
+        <simple-search:simple-search xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+            <field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="RMA" />
+        </simple-search:simple-search>
+    </context>
+
+    <!-- List View-->
+	<context type="Order" component="omslistview">
+		<list:list-view xmlns:list="http://www.hybris.com/cockpitng/component/listView">
+			<list:column qualifier="code" label="ordermanagementbackoffice.order.listview.ordernumber"/>
+			<list:column qualifier="user" label="ordermanagementbackoffice.order.details.customer"/>
+			<list:column qualifier="date" label="ordermanagementbackoffice.order.listview.date "/>
+			<list:column qualifier="deliveryMode" /> 
+			<list:column qualifier="status" label="ordermanagementbackoffice.order.listview.status" />
+		</list:list-view>
+	</context>
+
+	<context type="ReturnRequest" component="omslistview">
+		<list:list-view xmlns:list="http://www.hybris.com/cockpitng/component/listView">
+			<list:column qualifier="RMA" label="ordermanagementbackoffice.returns.listview.rma" />
+            <list:column qualifier="order.code"/>
+            <list:column qualifier="order.user"/>
+            <list:column qualifier="creationtime"/>
+            <list:column qualifier="status" />
+		</list:list-view>
+	</context>
+	
+    <!--Editor-Area -->
+	<context merge-by="type" parent="GenericItem" type="Order" component="oms-editor-area">
+		<editorArea:editorArea
+			xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="ordermanagementbackoffice.order.tab.details">
+				<editorArea:section name="ordermanagementbackoffice.section.order.general.information" columns="3">
+					<editorArea:attribute qualifier="user" label="ordermanagementbackoffice.order.details.customer" readonly="true" >
+					    <editorArea:editor-parameter>
+                            <editorArea:name>disableDisplayingDetails</editorArea:name>
+                            <editorArea:value>true</editorArea:value>
+                        </editorArea:editor-parameter>
+					</editorArea:attribute>
+					<editorArea:attribute qualifier="date" label="ordermanagementbackoffice.order.details.created" readonly="true" />
+					<editorArea:attribute qualifier="status" label="ordermanagementbackoffice.order.details.orderstatus" readonly="true" />
+					<editorArea:attribute qualifier="deliveryMode" label="ordermanagementbackoffice.order.details.shipmentmethod" >
+					    <editorArea:editor-parameter>
+                            <editorArea:name>disableDisplayingDetails</editorArea:name>
+                            <editorArea:value>true</editorArea:value>
+                        </editorArea:editor-parameter>
+					</editorArea:attribute>
+					<editorArea:attribute qualifier="paymentAddress" label="ordermanagementbackoffice.order.details.billaddress">
+						<editorArea:editor-parameter>
+							<editorArea:name>referenceSelected/editorArea/editorAreaConfigCtx</editorArea:name>
+							<editorArea:value>oms-editor-area</editorArea:value>
+						</editorArea:editor-parameter>
+					</editorArea:attribute>
+					<editorArea:attribute qualifier="deliveryAddress" label="ordermanagementbackoffice.order.details.shipaddress" >
+						<editorArea:editor-parameter>
+							<editorArea:name>referenceSelected/editorArea/editorAreaConfigCtx</editorArea:name>
+							<editorArea:value>oms-editor-area</editorArea:value>
+						</editorArea:editor-parameter>
+					</editorArea:attribute>
+				</editorArea:section>
+				<editorArea:section name="ordermanagementbackoffice.section.order.hierarchy.linedetails">
+					<editorArea:panel>
+						<editorArea:attribute
+							editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"
+							qualifier="entries" readonly="true">
+							<editorArea:editor-parameter>
+								<editorArea:name>listConfigContext</editorArea:name>
+								<editorArea:value>referenceListViewOrderEntries
+								</editorArea:value>
+							</editorArea:editor-parameter>
+							<editorArea:editor-parameter>
+								<editorArea:name>disableDisplayingDetails</editorArea:name>
+								<editorArea:value>true</editorArea:value>
+							</editorArea:editor-parameter>
+							<editorArea:editor-parameter>
+								<editorArea:name>disableRemoveReference</editorArea:name>
+								<editorArea:value>true</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+					</editorArea:panel>
+				</editorArea:section>
+				<editorArea:section name="ordermanagementbackoffice.section.order.general.totals" columns="3">
+					<editorArea:attribute qualifier="subtotal" readonly="true" />
+					<editorArea:attribute qualifier="totalTax" label="ordermanagementbackoffice.order.details.taxes" readonly="true" />
+					<editorArea:attribute qualifier="deliveryCost" label="ordermanagementbackoffice.order.details.shipping" readonly="true" />
+					<editorArea:attribute qualifier="totalDiscounts" label="ordermanagementbackoffice.order.details.orderdiscount" readonly="true" />
+					<editorArea:attribute qualifier="totalPrice" label="ordermanagementbackoffice.order.details.total" readonly="true" />
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="ordermanagementbackoffice.order.tab.consignments">
+				<editorArea:section name="ordermanagementbackoffice.section.order.hierarchy.descendants">
+					<editorArea:panel>
+						<editorArea:attribute
+							editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"
+							qualifier="consignments" readonly="true">
+							<editorArea:editor-parameter>
+								<editorArea:name>listConfigContext</editorArea:name>
+								<editorArea:value>referenceListViewConsignments</editorArea:value>
+							</editorArea:editor-parameter>
+							<editorArea:editor-parameter>
+								<editorArea:name>disableDisplayingDetails</editorArea:name>
+								<editorArea:value>true</editorArea:value>
+							</editorArea:editor-parameter>
+							<editorArea:editor-parameter>
+								<editorArea:name>disableRemoveReference</editorArea:name>
+								<editorArea:value>true</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+					</editorArea:panel>
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="ordermanagementbackoffice.order.tab.payment">
+				<editorArea:section name="ordermanagementbackoffice.section.order.hierarchy.descendants">
+					<editorArea:panel>
+						<editorArea:attribute
+							editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"
+							qualifier="paymentTransactions" readonly="true">
+							<editorArea:editor-parameter>
+								<editorArea:name>listConfigContext</editorArea:name>
+								<editorArea:value>referenceListViewPaymentTransactions
+								</editorArea:value>
+							</editorArea:editor-parameter>
+							<editorArea:editor-parameter>
+								<editorArea:name>disableRemoveReference</editorArea:name>
+								<editorArea:value>true</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+					</editorArea:panel>
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="ordermanagementbackoffice.order.tab.fraud">
+				<editorArea:section name="ordermanagementbackoffice.section.order.hierarchy.descendants">
+					<editorArea:panel>
+						<editorArea:attribute
+							editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"
+							qualifier="fraudReports" readonly="true">
+							<editorArea:editor-parameter>
+								<editorArea:name>listConfigContext</editorArea:name>
+								<editorArea:value>referenceListViewFraudReports</editorArea:value>
+							</editorArea:editor-parameter>
+							<editorArea:editor-parameter>
+								<editorArea:name>disableRemoveReference</editorArea:name>
+								<editorArea:value>true</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+					</editorArea:panel>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+
+	<context merge-by="module" parent="GenericItem" type="Address" component="oms-editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="warehousingbackoffice.tab.general">
+				<editorArea:section name="ordermanagementbackoffice.section.order.general.properties">
+					<editorArea:attribute qualifier="line1" label="ordermanagementbackoffice.order.address.line1" />
+					<editorArea:attribute qualifier="line2" label="ordermanagementbackoffice.order.address.line2" />
+					<editorArea:attribute qualifier="region" label="ordermanagementbackoffice.order.address.state" />
+					<editorArea:attribute qualifier="postalcode" label="ordermanagementbackoffice.order.address.postalcode" />
+					<editorArea:attribute qualifier="country" />
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+
+	<context merge-by="module" parent="GenericItem" type="PaymentTransaction" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="ordermanagementbackoffice.tab.general">
+				<editorArea:section name="ordermanagementbackoffice.section.order.general.properties">
+					<editorArea:attribute qualifier="code" readonly="true" />
+					<editorArea:attribute qualifier="info" readonly="true">
+						<editorArea:editor-parameter>
+							<editorArea:name>disableDisplayingDetails</editorArea:name>
+							<editorArea:value>true</editorArea:value>
+						</editorArea:editor-parameter>
+					</editorArea:attribute>
+					<editorArea:attribute qualifier="paymentProvider" readonly="true" />
+					<editorArea:attribute qualifier="plannedAmount"	readonly="true" />
+					<editorArea:attribute qualifier="requestId"	readonly="true" />
+				</editorArea:section>
+				<editorArea:section	name="ordermanagementbackoffice.section.paymenttransactions.entries">
+					<editorArea:panel>
+						<editorArea:attribute	editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor" qualifier="entries" readonly="true">
+							<editorArea:editor-parameter>
+								<editorArea:name>listConfigContext</editorArea:name>
+								<editorArea:value>referenceListViewPaymentTransactionEntries
+								</editorArea:value>
+							</editorArea:editor-parameter>
+							<editorArea:editor-parameter>
+								<editorArea:name>disableDisplayingDetails</editorArea:name>
+								<editorArea:value>true</editorArea:value>
+							</editorArea:editor-parameter>
+							<editorArea:editor-parameter>
+								<editorArea:name>disableRemoveReference</editorArea:name>
+								<editorArea:value>true</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+					</editorArea:panel>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+
+    <context merge-by="module" parent="GenericItem" type="ReturnRequest" component="oms-editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="ordermanagementbackoffice.tab.general">
+                <editorArea:section name="ordermanagementbackoffice.section.returns.rma.properties">
+                    <editorArea:panel>
+                        <editorArea:attribute qualifier="RMA" readonly="true" label="ordermanagementbackoffice.returnrequest.rma"/>
+                    </editorArea:panel>
+                    <editorArea:panel>
+                        <editorArea:attribute qualifier="order" readonly="true" label="ordermanagementbackoffice.returnrequest.order.number">
+                            <editorArea:editor-parameter>
+                                <editorArea:name>disableDisplayingDetails</editorArea:name>
+                                <editorArea:value>true</editorArea:value>
+                            </editorArea:editor-parameter>
+                        </editorArea:attribute>
+                    </editorArea:panel>
+                    <editorArea:customPanel name="ordermanagementbackoffice.panel.order.general.shipaddress" spring-bean="orderNestedAttributePanelRenderer">
+                        <editorArea:attribute qualifier="order.deliveryCost" readonly="true" />
+                    </editorArea:customPanel>
+                    <editorArea:panel>
+                        <editorArea:attribute qualifier="refundShippingCost"/>
+                    </editorArea:panel>
+                    <editorArea:attribute qualifier="originalRefundAmount" readonly="true">
+                        <editorArea:editor-parameter>
+                            <editorArea:name>numberFormat</editorArea:name>
+                            <editorArea:value>###.00</editorArea:value>
+                        </editorArea:editor-parameter>
+                    </editorArea:attribute>
+                    <editorArea:attribute qualifier="customRefundAmount">
+                        <editorArea:editor-parameter>
+                            <editorArea:name>numberFormat</editorArea:name>
+                            <editorArea:value>###.00</editorArea:value>
+                        </editorArea:editor-parameter>
+                    </editorArea:attribute>
+                    <editorArea:attribute qualifier="status" readonly="true"/>
+                </editorArea:section>
+                <editorArea:section
+					name="ordermanagementbackoffice.section.returns.hierarchy.descendants">
+					<editorArea:panel>
+						<editorArea:attribute editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor" qualifier="returnEntries" readonly="true">
+							<editorArea:editor-parameter>
+								<editorArea:name>listConfigContext</editorArea:name>
+								<editorArea:value>referenceListViewRefundEntries</editorArea:value>
+							</editorArea:editor-parameter>
+							<editorArea:editor-parameter>
+								<editorArea:name>disableDisplayingDetails</editorArea:name>
+								<editorArea:value>true</editorArea:value>
+							</editorArea:editor-parameter>
+							<editorArea:editor-parameter>
+								<editorArea:name>disableRemoveReference</editorArea:name>
+								<editorArea:value>true</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+					</editorArea:panel>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+
+	<context merge-by="module" parent="GenericItem" type="FraudReport" component="editor-area">
+	    <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+	        <editorArea:tab name="warehousingbackoffice.tab.general">
+           		<editorArea:section name="ordermanagementbackoffice.section.order.report">
+					<editorArea:panel>
+						<editorArea:attribute
+							editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"
+							qualifier="fraudSymptomScorings" readonly="true">
+							<editorArea:editor-parameter>
+								<editorArea:name>listConfigContext</editorArea:name>
+							</editorArea:editor-parameter>
+							<editorArea:editor-parameter>
+								<editorArea:name>disableDisplayingDetails</editorArea:name>
+								<editorArea:value>true</editorArea:value>
+							</editorArea:editor-parameter>
+							<editorArea:editor-parameter>
+								<editorArea:name>disableRemoveReference</editorArea:name>
+								<editorArea:value>true</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+					</editorArea:panel>
+            	</editorArea:section>
+        	</editorArea:tab>
+    	</editorArea:editorArea>
+    </context>
+	
+	<context merge-by="type" parent="GenericItem" type="FraudReport" component="referenceListViewFraudReports">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="code" />
+			<list-view:column qualifier="provider" />
+			<list-view:column qualifier="status" />
+			<list-view:column qualifier="explanation" />
+			<list-view:column qualifier="timestamp" />
+			<list-view:column spring-bean="fraudCheckButtonCellRenderer" label="ordermanagementbackoffice.order.hierarchy.actions" />
+		</list-view:list-view>
+	</context>
+
+    <context merge-by="type" parent="GenericItem" type="ReturnEntry" component="referenceListViewRefundEntries">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="orderEntry.product.code" />
+            <list-view:column qualifier="orderEntry.product.name" />
+            <list-view:column qualifier="orderEntry.basePrice" />
+            <list-view:column qualifier="amount" spring-bean="refundEntryTotalPriceRenderer" label="ordermanagementbackoffice.section.returns.hierarchy.totalPrice"/>
+            <list-view:column qualifier="expectedQuantity" />
+        </list-view:list-view>
+    </context>
+
+
+	
+	<context merge-by="type" parent="GenericItem" type="PaymentTransaction" component="referenceListViewPaymentTransactions">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="code" />
+			<list-view:column qualifier="info" />
+			<list-view:column qualifier="paymentProvider" />
+			<list-view:column qualifier="plannedAmount" />
+			<list-view:column qualifier="requestId" />
+		</list-view:list-view>
+	</context>
+	
+	 <context merge-by="module" parent="GenericItem" type="PaymentTransactionEntry" component="referenceListViewPaymentTransactionEntries">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="time"/>
+            <list-view:column qualifier="type"/>
+            <list-view:column qualifier="requestId"/>
+            <list-view:column qualifier="amount"/>
+            <list-view:column qualifier="transactionStatus"/>
+            <list-view:column qualifier="transactionStatusDetails"/>
+        </list-view:list-view>
+    </context>
+
+	<context merge-by="type" parent="GenericItem" type="OrderEntry" component="referenceListViewOrderEntries">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="product.code" label="ordermanagementbackoffice.order.hierarchy.productcode" />	
+			<list-view:column qualifier="product.name" label="ordermanagementbackoffice.order.hierarchy.productname" />
+			<list-view:column qualifier="basePrice" label="ordermanagementbackoffice.order.hierarchy.itemprice" />
+			<list-view:column qualifier="quantity" label="ordermanagementbackoffice.order.hierarchy.qty" />
+			<list-view:column qualifier="totalPrice" label="ordermanagementbackoffice.order.hierarchy.totalprice" />
+			<list-view:column qualifier="quantityPending" />
+			<list-view:column qualifier="quantityReturned" />
+			<list-view:column qualifier="quantityCancelled" />
+			<list-view:column qualifier="quantityShipped" />
+			<list-view:column spring-bean="cancelButtonCellRenderer" label="ordermanagementbackoffice.order.hierarchy.actions" />
+		</list-view:list-view>
+	</context>
+	
+	<context merge-by="type" parent="GenericItem" type="Consignment" component="referenceListViewConsignments">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="code" name="ordermanagementbackoffice.order.tab.consignments.code"/>
+			<list-view:column qualifier="trackingID"/>
+			<list-view:column qualifier="deliveryMode"/>
+			<list-view:column qualifier="status"/>
+		</list-view:list-view>
+	</context>
+
+    <!-- Actions -->
+	 <context component="omslistviewActions" type="GenericItem">
+        <y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <y:group qualifier="common">
+                <y:label>actiongroup.common</y:label>
+                <y:action action-id="com.hybris.cockpitng.listview.action.export.csv" property="exportColumnsAndData" />
+            </y:group>
+        </y:actions>
+    </context>
+    
+    <context component="omsEditorAreaActions" type="Order" merge-by="type">
+        <y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:group qualifier="common">
+                <y:label>actiongroup.common</y:label>
+                <y:action action-id="de.hybris.ordermanagementbackoffice.actions.cancelorderaction" property="currentObject" />
+                <y:action action-id="de.hybris.ordermanagementbackoffice.actions.createreturnrequestaction" property="currentObject" />
+            </y:group>
+        </y:actions>
+    </context>
+
+    <context component="omsEditorAreaActions" type="ReturnRequest" merge-by="type">
+        <y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:group qualifier="common">
+                <y:label>actiongroup.common</y:label>
+                <y:action action-id="de.hybris.ordermanagementbackoffice.actions.manualrefundaction" property="currentObject" />
+                <y:action action-id="de.hybris.ordermanagementbackoffice.actions.autorefundaction" property="currentObject" />
+                <y:action action-id="de.hybris.ordermanagementbackoffice.actions.cancelrefundaction" property="currentObject" />
+                <y:action action-id="de.hybris.ordermanagementbackoffice.actions.manualtaxreverseaction" property="currentObject" />
+            </y:group>
+        </y:actions>
+    </context>
+    
+    <context type="Address" component="collectioneditorareaactions">
+        <y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <y:group qualifier="common">
+            	<!-- leave empty to disable delete action or provide action-id to add custom action -->
+            </y:group>
+        </y:actions>
+    </context>
+    
+    <context type="PaymentTransaction" component="collectioneditorareaactions">
+        <y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <y:group qualifier="common">
+            	<!-- leave empty to disable delete action or provide action-id to add custom action -->
+            </y:group>
+        </y:actions>
+    </context>
+    
+    <context type="FraudReport" component="collectioneditorareaactions">
+        <y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <y:group qualifier="common">
+            	<!-- leave empty to disable delete action or provide action-id to add custom action -->
+            </y:group>
+        </y:actions>
+    </context>
+
+    <!-- Dynamic Forms -->
+    <context type="ReturnRequest" component="editorAreaDynamicForms">
+        <df:dynamicForms xmlns:df="http://www.hybris.com/cockpitng/component/dynamicForms" modelProperty="currentObject">
+            <df:attribute id="disableCustomRefundAmount" triggeredOn="status" qualifier="customRefundAmount" disabledIf="status.toString().equals('CANCELED') or status.toString().equals('PAYMENT_CAPTURED') or status.toString().equals('TAX_CAPTURED') or status.toString().equals('COMPLETED')"/>
+            <df:attribute id="disableRefundShippingCost" triggeredOn="status" qualifier="refundShippingCost" disabledIf="status.toString().equals('CANCELED') or status.toString().equals('PAYMENT_CAPTURED') or status.toString().equals('TAX_CAPTURED') or status.toString().equals('COMPLETED')"/>
+            <df:attribute id="evalOrigRefundAmount" computedValue="model://evalOrigRefundAmount" qualifier="originalRefundAmount" triggeredOn="refundShippingCost" >
+                <df:scriptingConfig computedValueLanguage="Groovy" computedValueScriptType="uri"/>
+            </df:attribute>
+            <df:attribute id="evalCustomRefundAmount" computedValue="model://evalCustomRefundAmount" qualifier="customRefundAmount" triggeredOn="refundShippingCost">
+                <df:scriptingConfig computedValueLanguage="Groovy" computedValueScriptType="uri"/>
+            </df:attribute>
+        </df:dynamicForms>
+    </context>
+
+</config>

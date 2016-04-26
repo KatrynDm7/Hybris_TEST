@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+<content-editor hideEmpty="true" hideReadOnly="true" groupCollections="false">
+	<template>
+    <![CDATA[
+        <table width="100%" style="margin:0px;padding:0px">
+            <tbody>
+                <tr>
+                    <td colspan="2"><div style="height:6px"/></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><div class="contentEditorHeader" style="background-color:#C3C3C3;font-size:11px;padding:3px;"><b>$label</b></div></td>
+                </tr>
+                <tr>
+                    <td style="width:900px"><cockpit code="property" value="YFormCMSComponent.applicationId"/></td>
+                    <td><div style="height:6px"/></td>
+                </tr>
+                <tr>
+                    <td style="width:900px"><cockpit code="property" value="YFormCMSComponent.formId"/></td>
+                    <td><div style="height:6px"/></td>
+                </tr>
+                <tr>
+                    <td style="width:900px"><cockpit code="property" value="YFormCMSComponent.action"/></td>
+                    <td><div style="height:6px"/></td>
+                </tr>
+                <tr>
+                    <td style="width:900px"><cockpit code="property" value="YFormCMSComponent.formDataId"/></td>
+                    <td><div style="height:6px"/></td>
+                </tr>
+            </tbody>
+        </table>
+    ]]>
+	</template>
+</content-editor>

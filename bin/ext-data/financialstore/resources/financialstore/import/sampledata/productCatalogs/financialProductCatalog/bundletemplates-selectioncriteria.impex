@@ -1,0 +1,45 @@
+$productCatalog=financialProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+# Selection creteria
+INSERT_UPDATE PickExactlyNBundleSelectionCriteria;id[unique=true];n;$catalogVersion
+;STAR_PLAN_PickExactlyOne		;1
+;TRA_INSURANCE_PickExactlyOne	;1
+;PRO_INSURANCE_PickExactlyOne	;1
+;AUTO_INSAURANCE_pickExctlyOne  ;1
+;LIFE_INSAURANCE_pickExctlyOne  ;1
+
+# Auto pick Selection creteria
+INSERT_UPDATE AutoPickBundleSelectionCriteria;id[unique=true];$catalogVersion
+;Auto_Mandatory_AutoPickBundleSelection
+
+# 
+INSERT_UPDATE PickNToMBundleSelectionCriteria;id[unique=true];n;m;$catalogVersion
+;STAR_PRODUCT_Pick0To3	;0	;3
+;TRA_OPTIONS_Pick0To6	;0	;6
+;PRO_OPTIONS_Pick0To5	;0	;5
+;AUTO_ANNUAL_OPTIONS_Pick0To4   ;0  ;4
+;AUTO_MONTHLY_OPTIONS_Pick0To5  ;0  ;5
+;LIFE_OPTIONS_Pick0To3  ;0  ;3
+ 
+#Update the BundleTemplate with Selectioncriteria
+UPDATE BundleTemplate;id[unique=true];version[default=1.0][unique=true];bundleSelectionCriteria(id, $catalogVersion);$catalogVersion
+;STAR_PRODUCT						; ;STAR_PRODUCT_Pick0To3
+;STAR_PLAN							; ;STAR_PLAN_PickExactlyOne
+;TRA_INSURANCE						; ;TRA_INSURANCE_PickExactlyOne
+;TRA_OPTIONS						; ;TRA_OPTIONS_Pick0To6
+;PRO_HOMEOWNERS_INSURANCE			; ;PRO_INSURANCE_PickExactlyOne
+;PRO_HOMEOWNERS_OPTIONS	 			; ;PRO_OPTIONS_Pick0To5
+;PRO_RENTERS_INSURANCE   			; ;PRO_INSURANCE_PickExactlyOne
+;PRO_RENTERS_OPTIONS	 			; ;PRO_OPTIONS_Pick0To5
+;PRO_HOMEOWNERS_INSURANCE_MONTHLY	; ;PRO_INSURANCE_PickExactlyOne
+;PRO_HOMEOWNERS_OPTIONS_MONTHLY	 	; ;PRO_OPTIONS_Pick0To5
+;PRO_RENTERS_INSURANCE_MONTHLY   	; ;PRO_INSURANCE_PickExactlyOne
+;PRO_RENTERS_OPTIONS_MONTHLY	 	; ;PRO_OPTIONS_Pick0To5
+;AUTO_INSURANCE_ANNUALLY            ; ;AUTO_INSAURANCE_pickExctlyOne
+;AUTO_INSURANCE_ANNUALLY_OPTIONS    ; ;AUTO_ANNUAL_OPTIONS_Pick0To4
+;AUTO_INSURANCE_MONTHLY             ; ;AUTO_INSAURANCE_pickExctlyOne
+;AUTO_INSURANCE_MONTHLY_OPTIONS     ; ;AUTO_MONTHLY_OPTIONS_Pick0To5
+;AUTO_MANDATORY						; ;Auto_Mandatory_AutoPickBundleSelection
+;LIFE_PLAN                          ; ;LIFE_INSAURANCE_pickExctlyOne
+;LIFE_OPTIONS                       ; ;LIFE_OPTIONS_Pick0To3

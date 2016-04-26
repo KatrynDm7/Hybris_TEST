@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<config xmlns="http://www.hybris.com/cockpit/config">
+	<context type="com.hybris.cockpitng.util.Range" component="base">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels beanId="rangeLabelProvider"/>
+        </y:base>
+    </context>
+    
+    <context merge-by="type" parent="AbstractLuceneItem" type="LuceneIndex" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:essentials xmlns="http://www.hybris.com/cockpitng/component/editorArea">
+				<editorArea:essentialSection name="hmc.essential">
+					<attribute qualifier="code"/>
+				</editorArea:essentialSection>
+			</editorArea:essentials>
+			<editorArea:tab xmlns="http://www.hybris.com/cockpitng/component/editorArea" name="hmc.tab.common">
+				<section name="hmc.section.update">
+					<attribute qualifier="rebuildStartTimestamp"/>
+					<attribute qualifier="rebuildEndTimestamp"/>
+					<attribute qualifier="upToDate"/>
+					<attribute qualifier="pendingUpdatesCount"/>
+				</section>
+				<section name="hmc.section.indexconfiguration">
+					<attribute qualifier="indexConfigurations"/>
+					<attribute qualifier="postQueryFilterClassName" description="hmc.text.luceneindex.postqueryfilterclassname"/>
+				</section>
+				<section name="hmc.section.languageconfigurations">
+					<attribute qualifier="languageConfigurations"/>
+				</section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	
+	<context type="IndexConfiguration" component="base" merge-by="type" parent="AbstractLuceneItem">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>luceneIndex.code+ ' - ' +indexedType.code</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	
+	<context type="LanguageConfiguration" component="base" merge-by="type" parent="AbstractLuceneItem">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>luceneIndex.code+ ' - ' +indexedLanguage.name</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	
+	<context merge-by="type" parent="AbstractLuceneItem" type="LuceneIndex" component="simple-search">
+		<simple-search:simple-search xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+			<simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="code"/>
+		</simple-search:simple-search>
+	</context>
+	
+	<context type="LuceneIndex" component="advanced-search" merge-by="type" parent="AbstractLuceneItem">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch" xmlns="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<field-list>
+				<field name="code" selected="true" operator="startsWith"/>
+				<field name="postQueryFilterClassName" selected="false"/>
+				<field name="rebuildEndTimestamp" selected="false"/>
+				<field name="rebuildStartTimestamp" selected="false"/>
+				<field name="testLoc" selected="false"/>
+				<field name="comments" selected="false"/>
+				<field name="creationtime" selected="false"/>
+				<field name="itemtype" selected="false"/>
+				<field name="modifiedtime" selected="false"/>
+				<field name="owner" selected="false"/>
+				<field name="pk" selected="false" editor="com.hybris.cockpitng.editor.defaultlong"/>
+			</field-list>
+		</advanced-search:advanced-search>
+	</context>
+	
+	<context merge-by="type" parent="AbstractLuceneItem" type="LuceneIndex" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="code"/>
+		</list-view:list-view>
+	</context>
+	
+	<context type="LuceneIndex" component="base" merge-by="type" parent="AbstractLuceneItem">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>code</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	
+	<context component="explorer-tree">
+		<explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
+			<explorer-tree:navigation-node id="hmc_treenode_system">
+				<explorer-tree:type-node code="LuceneIndex" id="hmc_typenode_luceneindex" position="11"/>
+			</explorer-tree:navigation-node>
+		</explorer-tree:explorer-tree>
+	</context>
+	
+	<context component="simple-list" type="java.lang.String">
+		<ysl:simple-list xmlns:ysl="http://www.hybris.com/cockpitng/config/simplelist">
+			<ysl:name field="#root"/>
+			<ysl:description field="class.canonicalName"/>
+		</ysl:simple-list>
+	</context>
+	
+	<context type="java.util.Collection" component="base">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels beanId="collectionLabelProvider"/>
+		</y:base>
+    </context>
+    <context type="java.util.Map" component="base">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels beanId="mapLabelProvider"/>
+        </y:base>
+    </context>
+	<context type="java.util.Locale" component="base">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels beanId="localeLabelProvider"/>
+        </y:base>
+    </context>
+</config>

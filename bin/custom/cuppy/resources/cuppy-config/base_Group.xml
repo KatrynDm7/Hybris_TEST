@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="Group.code" />
+			<property qualifier="Group.name" />
+		</search-properties>
+		<sort-properties>
+			<property qualifier="Group.code" />
+			<property qualifier="Group.name" />
+		</sort-properties>
+	</search>
+	<label>
+		<property qualifier="Group.code" />
+		<property qualifier="Group.name"/>
+		<property qualifier="Group.competition.name"/>
+	</label>
+</base>

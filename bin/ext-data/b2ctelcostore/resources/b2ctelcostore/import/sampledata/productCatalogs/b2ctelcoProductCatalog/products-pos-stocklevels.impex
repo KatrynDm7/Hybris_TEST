@@ -1,0 +1,182 @@
+# ImpEx for Importing Products Store Stock Levels into B2C Telco Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=b2ctelcoProductCatalog
+$productCatalogName=B2C Telco Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$vendor=b2ctel
+
+
+# Create some Warehouses for the Vendor
+INSERT_UPDATE Warehouse;code[unique=true];vendor(code)[default=$vendor];default[default='false']
+;Hybris Telco - Chicago Premium Outlets
+;Hybris Telco - Chrysler Building
+;Hybris Telco - San Francisco Center
+;Hybris Telco - Seattle Premium Outlets
+;Hybris Telco - Riverwalk Marketplace
+
+INSERT_UPDATE StockLevel;available;warehouse(code)[default='Hybris Telco - Chicago Premium Outlets',unique=true];inStockStatus(code)[default='notSpecified'];overSelling;preOrder;productCode[unique=true];reserved
+#Devices (iPhones)
+;10;;;0;0;2047052;0
+;10;;;0;0;2093587;0
+;10;;;0;0;3417123;0
+;10;;;0;0;3417124;0
+;10;;;0;0;3417125;0
+;10;;;0;0;3417130;0
+;10;;;0;0;5909755;0
+;10;;;0;0;5925495;0
+;10;;;0;0;5925498;0
+;10;;;0;0;5925499;0
+;10;;;0;0;5925500;0
+#Accessories (Headsets)
+;10;;;0;0;3335769;0
+;10;;;0;0;3432858;0
+;10;;;0;0;3432862;0
+;10;;;0;0;3551681;0
+;10;;;0;0;3682711;0
+;10;;;0;0;3717933;0
+;10;;;0;0;3781771;0
+;10;;;0;0;3798326;0
+;10;;;0;0;3798384;0
+;10;;;0;0;3882494;0
+;10;;;0;0;3887538;0
+;10;;;0;0;3938133;0
+;10;;;0;0;3951220;0
+;10;;;0;0;4104255;0
+;10;;;0;0;4211479;0
+;10;;;0;0;5120023;0
+;10;;;0;0;5120024;0
+;10;;;0;0;6053184;0
+;10;;;0;0;6068414;0
+
+INSERT_UPDATE StockLevel;available;warehouse(code)[default='Hybris Telco - Chrysler Building',unique=true];inStockStatus(code)[default='notSpecified'];overSelling;preOrder;productCode[unique=true];reserved
+#Devices (iPhones)
+;10;;;0;0;2047052;0
+;10;;;0;0;2093587;0
+;10;;;0;0;3417123;0
+;10;;;0;0;3417124;0
+;10;;;0;0;3417125;0
+;10;;;0;0;3417130;0
+;10;;;0;0;5909755;0
+;10;;;0;0;5925498;0
+;10;;;0;0;5925499;0
+;10;;;0;0;5925500;0
+#Accessories (Headsets)
+;10;;;0;0;3335769;0
+;10;;;0;0;3432858;0
+;10;;;0;0;3432862;0
+;10;;;0;0;3551681;0
+;10;;;0;0;3682711;0
+;10;;;0;0;3717933;0
+;10;;;0;0;3781771;0
+;10;;;0;0;3798326;0
+;10;;;0;0;3798384;0
+;10;;;0;0;3882494;0
+;10;;;0;0;3887538;0
+;10;;;0;0;3938133;0
+;10;;;0;0;3951220;0
+;10;;;0;0;4104255;0
+;10;;;0;0;4211479;0
+;10;;;0;0;5120023;0
+;10;;;0;0;5120024;0
+;10;;;0;0;6053184;0
+;10;;;0;0;6068414;0
+
+INSERT_UPDATE StockLevel;available;warehouse(code)[default='Hybris Telco - San Francisco Center',unique=true];inStockStatus(code)[default='notSpecified'];overSelling;preOrder;productCode[unique=true];reserved
+#Devices (iPhones)
+;10;;;0;0;2047052;0
+;10;;;0;0;2093587;0
+;10;;;0;0;3417123;0
+;10;;;0;0;3417124;0
+;10;;;0;0;3417125;0
+;10;;;0;0;3417130;0
+;10;;;0;0;5909755;0
+;10;;;0;0;5925498;0
+;10;;;0;0;5925499;0
+;10;;;0;0;5925500;0
+#Accessories (Headsets)
+;10;;;0;0;3335769;0
+;10;;;0;0;3432858;0
+;10;;;0;0;3432862;0
+;10;;;0;0;3551681;0
+;10;;;0;0;3682711;0
+;10;;;0;0;3717933;0
+;10;;;0;0;3781771;0
+;10;;;0;0;3798326;0
+;10;;;0;0;3798384;0
+;10;;;0;0;3882494;0
+;10;;;0;0;3887538;0
+;10;;;0;0;3938133;0
+;10;;;0;0;3951220;0
+;10;;;0;0;4104255;0
+;10;;;0;0;4211479;0
+;10;;;0;0;5120023;0
+;10;;;0;0;5120024;0
+;10;;;0;0;6053184;0
+;10;;;0;0;6068414;0
+
+INSERT_UPDATE StockLevel;available;warehouse(code)[default='Hybris Telco - Seattle Premium Outlets',unique=true];inStockStatus(code)[default='notSpecified'];overSelling;preOrder;productCode[unique=true];reserved
+#Devices (iPhones)
+;10;;;0;0;2047052;0
+;10;;;0;0;2093587;0
+;10;;;0;0;3417123;0
+;10;;;0;0;3417124;0
+;10;;;0;0;3417125;0
+;10;;;0;0;3417130;0
+;10;;;0;0;5909755;0
+;10;;;0;0;5925498;0
+;10;;;0;0;5925499;0
+;10;;;0;0;5925500;0
+#Accessories (Headsets)
+;10;;;0;0;3335769;0
+;10;;;0;0;3432858;0
+;10;;;0;0;3432862;0
+;10;;;0;0;3551681;0
+;10;;;0;0;3682711;0
+;10;;;0;0;3717933;0
+;10;;;0;0;3781771;0
+;10;;;0;0;3798326;0
+;10;;;0;0;3798384;0
+;10;;;0;0;3882494;0
+;10;;;0;0;3887538;0
+;10;;;0;0;3938133;0
+;10;;;0;0;3951220;0
+;10;;;0;0;4104255;0
+;10;;;0;0;4211479;0
+;10;;;0;0;5120023;0
+;10;;;0;0;5120024;0
+;10;;;0;0;6053184;0
+;10;;;0;0;6068414;0
+
+INSERT_UPDATE StockLevel;available;warehouse(code)[default='Hybris Telco - Riverwalk Marketplace',unique=true];inStockStatus(code)[default='notSpecified'];overSelling;preOrder;productCode[unique=true];reserved
+#Devices (iPhones)
+;10;;;0;0;2047052;0
+;10;;;0;0;2093587;0
+;10;;;0;0;3417123;0
+;10;;;0;0;3417124;0
+;10;;;0;0;3417125;0
+;10;;;0;0;3417130;0
+;10;;;0;0;5909755;0
+;10;;;0;0;5925498;0
+;10;;;0;0;5925499;0
+;10;;;0;0;5925500;0
+#Accessories (Headsets)
+;10;;;0;0;3335769;0
+;10;;;0;0;3432858;0
+;10;;;0;0;3432862;0
+;10;;;0;0;3551681;0
+;10;;;0;0;3682711;0
+;10;;;0;0;3717933;0
+;10;;;0;0;3781771;0
+;10;;;0;0;3798326;0
+;10;;;0;0;3798384;0
+;10;;;0;0;3882494;0
+;10;;;0;0;3887538;0
+;10;;;0;0;3938133;0
+;10;;;0;0;3951220;0
+;10;;;0;0;4104255;0
+;10;;;0;0;4211479;0
+;10;;;0;0;5120023;0
+;10;;;0;0;5120024;0
+;10;;;0;0;6053184;0
+;10;;;0;0;6068414;0

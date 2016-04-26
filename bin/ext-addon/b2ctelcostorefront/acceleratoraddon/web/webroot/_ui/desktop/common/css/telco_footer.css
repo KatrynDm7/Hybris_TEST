@@ -1,0 +1,12 @@
+.footer {
+    border-top: 4px solid #f0efec;
+    margin-top: 87px;
+}
+.footer .links ul{
+    width: 235px;
+    padding-right: 10px;
+}
+.footer .links .title{
+    font-weight: bold;
+    margin-bottom: 20px;
+}

@@ -1,0 +1,58 @@
+# Create jiathisDetail page via New Page Template
+
+$contentCatalog=electronicsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+$jarResourceCms=$config-jarResourceCmsValue
+
+INSERT_UPDATE ProductAddToCartComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;AddToCart;Product Add To Cart;AddToCart
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
+;;JiaThisAddToCartSlot;AddToCart slot for jiathis Detail;true
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;JiaThisAddToCartSlot;AddToCart
+
+INSERT_UPDATE JiaThisComponent;$contentCV[unique=true];uid[unique=true];name;slots($contentCV, uid)
+;;JiaThis;Jia This;JiaThisAddToCartSlot
+
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;JiaThisDetailsPageTemplate;Jia This Details Page Template;product/productLayout2Page;ProductPage
+
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;;JiaThisDetailsPageTemplate;$jarResourceCms/structure-view/structure_productDetails2PageTemplate.vm
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='JiaThisDetailsPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;NavigationBar;;;navigation
+;Section1;;;wide
+;Section2;;;wide
+;Section3;;;wide
+;Section4;;;wide
+;VariantSelector;;ProductVariantSelectorComponent;narrow
+;JiaThisAddToCartSlot;;ProductAddToCartComponent;narrow
+;CrossSelling;;ProductReferencesComponent;narrow
+;UpSelling;;ProductReferencesComponent;narrow
+;Footer;;;footer
+;Tabs;;CMSTabParagraphContainer
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='JiaThisDetailsPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-JiaThisDetails;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-JiaThisDetails;HomepageNavLink;;HomepageNavLinkSlot;true
+;;MiniCart-JiaThisDetails;MiniCart;;MiniCartSlot;true
+;;NavigationBar-JiaThisDetails;NavigationBar;;NavigationBarSlot;true
+;;Tabs-JiaThisDetails;Tabs;;TabsSlot;true
+;;Footer-JiaThisDetails;Footer;;FooterSlot;true
+;;HeaderLinks-JiaThisDetails;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-JiaThisDetails;SearchBox;;SearchBoxSlot;true
+;;VariantSelector-JiaThisDetails;VariantSelector;;VariantSelectorSlot;true
+;;JiaThisAddToCart-JiaThisDetails;AddToCart;;JiaThisAddToCartSlot;true
+;;UpSelling-JiaThisDetails;UpSelling;;UpSellingSlot;true
+;;CrossSelling-JiaThisDetails;CrossSelling;;CrossSellingSlot;true
+
+INSERT_UPDATE ProductPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved']
+;;jiathisDetail;Jia This Detail;JiaThisDetailsPageTemplate;true

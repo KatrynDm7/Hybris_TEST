@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<project name="scalanature_buildcallbacks">
+
+    <macrodef name="scala_compile">
+        <attribute name="srcdir"/>
+        <attribute name="destdir"/>
+        <attribute name="extname"/>
+
+        <sequential>
+            <property name="scala.lib.dir" location="${ext.scalanature.path}/lib"/>
+
+            <taskdef resource="scala/tools/ant/antlib.xml">
+                <classpath>
+                    <pathelement location="${scala.lib.dir}/scala-compiler-2.11.5.jar"/>
+                    <pathelement location="${scala.lib.dir}/scala-library-2.11.5.jar"/>
+                    <pathelement location="${scala.lib.dir}/scala-reflect-2.11.5.jar"/>
+                </classpath>
+            </taskdef>
+            <echo message="compile scala sources for @{extname} using srcdir: @{srcdir}"/>
+            <mkdir dir="@{destdir}"/>
+            <scalac srcdir="@{srcdir}" destdir="@{destdir}"
+                    target="jvm-${build.target}" force="yes" deprecation="yes" usejavacp="yes">
+                <classpath>
+                    <fileset dir="${ext.@{extname}.path}" erroronmissingdir="false">
+                        <include name="${ext.@{extname}.additional.src.dir}/**"/>
+                        <include name="${ext.@{extname}.additional.testsrc.dir}/**"/>
+                        <include name="${ext.@{extname}.additional.websrc.dir}/**"/>
+                        <include name="${ext.@{extname}.additional.webtestsrc.dir}/**"/>
+                    </fileset>
+                    <pathelement path="${build.classpath}"/>
+                    <pathelement path="${platformhome}/bootstrap/bin/models.jar" />
+                    <fileset dir="${bundled.tomcat.home}">
+                        <include name="lib/jsp-api.jar"/>
+                        <include name="lib/servlet-api.jar"/>
+                        <include name="lib/el-api.jar"/>
+                        <include name="lib/wrapper*.jar"/>
+                    </fileset>
+                    <dirset dir="${ext.@{extname}.path}/web/webroot/WEB-INF" erroronmissingdir="false">
+                        <include name="classes" />
+                    </dirset>
+                    <pathelement path="${ext.@{extname}.classpath}" />
+                </classpath>
+                <include name="**/*.scala"/>
+            </scalac>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="scalanature_compile_core">
+        <attribute name="extname"/>
+        <sequential>
+            <if>
+                <isset property="ext.@{extname}.coremodule.available"/>
+                <then>
+                    <if>
+                        <istrue value="${ext.@{extname}.extension.coremodule.sourceavailable}"/>
+                        <then>
+                            <scala_compile srcdir="${ext.@{extname}.path}/scalasrc"
+                                           destdir="${ext.@{extname}.path}/classes"
+                                           extname="@{extname}"/>
+                            <scala_compile srcdir="${ext.@{extname}.path}/scalatestsrc"
+                                           destdir="${ext.@{extname}.path}/classes"
+                                           extname="@{extname}"/>
+                        </then>
+                    </if>
+                </then>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="scalanature_compile_web">
+        <attribute name="extname"/>
+        <sequential>
+            <if>
+                <isset property="ext.@{extname}.webmodule.available"/>
+                <then>
+                    <if>
+                        <istrue value="${ext.@{extname}.extension.webmodule.sourceavailable}"/>
+                        <then>
+                            <scala_compile srcdir="${ext.@{extname}.path}/web/scalasrc"
+                                           destdir="${ext.@{extname}.path}/web/webroot/WEB-INF/classes"
+                                           extname="@{extname}"/>
+                            <scala_compile srcdir="${ext.@{extname}.path}/web/scalatestsrc"
+                                           destdir="${ext.@{extname}.path}/web/webroot/WEB-INF/classes"
+                                           extname="@{extname}"/>
+                        </then>
+                    </if>
+                </then>
+            </if>
+        </sequential>
+    </macrodef>
+
+</project>

@@ -1,0 +1,52 @@
+.searchPOS .headline {
+    font-size: 24px;
+    color: #484848;
+    padding: 0 5px 25px;
+    text-transform: none;
+    margin: 0;
+    border-bottom: 0;
+}
+.searchPOS .prod_grid img {
+    width: 150px;
+}
+.searchPOS .searchPOSForm .control-group {
+    width: 265px;
+}
+.searchPOS .searchPOSForm button {
+    margin: 0 10px;
+}
+.searchPOS .searchPOSForm #find_pickupStoresNearMe_button {
+    background: url("../images/findStoresNearMe-bg.png") no-repeat scroll 10px center #ffb800;
+    padding-left: 75px;
+    padding-right: 30px;
+}
+.searchPOS #pickup_store_results .add_to_cart_storepickup_form,
+.searchPOS #pickup_store_results .select_store_form {
+    margin-top: -62px;
+}
+.searchPOS #pickup_store_results .add_to_cart_storepickup_form .positive,
+.searchPOS #pickup_store_results .select_store_form .positive {
+    margin-bottom: 10px;
+}
+
+.searchPOSContent .searchPOSPaging {
+    margin-top: 20px;
+}
+.searchPOS li.searchPOSResult {
+    border-bottom: 1px solid #dbdad7;
+    width: 290px;
+    height: auto;
+    padding-bottom: 5px;
+    margin: 20px 35px 0 0;
+}
+.searchPOS .prod_grid img {
+    width: 150px;
+    border: 1px solid #dcdbd8;
+    border-radius: 3px;
+    padding: 2px;
+    margin-bottom: 12px;
+}
+.searchPOS #pickupQty {
+    opacity: .6;
+    background-color: #fff;
+}

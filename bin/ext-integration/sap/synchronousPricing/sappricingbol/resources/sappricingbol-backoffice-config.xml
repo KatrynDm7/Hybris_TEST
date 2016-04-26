@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config xmlns="http://www.hybris.com/cockpit/config">
+  
+    <context merge-by="module" type="SAPConfiguration" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:essentials xmlns="http://www.hybris.com/cockpitng/component/editorArea">
+                <essentialSection name="hmc.essential">
+                    <attribute qualifier="core_name"/>
+                </essentialSection>
+            </editorArea:essentials>
+            <editorArea:tab xmlns="http://www.hybris.com/cockpitng/component/editorArea" name="hmc.tab.sappricing" position="2">
+                <editorArea:section name="hmc.section.sappricing">
+               
+                    <editorArea:attribute qualifier="sappricingbol_catalogPricing"/>
+                    <editorArea:attribute qualifier="sappricingbol_cartPricing"/>
+                     <editorArea:attribute qualifier="sappricingbol_cachePrice"/>
+                    <editorArea:attribute qualifier="sappricingbol_priceSub"/>
+                     <editorArea:attribute qualifier="sappricingbol_discountSub"/>
+                   
+                    <editorArea:attribute qualifier="sappricingbol_taxesSub"/>
+                    <editorArea:attribute qualifier="sappricingbol_deliverySub"/>
+                    <editorArea:attribute qualifier="sappricingbol_paymentSub"/>
+               
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    
+</config>

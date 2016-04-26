@@ -1,0 +1,51 @@
+$catalogversion=catalogversion(catalog(id),version)[unique=true,default='hwcatalog:Online${testId}']
+$supercategories=supercategories(code,catalogversion(catalog(id[default='hwcatalog']),version[default='Online${testId}']))
+$prices=europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+
+INSERT_UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];languages(isocode);active
+;hwcatalog;Online${testId};de,en;TRUE
+
+INSERT_UPDATE Category;code[unique=true];$catalogversion;name[lang=de];name[lang=en];$supercategories
+;test${testId};;test_de;test_en;
+
+INSERT_UPDATE Product;code[unique=true];$catalogversion;name[lang=de];name[lang=en];unit(code);$prices;approvalStatus(code);$supercategories;description[lang=de];description[lang=en];onlineDate[dateformat=dd-MM-yyyy]
+;testProduct0;;testProduct0-de;testProduct0-en;pieces;157,95 EUR;approved;test${testId};de-description;en-description;02-05-2008
+;testProduct1;;testProduct1-de;testProduct1-en;pieces;87,95 EUR, 145,99 USD, 1003 CHF;approved;test${testId};de-description;en-description;06-02-2009
+;testProduct2;;Deutche Name;English name;pieces;1,92 EUR, 3,99 USD;approved;test${testId};de-description;en-description;22-12-2009
+
+INSERT_UPDATE SolrValueRangeSet;name[unique=true];qualifier;type
+;testPriceRangeSetEUR${testId};EUR;double
+;testPriceRangeSetUSD${testId};USD;double
+;testPriceRangeSetCHF${testId};CHF;double
+
+INSERT_UPDATE SolrValueRange;solrValueRangeSet(name)[unique=true];name[unique=true];from;to
+;testPriceRangeSetEUR${testId};1-100;1;100
+;testPriceRangeSetEUR${testId};101-200;101;200
+;testPriceRangeSetEUR${testId};201-300;201;300
+;testPriceRangeSetEUR${testId};301-400;301;400
+;testPriceRangeSetEUR${testId};401-500;401;500
+;testPriceRangeSetEUR${testId};501-600;501;600
+;testPriceRangeSetEUR${testId};601-700;601;700
+;testPriceRangeSetEUR${testId};701-800;701;800
+;testPriceRangeSetEUR${testId};801-900;801;900
+;testPriceRangeSetEUR${testId};901-1000;901;1000
+;testPriceRangeSetEUR${testId};1001-INF;1001;
+;testPriceRangeSetUSD${testId};      $0-$49.99;   0;  49.99
+;testPriceRangeSetUSD${testId};    $50-$199.99;  50; 199.99
+;testPriceRangeSetUSD${testId};   $200-$499.99; 200; 499.99
+;testPriceRangeSetUSD${testId};   $500-$999.99; 500; 999.99
+;testPriceRangeSetUSD${testId};$1,000-$100,000;1000; 100000
+;testPriceRangeSetCHF${testId};      0-49.99SFr.;   0;  49.99
+;testPriceRangeSetCHF${testId};    50-199.99SFr.;  50; 199.99
+;testPriceRangeSetCHF${testId};   200-499.99SFr.; 200; 499.99
+;testPriceRangeSetCHF${testId};   500-999.99SFr.; 500; 999.99
+;testPriceRangeSetCHF${testId};1,000-100,000SFr.;1000; 100000
+
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);facet;localized;currency;multiValue;rangeSets(name);facetDisplayNameProvider;fieldValueProvider
+;testIndexedType${testId};price;double;;true;false;true;false;testPriceRangeSetEUR${testId},testPriceRangeSetUSD${testId},testPriceRangeSetCHF${testId};;productPriceValueProvider
+
+INSERT_UPDATE SolrSearchConfig;description[unique=true];allFacetValuesInResponse
+;testSearchConfig${testId};true
+
+INSERT_UPDATE SolrFacetSearchConfig;name[unique=true];catalogVersions(catalog(id),version);solrValueRangeSets(name);currencies(isocode)
+;testFacetSearchConfig${testId};hwcatalog:Online${testId};testPriceRangeSetEUR${testId},testPriceRangeSetUSD${testId},testPriceRangeSetCHF${testId};EUR,USD,CHF

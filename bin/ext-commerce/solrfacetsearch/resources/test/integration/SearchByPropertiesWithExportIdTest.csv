@@ -1,0 +1,20 @@
+
+INSERT_UPDATE Catalog;id[unique=true];name[lang=de];name[lang=en];supplier(uid);defaultCatalog
+;hwcatalog;Hardware-Katalog;Computer hardware;hybris;false
+
+INSERT_UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];languages(isocode);inclAssurance;inclDuty;inclFreight;inclPacking;active
+;hwcatalog;Online${testId};de,en,fr;true;true;true;false;true
+
+INSERT_UPDATE Product;code[unique=true];catalogversion(catalog(id),version)[unique=true];name[lang=de];name[lang=en];approvalStatus(code)
+;product1${testId};hwcatalog:Online${testId};deutches;english;approved
+;product2${testId};hwcatalog:Online${testId};deutches;english;approved
+
+INSERT_UPDATE SolrIndexedType;identifier[unique=true];type(code);indexName
+;testIndexedType${testId};Product;testIndexedType${testId}
+
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);facet;exportId
+;testIndexedType${testId};code;string;;true;code_id
+;testIndexedType${testId};name;text;sortabletext;true;
+
+INSERT_UPDATE SolrFacetSearchConfig;name[unique=true];catalogVersions(catalog(id),version)
+;testFacetSearchConfig${testId};hwcatalog:Online${testId}

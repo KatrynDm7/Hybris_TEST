@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd">
+		
+	<context:annotation-config/>
+	
+	<alias name="sapB2BAcceleratorCheckoutFacade" alias="acceleratorCheckoutFacade"/>
+	<bean id="sapB2BAcceleratorCheckoutFacade" class="de.hybris.platform.sap.sapordermgmtb2bfacades.checkout.impl.SapB2BAcceleratorCheckoutFacade" parent="sapOrdermgmtB2BCheckoutFacade">
+		<property name="acceleratorCheckoutFacade" ref="defaultAcceleratorCheckoutFacade"/>
+	</bean>
+	
+	<alias name="defaultB2BCheckoutFlowFacade" alias="checkoutFlowFacade"/>
+	<alias name="defaultB2BCheckoutFlowFacade" alias="b2bCheckoutFlowFacade"/>
+	<bean id="defaultB2BCheckoutFlowFacade" class="de.hybris.platform.sap.sapordermgmtb2bfacades.checkout.impl.SapB2BCheckoutFlowFacade" parent="sapB2BAcceleratorCheckoutFacade">
+		<property name="checkoutFlowFacade" ref="sessionOverrideCheckoutFlowFacade"/>
+	</bean>
+
+	<alias name="sapDeliveryMethodCheckoutStep" alias="deliveryMethodCheckoutStep" />
+	<bean id="sapDeliveryMethodCheckoutStep"  parent="defaultDeliveryMethodCheckoutStep">
+		<property name="checkoutStepValidator" ref="sapDeliveryMethodCheckoutValidator"/>	
+	</bean>
+	
+	<alias name="sapB2BDeliveryMethodCheckoutStepValidator" alias="sapDeliveryMethodCheckoutValidator" />
+	<bean id="sapB2BDeliveryMethodCheckoutStepValidator" class="de.hybris.platform.sap.ysapordermgmtb2baddon.checkout.steps.validation.SapB2BDeliveryMethodCheckoutStepValidator" parent="abstractB2BCheckoutStepValidator" >
+		<property name="sapB2BCheckoutFlowFacade" ref="defaultB2BCheckoutFlowFacade"/>
+	</bean>
+		
+	<alias name="sapB2BPaymentMethodCheckoutValidator" alias="defaultPaymentMethodCheckoutValidator"/>
+	<bean id="sapB2BPaymentMethodCheckoutValidator" class="de.hybris.platform.sap.ysapordermgmtb2baddon.checkout.steps.validation.SapB2BPaymentMethodCheckoutValidator" parent="abstractB2BCheckoutStepValidator">
+		<property name="sapB2BCheckoutFlowFacade" ref="defaultB2BCheckoutFlowFacade"/>
+	</bean>
+	
+	<alias name="sapB2BSummaryCheckoutStepValidator" alias="defaultSummaryCheckoutValidator"/>
+	<bean id="sapB2BSummaryCheckoutStepValidator" class="de.hybris.platform.sap.ysapordermgmtb2baddon.checkout.steps.validation.SapB2BSummaryCheckoutStepValidator" parent="abstractB2BCheckoutStepValidator" >
+		<property name="sapB2BCheckoutFlowFacade" ref="defaultB2BCheckoutFlowFacade"/>
+	</bean>
+
+</beans>

@@ -1,0 +1,16 @@
+eclipse.preferences.version=1
+encoding//acceleratoraddon/web/webroot/WEB-INF/messages/base_de.properties=UTF-8
+encoding//acceleratoraddon/web/webroot/WEB-INF/messages/base_en.properties=UTF-8
+encoding//acceleratoraddon/web/webroot/WEB-INF/messages/base_ja.properties=UTF-8
+encoding//acceleratoraddon/web/webroot/WEB-INF/messages/base_zh.properties=UTF-8
+encoding//resources/localization/b2bacceleratoraddon-locales_de.properties=UTF-8
+encoding//resources/localization/b2bacceleratoraddon-locales_en.properties=UTF-8
+encoding//resources/localization/b2bacceleratoraddon-locales_es.properties=UTF-8
+encoding//resources/localization/b2bacceleratoraddon-locales_fr.properties=UTF-8
+encoding//resources/localization/b2bacceleratoraddon-locales_it.properties=UTF-8
+encoding//resources/localization/b2bacceleratoraddon-locales_ja.properties=UTF-8
+encoding//resources/localization/b2bacceleratoraddon-locales_ko.properties=UTF-8
+encoding//resources/localization/b2bacceleratoraddon-locales_pt.properties=UTF-8
+encoding//resources/localization/b2bacceleratoraddon-locales_ru.properties=UTF-8
+encoding//resources/localization/b2bacceleratoraddon-locales_zh.properties=UTF-8
+encoding/<project>=UTF-8

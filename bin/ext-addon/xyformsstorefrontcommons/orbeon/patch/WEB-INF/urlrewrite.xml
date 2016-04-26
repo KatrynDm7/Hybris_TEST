@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<urlrewrite>
+   <rule>
+      <condition type="header" name="${xyformsservices.orbeon.hybris-proxy-header}" operator="equal">${xyformsservices.orbeon.hybris-proxy-value}</condition>
+      <from>^/xforms.*$</from>
+      <to last="true">-</to>
+   </rule>
+   <rule>
+      <condition type="header" name="${xyformsservices.orbeon.hybris-proxy-header}" operator="equal">${xyformsservices.orbeon.hybris-proxy-value}</condition>
+      <from>^/.*\.(css|js|png|gif|jpeg|jpg)$</from>
+      <to last="true">-</to>
+   </rule>
+   <rule>
+      <condition type="header" name="${xyformsservices.orbeon.hybris-proxy-header}" operator="equal">${xyformsservices.orbeon.hybris-proxy-value}</condition>
+      <from>^/fr/[^/]+/[^/]+/(edit|new|view)/?.*$</from>
+      <to last="true">-</to>
+   </rule>
+   <rule>
+      <from>^/fr/service/.*$</from>
+      <to last="true">-</to>
+   </rule>
+   <rule>
+      <from>^/fr/[^/]+/[^/]+/test$</from>
+      <to last="true">-</to>
+   </rule>
+   <rule>
+      <from>^.*$</from>
+      <set type="status">403</set>
+      <to last="true">null</to>
+   </rule>
+</urlrewrite>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2011 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd"
+		>
+
+	<bean id="datahubbackofficeLabelLocator" class="com.hybris.cockpitng.util.labels.ResourcesLabelLocator" scope="singleton"
+		  init-method="init" lazy-init="false">
+		<property name="location" value="/datahubbackoffice-labels/" />
+		<property name="name" value="labels" />
+	</bean>
+
+	<import resource="classpath:/datahub-ui-spring.xml" />
+	<import resource="classpath:/datahub-ui-strategy-spring.xml" />
+	<import resource="classpath:/datahub-ui-service-spring.xml" />
+
+	<alias name="typeSystemBasedDataHubNameService" alias="dataHubNameService" />
+	<bean id="typeSystemBasedDataHubNameService" class="com.hybris.datahub.service.TypeSystemBasedDataHubNameService">
+		<property name="dataHubInstanceDAO" ref="dataHubInstanceDao" />
+	</bean>
+
+	<bean id="dataHubInstanceDao" class="com.hybris.datahub.daos.impl.DefaultDataHubInstanceDAOImpl">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+
+</beans>

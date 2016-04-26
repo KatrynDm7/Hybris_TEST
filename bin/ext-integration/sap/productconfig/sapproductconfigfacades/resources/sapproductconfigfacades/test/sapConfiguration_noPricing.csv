@@ -1,0 +1,10 @@
+INSERT_UPDATE sapconfiguration;core_name[unique=true];sapcommon_salesOrganization;sapcommon_distributionChannel;sapcommon_division;sapproductconfig_enable_pricing
+;WEF504;3020;30;00;FALSE
+
+INSERT_UPDATE ReferenceDistributionChannelMapping;salesOrganization[unique=true];distChannel[unique=true];distChannelName[lang=en];refDistChannelConditions;refDistChannelConditionsName[lang=en];refDistChannelCustMat;refDistChannelCustMatName[lang=en];
+;1000;10;"Distribution Channel 10";10;"Distribution Channel 10";10;"Distribution Channel 10"
+;3020;30;"Distribution Channel 30";30;"Distribution Channel 30";30;"Distribution Channel 30"
+
+INSERT_UPDATE ReferenceDivisionMapping;salesOrganization[unique=true];division[unique=true];divisionName[lang=en];refDivisionConditions;refDivisionConditionsName[lang=en];refDivisionCustomer;refDivisionCustomerName[lang=en]
+;1000;00;"Produktdivision 00";00;"Produktdivision 00";00;"Product Division 00"
+;3020;00;"Produktdivision 00";00;"Produktdivision 00";00;"Product Division 00"

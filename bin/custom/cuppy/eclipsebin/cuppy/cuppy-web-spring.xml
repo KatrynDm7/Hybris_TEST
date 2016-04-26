@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2009 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+
+<!-- WARNING: This is the Spring WEB configuration file. If you want to replace 
+	items or managers you have to do this from the extensions core configuration 
+	file (cuppy/resources/cuppy-spring.xml) -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+						http://www.springframework.org/schema/aop 
+						http://www.springframework.org/schema/aop/spring-aop-3.0.xsd"
+	default-autowire="byName">
+
+	<!-- UICockpitSession represents session in an cockpit application. It manages 
+		e.g. the available cockpit perspectives. -->
+	<bean id="UICockpitSession" class="de.hybris.platform.cockpit.session.impl.UISessionImpl"
+		scope="session">
+		<property name="initialSessionListeners">
+			<list></list>
+		</property>
+		<property name="availablePerspectives">
+			<list>
+				<ref bean="CuppyAdminPerspective" />
+			</list>
+		</property>
+		<property name="usingTestIDs" value="false" />
+		<property name="dragOverPerspectivesEnabled" value="false" />
+		<property name="cachePerspectivesEnabled" value="false" />
+		<property name="sendEventsImmediately" value="false" />
+		<property name="requestHandler" ref="RequestHandler" />
+	</bean>
+
+	<!-- Cuppy admin perspective. -->
+	<bean id="CuppyAdminPerspective" scope="session" parent="BasePerspective"
+		class="de.hybris.platform.cuppy.web.cockpit.CuppyAdminPerspective">
+		<property name="uid" value="cuppy.perspective.cuppy" />  <!-- unique ID of the perspective -->
+		<property name="label" value="perspective.cuppy.admin" />  <!-- localization key for the label of the perspective -->
+		<property name="customCsaURI" value="/cuppy/cuppyCSA.zul" />  <!-- file with optional custom client side actions -->
+
+		<property name="navigationArea">
+			<ref bean="CuppyNavigationArea" />
+		</property>
+		<property name="browserArea">
+			<bean class="de.hybris.platform.cuppy.web.cockpit.CuppyBrowserArea">
+				<property name="rootSearchTypeCode" value="Match" />
+				<property name="viewURI" value="/cockpit/baseSearchBrowserArea.zul" />
+			</bean>
+		</property>
+		<property name="editorArea">
+			<bean id="CuppyEditorAreaModel" parent="BaseEditorAreaModel">
+				<property name="editorAreaController">
+					<ref bean="CuppyEditorAreaController" />
+				</property>
+			</bean>
+		</property>
+		<property name="popupEditorArea">
+			<bean id="CuppyPopupEditor" parent="BasePopupEditor">
+				<property name="editorAreaController">
+					<ref bean="CuppyPopupEditorAreaController" />
+				</property>
+			</bean>
+		</property>
+		<property name="cockpitTypeService" ref="cockpitTypeService" />
+	</bean>
+
+	<bean id="CuppyNavigationArea"
+		class="de.hybris.platform.cuppy.web.cockpit.CuppyNavigationArea"
+		scope="session" parent="BaseNavigationArea">
+		<property name="sectionModel">
+			<ref bean="CuppyNavigationAreaModel" />
+		</property>
+		<property name="infoSlotRenderer">
+			<bean
+				class="de.hybris.platform.cockpit.components.navigationarea.renderer.InfoBoxRenderer">
+			</bean>
+		</property>
+		<property name="sections">
+			<list>
+				<ref bean="CuppyTypeSelectorSection" />
+				<ref bean="CuppyUndoSection" />
+			</list>
+		</property>
+		<property name="infoSlotAttachmentTypes">
+			<list value-type="java.lang.String">
+				<value>de.hybris.platform.cuppy.model.PlayerModel</value>
+			</list>
+		</property>
+		<property name="cockpitTypeService" ref="cockpitTypeService" />
+	</bean>
+
+	<bean id="CuppyNavigationAreaModel"
+		class="de.hybris.platform.cuppy.web.cockpit.CuppyNavigationAreaModel"
+		scope="session">
+		<property name="specialCollectionTypes">
+			<list>
+				<value>blacklist</value>
+				<value>quickcollection</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="CuppyQuerySection"
+		class="de.hybris.platform.cockpit.components.navigationarea.NavigationPanelSection"
+		scope="prototype">
+		<property name="localizedLabel" value="navigationarea.queries" />
+		<property name="visible" value="true" />
+		<property name="renderer">
+			<bean
+				class="de.hybris.platform.cockpit.components.navigationarea.renderer.QuerySectionRenderer" />
+		</property>
+	</bean>
+	<bean id="CuppyUndoSection"
+		class="de.hybris.platform.cockpit.components.navigationarea.NavigationPanelSection"
+		scope="prototype">
+		<property name="localizedLabel" value="navigationarea.history" />
+		<property name="visible" value="true" />
+		<property name="renderer">
+			<bean
+				class="de.hybris.platform.cockpit.components.navigationarea.renderer.UndoSectionRenderer" />
+		</property>
+	</bean>
+	<bean id="CuppyTypeSelectorSection"
+		class="de.hybris.platform.cockpit.components.navigationarea.NavigationPanelSection"
+		scope="prototype">
+		<property name="localizedLabel" value="navigationarea.types" />
+		<property name="visible" value="true" />
+		<property name="renderer">
+			<bean
+				class="de.hybris.platform.cockpit.components.navigationarea.renderer.TypeSelectorSectionRenderer">
+				<property name="typeCodes"
+					value="Competition,Match,MatchBet,Group,Team,Player,News"></property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="CuppyEditorAreaController"
+		class="de.hybris.platform.cockpit.session.impl.DefaultEditorAreaController"
+		scope="session">
+		<property name="sectionRowRenderer">
+			<bean id="CuppyEditorSectionRowRenderer" parent="EditorSectionRowRenderer" />
+		</property>
+		<property name="editorFactory">
+			<ref bean="EditorFactory" />
+		</property>
+	</bean>
+
+	<bean id="CuppyPopupEditorAreaController"
+		class="de.hybris.platform.cuppy.web.cockpit.CuppyPopupEditorAreaControllerImpl"
+		scope="prototype">
+		<property name="sectionRowRenderer">
+			<bean id="CuppyPopupEditorSectionRowRenderer" parent="EditorSectionRowRenderer" />
+		</property>
+		<property name="editorFactory">
+			<ref bean="EditorFactory" />
+		</property>
+	</bean>
+
+	<bean id="RequestHandler"
+		class="de.hybris.platform.cockpit.session.impl.DefaultRequestHandler"
+		scope="session">
+		<property name="requestEventHandlers">
+			<map>
+				<entry key="activation">
+					<bean
+						class="de.hybris.platform.cockpit.session.impl.ActivationEventHandler">
+						<property name="prefix" value="act" />
+					</bean>
+				</entry>
+				<entry key="search">
+					<bean class="de.hybris.platform.cockpit.session.impl.SearchEventHandler">
+						<property name="prefix" value="srch" />
+					</bean>
+				</entry>
+				<entry key="celum">
+					<bean class="de.hybris.platform.cockpit.session.impl.CelumEventHandler" />
+				</entry>
+				<entry key="msg">
+					<bean
+						class="de.hybris.platform.cockpit.session.impl.NotificationEventHandler">
+						<property name="prefix" value="msg" />
+					</bean>
+				</entry>
+				<entry key="wf">
+					<bean class="de.hybris.platform.cockpit.session.impl.TaskEventHandler">
+						<property name="attachmentTypes" ref="WorkflowAttachmentData"/>
+						<property name="prefix" value="wf"/>
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="themeConfig" class="de.hybris.platform.cockpit.util.CockpitThemeConfig"
+		scope="singleton">
+		<property name="keepZKCss" value="false" />
+		<property name="uris">
+			<list>
+				<value>/cockpit/css/zk_essential.css</value>
+				<value>/cockpit/css/zk_recommended.css</value>
+				<!-- <value>/cockpit/css/zk_additional.css</value> -->
+
+				<value>/cockpit/css/cockpit_essential.css</value>
+				<value>/cockpit/css/cockpit_comments.css</value>
+				<value>/cockpit/css/cockpit_compare.css</value>
+				<value>/cockpit/css/cockpit_login.css</value>
+				<value>/cockpit/css/cockpit_navsections.css</value>
+				<value>/cockpit/css/cockpit_refeditor.css</value>
+				<value>/cockpit/css/cockpit_sectionbrowser.css</value>
+				<value>/cockpit/css/cockpit_widgets.css</value>
+				<value>/cockpit/css/cockpit_wizard.css</value>
+				<value>/cockpit/css/cockpit_workflow.css</value>
+				<value>/cockpit/css/cockpit_fileupload.css</value>
+
+				<value>/cuppy/css/cuppy.css</value>
+			</list>
+		</property>
+		<property name="ieCssUris">
+			<list>
+				<value>/cockpit/css/cockpit_essential_ie.css</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="WorkflowAttachmentData" class="java.util.LinkedList">
+		<constructor-arg>
+			<list value-type="java.lang.String">
+				<value>de.hybris.platform.core.model.product.ProductModel</value>
+				<value>de.hybris.platform.category.model.CategoryModel</value>
+			</list>
+		</constructor-arg>
+	</bean>
+
+
+
+</beans>
+	

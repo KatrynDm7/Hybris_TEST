@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>
+	
+	<group qualifier="Hyend2RangeEntryGeneral" visible="true" initially-opened="true">
+		<label key="cockpit.config.label.General" />
+		<property qualifier="Hyend2RangeEntry.range" />
+		<property qualifier="Hyend2RangeEntry.displayName" >
+		</property>		
+	</group>
+	
+	<group qualifier="Hyend2RangeEntryLBSection" visible="true" initially-opened="true">
+		<label key="hyend2.lowerbound" />
+		<property qualifier="Hyend2RangeEntry.lowerBound" />	
+		<property qualifier="Hyend2RangeEntry.includeLowerBound" />	
+	</group>
+	
+	<group qualifier="Hyend2RangeEntryUBSection" visible="true" initially-opened="true">
+		<label key="hyend2.upperbound" />
+		<property qualifier="Hyend2RangeEntry.upperBound" />	
+		<property qualifier="Hyend2RangeEntry.includeUpperBound" />	
+	</group>
+
+</editor>

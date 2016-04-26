@@ -1,0 +1,3 @@
+
+INSERT_UPDATE SearchRestriction;code[unique=true];principal(uid);query;restrictedType(code);active;generate
+;anonymousRestriction;customergroup;{approvalStatus} = ${approvedPk};Product;true;true

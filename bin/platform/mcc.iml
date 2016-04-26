@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="mccspring" name="mccspring" removed="false">
+          <file>file://$MODULE_DIR$/../ext-cockpit/mcc/resources/mcc-spring.xml</file>
+          <file>file://$MODULE_DIR$/../ext-cockpit/cockpit/resources/cockpit-spring.xml</file>
+          <file>file://$MODULE_DIR$/../ext-cockpit/cockpit/resources/global-cockpit-spring.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/../ext-cockpit/mcc/web/webroot/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/../ext-cockpit/mcc/web/webroot" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/../ext-cockpit/mcc/eclipsebin" />
+    <output-test url="file://$MODULE_DIR$/../ext-cockpit/mcc/eclipsebin" />
+    <exclude-output />
+    <javadoc-paths>
+      <root url="https://download.hybris.com/api/5.7.0/commercesuite" />
+    </javadoc-paths>
+    <content url="file://$MODULE_DIR$/../ext-cockpit/mcc">
+      <excludeFolder url="file://$MODULE_DIR$/../ext-cockpit/mcc/.externalToolBuilders" />
+      <excludeFolder url="file://$MODULE_DIR$/../ext-cockpit/mcc/.settings" />
+      <excludeFolder url="file://$MODULE_DIR$/../ext-cockpit/mcc/acceleratoraddon/hmc/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/../ext-cockpit/mcc/acceleratoraddon/web/addonsrc" />
+      <excludeFolder url="file://$MODULE_DIR$/../ext-cockpit/mcc/acceleratoraddon/web/commonwebsrc" />
+      <excludeFolder url="file://$MODULE_DIR$/../ext-cockpit/mcc/acceleratoraddon/web/testclasses" />
+      <excludeFolder url="file://$MODULE_DIR$/../ext-cockpit/mcc/backoffice/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/../ext-cockpit/mcc/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/../ext-cockpit/mcc/commonweb/addonsrc" />
+      <excludeFolder url="file://$MODULE_DIR$/../ext-cockpit/mcc/commonweb/commonwebsrc" />
+      <excludeFolder url="file://$MODULE_DIR$/../ext-cockpit/mcc/commonweb/testclasses" />
+      <excludeFolder url="file://$MODULE_DIR$/../ext-cockpit/mcc/eclipsebin" />
+      <excludeFolder url="file://$MODULE_DIR$/../ext-cockpit/mcc/hmc/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/../ext-cockpit/mcc/web/addonsrc" />
+      <excludeFolder url="file://$MODULE_DIR$/../ext-cockpit/mcc/web/commonwebsrc" />
+      <excludeFolder url="file://$MODULE_DIR$/../ext-cockpit/mcc/web/testclasses" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Common libs" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../ext-cockpit/mcc/resources" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../ext-cockpit/mcc/bin" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/../ext-cockpit/mcc/bin" recursive="true" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module" module-name="processing" exported="" />
+    <orderEntry type="module" module-name="impex" exported="" />
+    <orderEntry type="module" module-name="platform" exported="" />
+    <orderEntry type="module" module-name="cockpit" exported="" />
+  </component>
+</module>

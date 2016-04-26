@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wizard-config showPrefilledValues="false" selectMode="true" createMode="true" createWithinPopup="false" createWithinEditor="false">
+	<displayed-properties>
+	<group qualifier="Hyend2DimensionGeneral" visible="true" initially-opened="true">
+		<label key="cockpit.config.label.General" />
+		<property qualifier="Hyend2CategoryDimension.rootCategory" >
+			<parameter name="restrictToCreateTypes" value="Category"/>
+			<parameter name="allowCreate" value="false"/>		
+			<parameter name="allowActivate" value="false"/>
+		</property>
+		<property qualifier="Hyend2CategoryDimension.displayName" />
+		<property qualifier="Hyend2CategoryDimension.exportId" />
+	</group>
+	
+	<group qualifier="Hyend2EndecaAttributeConfiguration" visible="true" initially-opened="true">
+		<label key="hyend2.endecadimensionconfiguration" />
+		<property qualifier="Hyend2CategoryDimension.endecaDimensionConfiguration" >
+			<parameter name="restrictToCreateTypes" value="Hyend2EndecaDimensionConfiguration"/>
+		</property>		
+	</group>
+	
+	<group qualifier="Hyend2DimensionIndexElements" visible="true" initially-opened="true">
+		<label key="hyend2.indexelements" />
+		<property qualifier="Hyend2CategoryDimension.indexElements" />		
+	</group>
+	
+	</displayed-properties>
+</wizard-config>

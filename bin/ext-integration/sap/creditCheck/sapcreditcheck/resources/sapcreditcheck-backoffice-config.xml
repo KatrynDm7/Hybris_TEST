@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config xmlns="http://www.hybris.com/cockpit/config">
+	<context type="SAPConfiguration" component="editor-area" parent="auto" merge-by="module">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea" xmlns="http://www.hybris.com/cockpitng/component/editorArea">
+            <tab name="hmc.tab.sapcreditcheck">
+                <section name="hmc.section.sapcreditcheck">
+                    <attribute qualifier="sapcreditcheckactive"/>
+                </section>
+            </tab>
+        </editorArea:editorArea>
+    </context>
+</config>

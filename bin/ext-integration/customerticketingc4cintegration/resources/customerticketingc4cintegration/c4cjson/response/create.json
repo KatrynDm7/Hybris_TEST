@@ -1,0 +1,37 @@
+{
+    "d": {
+        "results": {
+            "__metadata": {
+                "uri": "https://server:port/path/ServiceTicketCollection('00163E06B0301EE58C876B86EBFF2654')",
+                "type": "ZSERVICETICKET.ServiceTicket"
+            },
+            "CauseCategoryID": "",
+            "ContactID": "",
+            "CreationDateTime": "\\/Date(1437546726700)\\/",
+            "CustomerID": "SOME CID",
+            "DataOriginTypeCode": "4",
+            "ExternalContactID": "",
+            "ExternalCustomerID": "",
+            "ExternalKey": "",
+            "ID": "2405",
+            "IncidentCategoryID": "",
+            "LastChangeDateTime": "\\/Date(1437546726700)\\/",
+            "Name": "Ticket subject",
+            "ObjectID": "00163E06B0301EE58C876B86EBFF2654",
+            "ProcessingTypeCode": "SRRQ",
+            "ResolutionCategoryID": "",
+            "ServiceCategoryID": "",
+            "StatusCode": "1",
+            "Notes": {
+                "__deferred": {
+                    "uri": "https://server:port/path/ServiceTicketCollection('00163E06B0301EE58C876B86EBFF2654')/Notes"
+                }
+            },
+            "RelatedTransactions": {
+                "__deferred": {
+                    "uri": "https://server:port/path/ServiceTicketCollection('00163E06B0301EE58C876B86EBFF2654')/RelatedTransactions"
+                }
+            }
+        }
+    }
+}

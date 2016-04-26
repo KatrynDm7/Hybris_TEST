@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2015 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+
+<!-- WARNING: This is the Spring WEB configuration file. If you want to replace 
+	items or managers you have to do this from the extensions core configuration 
+	file (cmscockpit/resources/cmscockpit-application-context.xml) -->
+
+<!-- WARNING: This file is imported in cmscockpit-web-spring.xml therefore you don't need
+	to list it in your deployment descriptor -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/util 
+           http://www.springframework.org/schema/util/spring-util.xsd"
+           default-autowire="byName">
+
+
+	<bean id="notifyIframeZKComponentScripts" class="de.hybris.platform.cmscockpit.session.script.config.impl.SingleJavaScriptFile">
+		<property name="group" value="LIVEEDIT_SCRIPT_FILE" />
+		<property name="script">
+			<value>cmscockpit/js/notify_zk_via_iframe.js</value>
+		</property>
+	</bean>
+
+	<bean id="cmsLockingService" class="de.hybris.liveeditaddon.cockpit.service.impl.DefaultCMSLockingService"/>
+	<bean id="dropMediaCallbackEventHandler" class="de.hybris.liveeditaddon.cockpit.callbackevent.DropMediaCallbackEventHandler" />
+	<bean id="moveComponentCallbackEventHandler" class="de.hybris.liveeditaddon.cockpit.callbackevent.MoveComponentCallbackEventHandler" />
+	<bean id="removeComponentCallbackEventHandler" class="de.hybris.liveeditaddon.cockpit.callbackevent.RemoveComponentCallbackEventHandler" />
+	<bean id="removeContainerCallbackEventHandler" class="de.hybris.liveeditaddon.cockpit.callbackevent.RemoveContainerCallbackEventHandler" />
+	<bean id="syncItemCallbackEventHandler" class="de.hybris.liveeditaddon.cockpit.callbackevent.SyncCMSItemCallbackEventHandler" />
+	<bean id="cloneComponentCallbackEventHandler" class="de.hybris.liveeditaddon.cockpit.callbackevent.CloneComponentCallbackEventHandler" />
+	<bean id="createComponentCallbackEventHandler" class="de.hybris.liveeditaddon.cockpit.callbackevent.CreateComponentCallbackEventHandler" />
+	<bean id="showAllComponentsCallbackEventHandler" class="de.hybris.liveeditaddon.cockpit.callbackevent.ShowAllComponentsCallbackEventHandler" />
+	<bean id="inspectComponentCallbackEventHandler" class="de.hybris.liveeditaddon.cockpit.callbackevent.InspectComponentCallbackEventHandler" />
+	<bean id="toggleComponentVisibilityCallbackEventHandler" class="de.hybris.liveeditaddon.cockpit.callbackevent.VisibleToggleComponentCallbackEventHandler" />
+	<bean id="createContentSlotCallbackEventHandler" class="de.hybris.liveeditaddon.cockpit.callbackevent.CreateContentSlotCallbackEventHandler" />
+	<bean id="removeContentSlotCallbackEventHandler" class="de.hybris.liveeditaddon.cockpit.callbackevent.RemoveContentSlotCallbackEventHandler" />
+	<bean id="lockContentSlotCallbackEventHandler" class="de.hybris.liveeditaddon.cockpit.callbackevent.LockContentSlotCallbackEventHandler" />
+	<bean id="editComponentCallbackEventHandler" class="de.hybris.liveeditaddon.cockpit.callbackevent.EditComponentCallbackEventHandler" />
+	<bean id="manageProductImageCallbackEventHandler" class="de.hybris.liveeditaddon.cockpit.callbackevent.ManageProductImageCallbackEventHandler" />
+	<bean id="manageProductFeatureImageCallbackEventHandler" class="de.hybris.liveeditaddon.cockpit.callbackevent.ManageProductFeatureImageCallbackEventHandler" />
+	<bean id="editProductReferencesCallbackEventHandler" class="de.hybris.liveeditaddon.cockpit.callbackevent.EditProductReferencesCallbackEventHandler" >
+		<property name="productFrontendUrlDecoder" ref="productCatalogVersionFrontendUrlDecoder" />
+	</bean>
+	<bean id="editRestrictionsCallbackEventHandler" class="de.hybris.liveeditaddon.cockpit.callbackevent.EditCMSItemCallbackEventHandler">
+		<property name="eventId" value="editRestrictions" />
+		<property name="editorAreaConfigCode" value="liveeditRestrictionEditorArea" />
+	</bean>
+	<bean id="editCMSItemEventHandler" class="de.hybris.liveeditaddon.cockpit.callbackevent.EditCMSItemCallbackEventHandler">
+		<property name="eventId" value="editCMSItem" />
+	</bean>
+	<bean id="editItemCallbackEventHandler" class="de.hybris.liveeditaddon.cockpit.callbackevent.EditItemCallbackEventHandler">
+		<property name="eventId" value="editItem" />
+	</bean>
+    <bean id="manageMediaCallbackEventHandler" class="de.hybris.liveeditaddon.cockpit.callbackevent.ManageMediaCallbackEventHandler" />
+	<bean id="editProductLiveEditCaptionButtonHandlerListMergeDirective" depends-on="liveEditCaptionButtonHandlers" parent="listMergeDirective" >
+		<property name="add" ref="editProductLiveEditCaptionButtonHandler" />
+		<property name="beforeBeanNames" value="liveEditCaptionButtonHandler" />
+	</bean>
+	<alias name="defaultEditProductLiveEditCaptionButtonHandler" alias="editProductLiveEditCaptionButtonHandler" />
+	<bean id="defaultEditProductLiveEditCaptionButtonHandler" class="de.hybris.liveeditaddon.cockpit.captionhandler.EditProductLiveEditCaptionButtonHandler" >
+		<property name="productFrontendUrlDecoder" ref="productCatalogVersionFrontendUrlDecoder" />
+	</bean> 
+	<bean id="editMenuContentCallbackEventHandler" class="de.hybris.liveeditaddon.cockpit.callbackevent.OpenNavigationEditorCallbackEventHandler">
+		<property name="NavigationEditorService" ref="navigationEditorService"/>
+	</bean>
+</beans>
+

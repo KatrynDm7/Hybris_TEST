@@ -1,0 +1,838 @@
+INFO   | wrapper  | timer   | 2016/03/18 13:06:55.063 | The system clock fell behind the timer by -1616566696ms.
+INFO   | jvm 1    | main    | 2016/03/18 13:06:55.153 | WrapperManager: The system clock fell behind the timer by -1 616 566 696 ms.
+INFO   | jvm 1    | main    | 2016/03/18 13:06:59.067 | INFO  [localhost-startStop-1] [RemoveDefaultSessionFixationStrategyBeanPostProcessor] Removed Spring default SessionFixationProtectionStrategy, since HybrisSessionFixationProtectionStrategy is already defined
+STATUS | wrapper  | main    | 2016/03/18 13:07:02.626 | CTRL-C trapped.  Shutting down.
+INFO   | jvm 1    | main    | 2016/03/18 13:07:02.938 | shutting down hybris registry..
+INFO   | jvm 1    | main    | 2016/03/18 13:07:02.940 | INFO  [Thread-1] [DefaultTaskService] Shutting down task engine for tenant master.
+INFO   | jvm 1    | main    | 2016/03/18 13:07:02.940 | INFO  [Thread-1] [DefaultTaskService] Terminating task polling thread.
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.150 | INFO  [Thread-1] [DefaultTaskService] Stopped task engine for tenant master.
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.170 | INFO  [Thread-1] [DefaultTaskService] Task engine already stopped.
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.172 | WARN  [localhost-startStop-1] [TenantIgnoreXmlWebApplicationContext] Exception encountered during context initialization - cancelling refresh attempt
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.196 | org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'backofficeWarmUpTypeFacadeCaches' defined in ServletContext resource [/WEB-INF/backoffice-web-spring.xml]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: tenant <<master>>, (2076782103) not yet started - got no cache (state:STARTED currentlyStopping:true cache:RegionCacheAdapter(1385578681) - <<master>>)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.197 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.197 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.197 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.198 | 	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.198 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.198 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.199 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.199 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.199 | 	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.200 | 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.200 | 	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:434)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.200 | 	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.201 | 	at de.hybris.platform.spring.HybrisContextLoaderListener.doInitWebApplicationContext(HybrisContextLoaderListener.java:145)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.201 | 	at de.hybris.platform.spring.HybrisContextLoaderListener.initWebApplicationContext(HybrisContextLoaderListener.java:125)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.202 | 	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.202 | 	at de.hybris.platform.spring.HybrisContextLoaderListener.contextInitialized(HybrisContextLoaderListener.java:80)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.202 | 	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:5016)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.203 | 	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5524)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.203 | 	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.203 | 	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1575)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.203 | 	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1565)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.204 | 	at java.util.concurrent.FutureTask.run(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.204 | 	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.204 | 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.204 | 	at java.lang.Thread.run(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.204 | Caused by: java.lang.IllegalStateException: tenant <<master>>, (2076782103) not yet started - got no cache (state:STARTED currentlyStopping:true cache:RegionCacheAdapter(1385578681) - <<master>>)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.205 | 	at de.hybris.platform.core.AbstractTenant.getCache(AbstractTenant.java:1809)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.205 | 	at de.hybris.platform.servicelayer.internal.i18n.impl.DefaultLocalizationService.getSupportedLocales(DefaultLocalizationService.java:270)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.206 | 	at de.hybris.platform.servicelayer.internal.i18n.impl.DefaultLocalizationService.matchDataLocale(DefaultLocalizationService.java:228)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.206 | 	at de.hybris.platform.servicelayer.internal.i18n.impl.DefaultLocalizationService.getDataLocale(DefaultLocalizationService.java:146)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.206 | 	at de.hybris.platform.servicelayer.i18n.impl.DefaultI18NService.getBestMatchingLocale(DefaultI18NService.java:167)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.207 | 	at de.hybris.platform.servicelayer.internal.converter.impl.DefaultLocaleProvider.toDataLocale(DefaultLocaleProvider.java:61)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.207 | 	at de.hybris.platform.servicelayer.model.ItemModelContextImpl.toDataLocale(ItemModelContextImpl.java:434)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.207 | 	at de.hybris.platform.servicelayer.model.ItemModelContextImpl.getLocalizedValue(ItemModelContextImpl.java:325)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.208 | 	at de.hybris.platform.core.model.type.TypeManagerManagedModel.getName(TypeManagerManagedModel.java:181)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.208 | 	at com.hybris.backoffice.cockpitng.dataaccess.facades.type.DefaultPlatformTypeFacadeStrategy.convertType(DefaultPlatformTypeFacadeStrategy.java:296)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.208 | 	at com.hybris.backoffice.cockpitng.dataaccess.facades.type.DefaultPlatformTypeFacadeStrategy.loadAndCache(DefaultPlatformTypeFacadeStrategy.java:181)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.209 | 	at com.hybris.backoffice.cockpitng.dataaccess.facades.type.DefaultPlatformTypeFacadeStrategy.convertAttribute(DefaultPlatformTypeFacadeStrategy.java:342)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.209 | 	at com.hybris.backoffice.cockpitng.dataaccess.facades.type.DefaultPlatformTypeFacadeStrategy.convertType(DefaultPlatformTypeFacadeStrategy.java:279)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.210 | 	at com.hybris.backoffice.cockpitng.dataaccess.facades.type.DefaultPlatformTypeFacadeStrategy.loadAndCache(DefaultPlatformTypeFacadeStrategy.java:181)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.210 | 	at com.hybris.backoffice.cockpitng.dataaccess.facades.type.DefaultPlatformTypeFacadeStrategy.load(DefaultPlatformTypeFacadeStrategy.java:143)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.211 | 	at com.hybris.cockpitng.dataaccess.facades.type.impl.DefaultTypeFacade.load(DefaultTypeFacade.java:47)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.211 | 	at com.hybris.cockpitng.dataaccess.facades.type.impl.DefaultTypeFacade.load(DefaultTypeFacade.java:54)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.211 | 	at com.hybris.backoffice.config.WarmUpTypeFacadeCaches.cacheTypesAndLoadStrategies(WarmUpTypeFacadeCaches.java:83)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.211 | 	at com.hybris.backoffice.config.WarmUpTypeFacadeCaches.warmUpCaches(WarmUpTypeFacadeCaches.java:62)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.212 | 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.212 | 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.212 | 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.212 | 	at java.lang.reflect.Method.invoke(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.213 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeCustomInitMethod(AbstractAutowireCapableBeanFactory.java:1702)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.213 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1641)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.213 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1570)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.214 | 	... 24 more
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.214 | WARN  [localhost-startStop-1] [TenantIgnoreXmlWebApplicationContext] Exception encountered during context initialization - cancelling refresh attempt
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.214 | org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'backofficeWarmUpTypeFacadeCaches' defined in ServletContext resource [/WEB-INF/backoffice-web-spring.xml]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: tenant <<master>>, (2076782103) not yet started - got no cache (state:STARTED currentlyStopping:true cache:RegionCacheAdapter(1385578681) - <<master>>)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.215 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.215 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.216 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.216 | 	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.216 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.217 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.219 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.219 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.219 | 	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.235 | 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.236 | 	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:434)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.236 | 	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.236 | 	at de.hybris.platform.spring.HybrisContextLoaderListener.doInitWebApplicationContext(HybrisContextLoaderListener.java:145)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.248 | 	at de.hybris.platform.spring.HybrisContextLoaderListener.initWebApplicationContext(HybrisContextLoaderListener.java:125)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.248 | 	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.248 | 	at de.hybris.platform.spring.HybrisContextLoaderListener.contextInitialized(HybrisContextLoaderListener.java:80)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.253 | 	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:5016)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.254 | 	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5524)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.254 | 	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.255 | 	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1575)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.255 | 	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1565)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.255 | 	at java.util.concurrent.FutureTask.run(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.255 | 	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.256 | 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.256 | 	at java.lang.Thread.run(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.256 | Caused by: java.lang.IllegalStateException: tenant <<master>>, (2076782103) not yet started - got no cache (state:STARTED currentlyStopping:true cache:RegionCacheAdapter(1385578681) - <<master>>)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.257 | 	at de.hybris.platform.core.AbstractTenant.getCache(AbstractTenant.java:1809)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.257 | 	at de.hybris.platform.servicelayer.internal.i18n.impl.DefaultLocalizationService.getSupportedLocales(DefaultLocalizationService.java:270)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.258 | 	at de.hybris.platform.servicelayer.internal.i18n.impl.DefaultLocalizationService.matchDataLocale(DefaultLocalizationService.java:228)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.259 | 	at de.hybris.platform.servicelayer.internal.i18n.impl.DefaultLocalizationService.getDataLocale(DefaultLocalizationService.java:146)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.259 | 	at de.hybris.platform.servicelayer.i18n.impl.DefaultI18NService.getBestMatchingLocale(DefaultI18NService.java:167)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.260 | 	at de.hybris.platform.servicelayer.internal.converter.impl.DefaultLocaleProvider.toDataLocale(DefaultLocaleProvider.java:61)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.261 | 	at de.hybris.platform.servicelayer.model.ItemModelContextImpl.toDataLocale(ItemModelContextImpl.java:434)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.261 | 	at de.hybris.platform.servicelayer.model.ItemModelContextImpl.getLocalizedValue(ItemModelContextImpl.java:325)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.262 | 	at de.hybris.platform.core.model.type.TypeManagerManagedModel.getName(TypeManagerManagedModel.java:181)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.262 | 	at com.hybris.backoffice.cockpitng.dataaccess.facades.type.DefaultPlatformTypeFacadeStrategy.convertType(DefaultPlatformTypeFacadeStrategy.java:296)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.262 | 	at com.hybris.backoffice.cockpitng.dataaccess.facades.type.DefaultPlatformTypeFacadeStrategy.loadAndCache(DefaultPlatformTypeFacadeStrategy.java:181)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.263 | 	at com.hybris.backoffice.cockpitng.dataaccess.facades.type.DefaultPlatformTypeFacadeStrategy.convertAttribute(DefaultPlatformTypeFacadeStrategy.java:342)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.263 | 	at com.hybris.backoffice.cockpitng.dataaccess.facades.type.DefaultPlatformTypeFacadeStrategy.convertType(DefaultPlatformTypeFacadeStrategy.java:279)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.264 | 	at com.hybris.backoffice.cockpitng.dataaccess.facades.type.DefaultPlatformTypeFacadeStrategy.loadAndCache(DefaultPlatformTypeFacadeStrategy.java:181)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.264 | 	at com.hybris.backoffice.cockpitng.dataaccess.facades.type.DefaultPlatformTypeFacadeStrategy.load(DefaultPlatformTypeFacadeStrategy.java:143)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.264 | 	at com.hybris.cockpitng.dataaccess.facades.type.impl.DefaultTypeFacade.load(DefaultTypeFacade.java:47)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.267 | 	at com.hybris.cockpitng.dataaccess.facades.type.impl.DefaultTypeFacade.load(DefaultTypeFacade.java:54)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.268 | 	at com.hybris.backoffice.config.WarmUpTypeFacadeCaches.cacheTypesAndLoadStrategies(WarmUpTypeFacadeCaches.java:83)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.268 | 	at com.hybris.backoffice.config.WarmUpTypeFacadeCaches.warmUpCaches(WarmUpTypeFacadeCaches.java:62)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.268 | 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.269 | 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.269 | 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.269 | 	at java.lang.reflect.Method.invoke(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.269 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeCustomInitMethod(AbstractAutowireCapableBeanFactory.java:1702)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.271 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1641)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.271 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1570)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.271 | 	... 24 more
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.272 | ERROR [localhost-startStop-1] [ContextLoader] Context initialization failed
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.272 | org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'backofficeWarmUpTypeFacadeCaches' defined in ServletContext resource [/WEB-INF/backoffice-web-spring.xml]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: tenant <<master>>, (2076782103) not yet started - got no cache (state:STARTED currentlyStopping:true cache:RegionCacheAdapter(1385578681) - <<master>>)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.273 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.273 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.274 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.274 | 	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.274 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.320 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.323 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.324 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.325 | 	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.325 | 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.326 | 	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:434)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.328 | 	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.328 | 	at de.hybris.platform.spring.HybrisContextLoaderListener.doInitWebApplicationContext(HybrisContextLoaderListener.java:145)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.329 | 	at de.hybris.platform.spring.HybrisContextLoaderListener.initWebApplicationContext(HybrisContextLoaderListener.java:125)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.329 | 	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.334 | 	at de.hybris.platform.spring.HybrisContextLoaderListener.contextInitialized(HybrisContextLoaderListener.java:80)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.334 | 	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:5016)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.337 | 	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5524)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.341 | 	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.341 | 	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1575)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.344 | 	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1565)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.345 | 	at java.util.concurrent.FutureTask.run(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.345 | 	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.345 | 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.346 | 	at java.lang.Thread.run(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.346 | Caused by: java.lang.IllegalStateException: tenant <<master>>, (2076782103) not yet started - got no cache (state:STARTED currentlyStopping:true cache:RegionCacheAdapter(1385578681) - <<master>>)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.346 | 	at de.hybris.platform.core.AbstractTenant.getCache(AbstractTenant.java:1809)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.346 | 	at de.hybris.platform.servicelayer.internal.i18n.impl.DefaultLocalizationService.getSupportedLocales(DefaultLocalizationService.java:270)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.347 | 	at de.hybris.platform.servicelayer.internal.i18n.impl.DefaultLocalizationService.matchDataLocale(DefaultLocalizationService.java:228)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.347 | 	at de.hybris.platform.servicelayer.internal.i18n.impl.DefaultLocalizationService.getDataLocale(DefaultLocalizationService.java:146)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.348 | 	at de.hybris.platform.servicelayer.i18n.impl.DefaultI18NService.getBestMatchingLocale(DefaultI18NService.java:167)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.349 | 	at de.hybris.platform.servicelayer.internal.converter.impl.DefaultLocaleProvider.toDataLocale(DefaultLocaleProvider.java:61)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.349 | 	at de.hybris.platform.servicelayer.model.ItemModelContextImpl.toDataLocale(ItemModelContextImpl.java:434)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.349 | 	at de.hybris.platform.servicelayer.model.ItemModelContextImpl.getLocalizedValue(ItemModelContextImpl.java:325)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.350 | 	at de.hybris.platform.core.model.type.TypeManagerManagedModel.getName(TypeManagerManagedModel.java:181)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.350 | 	at com.hybris.backoffice.cockpitng.dataaccess.facades.type.DefaultPlatformTypeFacadeStrategy.convertType(DefaultPlatformTypeFacadeStrategy.java:296)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.351 | 	at com.hybris.backoffice.cockpitng.dataaccess.facades.type.DefaultPlatformTypeFacadeStrategy.loadAndCache(DefaultPlatformTypeFacadeStrategy.java:181)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.352 | 	at com.hybris.backoffice.cockpitng.dataaccess.facades.type.DefaultPlatformTypeFacadeStrategy.convertAttribute(DefaultPlatformTypeFacadeStrategy.java:342)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.352 | 	at com.hybris.backoffice.cockpitng.dataaccess.facades.type.DefaultPlatformTypeFacadeStrategy.convertType(DefaultPlatformTypeFacadeStrategy.java:279)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.353 | 	at com.hybris.backoffice.cockpitng.dataaccess.facades.type.DefaultPlatformTypeFacadeStrategy.loadAndCache(DefaultPlatformTypeFacadeStrategy.java:181)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.353 | 	at com.hybris.backoffice.cockpitng.dataaccess.facades.type.DefaultPlatformTypeFacadeStrategy.load(DefaultPlatformTypeFacadeStrategy.java:143)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.354 | 	at com.hybris.cockpitng.dataaccess.facades.type.impl.DefaultTypeFacade.load(DefaultTypeFacade.java:47)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.356 | 	at com.hybris.cockpitng.dataaccess.facades.type.impl.DefaultTypeFacade.load(DefaultTypeFacade.java:54)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.356 | 	at com.hybris.backoffice.config.WarmUpTypeFacadeCaches.cacheTypesAndLoadStrategies(WarmUpTypeFacadeCaches.java:83)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.356 | 	at com.hybris.backoffice.config.WarmUpTypeFacadeCaches.warmUpCaches(WarmUpTypeFacadeCaches.java:62)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.357 | 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.357 | 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.360 | 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.360 | 	at java.lang.reflect.Method.invoke(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.360 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeCustomInitMethod(AbstractAutowireCapableBeanFactory.java:1702)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.361 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1641)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.361 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1570)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.362 | 	... 24 more
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.362 | ERROR [localhost-startStop-1] [ContextLoader] Context initialization failed
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.362 | org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'backofficeWarmUpTypeFacadeCaches' defined in ServletContext resource [/WEB-INF/backoffice-web-spring.xml]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: tenant <<master>>, (2076782103) not yet started - got no cache (state:STARTED currentlyStopping:true cache:RegionCacheAdapter(1385578681) - <<master>>)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.363 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.364 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.365 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.365 | 	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.366 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.366 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.366 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.366 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.367 | 	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.368 | 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.368 | 	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:434)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.368 | 	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.369 | 	at de.hybris.platform.spring.HybrisContextLoaderListener.doInitWebApplicationContext(HybrisContextLoaderListener.java:145)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.369 | 	at de.hybris.platform.spring.HybrisContextLoaderListener.initWebApplicationContext(HybrisContextLoaderListener.java:125)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.369 | 	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.370 | 	at de.hybris.platform.spring.HybrisContextLoaderListener.contextInitialized(HybrisContextLoaderListener.java:80)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.370 | 	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:5016)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.370 | 	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5524)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.372 | 	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.378 | 	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1575)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.378 | 	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1565)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.379 | 	at java.util.concurrent.FutureTask.run(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.379 | 	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.379 | 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.380 | 	at java.lang.Thread.run(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.380 | Caused by: java.lang.IllegalStateException: tenant <<master>>, (2076782103) not yet started - got no cache (state:STARTED currentlyStopping:true cache:RegionCacheAdapter(1385578681) - <<master>>)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.380 | 	at de.hybris.platform.core.AbstractTenant.getCache(AbstractTenant.java:1809)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.381 | 	at de.hybris.platform.servicelayer.internal.i18n.impl.DefaultLocalizationService.getSupportedLocales(DefaultLocalizationService.java:270)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.381 | 	at de.hybris.platform.servicelayer.internal.i18n.impl.DefaultLocalizationService.matchDataLocale(DefaultLocalizationService.java:228)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.381 | 	at de.hybris.platform.servicelayer.internal.i18n.impl.DefaultLocalizationService.getDataLocale(DefaultLocalizationService.java:146)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.382 | 	at de.hybris.platform.servicelayer.i18n.impl.DefaultI18NService.getBestMatchingLocale(DefaultI18NService.java:167)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.382 | 	at de.hybris.platform.servicelayer.internal.converter.impl.DefaultLocaleProvider.toDataLocale(DefaultLocaleProvider.java:61)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.382 | 	at de.hybris.platform.servicelayer.model.ItemModelContextImpl.toDataLocale(ItemModelContextImpl.java:434)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.383 | 	at de.hybris.platform.servicelayer.model.ItemModelContextImpl.getLocalizedValue(ItemModelContextImpl.java:325)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.383 | 	at de.hybris.platform.core.model.type.TypeManagerManagedModel.getName(TypeManagerManagedModel.java:181)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.383 | 	at com.hybris.backoffice.cockpitng.dataaccess.facades.type.DefaultPlatformTypeFacadeStrategy.convertType(DefaultPlatformTypeFacadeStrategy.java:296)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.383 | 	at com.hybris.backoffice.cockpitng.dataaccess.facades.type.DefaultPlatformTypeFacadeStrategy.loadAndCache(DefaultPlatformTypeFacadeStrategy.java:181)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.384 | 	at com.hybris.backoffice.cockpitng.dataaccess.facades.type.DefaultPlatformTypeFacadeStrategy.convertAttribute(DefaultPlatformTypeFacadeStrategy.java:342)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.384 | 	at com.hybris.backoffice.cockpitng.dataaccess.facades.type.DefaultPlatformTypeFacadeStrategy.convertType(DefaultPlatformTypeFacadeStrategy.java:279)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.385 | 	at com.hybris.backoffice.cockpitng.dataaccess.facades.type.DefaultPlatformTypeFacadeStrategy.loadAndCache(DefaultPlatformTypeFacadeStrategy.java:181)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.385 | 	at com.hybris.backoffice.cockpitng.dataaccess.facades.type.DefaultPlatformTypeFacadeStrategy.load(DefaultPlatformTypeFacadeStrategy.java:143)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.385 | 	at com.hybris.cockpitng.dataaccess.facades.type.impl.DefaultTypeFacade.load(DefaultTypeFacade.java:47)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.385 | 	at com.hybris.cockpitng.dataaccess.facades.type.impl.DefaultTypeFacade.load(DefaultTypeFacade.java:54)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.386 | 	at com.hybris.backoffice.config.WarmUpTypeFacadeCaches.cacheTypesAndLoadStrategies(WarmUpTypeFacadeCaches.java:83)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.386 | 	at com.hybris.backoffice.config.WarmUpTypeFacadeCaches.warmUpCaches(WarmUpTypeFacadeCaches.java:62)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.388 | 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.390 | 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.391 | 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.394 | 	at java.lang.reflect.Method.invoke(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.394 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeCustomInitMethod(AbstractAutowireCapableBeanFactory.java:1702)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.398 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1641)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.398 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1570)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.401 | 	... 24 more
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.401 | INFO  [localhost-startStop-1] [WebManager] Starting ZK 7.0.4 EE (build: 2014120911)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.401 | INFO  [Thread-1] (junit) [DefaultTaskService] Task engine already stopped.
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.401 | INFO  [Thread-1] (junit) [DefaultTaskService] Task engine already stopped.
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.401 | INFO  [AfterSaveEventPublisher-junit] (junit) [DefaultAfterSaveListenerRegistry] AfterSaveEventPublisher-junit has been interrupted/terminated but without InterruptedException - stopping now.
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.402 | INFO  [localhost-startStop-1] [ConfigParser] Loading system default
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.402 | WARN  [AfterSaveEventPublisher-master] [DefaultAfterSaveListenerRegistry] AfterSaveEventPublisher-master has been interrupted - stopping now: sleep interrupted
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.402 | INFO  [AfterSaveEventPublisher-master] [DefaultAfterSaveListenerRegistry] AfterSaveEventPublisher-master has been interrupted/terminated but without InterruptedException - stopping now.
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.503 | WARN  [localhost-startStop-1] [ClassLocator] Replicate resource: zk
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.506 | Overwrite jar:file:/C:/Users/user/IdeaProjects/hybris/bin/ext-cockpit/cockpit/lib/zk-3.6.4.jar!/metainfo/zk/config.xml
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.507 | with jar:file:/C:/Users/user/IdeaProjects/hybris/bin/ext-backoffice/backoffice/web/webroot/WEB-INF/lib/zk-7.0.4.jar!/metainfo/zk/config.xml
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.507 | INFO  [Thread-1] (junit) [DefaultCacheController] Removed listener from cache controller. Currently registered 2
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.607 | WARN  [localhost-startStop-1] [ClassLocator] Replicate resource: zkex
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.607 | Overwrite jar:file:/C:/Users/user/IdeaProjects/hybris/bin/ext-cockpit/cockpit/lib/zkex-3.6.4.jar!/metainfo/zk/config.xml
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.608 | with jar:file:/C:/Users/user/IdeaProjects/hybris/bin/ext-backoffice/backoffice/web/webroot/WEB-INF/lib/zkex-7.0.4.jar!/metainfo/zk/config.xml
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.608 | WARN  [localhost-startStop-1] [ClassLocator] Replicate resource: zkmax
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.608 | Overwrite jar:file:/C:/Users/user/IdeaProjects/hybris/bin/ext-cockpit/cockpit/lib/zkmax-3.6.4.jar!/metainfo/zk/config.xml
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.609 | with jar:file:/C:/Users/user/IdeaProjects/hybris/bin/ext-backoffice/backoffice/web/webroot/WEB-INF/lib/zkmax-7.0.4.jar!/metainfo/zk/config.xml
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.709 | INFO  [localhost-startStop-1] [ConfigParser] Parsing jar:file:/C:/Users/user/IdeaProjects/hybris/bin/ext-backoffice/backoffice/web/webroot/WEB-INF/lib/cockpitframework-2.3.0.1.jar!/metainfo/zk/zk.xml
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.812 | INFO  [localhost-startStop-1] [ConfigParser] Parsing jar:file:/C:/Users/user/IdeaProjects/hybris/bin/ext-backoffice/backoffice/web/webroot/WEB-INF/lib/zul-7.0.4.jar!/metainfo/zk/zk.xml
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.816 | INFO  [localhost-startStop-1] [ConfigParser] Parsing jar:file:/C:/Users/user/IdeaProjects/hybris/bin/ext-backoffice/backoffice/web/webroot/WEB-INF/lib/zkex-7.0.4.jar!/metainfo/zk/zk.xml
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.817 | INFO  [localhost-startStop-1] [ConfigParser] Parsing jar:file:/C:/Users/user/IdeaProjects/hybris/bin/ext-backoffice/backoffice/web/webroot/WEB-INF/lib/zkmax-7.0.4.jar!/metainfo/zk/zk.xml
+INFO   | jvm 1    | main    | 2016/03/18 13:07:03.818 | WARN  [Thread-1] [DefaultCacheController] Listener not un-registered (not found): RegionCacheAdapter(1385578681) - <<master>> : de.hybris.platform.cache.impl.RegionCacheAdapter
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.024 | ERROR [localhost-startStop-1] [Configuration] Failed to invoke class org.zkoss.spring.init.SecurityWebAppInit
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.024 | org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'backofficeWarmUpTypeFacadeCaches' defined in ServletContext resource [/WEB-INF/backoffice-web-spring.xml]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: tenant <<master>>, (2076782103) not yet started - got no cache (state:STARTED currentlyStopping:true cache:RegionCacheAdapter(1385578681) - <<master>>)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.025 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.025 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.026 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.026 | 	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.027 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.029 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.029 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.030 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.030 | 	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.030 | 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.031 | 	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:434)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.035 | 	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.036 | 	at de.hybris.platform.spring.HybrisContextLoaderListener.doInitWebApplicationContext(HybrisContextLoaderListener.java:145)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.037 | 	at de.hybris.platform.spring.HybrisContextLoaderListener.initWebApplicationContext(HybrisContextLoaderListener.java:125)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.037 | 	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.037 | 	at de.hybris.platform.spring.HybrisContextLoaderListener.contextInitialized(HybrisContextLoaderListener.java:80)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.038 | 	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:5016)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.038 | 	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5524)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.038 | 	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.038 | 	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1575)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.039 | 	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1565)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.039 | 	at java.util.concurrent.FutureTask.run(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.040 | 	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.040 | 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.040 | 	at java.lang.Thread.run(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.040 | Caused by: java.lang.IllegalStateException: tenant <<master>>, (2076782103) not yet started - got no cache (state:STARTED currentlyStopping:true cache:RegionCacheAdapter(1385578681) - <<master>>)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.041 | 	at de.hybris.platform.core.AbstractTenant.getCache(AbstractTenant.java:1809)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.044 | 	at de.hybris.platform.servicelayer.internal.i18n.impl.DefaultLocalizationService.getSupportedLocales(DefaultLocalizationService.java:270)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.046 | 	at de.hybris.platform.servicelayer.internal.i18n.impl.DefaultLocalizationService.matchDataLocale(DefaultLocalizationService.java:228)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.050 | 	at de.hybris.platform.servicelayer.internal.i18n.impl.DefaultLocalizationService.getDataLocale(DefaultLocalizationService.java:146)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.051 | 	at de.hybris.platform.servicelayer.i18n.impl.DefaultI18NService.getBestMatchingLocale(DefaultI18NService.java:167)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.051 | 	at de.hybris.platform.servicelayer.internal.converter.impl.DefaultLocaleProvider.toDataLocale(DefaultLocaleProvider.java:61)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.052 | 	at de.hybris.platform.servicelayer.model.ItemModelContextImpl.toDataLocale(ItemModelContextImpl.java:434)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.052 | 	at de.hybris.platform.servicelayer.model.ItemModelContextImpl.getLocalizedValue(ItemModelContextImpl.java:325)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.052 | 	at de.hybris.platform.core.model.type.TypeManagerManagedModel.getName(TypeManagerManagedModel.java:181)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.052 | 	at com.hybris.backoffice.cockpitng.dataaccess.facades.type.DefaultPlatformTypeFacadeStrategy.convertType(DefaultPlatformTypeFacadeStrategy.java:296)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.053 | 	at com.hybris.backoffice.cockpitng.dataaccess.facades.type.DefaultPlatformTypeFacadeStrategy.loadAndCache(DefaultPlatformTypeFacadeStrategy.java:181)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.053 | 	at com.hybris.backoffice.cockpitng.dataaccess.facades.type.DefaultPlatformTypeFacadeStrategy.convertAttribute(DefaultPlatformTypeFacadeStrategy.java:342)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.054 | 	at com.hybris.backoffice.cockpitng.dataaccess.facades.type.DefaultPlatformTypeFacadeStrategy.convertType(DefaultPlatformTypeFacadeStrategy.java:279)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.054 | 	at com.hybris.backoffice.cockpitng.dataaccess.facades.type.DefaultPlatformTypeFacadeStrategy.loadAndCache(DefaultPlatformTypeFacadeStrategy.java:181)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.055 | 	at com.hybris.backoffice.cockpitng.dataaccess.facades.type.DefaultPlatformTypeFacadeStrategy.load(DefaultPlatformTypeFacadeStrategy.java:143)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.055 | 	at com.hybris.cockpitng.dataaccess.facades.type.impl.DefaultTypeFacade.load(DefaultTypeFacade.java:47)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.056 | 	at com.hybris.cockpitng.dataaccess.facades.type.impl.DefaultTypeFacade.load(DefaultTypeFacade.java:54)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.066 | 	at com.hybris.backoffice.config.WarmUpTypeFacadeCaches.cacheTypesAndLoadStrategies(WarmUpTypeFacadeCaches.java:83)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.067 | 	at com.hybris.backoffice.config.WarmUpTypeFacadeCaches.warmUpCaches(WarmUpTypeFacadeCaches.java:62)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.067 | 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.068 | 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.068 | 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.069 | 	at java.lang.reflect.Method.invoke(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.069 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeCustomInitMethod(AbstractAutowireCapableBeanFactory.java:1702)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.073 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1641)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.074 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1570)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.074 | 	... 24 more
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.075 | INFO  [localhost-startStop-1] [ConfigParser] Ignore jar:file:/C:/Users/user/IdeaProjects/hybris/bin/ext-cockpit/cockpit/lib/zhtml-3.6.4.jar!/metainfo/zk/lang.xml
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.075 | Cause: version not matched; expected=7.0.4, xml=3.6.4
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.175 | INFO  [localhost-startStop-1] [LabelLoaderImpl] Loading labels for ru_RU
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.375 | INFO  [Thread-1] [DefaultRMIRegistryService] Unexporting the registry.
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.375 | WARN  [localhost-startStop-1] [CockpitModuleComponentDefinitionService] Could not get library for module extension://cockpit
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.375 | WARN  [localhost-startStop-1] [CockpitModuleComponentDefinitionService] Could not get library for module extension://mcc
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.675 | ERROR [localhost-startStop-1] [Messages] 
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.675 | java.lang.IllegalStateException: tenant <<master>>,(2076782103) not started yet - got no jaloConnection (state:INACTIVE currentlyStopping:false jaloConnection:null)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.675 | 	at de.hybris.platform.core.AbstractTenant.getJaloConnection(AbstractTenant.java:2310)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.675 | 	at de.hybris.platform.jalo.flexiblesearch.FlexibleSearch.getInstance(FlexibleSearch.java:2196)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.676 | 	at de.hybris.platform.servicelayer.search.impl.DefaultFlexibleSearchService$2.execute(DefaultFlexibleSearchService.java:374)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.676 | 	at de.hybris.platform.servicelayer.search.impl.DefaultFlexibleSearchService$2.execute(DefaultFlexibleSearchService.java:1)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.676 | 	at de.hybris.platform.servicelayer.session.impl.DefaultSessionService.executeInLocalView(DefaultSessionService.java:91)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.676 | 	at de.hybris.platform.servicelayer.search.impl.DefaultFlexibleSearchService.getJaloResult(DefaultFlexibleSearchService.java:363)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.677 | 	at de.hybris.platform.servicelayer.search.impl.DefaultFlexibleSearchService.search(DefaultFlexibleSearchService.java:164)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.677 | 	at de.hybris.platform.servicelayer.search.impl.DefaultFlexibleSearchService.search(DefaultFlexibleSearchService.java:203)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.677 | 	at de.hybris.platform.servicelayer.media.impl.DefaultMediaDao.findMediaByCode(DefaultMediaDao.java:122)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.677 | 	at de.hybris.platform.servicelayer.media.impl.DefaultMediaService.getMedia(DefaultMediaService.java:708)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.678 | 	at com.hybris.backoffice.config.impl.BackofficeCockpitConfigurationService.getCockpitNGConfig(BackofficeCockpitConfigurationService.java:132)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.678 | 	at com.hybris.backoffice.config.impl.BackofficeCockpitConfigurationService.getConfigFileInputStream(BackofficeCockpitConfigurationService.java:59)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.678 | 	at com.hybris.cockpitng.core.config.impl.DefaultCockpitConfigurationService.loadRootConfiguration(DefaultCockpitConfigurationService.java:303)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.679 | 	at com.hybris.backoffice.cockpitng.modules.BackofficeLibraryHandler.afterDeployReverseOrder(BackofficeLibraryHandler.java:175)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.679 | 	at com.hybris.cockpitng.modules.core.impl.CockpitModuleComponentDefinitionService.doAfterDeployReverseOrder(CockpitModuleComponentDefinitionService.java:203)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.679 | 	at com.hybris.cockpitng.modules.core.impl.CockpitModuleComponentDefinitionService.fetchInModules(CockpitModuleComponentDefinitionService.java:169)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.680 | 	at com.hybris.cockpitng.modules.core.impl.CockpitModuleComponentDefinitionService.fetchExternalWidgets(CockpitModuleComponentDefinitionService.java:108)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.680 | 	at com.hybris.cockpitng.modules.core.impl.CockpitModuleComponentDefinitionService.reloadDefinitions(CockpitModuleComponentDefinitionService.java:74)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.680 | 	at com.hybris.cockpitng.core.impl.DefaultCockpitComponentDefinitionService.assureDefinitionsLoaded(DefaultCockpitComponentDefinitionService.java:167)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.680 | 	at com.hybris.cockpitng.core.impl.DefaultCockpitComponentDefinitionService.getAllComponentDefinitions(DefaultCockpitComponentDefinitionService.java:111)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.681 | 	at com.hybris.cockpitng.util.labels.CockpitComponentDefinitionLabelLocator.locate(CockpitComponentDefinitionLabelLocator.java:81)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.681 | 	at org.zkoss.util.resource.impl.LabelLoaderImpl.loadLabels(LabelLoaderImpl.java:265)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.681 | 	at org.zkoss.util.resource.impl.LabelLoaderImpl.getLabel(LabelLoaderImpl.java:118)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.682 | 	at org.zkoss.util.resource.impl.LabelLoaderImpl.getLabel(LabelLoaderImpl.java:109)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.682 | 	at org.zkoss.util.resource.Labels.getLabel(Labels.java:61)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.682 | 	at org.zkoss.mesg.Messages.getFromBundle(Messages.java:81)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.682 | 	at org.zkoss.mesg.Messages.get(Messages.java:134)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.682 | 	at org.zkoss.mesg.Messages.get(Messages.java:67)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.682 | 	at org.zkoss.lang.Exceptions.getMessage(Exceptions.java:360)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.682 | 	at org.zkoss.lang.SystemException.<init>(SystemException.java:130)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.683 | 	at org.zkoss.util.IllegalSyntaxException.<init>(IllegalSyntaxException.java:47)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.683 | 	at org.zkoss.idom.util.IDOMs.getRequiredElementValue(IDOMs.java:79)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.683 | 	at org.zkoss.zk.ui.metainfo.DefinitionLoaders.parseLang(DefinitionLoaders.java:266)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.683 | 	at org.zkoss.zk.ui.metainfo.DefinitionLoaders.load0(DefinitionLoaders.java:179)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.683 | 	at org.zkoss.zk.ui.metainfo.DefinitionLoaders.load(DefinitionLoaders.java:155)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.684 | 	at org.zkoss.zk.ui.metainfo.LanguageDefinition.init(LanguageDefinition.java:316)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.684 | 	at org.zkoss.zk.ui.metainfo.LanguageDefinition.getAll(LanguageDefinition.java:295)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.684 | 	at org.zkoss.zk.ui.http.WebManager.getCWRURLPrefix(WebManager.java:273)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.685 | 	at org.zkoss.zk.ui.http.WebManager.<init>(WebManager.java:230)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.685 | 	at org.zkoss.zk.ui.http.HttpSessionListener23.contextInitialized(HttpSessionListener23.java:140)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.685 | 	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:5016)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.685 | 	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5524)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.685 | 	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.685 | 	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1575)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.686 | 	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1565)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.686 | 	at java.util.concurrent.FutureTask.run(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.686 | 	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.686 | 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.686 | 	at java.lang.Thread.run(Unknown Source)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.686 | ERROR [localhost-startStop-1] [Messages] Message code not found: 2b902400 not in ru_RU:[org.zkoss.mesg.MCommon, /metainfo/mesg/msgcommon]
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.686 | INFO  [localhost-startStop-1] [LabelLoaderImpl] Loading labels for ru_RU
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.687 | WARN  [localhost-startStop-1] [CockpitModuleComponentDefinitionService] Could not get library for module extension://cockpit
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.687 | WARN  [localhost-startStop-1] [CockpitModuleComponentDefinitionService] Could not get library for module extension://mcc
+INFO   | jvm 1    | main    | 2016/03/18 13:07:04.688 | INFO  [Thread-1] [DefaultClusterNodeManagementService] Unregistering assigned cluster node id 0...
+STATUS | wrapper  | main    | 2016/03/18 13:07:05.543 | <-- Wrapper Stopped
+STATUS | wrapper  | main    | 2016/03/18 13:07:13.056 | --> Wrapper Started as Console
+STATUS | wrapper  | main    | 2016/03/18 13:07:14.795 | Java Service Wrapper Standard Edition 64-bit 3.5.24
+STATUS | wrapper  | main    | 2016/03/18 13:07:14.796 |   Copyright (C) 1999-2014 Tanuki Software, Ltd. All Rights Reserved.
+STATUS | wrapper  | main    | 2016/03/18 13:07:14.796 |     http://wrapper.tanukisoftware.com
+STATUS | wrapper  | main    | 2016/03/18 13:07:14.796 |   Licensed to hybris software - www.hybris.com for hybris Platform
+STATUS | wrapper  | main    | 2016/03/18 13:07:14.796 | 
+STATUS | wrapper  | main    | 2016/03/18 13:07:15.161 | Launching a JVM...
+INFO   | jvm 1    | main    | 2016/03/18 13:07:17.605 | WrapperManager: Initializing...
+INFO   | jvm 1    | main    | 2016/03/18 13:07:18.893 | мар 18, 2016 12:07:18 PM org.apache.coyote.AbstractProtocol init
+INFO   | jvm 1    | main    | 2016/03/18 13:07:18.895 | INFO: Initializing ProtocolHandler ["http-bio-9001"]
+INFO   | jvm 1    | main    | 2016/03/18 13:07:18.898 | мар 18, 2016 12:07:18 PM org.apache.coyote.AbstractProtocol init
+INFO   | jvm 1    | main    | 2016/03/18 13:07:18.898 | INFO: Initializing ProtocolHandler ["http-bio-9002"]
+INFO   | jvm 1    | main    | 2016/03/18 13:07:19.638 | мар 18, 2016 12:07:19 PM org.apache.coyote.AbstractProtocol init
+INFO   | jvm 1    | main    | 2016/03/18 13:07:19.638 | INFO: Initializing ProtocolHandler ["ajp-bio-8009"]
+INFO   | jvm 1    | main    | 2016/03/18 13:07:19.639 | мар 18, 2016 12:07:19 PM org.apache.catalina.startup.Catalina load
+INFO   | jvm 1    | main    | 2016/03/18 13:07:19.639 | INFO: Initialization processed in 1665 ms
+INFO   | jvm 1    | main    | 2016/03/18 13:07:19.850 | мар 18, 2016 12:07:19 PM org.apache.catalina.mbeans.JmxRemoteLifecycleListener createServer
+INFO   | jvm 1    | main    | 2016/03/18 13:07:19.850 | INFO: The JMX Remote Listener has configured the registry on port 9003 and the server on port 9004 for the Platform server
+INFO   | jvm 1    | main    | 2016/03/18 13:07:19.853 | мар 18, 2016 12:07:19 PM org.apache.catalina.core.StandardService startInternal
+INFO   | jvm 1    | main    | 2016/03/18 13:07:19.853 | INFO: Starting service Catalina
+INFO   | jvm 1    | main    | 2016/03/18 13:07:23.915 | мар 18, 2016 12:07:23 PM org.apache.catalina.startup.TaglibUriRule body
+INFO   | jvm 1    | main    | 2016/03/18 13:07:23.916 | INFO: TLD skipped. URI: http://displaytag.sf.net/el is already defined
+INFO   | jvm 1    | main    | 2016/03/18 13:07:23.916 | мар 18, 2016 12:07:23 PM org.apache.catalina.startup.TaglibUriRule body
+INFO   | jvm 1    | main    | 2016/03/18 13:07:23.917 | INFO: TLD skipped. URI: http://displaytag.sf.net is already defined
+INFO   | jvm 1    | main    | 2016/03/18 13:07:24.377 | >>> No SAP licenses found in the system. Trying fallback to hybris license.
+INFO   | jvm 1    | main    | 2016/03/18 13:07:26.643 | INFO  [localhost-startStop-1] [AbstractTenant] Created master data source DataSourceImpl<<master/master>>
+INFO   | jvm 1    | main    | 2016/03/18 13:07:26.644 | INFO  [localhost-startStop-1] [DefaultClusterNodeManagementService] Automatic cluster ID discovery disabled. Configured ID: 0
+INFO   | jvm 1    | main    | 2016/03/18 13:07:26.644 | INFO  [localhost-startStop-1] [DefaultBroadcastService] Started message broadcast service:
+INFO   | jvm 1    | main    | 2016/03/18 13:07:26.645 | clustering (enabled:false)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:26.645 | sending synchronously - no queue
+INFO   | jvm 1    | main    | 2016/03/18 13:07:26.645 | methods [<loopback>::de.hybris.platform.cluster.LoopBackBroadcastMethod@4b06d69e]
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.001 | INFO  [localhost-startStop-1] [hybrisserver] 
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.001 | INFO  [localhost-startStop-1] [hybrisserver] *****************************************************************
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.001 | INFO  [localhost-startStop-1] [hybrisserver] 
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.001 | INFO  [localhost-startStop-1] [hybrisserver] Starting up hybris server
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.002 | INFO  [localhost-startStop-1] [hybrisserver] 
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.002 | INFO  [localhost-startStop-1] [hybrisserver] Configuration:
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.002 | INFO  [localhost-startStop-1] [hybrisserver] 
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.002 | INFO  [localhost-startStop-1] [hybrisserver] Cluster:     disabled
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.002 | INFO  [localhost-startStop-1] [hybrisserver] Tenant:      master
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.003 | INFO  [localhost-startStop-1] [hybrisserver] Mode:        development
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.003 | INFO  [localhost-startStop-1] [hybrisserver] OS:          Windows 7 6.1, amd64
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.003 | INFO  [localhost-startStop-1] [hybrisserver] Database:    Pool: hybris - hsqldb, table prefix: 
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.003 | INFO  [localhost-startStop-1] [hybrisserver]              SA - jdbc:hsqldb:file:C:\Users\user\IdeaProjects\hybris\data/hsqldb/mydb;shutdown=true;hsqldb.cache_rows=100000;hsqldb.cache_size=20000;hsqldb.write_delay_millis=1000;hsqldb.inc_backup=true;hsqldb.defrag_limit=2;hsqldb.nio_data_file=false
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.004 | INFO  [localhost-startStop-1] [hybrisserver] Platform:    5.7.0.3
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.004 | INFO  [localhost-startStop-1] [hybrisserver] Java:        Oracle Corporation
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.004 | INFO  [localhost-startStop-1] [hybrisserver]              Java(TM) SE Runtime Environment, 1.8.0_73-b02
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.005 | INFO  [localhost-startStop-1] [hybrisserver]              C:\Program Files\Java\jre1.8.0_73
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.005 | INFO  [localhost-startStop-1] [hybrisserver] VM Locale:   language=ru,country=RU,region=null
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.005 | INFO  [localhost-startStop-1] [hybrisserver] Cache:       RegionCache is not yet initialized. [de.hybris.platform.cache.impl.RegionCacheAdapter]
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.005 | INFO  [localhost-startStop-1] [hybrisserver] Server type: tomcat
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.006 | INFO  [localhost-startStop-1] [hybrisserver] 
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.006 | INFO  [localhost-startStop-1] [hybrisserver] *****************************************************************
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.006 | INFO  [localhost-startStop-1] [hybrisserver] 
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.006 | INFO  [localhost-startStop-1] [hybrisserver] ---------------------------------------------------------------
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.007 | INFO  [localhost-startStop-1] [hybrisserver] --- Extensions in dependency order ( options: 
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.008 | INFO  [localhost-startStop-1] [hybrisserver] ---  @deprecated: is deprecated, p: platform extension,*: auto-required 
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.008 | INFO  [localhost-startStop-1] [hybrisserver] ---  ?: lazy-loaded, i: got items.xml, b: got beans.xml, c: got core module 
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.008 | INFO  [localhost-startStop-1] [hybrisserver] ---  w: got web module, h: got HMC module ) 
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.009 | INFO  [localhost-startStop-1] [hybrisserver] ---------------------------------------------------------------
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.009 | INFO  [localhost-startStop-1] [hybrisserver] core 5.7.0.3 [p*cib]
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.009 | INFO  [localhost-startStop-1] [hybrisserver] testweb 5.7.0.3 [p*w]
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.009 | INFO  [localhost-startStop-1] [hybrisserver] scripting 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.010 | INFO  [localhost-startStop-1] [hybrisserver] paymentstandard 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.010 | INFO  [localhost-startStop-1] [hybrisserver] mediaweb 5.7.0.3 [p*cw]
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.010 | INFO  [localhost-startStop-1] [hybrisserver] maintenanceweb 5.7.0.3 [p*w]
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.010 | INFO  [localhost-startStop-1] [hybrisserver] deliveryzone 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.010 | INFO  [localhost-startStop-1] [hybrisserver] commons 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.011 | INFO  [localhost-startStop-1] [hybrisserver] processing->(scripting,commons) 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.011 | INFO  [localhost-startStop-1] [hybrisserver] impex->processing 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.011 | INFO  [localhost-startStop-1] [hybrisserver] validation->impex 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.011 | INFO  [localhost-startStop-1] [hybrisserver] catalog->(validation,commons) 5.7.0.3 [p*cib]
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.017 | INFO  [localhost-startStop-1] [hybrisserver] europe1->(impex,catalog) 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.017 | INFO  [localhost-startStop-1] [hybrisserver] platformservices->(paymentstandard,impex,deliveryzone,europe1,processing) 5.7.0.3 [p*cb]
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.018 | INFO  [localhost-startStop-1] [hybrisserver] workflow->(catalog,platformservices,processing,commons) 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.018 | INFO  [localhost-startStop-1] [hybrisserver] hac->(impex,catalog,processing,platformservices) 5.7.0.3 [p*w]
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.018 | INFO  [localhost-startStop-1] [hybrisserver] comments->(workflow,impex,catalog,processing) 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.019 | INFO  [localhost-startStop-1] [hybrisserver] advancedsavedquery->(impex,catalog,processing) 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.019 | INFO  [localhost-startStop-1] [hybrisserver] ldap->(impex,catalog,processing) <-?-platformhmc 5.7.0.3 [?ci] path:C:\Users\user\IdeaProjects\hybris\bin\ext-platform-optional\ldap
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.020 | INFO  [localhost-startStop-1] [hybrisserver] hmc->scripting 5.7.0.3 [ciw] path:C:\Users\user\IdeaProjects\hybris\bin\ext-platform-optional\hmc
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.020 | INFO  [localhost-startStop-1] [hybrisserver] mediaconversion->hmc 5.7.0.3 [ciwh] path:C:\Users\user\IdeaProjects\hybris\bin\ext-platform-optional\mediaconversion
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.020 | INFO  [localhost-startStop-1] [hybrisserver] platformhmc->(ldap,hmc) 5.7.0.3 [cibh] path:C:\Users\user\IdeaProjects\hybris\bin\ext-platform-optional\platformhmc
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.021 | INFO  [localhost-startStop-1] [hybrisserver] cockpit->(comments,workflow,impex,catalog,processing,validation) 5.7.0.3 [ci] path:C:\Users\user\IdeaProjects\hybris\bin\ext-cockpit\cockpit
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.021 | INFO  [localhost-startStop-1] [hybrisserver] cuppy->(cockpit,hmc) 5.7.0.3 [ciwh] path:C:\Users\user\IdeaProjects\hybris\bin\custom\cuppy
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.022 | INFO  [localhost-startStop-1] [hybrisserver] cuppytrail->cuppy 5.7.0.3 [cib] path:C:\Users\user\IdeaProjects\hybris\bin\custom\cuppytrail
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.023 | INFO  [localhost-startStop-1] [hybrisserver] mcc->(impex,processing,cockpit) 5.7.0.3 [ciw] path:C:\Users\user\IdeaProjects\hybris\bin\ext-cockpit\mcc
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.024 | INFO  [localhost-startStop-1] [hybrisserver] backoffice 5.7.0.3 [ciw] path:C:\Users\user\IdeaProjects\hybris\bin\ext-backoffice\backoffice
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.026 | INFO  [localhost-startStop-1] [hybrisserver] admincockpit->(impex,processing,validation,cockpit) 5.7.0.3 [ciw] path:C:\Users\user\IdeaProjects\hybris\bin\ext-cockpit\admincockpit
+INFO   | jvm 1    | main    | 2016/03/18 13:07:27.026 | INFO  [localhost-startStop-1] [hybrisserver] ---------------------------------------------------------------
+INFO   | jvm 1    | main    | 2016/03/18 13:07:28.116 | INFO  [localhost-startStop-1] [Licence] ##########################################################################
+INFO   | jvm 1    | main    | 2016/03/18 13:07:28.157 | INFO  [localhost-startStop-1] [Licence] This Hybris licence is only for demo or develop usage and is valid for 30 days.
+INFO   | jvm 1    | main    | 2016/03/18 13:07:28.189 | INFO  [localhost-startStop-1] [Licence] After this time you have to reinitialize database to continue your work.
+INFO   | jvm 1    | main    | 2016/03/18 13:07:28.189 | INFO  [localhost-startStop-1] [Licence] Remaining days ====> 50
+INFO   | jvm 1    | main    | 2016/03/18 13:07:28.190 | INFO  [localhost-startStop-1] [Licence] ##########################################################################
+INFO   | jvm 1    | main    | 2016/03/18 13:07:31.091 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<global>> spring config from extension (core) located in (global-core-spring.xml,core-cache.xml,global-servicelayer-spring.xml,global-core-jmx-spring.xml,global-statistics-spring.xml) took: (1,030 s)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:31.260 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<global>> spring config from extension (mediaconversion) located in (/mediaconversion-global-context.xml) took: (38,09 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:31.261 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<global>> spring config from extension (cockpit) located in (global-cockpit-spring.xml) took: (52,09 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:31.361 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<global>> spring config from extension (cuppy) located in (global-cuppy-spring.xml,cuppy-ws-spring.xml) took: (102,4 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:32.109 | INFO  [localhost-startStop-1] [DefaultRMIRegistryService] Creating Registry on port 2198.
+INFO   | jvm 1    | main    | 2016/03/18 13:07:32.109 | INFO  [localhost-startStop-1] [LocalRMISocketFactory] Creating server socket at '/127.0.0.1:2198'.
+INFO   | jvm 1    | main    | 2016/03/18 13:07:33.394 | INFO  [localhost-startStop-1] [HybrisContextFactory] - Refreshing SpringContext (Global context) took: (1,674 s)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:33.394 | INFO  [localhost-startStop-1] [HybrisContextFactory] Initializing <<global>> Spring ApplicationContext took: (3,065 s)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:33.395 | WARN  [localhost-startStop-1] [AutowiredAnnotationBeanPostProcessor] Inconsistent constructor declaration on bean with name 'defaultCacheController': single autowire-marked constructor flagged as optional - this constructor is effectively required since there is no default constructor to fall back to: public de.hybris.platform.regioncache.DefaultCacheController(de.hybris.platform.regioncache.CacheConfiguration)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:33.396 | WARN  [localhost-startStop-1] [AutowiredAnnotationBeanPostProcessor] Inconsistent constructor declaration on bean with name 'defaultCacheController': single autowire-marked constructor flagged as optional - this constructor is effectively required since there is no default constructor to fall back to: public de.hybris.platform.regioncache.DefaultCacheController(de.hybris.platform.regioncache.CacheConfiguration)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:33.397 | INFO  [localhost-startStop-1] [EHCacheRegion] EHCacheRegion entityCacheRegion, eviction policy FIFO, size 100000
+INFO   | jvm 1    | main    | 2016/03/18 13:07:33.631 | INFO  [localhost-startStop-1] [EHCacheRegion] EHCacheRegion queryCacheRegion, eviction policy FIFO, size 20000
+INFO   | jvm 1    | main    | 2016/03/18 13:07:34.554 | INFO  [localhost-startStop-1] [DefaultCacheController] Regioncache initialized with region count 5
+INFO   | jvm 1    | main    | 2016/03/18 13:07:34.557 | INFO  [localhost-startStop-1] [DefaultCacheController] Cache region: Name: typesystemCacheRegion, size: 0, types: [81, 82, 83, 84, 87], statistics: true, class: class de.hybris.platform.regioncache.region.impl.UnlimitedCacheRegion
+INFO   | jvm 1    | main    | 2016/03/18 13:07:34.557 | INFO  [localhost-startStop-1] [DefaultCacheController] Cache region: Name: entityCacheRegion, size: 100000, types: [__ALL_TYPES__, __NO_QUERY__], exclusive computation: false, statistics: true, class: class de.hybris.platform.regioncache.region.impl.EHCacheRegion
+INFO   | jvm 1    | main    | 2016/03/18 13:07:34.558 | INFO  [localhost-startStop-1] [DefaultCacheController] Cache region: Name: queryCacheRegion, size: 20000, types: [__QUERY_CACHE__], exclusive computation: false, statistics: true, class: class de.hybris.platform.regioncache.region.impl.EHCacheRegion
+INFO   | jvm 1    | main    | 2016/03/18 13:07:34.559 | INFO  [localhost-startStop-1] [DefaultCacheController] Cache region: Name: mediaCacheRegion, size: 0, types: [__MEDIA__cache], statistics: true, class: class de.hybris.platform.media.storage.impl.MediaCacheRegion
+INFO   | jvm 1    | main    | 2016/03/18 13:07:34.559 | INFO  [localhost-startStop-1] [DefaultCacheController] Cache region: Name: scriptsCacheRegion, size: 0, types: [__SCRIPT__], statistics: true, class: class de.hybris.platform.scripting.engine.internal.cache.impl.ScriptsCacheRegion
+INFO   | jvm 1    | main    | 2016/03/18 13:07:34.560 | INFO  [localhost-startStop-1] [DefaultCacheController] Registered Listener RegionCacheAdapter(866727230) - <<master>> on cache controller. Currently registered 1
+INFO   | jvm 1    | main    | 2016/03/18 13:07:42.328 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (core) located in (core-spring.xml,persistence-spring.xml,core-media-spring.xml,core-profiling-spring.xml,core-jmx-spring.xml,core-filter-spring.xml,servicelayer-spring.xml,user-spring.xml,security-spring.xml,media-spring.xml,i18n-spring.xml,interceptor-spring.xml,event-spring.xml) took: (781,4 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:42.557 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (scripting) located in (scripting-spring.xml) took: (37,23 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:42.736 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (commons) located in (commons-spring.xml) took: (29,60 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:43.008 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (processing) located in (processing-spring.xml,cronjob-spring.xml,task-spring.xml,processengine-spring.xml,processing-jmx-spring.xml) took: (144,4 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:43.057 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (impex) located in (impex-spring.xml) took: (35,66 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:43.124 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (validation) located in (validation-spring.xml) took: (48,03 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:43.299 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (europe1) located in (europe1-spring.xml) took: (27,87 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:43.388 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (platformservices) located in (catalog-spring.xml,order-spring.xml,product-spring.xml,category-spring.xml,classification-spring.xml,jobs-spring.xml,converters-spring.xml) took: (225,3 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:43.389 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (workflow) located in (workflow-spring.xml) took: (57,39 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:43.389 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (comments) located in (comments-spring.xml) took: (29,09 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:43.390 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (ldap) located in (ldap-spring.xml) took: (28,64 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:43.391 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (mediaconversion) located in (mediaconversion-spring.xml) took: (36,82 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:43.391 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (platformhmc) located in (platformhmc-spring.xml) took: (35,35 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:43.392 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (cockpit) located in (cockpit-spring.xml) took: (44,52 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:43.517 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (cuppy) located in (cuppy-spring.xml) took: (381,4 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:43.860 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (cuppytrail) located in (cuppytrail-spring.xml) took: (30,26 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:43.866 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (mcc) located in (mcc-spring.xml) took: (31,76 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:43.867 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (backoffice) located in (backoffice-spring.xml) took: (34,75 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:43.867 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (admincockpit) located in (admincockpit-spring.xml) took: (32,27 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:07:48.275 | ERROR [localhost-startStop-1] [MailSenderFactory] Can not start mail sender, please configure properties mail.smtp.server and mail.smtp.port
+INFO   | jvm 1    | main    | 2016/03/18 13:07:49.446 | INFO  [localhost-startStop-1] [DefaultCacheController] Registered Listener de.hybris.platform.media.storage.impl.DefaultLocalMediaFileCacheService$MediaCacheLifecycleCallback@5857fb11 on cache controller. Currently registered 2
+INFO   | jvm 1    | main    | 2016/03/18 13:07:52.509 | INFO  [localhost-startStop-1] [Reflections] Reflections took 142 ms to scan 1 urls, producing 9 keys and 16 values 
+INFO   | jvm 1    | main    | 2016/03/18 13:07:52.510 | INFO  [localhost-startStop-1] [Reflections] Reflections took 1 ms to scan 1 urls, producing 2 keys and 5 values 
+INFO   | jvm 1    | main    | 2016/03/18 13:07:58.413 | WARN  [localhost-startStop-1] [PersistentKeyGenerator] cockpitSavedQuery generator is using deprecated 'numeric' property! Initializing as alphanumeric
+INFO   | jvm 1    | main    | 2016/03/18 13:08:06.570 | INFO  [localhost-startStop-1] [HybrisContextFactory] - Refreshing SpringContext (hybris Application context - master) took: (22,99 s)
+INFO   | jvm 1    | main    | 2016/03/18 13:08:06.570 | INFO  [localhost-startStop-1] [HybrisContextFactory] Initializing application Spring ApplicationContext for tenant master  took: (25,09 s)
+INFO   | jvm 1    | main    | 2016/03/18 13:08:06.684 | INFO  [localhost-startStop-1] [DefaultBroadcastService] updating cluster island ID -1->15481123719086096
+INFO   | jvm 1    | main    | 2016/03/18 13:08:07.492 | INFO  [localhost-startStop-1] [DefaultTaskService] Task engine starting up (min:10 max:10 idle:20s interval:10s)
+INFO   | jvm 1    | main    | 2016/03/18 13:08:07.493 | INFO  [Task-master-poll] [DefaultTaskService] Polling thread started.
+INFO   | jvm 1    | main    | 2016/03/18 13:08:07.495 | INFO  [Task-master-poll] [DefaultModelConverterRegistry] loading model converters: 
+INFO   | jvm 1    | main    | 2016/03/18 13:08:07.501 | INFO  [Task-master-poll] [DefaultModelConverterRegistry] 	pre-fetch mode:default
+INFO   | jvm 1    | main    | 2016/03/18 13:08:09.069 | INFO  [localhost-startStop-1] [RemoveDefaultSessionFixationStrategyBeanPostProcessor] Removed Spring default SessionFixationProtectionStrategy, since HybrisSessionFixationProtectionStrategy is already defined
+INFO   | jvm 1    | main    | 2016/03/18 13:08:09.717 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/'
+INFO   | jvm 1    | main    | 2016/03/18 13:08:13.521 | INFO  [localhost-startStop-1] [Version] HV000001: Hibernate Validator 4.3.2.Final
+INFO   | jvm 1    | main    | 2016/03/18 13:08:19.655 | INFO  [localhost-startStop-1] (junit) [AbstractTenant] Created master data source DataSourceImpl<<junit/master>>
+INFO   | jvm 1    | main    | 2016/03/18 13:08:19.656 | INFO  [localhost-startStop-1] (junit) [AbstractTenant] Created alternative data source "alt1"
+INFO   | jvm 1    | main    | 2016/03/18 13:08:19.657 | INFO  [localhost-startStop-1] (junit) [AbstractTenant] Created alternative data source "alt2"
+INFO   | jvm 1    | main    | 2016/03/18 13:08:19.657 | INFO  [localhost-startStop-1] (junit) [AbstractTenant] Created alternative data source "a"
+INFO   | jvm 1    | main    | 2016/03/18 13:08:19.657 | INFO  [localhost-startStop-1] (junit) [AbstractTenant] Created alternative data source "b"
+INFO   | jvm 1    | main    | 2016/03/18 13:08:19.658 | INFO  [localhost-startStop-1] (junit) [AbstractTenant] Created alternative data source "c"
+INFO   | jvm 1    | main    | 2016/03/18 13:08:19.658 | WARN  [localhost-startStop-1] (junit) [DefaultCacheController] Listener already registered: RegionCacheAdapter(866727230) - <<junit>> : de.hybris.platform.cache.impl.RegionCacheAdapter
+INFO   | jvm 1    | main    | 2016/03/18 13:08:20.509 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (core) located in (core-spring.xml,core-media-spring.xml,persistence-spring.xml,core-profiling-spring.xml,core-jmx-spring.xml,core-filter-spring.xml,servicelayer-spring.xml,user-spring.xml,security-spring.xml,media-spring.xml,i18n-spring.xml,interceptor-spring.xml,event-spring.xml,test/test-core-spring.xml) took: (509,8 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:08:20.517 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (scripting) located in (scripting-spring.xml) took: (32,94 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:08:20.518 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (commons) located in (commons-spring.xml) took: (28,11 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:08:20.702 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (processing) located in (processing-spring.xml,cronjob-spring.xml,task-spring.xml,processengine-spring.xml,processing-jmx-spring.xml,test/test-processing-spring.xml) took: (144,9 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:08:20.703 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (impex) located in (impex-spring.xml) took: (23,14 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:08:20.822 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (validation) located in (validation-spring.xml) took: (108,3 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:08:20.924 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (europe1) located in (europe1-spring.xml) took: (105,6 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:08:21.256 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (platformservices) located in (catalog-spring.xml,order-spring.xml,product-spring.xml,category-spring.xml,classification-spring.xml,jobs-spring.xml,converters-spring.xml) took: (288,3 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:08:21.259 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (workflow) located in (workflow-spring.xml) took: (33,18 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:08:21.260 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (comments) located in (comments-spring.xml) took: (35,30 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:08:22.093 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (ldap) located in (ldap-spring.xml) took: (37,62 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:08:22.101 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (mediaconversion) located in (mediaconversion-spring.xml) took: (28,15 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:08:22.104 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (platformhmc) located in (platformhmc-spring.xml) took: (54,52 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:08:22.106 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (cockpit) located in (cockpit-spring.xml) took: (57,81 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:08:22.131 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (cuppy) located in (cuppy-spring.xml) took: (299,8 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:08:22.133 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (cuppytrail) located in (cuppytrail-spring.xml) took: (24,76 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:08:22.137 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (mcc) located in (mcc-spring.xml) took: (24,93 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:08:22.167 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (backoffice) located in (backoffice-spring.xml) took: (25,95 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:08:22.250 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (admincockpit) located in (admincockpit-spring.xml) took: (29,66 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:08:24.464 | ERROR [localhost-startStop-1] (junit) [MailSenderFactory] Can not start mail sender, please configure properties mail.smtp.server and mail.smtp.port
+INFO   | jvm 1    | main    | 2016/03/18 13:08:25.021 | INFO  [localhost-startStop-1] (junit) [DefaultCacheController] Registered Listener de.hybris.platform.media.storage.impl.DefaultLocalMediaFileCacheService$MediaCacheLifecycleCallback@14886283 on cache controller. Currently registered 3
+INFO   | jvm 1    | main    | 2016/03/18 13:08:28.786 | WARN  [localhost-startStop-1] (junit) [PersistentKeyGenerator] cockpitSavedQuery generator is using deprecated 'numeric' property! Initializing as alphanumeric
+INFO   | jvm 1    | main    | 2016/03/18 13:08:33.091 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] - Refreshing SpringContext (hybris Application context - junit) took: (10,51 s)
+INFO   | jvm 1    | main    | 2016/03/18 13:08:33.102 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Initializing application Spring ApplicationContext for tenant junit  took: (12,42 s)
+INFO   | jvm 1    | main    | 2016/03/18 13:08:33.104 | WARN  [localhost-startStop-1] (junit) [DefaultTaskService] System not initialized. Not starting task module.
+INFO   | jvm 1    | main    | 2016/03/18 13:08:33.105 | WARN  [localhost-startStop-1] (junit) [DefaultTaskService] System not initialized. Not starting task module.
+INFO   | jvm 1    | main    | 2016/03/18 13:08:33.106 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/hmc_junit'
+INFO   | jvm 1    | main    | 2016/03/18 13:08:37.871 | INFO  [localhost-startStop-1] [RemoveDefaultSessionFixationStrategyBeanPostProcessor] Removed Spring default SessionFixationProtectionStrategy, since HybrisSessionFixationProtectionStrategy is already defined
+INFO   | jvm 1    | main    | 2016/03/18 13:08:37.874 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/admincockpit'
+INFO   | jvm 1    | main    | 2016/03/18 13:08:58.954 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/cuppy'
+INFO   | jvm 1    | main    | 2016/03/18 13:09:00.114 | мар 18, 2016 12:09:00 PM org.apache.catalina.startup.TaglibUriRule body
+INFO   | jvm 1    | main    | 2016/03/18 13:09:00.150 | INFO: TLD skipped. URI: http://displaytag.sf.net/el is already defined
+INFO   | jvm 1    | main    | 2016/03/18 13:09:00.185 | мар 18, 2016 12:09:00 PM org.apache.catalina.startup.TaglibUriRule body
+INFO   | jvm 1    | main    | 2016/03/18 13:09:00.220 | INFO: TLD skipped. URI: http://displaytag.sf.net is already defined
+INFO   | jvm 1    | main    | 2016/03/18 13:09:00.361 | INFO  [localhost-startStop-1] (junit) [RemoveDefaultSessionFixationStrategyBeanPostProcessor] Removed Spring default SessionFixationProtectionStrategy, since HybrisSessionFixationProtectionStrategy is already defined
+INFO   | jvm 1    | main    | 2016/03/18 13:09:00.494 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/hac_junit'
+INFO   | jvm 1    | main    | 2016/03/18 13:09:05.521 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/hmc'
+INFO   | jvm 1    | main    | 2016/03/18 13:09:08.260 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/mcc'
+INFO   | jvm 1    | main    | 2016/03/18 13:09:08.681 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/mediaconversion'
+INFO   | jvm 1    | main    | 2016/03/18 13:09:27.721 | INFO  [localhost-startStop-1] [RemoveDefaultSessionFixationStrategyBeanPostProcessor] Removed Spring default SessionFixationProtectionStrategy, since HybrisSessionFixationProtectionStrategy is already defined
+INFO   | jvm 1    | main    | 2016/03/18 13:09:43.641 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/backoffice'
+INFO   | jvm 1    | main    | 2016/03/18 13:09:43.642 | INFO  [localhost-startStop-1] [WebManager] Starting ZK 7.0.4 EE (build: 2014120911)
+INFO   | jvm 1    | main    | 2016/03/18 13:09:43.742 | INFO  [localhost-startStop-1] [ConfigParser] Loading system default
+INFO   | jvm 1    | main    | 2016/03/18 13:09:44.042 | INFO  [localhost-startStop-1] [ConfigParser] Parsing jar:file:/C:/Users/user/IdeaProjects/hybris/bin/ext-backoffice/backoffice/web/webroot/WEB-INF/lib/cockpitframework-2.3.0.1.jar!/metainfo/zk/zk.xml
+INFO   | jvm 1    | main    | 2016/03/18 13:09:44.042 | INFO  [localhost-startStop-1] [ConfigParser] Parsing jar:file:/C:/Users/user/IdeaProjects/hybris/bin/ext-backoffice/backoffice/web/webroot/WEB-INF/lib/zul-7.0.4.jar!/metainfo/zk/zk.xml
+INFO   | jvm 1    | main    | 2016/03/18 13:09:44.043 | INFO  [localhost-startStop-1] [ConfigParser] Parsing jar:file:/C:/Users/user/IdeaProjects/hybris/bin/ext-backoffice/backoffice/web/webroot/WEB-INF/lib/zkex-7.0.4.jar!/metainfo/zk/zk.xml
+INFO   | jvm 1    | main    | 2016/03/18 13:09:44.044 | INFO  [localhost-startStop-1] [ConfigParser] Parsing jar:file:/C:/Users/user/IdeaProjects/hybris/bin/ext-backoffice/backoffice/web/webroot/WEB-INF/lib/zkmax-7.0.4.jar!/metainfo/zk/zk.xml
+INFO   | jvm 1    | main    | 2016/03/18 13:09:46.385 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/test'
+INFO   | jvm 1    | main    | 2016/03/18 13:09:47.658 | мар 18, 2016 12:09:47 PM org.apache.coyote.AbstractProtocol start
+INFO   | jvm 1    | main    | 2016/03/18 13:09:47.658 | INFO: Starting ProtocolHandler ["http-bio-9001"]
+INFO   | jvm 1    | main    | 2016/03/18 13:09:47.659 | мар 18, 2016 12:09:47 PM org.apache.coyote.AbstractProtocol start
+INFO   | jvm 1    | main    | 2016/03/18 13:09:47.661 | INFO: Starting ProtocolHandler ["http-bio-9002"]
+INFO   | jvm 1    | main    | 2016/03/18 13:09:47.664 | мар 18, 2016 12:09:47 PM org.apache.coyote.AbstractProtocol start
+INFO   | jvm 1    | main    | 2016/03/18 13:09:47.665 | INFO: Starting ProtocolHandler ["ajp-bio-8009"]
+INFO   | jvm 1    | main    | 2016/03/18 13:09:47.669 | мар 18, 2016 12:09:47 PM org.apache.catalina.startup.Catalina start
+INFO   | jvm 1    | main    | 2016/03/18 13:09:47.670 | INFO: Server startup in 148061 ms
+INFO   | jvm 1    | main    | 2016/03/18 13:09:49.801 | ERROR [hybrisHTTP1] [UISessionImpl] Can not set ID generator. Reason: ZK has not been properly initialized.
+INFO   | jvm 1    | main    | 2016/03/18 13:09:49.821 | WARN  [hybrisHTTP1] [UITools] Execution cannot be null. Is ZK available?
+STATUS | wrapper  | main    | 2016/03/18 13:17:37.635 | CTRL-C trapped.  Shutting down.
+INFO   | jvm 1    | main    | 2016/03/18 13:17:37.939 | shutting down hybris registry..
+INFO   | jvm 1    | main    | 2016/03/18 13:17:37.954 | INFO  [Thread-1] [DefaultTaskService] Shutting down task engine for tenant master.
+INFO   | jvm 1    | main    | 2016/03/18 13:17:37.956 | INFO  [Thread-1] [DefaultTaskService] Terminating task polling thread.
+INFO   | jvm 1    | main    | 2016/03/18 13:17:37.972 | INFO  [Thread-1] [DefaultTaskService] Stopped task engine for tenant master.
+INFO   | jvm 1    | main    | 2016/03/18 13:17:37.972 | INFO  [Thread-1] [DefaultTaskService] Task engine already stopped.
+INFO   | jvm 1    | main    | 2016/03/18 13:17:38.073 | INFO  [Thread-1] (junit) [DefaultTaskService] Task engine already stopped.
+INFO   | jvm 1    | main    | 2016/03/18 13:17:38.073 | INFO  [Thread-1] (junit) [DefaultTaskService] Task engine already stopped.
+INFO   | jvm 1    | main    | 2016/03/18 13:17:38.073 | WARN  [AfterSaveEventPublisher-master] [DefaultAfterSaveListenerRegistry] AfterSaveEventPublisher-master has been interrupted - stopping now: sleep interrupted
+INFO   | jvm 1    | main    | 2016/03/18 13:17:38.074 | INFO  [AfterSaveEventPublisher-master] [DefaultAfterSaveListenerRegistry] AfterSaveEventPublisher-master has been interrupted/terminated but without InterruptedException - stopping now.
+INFO   | jvm 1    | main    | 2016/03/18 13:17:38.074 | INFO  [AfterSaveEventPublisher-junit] (junit) [DefaultAfterSaveListenerRegistry] AfterSaveEventPublisher-junit has been interrupted/terminated but without InterruptedException - stopping now.
+INFO   | jvm 1    | main    | 2016/03/18 13:17:38.374 | INFO  [Thread-1] (junit) [DefaultCacheController] Removed listener from cache controller. Currently registered 2
+INFO   | jvm 1    | main    | 2016/03/18 13:17:38.574 | WARN  [Thread-1] [DefaultCacheController] Listener not un-registered (not found): RegionCacheAdapter(866727230) - <<master>> : de.hybris.platform.cache.impl.RegionCacheAdapter
+INFO   | jvm 1    | main    | 2016/03/18 13:17:39.020 | INFO  [Thread-1] [DefaultRemoteDrain] RemoteDrain has been already unexported
+INFO   | jvm 1    | main    | 2016/03/18 13:17:39.020 | INFO  [Thread-1] [DefaultRMIRegistryService] Unexporting the registry.
+INFO   | jvm 1    | main    | 2016/03/18 13:17:39.020 | INFO  [Thread-1] [DefaultRMIRegistryService] Registry has been already unexported.
+INFO   | jvm 1    | main    | 2016/03/18 13:17:39.121 | INFO  [Thread-1] [DefaultClusterNodeManagementService] Unregistering assigned cluster node id 0...
+STATUS | wrapper  | main    | 2016/03/18 13:17:40.180 | <-- Wrapper Stopped
+STATUS | wrapper  | main    | 2016/03/18 13:17:46.298 | --> Wrapper Started as Console
+STATUS | wrapper  | main    | 2016/03/18 13:17:48.273 | Java Service Wrapper Standard Edition 64-bit 3.5.24
+STATUS | wrapper  | main    | 2016/03/18 13:17:48.274 |   Copyright (C) 1999-2014 Tanuki Software, Ltd. All Rights Reserved.
+STATUS | wrapper  | main    | 2016/03/18 13:17:48.274 |     http://wrapper.tanukisoftware.com
+STATUS | wrapper  | main    | 2016/03/18 13:17:48.274 |   Licensed to hybris software - www.hybris.com for hybris Platform
+STATUS | wrapper  | main    | 2016/03/18 13:17:48.274 | 
+STATUS | wrapper  | main    | 2016/03/18 13:17:49.410 | Launching a JVM...
+INFO   | jvm 1    | main    | 2016/03/18 13:17:56.479 | WrapperManager: Initializing...
+INFO   | jvm 1    | main    | 2016/03/18 13:18:00.049 | мар 18, 2016 12:17:59 PM org.apache.coyote.AbstractProtocol init
+INFO   | jvm 1    | main    | 2016/03/18 13:18:00.051 | INFO: Initializing ProtocolHandler ["http-bio-9001"]
+INFO   | jvm 1    | main    | 2016/03/18 13:18:00.051 | мар 18, 2016 12:17:59 PM org.apache.coyote.AbstractProtocol init
+INFO   | jvm 1    | main    | 2016/03/18 13:18:00.052 | INFO: Initializing ProtocolHandler ["http-bio-9002"]
+INFO   | jvm 1    | main    | 2016/03/18 13:18:01.903 | мар 18, 2016 12:18:01 PM org.apache.coyote.AbstractProtocol init
+INFO   | jvm 1    | main    | 2016/03/18 13:18:01.903 | INFO: Initializing ProtocolHandler ["ajp-bio-8009"]
+INFO   | jvm 1    | main    | 2016/03/18 13:18:01.903 | мар 18, 2016 12:18:01 PM org.apache.catalina.startup.Catalina load
+INFO   | jvm 1    | main    | 2016/03/18 13:18:01.904 | INFO: Initialization processed in 4251 ms
+INFO   | jvm 1    | main    | 2016/03/18 13:18:02.304 | мар 18, 2016 12:18:02 PM org.apache.catalina.mbeans.JmxRemoteLifecycleListener createServer
+INFO   | jvm 1    | main    | 2016/03/18 13:18:02.304 | INFO: The JMX Remote Listener has configured the registry on port 9003 and the server on port 9004 for the Platform server
+INFO   | jvm 1    | main    | 2016/03/18 13:18:02.304 | мар 18, 2016 12:18:02 PM org.apache.catalina.core.StandardService startInternal
+INFO   | jvm 1    | main    | 2016/03/18 13:18:02.305 | INFO: Starting service Catalina
+INFO   | jvm 1    | main    | 2016/03/18 13:18:16.842 | мар 18, 2016 12:18:16 PM org.apache.catalina.startup.TaglibUriRule body
+INFO   | jvm 1    | main    | 2016/03/18 13:18:16.842 | INFO: TLD skipped. URI: http://displaytag.sf.net/el is already defined
+INFO   | jvm 1    | main    | 2016/03/18 13:18:16.844 | мар 18, 2016 12:18:16 PM org.apache.catalina.startup.TaglibUriRule body
+INFO   | jvm 1    | main    | 2016/03/18 13:18:16.844 | INFO: TLD skipped. URI: http://displaytag.sf.net is already defined
+INFO   | jvm 1    | main    | 2016/03/18 13:18:19.466 | >>> No SAP licenses found in the system. Trying fallback to hybris license.
+INFO   | jvm 1    | main    | 2016/03/18 13:18:22.999 | INFO  [localhost-startStop-1] [AbstractTenant] Created master data source DataSourceImpl<<master/master>>
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.201 | INFO  [localhost-startStop-1] [DefaultClusterNodeManagementService] Automatic cluster ID discovery disabled. Configured ID: 0
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.301 | INFO  [localhost-startStop-1] [DefaultBroadcastService] Started message broadcast service:
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.301 | clustering (enabled:false)
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.301 | sending synchronously - no queue
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.301 | methods [<loopback>::de.hybris.platform.cluster.LoopBackBroadcastMethod@3e88bf4a]
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.851 | INFO  [localhost-startStop-1] [hybrisserver] 
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.851 | INFO  [localhost-startStop-1] [hybrisserver] *****************************************************************
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.855 | INFO  [localhost-startStop-1] [hybrisserver] 
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.857 | INFO  [localhost-startStop-1] [hybrisserver] Starting up hybris server
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.859 | INFO  [localhost-startStop-1] [hybrisserver] 
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.861 | INFO  [localhost-startStop-1] [hybrisserver] Configuration:
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.861 | INFO  [localhost-startStop-1] [hybrisserver] 
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.861 | INFO  [localhost-startStop-1] [hybrisserver] Cluster:     disabled
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.861 | INFO  [localhost-startStop-1] [hybrisserver] Tenant:      master
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.862 | INFO  [localhost-startStop-1] [hybrisserver] Mode:        development
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.862 | INFO  [localhost-startStop-1] [hybrisserver] OS:          Windows 7 6.1, amd64
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.862 | INFO  [localhost-startStop-1] [hybrisserver] Database:    Pool: hybris - hsqldb, table prefix: 
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.862 | INFO  [localhost-startStop-1] [hybrisserver]              SA - jdbc:hsqldb:file:C:\Users\user\IdeaProjects\hybris\data/hsqldb/mydb;shutdown=true;hsqldb.cache_rows=100000;hsqldb.cache_size=20000;hsqldb.write_delay_millis=1000;hsqldb.inc_backup=true;hsqldb.defrag_limit=2;hsqldb.nio_data_file=false
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.863 | INFO  [localhost-startStop-1] [hybrisserver] Platform:    5.7.0.3
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.863 | INFO  [localhost-startStop-1] [hybrisserver] Java:        Oracle Corporation
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.863 | INFO  [localhost-startStop-1] [hybrisserver]              Java(TM) SE Runtime Environment, 1.8.0_73-b02
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.864 | INFO  [localhost-startStop-1] [hybrisserver]              C:\Program Files\Java\jre1.8.0_73
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.864 | INFO  [localhost-startStop-1] [hybrisserver] VM Locale:   language=ru,country=RU,region=null
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.864 | INFO  [localhost-startStop-1] [hybrisserver] Cache:       RegionCache is not yet initialized. [de.hybris.platform.cache.impl.RegionCacheAdapter]
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.865 | INFO  [localhost-startStop-1] [hybrisserver] Server type: tomcat
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.865 | INFO  [localhost-startStop-1] [hybrisserver] 
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.865 | INFO  [localhost-startStop-1] [hybrisserver] *****************************************************************
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.865 | INFO  [localhost-startStop-1] [hybrisserver] 
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.865 | INFO  [localhost-startStop-1] [hybrisserver] ---------------------------------------------------------------
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.866 | INFO  [localhost-startStop-1] [hybrisserver] --- Extensions in dependency order ( options: 
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.866 | INFO  [localhost-startStop-1] [hybrisserver] ---  @deprecated: is deprecated, p: platform extension,*: auto-required 
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.866 | INFO  [localhost-startStop-1] [hybrisserver] ---  ?: lazy-loaded, i: got items.xml, b: got beans.xml, c: got core module 
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.867 | INFO  [localhost-startStop-1] [hybrisserver] ---  w: got web module, h: got HMC module ) 
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.867 | INFO  [localhost-startStop-1] [hybrisserver] ---------------------------------------------------------------
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.867 | INFO  [localhost-startStop-1] [hybrisserver] core 5.7.0.3 [p*cib]
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.868 | INFO  [localhost-startStop-1] [hybrisserver] testweb 5.7.0.3 [p*w]
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.868 | INFO  [localhost-startStop-1] [hybrisserver] scripting 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.868 | INFO  [localhost-startStop-1] [hybrisserver] paymentstandard 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.868 | INFO  [localhost-startStop-1] [hybrisserver] mediaweb 5.7.0.3 [p*cw]
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.868 | INFO  [localhost-startStop-1] [hybrisserver] maintenanceweb 5.7.0.3 [p*w]
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.869 | INFO  [localhost-startStop-1] [hybrisserver] deliveryzone 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.869 | INFO  [localhost-startStop-1] [hybrisserver] commons 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.869 | INFO  [localhost-startStop-1] [hybrisserver] processing->(scripting,commons) 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.869 | INFO  [localhost-startStop-1] [hybrisserver] impex->processing 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.869 | INFO  [localhost-startStop-1] [hybrisserver] validation->impex 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.870 | INFO  [localhost-startStop-1] [hybrisserver] catalog->(validation,commons) 5.7.0.3 [p*cib]
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.870 | INFO  [localhost-startStop-1] [hybrisserver] europe1->(impex,catalog) 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.870 | INFO  [localhost-startStop-1] [hybrisserver] platformservices->(paymentstandard,impex,deliveryzone,europe1,processing) 5.7.0.3 [p*cb]
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.870 | INFO  [localhost-startStop-1] [hybrisserver] workflow->(catalog,platformservices,processing,commons) 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.871 | INFO  [localhost-startStop-1] [hybrisserver] hac->(impex,catalog,processing,platformservices) 5.7.0.3 [p*w]
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.871 | INFO  [localhost-startStop-1] [hybrisserver] comments->(workflow,impex,catalog,processing) 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.871 | INFO  [localhost-startStop-1] [hybrisserver] advancedsavedquery->(impex,catalog,processing) 5.7.0.3 [p*ci]
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.872 | INFO  [localhost-startStop-1] [hybrisserver] ldap->(impex,catalog,processing) <-?-platformhmc 5.7.0.3 [?ci] path:C:\Users\user\IdeaProjects\hybris\bin\ext-platform-optional\ldap
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.872 | INFO  [localhost-startStop-1] [hybrisserver] hmc->scripting 5.7.0.3 [ciw] path:C:\Users\user\IdeaProjects\hybris\bin\ext-platform-optional\hmc
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.872 | INFO  [localhost-startStop-1] [hybrisserver] mediaconversion->hmc 5.7.0.3 [ciwh] path:C:\Users\user\IdeaProjects\hybris\bin\ext-platform-optional\mediaconversion
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.873 | INFO  [localhost-startStop-1] [hybrisserver] platformhmc->(ldap,hmc) 5.7.0.3 [cibh] path:C:\Users\user\IdeaProjects\hybris\bin\ext-platform-optional\platformhmc
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.873 | INFO  [localhost-startStop-1] [hybrisserver] cockpit->(comments,workflow,impex,catalog,processing,validation) 5.7.0.3 [ci] path:C:\Users\user\IdeaProjects\hybris\bin\ext-cockpit\cockpit
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.874 | INFO  [localhost-startStop-1] [hybrisserver] cuppy->(cockpit,hmc) 5.7.0.3 [ciwh] path:C:\Users\user\IdeaProjects\hybris\bin\custom\cuppy
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.874 | INFO  [localhost-startStop-1] [hybrisserver] cuppytrail->cuppy 5.7.0.3 [cib] path:C:\Users\user\IdeaProjects\hybris\bin\custom\cuppytrail
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.875 | INFO  [localhost-startStop-1] [hybrisserver] mcc->(impex,processing,cockpit) 5.7.0.3 [ciw] path:C:\Users\user\IdeaProjects\hybris\bin\ext-cockpit\mcc
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.875 | INFO  [localhost-startStop-1] [hybrisserver] backoffice 5.7.0.3 [ciw] path:C:\Users\user\IdeaProjects\hybris\bin\ext-backoffice\backoffice
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.875 | INFO  [localhost-startStop-1] [hybrisserver] admincockpit->(impex,processing,validation,cockpit) 5.7.0.3 [ciw] path:C:\Users\user\IdeaProjects\hybris\bin\ext-cockpit\admincockpit
+INFO   | jvm 1    | main    | 2016/03/18 13:18:23.876 | INFO  [localhost-startStop-1] [hybrisserver] ---------------------------------------------------------------
+INFO   | jvm 1    | main    | 2016/03/18 13:18:24.190 | INFO  [localhost-startStop-1] [Licence] ##########################################################################
+INFO   | jvm 1    | main    | 2016/03/18 13:18:24.201 | INFO  [localhost-startStop-1] [Licence] This Hybris licence is only for demo or develop usage and is valid for 30 days.
+INFO   | jvm 1    | main    | 2016/03/18 13:18:24.253 | INFO  [localhost-startStop-1] [Licence] After this time you have to reinitialize database to continue your work.
+INFO   | jvm 1    | main    | 2016/03/18 13:18:24.271 | INFO  [localhost-startStop-1] [Licence] Remaining days ====> 50
+INFO   | jvm 1    | main    | 2016/03/18 13:18:24.277 | INFO  [localhost-startStop-1] [Licence] ##########################################################################
+INFO   | jvm 1    | main    | 2016/03/18 13:18:29.020 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<global>> spring config from extension (core) located in (global-core-spring.xml,core-cache.xml,global-servicelayer-spring.xml,global-core-jmx-spring.xml,global-statistics-spring.xml) took: (1,283 s)
+INFO   | jvm 1    | main    | 2016/03/18 13:18:29.192 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<global>> spring config from extension (mediaconversion) located in (/mediaconversion-global-context.xml) took: (54,77 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:18:29.192 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<global>> spring config from extension (cockpit) located in (global-cockpit-spring.xml) took: (55,19 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:18:29.393 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<global>> spring config from extension (cuppy) located in (global-cuppy-spring.xml,cuppy-ws-spring.xml) took: (182,0 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:18:30.388 | INFO  [localhost-startStop-1] [DefaultRMIRegistryService] Creating Registry on port 2198.
+INFO   | jvm 1    | main    | 2016/03/18 13:18:30.388 | INFO  [localhost-startStop-1] [LocalRMISocketFactory] Creating server socket at '/127.0.0.1:2198'.
+INFO   | jvm 1    | main    | 2016/03/18 13:18:32.881 | INFO  [localhost-startStop-1] [HybrisContextFactory] - Refreshing SpringContext (Global context) took: (3,558 s)
+INFO   | jvm 1    | main    | 2016/03/18 13:18:32.882 | INFO  [localhost-startStop-1] [HybrisContextFactory] Initializing <<global>> Spring ApplicationContext took: (5,293 s)
+INFO   | jvm 1    | main    | 2016/03/18 13:18:32.882 | WARN  [localhost-startStop-1] [AutowiredAnnotationBeanPostProcessor] Inconsistent constructor declaration on bean with name 'defaultCacheController': single autowire-marked constructor flagged as optional - this constructor is effectively required since there is no default constructor to fall back to: public de.hybris.platform.regioncache.DefaultCacheController(de.hybris.platform.regioncache.CacheConfiguration)
+INFO   | jvm 1    | main    | 2016/03/18 13:18:32.883 | WARN  [localhost-startStop-1] [AutowiredAnnotationBeanPostProcessor] Inconsistent constructor declaration on bean with name 'defaultCacheController': single autowire-marked constructor flagged as optional - this constructor is effectively required since there is no default constructor to fall back to: public de.hybris.platform.regioncache.DefaultCacheController(de.hybris.platform.regioncache.CacheConfiguration)
+INFO   | jvm 1    | main    | 2016/03/18 13:18:33.990 | INFO  [localhost-startStop-1] [EHCacheRegion] EHCacheRegion entityCacheRegion, eviction policy FIFO, size 100000
+INFO   | jvm 1    | main    | 2016/03/18 13:18:34.190 | INFO  [localhost-startStop-1] [EHCacheRegion] EHCacheRegion queryCacheRegion, eviction policy FIFO, size 20000
+INFO   | jvm 1    | main    | 2016/03/18 13:18:34.391 | INFO  [localhost-startStop-1] [DefaultCacheController] Regioncache initialized with region count 5
+INFO   | jvm 1    | main    | 2016/03/18 13:18:34.391 | INFO  [localhost-startStop-1] [DefaultCacheController] Cache region: Name: typesystemCacheRegion, size: 0, types: [81, 82, 83, 84, 87], statistics: true, class: class de.hybris.platform.regioncache.region.impl.UnlimitedCacheRegion
+INFO   | jvm 1    | main    | 2016/03/18 13:18:34.391 | INFO  [localhost-startStop-1] [DefaultCacheController] Cache region: Name: entityCacheRegion, size: 100000, types: [__ALL_TYPES__, __NO_QUERY__], exclusive computation: false, statistics: true, class: class de.hybris.platform.regioncache.region.impl.EHCacheRegion
+INFO   | jvm 1    | main    | 2016/03/18 13:18:34.392 | INFO  [localhost-startStop-1] [DefaultCacheController] Cache region: Name: queryCacheRegion, size: 20000, types: [__QUERY_CACHE__], exclusive computation: false, statistics: true, class: class de.hybris.platform.regioncache.region.impl.EHCacheRegion
+INFO   | jvm 1    | main    | 2016/03/18 13:18:34.393 | INFO  [localhost-startStop-1] [DefaultCacheController] Cache region: Name: mediaCacheRegion, size: 0, types: [__MEDIA__cache], statistics: true, class: class de.hybris.platform.media.storage.impl.MediaCacheRegion
+INFO   | jvm 1    | main    | 2016/03/18 13:18:34.393 | INFO  [localhost-startStop-1] [DefaultCacheController] Cache region: Name: scriptsCacheRegion, size: 0, types: [__SCRIPT__], statistics: true, class: class de.hybris.platform.scripting.engine.internal.cache.impl.ScriptsCacheRegion
+INFO   | jvm 1    | main    | 2016/03/18 13:18:34.393 | INFO  [localhost-startStop-1] [DefaultCacheController] Registered Listener RegionCacheAdapter(1262821132) - <<master>> on cache controller. Currently registered 1
+INFO   | jvm 1    | main    | 2016/03/18 13:18:46.664 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (core) located in (core-spring.xml,persistence-spring.xml,core-media-spring.xml,core-profiling-spring.xml,core-jmx-spring.xml,core-filter-spring.xml,servicelayer-spring.xml,user-spring.xml,security-spring.xml,media-spring.xml,i18n-spring.xml,interceptor-spring.xml,event-spring.xml) took: (846,3 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:18:46.666 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (scripting) located in (scripting-spring.xml) took: (65,92 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:18:46.778 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (commons) located in (commons-spring.xml) took: (40,31 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:18:47.145 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (processing) located in (processing-spring.xml,cronjob-spring.xml,task-spring.xml,processengine-spring.xml,processing-jmx-spring.xml) took: (331,5 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:18:47.146 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (impex) located in (impex-spring.xml) took: (99,67 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:18:47.247 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (validation) located in (validation-spring.xml) took: (77,24 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:18:47.351 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (europe1) located in (europe1-spring.xml) took: (79,86 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:18:47.655 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (platformservices) located in (catalog-spring.xml,order-spring.xml,product-spring.xml,category-spring.xml,classification-spring.xml,jobs-spring.xml,converters-spring.xml) took: (345,9 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:18:47.756 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (workflow) located in (workflow-spring.xml) took: (70,94 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:18:47.864 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (comments) located in (comments-spring.xml) took: (55,81 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:18:47.865 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (ldap) located in (ldap-spring.xml) took: (49,52 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:18:47.865 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (mediaconversion) located in (mediaconversion-spring.xml) took: (42,54 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:18:47.966 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (platformhmc) located in (platformhmc-spring.xml) took: (42,78 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:18:47.967 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (cockpit) located in (cockpit-spring.xml) took: (51,25 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:18:48.781 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (cuppy) located in (cuppy-spring.xml) took: (778,0 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:18:48.886 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (cuppytrail) located in (cuppytrail-spring.xml) took: (66,96 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:18:48.886 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (mcc) located in (mcc-spring.xml) took: (37,14 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:18:48.989 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (backoffice) located in (backoffice-spring.xml) took: (60,94 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:18:48.989 | INFO  [localhost-startStop-1] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (admincockpit) located in (admincockpit-spring.xml) took: (38,34 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:18:57.227 | ERROR [localhost-startStop-1] [MailSenderFactory] Can not start mail sender, please configure properties mail.smtp.server and mail.smtp.port
+INFO   | jvm 1    | main    | 2016/03/18 13:18:59.324 | INFO  [localhost-startStop-1] [DefaultCacheController] Registered Listener de.hybris.platform.media.storage.impl.DefaultLocalMediaFileCacheService$MediaCacheLifecycleCallback@40d36021 on cache controller. Currently registered 2
+INFO   | jvm 1    | main    | 2016/03/18 13:19:03.140 | INFO  [localhost-startStop-1] [Reflections] Reflections took 219 ms to scan 1 urls, producing 9 keys and 16 values 
+INFO   | jvm 1    | main    | 2016/03/18 13:19:03.141 | INFO  [localhost-startStop-1] [Reflections] Reflections took 1 ms to scan 1 urls, producing 2 keys and 5 values 
+INFO   | jvm 1    | main    | 2016/03/18 13:19:10.311 | WARN  [localhost-startStop-1] [PersistentKeyGenerator] cockpitSavedQuery generator is using deprecated 'numeric' property! Initializing as alphanumeric
+INFO   | jvm 1    | main    | 2016/03/18 13:19:19.779 | INFO  [localhost-startStop-1] [HybrisContextFactory] - Refreshing SpringContext (hybris Application context - master) took: (30,77 s)
+INFO   | jvm 1    | main    | 2016/03/18 13:19:19.779 | INFO  [localhost-startStop-1] [HybrisContextFactory] Initializing application Spring ApplicationContext for tenant master  took: (34,00 s)
+INFO   | jvm 1    | main    | 2016/03/18 13:19:19.880 | INFO  [localhost-startStop-1] [DefaultBroadcastService] updating cluster island ID -1->15481123719086096
+INFO   | jvm 1    | main    | 2016/03/18 13:19:21.001 | INFO  [localhost-startStop-1] [DefaultTaskService] Task engine starting up (min:10 max:10 idle:20s interval:10s)
+INFO   | jvm 1    | main    | 2016/03/18 13:19:21.001 | INFO  [Task-master-poll] [DefaultTaskService] Polling thread started.
+INFO   | jvm 1    | main    | 2016/03/18 13:19:21.201 | INFO  [Task-master-poll] [DefaultModelConverterRegistry] loading model converters: 
+INFO   | jvm 1    | main    | 2016/03/18 13:19:21.201 | INFO  [Task-master-poll] [DefaultModelConverterRegistry] 	pre-fetch mode:default
+INFO   | jvm 1    | main    | 2016/03/18 13:19:22.750 | INFO  [localhost-startStop-1] [RemoveDefaultSessionFixationStrategyBeanPostProcessor] Removed Spring default SessionFixationProtectionStrategy, since HybrisSessionFixationProtectionStrategy is already defined
+INFO   | jvm 1    | main    | 2016/03/18 13:19:23.363 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/'
+INFO   | jvm 1    | main    | 2016/03/18 13:19:28.439 | INFO  [localhost-startStop-1] [Version] HV000001: Hibernate Validator 4.3.2.Final
+INFO   | jvm 1    | main    | 2016/03/18 13:19:39.516 | INFO  [localhost-startStop-1] (junit) [AbstractTenant] Created master data source DataSourceImpl<<junit/master>>
+INFO   | jvm 1    | main    | 2016/03/18 13:19:39.521 | INFO  [localhost-startStop-1] (junit) [AbstractTenant] Created alternative data source "alt1"
+INFO   | jvm 1    | main    | 2016/03/18 13:19:39.550 | INFO  [localhost-startStop-1] (junit) [AbstractTenant] Created alternative data source "alt2"
+INFO   | jvm 1    | main    | 2016/03/18 13:19:39.583 | INFO  [localhost-startStop-1] (junit) [AbstractTenant] Created alternative data source "a"
+INFO   | jvm 1    | main    | 2016/03/18 13:19:39.617 | INFO  [localhost-startStop-1] (junit) [AbstractTenant] Created alternative data source "b"
+INFO   | jvm 1    | main    | 2016/03/18 13:19:39.644 | INFO  [localhost-startStop-1] (junit) [AbstractTenant] Created alternative data source "c"
+INFO   | jvm 1    | main    | 2016/03/18 13:19:40.287 | WARN  [localhost-startStop-1] (junit) [DefaultCacheController] Listener already registered: RegionCacheAdapter(1262821132) - <<junit>> : de.hybris.platform.cache.impl.RegionCacheAdapter
+INFO   | jvm 1    | main    | 2016/03/18 13:19:40.971 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (core) located in (core-spring.xml,core-media-spring.xml,persistence-spring.xml,core-profiling-spring.xml,core-jmx-spring.xml,core-filter-spring.xml,servicelayer-spring.xml,user-spring.xml,security-spring.xml,media-spring.xml,i18n-spring.xml,interceptor-spring.xml,event-spring.xml,test/test-core-spring.xml) took: (388,9 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:19:41.038 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (scripting) located in (scripting-spring.xml) took: (32,26 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:19:41.072 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (commons) located in (commons-spring.xml) took: (27,58 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:19:41.142 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (processing) located in (processing-spring.xml,cronjob-spring.xml,task-spring.xml,processengine-spring.xml,processing-jmx-spring.xml,test/test-processing-spring.xml) took: (179,6 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:19:41.175 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (impex) located in (impex-spring.xml) took: (26,24 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:19:41.201 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (validation) located in (validation-spring.xml) took: (42,62 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:19:41.321 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (europe1) located in (europe1-spring.xml) took: (28,27 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:19:41.621 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (platformservices) located in (catalog-spring.xml,order-spring.xml,product-spring.xml,category-spring.xml,classification-spring.xml,jobs-spring.xml,converters-spring.xml) took: (354,6 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:19:41.621 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (workflow) located in (workflow-spring.xml) took: (29,24 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:19:41.732 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (comments) located in (comments-spring.xml) took: (25,00 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:19:41.739 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (ldap) located in (ldap-spring.xml) took: (25,15 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:19:41.743 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (mediaconversion) located in (mediaconversion-spring.xml) took: (36,58 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:19:41.747 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (platformhmc) located in (platformhmc-spring.xml) took: (30,41 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:19:41.780 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (cockpit) located in (cockpit-spring.xml) took: (43,25 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:19:42.380 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (cuppy) located in (cuppy-spring.xml) took: (535,5 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:19:42.380 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (cuppytrail) located in (cuppytrail-spring.xml) took: (64,21 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:19:42.481 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (mcc) located in (mcc-spring.xml) took: (57,66 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:19:42.582 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (backoffice) located in (backoffice-spring.xml) took: (74,64 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:19:42.582 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (admincockpit) located in (admincockpit-spring.xml) took: (28,66 ms)
+INFO   | jvm 1    | main    | 2016/03/18 13:19:45.006 | ERROR [localhost-startStop-1] (junit) [MailSenderFactory] Can not start mail sender, please configure properties mail.smtp.server and mail.smtp.port
+INFO   | jvm 1    | main    | 2016/03/18 13:19:45.527 | INFO  [localhost-startStop-1] (junit) [DefaultCacheController] Registered Listener de.hybris.platform.media.storage.impl.DefaultLocalMediaFileCacheService$MediaCacheLifecycleCallback@4a5c898e on cache controller. Currently registered 3
+INFO   | jvm 1    | main    | 2016/03/18 13:19:48.290 | WARN  [localhost-startStop-1] (junit) [PersistentKeyGenerator] cockpitSavedQuery generator is using deprecated 'numeric' property! Initializing as alphanumeric
+INFO   | jvm 1    | main    | 2016/03/18 13:19:52.529 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] - Refreshing SpringContext (hybris Application context - junit) took: (9,943 s)
+INFO   | jvm 1    | main    | 2016/03/18 13:19:52.531 | INFO  [localhost-startStop-1] (junit) [HybrisContextFactory] Initializing application Spring ApplicationContext for tenant junit  took: (11,99 s)
+INFO   | jvm 1    | main    | 2016/03/18 13:19:52.531 | WARN  [localhost-startStop-1] (junit) [DefaultTaskService] System not initialized. Not starting task module.
+INFO   | jvm 1    | main    | 2016/03/18 13:19:52.531 | WARN  [localhost-startStop-1] (junit) [DefaultTaskService] System not initialized. Not starting task module.
+INFO   | jvm 1    | main    | 2016/03/18 13:19:52.732 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/hmc_junit'
+INFO   | jvm 1    | main    | 2016/03/18 13:19:57.939 | INFO  [localhost-startStop-1] [RemoveDefaultSessionFixationStrategyBeanPostProcessor] Removed Spring default SessionFixationProtectionStrategy, since HybrisSessionFixationProtectionStrategy is already defined
+INFO   | jvm 1    | main    | 2016/03/18 13:19:58.768 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/admincockpit'
+INFO   | jvm 1    | main    | 2016/03/18 13:20:39.335 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/cuppy'
+INFO   | jvm 1    | main    | 2016/03/18 13:20:41.111 | мар 18, 2016 12:20:41 PM org.apache.catalina.startup.TaglibUriRule body
+INFO   | jvm 1    | main    | 2016/03/18 13:20:41.111 | INFO: TLD skipped. URI: http://displaytag.sf.net/el is already defined
+INFO   | jvm 1    | main    | 2016/03/18 13:20:41.111 | мар 18, 2016 12:20:41 PM org.apache.catalina.startup.TaglibUriRule body
+INFO   | jvm 1    | main    | 2016/03/18 13:20:41.111 | INFO: TLD skipped. URI: http://displaytag.sf.net is already defined
+INFO   | jvm 1    | main    | 2016/03/18 13:20:41.411 | INFO  [localhost-startStop-1] (junit) [RemoveDefaultSessionFixationStrategyBeanPostProcessor] Removed Spring default SessionFixationProtectionStrategy, since HybrisSessionFixationProtectionStrategy is already defined
+INFO   | jvm 1    | main    | 2016/03/18 13:20:41.411 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/hac_junit'
+INFO   | jvm 1    | main    | 2016/03/18 13:20:47.083 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/hmc'
+INFO   | jvm 1    | main    | 2016/03/18 13:20:49.607 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/mcc'
+INFO   | jvm 1    | main    | 2016/03/18 13:20:50.347 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/mediaconversion'
+INFO   | jvm 1    | main    | 2016/03/18 13:21:10.213 | INFO  [localhost-startStop-1] [RemoveDefaultSessionFixationStrategyBeanPostProcessor] Removed Spring default SessionFixationProtectionStrategy, since HybrisSessionFixationProtectionStrategy is already defined
+INFO   | jvm 1    | main    | 2016/03/18 13:21:25.104 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/backoffice'
+INFO   | jvm 1    | main    | 2016/03/18 13:21:25.104 | INFO  [localhost-startStop-1] [WebManager] Starting ZK 7.0.4 EE (build: 2014120911)
+INFO   | jvm 1    | main    | 2016/03/18 13:21:25.204 | INFO  [localhost-startStop-1] [ConfigParser] Loading system default
+INFO   | jvm 1    | main    | 2016/03/18 13:21:25.404 | INFO  [localhost-startStop-1] [ConfigParser] Parsing jar:file:/C:/Users/user/IdeaProjects/hybris/bin/ext-backoffice/backoffice/web/webroot/WEB-INF/lib/cockpitframework-2.3.0.1.jar!/metainfo/zk/zk.xml
+INFO   | jvm 1    | main    | 2016/03/18 13:21:25.404 | INFO  [localhost-startStop-1] [ConfigParser] Parsing jar:file:/C:/Users/user/IdeaProjects/hybris/bin/ext-backoffice/backoffice/web/webroot/WEB-INF/lib/zul-7.0.4.jar!/metainfo/zk/zk.xml
+INFO   | jvm 1    | main    | 2016/03/18 13:21:25.504 | INFO  [localhost-startStop-1] [ConfigParser] Parsing jar:file:/C:/Users/user/IdeaProjects/hybris/bin/ext-backoffice/backoffice/web/webroot/WEB-INF/lib/zkex-7.0.4.jar!/metainfo/zk/zk.xml
+INFO   | jvm 1    | main    | 2016/03/18 13:21:25.504 | INFO  [localhost-startStop-1] [ConfigParser] Parsing jar:file:/C:/Users/user/IdeaProjects/hybris/bin/ext-backoffice/backoffice/web/webroot/WEB-INF/lib/zkmax-7.0.4.jar!/metainfo/zk/zk.xml
+INFO   | jvm 1    | main    | 2016/03/18 13:21:27.633 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/test'
+INFO   | jvm 1    | main    | 2016/03/18 13:21:28.508 | мар 18, 2016 12:21:28 PM org.apache.coyote.AbstractProtocol start
+INFO   | jvm 1    | main    | 2016/03/18 13:21:28.508 | INFO: Starting ProtocolHandler ["http-bio-9001"]
+INFO   | jvm 1    | main    | 2016/03/18 13:21:28.508 | мар 18, 2016 12:21:28 PM org.apache.coyote.AbstractProtocol start
+INFO   | jvm 1    | main    | 2016/03/18 13:21:28.508 | INFO: Starting ProtocolHandler ["http-bio-9002"]
+INFO   | jvm 1    | main    | 2016/03/18 13:21:28.508 | мар 18, 2016 12:21:28 PM org.apache.coyote.AbstractProtocol start
+INFO   | jvm 1    | main    | 2016/03/18 13:21:28.508 | INFO: Starting ProtocolHandler ["ajp-bio-8009"]
+INFO   | jvm 1    | main    | 2016/03/18 13:21:28.508 | мар 18, 2016 12:21:28 PM org.apache.catalina.startup.Catalina start
+INFO   | jvm 1    | main    | 2016/03/18 13:21:28.508 | INFO: Server startup in 206597 ms
+INFO   | jvm 1    | main    | 2016/03/18 13:21:30.460 | ERROR [hybrisHTTP1] [UISessionImpl] Can not set ID generator. Reason: ZK has not been properly initialized.
+INFO   | jvm 1    | main    | 2016/03/18 13:21:30.460 | WARN  [hybrisHTTP1] [UITools] Execution cannot be null. Is ZK available?
+STATUS | wrapper  | main    | 2016/03/18 13:24:04.777 | CTRL-C trapped.  Shutting down.
+INFO   | jvm 1    | main    | 2016/03/18 13:24:05.136 | shutting down hybris registry..
+INFO   | jvm 1    | main    | 2016/03/18 13:24:05.162 | INFO  [Thread-1] [DefaultTaskService] Shutting down task engine for tenant master.
+INFO   | jvm 1    | main    | 2016/03/18 13:24:05.163 | INFO  [Thread-1] [DefaultTaskService] Terminating task polling thread.
+INFO   | jvm 1    | main    | 2016/03/18 13:24:05.163 | INFO  [Thread-1] [DefaultTaskService] Stopped task engine for tenant master.
+INFO   | jvm 1    | main    | 2016/03/18 13:24:05.163 | INFO  [Thread-1] [DefaultTaskService] Task engine already stopped.
+INFO   | jvm 1    | main    | 2016/03/18 13:24:05.163 | INFO  [Thread-1] (junit) [DefaultTaskService] Task engine already stopped.
+INFO   | jvm 1    | main    | 2016/03/18 13:24:05.163 | INFO  [Thread-1] (junit) [DefaultTaskService] Task engine already stopped.
+INFO   | jvm 1    | main    | 2016/03/18 13:24:05.164 | WARN  [AfterSaveEventPublisher-master] [DefaultAfterSaveListenerRegistry] AfterSaveEventPublisher-master has been interrupted - stopping now: sleep interrupted
+INFO   | jvm 1    | main    | 2016/03/18 13:24:05.164 | INFO  [AfterSaveEventPublisher-master] [DefaultAfterSaveListenerRegistry] AfterSaveEventPublisher-master has been interrupted/terminated but without InterruptedException - stopping now.
+INFO   | jvm 1    | main    | 2016/03/18 13:24:05.265 | WARN  [AfterSaveEventPublisher-junit] (junit) [DefaultAfterSaveListenerRegistry] AfterSaveEventPublisher-junit has been interrupted - stopping now: sleep interrupted
+INFO   | jvm 1    | main    | 2016/03/18 13:24:05.267 | INFO  [AfterSaveEventPublisher-junit] (junit) [DefaultAfterSaveListenerRegistry] AfterSaveEventPublisher-junit has been interrupted/terminated but without InterruptedException - stopping now.
+INFO   | jvm 1    | main    | 2016/03/18 13:24:05.477 | INFO  [Thread-1] (junit) [DefaultCacheController] Removed listener from cache controller. Currently registered 2
+INFO   | jvm 1    | main    | 2016/03/18 13:24:05.778 | WARN  [Thread-1] [DefaultCacheController] Listener not un-registered (not found): RegionCacheAdapter(1262821132) - <<master>> : de.hybris.platform.cache.impl.RegionCacheAdapter
+INFO   | jvm 1    | main    | 2016/03/18 13:24:06.187 | INFO  [Thread-1] [DefaultRemoteDrain] RemoteDrain has been already unexported
+INFO   | jvm 1    | main    | 2016/03/18 13:24:06.187 | INFO  [Thread-1] [DefaultRMIRegistryService] Unexporting the registry.
+INFO   | jvm 1    | main    | 2016/03/18 13:24:06.187 | INFO  [Thread-1] [DefaultRMIRegistryService] Registry has been already unexported.
+INFO   | jvm 1    | main    | 2016/03/18 13:24:06.287 | INFO  [Thread-1] [DefaultClusterNodeManagementService] Unregistering assigned cluster node id 0...
+STATUS | wrapper  | main    | 2016/03/18 13:24:07.326 | <-- Wrapper Stopped
+STATUS | wrapper  | main    | 2016/03/18 13:25:05.630 | --> Wrapper Started as Console
+STATUS | wrapper  | main    | 2016/03/18 13:25:08.922 | Java Service Wrapper Standard Edition 64-bit 3.5.24
+STATUS | wrapper  | main    | 2016/03/18 13:25:08.923 |   Copyright (C) 1999-2014 Tanuki Software, Ltd. All Rights Reserved.
+STATUS | wrapper  | main    | 2016/03/18 13:25:08.923 |     http://wrapper.tanukisoftware.com
+STATUS | wrapper  | main    | 2016/03/18 13:25:08.923 |   Licensed to hybris software - www.hybris.com for hybris Platform
+STATUS | wrapper  | main    | 2016/03/18 13:25:08.923 | 
+STATUS | wrapper  | main    | 2016/03/18 13:25:10.077 | CTRL-C trapped.  Shutting down.
+STATUS | wrapper  | main    | 2016/03/18 13:25:10.078 | <-- Wrapper Stopped

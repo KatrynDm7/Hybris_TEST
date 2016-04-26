@@ -1,0 +1,6 @@
+# Old payment subscription result Cleanup CronJobs
+INSERT_UPDATE OldPaymentSubscriptionResultRemovalCronJob;code[unique=true];job(code);age;sessionLanguage(isoCode)[default=en]
+;oldPaymentSubscriptionResultRemovalCronJob;oldPaymentSubscriptionResultRemovalJob;86400;
+
+INSERT_UPDATE Trigger;cronJob(code)[unique=true];second;minute;hour;day;month;year;relative;active;maxAcceptableDelay
+;oldPaymentSubscriptionResultRemovalCronJob;0;0;3;-1;-1;-1;false;true;-1

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:h="http://www.w3.org/1999/xhtml" 
+		xmlns:zk="http://www.zkoss.org/2005/zk"
+		xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd ">
+	
+		<div width="100%" height="90%" sclass="contentPage statisticsDashoard"  style="position:relative;">
+			<div use="de.hybris.platform.cuppy.web.components.RankStatisticsComponent" sclass="rankStats"/>
+			<div use="de.hybris.platform.cuppy.web.components.PlayerStatisticsComponent" sclass="playerStats"/>
+			<div use="de.hybris.platform.cuppy.web.components.MatchStatisticsComponent" sclass="matchStats"/>
+			<div use="de.hybris.platform.cuppy.web.components.TimepointStatisticsComponent" sclass="timepointStats" />
+		</div>
+			
+</zk>

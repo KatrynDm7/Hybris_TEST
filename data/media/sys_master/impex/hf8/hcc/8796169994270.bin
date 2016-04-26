@@ -1,0 +1,29 @@
+$comp=wc2006
+
+#last16
+update Match;id[unique=true];homeGoals;guestGoals;homeTeam(isocode);guestTeam(isocode);group(code,competition(code[default=$comp]))[unique=true]
+;49;2;0;GER;SWE;LAST16
+;50;2;1;ARG;MEX;LAST16
+;51;1;0;ENG;ECU;LAST16
+;52;3;2;POR;NLD;LAST16
+;53;1;0;ITA;AUS;LAST16
+;54;0;3;CHE;UKR;LAST16
+;55;3;0;BRA;GHA;LAST16
+;56;1;3;ESP;FRA;LAST16
+
+#quarters
+update Match;id[unique=true];homeGoals;guestGoals;homeTeam(isocode);guestTeam(isocode);group(code,competition(code[default=$comp]))[unique=true]
+;57;4;2;GER;ARG;QUARTER
+;58;3;0;ITA;UKR;QUARTER
+;59;1;3;ENG;POR;QUARTER
+;60;0;1;BRA;FRA;QUARTER
+
+#semi
+update Match;id[unique=true];homeGoals;guestGoals;homeTeam(isocode);guestTeam(isocode);group(code,competition(code[default=$comp]))[unique=true]
+;61;0;2;GER;ITA;SEMI
+;62;0;1;POR;FRA;SEMI
+
+#finals
+update Match;id[unique=true];homeGoals;guestGoals;homeTeam(isocode);guestTeam(isocode);group(code,competition(code[default=$comp]))[unique=true]
+;63;3;1;GER;POR;THIRD
+;64;5;3;ITA;FRA;FINAL

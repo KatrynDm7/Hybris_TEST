@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+           
+    <context:annotation-config/> 
+
+	<!-- Expose /acceleratoraddon/web/webroot/WEB-INF/messages/base.js.properties  resource bundle as javascript variables -->
+	<bean id="defaultB2bacceleratoraddonJavaScriptMessageResourceAccessor" parent="abstractJavaScriptMessageResourceAccessor">
+		<property name="addOnName" value="b2bacceleratoraddon"/>
+	</bean>
+
+	<bean id="defaultB2bacceleratoraddonBeforeViewJsPropsHandlerAdaptee" parent="abstractBeforeViewJsPropsHandlerAdaptee" class="de.hybris.platform.addonsupport.interceptors.ExportJsPropertiesBeforeViewHandler">
+		<property name="messageSource" ref="defaultB2bacceleratoraddonJavaScriptMessageResourceAccessor"/>
+	</bean>
+
+	<bean id="getB2bacceleratoraddonBeforeViewHandler" parent="beforeViewHandlerAdapter">
+		<property name="adaptee">
+			<ref bean="defaultB2bacceleratoraddonBeforeViewJsPropsHandlerAdaptee"/>
+		</property>
+	</bean>
+	<bean id="B2bacceleratoraddonBeforeViewHandlerListMergeDirective" depends-on="beforeViewHandlersList" parent="listMergeDirective">
+		<property name="add" ref="getB2bacceleratoraddonBeforeViewHandler"/>
+	</bean>
+	
+	
+	<bean id="b2bAcceleratorAddonBeforeViewHandler" class="de.hybris.platform.b2bacceleratoraddon.interceptors.B2BAcceleratorAddonBeforeViewHandler">
+		<property name="viewMap" ref="b2bAcceleratorAddonViewMap" />
+	</bean>
+	
+	<bean id="beforeViewHandlerAdapter" abstract="true" class="de.hybris.platform.addonsupport.interceptors.BeforeViewHandlerAdapter">
+   		<property name="proxyInterfaceName" value="de.hybris.platform.yacceleratorstorefront.interceptors.BeforeViewHandler" />
+    </bean>
+    
+	<bean depends-on="beforeViewHandlersList" parent="listMergeDirective">
+		<property name="add">
+				<bean parent="beforeViewHandlerAdapter">
+					<property name="adaptee" ref="b2bAcceleratorAddonBeforeViewHandler" />
+				</bean>
+		</property>
+	</bean>
+	
+	<util:map id="b2bAcceleratorAddonViewMap" key-type="java.lang.String" value-type="java.lang.Map">
+		<entry key="pages/checkout/multi/checkoutSummaryPage" value-ref="checkoutSummaryMap"/>
+		<entry key="pages/checkout/checkoutConfirmationPage" value-ref="checkoutConfirmationPage"/>
+		<entry key="pages/product/productLayout2Page" value-ref="productLayout2Page"/>
+	</util:map>
+
+	<util:map id="checkoutSummaryMap" key-type="java.lang.String" value-type="java.lang.String">
+		<entry key="viewName" value="/pages/checkout/multi/checkoutSummaryPage" />
+	</util:map>
+
+	<util:map id="checkoutConfirmationPage" key-type="java.lang.String" value-type="java.lang.String">
+		<entry key="viewName" value="/pages/checkout/checkoutConfirmationPage" />
+	</util:map>
+	
+	<util:map id="productLayout2Page" key-type="java.lang.String" value-type="java.lang.String">
+		<entry key="viewName" value="/pages/product/productLayout2Page" />
+	</util:map>
+
+    <!-- Controllers & Mappings (necessary to override controllers with the same mappings in the target storefront) -->
+    <bean name="checkoutLoginController" class="de.hybris.platform.b2bacceleratoraddon.controllers.pages.CheckoutLoginController"/>
+	<bean name="summaryCheckoutStepController" class="de.hybris.platform.b2bacceleratoraddon.controllers.pages.checkout.steps.SummaryCheckoutStepController"/>
+	<bean name="paymentMethodCheckoutStepController" class="de.hybris.platform.b2bacceleratoraddon.controllers.pages.checkout.steps.PaymentMethodCheckoutStepController"/>
+	<bean name="deliveryAddressCheckoutStepController" class="de.hybris.platform.b2bacceleratoraddon.controllers.pages.checkout.steps.DeliveryAddressCheckoutStepController"/>
+	<bean name="deliveryMethodCheckoutStepController" class="de.hybris.platform.b2bacceleratoraddon.controllers.pages.checkout.steps.DeliveryMethodCheckoutStepController"/>
+
+	<bean depends-on="previewUrlResolverPageMappings" parent="mapMergeDirective">
+		<property name="sourceMap">
+			<map>
+				<entry key="my-quotes" value="/my-account/my-quotes"/>
+				<entry key="my-replenishment-orders" value="/my-account/my-replenishment"/>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="b2bAcceleratorProductAddToCartComponentRenderer"  class="de.hybris.platform.b2bacceleratoraddon.component.renderer.B2BAcceleratorProductAddToCartComponentRenderer" parent="addOnJspIncludeCMSComponentRenderer"/>
+
+	<bean id="b2cAcceleratorComponentRendererMapping" parent="addonCmsComponentRendererMapping" >
+      <property name="typeCode" value="ProductAddToCartComponent" />
+      <property name="renderer" ref="b2bAcceleratorProductAddToCartComponentRenderer" />
+	</bean>
+</beans>

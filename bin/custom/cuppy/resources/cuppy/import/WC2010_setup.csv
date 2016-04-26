@@ -1,0 +1,198 @@
+#http://de.wikipedia.org/wiki/ISO-3166-1-Kodierliste
+
+# set locale for the Match.date data
+#%impex.setLocale(Locale.GERMANY)
+
+$comp=wc2010
+
+insert_update Competition;code[unique=true];name[lang=de];name[lang=en];type(code)
+;$comp;WM 2010 Südafrika;WC 2010 South Africa;tournament
+
+# INSERT_UPDATE News;content[lang=de];content[lang=en];competition(code)[unique=true]
+# ;Willkommen zur WM 2010;Welcome to World Cup 2010;$comp;
+
+insert_update Group;competition(code)[unique=true,default=$comp];code[unique=true];name[lang=de];name[lang=en];name[lang=pl];multiplier;sequenceNumber
+;;A;Gruppe A;Group A;Grupa A;1;1
+;;B;Gruppe B;Group B;Grupa B;1;2
+;;C;Gruppe C;Group C;Grupa C;1;3
+;;D;Gruppe D;Group D;Grupa D;1;4
+;;E;Gruppe E;Group E;Grupa E;1;5
+;;F;Gruppe F;Group F;Grupa F;1;6
+;;G;Gruppe G;Group G;Grupa G;1;7
+;;H;Gruppe H;Group H;Grupa H;1;8
+;;LAST16;Achtelfinale;Last16;Czwarta runda;2;9
+;;QUARTER;Viertelfinale;Quarter Finals;Ćwierćfinał;2;10
+;;SEMI;Halbfinale;Semi Finals;Półfinał;2;11
+;;THIRD;Kleines Finale;Third Place;Mecz o trzecie miejsce;2;12
+;;FINAL;Finale;Final;Finał;2;13
+
+insert_update CountryFlag;code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];catalogVersion(catalog(id),version)[default=Default:Online]
+;ZA;za.png;jar:/cuppy/flags/countries/za.png
+;MX;mx.png;jar:/cuppy/flags/countries/mx.png
+;UY;uy.png;jar:/cuppy/flags/countries/uy.png
+;FR;fr.png;jar:/cuppy/flags/countries/fr.png
+;AR;ar.png;jar:/cuppy/flags/countries/ar.png
+;NG;ng.png;jar:/cuppy/flags/countries/ng.png
+;KR;kr.png;jar:/cuppy/flags/countries/kr.png
+;GR;gr.png;jar:/cuppy/flags/countries/gr.png
+;EN;en.png;jar:/cuppy/flags/countries/england.png
+;US;us.png;jar:/cuppy/flags/countries/us.png
+;DZ;dz.png;jar:/cuppy/flags/countries/dz.png
+;SI;si.png;jar:/cuppy/flags/countries/si.png
+;DE;de.png;jar:/cuppy/flags/countries/de.png
+;AU;au.png;jar:/cuppy/flags/countries/au.png
+;RS;rs.png;jar:/cuppy/flags/countries/rs.png
+;GH;gh.png;jar:/cuppy/flags/countries/gh.png
+;NL;nl.png;jar:/cuppy/flags/countries/nl.png
+;DK;dk.png;jar:/cuppy/flags/countries/dk.png
+;JP;jp.png;jar:/cuppy/flags/countries/jp.png
+;CM;cm.png;jar:/cuppy/flags/countries/cm.png
+;IT;it.png;jar:/cuppy/flags/countries/it.png
+;PY;py.png;jar:/cuppy/flags/countries/py.png
+;NZ;nz.png;jar:/cuppy/flags/countries/nz.png
+;SK;sk.png;jar:/cuppy/flags/countries/sk.png
+;BR;br.png;jar:/cuppy/flags/countries/br.png
+;KP;kp.png;jar:/cuppy/flags/countries/kp.png
+;CI;ci.png;jar:/cuppy/flags/countries/ci.png
+;PT;pt.png;jar:/cuppy/flags/countries/pt.png
+;ES;es.png;jar:/cuppy/flags/countries/es.png
+;CH;ch.png;jar:/cuppy/flags/countries/ch.png
+;HN;hn.png;jar:/cuppy/flags/countries/hn.png
+;CL;cl.png;jar:/cuppy/flags/countries/cl.png
+;EN;en.png;jar:/cuppy/flags/countries/england.png
+
+insert_update Team;isocode[unique=true];name[lang=de];name[lang=en];name[lang=pl];flag(code)
+;RSA;Südafrika;South Africa;RPA;ZA
+;MEX;Mexiko;Mexico;Meksyk;MX
+;URU;Uruguay;Uruguay;Urugwaj;UY
+;FRA;Frankreich;France;Francja;FR
+;ARG;Argentinien;Argentina;Argentyna;AR
+;NGA;Nigeria;Nigeria;Nigeria;NG
+;KOR;Südkorea;South Korea;Korea Południowa;KR
+;GRC;Griechenland;Greece;Grecja;GR
+;GBR;England;England;Anglia;EN
+;USA;USA;USA;USA;US
+;DZA;Algerien;Algeria;Algieria;DZ
+;SVO;Slowenien;Slovenia;Słowenia;SI
+;GER;Deutschland;Germany;Niemcy;DE
+;AUS;Australien;Australia;Australia;AU
+;SRB;Serbien;Serbia;Serbia;RS
+;GHA;Ghana;Ghana;Ghana;GH
+;NLD;Niederlande;Netherlands;Holandia;NL
+;DEN;Dänemark;Denmark;Dania;DK
+;JPN;Japan;Japan;Japonia;JP
+;CMR;Kamerun;Cameroon;Kamerun;CM
+;ITA;Italien;Italy;Włochy;IT
+;PAR;Paraguay;Paraguay;Paragwaj;PY
+;NZL;Neuseeland;New Zealand;Nowa Zelandia;NZ
+;SVK;Slowakei;Slovakia;Słowacja;SK
+;BRA;Brasilien;Brazil;Brazylia;BR
+;PRK;Nordkorea;North Korea;Korea Północna;KP
+;CIV;Elfenbeinküste;Ivory Coast;WKS;CI
+;POR;Portugal;Portugal;Portugalia;PT
+;ESP;Spanien;Spain;Hiszpania;ES
+;CHE;Schweiz;Swiss;Szwajcaria;CH
+;HND;Honduras;Honduras;Honduras;HN
+;CHL;Chile;Chile;Chile;CL
+
+insert_update Team;isocode[unique=true];name[lang=de];name[lang=en];flag(code);dummy[default=true,virtual=true]
+;E-1
+;B-2
+;A-1
+;F-2
+;F-1
+;A-2
+;B-1
+;E-2
+;G-1
+;D-2
+;C-1
+;H-2
+;H-1
+;C-2
+;D-1
+;G-2
+;50-1
+;54-1
+;49-1
+;53-1
+;52-1
+;56-1
+;51-1
+;55-1
+;58-1
+;59-1
+;57-1
+;60-1
+;61-2
+;62-2
+;61-1
+;62-1
+
+
+insert_update Match;id[unique=true];matchday;date[dateformat='dd.MM.yy HH.mm'];group(code,competition(code[default=$comp]))[unique=true];homeTeam(isocode);guestTeam(isocode);location
+;1;1;11.06.2010 16.00;A;RSA;MEX;Johannesburg/Soccer City;
+;2;1;11.06.2010 20.30;A;URU;FRA;Kapstadt/Green Point;
+;3;2;12.06.2010 13.30;B;KOR;GRC;Port Elizabeth;
+;4;2;12.06.2010 16.00;B;ARG;NGA;Johannesburg/Ellis Park;
+;5;2;12.06.2010 20.30;C;GBR;USA;Rustenburg/Royal Bafokeng;
+;6;3;13.06.2010 13.30;C;DZA;SVO;Polokwane/Peter Mokaba;
+;7;3;13.06.2010 16.00;D;SRB;GHA;Tshwane/Pretoria/Loftus Versfeld;
+;8;3;13.06.2010 20.30;D;GER;AUS;Durban/Durban;
+;9;4;14.06.2010 13.30;E;NLD;DEN;Johannesburg/Soccer City;
+;10;4;14.06.2010 16.00;E;JPN;CMR;Mangaung/Bloemfontein/Free State;
+;11;4;14.06.2010 20.30;F;ITA;PAR;Kapstadt/Green Point;
+;12;5;15.06.2010 13.30;F;NZL;SVK;Rustenburg/Royal Bafokeng;
+;13;5;15.06.2010 16.00;G;CIV;POR;Port Elisabeth/Nelson Mandela Bay;
+;14;5;15.06.2010 20.30;G;BRA;PRK;Johannesburg/Ellis Park;
+;15;6;16.06.2010 13.30;H;HND;CHL;Nelspruit/Mbombela;
+;16;6;16.06.2010 16.00;H;ESP;CHE;Durban/Durban;
+;17;6;16.06.2010 20.30;A;RSA;URU;Tshwane/Pretoria/Loftus Versfeld;
+;18;7;17.06.2010 13.30;B;ARG;KOR;Johannesburg/Soccer City;
+;19;7;17.06.2010 16.00;B;GRC;NGA;Mangaung/Bloemfontein/Free State;
+;20;7;17.06.2010 20.30;A;FRA;MEX;Polokwane/Peter Mokaba;
+;21;8;18.06.2010 13.30;D;GER;SRB;Port Elisabeth/Nelson Mandela Bay;
+;22;8;18.06.2010 16.00;C;SVO;USA;Johannesburg/Ellis Park;
+;23;8;18.06.2010 20.30;C;GBR;DZA;Kapstadt/Green Point;
+;24;9;19.06.2010 13.30;E;NLD;JPN;Durban/Durban;
+;25;9;19.06.2010 16.00;D;GHA;AUS;Rustenberg/Royal Bafokeng;
+;26;9;19.06.2010 20.30;E;CMR;DEN;Tshwane/Pretoria/Loftus Versfeld;
+;27;10;20.06.2010 13.30;F;SVK;PAR;Mangaung/Bloemfontein/Free State;
+;28;10;20.06.2010 16.00;F;ITA;NZL;Nelspruit/Mbombela;
+;29;10;20.06.2010 20.30;G;BRA;CIV;Johannesburg/Soccer City;
+;30;11;21.06.2010 13.30;G;POR;PRK;Kapstadt/Green Point;
+;31;11;21.06.2010 16.00;H;CHL;CHE;Port Elisabeth/Nelson Mandela Bay;
+;32;11;21.06.2010 20.30;H;ESP;HND;Johannesburg/Ellis Park;
+;33;12;22.06.2010 16.00;A;FRA;RSA;Mangaung/Bloemfontein/Free State;
+;34;12;22.06.2010 16.00;A;MEX;URU;Rustenberg/Royal Bafokeng;
+;35;12;22.06.2010 20.30;B;GRC;ARG;Polokwane/Peter Mokaba;
+;36;12;22.06.2010 20.30;B;NGA;KOR;Durban/Durban;
+;37;13;23.06.2010 16.00;C;SVO;GBR;Port Elisabeth/Nelson Mandela Bay;
+;38;13;23.06.2010 16.00;C;USA;DZA;Tshwane/Pretoria/Loftus Versfeld;
+;39;13;23.06.2010 20.30;D;GHA;GER;Johannesburg/Soccer City;
+;40;13;23.06.2010 20.30;D;AUS;SRB;Nelspruit/Mbombela;
+;41;14;24.06.2010 16.00;F;SVK;ITA;Johannesburg/Ellis Park;
+;42;14;24.06.2010 16.00;F;PAR;NZL;Polokwane/Peter Mokaba;
+;43;14;24.06.2010 20.30;E;CMR;NLD;Kapstadt/Green Point;
+;44;14;24.06.2010 20.30;E;DEN;JPN;Rustenburg/Royal Bafokeng;
+;45;15;25.06.2010 16.00;G;POR;BRA;Durban/Durban;
+;46;15;25.06.2010 16.00;G;PRK;CIV;Nelspruit/Mbombela;
+;47;15;25.06.2010 20.30;H;CHL;ESP;Tshwane/Pretoria/Loftus Versfeld;
+;48;15;25.06.2010 20.30;H;CHE;HND;Mangaung/Bloemfontein/Free State;
+
+;49;16;26.06.2010 16.00;LAST16;A-1;B-2;Port Elisabeth/Nelson Mandela Bay;
+;50;16;26.06.2010 20.30;LAST16;C-1;D-2;Rustenburg/Royal Bafokeng;
+;51;17;27.06.2010 16.00;LAST16;D-1;C-2;Mangaung/Bloemfontein/Free State;
+;52;17;27.06.2010 20.30;LAST16;B-1;A-2;Johannesburg/Soccer City;
+;53;18;28.06.2010 16.00;LAST16;E-1;F-2;Durban/Durban;
+;54;18;28.06.2010 20.30;LAST16;G-1;H-2;Johannesburg/Ellis Park;
+;55;19;29.06.2010 16.00;LAST16;F-1;E-2;Kapstadt/Green Point;
+;56;19;29.06.2010 20.30;LAST16;H-1;G-2;Tshwane/Pretoria/Loftus Versfeld;
+;57;20;02.07.2010 16.00;QUARTER;53-1;54-1;Port Elisabeth/Nelson Mandela Bay;
+;58;20;02.07.2010 20.30;QUARTER;49-1;50-1;Johannesburg/Soccer City;
+;59;21;03.07.2010 16.00;QUARTER;52-1;51-1;Kapstadt/Green Point;
+;60;21;03.07.2010 20.30;QUARTER;55-1;56-1;Johannesburg/Ellis Park;
+;61;22;06.07.2010 20.30;SEMI;58-1;57-1;Kapstadt/Green Point;
+;62;23;07.07.2010 20.30;SEMI;59-1;60-1;Durban/Durban;
+;63;24;10.07.2010 20.30;THIRD;61-2;62-2;Port Elisabeth/Nelson Mandela Bay;
+;64;25;11.07.2010 20.30;FINAL;61-1;62-1;Johannesburg/Soccer City;

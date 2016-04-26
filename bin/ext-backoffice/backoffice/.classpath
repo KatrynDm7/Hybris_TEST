@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="web/webroot/WEB-INF/classes"/>
+
+				
+				
+				
+				
+	<classpathentry exported="false" kind="src" path="/platform" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/atlantic-1.0.2.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/backoffice-core-2.3.0.1.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/backoffice-widgets-2.3.0.1.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/ckez-4.4.6.1.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/cockpit-data-integration-2.3.0.1.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/cockpit-demo-widgets-2.3.0.1.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/cockpit-module-aggregator-2.3.0.1.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/cockpit-standard-editors-2.3.0.1.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/cockpitadmin-2.3.0.1.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/cockpitcore-2.3.0.1.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/cockpitframework-2.3.0.1.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/cockpittesting-2.3.0.1.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/cockpitwidgets-2.3.0.1.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/commons-lang3-3.1.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/gmapsz-3.0.0.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/jaxb-impl-2.2.4-1.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/jfreechart.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/sac-1.3.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/webfragmentCore_XSSFilter.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/webfragmentCore_backofficeContextClassloaderFilter.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/webfragmentCore_backofficeMobileFilter.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/webfragmentCore_backofficefilterchain.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/webfragmentCore_requestContextFilter.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/webfragmentCore_springSecurityFilterChain.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/zcommon-7.0.4.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/zel-7.0.4.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/zhtml-7.0.4.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/zk-7.0.4.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/zkbind-7.0.4.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/zkcharts-2.0.1.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/zkex-7.0.4.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/zkmax-7.0.4.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/zkplus-7.0.4.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/zkspring-core-3.1.1.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/zkspring-security-3.1.1.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/zul-7.0.4.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/zweb-7.0.4.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/classes" />
+	<classpathentry exported="true" kind="lib" path="bin/backofficeserver.jar" >
+		<attributes>
+			<attribute name="javadoc_location" value="https://download.hybris.com/api/5.7.0"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="resources" />
+	<classpathentry exported="false" output="eclipsebin/web/classes" kind="src" path="web/testsrc" />
+	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="testsrc" />
+				
+</classpath>
+				

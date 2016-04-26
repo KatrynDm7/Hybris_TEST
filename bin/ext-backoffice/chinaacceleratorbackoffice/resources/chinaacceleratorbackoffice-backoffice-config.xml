@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2015 hybris AG All rights reserved. This software is the confidential and proprietary information 
+	of hybris ("Confidential Information"). You shall not disclose such Confidential Information and shall use it only in accordance with the terms 
+	of the license agreement you entered into with hybris. -->
+<config xmlns="http://www.hybris.com/cockpit/config">
+   
+	<!-- chinaacceleratorservice start -->
+	
+	<context type="City" component="base" merge-by="type">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>code+ ' / ' +name</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	
+	<context type="District" component="base" merge-by="type">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>code+ ' / ' +name</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	
+	<context parent="GenericItem" type="City" merge-by="type" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab xmlns="http://www.hybris.com/cockpitng/component/editorArea" name="hmc.administration">
+				<editorArea:section name="backoffice.section.city.sort" position="0">
+				    <editorArea:attribute qualifier="name" />
+					<editorArea:attribute qualifier="sortOrder" />
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	
+	<context parent="GenericItem" type="PointOfService" merge-by="type" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab xmlns="http://www.hybris.com/cockpitng/component/editorArea" name="hmc.administration">
+				<editorArea:section name="backoffice.section.pointofservice.sort" position="0">
+					<editorArea:attribute qualifier="sortOrder" />
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	
+	<context parent="GenericItem" type="Address" merge-by="type" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab xmlns="http://www.hybris.com/cockpitng/component/editorArea" name="hmc.tab.common">
+				<editorArea:section name="hmc.section.address.address">
+				    <editorArea:attribute qualifier="region" />
+					<editorArea:attribute qualifier="city" />
+					<editorArea:attribute qualifier="cityDistrict" />
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	
+	<!-- chinaacceleratorservice end -->
+</config>

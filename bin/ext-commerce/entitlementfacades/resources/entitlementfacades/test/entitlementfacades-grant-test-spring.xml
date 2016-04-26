@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+       <import resource="classpath:/META-INF/entitlement-api-spring.xml" />
+
+       <bean id="meteredConditionEntitlementPopulator" class="de.hybris.platform.entitlementfacades.entitlement.populator.MeteredConditionEntitlementPopulator"/>
+       <bean id="timeframeConditionEntitlementPopulator" class="de.hybris.platform.entitlementfacades.entitlement.populator.TimeframeConditionEntitlementPopulator">
+              <property name="dateTimeConverter" ref="dateTimeConverter" />
+       </bean>
+
+       <bean id="defaultGrantEntitlementPopulator" class="de.hybris.platform.entitlementfacades.entitlement.populator.GrantEntitlementPopulator">
+              <property name="dateTimeConverter" ref="dateTimeConverter" />
+              <property name="conditionPopulators">
+                     <list>
+<!--
+                            <ref bean="pathConditionEntitlementPopulator"/>
+                            <ref bean="stringConditionEntitlementPopulator"/>
+                            <ref bean="geoConditionEntitlementPopulator"/>
+-->
+                            <ref bean="meteredConditionEntitlementPopulator"/>
+                            <ref bean="timeframeConditionEntitlementPopulator"/>
+                     </list>
+              </property>
+       </bean>
+
+
+</beans>

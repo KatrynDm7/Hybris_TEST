@@ -1,0 +1,2 @@
+feedId,name,description,poolingStrategy,poolingCondition
+9400,"Y2YSYNC_FEED","Feed for Y2YSync","NAMED_POOL","Y2YSYNC_POOL"

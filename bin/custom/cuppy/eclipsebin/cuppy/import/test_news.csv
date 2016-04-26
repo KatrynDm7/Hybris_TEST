@@ -1,0 +1,7 @@
+INSERT_UPDATE News;content[lang=de];content[lang=en];competition[unique=true]
+;Wilkommen zu CuppY;Welcome to CuppY;;
+
+INSERT_UPDATE News;content[lang=de];content[lang=en];competition(code)[unique=true]
+;Willkommen zur WM 2002;Welcome to World Cup 2002;wc2002;
+;Willkommen EM 2008;Welcome to Euro Cup 2008;ec2008;
+;Willkommen zur WM 2010;Welcome to World Cup 2010;wc2010;

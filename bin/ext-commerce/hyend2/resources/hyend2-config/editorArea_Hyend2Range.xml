@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>
+	
+	<group qualifier="Hyend2RangeGeneral" visible="true" initially-opened="true">
+		<label key="cockpit.config.label.General" />
+		<property qualifier="Hyend2Range.name" >
+		</property>		
+		<property qualifier="Hyend2Range.boundType" >
+		</property>	
+		<property qualifier="Hyend2Range.rangeType" >
+		</property>
+	</group>
+	
+	<group qualifier="Hyend2RangeEntriesSection" visible="true" initially-opened="true">
+		<label key="hyend2.rangeentries" />
+		<property qualifier="Hyend2Range.rangeEntries" >
+			<parameter>
+				<name>allowSelect</name>
+				<value>false</value>
+			</parameter>
+		</property>	
+	</group>
+	
+	<group qualifier="Hyend2RangeAssignedPropsSection" visible="true" initially-opened="true">
+		<label key="hyend2.assignedproperties" />
+		<property qualifier="Hyend2Range.properties" >
+			<parameter>
+				<name>allowCreate</name>
+				<value>false</value>
+			</parameter>
+			<parameter>
+				<name>allowActivate</name>
+				<value>false</value>
+			</parameter>
+		</property>	
+	</group>
+	
+	<group qualifier="Hyend2RangeDimConfSection" visible="true" initially-opened="true">
+		<label key="hyend2.dimensionconfiguration" />
+		<property qualifier="Hyend2Range.endecaDimensionConfiguration" />	
+	</group>
+
+</editor>

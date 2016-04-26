@@ -1,0 +1,96 @@
+# ImpEx for Importing Categories into Electronics Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=financialProductCatalog
+$productCatalogName=Electronics Product Catalog
+$catalogVersion=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$supercategories=source(code, $catalogVersion)[unique=true]
+$categories=target(code, $catalogVersion)[unique=true]
+$lang=en
+
+# Insert Categories
+INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='customergroup'];$catalogVersion
+ ;insurances
+ ;insurances_event
+ ;insurances_event_options
+ ;insurances_travel
+ ;insurances_property
+ ;insurance_forms
+ ;insurance_forms_event
+ ;insurance_forms_event_additional
+ ;insurances_travel_annual
+ ;insurances_travel_single
+ ;insurances_travel_backpackers
+ ;insurances_travel_options
+ ;insurance_forms_travel_trip_details
+ ;insurance_forms_travel_traveller_info
+ ;insurance-forms_homeowners_property_details
+ ;insurance_forms_renters_property_details
+ ;insurance_forms_property_personal_details
+ ;insurance_forms_auto_personal_details
+ ;insurance_forms_auto_details
+ ;insurance_forms_life_details
+ ;insurance_forms_life_personal_details
+ ;insurances_property_homeowners
+ ;insurances_property_renters
+ ;insurances_property_options
+ ;insurances_auto
+ ;insurances_auto_options
+ ;insurances_life
+ ;insurances_life_options
+
+ ;insurance_main_event
+ ;insurance_main_travel
+ ;insurance_main_homeowners
+ ;insurance_main_renters
+
+ ;insurance_agents
+
+
+# Insert Category Structure
+INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
+ ;insurances_event_options              ;insurances_event
+ ;insurances_property					;insurances
+ ;insurance_forms_event				    ;insurance_forms
+ ;insurance_forms_event_additional	    ;insurance_forms
+ ;insurance-forms_homeowners_property_details;insurance_forms
+ ;insurance_forms_renters_property_details;insurance_forms
+ ;insurance_forms_property_personal_details;insurance_forms
+ ;insurance_forms_travel_trip_details   ;insurance_forms
+ ;insurance_forms_travel_traveller_info ;insurance_forms
+ ;insurance_forms_auto_personal_details	;insurance_forms
+ ;insurance_forms_auto_details			;insurance_forms
+ ;insurance_forms_life_details			;insurance_forms
+ ;insurance_forms_life_personal_details	;insurance_forms
+ 
+ ;insurances_travel_annual				;insurances_travel
+ ;insurances_travel_single				;insurances_travel
+ ;insurances_travel_backpackers			;insurances_travel
+ ;insurances_travel_options				;insurances_travel_annual
+ ;insurances_travel_options				;insurances_travel_single
+ ;insurances_travel_options				;insurances_travel_backpackers
+
+ ;insurances_property_options			;insurances_property_homeowners
+ ;insurances_property_options			;insurances_property_renters
+
+ ;insurance_main_event                  ;insurances
+ ;insurance_main_travel					;insurances
+ ;insurance_main_homeowners		        ;insurances
+ ;insurance_main_renters			    ;insurances
+
+ ;insurances_event                      ;insurance_main_event
+ ;insurances_travel						;insurance_main_travel
+ ;insurances_property_homeowners		;insurance_main_homeowners
+ ;insurances_property_renters			;insurance_main_renters
+
+ ;insurances_property_homeowners		;insurance_agents
+ ;insurances_property_renters			;insurance_agents
+ ;insurances_auto						;insurance_agents
+ ;insurances_life						;insurance_agents
+ ;insurances_travel					    ;insurance_agents
+ ;insurances_event                      ;insurance_agents
+
+ ;insurances_auto                       ;insurances
+ ;insurances_auto_options               ;insurances_auto
+ ;insurances_life                       ;insurances
+ ;insurances_life_options               ;insurances

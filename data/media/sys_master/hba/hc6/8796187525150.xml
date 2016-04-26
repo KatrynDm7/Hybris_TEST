@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="News.creationtime" />
+			<property qualifier="News.content" />
+		</search-properties>
+		<sort-properties>
+			<property qualifier="News.creationtime" />
+			<property qualifier="News.content" />
+			<property qualifier="News.email" />
+		</sort-properties>
+	</search>
+	<label>
+		<property qualifier="News.creationtime"/>
+		<property qualifier="News.competition.name"/>
+	</label>
+</base>

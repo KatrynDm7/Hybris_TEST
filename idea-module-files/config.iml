@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="configspring" name="configspring" removed="false" />
+      </configuration>
+    </facet>
+    <facet type="web" name="Web">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/../config/tomcat/conf/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/../config/tomcat/conf" relative="/WEB-INF" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web2">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/../config/tcServer/conf/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/../config/tcServer/conf" relative="/WEB-INF" />
+        </webroots>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/../config/eclipsebin" />
+    <output-test url="file://$MODULE_DIR$/../config/eclipsebin" />
+    <exclude-output />
+    <javadoc-paths>
+      <root url="https://download.hybris.com/api/5.7.0/commercesuite" />
+    </javadoc-paths>
+    <content url="file://$MODULE_DIR$/../config">
+      <excludeFolder url="file://$MODULE_DIR$/../config/.externalToolBuilders" />
+      <excludeFolder url="file://$MODULE_DIR$/../config/.settings" />
+      <excludeFolder url="file://$MODULE_DIR$/../config/acceleratoraddon/hmc/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/../config/acceleratoraddon/web/addonsrc" />
+      <excludeFolder url="file://$MODULE_DIR$/../config/acceleratoraddon/web/commonwebsrc" />
+      <excludeFolder url="file://$MODULE_DIR$/../config/acceleratoraddon/web/testclasses" />
+      <excludeFolder url="file://$MODULE_DIR$/../config/backoffice/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/../config/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/../config/commonweb/addonsrc" />
+      <excludeFolder url="file://$MODULE_DIR$/../config/commonweb/commonwebsrc" />
+      <excludeFolder url="file://$MODULE_DIR$/../config/commonweb/testclasses" />
+      <excludeFolder url="file://$MODULE_DIR$/../config/eclipsebin" />
+      <excludeFolder url="file://$MODULE_DIR$/../config/hmc/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/../config/web/addonsrc" />
+      <excludeFolder url="file://$MODULE_DIR$/../config/web/commonwebsrc" />
+      <excludeFolder url="file://$MODULE_DIR$/../config/web/testclasses" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Common libs" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../config/licence" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/../config/licence" recursive="true" />
+      </library>
+    </orderEntry>
+  </component>
+</module>

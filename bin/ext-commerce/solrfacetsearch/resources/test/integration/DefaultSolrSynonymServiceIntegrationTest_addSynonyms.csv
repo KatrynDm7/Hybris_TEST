@@ -1,0 +1,5 @@
+$facetSearchConfigName=testFacetSearchConfig${testId}
+
+INSERT_UPDATE SolrSynonymConfig;facetSearchConfig(name)[unique=true,default=$facetSearchConfigName];language(isocode)[unique=true];synonymFrom[unique=true];synonymTo
+;;de;bank;sparkasse,bank
+;;en;basic;primary

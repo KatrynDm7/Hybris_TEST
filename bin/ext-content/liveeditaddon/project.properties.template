@@ -1,0 +1,55 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform 
+# 
+# Copyright (c) 2000-2014 hybris AG
+# All rights reserved.
+#  
+# This software is the confidential and proprietary information of hybris 
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with hybris.
+#
+#  
+# -----------------------------------------------------------------------
+
+# you can put key/value pairs here.
+# Use Config.getParameter(..) to retrieve the values during runtime.
+
+liveeditaddon.key=value
+
+# Specifies the location of the spring context file added automatically to the global platform application context.
+liveeditaddon.application-context=liveeditaddon-spring.xml
+
+storefront.supportedUiExperienceLevels.electronics=DESKTOP,MOBILE
+storefront.supportedUiExperienceLevels.apparel-uk=DESKTOP,MOBILE
+storefront.supportedUiExperienceLevels.apparel-de=DESKTOP,MOBILE
+storefront.supportedUiExperienceLevels.powertools=DESKTOP
+
+
+#liveeditaddon.javascript.paths.desktop=/desktop/common/js/liveeditaddon.js
+#liveeditaddon.javascript.paths.mobile=/desktop/common/js/liveeditaddon.js
+liveeditaddon.css.paths.desktop=/desktop/common/css/liveeditaddon.css
+liveeditaddon.css.paths.mobile=/mobile/common/css/liveeditaddon.css
+liveeditaddon.css.paths.responsive=/responsive/common/css/liveeditaddon.css
+
+
+liveeditaddon.liveedit.javascript.paths.desktop=/shared/common/js/liveedit.slotmenu.actions.script.js;/shared/common/js/liveedit.slotmenu.script.js;/shared/common/js/jquery.filedrop.js;/shared/common/js/liveedit.filedrop.script.js;/shared/common/js/liveedit.move.script.js;/shared/common/js/plugins/jquery.contextmenu.js;/shared/common/js/liveedit.contextmenu.actions.script.js;/shared/common/js/liveedit.contextmenu.script.js;/desktop/common/js/acc.liveedit.js;/shared/common/js/liveedit.pagesync.script.js;/desktop/common/js/hybris.cms.live.edit.js
+liveeditaddon.liveedit.css.paths.desktop=/desktop/common/css/liveeditaddon.slotmenu.css;/desktop/common/css/hybris.cms.live.edit.css;/desktop/common/css/liveeditaddon.filedrop.css;/desktop/common/css/liveeditaddon.move.css;/desktop/common/css/liveeditaddon.contextmenu.css;/desktop/common/css/plugins/contextmenu/contextmenu.css
+liveeditaddon.liveedit.javascript.paths.mobile=/mobile/common/js/acc.to.accmob.js;/shared/common/js/liveedit.slotmenu.actions.script.js;/shared/common/js/liveedit.slotmenu.script.js;/shared/common/js/jquery.filedrop.js;/shared/common/js/liveedit.filedrop.script.js;/shared/common/js/liveedit.move.script.js;/shared/common/js/plugins/jquery.contextmenu.js;/shared/common/js/liveedit.contextmenu.actions.script.js;/shared/common/js/liveedit.contextmenu.script.js;/shared/common/js/liveedit.pagesync.script.js;/mobile/common/js/accmob.liveedit.js;/mobile/common/js/hybris.cms.live.edit.js
+liveeditaddon.liveedit.css.paths.mobile=/mobile/common/css/liveeditaddon.slotmenu.css;/mobile/common/css/hybris.cms.live.edit.css;/mobile/common/css/liveeditaddon.filedrop.css;/mobile/common/css/liveeditaddon.move.css;/mobile/common/css/liveeditaddon.contextmenu.css;/mobile/common/css/plugins/contextmenu/contextmenu.css
+liveeditaddon.liveedit.javascript.paths.responsive=/shared/common/js/liveedit.slotmenu.actions.script.js;/shared/common/js/liveedit.slotmenu.script.js;/shared/common/js/jquery.filedrop.js;/shared/common/js/liveedit.filedrop.script.js;/shared/common/js/liveedit.move.script.js;/shared/common/js/plugins/jquery.contextmenu.js;/shared/common/js/liveedit.contextmenu.actions.script.js;/shared/common/js/liveedit.contextmenu.script.js;/shared/common/js/liveedit.pagesync.script.js;/responsive/common/js/acc.liveedit.js;/responsive/common/js/hybris.cms.live.edit.js
+liveeditaddon.liveedit.css.paths.responsive=/responsive/common/css/liveeditaddon.slotmenu.css;/responsive/common/css/hybris.cms.live.edit.css;/responsive/common/css/liveeditaddon.filedrop.css;/responsive/common/css/liveeditaddon.move.css;/responsive/common/css/liveeditaddon.contextmenu.css;/responsive/common/css/plugins/contextmenu/contextmenu.css
+
+liveeditaddon.liveedit.css.paths.desktop.green=/desktop/theme-green/css/b2b.liveeditaddon.css
+liveeditaddon.liveedit.css.paths.desktop.blue=/desktop/theme-blue/css/b2c.liveeditaddon.css
+liveeditaddon.liveedit.css.paths.desktop.black=/desktop/theme-black/css/b2c.liveeditaddon.css
+
+liveeditaddon.preview.javascript.paths.desktop=/shared/common/js/hybris.cms.preview.js
+liveeditaddon.preview.javascript.paths.mobile=/mobile/common/js/acc.to.accmob.js;/shared/common/js/hybris.cms.preview.js
+liveeditaddon.preview.javascript.paths.responsive=/shared/common/js/hybris.cms.preview.js
+
+cmscockpit.additionalWebSpringConfigs.liveeditaddon=classpath:/liveeditaddon/cmscockpit/spring/import.xml
+btgcockpit.additionalWebSpringConfigs.liveeditaddon=classpath:/liveeditaddon/cmscockpit/spring/import.xml
+yacceleratorstorefront.additionalWebSpringConfigs.liveeditaddon=classpath:/liveeditaddon/web/spring/b2c-properties-spring.xml,classpath:/liveeditaddon/web/spring/liveeditaddon-storefront-web-spring.xml
+yb2bacceleratorstorefront.additionalWebSpringConfigs.liveeditaddon=classpath:/liveeditaddon/web/spring/b2b-properties-spring.xml,classpath:/liveeditaddon/web/spring/liveeditaddon-storefront-web-spring.xml
+ychinaacceleratorstorefront.additionalWebSpringConfigs.liveeditaddon=classpath:/liveeditaddon/web/spring/china-properties-spring.xml,classpath:/liveeditaddon/web/spring/liveeditaddon-storefront-web-spring.xml

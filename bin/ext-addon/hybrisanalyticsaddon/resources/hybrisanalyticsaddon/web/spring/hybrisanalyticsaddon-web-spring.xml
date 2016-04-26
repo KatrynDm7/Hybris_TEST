@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:annotation-config/>
+	
+	<!-- Expose /acceleratoraddon/web/webroot/WEB-INF/messages/base.js.properties  resource bundle as javascript variables -->
+	<bean id="defaultHybrisanalyticsaddonJavaScriptMessageResourceAccessor" parent="abstractJavaScriptMessageResourceAccessor">
+		<property name="addOnName" value="hybrisanalyticsaddon"/>
+	</bean>
+
+	<!--<bean id="defaultHybrisanalyticsaddonBeforeViewJsPropsHandlerAdaptee" parent="abstractBeforeViewJsPropsHandlerAdaptee" class="de.hybris.platform.addonsupport.interceptors.ExportJsPropertiesBeforeViewHandler">-->
+	<!--<property name="messageSource" ref="defaultHybrisanalyticsaddonJavaScriptMessageResourceAccessor"/>-->
+	<!--</bean>-->
+
+
+	<bean id="hybrisanalyticsCustomBeforeViewJsPropsHandlerAdaptee" parent="abstractBeforeViewJsPropsHandlerAdaptee" class="de.hybris.platform.hybrisanalyticsaddon.interceptors.beforeview.HybrisAnalyticsBeforeViewHandler">
+		<property name="messageSource" ref="defaultHybrisanalyticsaddonJavaScriptMessageResourceAccessor"/>
+		<property name="i18NService" ref="i18NService"/>
+		<property name="sessionService" ref="sessionService" />
+	</bean>
+
+
+	<!--<bean id="getHybrisanalyticsaddonBeforeViewHandler" parent="beforeViewHandlerAdapter">-->
+	<!--<property name="adaptee">-->
+	<!--<ref bean="defaultHybrisanalyticsaddonBeforeViewJsPropsHandlerAdaptee"/>-->
+	<!--</property>-->
+	<!--</bean>-->
+
+
+	<bean id="getHybrisanalyticsCustomBeforeViewHandler" parent="beforeViewHandlerAdapter">
+		<property name="adaptee">
+			<ref bean="hybrisanalyticsCustomBeforeViewJsPropsHandlerAdaptee"/>
+		</property>
+	</bean>
+
+	<!--<bean id="HybrisanalyticsaddonBeforeViewHandlerListMergeDirective" depends-on="beforeViewHandlersList" parent="listMergeDirective">-->
+	<!--<property name="add" ref="getHybrisanalyticsaddonBeforeViewHandler"/>-->
+	<!--</bean>-->
+
+	<bean id="HybrisanalyticsBeforeViewHandlerListMergeDirective" depends-on="beforeViewHandlersList" parent="listMergeDirective">
+		<property name="add" ref="getHybrisanalyticsCustomBeforeViewHandler"/>
+	</bean>
+
+
+	<bean id="hybrisAnalyticsTagScriptComponentRenderer"
+	      class="de.hybris.platform.hybrisanalyticsaddon.component.renderer.HybrisAnalyticsTagScriptComponentRenderer"
+	      parent="genericAddOnCMSComponentRenderer" />
+
+	<bean id="hybrisAnalyticsActionRendererMapping" parent="addonCmsComponentRendererMapping">
+		<property name="typeCode" value="HybrisAnalyticsTagScriptComponent" />
+		<property name="renderer" ref="hybrisAnalyticsTagScriptComponentRenderer" />
+	</bean>
+
+</beans>

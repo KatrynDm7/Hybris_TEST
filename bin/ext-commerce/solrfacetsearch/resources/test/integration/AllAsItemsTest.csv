@@ -1,0 +1,13 @@
+
+INSERT_UPDATE SolrValueRangeSet;name[unique=true];type;qualifier
+;priceRangesEUR${testId};double;EUR
+;priceRangesUSD${testId};double;USD
+
+INSERT_UPDATE SolrValueRange;solrValueRangeSet(name);name[unique=true];from;to
+;priceRangesEUR${testId};1-2000;1;2000
+;priceRangesEUR${testId};2001-INF;2001;
+;priceRangesUSD${testId};1-3000;1;3000
+;priceRangesUSD${testId};3001-INF;3001;
+
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);facet;localized;currency;multiValue;rangeSets(name);facetDisplayNameProvider;fieldValueProvider
+;testIndexedType${testId};priceWithCurrency;double;;true;false;true;true;priceRangesEUR${testId},priceRangesUSD${testId};;productPriceValueProvider

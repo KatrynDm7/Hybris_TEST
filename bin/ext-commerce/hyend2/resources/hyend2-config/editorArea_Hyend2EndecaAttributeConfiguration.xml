@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>
+	
+	<group qualifier="General" initially-opened="true">
+		<label key="cockpit.config.label.General" />
+		<property qualifier="Hyend2EndecaAttributeConfiguration.name" visible="true" />
+	</group>
+	<group qualifier="AssignedAttributes" initially-opened="true">
+		<label key="hyend2.editorArea.assignedattributes" />
+		<property qualifier="Hyend2EndecaAttributeConfiguration.properties" visible="true" />
+	</group>
+	<group qualifier="EndecaPropertyConfiguration"  initially-opened="true">
+		<label key="hyend2.editorArea.endecapropertyconfiguration" />
+		<property qualifier="Hyend2EndecaAttributeConfiguration.searchable" visible="true" />
+		<property qualifier="Hyend2EndecaAttributeConfiguration.searchWildcard" visible="true" />
+		<property qualifier="Hyend2EndecaAttributeConfiguration.offlineSort" visible="true" />
+		<property qualifier="Hyend2EndecaAttributeConfiguration.rollupKey" visible="true" />
+		<property qualifier="Hyend2EndecaAttributeConfiguration.showWithList" visible="true" />
+		<property qualifier="Hyend2EndecaAttributeConfiguration.showWithRecord" visible="true" />
+		<property qualifier="Hyend2EndecaAttributeConfiguration.recordFilterable" visible="true" />	
+	</group>
+</editor>

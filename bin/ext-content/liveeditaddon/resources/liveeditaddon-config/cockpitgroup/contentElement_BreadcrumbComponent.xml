@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content-elements>	
+
+
+<content-element type="BreadcrumbComponent" name="type.BreadcrumbComponent.name"
+							description="type.BreadcrumbComponent.description"
+							image="cmscockpit/images/breadcrumb_icon_34x34.gif"
+							refImage="cmscockpit/images/breadcrumb_icon_34x34.gif"
+							imageSmall="cmscockpit/images/breadcrumb_icon_20x20.gif"/>
+</content-elements>

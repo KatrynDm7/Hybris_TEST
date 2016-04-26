@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2015 hybris AG All rights reserved. This software is the confidential and proprietary information 
+	of hybris ("Confidential Information"). You shall not disclose such Confidential Information and shall use it only in accordance with 
+	the terms of the license agreement you entered into with hybris. -->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <alias name="cmscockpitProductFrontendUrlRegexPattern" alias="productFrontendUrlRegexPattern"/>
+    <bean id="cmscockpitProductFrontendUrlRegexPattern" class="java.lang.String">
+        <constructor-arg>
+            <value><![CDATA[(?<=/p/)[\.\:\,\*\(\!\'\)\/\\\$\%\+\-\_\#\???A-z0-9]{0,}[^(\?|\&|\;|$)]]]></value>
+        </constructor-arg>
+    </bean>
+
+
+    <alias name="cmscockpitCategoryFrontendUrlRegexPattern" alias="categoryFrontendUrlRegexPattern"/>
+    <bean id="cmscockpitCategoryFrontendUrlRegexPattern" class="java.lang.String">
+        <constructor-arg>
+            <value><![CDATA[(?<=/c/)[\.\:\,\*\(\!\'\)\/\\\$\%\+\-\_\#\???A-z0-9]{0,}[^(\?|\&|\;|$)]]]></value>
+        </constructor-arg>
+    </bean>
+
+    <alias name="cmscockpitAbstractPopulatingConverter" alias="abstractPopulatingConverter"/>
+    <bean id="cmscockpitAbstractPopulatingConverter" class="de.hybris.platform.cmscockpit.converter.impl.AbstractPopulatingConverter" abstract="true"/>
+
+
+    <alias alias="CatalogAbstractContentElementSectionListActionColumn" name="defaultCatalogAbstractContentElementSectionListActionColumn" />
+	<bean id="defaultCatalogAbstractContentElementSectionListActionColumn"
+		class="de.hybris.platform.cockpit.components.listview.impl.DefaultActionColumnConfiguration"
+		scope="prototype">
+		<constructor-arg value="Actions" />
+		<property name="actions">
+			<list>
+				<ref bean="SynchronizationAction" />
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultObjectTemplates4ContentSlotFilter" alias="objectTemplates4ContentSlotFilter"/>
+	<bean id="defaultObjectTemplates4ContentSlotFilter" class="de.hybris.platform.cms2.services.meta.impl.ObjectTemplates4ContentSlotFilter" scope="tenant">
+		<property name="typeService" ref="typeService"/>
+	</bean>
+	
+	<alias name="defaultObjectTemplates4PageFilter" alias="objectTemplates4PageFilter"/>
+	<bean id="defaultObjectTemplates4PageFilter" class="de.hybris.platform.cms2.services.meta.impl.ObjectTemplates4AbstractPageFilter" scope="tenant">
+		<property name="typeService" ref="typeService"/>
+		<property name="cmsAdminRestrictionService" ref="cmsAdminRestrictionService"/>
+	</bean>
+	
+	<bean id="cmscockpitLocalizationLabelLocator" class="de.hybris.platform.cockpit.util.ConfigurableCockpitLabelLocator" scope="singleton" lazy-init="false">
+		<property name="resourceFolder" value="/i3localization/"/>
+	</bean>
+	
+
+	
+	<alias name="defaultLiveEditFrontEndAttributesConverter" alias="liveEditFrontEndAttributesConverter"/>
+
+
+	<bean id="defaultLiveEditFrontEndAttributesConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.cmscockpit.session.impl.FrontendAttributes"/>
+		<property name="populators">
+			<list/>
+		</property>
+	</bean>
+
+
+	
+	<alias name="defaultUrlChangeEventConverter" alias="urlChangeEventConverter"/>
+
+
+	<bean id="defaultUrlChangeEventConverter" class="de.hybris.platform.cmscockpit.components.liveedit.converter.DefaultCmsUrlChangeEventConverter">
+		<property name="frontEndAttributesConverter" ref="liveEditFrontEndAttributesConverter"/>
+	</bean>
+
+	
+	
+	<bean id="addOnFrontendAttributes" class="de.hybris.platform.cmscockpit.session.impl.FrontendAttributes" scope="prototype"/>
+
+	
+	
+	
+	<bean id="cockpitImportConfig" name="cockpitImportConfig" class="de.hybris.platform.cmscockpit.systemsetup.CMSCockpitImportConfig">
+		<property name="typeService" ref="typeService"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+		<property name="ctxID2FactoryMappings" ref="ctxID2FactoryMappings"/>
+	</bean>
+
+	<alias name="defaultCategoryCatalogVersionFrontendRegexUrlDecoder" alias="categoryCatalogVersionFrontendRegexUrlDecoder"/>
+
+
+	<alias name="defaultCategoryCatalogVersionFrontendRegexUrlDecoder" alias="categoryCatalogVersionFrontendUrlDecoder"/>
+
+
+	<bean id="defaultCategoryCatalogVersionFrontendRegexUrlDecoder" class="de.hybris.platform.cmscockpit.url.impl.CategoryCatalogVersionFrontendUrlDecoder">
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+		<property name="catalogVersionService" ref="catalogVersionService"/>
+		<property name="regex" ref="categoryFrontendUrlRegexPattern"/>
+	</bean>
+
+
+
+	<alias name="defaultProductCatalogVersionFrontendRegexUrlDecoder" alias="productCatalogVersionFrontendRegexUrlDecoder"/>
+
+	
+	<alias name="defaultProductCatalogVersionFrontendRegexUrlDecoder" alias="productCatalogVersionFrontendUrlDecoder"/>
+
+
+	<bean id="defaultProductCatalogVersionFrontendRegexUrlDecoder" class="de.hybris.platform.cmscockpit.url.impl.ProductCatalogVersionFrontendUrlDecoder">
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+		<property name="catalogVersionService" ref="catalogVersionService"/>
+		<property name="regex" ref="productFrontendUrlRegexPattern"/>	
+	</bean>
+
+	<bean id="uRLCOMInjectionSanitizer" class="de.hybris.platform.cmscockpit.util.URLCOMInjectionSanitizer">
+		<constructor-arg>
+			<map key-type="java.lang.String" value-type="java.lang.String">
+				<entry key=";" value="&amp;" />
+			</map>
+		</constructor-arg>
+		<constructor-arg>
+			<map key-type="java.lang.String" value-type="java.lang.String">
+				<entry key="$" value="&amp;" />
+				<entry key="(" value="%28" />
+				<entry key=")" value="%29" />
+			</map>
+		</constructor-arg>
+	</bean>
+
+</beans>
+
+

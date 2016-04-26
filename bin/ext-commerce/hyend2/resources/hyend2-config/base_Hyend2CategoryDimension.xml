@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<label spring-bean="hyend2propertyLabelProvider"/>
+	<initial-properties source-object-template="Hyend2IndexElement">
+        <property-mapping source="src.type" target="Hyend2CategoryDimension.attributeType"/>
+        <property-mapping source="src" target="Hyend2CategoryDimension.indexElements"/>
+	</initial-properties>
+</base>

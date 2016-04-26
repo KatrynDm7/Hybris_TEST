@@ -1,0 +1,10 @@
+#
+# Import the Financial Content Catalog
+#
+
+# Language
+$lang=en
+
+# Create Content Catalog
+UPDATE ContentCatalog;id[unique=true];name[lang=$lang]
+ ;financialContentCatalog;"Financial Content Catalog"

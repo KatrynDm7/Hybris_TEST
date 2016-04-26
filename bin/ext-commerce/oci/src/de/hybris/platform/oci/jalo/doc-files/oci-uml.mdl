@@ -1,0 +1,1789 @@
+
+(object Petal
+    version    	42
+    _written   	"Rose 4.5.8163.3"
+    charSet    	0)
+
+(object Design "Logical View"
+    is_unit    	TRUE
+    is_loaded  	TRUE
+    defaults   	(object defaults
+	rightMargin 	0.250000
+	leftMargin 	0.250000
+	topMargin  	0.250000
+	bottomMargin 	0.500000
+	pageOverlap 	0.250000
+	clipIconLabels 	TRUE
+	autoResize 	TRUE
+	snapToGrid 	FALSE
+	gridX      	0
+	gridY      	0
+	defaultFont 	(object Font
+	    size       	12
+	    face       	"Arial"
+	    bold       	FALSE
+	    italics    	FALSE
+	    underline  	FALSE
+	    strike     	FALSE
+	    color      	0
+	    default_color 	TRUE)
+	showMessageNum 	3
+	showClassOfObject 	TRUE
+	notation   	"Unified")
+    root_usecase_package 	(object Class_Category "Use Case View"
+	quid       	"4225F74600DC"
+	exportControl 	"Public"
+	global     	TRUE
+	logical_models 	(list unit_reference_list)
+	logical_presentations 	(list unit_reference_list
+	    (object UseCaseDiagram "Main"
+		quid       	"4225F74600EC"
+		title      	"Main"
+		zoom       	100
+		max_height 	28350
+		max_width  	21600
+		origin_x   	0
+		origin_y   	0
+		items      	(list diagram_item_list))))
+    root_category 	(object Class_Category "Logical View"
+	attributes 	(list Attribute_Set
+	    (object Attribute
+		tool       	"Java"
+		name       	"IDE"
+		value      	"Internal Editor")
+	    (object Attribute
+		tool       	"Java"
+		name       	"UserDefineTagName1"
+		value      	"")
+	    (object Attribute
+		tool       	"Java"
+		name       	"UserDefineTagText1"
+		value      	"")
+	    (object Attribute
+		tool       	"Java"
+		name       	"UserDefineTagApply1"
+		value      	"")
+	    (object Attribute
+		tool       	"Java"
+		name       	"UserDefineTagName2"
+		value      	"")
+	    (object Attribute
+		tool       	"Java"
+		name       	"UserDefineTagText2"
+		value      	"")
+	    (object Attribute
+		tool       	"Java"
+		name       	"UserDefineTagApply2"
+		value      	"")
+	    (object Attribute
+		tool       	"Java"
+		name       	"UserDefineTagName3"
+		value      	"")
+	    (object Attribute
+		tool       	"Java"
+		name       	"UserDefineTagText3"
+		value      	"")
+	    (object Attribute
+		tool       	"Java"
+		name       	"UserDefineTagApply3"
+		value      	""))
+	quid       	"4225F74600DB"
+	exportControl 	"Public"
+	global     	TRUE
+	subsystem  	"Component View"
+	quidu      	"4225F74600DD"
+	logical_models 	(list unit_reference_list
+	    (object Class "OciManager"
+		quid       	"4225F7540196"
+		used_nodes 	(list uses_relationship_list
+		    (object Uses_Relationship
+			quid       	"4226F01500CB"
+			label      	"uses"
+			supplier   	"Logical View::CatalogLoginPerformer"
+			quidu      	"4226EEBE029F")
+		    (object Uses_Relationship
+			quid       	"4226F6FF01D4"
+			label      	"needed by ociLogin()"
+			supplier   	"Logical View::CatalogLoginPerformer"
+			quidu      	"4226EEBE029F")
+		    (object Uses_Relationship
+			quid       	"42273CE7013D"
+			label      	"creates"
+			supplier   	"Logical View::OutboundSection"
+			quidu      	"4226F47702FD"))
+		operations 	(list Operations
+		    (object Operation "createOciBuyerButton"
+			quid       	"4226EDC002FD"
+			parameters 	(list Parameters
+			    (object Parameter "SAPProductList"))
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "createOciBuyerButton"
+			quid       	"4226EDC3002E"
+			parameters 	(list Parameters
+			    (object Parameter "SAPProductList")
+			    (object Parameter "ociButton"))
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "isOciSession"
+			quid       	"4226EE3D02FD"
+			parameters 	(list Parameters
+			    (object Parameter "JaloSession"))
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "ociLogin"
+			quid       	"4226EE5901C5"
+			parameters 	(list Parameters
+			    (object Parameter "HttpServletResponse")
+			    (object Parameter "HttpServletRequest")
+			    (object Parameter "CatalogLoginPerformer"))
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "ociLogin"
+			quid       	"4226EE8C003E"
+			parameters 	(list Parameters
+			    (object Parameter "HttpServletResponse")
+			    (object Parameter "HttpServletRequest")
+			    (object Parameter "CatalogLoginPerformer")
+			    (object Parameter "disableRedirect"))
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)))
+	    (object Class "CatalogLoginPerformer"
+		quid       	"4226EEBE029F"
+		stereotype 	" interface"
+		used_nodes 	(list uses_relationship_list
+		    (object Uses_Relationship
+			quid       	"4227227E03C6"
+			label      	"creates"
+			supplier   	"Logical View::SAPProductList"
+			quidu      	"4226F20F0196")
+		    (object Uses_Relationship
+			quid       	"42272288004C"
+			label      	"creates"
+			supplier   	"Logical View::SAPProduct"
+			quidu      	"4226F5E0008C"))
+		operations 	(list Operations
+		    (object Operation "backgroundSearch"
+			quid       	"4226EEFD02EE"
+			parameters 	(list Parameters
+			    (object Parameter "searchstring"))
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "getHookURLFieldName"
+			quid       	"4226EF12001F"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "getProductDetailURL"
+			quid       	"4226EF2F0186"
+			parameters 	(list Parameters
+			    (object Parameter "productID"))
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "getProductInfoForValidation"
+			quid       	"4226EF5601C5"
+			parameters 	(list Parameters
+			    (object Parameter "productID")
+			    (object Parameter "quantity"))
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "getProductSearchURL"
+			quid       	"4226EF72004E"
+			parameters 	(list Parameters
+			    (object Parameter "searchstring")
+			    (object Parameter "vendor"))
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "getShopURL"
+			quid       	"4226EF930109"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "ociLogin"
+			quid       	"4226EF9F002E"
+			parameters 	(list Parameters
+			    (object Parameter "HttpServletResponse")
+			    (object Parameter "HttpServletRequest")
+			    (object Parameter "CatalogLoginPerformer"))
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)))
+	    (object Class "DefaultCatalogLoginPerformer"
+		quid       	"4226F0C002EE"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"4226F13000BB"
+			supplier   	"Logical View::CatalogLoginPerformer"
+			quidu      	"4226EEBE029F"))
+		exportControl 	"Implementation")
+	    (object Class "DefaultSAPProduct"
+		quid       	"4226F1C002CE"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"4226F45F01B5"
+			supplier   	"Logical View::SAPProductList"
+			quidu      	"4226F20F0196")
+		    (object Inheritance_Relationship
+			quid       	"4226F5F40148"
+			supplier   	"Logical View::SAPProduct"
+			quidu      	"4226F5E0008C"))
+		exportControl 	"Implementation")
+	    (object Class "SAPProductList"
+		quid       	"4226F20F0196"
+		stereotype 	" interface "
+		used_nodes 	(list uses_relationship_list
+		    (object Uses_Relationship
+			quid       	"4227070D002E"
+			supplier   	"Logical View::SAPProduct"
+			quidu      	"4226F5E0008C"))
+		operations 	(list Operations
+		    (object Operation "size"
+			quid       	"42270B84031C"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "getProduct"
+			quid       	"42270B8D03A9"
+			parameters 	(list Parameters
+			    (object Parameter "index"))
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)))
+	    (object Class "DefaultSAPProductList"
+		quid       	"4226F228001F"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"4226F235030D"
+			supplier   	"Logical View::SAPProductList"
+			quidu      	"4226F20F0196"))
+		exportControl 	"Implementation")
+	    (object Class "OutboundSection"
+		quid       	"4226F47702FD"
+		used_nodes 	(list uses_relationship_list
+		    (object Uses_Relationship
+			quid       	"4226F752032C"
+			label      	"Attribute"
+			supplier   	"Logical View::JaloSession"
+			quidu      	"4226F485004E"
+			exportControl 	"Protected"
+			client_cardinality 	(value cardinality "0..1")))
+		operations 	(list Operations
+		    (object Operation "getField"
+			quid       	"4227416B0359"
+			parameters 	(list Parameters
+			    (object Parameter "name"
+				type       	"String"))
+			result     	"String"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "getHookURLFieldName"
+			quid       	"422741D003D6"
+			result     	"String"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)))
+	    (object Class "JaloSession"
+		quid       	"4226F485004E")
+	    (object Class "Utils"
+		quid       	"4226F48F0213"
+		used_nodes 	(list uses_relationship_list
+		    (object Uses_Relationship
+			quid       	"4226F6DB036B"
+			label      	"uses"
+			supplier   	"Logical View::SAPProduct"
+			quidu      	"4226F5E0008C")
+		    (object Uses_Relationship
+			quid       	"4226F6E30213"
+			label      	"uses"
+			supplier   	"Logical View::SAPProductList"
+			quidu      	"4226F20F0196")
+		    (object Uses_Relationship
+			quid       	"4226F6F2037A"
+			label      	"uses"
+			supplier   	"Logical View::OutboundSection"
+			quidu      	"4226F47702FD"))
+		operations 	(list Operations
+		    (object Operation "generateXMLData"
+			quid       	"42273DBF0363"
+			parameters 	(list Parameters
+			    (object Parameter "sapproduct"
+				type       	"SAPProduct")
+			    (object Parameter "outboundSection"
+				type       	"OutboundSection"))
+			result     	"String"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "generateXMLData"
+			quid       	"4227420302DC"
+			parameters 	(list Parameters
+			    (object Parameter "sapproductlist"
+				type       	"SAPProductList")
+			    (object Parameter "outboundSection"
+				type       	"OutboundSection"))
+			result     	"String"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "generateHTML"
+			quid       	"42274278032A"
+			parameters 	(list Parameters
+			    (object Parameter "xmldata"
+				type       	"String")
+			    (object Parameter "outboundSection"
+				type       	"OutboundSection")
+			    (object Parameter "autoSubmit"
+				type       	"boolean"))
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)))
+	    (object Class "SAPProduct"
+		quid       	"4226F5E0008C"
+		stereotype 	" interface "
+		operations 	(list Operations
+		    (object Operation "getItem*"
+			quid       	"42270BB403A9"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "getCustomParameterNames"
+			quid       	"42270BC6001F"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "getCustomParameterValue"
+			quid       	"42270BDF0109"
+			parameters 	(list Parameters
+			    (object Parameter "name"))
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)))
+	    (object Association "creates"
+		quid       	"4226F78D0213"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$0"
+			quid       	"4226F78E00DA"
+			supplier   	"Logical View::OutboundSection"
+			quidu      	"4226F47702FD"
+			is_navigable 	TRUE)
+		    (object Role "$UNNAMED$1"
+			quid       	"4226F78E00DC"
+			supplier   	"Logical View::OciManager"
+			quidu      	"4225F7540196")))
+	    (object Association "uses"
+		quid       	"4226F7980251"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$2"
+			quid       	"4226F799001F"
+			supplier   	"Logical View::CatalogLoginPerformer"
+			quidu      	"4226EEBE029F"
+			client_cardinality 	(value cardinality "1")
+			is_navigable 	TRUE)
+		    (object Role "$UNNAMED$3"
+			quid       	"4226F7990021"
+			supplier   	"Logical View::OciManager"
+			quidu      	"4225F7540196")))
+	    (object Association "$UNNAMED$4"
+		quid       	"4226F7A302FD"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$5"
+			quid       	"4226F7A40119"
+			supplier   	"Logical View::JaloSession"
+			quidu      	"4226F485004E"
+			is_aggregate 	TRUE)
+		    (object Role "theOutboundSection"
+			quid       	"4226F7A4011B"
+			label      	"theOutboundSection"
+			supplier   	"Logical View::OutboundSection"
+			quidu      	"4226F47702FD"
+			client_cardinality 	(value cardinality "0..1"))))
+	    (object Association "$UNNAMED$6"
+		quid       	"4227071701E4"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$7"
+			quid       	"422707180000"
+			supplier   	"Logical View::SAPProduct"
+			quidu      	"4226F5E0008C"
+			client_cardinality 	(value cardinality "0..*")
+			is_aggregate 	TRUE)
+		    (object Role "$UNNAMED$8"
+			quid       	"422707180002"
+			supplier   	"Logical View::SAPProductList"
+			quidu      	"4226F20F0196")))
+	    (object Class_Category "NewPackage"
+		quid       	"4227406203B5"
+		exportControl 	"Public"
+		logical_models 	(list unit_reference_list)
+		logical_presentations 	(list unit_reference_list)))
+	logical_presentations 	(list unit_reference_list
+	    (object ClassDiagram "Main"
+		quid       	"4225F74600EA"
+		title      	"Main"
+		zoom       	100
+		max_height 	28350
+		max_width  	21600
+		origin_x   	0
+		origin_y   	0
+		items      	(list diagram_item_list
+		    (object ClassView "Class" "Logical View::DefaultCatalogLoginPerformer" @1
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(2531, 353)
+			label      	(object ItemLabel
+			    Parent_View 	@1
+			    location   	(2118, 296)
+			    nlines     	1
+			    max_width  	826
+			    justify    	0
+			    label      	"DefaultCatalogLoginPerformer")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	16777215
+			quidu      	"4226F0C002EE"
+			width      	844
+			height     	142
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::DefaultSAPProduct" @2
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(2681, 786)
+			label      	(object ItemLabel
+			    Parent_View 	@2
+			    location   	(2409, 729)
+			    nlines     	1
+			    max_width  	544
+			    justify    	0
+			    label      	"DefaultSAPProduct")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	16777215
+			quidu      	"4226F1C002CE"
+			width      	562
+			height     	142
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::DefaultSAPProductList" @3
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(912, 797)
+			label      	(object ItemLabel
+			    Parent_View 	@3
+			    location   	(596, 740)
+			    nlines     	1
+			    max_width  	632
+			    justify    	0
+			    label      	"DefaultSAPProductList")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	16777215
+			quidu      	"4226F228001F"
+			width      	650
+			height     	142
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::JaloSession" @4
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(325, 1803)
+			label      	(object ItemLabel
+			    Parent_View 	@4
+			    location   	(150, 1746)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	350
+			    justify    	0
+			    label      	"JaloSession")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	8421631
+			quidu      	"4226F485004E"
+			width      	368
+			height     	142
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::OutboundSection" @5
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(325, 1284)
+			label      	(object ItemLabel
+			    Parent_View 	@5
+			    location   	(75, 1175)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	500
+			    justify    	0
+			    label      	"OutboundSection")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	8454143
+			quidu      	"4226F47702FD"
+			compartment 	(object Compartment
+			    Parent_View 	@5
+			    location   	(75, 1241)
+			    font       	(object Font
+				size       	10)
+			    icon_style 	"Icon"
+			    fill_color 	16777215
+			    anchor     	2
+			    nlines     	3
+			    max_width  	497)
+			width      	518
+			height     	246
+			annotation 	8
+			autoResize 	TRUE)
+		    (object AssociationViewNew "$UNNAMED$4" @6
+			location   	(325, 1569)
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"4226F7A302FD"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$5" @7
+				Parent_View 	@6
+				location   	(-359, 691)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"4226F7A40119"
+				client     	@6
+				supplier   	@4
+				line_style 	0)
+			    (object RoleView "theOutboundSection" @8
+				Parent_View 	@6
+				location   	(-359, 691)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"4226F7A4011B"
+				client     	@6
+				supplier   	@5
+				line_style 	0
+				label      	(object SegLabel @9
+				    Parent_View 	@8
+				    location   	(275, 1456)
+				    font       	(object Font
+					size       	10)
+				    anchor     	2
+				    anchor_loc 	1
+				    nlines     	1
+				    max_width  	15
+				    justify    	0
+				    label      	"0..1"
+				    pctDist    	0.695038
+				    height     	51
+				    orientation 	0))))
+		    (object ClassView "Class" "Logical View::OciManager" @10
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(326, 353)
+			label      	(object ItemLabel
+			    Parent_View 	@10
+			    location   	(45, 170)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	562
+			    justify    	0
+			    label      	"OciManager")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	8454143
+			quidu      	"4225F7540196"
+			compartment 	(object Compartment
+			    Parent_View 	@10
+			    location   	(45, 236)
+			    font       	(object Font
+				size       	10)
+			    icon_style 	"Icon"
+			    fill_color 	13434879
+			    anchor     	2
+			    nlines     	6
+			    max_width  	484)
+			width      	580
+			height     	394
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::CatalogLoginPerformer" @11
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(1576, 353)
+			label      	(object ItemLabel
+			    Parent_View 	@11
+			    location   	(1239, 142)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	674
+			    justify    	0
+			    label      	"CatalogLoginPerformer")
+			stereotype 	(object ItemLabel
+			    Parent_View 	@11
+			    location   	(1239, 92)
+			    fill_color 	13434879
+			    anchor     	10
+			    nlines     	1
+			    max_width  	674
+			    justify    	0
+			    label      	"<< interface>>")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	8454143
+			quidu      	"4226EEBE029F"
+			compartment 	(object Compartment
+			    Parent_View 	@11
+			    location   	(1239, 208)
+			    font       	(object Font
+				size       	10)
+			    icon_style 	"Icon"
+			    fill_color 	13434879
+			    anchor     	2
+			    nlines     	8
+			    max_width  	581)
+			width      	692
+			height     	550
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::SAPProduct" @12
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(2444, 1306)
+			label      	(object ItemLabel
+			    Parent_View 	@12
+			    location   	(2028, 1183)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	832
+			    justify    	0
+			    label      	"SAPProduct")
+			stereotype 	(object ItemLabel
+			    Parent_View 	@12
+			    location   	(2028, 1133)
+			    fill_color 	13434879
+			    anchor     	10
+			    nlines     	1
+			    max_width  	832
+			    justify    	0
+			    label      	"<< interface >>")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	8454143
+			quidu      	"4226F5E0008C"
+			compartment 	(object Compartment
+			    Parent_View 	@12
+			    location   	(2028, 1249)
+			    font       	(object Font
+				size       	10)
+			    icon_style 	"Icon"
+			    fill_color 	16777215
+			    anchor     	2
+			    nlines     	4
+			    max_width  	596)
+			width      	850
+			height     	374
+			annotation 	8
+			autoResize 	TRUE)
+		    (object InheritView "" @13
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"4226F5F40148"
+			client     	@2
+			supplier   	@12
+			line_style 	0)
+		    (object ClassView "Class" "Logical View::SAPProductList" @14
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(1320, 1306)
+			label      	(object ItemLabel
+			    Parent_View 	@14
+			    location   	(1093, 1211)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	454
+			    justify    	0
+			    label      	"SAPProductList")
+			stereotype 	(object ItemLabel
+			    Parent_View 	@14
+			    location   	(1093, 1161)
+			    fill_color 	13434879
+			    anchor     	10
+			    nlines     	1
+			    max_width  	454
+			    justify    	0
+			    label      	"<< interface >>")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	8454143
+			quidu      	"4226F20F0196"
+			compartment 	(object Compartment
+			    Parent_View 	@14
+			    location   	(1093, 1277)
+			    font       	(object Font
+				size       	10)
+			    icon_style 	"Icon"
+			    fill_color 	16777215
+			    anchor     	2
+			    nlines     	3
+			    max_width  	281)
+			width      	472
+			height     	318
+			annotation 	8
+			autoResize 	TRUE)
+		    (object InheritView "" @15
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"4226F235030D"
+			client     	@3
+			supplier   	@14
+			line_style 	0)
+		    (object AssociationViewNew "$UNNAMED$6" @16
+			location   	(1787, 1306)
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"4227071701E4"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$7" @17
+				Parent_View 	@16
+				location   	(187, 419)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"422707180000"
+				client     	@16
+				supplier   	@12
+				line_style 	0
+				label      	(object SegLabel @18
+				    Parent_View 	@17
+				    location   	(1968, 1359)
+				    font       	(object Font
+					size       	10)
+				    anchor     	2
+				    anchor_loc 	1
+				    nlines     	1
+				    max_width  	15
+				    justify    	0
+				    label      	"0..*"
+				    pctDist    	0.783550
+				    height     	53
+				    orientation 	1))
+			    (object RoleView "$UNNAMED$8" @19
+				Parent_View 	@16
+				location   	(187, 419)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"422707180002"
+				client     	@16
+				supplier   	@14
+				line_style 	0)))
+		    (object InheritView "" @20
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"4226F13000BB"
+			client     	@1
+			supplier   	@11
+			line_style 	0)
+		    (object UsesView "creates" @21
+			label      	(object ItemLabel
+			    Parent_View 	@21
+			    location   	(1432, 887)
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	168
+			    justify    	0
+			    label      	"creates")
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"4227227E03C6"
+			client     	@11
+			supplier   	@14
+			line_style 	0)
+		    (object UsesView "creates" @22
+			label      	(object ItemLabel
+			    Parent_View 	@22
+			    location   	(2050, 873)
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	168
+			    justify    	0
+			    label      	"creates")
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"42272288004C"
+			client     	@11
+			supplier   	@12
+			line_style 	0)
+		    (object UsesView "needed by ociLogin()" @23
+			label      	(object ItemLabel
+			    Parent_View 	@23
+			    location   	(923, 353)
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	468
+			    justify    	0
+			    label      	"needed by ociLogin()")
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"4226F6FF01D4"
+			client     	@10
+			supplier   	@11
+			line_style 	0)
+		    (object UsesView "creates" @24
+			label      	(object ItemLabel
+			    Parent_View 	@24
+			    location   	(325, 855)
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	168
+			    justify    	0
+			    label      	"creates")
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"42273CE7013D"
+			client     	@10
+			supplier   	@5
+			line_style 	0)
+		    (object ClassView "Class" "Logical View::Utils" @25
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(1328, 1990)
+			label      	(object ItemLabel
+			    Parent_View 	@25
+			    location   	(1118, 1854)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	420
+			    justify    	0
+			    label      	"Utils")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	8454143
+			quidu      	"4226F48F0213"
+			compartment 	(object Compartment
+			    Parent_View 	@25
+			    location   	(1118, 1920)
+			    font       	(object Font
+				size       	10)
+			    icon_style 	"Icon"
+			    fill_color 	16777215
+			    anchor     	2
+			    nlines     	4
+			    max_width  	394)
+			width      	438
+			height     	300
+			annotation 	8
+			autoResize 	TRUE)
+		    (object UsesView "uses" @26
+			label      	(object ItemLabel
+			    Parent_View 	@26
+			    location   	(806, 1623)
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	672
+			    justify    	0
+			    label      	"uses")
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"4226F6F2037A"
+			client     	@25
+			supplier   	@5
+			line_style 	0)
+		    (object UsesView "uses" @27
+			label      	(object ItemLabel
+			    Parent_View 	@27
+			    location   	(1324, 1652)
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	672
+			    justify    	0
+			    label      	"uses")
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"4226F6E30213"
+			client     	@25
+			supplier   	@14
+			line_style 	0)
+		    (object UsesView "uses" @28
+			label      	(object ItemLabel
+			    Parent_View 	@28
+			    location   	(1841, 1673)
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	672
+			    justify    	0
+			    label      	"uses")
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"4226F6DB036B"
+			client     	@25
+			supplier   	@12
+			line_style 	0)
+		    (object NoteView @29
+			location   	(2770, 1721)
+			font       	(object Font
+			    size       	10)
+			label      	(object ItemLabel
+			    Parent_View 	@29
+			    location   	(2592, 1659)
+			    fill_color 	13434879
+			    nlines     	2
+			    max_width  	321
+			    label      	
+|Platform
+|Types
+			    )
+			fill_color 	8421631
+			width      	381
+			height     	137)
+		    (object NoteView @30
+			location   	(2770, 1896)
+			font       	(object Font
+			    size       	10)
+			label      	(object ItemLabel
+			    Parent_View 	@30
+			    location   	(2592, 1834)
+			    fill_color 	13434879
+			    nlines     	2
+			    max_width  	321
+			    label      	"OCI Types")
+			fill_color 	8454143
+			width      	381
+			height     	137)
+		    (object NoteView @31
+			location   	(2770, 2073)
+			font       	(object Font
+			    size       	10)
+			label      	(object ItemLabel
+			    Parent_View 	@31
+			    location   	(2592, 2014)
+			    nlines     	2
+			    max_width  	321
+			    label      	"Example Implementation")
+			fill_color 	16777215
+			width      	381
+			height     	131)))))
+    root_subsystem 	(object SubSystem "Component View"
+	quid       	"4225F74600DD"
+	physical_models 	(list unit_reference_list)
+	physical_presentations 	(list unit_reference_list
+	    (object Module_Diagram "Main"
+		quid       	"4225F74600EB"
+		title      	"Main"
+		zoom       	100
+		max_height 	28350
+		max_width  	21600
+		origin_x   	0
+		origin_y   	0
+		items      	(list diagram_item_list))))
+    process_structure 	(object Processes
+	quid       	"4225F74600DE"
+	ProcsNDevs 	(list
+	    (object Process_Diagram "Deployment View"
+		quid       	"4225F74600E0"
+		title      	"Deployment View"
+		zoom       	100
+		max_height 	28350
+		max_width  	21600
+		origin_x   	0
+		origin_y   	0
+		items      	(list diagram_item_list))))
+    properties 	(object Properties
+	attributes 	(list Attribute_Set
+	    (object Attribute
+		tool       	"framework"
+		name       	"HiddenTool"
+		value      	FALSE)
+	    (object Attribute
+		tool       	"Java"
+		name       	"propertyId"
+		value      	"809135966")
+	    (object Attribute
+		tool       	"Java"
+		name       	"default__Project"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"Java"
+			name       	"RootDir"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"CreateMissingDirectories"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"StopOnError"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"UsePrefixes"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"AutoSync"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"NotShowRoseIDDlg"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"ShowCodegenDlg"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"GenerateRoseID"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"GenerateDefaultJ2EEJavadoc"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"GenerateDefaultReturnLine"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"JavadocDefaultAuthor"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"JavadocDefaultVersion"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"JavadocDefaultSince"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"UserDefineJavaDocTags"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"JavadocNumAsterisks"
+			value      	0)
+		    (object Attribute
+			tool       	"Java"
+			name       	"MaxNumChars"
+			value      	80)
+		    (object Attribute
+			tool       	"Java"
+			name       	"Editor"
+			value      	("EditorType" 100))
+		    (object Attribute
+			tool       	"Java"
+			name       	"VM"
+			value      	("VMType" 200))
+		    (object Attribute
+			tool       	"Java"
+			name       	"ClassPath"
+			value      	"C:\\JAVA\\j2sdk1.4.2_06\\jre\\lib\\charsets.jar;C:\\JAVA\\j2sdk1.4.2_06\\jre\\lib\\jce.jar;C:\\JAVA\\j2sdk1.4.2_06\\jre\\lib\\jsse.jar;C:\\JAVA\\j2sdk1.4.2_06\\jre\\lib\\rt.jar;C:\\JAVA\\j2sdk1.4.2_06\\jre\\lib\\sunrsasign.jar;C:\\JAVA\\j2sdk1.4.2_06\\jre\\lib\\ext\\dnsns.jar;C:\\JAVA\\j2sdk1.4.2_06\\jre\\lib\\ext\\ldapsec.jar;C:\\JAVA\\j2sdk1.4.2_06\\jre\\lib\\ext\\localedata.jar;C:\\JAVA\\j2sdk1.4.2_06\\jre\\lib\\ext\\sunjce_provider.jar;C:\\JAVA\\j2sdk1.4.2_06\\jre\\lib\\security\\local_policy.jar;C:\\JAVA\\j2sdk1.4.2_06\\jre\\lib\\security\\US_export_policy.jar;C:\\JAVA\\j2sdk1.4.2_06\\lib\\dt.jar;C:\\JAVA\\j2sdk1.4.2_06\\lib\\htmlconverter.jar;C:\\JAVA\\j2sdk1.4.2_06\\lib\\tools.jar;C:\\JAVA\\j2sdk1.4.2\\jre\\lib\\charsets.jar;C:\\JAVA\\j2sdk1.4.2\\jre\\lib\\jce.jar;C:\\JAVA\\j2sdk1.4.2\\jre\\lib\\jsse.jar;C:\\JAVA\\j2sdk1.4.2\\jre\\lib\\rt.jar;C:\\JAVA\\j2sdk1.4.2\\jre\\lib\\sunrsasign.jar;C:\\JAVA\\j2sdk1.4.2\\jre\\lib\\ext\\dnsns.jar;C:\\JAVA\\j2sdk1.4.2\\jre\\lib\\ext\\ldapsec.jar;C:\\JAVA\\j2sdk1.4.2\\jre\\lib\\ext\\localedata.jar;C:\\JAVA\\j2sdk1.4.2\\jre\\lib\\ext\\sunjce_provider.jar;C:\\JAVA\\j2sdk1.4.2\\jre\\lib\\security\\local_policy.jar;C:\\JAVA\\j2sdk1.4.2\\jre\\lib\\security\\US_export_policy.jar;C:\\JAVA\\j2sdk1.4.2\\lib\\dt.jar;C:\\JAVA\\j2sdk1.4.2\\lib\\htmlconverter.jar;C:\\JAVA\\j2sdk1.4.2\\lib\\tools.jar;D:\\eclipse-workspace\\hybris\\extensions\\oci\\src")
+		    (object Attribute
+			tool       	"Java"
+			name       	"ReferenceClasspath"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"EditorType"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"Java"
+				name       	"BuiltIn"
+				value      	100)))
+		    (object Attribute
+			tool       	"Java"
+			name       	"VMType"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"Java"
+				name       	"Sun"
+				value      	200)))
+		    (object Attribute
+			tool       	"Java"
+			name       	"VAJavaWorkingFolder"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"InstanceVariablePrefix"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"ClassVariablePrefix"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"DefaultAttributeDataType"
+			value      	"int")
+		    (object Attribute
+			tool       	"Java"
+			name       	"DefaultOperationReturnType"
+			value      	"void")
+		    (object Attribute
+			tool       	"Java"
+			name       	"NoClassCustomDlg"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"GlobalImports"
+			value      	(value Text ""))
+		    (object Attribute
+			tool       	"Java"
+			name       	"OpenBraceClassStyle"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"OpenBraceMethodStyle"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"UseTabs"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"UseSpaces"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"SpacingItems"
+			value      	3)
+		    (object Attribute
+			tool       	"Java"
+			name       	"RoseDefaultCommentStyle"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"AsteriskCommentStyle"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"JavaCommentStyle"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"JavadocAuthor"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"JavadocSince"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"JavadocVersion"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"BeanPrefix"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"BeanSuffix"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"RemotePrefix"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"RemoteSuffix"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"HomePrefix"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"HomeSuffix"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"LocalPrefix"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"LocalSuffix"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"LocalHomePrefix"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"LocalHomeSuffix"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"PrimaryKeyPrefix"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"PrimaryKeySuffix"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"EJBDTDLocation"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"ServletDTDLocation"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"DefaultEJBVersion"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"DefaultServletVersion"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"SourceControl"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"SCCSelected"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"SCCProjectSourceRoot"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"SCCProjectName"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"SCCComment"
+			value      	FALSE)))
+	    (object Attribute
+		tool       	"Java"
+		name       	"default__Class"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"Java"
+			name       	"Final"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"Static"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"GenerateDefaultConstructor"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"ConstructorIs"
+			value      	("Ctor_Set" 62))
+		    (object Attribute
+			tool       	"Java"
+			name       	"Ctor_Set"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"Java"
+				name       	"public"
+				value      	62)
+			    (object Attribute
+				tool       	"Java"
+				name       	"protected"
+				value      	63)
+			    (object Attribute
+				tool       	"Java"
+				name       	"private"
+				value      	64)
+			    (object Attribute
+				tool       	"Java"
+				name       	"package"
+				value      	65)))
+		    (object Attribute
+			tool       	"Java"
+			name       	"GenerateFinalizer"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"GenerateStaticInitializer"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"GenerateInstanceInitializer"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"GenerateCode"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"DisableAutoSync"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"ReadOnly"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"Strictfp"
+			value      	FALSE)))
+	    (object Attribute
+		tool       	"Java"
+		name       	"Default_Servlet__Class"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"Java"
+			name       	"ServletName"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"ServletContextRef"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"IsSingleThread"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"ServletInitParameter"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"ServletInitParameterNames"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"ServletIsSecure"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"ServletRequestDispatcher"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"ServletRequestDispatcherPath"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"DispatcherInclude"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"DispatcherForward"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"ServletSecurityRoles"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"ServletgetInfo"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"ServletXMLFilePath"
+			value      	"")))
+	    (object Attribute
+		tool       	"Java"
+		name       	"Http_Servlet__Class"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"Java"
+			name       	"ServletRequestAttribute"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"ServletRequestAttributesNames"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"MethodForRequestAttributes"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"ServletRequestParameter"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"ServletRequestParameterNames"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"MethodForRequestParameters"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"ServletHeader"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"ServletHeaderNames"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"MethodForHeaders"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"ServletIntHeader"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"ServletDateHeader"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"ServletCookie"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"MethodForCookie"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"ServletContentType"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"GenerateHTML"
+			value      	FALSE)))
+	    (object Attribute
+		tool       	"Java"
+		name       	"Default_EJB__Class"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"Java"
+			name       	"Generate_XML_DD"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"EJBCmpField"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"EJBEnvironmentProperties"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"EJBCnxFactory"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"EJBReferences"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"EJBSecurityRoles"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"EJBNameInJAR"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"EJBSessionType"
+			value      	("EJBSessionType_Set" 200))
+		    (object Attribute
+			tool       	"Java"
+			name       	"EJBSessionType_Set"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"Java"
+				name       	""
+				value      	200)
+			    (object Attribute
+				tool       	"Java"
+				name       	"Stateless"
+				value      	201)
+			    (object Attribute
+				tool       	"Java"
+				name       	"Stateful"
+				value      	202)))
+		    (object Attribute
+			tool       	"Java"
+			name       	"EJBTransactionType"
+			value      	("EJBTransactionType_Set" 211))
+		    (object Attribute
+			tool       	"Java"
+			name       	"EJBTransactionType_Set"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"Java"
+				name       	"Container"
+				value      	211)
+			    (object Attribute
+				tool       	"Java"
+				name       	"Bean"
+				value      	212)))
+		    (object Attribute
+			tool       	"Java"
+			name       	"EJBPersistenceType"
+			value      	("EJBPersistenceType_Set" 220))
+		    (object Attribute
+			tool       	"Java"
+			name       	"EJBPersistenceType_Set"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"Java"
+				name       	""
+				value      	220)
+			    (object Attribute
+				tool       	"Java"
+				name       	"Bean"
+				value      	221)
+			    (object Attribute
+				tool       	"Java"
+				name       	"Container"
+				value      	222)))
+		    (object Attribute
+			tool       	"Java"
+			name       	"EJBReentrant"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"EJBSessionSync"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"EJBVersion"
+			value      	("EJBVersion_Set" 230))
+		    (object Attribute
+			tool       	"Java"
+			name       	"EJBVersion_Set"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"Java"
+				name       	"2.0"
+				value      	230)
+			    (object Attribute
+				tool       	"Java"
+				name       	"1.x"
+				value      	231)))
+		    (object Attribute
+			tool       	"Java"
+			name       	"EJBXMLFilePath"
+			value      	"")))
+	    (object Attribute
+		tool       	"Java"
+		name       	"default__Module-Spec"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"Java"
+			name       	"CmIdentification"
+			value      	(value Text ""))
+		    (object Attribute
+			tool       	"Java"
+			name       	"CopyrightNotice"
+			value      	(value Text ""))))
+	    (object Attribute
+		tool       	"Java"
+		name       	"default__Module-Body"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"Java"
+			name       	"CmIdentification"
+			value      	(value Text ""))
+		    (object Attribute
+			tool       	"Java"
+			name       	"CopyrightNotice"
+			value      	(value Text ""))))
+	    (object Attribute
+		tool       	"Java"
+		name       	"default__Operation"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"Java"
+			name       	"Abstract"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"Static"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"Final"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"Native"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"Synchronized"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"GenerateFullyQualifiedReturn"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"ReplaceExistingCode"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"Strictfp"
+			value      	FALSE)))
+	    (object Attribute
+		tool       	"Java"
+		name       	"default__Attribute"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"Java"
+			name       	"Final"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"Transient"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"Volatile"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"PropertyType"
+			value      	("BeanProperty_Set" 71))
+		    (object Attribute
+			tool       	"Java"
+			name       	"BeanProperty_Set"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"Java"
+				name       	"Not A Property"
+				value      	71)
+			    (object Attribute
+				tool       	"Java"
+				name       	"Simple"
+				value      	72)
+			    (object Attribute
+				tool       	"Java"
+				name       	"Bound"
+				value      	73)
+			    (object Attribute
+				tool       	"Java"
+				name       	"Constrained"
+				value      	74)))
+		    (object Attribute
+			tool       	"Java"
+			name       	"IndividualChangeMgt"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"Read/Write"
+			value      	("Read/Write_Set" 81))
+		    (object Attribute
+			tool       	"Java"
+			name       	"Read/Write_Set"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"Java"
+				name       	"Read & Write"
+				value      	81)
+			    (object Attribute
+				tool       	"Java"
+				name       	"Read Only"
+				value      	82)
+			    (object Attribute
+				tool       	"Java"
+				name       	"Write Only"
+				value      	83)))
+		    (object Attribute
+			tool       	"Java"
+			name       	"GenerateFullyQualifiedTypes"
+			value      	FALSE)))
+	    (object Attribute
+		tool       	"Java"
+		name       	"default__Role"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"Java"
+			name       	"ContainerClass"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"InitialValue"
+			value      	"")
+		    (object Attribute
+			tool       	"Java"
+			name       	"Final"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"Transient"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"Volatile"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"PropertyType"
+			value      	("BeanProperty_Set" 71))
+		    (object Attribute
+			tool       	"Java"
+			name       	"BeanProperty_Set"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"Java"
+				name       	"Not A Property"
+				value      	71)
+			    (object Attribute
+				tool       	"Java"
+				name       	"Simple"
+				value      	72)
+			    (object Attribute
+				tool       	"Java"
+				name       	"Bound"
+				value      	73)
+			    (object Attribute
+				tool       	"Java"
+				name       	"Constrained"
+				value      	74)))
+		    (object Attribute
+			tool       	"Java"
+			name       	"IndividualChangeMgt"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"Read/Write"
+			value      	("Read/Write_Set" 81))
+		    (object Attribute
+			tool       	"Java"
+			name       	"Read/Write_Set"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"Java"
+				name       	"Read & Write"
+				value      	81)
+			    (object Attribute
+				tool       	"Java"
+				name       	"Read Only"
+				value      	82)
+			    (object Attribute
+				tool       	"Java"
+				name       	"Write Only"
+				value      	83)))
+		    (object Attribute
+			tool       	"Java"
+			name       	"GenerateFullyQualifiedTypes"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"Java"
+			name       	"IsNavigable"
+			value      	TRUE)))
+	    (object Attribute
+		tool       	"Java"
+		name       	"HiddenTool"
+		value      	FALSE)
+	    (object Attribute
+		tool       	"Rose Model Integrator"
+		name       	"HiddenTool"
+		value      	FALSE))
+	quid       	"4225F74600DF"))

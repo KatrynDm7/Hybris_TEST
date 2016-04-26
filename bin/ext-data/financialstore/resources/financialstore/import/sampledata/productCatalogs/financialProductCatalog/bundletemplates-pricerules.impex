@@ -1,0 +1,15 @@
+$productCatalog=financialProductCatalog
+$catalogversion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$ruleType=ruleType(code)[default='ANY']
+
+INSERT_UPDATE ChangeProductPriceBundleRule;id[unique=true];bundleTemplate(id,version[default=1.0],$catalogversion);conditionalProducts(code,$catalogversion);targetProducts(code,$catalogversion);$ruleType;price;currency(isocode)[default=USD, unique=true];billingEvent(code);$catalogversion
+;twostarplanrule;STAR_PRODUCT;WED_2STAR;WED_EXCESSWAIVER;;0;;deductible
+;threestarplanrule;STAR_PRODUCT;WED_3STAR;WED_EXCESSWAIVER;;0;;deductible
+;fourstarplanrule;STAR_PRODUCT;WED_4STAR;WED_EXCESSWAIVER;;0;;deductible
+;fivestarplanrule;STAR_PRODUCT;WED_5STAR;WED_EXCESSWAIVER;;0;;deductible
+;excesswaiverrule;STAR_PRODUCT;WED_4STAR,WED_5STAR;WED_EXCESSWAIVER;;15;;paynow
+;venueCoverrule;STAR_PRODUCT;WED_EXCESSWAIVER;WED_VENUECOVER;;0;;deductible
+;publicliabilityrule1;STAR_PRODUCT;WED_4STAR;WED_PUBLICLIABILITY;;15000;;failuresupplierscoverage
+;publicliabilityrule2;STAR_PRODUCT;WED_4STAR;WED_PUBLICLIABILITY;;2000000;;publicliability
+;publicliabilityrule3;STAR_PRODUCT;WED_5STAR;WED_PUBLICLIABILITY;;20000;;failuresupplierscoverage
+;publicliabilityrule4;STAR_PRODUCT;WED_5STAR;WED_PUBLICLIABILITY;;5000000;;publicliability

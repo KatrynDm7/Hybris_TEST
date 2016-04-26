@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+
+<project name="solrfacetsearch_buildcallbacks">
+
+	<macrodef name="solrfacetsearch_before_build">
+		<sequential>
+			<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
+				<classpath>
+					<fileset dir="${platformhome}/resources/ant/lib">
+						<include name="*.jar" />
+					</fileset>
+				</classpath>
+			</taskdef>
+			<mkdir dir="${ext.solrfacetsearch.path}/gensrc" />
+
+			<outofdate>
+				<sourcefiles>
+					<fileset file="${ext.solrfacetsearch.path}/resources/indexer/solrSearchAddDocuments.xsd" />
+				</sourcefiles>
+				<targetfiles path="${ext.solrfacetsearch.path}/gensrc/de/hybris/platform/solrfacetsearch/indexer/xml/add" />
+				<sequential>
+					<echo>JAXB for add solr documents</echo>
+					<xjc schema="${ext.solrfacetsearch.path}/resources/indexer/solrSearchAddDocuments.xsd" package="de.hybris.platform.solrfacetsearch.indexer.xml.add" destdir="${ext.solrfacetsearch.path}/gensrc">
+						<produces dir="${ext.solrfacetsearch.path}/gensrc/de/hybris/platform/solrfacetsearch/indexer/xml/add">
+							<include name="*.java" />
+						</produces>
+						<depends file="${ext.solrfacetsearch.path}/resources/indexer/solrSearchAddDocuments.xsd" />
+					</xjc>
+					<!-- BEWARE: Don't reformat lines below. Leading spaced need to remain as they are -->
+					<replace dir="${ext.solrfacetsearch.path}/gensrc/de/hybris/platform/solrfacetsearch/indexer/xml/add">
+						<include name="**/ObjectFactory.java" />
+						<replacetoken><![CDATA[public ObjectFactory() {]]></replacetoken>
+						<replacevalue><![CDATA[public ObjectFactory() { // empty constructor]]></replacevalue>
+					</replace>
+				</sequential>
+			</outofdate>
+
+			<outofdate>
+				<sourcefiles>
+					<fileset file="${ext.solrfacetsearch.path}/resources/indexer/solrSearchDeleteDocuments.xsd" />
+				</sourcefiles>
+				<targetfiles path="${ext.solrfacetsearch.path}/gensrc/de/hybris/platform/solrfacetsearch/indexer/xml/delete" />
+				<sequential>
+					<xjc schema="${ext.solrfacetsearch.path}/resources/indexer/solrSearchDeleteDocuments.xsd" package="de.hybris.platform.solrfacetsearch.indexer.xml.delete" destdir="${ext.solrfacetsearch.path}/gensrc">
+						<produces dir="${ext.solrfacetsearch.path}/gensrc/de/hybris/platform/solrfacetsearch/indexer/xml/delete">
+							<include name="*.java" />
+						</produces>
+						<depends file="${ext.solrfacetsearch.path}/resources/indexer/solrSearchDeleteDocuments.xsd" />
+					</xjc>
+					<!-- BEWARE: Don't reformat lines below. Leading spaced need to remain as they are -->
+					<replace dir="${ext.solrfacetsearch.path}/gensrc">
+						<include name="**/ObjectFactory.java" />
+						<replacetoken><![CDATA[public ObjectFactory() {]]></replacetoken>
+						<replacevalue><![CDATA[public ObjectFactory() { // empty constructor]]></replacevalue>
+					</replace>
+				</sequential>
+			</outofdate>
+		</sequential>
+	</macrodef>
+</project>

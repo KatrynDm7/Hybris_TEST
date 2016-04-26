@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<itemtypes>	 
+		<itemtype code="AbstractPromotionAccess" extends="GenericItem"
+			jaloclass="de.hybris.platform.timedaccesspromotionsservices.jalo.AbstractPromotionAccess"
+			abstract="true" autocreate="true" generate="true">
+			<attributes>
+				<attribute qualifier="promotionCode" autocreate="true"
+					type="java.lang.String">
+					<description>ID of the promotion</description>
+					<modifiers read="true" write="true" search="true"
+						optional="false" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="productCode" autocreate="true"
+					type="java.lang.String">
+					<description>ID of the product that the customer wants to buy.</description>
+					<modifiers read="true" write="true" search="true"
+						optional="false" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="PromotionEnqueue" extends="AbstractPromotionAccess"
+			jaloclass="de.hybris.platform.timedaccesspromotionsservices.jalo.PromotionEnqueue"
+			autocreate="true" generate="true">
+		 	<deployment table="PromotionEnqueue" typecode="9857" />
+			<attributes>
+				<attribute qualifier="customerUID" autocreate="true"
+					type="java.lang.String">
+					<description>ID of the customer that wants to buy the products.</description>
+					<modifiers read="true" write="true" search="true"
+						optional="false" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="PromotionReservation" extends="AbstractPromotionAccess"
+			jaloclass="de.hybris.platform.timedaccesspromotionsservices.jalo.PromotionReservation"
+			autocreate="true" generate="true">
+			<deployment table="PromotionReservation" typecode="9858" />
+			<attributes>
+				<attribute qualifier="promotionMatcher" autocreate="true" type="java.lang.String">
+					<description>The Code to match order entry with cart entry.</description>
+					<modifiers read="true" write="true" search="true" optional="false"></modifiers>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="PromotionAllocation" extends="AbstractPromotionAccess"
+			jaloclass="de.hybris.platform.timedaccesspromotionsservices.jalo.PromotionAllocation"
+			autocreate="true" generate="true">
+			<deployment table="PromotionAllocation" typecode="9859" />
+			<attributes>
+				<attribute qualifier="promotionMatcher" autocreate="true" type="java.lang.String">
+					<description>The Code to match order entry with cart entry.</description>
+					<modifiers read="true" write="true" search="true" optional="false"></modifiers>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="FlashbuyPromotion" extends="ProductFixedPricePromotion"
+			jaloclass="de.hybris.platform.timedaccesspromotionsservices.jalo.FlashbuyPromotion"
+			autocreate="true" generate="true">
+			<attributes>
+				<attribute qualifier="availableUnitsPerProduct" autocreate="true"
+					type="java.lang.Long">
+					<description>Number of units available for the flash buy promotion per product.</description>
+					<modifiers read="true" write="true" search="false"
+						optional="false" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="availableUnitsPerUserAndProduct" autocreate="true"
+					type="java.lang.Long">
+					<description>Maximum amount of units that each customer can buy per product.</description>
+					<defaultvalue>
+					Long.valueOf(1)
+					</defaultvalue>
+					<modifiers read="true" write="true" search="false"
+						optional="false" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="specialDiscount" redeclare="true" type="java.lang.Character">
+					<modifiers read="true" write="true" search="false" optional="false"></modifiers>
+					<description>Flag set value to 'Y' to clarify a flashbuy promotion.</description>
+					<defaultvalue>Character.valueOf('Y')</defaultvalue>
+				</attribute> 
+				<attribute qualifier="startBuyDate" autocreate="true" type="java.util.Date">
+					<description>Date on which this promotion becomes really available to purchase, if not set the promotion will not be available.</description>
+					<modifiers read="true" write="true" search="true" optional="false"/>
+					<persistence type="property"/>
+				</attribute> 
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="ProductPromotion" autocreate="false" generate="false">
+			<description>Extending Promotion type with specialDis.</description>
+			<attributes>
+				<attribute qualifier="specialDiscount" autocreate="true" type="java.lang.Character">
+					<description>Flag to check if it is a special Discount promotion.</description>
+					<modifiers read="true" write="true" search="false" optional="false"></modifiers>
+					<persistence type="property"></persistence>
+					<defaultvalue>Character.valueOf('N')</defaultvalue>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="ProductPurchaseComponent" autocreate="true" generate="true" extends="SimpleCMSComponent"
+			          jaloclass="de.hybris.platform.timedaccesspromotionsservices.jalo.cms.components.ProductPurchaseComponent">				
+		</itemtype>
+		
+		<itemtype code="AbstractOrderEntry" autocreate="false" generate="false">
+			<description>Extending AbstractOrderEntry type with additional attributes.</description>
+			<attributes>
+				<attribute qualifier="promotionCode" autocreate="true" type="java.lang.String">
+					<description>The promotion code of promotion applied.</description>
+					<modifiers read="true" write="true" search="false" optional="true"></modifiers>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="promotionMatcher" autocreate="true" type="java.lang.String">
+					<description>The Code to match order entry with cart entry.</description>
+					<modifiers read="true" write="true" search="false" optional="true"></modifiers>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+	</itemtypes>
+</items>

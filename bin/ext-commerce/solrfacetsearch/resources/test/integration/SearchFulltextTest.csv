@@ -1,0 +1,39 @@
+$catalogversion=catalogversion(catalog(id),version)[unique=true,default='hwcatalog:Online${testId}']
+$supercategories=supercategories(code,catalogversion(catalog(id[default='hwcatalog']),version[default='Online${testId}']))
+
+INSERT_UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];languages(isocode);active
+;hwcatalog;Online${testId};de,en;TRUE
+
+INSERT_UPDATE Category;code[unique=true];$catalogversion;name[lang=de];name[lang=en];name[lang=fr];$supercategories;;description[lang=de];description[lang=en];order;;;;;;;;;;;;;
+;HW1000;;Peripherie_online_de;Peripheral equipment_online_en;Peripheral equipment_online_fr;;HW1000-24;Produkte rund um den Computer;products around the computer;0;;;;;;;;;;;;;
+;HW1100;;Monitore_online_de;Monitors_online_en;Monitors_online_fr;HW1000;HW1100-23;Monitore der Firma EIZO;Monitors of the brand EIZO;0;;;;;;;;;;;;;
+;HW1200;;Fotografie_online_de;Photography_online_en;Photography_online_fr;HW1000;HW1200-22;verschiedene Digitalkameras;miscellaneous digital cameras;1;;;;;;;;;;;;;
+;HW2000;;Systemkomponenten_online_de;System components_online_en;System components_online_fr;;HW2000-25;Komponenten für den Computer, wie Grafikkarten, Prozessoren;components for the computer like graphic cards or processors;1;;;;;;;;;;;;;
+;HW2100;;Prozessoren_online_de;Processors_online_en;Processors_online_fr;HW2000;HW2100-19;Das Herz eines Computers;The heart of a computer;0;;;;;;;;;;;;;
+;HW2200;;Motherboards_online_de;Motherboards_online_en;Motherboards_online_fr;HW2000;HW2200-20;Hauptkomponente eines Rechners;main part of a computer;1;;;;;;;;;;;;;
+;HW2300;;Grafikkarten_online_de;Graphic cards_online_en;Graphic cards_online_fr;HW2000;HW2300-21;Für das beste visuelle Vergnügen;For the best visual experience;2;;;;;;;;;;;;;
+;HW2110;;Intel_online_de;Intel_online_en;Intel_online_fr;HW2100;HW2110-18;Produkte der Firma Intel;products from Intel;0;;;;;;;;;;;;;
+;HW2120;;AMD_online_de;AMD_online_en;AMD_online_fr;HW2100;HW2120-17;Produkte der Firma AMD;products from AMD;1;;;;;;;;;;;;;
+;HW1210;;Canon_online_de;Canon_online_en;Canon_online_fr;HW1200;HW1210-13;Produkte der Firma Canon;products by Canon;0;;;;;;;;;;;;;
+;HW1220;;Pentax_online_de;Pentax_online_en;Pentax_online_fr;HW1200;HW1220-12;Produkte der Firma Pentax;products by Pentax;1;;;;;;;;;;;;;
+;HW1230;;Sony_online_de;Sony_online_en;Sony_online_fr;HW1200;HW1230-14;Produkte der Firma Sony;products by Sony;2;;;;;;;;;;;;;
+;HW1240;;HP_online_de;HP_online_en;HP_online_fr;HW1200;HW1240-15;Produkte der Firma HP;products by HP;3;;;;;;;;;;;;;
+;topseller;;Topseller_online_de;Topseller_online_en;Topseller_online_fr;;;Ausgewählte Sonderangebote für Sie!;Choosen special offers only for you!;2;;;;;;;;;;;;;
+;specialoffers;;Sonderangebote_online_de;Special offers_online_en;Special offers_online_fr;;;;;5;;;;;;;;;;;;;
+;HW2310;;nVidia_online_de;nVidia_online_en;nVidia_online_fr;HW2300;HW2310-01;Grafikkarten mit einem nVidia Chip;graphic cards with nVidia chip;0;;;;;;;;;;;;;
+;HW2320;;ATI_online_de;ATI_online_en;ATI_online_fr;HW2300;HW2320-01;Grafikkarten mit einem ATI Chip;graphic cards with ATI  chip;1;;;;;;;;;;;;;
+
+INSERT_UPDATE Product;code[unique=true];$catalogversion;name[lang=en];unit(code);$supercategories;description[lang=en];approvalStatus(code)
+;HW1240-1732;;testEnglish Name;pieces;HW1240;<b>Memory:</b> Internal 32 MB<br/>_online_en;approved
+;HW1240-1733;;HP Photosmart R817 Digitalkamera_online_en;pieces;HW1240;<b>Memory:</b> Internal 32 MB_online_en;approved
+;HW1210-3411;;Canon Digital Ixus 50 Digitalkamera_online_en;pieces;HW1210,specialoffers;<b>Memory:</b> Internal 16 MB<br/>_online_en;approved
+;HW1210-3412;;Canon Digital Ixus 750 Digitalkam.silber_online_en;pieces;HW1210;<b>Memory:</b> 32 MB<br/>_online_en;approved
+;HW1210-3422;;Canon Digital Ixus i5 silber_online_en;pieces;HW1210;<b>Memory:</b> 32 MB_online_en;approved
+;HW1220-0011;;Pentax Optio WP Digitalkamera_online_en;pieces;HW1220;<b>Memory:</b> Internal 10 MB_online_en;approved
+;HW1230-0200;;Sony DSC-P200 CYBER-SHOT silber_online_en;pieces;HW1230,topseller;"<b>Memory:</b> 32 MB<br/><b>Please note: <br/>For returns please see our T&amp;C's </b>_online_en";approved
+;HW1210-0400;;Canon EOS 400D_online_en;pieces;HW1210,topseller;"<b>Please note: <br/>For returns please see our T&amp;C's </b>_online_en";approved
+;HW1230-0001;;Sony DSLR-A700_online_en;pieces;HW1230,topseller;"<b>Please note: <br/>For returns please see our T&amp;C's </b>_online_en";approved
+
+INSERT_UPDATE SolrFacetSearchConfig;name[unique=true];catalogVersions(catalog(id),version)
+;testFacetSearchConfig${testId};hwcatalog:Online${testId}
+

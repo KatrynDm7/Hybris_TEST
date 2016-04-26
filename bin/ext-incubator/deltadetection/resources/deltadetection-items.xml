@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="items.xsd">
+
+    <enumtypes>
+        <enumtype code="changeType">
+            <value code="NEW"/>
+            <value code="DELETED"/>
+            <value code="MODIFIED"/>
+        </enumtype>
+
+		<enumtype code="ItemVersionMarkerStatus">
+			<value code="ACTIVE"/>
+			<value code="DELETED"/>
+		</enumtype>
+    </enumtypes>
+
+    <relations>
+        <relation code="StreamConfigurationContainer2StreamConfiguration" localized="false">
+            <sourceElement type="StreamConfigurationContainer" cardinality="one" qualifier="container">
+                <modifiers optional="false" write="false" initial="true" />
+            </sourceElement>
+            <targetElement type="StreamConfiguration" cardinality="many" qualifier="configurations" collectiontype="set">
+                <modifiers partof="true" />
+            </targetElement>
+        </relation>
+
+        <relation code="StreamConfigurationExcludedSubtypes" localized="false">
+            <deployment table="exclTypesRel" typecode="8103" />
+            <sourceElement type="StreamConfiguration" cardinality="many" qualifier="streamConfigurations" />
+            <targetElement type="ComposedType" cardinality="many" qualifier="excludedTypes" collectiontype="set" />
+        </relation>
+    </relations>
+
+    <itemtypes>
+        <itemtype generate="true"
+                  code="ItemVersionMarker"
+                  jaloclass="de.hybris.deltadetection.jalo.ItemVersionMarker"
+                  autocreate="true">
+            <deployment table="itemversionmarkers" typecode="8100"/>
+            <attributes>
+                <attribute qualifier="itemPK" type="java.lang.Long">
+                    <persistence type="property"/>
+                    <modifiers optional="false"/>
+                </attribute>
+                <attribute qualifier="itemComposedType" type="ComposedType">
+                    <persistence type="property"/>
+                    <modifiers optional="false"/>
+                </attribute>
+                <attribute qualifier="versionTS" type="java.util.Date">
+                    <persistence type="property"/>
+                    <modifiers optional="false"/>
+                </attribute>
+                <attribute qualifier="versionValue" type="java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers initial="true" optional="true"/>
+                </attribute>
+				<attribute qualifier="lastVersionValue" type="java.lang.String">
+					<persistence type="property"/>
+					<modifiers initial="true" optional="true"/>
+				</attribute>
+                <attribute qualifier="info" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="streamId" type="java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers optional="false"/>
+                </attribute>
+				<attribute qualifier="status" type="ItemVersionMarkerStatus">
+					<persistence type="property"/>
+					<modifiers optional="false"/>
+				</attribute>
+            </attributes>
+            <indexes>
+                <index name="ItemVerMarkerIDX">
+                    <key attribute="itemPK" />
+                    <key attribute="streamId" />
+                </index>
+            </indexes>
+        </itemtype>
+
+        <itemtype code="ChangeDetectionJob"
+                  extends="ServicelayerJob"
+                  jaloclass="de.hybris.deltadetection.jalo.ChangeDetectionJob"
+                  autocreate="true"
+                  generate="true">
+            <attributes>
+                <attribute qualifier="springId" type="java.lang.String" redeclare="true">
+                    <persistence type="property"/>
+                    <modifiers read="true" write="true" search="true" initial="true" optional="false"/>
+                    <defaultvalue>"changeDetectionJobPerformable"</defaultvalue>
+                </attribute>
+                <attribute qualifier="typePK" type="ComposedType">
+                    <persistence type="property"/>
+                    <modifiers optional="false"/>
+                </attribute>
+                <attribute qualifier="streamId" type="java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers optional="false"/>
+                </attribute>
+                <attribute qualifier="output" type="Media">
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="AbstractChangeProcessorJob"
+                  extends="ServicelayerJob"
+                  jaloclass="de.hybris.deltadetection.jalo.AbstractChangeProcessorJob"
+                  autocreate="true"
+                  generate="true" abstract="true">
+            <attributes>
+                <attribute qualifier="input" type="Media">
+                    <modifiers read="true" write="true" optional="false"/>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="ConsumeAllChangesJob"
+                  extends="AbstractChangeProcessorJob"
+                  jaloclass="de.hybris.deltadetection.jalo.ConsumeAllChangesJob"
+                  autocreate="true"
+                  generate="true">
+            <attributes>
+                <attribute qualifier="springId" type="java.lang.String" redeclare="true">
+                    <persistence type="property"/>
+                    <modifiers read="true" write="true" search="true" initial="true" optional="false"/>
+                    <defaultvalue>"consumeAllChangesJobPerformable"</defaultvalue>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="ScriptChangeConsumptionJob"
+                  extends="AbstractChangeProcessorJob"
+                  jaloclass="de.hybris.deltadetection.jalo.ScriptChangeConsumptionJob"
+                  autocreate="true"
+                  generate="true">
+            <attributes>
+                <attribute qualifier="springId" type="java.lang.String" redeclare="true">
+                    <persistence type="property"/>
+                    <modifiers read="true" write="true" search="true" initial="true" optional="false"/>
+                    <defaultvalue>"scriptChangeConsumptionJobPerformable"</defaultvalue>
+                </attribute>
+                <attribute qualifier="scriptURI" type="java.lang.String">
+                    <modifiers read="true" write="true" optional="false"/>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="StreamConfiguration"
+                  jaloclass="de.hybris.deltadetection.jalo.StreamConfiguration"
+                  autocreate="true"
+                  generate="true">
+            <deployment table="streamcfg" typecode="8102"/>
+            <attributes>
+                <attribute qualifier="streamId" type="java.lang.String">
+                    <persistence type="property" />
+                    <modifiers read="true" write="false" initial="true" search="true" optional="false"/>
+                </attribute>
+                <attribute qualifier="itemTypeForStream" type="ComposedType">
+                    <persistence type="property" />
+                    <modifiers read="true" write="true" search="true" optional="false" />
+                </attribute>
+                <attribute qualifier="whereClause" type="java.lang.String">
+                    <persistence type="property">
+                        <columntype>
+                            <value>HYBRIS.LONG_STRING</value>
+                        </columntype>
+                    </persistence>
+                    <modifiers read="true" write="true" search="false" optional="true"/>
+                </attribute>
+                <attribute qualifier="versionSelectClause" type="java.lang.String">
+                    <persistence type="property">
+                        <columntype>
+                            <value>HYBRIS.LONG_STRING</value>
+                        </columntype>
+                    </persistence>
+                    <modifiers read="true" write="true" search="false" optional="true"/>
+                </attribute>
+                <attribute qualifier="active" type="java.lang.Boolean">
+                    <persistence type="property" />
+                    <modifiers read="true" write="true" search="true" />
+                    <defaultvalue>
+                        java.lang.Boolean.TRUE
+                    </defaultvalue>
+                </attribute>
+                <attribute qualifier="infoExpression" type="java.lang.String">
+                    <persistence type="property">
+                        <columntype>
+                            <value>HYBRIS.LONG_STRING</value>
+                        </columntype>
+                    </persistence>
+                    <modifiers read="true" write="true" initial="true" search="false" optional="true"/>
+                </attribute>
+            </attributes>
+
+            <indexes>
+                <index name="StreamIdContainerIDX" unique="true">
+                    <key attribute="streamId"/>
+                </index>
+            </indexes>
+        </itemtype>
+
+        <itemtype code="StreamConfigurationContainer"
+                  jaloclass="de.hybris.deltadetection.jalo.StreamConfigurationContainer"
+                  autocreate="true"
+                  generate="true">
+            <deployment table="streamcfgcontainer" typecode="8101"/>
+            <attributes>
+                <attribute qualifier="id" type="java.lang.String">
+                    <persistence type="property" />
+                    <modifiers read="true" write="false" initial="true" search="true" optional="false" unique="true" />
+                </attribute>
+            </attributes>
+        </itemtype>
+
+    </itemtypes>
+</items>

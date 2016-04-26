@@ -1,0 +1,50 @@
+###########################################################################################
+#
+#	Create 2 customers with billing and shipping address in Montreal.
+#	Both customers have registered their debit card and credit card information.
+#
+###########################################################################################
+
+# Language
+$lang=en
+
+# Currencies
+INSERT_UPDATE Currency;isocode[unique=true];name[lang=$lang];active;conversion;digits;symbol
+;USD;"US Dollar";true;1.5;2;"$"
+
+INSERT_UPDATE Country;isocode[unique=true];name[lang=$lang];active;;;;;;
+;US;United States;true;;;;;;
+;CA;Canada;true;;;;;;
+
+INSERT_UPDATE UserGroup;uid[unique=true];groups(uid);
+;admingroup;;
+;employeegroup;admingroup;
+;customergroup;employeegroup;
+
+INSERT_UPDATE Customer;uid[unique=true];customerID;name;description;sessionLanguage(isocode);sessionCurrency(isocode);groups(uid);password
+;johnsmith;100000;John Smith;;en;USD;customergroup;1234
+;janedoe;100001;Jane Doe;;en;USD;customergroup;1234
+
+INSERT_UPDATE Address;owner(Customer.uid)[unique=true];streetname[unique=true];streetnumber[unique=true];postalcode[unique=true];duplicate[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;gender(code);latitude;longitude
+;johnsmith;Maisonneuve Street;999;H3A3L4;false;Montreal;CA;true;true;true;false;John;Smith;john.smith@hybris.com;MALE;45.502097;73.574175
+;janedoe;Duke Street;111;H3C2M1;false;Montreal;CA;true;true;true;false;Jane;Doe;jane.doe@sap.com;FEMALE
+
+INSERT_UPDATE Customer;uid[unique=true];defaultPaymentaddress(owner(Customer.uid), streetname, streetnumber, postalcode,duplicate);defaultShipmentAddress(owner(Customer.uid), streetname, streetnumber, postalcode, duplicate)
+;johnsmith;johnsmith:Maisonneuve Street:999:H3A3L4:false;johnsmith:Maisonneuve Street:999:H3A3L4:false
+;janedoe;janedoe:Duke Street:111:H3C2M1:false;janedoe:Duke Street:111:H3C2M1:false;
+
+
+INSERT_UPDATE DebitPaymentInfo;code[unique=true];user(uid)[unique=true];baOwner;bankIDNumber;accountNumber;bank
+;debit;johnsmith;John Smith;51050015;K35654722;TD Bank
+;debit;janedoe;Jane Doe;37020090;K2004820952;National Bank
+
+
+INSERT_UPDATE CreditCardType;code[unique=true];name[lang=$lang]
+;amex;American Express
+;visa;Visa
+;master;MasterCard
+
+INSERT_UPDATE CreditCardPaymentInfo;code[unique=true];user(uid)[unique=true];ccOwner;number;type(code);validFromMonth;validFromYear;validToMonth;validToYear
+;visa;johnsmith;John Smith;4012888888881881;visa;3;2015;12;2027
+;amex;janedoe;Jane Doe;371449635398431;amex;1;2014;12;2026
+;master;janedoe;Jane Doe;305693090259041;master;5;2014;4;2027

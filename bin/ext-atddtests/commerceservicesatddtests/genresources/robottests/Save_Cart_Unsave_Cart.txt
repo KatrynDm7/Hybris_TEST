@@ -1,0 +1,138 @@
+*** Settings ***
+Resource          commerce/CommerceServices_Keywords.txt
+Test Setup        import commerce sample data
+
+
+*** Variables ***
+
+### user and site:
+${customerId}=    testuser@saved-carts.com
+${saveCartName1}=    Saved Cart 1
+${saveCartDescription1}=    This is a saved cart.
+${saveCartName2}=    Saved Cart 2
+${saveCartDescription2}=    This is a another saved cart.
+${expirationDays}=    30
+
+*** Test Cases ***
+Test_Flag_Cart_For_Deletion_For_Customer_With_Existing_Saved_Cart
+	create customer "${customerId}" with currency "USD"
+	${sessionCart}=    get session cart  
+	login customer with id "${customerId}" 
+	Should Be Equal    ${sessionCart.name}    ${null}
+	Should Be Equal    ${sessionCart.description}    ${null}
+	Should Be Equal    ${sessionCart.saveTime}    ${null}
+	Should Be Equal    ${sessionCart.savedBy}    ${null}
+	Should Be Equal    ${sessionCart.expirationTime}    ${null}
+	${savedCart}=    save cart with name "${saveCartName1}" and description "${saveCartDescription1}"
+	Should be Equal    ${savedCart.name}   ${saveCartName1}
+	Should be Equal    ${savedCart.description}   ${saveCartDescription1}
+	Should be Equal    ${savedCart.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${savedCart.saveTime}    ${null}
+	Should Not Be Equal    ${savedCart.expirationTime}    ${null}
+	verify that date "${savedCart.expirationTime}" is "${expirationDays}" days later than date "${savedCart.saveTime}"
+	${listOfSavedCarts}=    get saved carts for current user
+	verify list size equals   ${listOfSavedCarts}    1
+	${savedCart}=    get saved cart from list    ${listOfSavedCarts}    ${savedCart.code}
+	${flaggedCart}=    flag cart with code "${savedCart.code}" for deletion
+ 	Should Be Equal    ${flaggedCart.name}    ${null}
+	Should Be Equal    ${flaggedCart.description}    ${null}
+	Should Be Equal    ${flaggedCart.saveTime}    ${null}
+	Should Be Equal    ${flaggedCart.savedBy}    ${null}
+	Should Be Equal    ${flaggedCart.expirationTime}    ${null}
+
+Test_Flag_One_Cart_For_Deletion_For_Customer_With_Two_Saved_Carts
+    create customer "${customerId}" with currency "USD"
+    ${sessionCart}=    get session cart
+    login customer with id "${customerId}"
+    ${savedCart1}=    save cart with name "${saveCartName1}" and description "${saveCartDescription1}"
+    ${sessionCart2}=    create new session cart
+    login customer with id "${customerId}"
+    ${savedCart2}=    save cart with name "${saveCartName2}" and description "${saveCartDescription2}"
+    ${listOfSavedCarts}=    get saved carts for current user
+    verify list size equals   ${listOfSavedCarts}    2
+    ${savedCartToBeFlagged}=    get saved cart from list    ${listOfSavedCarts}    ${savedCart1.code}
+    ${flaggedCart}=    flag cart with code "${savedCartToBeFlagged.code}" for deletion
+    Should Be Equal    ${flaggedCart.name}    ${null}
+	Should Be Equal    ${flaggedCart.description}    ${null}
+	Should Be Equal    ${flaggedCart.saveTime}    ${null}
+	Should Be Equal    ${flaggedCart.savedBy}    ${null}
+	Should Be Equal    ${flaggedCart.expirationTime}    ${null}
+    ${listOfSavedCarts}=    get saved carts for current user
+    verify list size equals   ${listOfSavedCarts}    1
+    ${savedCart}=    get saved cart from list    ${listOfSavedCarts}    ${savedCart2.code}
+    Should be Equal    ${savedCart.name}   ${saveCartName2}
+    Should be Equal    ${savedCart.description}   ${saveCartDescription2}
+    Should be Equal    ${savedCart.savedBy.uid}   ${customerId}
+    Should Not Be Equal    ${savedCart.saveTime}    ${null}
+	Should Not Be Equal    ${savedCart.expirationTime}    ${null}
+
+Test_To_Flag_For_Deletion_Already_Flaggged_Cart
+	create customer "${customerId}" with currency "USD"
+	${sessionCart}=    get session cart
+	login customer with id "${customerId}"
+	Should Be Equal    ${sessionCart.name}    ${null}
+	Should Be Equal    ${sessionCart.description}    ${null}
+	Should Be Equal    ${sessionCart.saveTime}    ${null}
+	Should Be Equal    ${sessionCart.savedBy}    ${null}
+	Should Be Equal    ${sessionCart.expirationTime}    ${null}
+	login customer with id "${customerId}"
+	${savedCart}=    save cart with name "${saveCartName1}" and description "${saveCartDescription1}"
+	Should be Equal    ${savedCart.name}   ${saveCartName1}
+	Should be Equal    ${savedCart.description}   ${saveCartDescription1}
+	Should be Equal    ${savedCart.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${savedCart.saveTime}    ${null}
+	Should Not Be Equal    ${savedCart.expirationTime}    ${null}
+	verify that date "${savedCart.expirationTime}" is "${expirationDays}" days later than date "${savedCart.saveTime}"
+	${listOfSavedCarts}=    get saved carts for current user
+	verify list size equals   ${listOfSavedCarts}    1
+	${savedCart}=    get saved cart from list    ${listOfSavedCarts}    ${savedCart.code}
+	${flaggedCart}=    flag cart with code "${savedCart.code}" for deletion
+	Should Be Equal    ${flaggedCart.name}    ${null}
+	Should Be Equal    ${flaggedCart.description}    ${null}
+	Should Be Equal    ${flaggedCart.saveTime}    ${null}
+	Should Be Equal    ${flaggedCart.savedBy}    ${null}
+	Should Be Equal    ${flaggedCart.expirationTime}    ${null}
+
+Test_To_Flag_Non_Existing_Cart_For_Deletion
+	create customer "${customerId}" with currency "USD"
+	${sessionCart}=    get session cart
+	login customer with id "${customerId}"
+	${savedCart}=    save cart with name "${saveCartName1}" and description "${saveCartDescription1}"
+	${savedCart.code}=    Set Variable    xxx
+	Run Keyword And Expect Error    CommerceSaveCartException: Cannot find a cart for code [*]
+    ...    flag cart with code "${savedCart.code}" for deletion
+
+Test_To_Flag_Multiple_Saved_Carts_For_Deletion
+    create customer "${customerId}" with currency "USD"
+    ${sessionCart}=    get session cart
+    login customer with id "${customerId}"
+    ${savedCart1}=    save cart with name "${saveCartName1}" and description "${saveCartDescription1}"
+    ${sessionCart2}=    create new session cart
+    login customer with id "${customerId}"
+    ${savedCart2}=    save cart with name "${saveCartName2}" and description "${saveCartDescription2}"
+    ${listOfSavedCarts}=    get saved carts for current user
+    verify list size equals   ${listOfSavedCarts}    2
+    ${savedCartToFlag}=    get saved cart from list    ${listOfSavedCarts}    ${savedCart1.code}
+    ${flaggedCart}=    flag cart with code "${savedCartToFlag.code}" for deletion
+    Should Be Equal    ${flaggedCart.name}    ${null}
+	 Should Be Equal    ${flaggedCart.description}    ${null}
+	 Should Be Equal    ${flaggedCart.saveTime}    ${null}
+	 Should Be Equal    ${flaggedCart.savedBy}    ${null}
+	 Should Be Equal    ${flaggedCart.expirationTime}    ${null}
+    ${listOfSavedCarts}=    get saved carts for current user
+    verify list size equals   ${listOfSavedCarts}    1
+    ${savedCart}=    get saved cart from list    ${listOfSavedCarts}    ${savedCart2.code}
+    Should be Equal    ${savedCart.name}   ${saveCartName2}
+    Should be Equal    ${savedCart.description}   ${saveCartDescription2}
+    Should be Equal    ${savedCart.savedBy.uid}   ${customerId}
+    Should Not Be Equal    ${savedCart.saveTime}    ${null}
+	 Should Not Be Equal    ${savedCart.expirationTime}    ${null}
+    ${listOfSavedCarts}=    get saved carts for current user
+    verify list size equals   ${listOfSavedCarts}    1
+    ${savedCartToFlag}=    get saved cart from list    ${listOfSavedCarts}    ${savedCart2.code}
+    ${flaggedCart}=    flag cart with code "${savedCartToFlag.code}" for deletion
+    Should Be Equal    ${flaggedCart.name}    ${null}
+	 Should Be Equal    ${flaggedCart.description}    ${null}
+	 Should Be Equal    ${flaggedCart.saveTime}    ${null}
+	 Should Be Equal    ${flaggedCart.savedBy}    ${null}
+	 Should Be Equal    ${flaggedCart.expirationTime}    ${null}

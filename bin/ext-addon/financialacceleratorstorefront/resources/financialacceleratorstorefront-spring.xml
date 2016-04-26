@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2015 hybris AG All rights reserved.
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config />
+  
+	<alias name="defaultInsuranceComparisonTableFactory" alias="insuranceComparisonTableFactory"/>
+	<bean id="defaultInsuranceComparisonTableFactory" class="de.hybris.platform.financialacceleratorstorefront.comparison.InsuranceComparisonTableFactory">
+		<property name="billingTimeDataComparator" ref="billingTimeDataComparator"/>
+		<property name="excludableBillingEvents">
+			<set>
+				<value>paynow</value>
+			</set>
+		</property>
+        <property name="priceFactory" ref="priceDataFactory"/>
+	</bean>
+
+    <alias alias="emailContextFactory" name="extDefaultEmailContextFactory"/>
+    <bean id="extDefaultEmailContextFactory" parent="defaultEmailContextFactory">
+    	<property name="emailContextVariables">
+			<map merge="true">
+				<entry key="commonResourceUrl" value="{baseThemeUrl}/_ui/common"/>
+				<entry key="themeResourceUrl" value="{baseThemeUrl}/_ui/addons/financialacceleratorstorefront/desktop/theme-{theme}"/>
+			</map>
+		</property>
+    </bean>
+
+</beans>

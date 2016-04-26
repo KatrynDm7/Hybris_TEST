@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wizard-config showPrefilledValues="false" selectMode="true" createMode="true" createWithinPopup="false" createWithinEditor="false">
+	<displayed-properties>
+	<group qualifier="Hyend2eacGeneral" visible="true" initially-opened="true">
+		<label key="cockpit.config.label.General" />
+		<property qualifier="Hyend2EndecaAttributeConfiguration.name" />
+		<property qualifier="Hyend2EndecaAttributeConfiguration.searchable" />
+		<property qualifier="Hyend2EndecaAttributeConfiguration.searchWildcard" />	
+		<property qualifier="Hyend2EndecaAttributeConfiguration.offlineSort" />	
+		<property qualifier="Hyend2EndecaAttributeConfiguration.rollupKey" />	
+		<property qualifier="Hyend2EndecaAttributeConfiguration.showWithList" />	
+		<property qualifier="Hyend2EndecaAttributeConfiguration.showWithRecord" />	
+		<property qualifier="Hyend2EndecaAttributeConfiguration.recordFilterable" />	
+	</group>
+	
+
+	</displayed-properties>
+</wizard-config>

@@ -1,0 +1,3 @@
+# imports default feeds and pools
+DataHubPool,y2ysync-datahub-pool.csv
+DataHubFeed,y2ysync-datahub-feed.csv

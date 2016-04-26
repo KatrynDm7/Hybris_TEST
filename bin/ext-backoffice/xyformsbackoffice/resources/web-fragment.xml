@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ [y] hybris Platform
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<web-fragment xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-fragment_3_0.xsd" version="3.0">
+
+   <name>webfragment_xyformsbackoffice</name>
+
+   <ordering>
+      <after>
+         <name>webfragment_springSecurityFilterChain</name>
+      </after>
+      <before>
+         <others />
+      </before>
+   </ordering>
+
+   <servlet>
+      <servlet-name>YFormsProxyServlet</servlet-name>
+      <servlet-class>de.hybris.platform.xyformsfacades.proxy.servlet.YFormsProxyServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>YFormsProxyServlet</servlet-name>
+      <url-pattern>/orbeon/*</url-pattern>
+   </servlet-mapping>
+
+   <!-- Spring Security -->
+   <filter-mapping>
+      <filter-name>springSecurityFilterChain</filter-name>
+      <url-pattern>/orbeon/*</url-pattern>
+   </filter-mapping>
+   
+   <!-- Url Rewriter to Forbid URLS -->
+   <filter>
+      <filter-name>UrlRewriteFilter</filter-name>
+      <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+      <init-param>
+         <param-name>logLevel</param-name>
+         <param-value>LOG4J</param-value>
+      </init-param>
+      <init-param>
+         <param-name>confReloadCheckInterval</param-name>
+         <param-value>-1</param-value>
+      </init-param>
+   </filter>
+   
+   <filter-mapping>
+      <filter-name>UrlRewriteFilter</filter-name>
+      <url-pattern>/orbeon/*</url-pattern>
+      <dispatcher>REQUEST</dispatcher>
+      <dispatcher>FORWARD</dispatcher>
+   </filter-mapping>
+
+</web-fragment>
+

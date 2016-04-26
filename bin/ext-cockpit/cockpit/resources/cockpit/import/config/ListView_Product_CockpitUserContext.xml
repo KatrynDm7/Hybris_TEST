@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<list-view unassigned-group-name="Other" allow-create-inline-items="true">
+	<group name="General">
+		<custom class="de.hybris.platform.cockpit.services.config.impl.LineNumberColumn" name="Line nr" visible="true" selectable="true"/>
+		<property qualifier="product.thumbnail" editor="simpleMediaReferenceSelector" visible="true">
+			<renderer class="de.hybris.platform.cockpit.model.listview.impl.ImageCellRenderer"/>
+		</property>
+		<property qualifier="Product.code" visible="true"/>
+		<property qualifier="Product.name" visible="true" editable="true">
+			<language isocode="en"/>
+			<language isocode="de"/>
+		</property>
+		<property qualifier="Product.ean" visible="false" editable="true"/>
+		<property qualifier="Product.manufacturerName" visible="false" editable="true"/>
+		<property qualifier="Product.description" visible="false" editable="true"/>
+		<group name="Unit">
+			<label key="config.general.units" />
+			<property qualifier="Product.unit" editable="true"/>
+		</group>
+	</group>
+</list-view>

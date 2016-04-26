@@ -1,0 +1,357 @@
+$contentCatalog=electronicsContentCatalog
+$contentCatalogName=Electronics Content Catalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$productCatalog=electronicsProductCatalog
+$productCatalogName=Electronics Product Catalog
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$picture=media(code, $contentCV);
+$siteResource=jar:de.hybris.platform.electronicsstore.constants.ElectronicsstoreConstants&/electronicsstore/import/sampledata/contentCatalogs/$contentCatalog
+$medias=medias(code, $contentCV);
+$lang=ja
+$mediaContainer=media(qualifier, $contentCV)[lang=$lang];
+
+###  Home page splash   #######
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
+;mobile;Elec_480x320_HomeSpeed_JA_01_480W.jpg;$siteResource/images/banners/homepage/responsive/Elec_480x320_HomeSpeed_JA_01_480W.jpg;Elec_480x320_HomeSpeed_JA_01_480W.jpg;"一眼レフ カメラとデジタル一眼レフ カメラがお買い得";
+;tablet;Elec_770x350_HomeSpeed_JA_01_770W.jpg;$siteResource/images/banners/homepage/responsive/Elec_770x350_HomeSpeed_JA_01_770W.jpg;Elec_770x350_HomeSpeed_JA_01_770W.jpg;"一眼レフ カメラとデジタル一眼レフ カメラがお買い得";
+;desktop;Elec_960x330_HomeSpeed_JA_01_960W.jpg;$siteResource/images/banners/homepage/responsive/Elec_960x330_HomeSpeed_JA_01_960W.jpg;Elec_960x330_HomeSpeed_JA_01_960W.jpg;"一眼レフ カメラとデジタル一眼レフ カメラがお買い得";
+;widescreen;Elec_1400x440_HomeSpeed_JA_01_1400W.jpg;$siteResource/images/banners/homepage/responsive/Elec_1400x440_HomeSpeed_JA_01_1400W.jpg;Elec_1400x440_HomeSpeed_JA_01_1400W.jpg;"一眼レフ カメラとデジタル一眼レフ カメラがお買い得";
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
+;electronics-homepage-spalsh-ja;Elec_480x320_HomeSpeed_JA_01_480W.jpg,Elec_770x350_HomeSpeed_JA_01_770W.jpg,Elec_960x330_HomeSpeed_JA_01_960W.jpg,Elec_1400x440_HomeSpeed_JA_01_1400W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;ElectronicsHompageSplashBannerComponent;electronics-homepage-spalsh-ja
+
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images]
+;mobile;Elec_480x118_HomeDiscount_JA_01_480W.jpg;$siteResource/images/banners/homepage/responsive/Elec_480x118_HomeDiscount_JA_01_480W.jpg;Elec_480x118_HomeDiscount_JA_01_480W.jpg;"カメラ アクセサリとサプライがお買い得";
+;tablet;Elec_770x80_HomeDiscount_JA_01_770W.jpg;$siteResource/images/banners/homepage/responsive/Elec_770x80_HomeDiscount_JA_01_770W.jpg;Elec_770x80_HomeDiscount_JA_01_770W.jpg;"カメラ アクセサリとサプライがお買い得";
+;desktop;Elec_960x80_HomeDiscount_JA_01_960W.jpg;$siteResource/images/banners/homepage/responsive/Elec_960x80_HomeDiscount_JA_01_960W.jpg;Elec_960x80_HomeDiscount_JA_01_960W.jpg;"カメラ アクセサリとサプライがお買い得";
+;widescreen;Elec_1400x80_HomeDiscount_JA_01_1400W.jpg;$siteResource/images/banners/homepage/responsive/Elec_1400x80_HomeDiscount_JA_01_1400W.jpg;Elec_1400x80_HomeDiscount_JA_01_1400W.jpg;"カメラ アクセサリとサプライがお買い得";
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
+;electronics-homepage-discount-ja;Elec_480x118_HomeDiscount_JA_01_480W.jpg,Elec_770x80_HomeDiscount_JA_01_770W.jpg,Elec_960x80_HomeDiscount_JA_01_960W.jpg,Elec_1400x80_HomeDiscount_JA_01_1400W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;ElectronicsHompageDiscountBannerComponent;electronics-homepage-discount-ja;
+
+###  Home page slot 2A  ####
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images]
+;tablet;Elec_200x150_HomeFam_JA_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Elec_200x150_HomeFam_JA_01_200W.jpg;Elec_200x150_HomeFam_JA_01_200W.jpg;"電源";
+;desktop;Elec_240x180_HomeFam_JA_01_240W.jpg;$siteResource/images/banners/homepage/responsive/Elec_240x180_HomeFam_JA_01_240W.jpg;Elec_240x180_HomeFam_JA_01_240W.jpg;"電源";
+;widescreen;Elec_350x262_HomeFam_JA_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Elec_350x262_HomeFam_JA_01_350W.jpg;Elec_350x262_HomeFam_JA_01_350W.jpg;"電源";
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
+;electronics-homepage-light-fam-ja;Elec_200x150_HomeFam_JA_01_200W.jpg,Elec_240x180_HomeFam_JA_01_240W.jpg,Elec_350x262_HomeFam_JA_01_350W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;ElectronicsHompageLightFamBannerComponent;electronics-homepage-light-fam-ja
+
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images]
+;tablet;Elec_200x150_HomeFamLight_JA_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Elec_200x150_HomeFamLight_JA_01_200W.jpg;Elec_200x150_HomeFamLight_JA_01_200W.jpg;"カメラ レンズ";
+;desktop;Elec_240x180_HomeFamLight_JA_01_240W.jpg;$siteResource/images/banners/homepage/responsive/Elec_240x180_HomeFamLight_JA_01_240W.jpg;Elec_240x180_HomeFamLight_JA_01_240W.jpg;"カメラ レンズ";
+;widescreen;Elec_350x262_HomeFamLight_JA_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Elec_350x262_HomeFamLight_JA_01_350W.jpg;Elec_350x262_HomeFamLight_JA_01_350W.jpg;"カメラ レンズ";
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
+;electronics-homepage-light-text-ja;Elec_200x150_HomeFamLight_JA_01_200W.jpg,Elec_240x180_HomeFamLight_JA_01_240W.jpg,Elec_350x262_HomeFamLight_JA_01_350W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;ElectronicsHompageLightFamTextBannerComponent;electronics-homepage-light-text-ja
+
+#### Home section 2B #######
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images]
+;tablet;Elec_200x150_HomeKid_JA_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Elec_200x150_HomeKid_JA_01_200W.jpg;Elec_200x150_HomeKid_JA_01_200W.jpg;"電源";
+;desktop;Elec_240x180_HomeKid_JA_01_240W.jpg;$siteResource/images/banners/homepage/responsive/Elec_240x180_HomeKid_JA_01_240W.jpg;Elec_240x180_HomeKid_JA_01_240W.jpg;"電源";
+;widescreen;Elec_350x262_HomeKid_JA_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Elec_350x262_HomeKid_JA_01_350W.jpg;Elec_350x262_HomeKid_JA_01_350W.jpg;"電源";
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
+;electronics-homepage-camcorders-ja;Elec_200x150_HomeKid_JA_01_200W.jpg,Elec_240x180_HomeKid_JA_01_240W.jpg,Elec_350x262_HomeKid_JA_01_350W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;ElectronicsHompageCamcordersBannerComponent;electronics-homepage-camcorders-ja
+
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images]
+;tablet;Elec_200x150_HomeCaptureFirst_JA_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Elec_200x150_HomeCaptureFirst_JA_01_200W.jpg;Elec_200x150_HomeCaptureFirst_JA_01_200W.jpg;"ビデオカメラ";
+;desktop;Elec_240x180_HomeCaptureFirst_JA_01_240W.jpg;$siteResource/images/banners/homepage/responsive/Elec_240x180_HomeCaptureFirst_JA_01_240W.jpg;Elec_240x180_HomeCaptureFirst_JA_01_240W.jpg;"ビデオカメラ";
+;widescreen;Elec_350x262_HomeCaptureFirst_JA_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Elec_350x262_HomeCaptureFirst_JA_01_350W.jpg;Elec_350x262_HomeCaptureFirst_JA_01_350W.jpg;"ビデオカメラ";
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
+;electronics-homepage-camcorders-02-ja;Elec_200x150_HomeCaptureFirst_JA_01_200W.jpg,Elec_240x180_HomeCaptureFirst_JA_01_240W.jpg,Elec_350x262_HomeCaptureFirst_JA_01_350W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;ElectronicsHompageCamcordersChildBannerComponent;electronics-homepage-camcorders-02-ja
+### Section 4
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images]
+;tablet;Elec_200x200_HomeSmallDiscount_JA_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Elec_200x200_HomeSmallDiscount_JA_01_200W.jpg;Elec_200x200_HomeSmallDiscount_JA_01_200W.jpg;"Canyon Web Camera 100 KpixelM CMOS";
+;desktop;Elec_240x240_HomeSmallDiscount_JA_01_240W.jpg;$siteResource/images/banners/homepage/responsive/Elec_240x240_HomeSmallDiscount_JA_01_240W.jpg;Elec_240x240_HomeSmallDiscount_JA_01_240W.jpg;"Canyon Web Camera 100 KpixelM CMOS";
+;widescreen;Elec_350x350_HomeSmallDiscount_JA_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Elec_350x350_HomeSmallDiscount_JA_01_350W.jpg;Elec_350x350_HomeSmallDiscount_JA_01_350W.jpg;"Canyon Web Camera 100 KpixelM CMOS";
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
+;electronics-homepage-sm-discount-ja;Elec_200x200_HomeSmallDiscount_JA_01_200W.jpg,Elec_240x240_HomeSmallDiscount_JA_01_240W.jpg,Elec_350x350_HomeSmallDiscount_JA_01_350W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;ElectronicsHompageSmDiscountBannerComponent;electronics-homepage-sm-discount-ja
+
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images]
+;tablet;Elec_200x200_HomeShop_JA_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Elec_200x200_HomeShop_JA_01_200W.jpg;Elec_200x200_HomeShop_JA_01_200W.jpg;"Logitech QuickCam for Notebook Pro";
+;desktop;Elec_240x240_HomeShop_JA_01_240W.jpg;$siteResource/images/banners/homepage/responsive/Elec_240x240_HomeShop_JA_01_240W.jpg;Elec_240x240_HomeShop_JA_01_240W.jpg;"Logitech QuickCam for Notebook Pro";
+;widescreen;Elec_350x350_HomeShop_JA_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Elec_350x350_HomeShop_JA_01_350W.jpg;Elec_350x350_HomeShop_JA_01_350W.jpg;"Logitech QuickCam for Notebook Pro";
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
+;electronics-homepage-shop-ja;Elec_200x200_HomeShop_JA_01_200W.jpg,Elec_240x240_HomeShop_JA_01_240W.jpg,Elec_350x350_HomeShop_JA_01_350W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;ElectronicsHompageShopBannerComponent;electronics-homepage-shop-ja
+
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images]
+;tablet;Elec_200x200_HomeShipment_JA_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Elec_200x200_HomeShipment_JA_01_200W.jpg;Elec_200x200_HomeShipment_JA_01_200W.jpg;"Samsung NV10 コンパクト カメラ";
+;desktop;Elec_240x240_HomeShipment_JA_01_240W.jpg;$siteResource/images/banners/homepage/responsive/Elec_240x240_HomeShipment_JA_01_240W.jpg;Elec_240x240_HomeShipment_JA_01_240W.jpg;"Samsung NV10 コンパクト カメラ";
+;widescreen;Elec_350x350_HomeShipment_JA_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Elec_350x350_HomeShipment_JA_01_350W.jpg;Elec_350x350_HomeShipment_JA_01_350W.jpg;"Samsung NV10 コンパクト カメラ";
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
+;electronics-homepage-shipment-ja;Elec_200x200_HomeShipment_JA_01_200W.jpg,Elec_240x240_HomeShipment_JA_01_240W.jpg,Elec_350x350_HomeShipment_JA_01_350W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;ElectronicsHompageShipmentBannerComponent;electronics-homepage-shipment-ja
+
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images]
+;tablet;Elec_200x200_HomeService_JA_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Elec_200x200_HomeService_JA_01_200W.jpg;Elec_200x200_HomeService_JA_01_200W.jpg;"Sony Light HVL-20DW2";
+;desktop;Elec_240x240_HomeService_JA_01_240W.jpg;$siteResource/images/banners/homepage/responsive/Elec_240x240_HomeService_JA_01_240W.jpg;Elec_240x240_HomeService_JA_01_240W.jpg;"Sony Light HVL-20DW2";
+;widescreen;Elec_350x350_HomeService_JA_01_350W.jpg;$siteResource/images/banners/homepage/responsive/Elec_350x350_HomeService_JA_01_350W.jpg;Elec_350x350_HomeService_JA_01_350W.jpg;"Sony Light HVL-20DW2";
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
+;electronics-homepage-service-ja;Elec_200x200_HomeService_JA_01_200W.jpg,Elec_240x240_HomeService_JA_01_240W.jpg,Elec_350x350_HomeService_JA_01_350W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;ElectronicsHompageServiceBannerComponent;electronics-homepage-service-ja
+
+
+### Section 5
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images]
+;mobile;Elec_475x119_HomeFreeDel_JA_01_475W.jpg;$siteResource/images/banners/homepage/responsive/Elec_475x119_HomeFreeDel_JA_01_475W.jpg;Elec_475x119_HomeFreeDel_JA_01_475W.jpg;"今週末は全注文を無料配送";
+;tablet;Elec_770x50_HomeFreeDel_JA_01_770W.jpg;$siteResource/images/banners/homepage/responsive/Elec_770x50_HomeFreeDel_JA_01_770W.jpg;Elec_770x50_HomeFreeDel_JA_01_770W.jpg;"今週末は全注文を無料配送";
+;desktop;Elec_960x50_HomFreeDel_JA_01_960W.jpg;$siteResource/images/banners/homepage/responsive/Elec_960x50_HomFreeDel_JA_01_960W.jpg;Elec_960x50_HomFreeDel_JA_01_960W.jpg;"今週末は全注文を無料配送";
+;widescreen;Elec_1400x50_HomeFreeDel_JA_01_1400W.jpg	;$siteResource/images/banners/homepage/responsive/Elec_1400x50_HomeFreeDel_JA_01_1400W.jpg;Elec_1400x50_HomeFreeDel_JA_01_1400W.jpg;"今週末は全注文を無料配送";	
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
+;electronics-homepage-free-del-ja;Elec_475x119_HomeFreeDel_JA_01_475W.jpg,Elec_770x50_HomeFreeDel_JA_01_770W.jpg,Elec_960x50_HomFreeDel_JA_01_960W.jpg,Elec_1400x50_HomeFreeDel_JA_01_1400W.jpg	
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;ElectronicsHompageFreeDelBannerComponent;electronics-homepage-free-del-ja
+
+##### DSLR Category Page ######
+
+##### Section 1
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
+;mobile;Elec_480x320_Category11_JA_01_480W.jpg;$siteResource/images/banners/category/responsive/Elec_480x320_Category11_JA_01_480W.jpg;Elec_480x320_Category11_JA_01_480W.jpg;"すべて買う";
+;tablet;Elec_770x350_Category11_JA_01_770W.jpg;$siteResource/images/banners/category/responsive/Elec_770x350_Category11_JA_01_770W.jpg;Elec_770x350_Category11_JA_01_770W.jpg;"すべて買う";
+;desktop;Elec_1400x440_Category11_JA_01_1400W.jpg;$siteResource/images/banners/category/responsive/Elec_1400x440_Category11_JA_01_1400W.jpg;Elec_1400x440_Category11_JA_01_1400W.jpg;"すべて買う";
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
+;electronics-slr-category-splash-ja;Elec_480x320_Category11_JA_01_480W.jpg,Elec_770x350_Category11_JA_01_770W.jpg,Elec_1400x440_Category11_JA_01_1400W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;ElectronicsSLRSplashBannerComponent;electronics-slr-category-splash-ja
+
+##### Section 2
+# A330
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
+;tablet;Elec_200x200_Category02_JA_01_200W.jpg;$siteResource/images/banners/category/responsive/Elec_200x200_Category02_JA_01_200W.jpg;Elec_200x200_Category02_JA_01_200W.jpg;"見る";
+;desktop;Elec_350x350_Category02_JA_01_350W.jpg;$siteResource/images/banners/category/responsive/Elec_350x350_Category02_JA_01_350W.jpg;Elec_350x350_Category02_JA_01_350W.jpg;"見る";
+
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
+;electronics-sony-A330-banner-ja;Elec_350x350_Category02_JA_01_350W.jpg,Elec_200x200_Category02_JA_01_200W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;ElectronicsSonyA330BannerComponent;electronics-sony-A330-banner-ja
+
+#Canon 500D
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
+;tablet;Elec_200x200_Category07_JA_01_200W.jpg;$siteResource/images/banners/category/responsive/Elec_200x200_Category07_JA_01_200W.jpg;Elec_200x200_Category07_JA_01_200W.jpg;"見る";
+;desktop;Elec_350x350_Category07_JA_01_350W.jpg;$siteResource/images/banners/category/responsive/Elec_350x350_Category07_JA_01_350W.jpg;Elec_350x350_Category07_JA_01_350W.jpg;"見る";
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
+;electronics-canon-500D-banner-ja;Elec_350x350_Category07_JA_01_350W.jpg,Elec_200x200_Category07_JA_01_200W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;ElectronicsCanon500DBannerComponent;electronics-canon-500D-banner-ja
+
+#Canon 450D
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
+;tablet;Elec_200x200_Category06_JA_01_200W.jpg;$siteResource/images/banners/category/responsive/Elec_200x200_Category06_JA_01_200W.jpg;Elec_200x200_Category06_JA_01_200W.jpg;"見る";
+;desktop;Elec_350x350_Category06_JA_01_350W.jpg;$siteResource/images/banners/category/responsive/Elec_350x350_Category06_JA_01_350W.jpg;Elec_350x350_Category06_JA_01_350W.jpg;"見る";
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
+;electronics-canon-450-banner-ja;Elec_350x350_Category06_JA_01_350W.jpg,Elec_200x200_Category06_JA_01_200W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;ElectronicsCanon450DBannerComponent;electronics-canon-450-banner-ja
+
+# Sony A100
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
+;tablet;Elec_200x200_Category05_JA_01_200W.jpg;$siteResource/images/banners/category/responsive/Elec_200x200_Category05_JA_01_200W.jpg;Elec_200x200_Category05_JA_01_200W.jpg;"見る";
+;desktop;Elec_350x350_Category05_JA_01_350W.jpg;$siteResource/images/banners/category/responsive/Elec_350x350_Category05_JA_01_350W.jpg;Elec_350x350_Category05_JA_01_350W.jpg;"見る";
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
+;electronics-sony-a100-banner-ja;Elec_350x350_Category05_JA_01_350W.jpg,Elec_200x200_Category05_JA_01_200W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;ElectronicsSonyA100HBannerComponent;electronics-sony-a100-banner-ja
+
+# Sony Alpha 200
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
+;tablet;Elec_200x200_Category03_JA_01_200W.jpg;$siteResource/images/banners/category/responsive/Elec_200x200_Category03_JA_01_200W.jpg;Elec_200x200_Category03_JA_01_200W.jpg;"見る";
+;desktop;Elec_350x350_Category03_JA_01_350W.jpg;$siteResource/images/banners/category/responsive/Elec_350x350_Category03_JA_01_350W.jpg;Elec_350x350_Category03_JA_01_350W.jpg;"見る";
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
+;electronics-sony-A200-banner-ja;Elec_350x350_Category03_JA_01_350W.jpg,Elec_200x200_Category03_JA_01_200W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;ElectronicsSonyA200BannerComponent;electronics-sony-A200-banner-ja
+
+# Sony Alpha 350
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
+;tablet;Elec_200x200_Category01_JA_01_200W.jpg;$siteResource/images/banners/category/responsive/Elec_200x200_Category01_JA_01_200W.jpg;Elec_200x200_Category01_JA_01_200W.jpg;"見る";
+;desktop;Elec_350x350_Category01_JA_01_350W.jpg;$siteResource/images/banners/category/responsive/Elec_350x350_Category01_JA_01_350W.jpg;Elec_350x350_Category01_JA_01_350W.jpg;"見る";
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
+;electronics-sony-Alpha-350-banner-ja;Elec_350x350_Category01_JA_01_350W.jpg,Elec_200x200_Category01_JA_01_200W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;ElectronicsSonyAlpha350BannerComponent;electronics-sony-Alpha-350-banner-ja
+
+##### Section 3
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
+;mobile;Elec_480x118_Category10_JA_01_480W.jpg;$siteResource/images/banners/category/responsive/Elec_480x118_Category10_JA_01_480W.jpg;Elec_480x118_Category10_JA_01_480W.jpg;"買う";
+;tablet;Elec_770x80_Category10_JA_01_770W.jpg;$siteResource/images/banners/category/responsive/Elec_770x80_Category10_JA_01_770W.jpg;Elec_770x80_Category10_JA_01_770W.jpg;"買う";
+;desktop;Elec_1400x140_Category10_JA_01_1400W.jpg;$siteResource/images/banners/category/responsive/Elec_1400x140_Category10_JA_01_1400W.jpg;Elec_1400x140_Category10_JA_01_1400W.jpg;"買う";
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
+;electronics-save-big-banner-ja;Elec_480x118_Category10_JA_01_480W.jpg,Elec_770x80_Category10_JA_01_770W.jpg,Elec_1400x140_Category10_JA_01_1400W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;ElectronicsSaveBigDLSRBannerComponent;electronics-save-big-banner-ja
+
+##### DSLR Category Page ######
+
+##### Section 1
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
+;mobile;Elec_480x320_Category11_JA_01_480W.jpg;$siteResource/images/banners/category/responsive/Elec_480x320_Category11_JA_01_480W.jpg;Elec_480x320_Category11_JA_01_480W.jpg;"すべて買う";
+;tablet;Elec_770x350_Category11_JA_01_770W.jpg;$siteResource/images/banners/category/responsive/Elec_770x350_Category11_JA_01_770W.jpg;Elec_770x350_Category11_JA_01_770W.jpg;"すべて買う";
+;desktop;Elec_1400x440_Category11_JA_01_1400W.jpg;$siteResource/images/banners/category/responsive/Elec_1400x440_Category11_JA_01_1400W.jpg;Elec_1400x440_Category11_JA_01_1400W.jpg;"すべて買う";
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
+;electronics-slr-category-splash-ja;Elec_480x320_Category11_JA_01_480W.jpg,Elec_770x350_Category11_JA_01_770W.jpg,Elec_1400x440_Category11_JA_01_1400W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;ElectronicsSLRSplashBannerComponent;electronics-slr-category-splash-ja
+
+##### Section 2
+# A330
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
+;tablet;Elec_200x200_Category02_JA_01_200W.jpg;$siteResource/images/banners/category/responsive/Elec_200x200_Category02_JA_01_200W.jpg;Elec_200x200_Category02_JA_01_200W.jpg;"見る";
+;desktop;Elec_350x350_Category02_JA_01_350W.jpg;$siteResource/images/banners/category/responsive/Elec_350x350_Category02_JA_01_350W.jpg;Elec_350x350_Category02_JA_01_350W.jpg;"見る";
+
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
+;electronics-sony-A330-banner-ja;Elec_350x350_Category02_JA_01_350W.jpg,Elec_200x200_Category02_JA_01_200W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;ElectronicsSonyA330BannerComponent;electronics-sony-A330-banner-ja
+
+#Canon 500D
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
+;tablet;Elec_200x200_Category07_JA_01_200W.jpg;$siteResource/images/banners/category/responsive/Elec_200x200_Category07_JA_01_200W.jpg;Elec_200x200_Category07_JA_01_200W.jpg;"見る";
+;desktop;Elec_350x350_Category07_JA_01_350W.jpg;$siteResource/images/banners/category/responsive/Elec_350x350_Category07_JA_01_350W.jpg;Elec_350x350_Category07_JA_01_350W.jpg;"見る";
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
+;electronics-canon-500D-banner-ja;Elec_350x350_Category07_JA_01_350W.jpg,Elec_200x200_Category07_JA_01_200W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;ElectronicsCanon500DBannerComponent;electronics-canon-500D-banner-ja
+
+#Canon 450D
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
+;tablet;Elec_200x200_Category06_JA_01_200W.jpg;$siteResource/images/banners/category/responsive/Elec_200x200_Category06_JA_01_200W.jpg;Elec_200x200_Category06_JA_01_200W.jpg;"見る";
+;desktop;Elec_350x350_Category06_JA_01_350W.jpg;$siteResource/images/banners/category/responsive/Elec_350x350_Category06_JA_01_350W.jpg;Elec_350x350_Category06_JA_01_350W.jpg;"見る";
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
+;electronics-canon-450-banner-ja;Elec_350x350_Category06_JA_01_350W.jpg,Elec_200x200_Category06_JA_01_200W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;ElectronicsCanon450DBannerComponent;electronics-canon-450-banner-ja
+
+# Sony A100
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
+;tablet;Elec_200x200_Category05_JA_01_200W.jpg;$siteResource/images/banners/category/responsive/Elec_200x200_Category05_JA_01_200W.jpg;Elec_200x200_Category05_JA_01_200W.jpg;"見る";
+;desktop;Elec_350x350_Category05_JA_01_350W.jpg;$siteResource/images/banners/category/responsive/Elec_350x350_Category05_JA_01_350W.jpg;Elec_350x350_Category05_JA_01_350W.jpg;"見る";
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
+;electronics-sony-a100-banner-ja;Elec_350x350_Category05_JA_01_350W.jpg,Elec_200x200_Category05_JA_01_200W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;ElectronicsSonyA100HBannerComponent;electronics-sony-a100-banner-ja
+
+# Sony Alpha 200
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
+;tablet;Elec_200x200_Category03_JA_01_200W.jpg;$siteResource/images/banners/category/responsive/Elec_200x200_Category03_JA_01_200W.jpg;Elec_200x200_Category03_JA_01_200W.jpg;"見る";
+;desktop;Elec_350x350_Category03_JA_01_350W.jpg;$siteResource/images/banners/category/responsive/Elec_350x350_Category03_JA_01_350W.jpg;Elec_350x350_Category03_JA_01_350W.jpg;"見る";
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
+;electronics-sony-A200-banner-ja;Elec_350x350_Category03_JA_01_350W.jpg,Elec_200x200_Category03_JA_01_200W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;ElectronicsSonyA200BannerComponent;electronics-sony-A200-banner-ja
+
+# Sony Alpha 350
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
+;tablet;Elec_200x200_Category01_JA_01_200W.jpg;$siteResource/images/banners/category/responsive/Elec_200x200_Category01_JA_01_200W.jpg;Elec_200x200_Category01_JA_01_200W.jpg;"見る";
+;desktop;Elec_350x350_Category01_JA_01_350W.jpg;$siteResource/images/banners/category/responsive/Elec_350x350_Category01_JA_01_350W.jpg;Elec_350x350_Category01_JA_01_350W.jpg;"見る";
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
+;electronics-sony-Alpha-350-banner-ja;Elec_350x350_Category01_JA_01_350W.jpg,Elec_200x200_Category01_JA_01_200W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;ElectronicsSonyAlpha350BannerComponent;electronics-sony-Alpha-350-banner-ja
+
+##### Section 3
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
+;mobile;Elec_480x118_Category10_JA_01_480W.jpg;$siteResource/images/banners/category/responsive/Elec_480x118_Category10_JA_01_480W.jpg;Elec_480x118_Category10_JA_01_480W.jpg;"買う";
+;tablet;Elec_770x80_Category10_JA_01_770W.jpg;$siteResource/images/banners/category/responsive/Elec_770x80_Category10_JA_01_770W.jpg;Elec_770x80_Category10_JA_01_770W.jpg;"買う";
+;desktop;Elec_1400x140_Category10_JA_01_1400W.jpg;$siteResource/images/banners/category/responsive/Elec_1400x140_Category10_JA_01_1400W.jpg;Elec_1400x140_Category10_JA_01_1400W.jpg;"買う";
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
+;electronics-save-big-banner-ja;Elec_480x118_Category10_JA_01_480W.jpg,Elec_770x80_Category10_JA_01_770W.jpg,Elec_1400x140_Category10_JA_01_1400W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;ElectronicsSaveBigDLSRBannerComponent;electronics-save-big-banner-ja
+
+##### END DSLR Category Page ######
+
+# CMS Paragraph Component (Contact information)
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang];
+;;faqTextParagraph;"<div class=""global-alerts""><div class=""alert alert-info"" role=""alert""><strong>インフォメーション: </strong>工事中ページ-完全にはしていない機能</div></div><a name=""00""></a><div class=""textpage textpage-faqs""><div class=""item_container"">		<h2><a name=""a00""></a>ご返品とご返金</h2>		<p>テキスト</p>		<a class=""pagetop-link"" href=""#00"">トップに戻る</a>	</div>		<div class=""item_container"">		<h2><a name=""b00""></a>配送情報</h2>		<a class=""faq-menulink"" href=""#b01"">配送オプション</a>		<a class=""faq-menulink"" href=""#b02"">配送時間と料金</a>		<a class=""faq-menulink"" href=""#b03"">ご注文の追跡情報</a>		<a class=""faq-menulink"" href=""#b04"">配送状況情報</a>			<h3><a name=""b01""></a>配送オプション</h3>		<p>			利用可能な配送オプションは、配送方法の下にあるチェックアウト エリアに表示されます。<br><br>			ご記入いただいた住所によっては、以下のオプションをご利用いただけない場合があります。			</p><ul>			<li>					<b>宅配</b> - L50 を超えるすべての注文で 4 営業日以内に英国標準無料配達 (*例外あり)				</li>				<li>					<b>標準配送</b> - 1～2 営業日				</li>				<li>					<b>その他の配送方法</b> - 3～5 営業日				</li>				<li>				<b>国際配送</b> - 7～10 営業日 (一部の国や地域は対象外)				</li>			</ul>		<p></p>		<h3><a name=""b02""></a>配送時間と料金</h3>		<p>			ほとんどの L3.99 のご注文は 4 営業日以内に配送します。L50 を超えるご注文は配送無料です (*例外については、以下の表をご参照ください)。			</p><ul>				<li>					英国の住所へは、祝日を除く、月曜日から金曜日までの午前 9 時～午後 6 時間に配送します。 				</li>				<li>					スコットランド高地や諸島、海外や北アイルランドへの配送にはお時間がかかる場合があります。<br>					アイルランドへの配送については、hybris.com のアイルランド向け Web サイトをご覧ください				</li>				<li>					配送品が複数ある場合、すべての配送品が同時に配送されないことがあります。				</li>			</ul>		<p></p>	<h3><a name=""b03""></a>ご注文の追跡情報</h3>		<p>			ご注文の各段階で電子メールをお送りします。電子メールには現在の注文状況が記載されます。各注文状況については、以下の表をご確認ください。ほとんどの荷物は当社の配送業者からお届けします。電子メールに記載されているお荷物参照リンクをクリックすると、お荷物を追跡することができます。リンクをクリックすると、配送業者の Web サイトに移動します。宅配便の状況については、 <a href=""#b04"">こちらをクリックしてください</a>。		</p>		<table width=""100%"" cellspacing=""0"" cellpadding=""0"" border=""0"">			<tbody>				<tr>					<th>状況</th>					<th>説明</th>				</tr>				<!--ROW 1-->				<tr>					<td class=""blue3"">						<strong>処理中</strong><br>					</td>					<td class=""grey3"">						ご注文を処理しています。<br>					</td>				</tr>				<!--ROW 2-->	<tr>					<td class=""blue3"">						<strong>送付</strong><br>					</td>					<td class=""grey3"">						ご注文は配送業者に送付されました。<br><br>    重量のある大きい製品の場合、ご注文は当社の配送業者から配送されます。配送日時については、配送業者から直接ご連絡いたします。<br><br>店舗でのお受け取りの場合、商品のお引き渡しの準備が整ったときにご連絡いたします （店舗でのお受け取りについては、以下を参照してください）。<br><br>					</td>				</tr>				<!--ROW 3-->				<tr>					<td class=""blue3"">						<strong>キャンセル<br>支払い取り消しを<br> 実行できません</strong><br>					</td>					<td class=""grey3"">						在庫状況により、ご注文がキャンセルされました。お支払いは行われません。<br><br>					</td>				</tr>				<!--ROW 4-->				<tr>					<td class=""blue3"">						<strong>キャンセル<br>払い戻しを<br>実行できません</strong><br>				</td>					<td class=""grey3"">						在庫状況により、ご注文がキャンセルされました。お支払いカードに払い戻しの処理を行いました。<br><br>					</td>				</tr>				<!--ROW 5-->				<tr>					<td class=""blue3"">						<strong>返品受領</strong><br>					</td>					<td class=""grey3"">ご返品を受領しました。ただし、商品の返送中、間違った倉庫の住所に商品が送られたため、商品を再送している間、払い戻しのお手続きにお時間がかかる場合があります。<br><br>					</td>				</tr>				<!--ROW 6-->				<tr>					<td class=""blue3"">						<strong>注文のお引き渡し準備完了</strong><br>					</td>					<td class=""grey3"">						お選びいただいた店舗で商品のお引き渡しの準備が整いました。<br><br><strong><i>ご注意：</i></strong> 通知の電子メールを受け取ってから、14 日以内にご注文をお受け取りください。<br><br>					</td>				</tr>				<!--ROW 7-->				<tr>					<td class=""blue3"">						<strong>お引き渡し</strong><br>					</td>					<td class=""grey3"">					ご注文をお引き渡ししたしました。<br><br>					</td>				</tr>				<!--ROW 8-->				<tr>					<td class=""blue3"">						<strong>返品処理中</strong><br>					</td>					<td class=""grey3"">						返品を処理しています。<br><br>					</td>				</tr>				<!--ROW 9-->				<tr>					<td class=""blue3"">						<strong>返金完了</strong><br>					</td>					<td class=""grey3"">						ご返金を完了しました。<br><br><strong><i>ご注意：</i></strong> 銀行によっては、返金処理に時間がかかる場合があります。<br><br>					</td>				</tr>			</tbody>		</table>		<p></p>		<h3><a name=""b04""></a>配送状況情報</h3>		<p></p>		<table width=""100%"" cellspacing=""0"" cellpadding=""0"" border=""0"">			<tbody>				<tr>					<th>状況</th>					<th>説明</th>				</tr>			<!--ROW 1-->				<tr>					<td class=""blue3"">						<strong>注文作成</strong><br>					</td>					<td class=""grey3"">						ご注文の配送準備が整い、配送業者のシステムに登録されました。<br>					</td>				</tr>				<!--ROW 2-->				<tr>					<td class=""blue3"">						<strong>物流センターでの受領</strong><br>					</td>					<td class=""grey3"">					お荷物が物流センターに到着しました。 <br><br>					</td>				</tr>				<!--ROW 3-->				<tr>					<td class=""blue3"">						<strong>物流センターでの手続き終了</strong><br>					</td>					<td class=""grey3"">						お荷物が物流センターで処理され、配送業者への引き渡し準備が整いました。<br><br>					</td>				</tr>				<!--ROW 4-->				<tr>					<td class=""blue3"">						<strong>配送業者に配送中</strong><br>					</td>					<td class=""grey3"">						お荷物が物流センターから配送業者に送られました。<br><br>					</td>				</tr>				<!--ROW 5-->				<tr>					<td class=""blue3"">						<strong>配送業者による再配送</strong><br>					</td>					<td class=""grey3"">						配送業者が荷物を配送しましたが、もう一度お届けに参ります。不在時配送をお知らせする連絡票が届きます。<br><br>					</td>				</tr>			<!--ROW 6-->				<tr>					<td class=""blue3"">						<strong>配送済み</strong><br>					</td>					<td class=""grey3"">						お荷物が配送されました。<br><br>					</td>				</tr>			</tbody>		</table>		<p></p>		<a class=""pagetop-link"" href=""#00"">トップに戻る</a>	</div>		<div class=""item_container"">		<h2><a name=""c00""></a>登録</h2>		<p>テキスト</p>		<a class=""pagetop-link"" href=""#00"">トップに戻る</a>	</div>	<div class=""item_container"">		<h2><a name=""d00""></a>オンライン アカウント</h2>		<p>テキスト</p>		<a class=""pagetop-link"" href=""#00"">トップに戻る</a>	</div>	<div class=""item_container"">		<h2><a name=""e00""></a>ご注文</h2>		<p>テキスト</p>		<a class=""pagetop-link"" href=""#00"">トップに戻る</a>	</div>	<div class=""item_container"">		<h2><a name=""f00""></a>プロモーションと割り引き</h2>		<p>テキスト</p>		<a class=""pagetop-link"" href=""#00"">トップに戻る</a>	</div>	<div class=""item_container"">		<h2><a name=""g00""></a>製品情報と一般的な情報</h2>		<p>テキスト</p>		<a class=""pagetop-link"" href=""#00"">トップに戻る</a>	</div>	<div class=""item_container"">		<h2><a name=""h00""></a>店舗情報</h2>		<p>テキスト</p>		<a class=""pagetop-link"" href=""#00"">トップに戻る</a>	</div>	<div class=""item_container"">		<h2><a name=""i00""></a>業務に関する連絡先</h2>		<p>テキスト</p>		<a class=""pagetop-link"" href=""#00"">トップに戻る</a>	</div>		<div class=""item_container"">		<h2><a name=""j00""></a>購入ガイド</h2>		<p>テキスト</p>		<a class=""pagetop-link"" href=""#00"">トップに戻る</a>	</div>		<div class=""item_container"">		<h2><a name=""k00""></a>サイズ ガイド</h2>		<p>テキスト</p>		<a class=""pagetop-link"" href=""#00"">トップに戻る</a>	</div>		<div class=""item_container"">		<h2><a name=""l00""></a>プライバシーとセキュリティ</h2>		<p>テキスト</p>		<a class=""pagetop-link"" href=""#00"">トップに戻る</a>	</div></div>";
+
+# Site Logo Component
+UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+;;SiteLogoComponent;/images/theme/logo-hybris-responsive.png
+
+#############################################################################################################################################
+#############################################				 needs localization 				#############################################
+#############################################################################################################################################
+# update linkname
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;PersonalDetailsLink;"Update Personal Details"
+;;UpdateEmailLink;"Update Email"
+;;UpdatePasswordLink;"Update Password"
+;;AddressBookLink;"Address Book"
+;;PaymentDetailsLink;"Payment Details"
+;;OrderHistoryLink;"Order History"
+
+# update navigation node title
+UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+;;MyAccountNavNode;"My Account"
+#############################################################################################################################################
+#############################################						 end 						#############################################
+#############################################################################################################################################

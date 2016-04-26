@@ -1,0 +1,16 @@
+$catalogVersion=catalogVersion(catalog(id[default='Default']),version[default='Online'])[unique=true,default='Default:Online'];
+
+INSERT_UPDATE Catalog;id[unique=true];name[lang=de];name[lang=en];defaultCatalog
+;Default;Default-Katalog;default catalog;true
+
+INSERT_UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];languages(isocode);active
+;Default;Online;en;false
+;Default;Staged;en;true
+
+INSERT_UPDATE News;content[lang=de];content[lang=en];competition[unique=true];id;$catalogVersion
+;Wilkommen zu CuppY;Welcome to CuppY;;1
+
+INSERT_UPDATE News;content[lang=de];content[lang=en];competition(code)[unique=true];id;$catalogVersion
+;Willkommen zur WM 2002;Welcome to World Cup 2002;wc2002;2
+;Willkommen EM 2008;Welcome to Euro Cup 2008;ec2008;3
+;Willkommen zur WM 2010;Welcome to World Cup 2010;wc2010;4

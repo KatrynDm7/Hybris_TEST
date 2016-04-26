@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns="http://www.springframework.org/schema/beans"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="csvImportResource" class="de.hybris.datahub.y2ysync.rest.resources.Y2YSyncImportResource">
+		<property name="csvImportFacade" ref="csvImportFacade" />
+	</bean>
+
+	<alias name="defaultCsvImportFacade" alias="csvImportFacade" />
+	<bean id="defaultCsvImportFacade" class="de.hybris.datahub.y2ysync.facade.impl.DefaultCsvImportFacade">
+		<property name="csvReaderService" ref="csvReaderService" />
+		<property name="csvRawFragmentConversionService" ref="csvRawFragmentConversionService" />
+		<property name="rawFragmentInputChannel" ref="rawFragmentMessageInputChannel" />
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="dataLoadingValidator" ref="csvDataLoadingValidator" />
+		<property name="dataLoadingService" ref="dataLoadingService" />
+		<property name="dataHubFeedService" ref="dataHubFeedService" />
+		<property name="canonicalItemService" ref="canonicalItemService" />
+	</bean>
+
+	<alias name="defaultCsvReaderService" alias="csvReaderService" />
+	<bean name="defaultCsvReaderService" class="de.hybris.datahub.y2ysync.service.impl.DefaultCsvReaderService" />
+
+	<alias name="defaultCsvRawFragmentConversionService" alias="csvRawFragmentConversionService" />
+	<bean name="defaultCsvRawFragmentConversionService"
+		  class="de.hybris.datahub.y2ysync.service.impl.DefaultCsvRawFragmentConversionService" />
+	<bean id="csvDataLoadingValidator" class="de.hybris.datahub.y2ysync.service.impl.CsvDataLoadingValidator">
+		<property name="dataHubFeedService" ref="dataHubFeedService" />
+		<property name="rawItemService" ref="rawItemService" />
+	</bean>
+
+
+</beans>

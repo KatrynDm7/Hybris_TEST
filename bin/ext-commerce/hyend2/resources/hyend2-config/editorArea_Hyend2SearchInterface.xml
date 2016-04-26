@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>
+	<group qualifier="Hyend2SearchInterfaceGeneral" visible="true" initially-opened="true">
+		<label key="cockpit.config.label.General" />
+		<property qualifier="Hyend2SearchInterface.name" />
+	</group>
+	
+	<group qualifier="Hyend2SIAttributesSection" visible="true" initially-opened="true">
+		<label key="hyend2.attributes" />
+		<property qualifier="Hyend2SearchInterface.attributes" />	
+	</group>
+</editor>

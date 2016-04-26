@@ -1,0 +1,45 @@
+$productCatalog=financialProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+$lang=en
+
+
+#Update BundleTemplate for name.
+UPDATE BundleTemplate;id[unique=true];name[lang=$lang];$catalogVersion
+;WEDPLAN		;Event Insurance
+;STAR_PRODUCT	;Event Insurance Options
+;STAR_PLAN		;Event Insurance Plans
+
+# Insert BundleTemplates for TravelInsurance
+;TRA_PACKAGE	;Travel Insurance
+;TRA_INSURANCE	;Travel Insurance Component
+;TRA_OPTIONS	;Optional Travel Coverage Component
+
+;PRO_HOMEOWNERS_PACKAGE	    ;Homeowners Property Insurance
+;PRO_HOMEOWNERS_INSURANCE	;Homeowners Property Insurance Component
+;PRO_HOMEOWNERS_OPTIONS	    ;Optional Homeowners Property Coverage Component
+
+;PRO_RENTERS_PACKAGE	    ;Renters Property Insurance
+;PRO_RENTERS_INSURANCE	    ;Renters Property Insurance Component
+;PRO_RENTERS_OPTIONS	    ;Optional Renters Property Coverage Component
+
+;PRO_HOMEOWNERS_PACKAGE_MONTHLY	    ;Homeowners Property Insurance Monthly
+;PRO_HOMEOWNERS_INSURANCE_MONTHLY	;Homeowners Property Insurance Component Monthly
+;PRO_HOMEOWNERS_OPTIONS_MONTHLY	    ;Optional Homeowners Property Coverage Component Monthly
+
+;PRO_RENTERS_PACKAGE_MONTHLY	    ;Renters Property Insurance Monthly
+;PRO_RENTERS_INSURANCE_MONTHLY	    ;Renters Property Insurance Component Monthly
+;PRO_RENTERS_OPTIONS_MONTHLY	    ;Optional Renters Property Coverage Component Monthly
+
+;AUTO_PACKAGE_ANNUALLY          ;Auto Insurance Annually Bundle Package
+;AUTO_INSURANCE_ANNUALLY        ;Auto Insurance Annually Component
+;AUTO_INSURANCE_ANNUALLY_OPTIONS;Optional Auto Insuarnce Annually Component
+
+;AUTO_PACKAGE_MONTHLY           ;Auto Insurance Monthly Bundle Package
+;AUTO_INSURANCE_MONTHLY         ;Auto Insurance Monthly Component
+;AUTO_INSURANCE_MONTHLY_OPTIONS ;Optional Auto Insuarnce Monthly Component
+
+;AUTO_MANDATORY					;Auto Insurance Mandatory Component
+;LIFE_PACKAGE                   ;Life Insurance Bundle Package
+;LIFE_PLAN                      ;Life Insurance
+;LIFE_OPTIONS                   ;Life Insurance Component

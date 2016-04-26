@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+--> 
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+           
+    <!-- define module access  -->
+    <bean id="sapCreditCheckConfigurationAccess" parent="sapCoreModuleConfigurationAccess">
+		<property name="moduleId" value="sapcreditcheck" />		
+	</bean>
+    
+	<!-- define business object  -->
+	<alias alias="sapCreditCheckBO" name="sapCreditCheckBOImpl" />
+	<bean id="sapCreditCheckBOImpl" parent="sapCoreBusinessObject"
+		class="de.hybris.platform.sap.sapcreditcheck.businessobject.impl.SapCreditCheckBOImpl">
+		<property name="moduleConfigurationAccess" ref="sapCreditCheckConfigurationAccess" />		
+	</bean>
+	
+	<!-- define business object factory  -->
+	<alias alias="sapCreditCheckBOFactory" name="defaultSapCreditCheckBOFactory" />
+	<bean id="defaultSapCreditCheckBOFactory"
+		class="de.hybris.platform.sap.sapcreditcheck.service.impl.DefaultSapCreditCheckBOFactory">
+		<property name="genericFactory" ref="sapCoreGenericFactory" />
+	</bean>
+	
+	<!-- define ERP back-end object  -->
+	<alias alias="sapCreditCheckBackendERP" name="defaultSapCreditCheckBackendERP" />
+	<bean id="defaultSapCreditCheckBackendERP"
+		class="de.hybris.platform.sap.sapcreditcheck.backend.impl.SapCreditCheckBackendERP"
+		scope="sapSession" parent="sapCoreBackendObjectJCo">
+		<property name="managedConnectionFactory" ref="sapCoreJCoManagedConnectionFactory" />
+		<property name="moduleConfigurationAccess" ref="sapCreditCheckConfigurationAccess" />
+	</bean>
+	
+	<!-- define sapCreditCheckService service bean  -->
+	<alias name="defaultSapCreditCheckService" alias="sapCreditCheckService"/>
+	<bean id="defaultSapCreditCheckService"
+			class="de.hybris.platform.sap.sapcreditcheck.service.impl.DefaultSapCreditCheckService">
+		<property name="sapCreditCheckBOFactory" ref="sapCreditCheckBOFactory" />
+		<property name="moduleConfigurationAccess" ref="sapCreditCheckConfigurationAccess" />
+		<property name="b2bCustomerService" ref="b2bCustomerService" />
+		<property name="b2bUnitService" ref="b2bUnitService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+	</bean>
+	
+	 <!-- Override b2bCheckoutFacade -->
+    <alias name="sapCreditCheckB2BCheckoutFacade" alias="b2bCheckoutFacade" />
+	<bean id="sapCreditCheckB2BCheckoutFacade" parent="defaultB2BCheckoutFacade"
+	      class="de.hybris.platform.sap.sapcreditcheck.facades.impl.SapCreditCheckB2BCheckoutFacade" >
+	      <property name="sapCreditCheckService" ref="sapCreditCheckService" />		
+	</bean>
+	
+	<!-- Override b2bOrderFacade -->
+	<alias name="sapCreditCheckB2BOrderFacade" alias="b2bOrderFacade"/>
+	<bean id="sapCreditCheckB2BOrderFacade" parent="defaultB2BOrderFacade" 
+			class="de.hybris.platform.sap.sapcreditcheck.facades.impl.SapCreditCheckB2BOrderFacade">
+            <property name="sapCreditCheckService" ref="sapCreditCheckService" />	
+	</bean>
+		
+</beans>

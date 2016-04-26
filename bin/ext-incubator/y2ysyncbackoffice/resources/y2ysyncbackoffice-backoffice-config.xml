@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<config xmlns="http://www.hybris.com/cockpit/config"
+		xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config"
+		xmlns:y="http://www.hybris.com/cockpit/config/hybris"
+		xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea"
+		xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree"
+		xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch"
+		xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch"
+		xmlns:list-view="http://www.hybris.com/cockpitng/component/listView"
+		xmlns:df="http://www.hybris.com/cockpitng/component/dynamicForms">
+
+	<context component="explorer-tree" merge-by="module">
+		<explorer-tree:explorer-tree>
+			<explorer-tree:navigation-node id="hmc_treenode_y2ysync" position="100">
+				<explorer-tree:type-node code="Y2YStreamConfigurationContainer" id="hmc_typenode_y2ysyncstreamconfigurationcontainer"/>
+                <explorer-tree:type-node code="Y2YSyncJob" id="hmc_typenode_syncjob"/>
+				<explorer-tree:navigation-node id="hmc_treenode_y2ysync_advanced">
+					<explorer-tree:type-node code="SyncImpExMedia" id="hmc_typenode_syncimpexmedia"/>
+					<explorer-tree:type-node code="ItemVersionMarker" id="hmc_typenode_deltadetection_itemversionmarker"/>
+				</explorer-tree:navigation-node>
+			</explorer-tree:navigation-node>
+		</explorer-tree:explorer-tree>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="StreamConfiguration" component="simple-search">
+		<simple-search:simple-search >
+			<simple-search:field name="pk"/>
+			<simple-search:field name="streamId"/>
+		</simple-search:simple-search>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="StreamConfiguration" component="advanced-search">
+		<advanced-search:advanced-search >
+			<advanced-search:field-list>
+				<advanced-search:field name="streamId" selected="true"/>
+				<advanced-search:field name="active" selected="true"/>
+				<advanced-search:field name="pk" selected="false"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="StreamConfigurationContainer"  component="simple-search">
+		<simple-search:simple-search >
+			<simple-search:field  name="id"/>
+		</simple-search:simple-search>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="StreamConfigurationContainer" component="advanced-search">
+		<advanced-search:advanced-search>
+			<advanced-search:field-list>
+				<advanced-search:field name="id" selected="true"/>
+				<advanced-search:field name="pk" selected="false"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+
+
+	<context merge-by="type" parent="StreamConfiguration" type="Y2YStreamConfiguration" component="simple-search">
+		<simple-search:simple-search>
+			<simple-search:field name="pk"/>
+			<simple-search:field name="streamId"/>
+		</simple-search:simple-search>
+	</context>
+
+	<context merge-by="type" parent="StreamConfiguration" type="Y2YStreamConfiguration" component="advanced-search">
+		<advanced-search:advanced-search>
+			<advanced-search:field-list>
+				<advanced-search:field name="streamId" selected="true"/>
+				<advanced-search:field name="active" selected="true"/>
+				<advanced-search:field name="catalogVersion" selected="true"/>
+				<advanced-search:field name="pk" selected="false"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+
+	<context merge-by="type" parent="StreamConfigurationContainer" type="Y2YStreamConfigurationContainer" component="simple-search">
+		<simple-search:simple-search>
+			<simple-search:field name="id"/>
+		</simple-search:simple-search>
+	</context>
+
+	<context merge-by="type" parent="StreamConfigurationContainer" type="Y2YStreamConfigurationContainer" component="advanced-search">
+		<advanced-search:advanced-search >
+			<advanced-search:field-list>
+				<advanced-search:field name="id" selected="true"/>
+				<advanced-search:field name="catalogVersion" selected="false"/>
+				<advanced-search:field name="pk" selected="false"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+
+	<context merge-by="type" parent="Item" type="ItemVersionMarker" component="simple-search">
+		<simple-search:simple-search>
+			<simple-search:field name="itemPK"/>
+			<simple-search:field name="streamId"/>
+		</simple-search:simple-search>
+	</context>
+
+	<context merge-by="type" parent="Item" type="ItemVersionMarker" component="advanced-search">
+		<advanced-search:advanced-search>
+			<advanced-search:field-list>
+				<advanced-search:field name="itemPK" selected="true"/>
+				<advanced-search:field name="streamId" selected="false"/>
+				<advanced-search:field name="itemComposedType" selected="false"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+
+    <context parent="CatalogUnawareMedia" type="SyncImpExMedia" component="listview">
+		<list-view:list-view>
+			<list-view:column qualifier="exportCronJob" />
+			<list-view:column qualifier="code" />
+			<list-view:column qualifier="syncType" />
+			<list-view:column qualifier="size" />
+		</list-view:list-view>
+	</context>
+
+	<context merge-by="type" parent="Item" type="StreamConfiguration" component="listview">
+		<list-view:list-view>
+			<list-view:column qualifier="streamId"/>
+			<list-view:column qualifier="active"/>
+		</list-view:list-view>
+	</context>
+
+	<context merge-by="type" parent="Item" type="StreamConfigurationContainer" component="listview">
+		<list-view:list-view>
+			<list-view:column qualifier="id"/>
+		</list-view:list-view>
+	</context>
+
+
+	<context merge-by="type" parent="StreamConfiguration" type="Y2YStreamConfiguration" component="listview">
+		<list-view:list-view>
+			<list-view:column qualifier="catalogVersion"/>
+		</list-view:list-view>
+	</context>
+
+	<context merge-by="type" parent="StreamConfigurationContainer" type="Y2YStreamConfigurationContainer" component="listview">
+        <list-view:list-view >
+            <list-view:column qualifier="catalogVersion"/>
+        </list-view:list-view>
+	</context>
+
+
+	<context merge-by="type" parent="Item" type="ItemVersionMarker" component="listview">
+		<list-view:list-view>
+			<list-view:column qualifier="streamId"/>
+			<list-view:column qualifier="itemComposedType"/>
+			<list-view:column qualifier="itemPK"/>
+			<list-view:column qualifier="versionTS"/>
+		</list-view:list-view>
+	</context>
+
+	<context merge-by="type" parent="Job" type="Y2YSyncJob" component="listview">
+		<list-view:list-view>
+			<list-view:column qualifier="code"/>
+			<list-view:column qualifier="streamConfigurationContainer"/>
+			<list-view:column qualifier="syncType"/>
+		</list-view:list-view>
+	</context>
+
+    <context merge-by="type" type="Y2YColumnDefinition" component="editor-area" module="y2ysyncbackoffice">
+        <editorArea:editorArea name="Y2YColumnDefinitionEditorArea">
+            <editorArea:essentials>
+                <editorArea:essentialSection columns="2" name="hmc.essential">
+                    <editorArea:attribute qualifier="attributeDescriptor"/>
+                    <editorArea:attribute qualifier="language"/>
+                    <editorArea:attribute qualifier="position"/>
+				</editorArea:essentialSection>
+			</editorArea:essentials>
+            <editorArea:tab name="hmc.tab.common">
+                <editorArea:section columns="2" name="hmc.y2ysync.streamconfiguration">
+                    <editorArea:panel colspan="2" name="panel.columnDefinitions" rowspan="2">
+	                    <editorArea:attribute qualifier="impexHeader"/>
+	                </editorArea:panel>
+                    <editorArea:attribute qualifier="columnName"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+    </context>
+	
+	<context merge-by="type" parent="StreamConfiguration" type="Y2YStreamConfiguration" component="editor-area">
+		<editorArea:editorArea name="StreamConfigurationEditorArea">
+			<editorArea:essentials>
+				<editorArea:essentialSection name="hmc.essential" columns="2">
+					<editorArea:attribute qualifier="streamId"/>
+					<editorArea:attribute qualifier="itemTypeForStream"/>
+					<editorArea:attribute qualifier="container"/>
+					<editorArea:attribute qualifier="catalogVersion"/>
+				</editorArea:essentialSection>
+			</editorArea:essentials>
+			<editorArea:tab xmlns="http://www.hybris.com/cockpitng/component/editorArea" name="hmc.tab.common">
+				<editorArea:section name="hmc.y2ysync.streamconfiguration" columns="1">
+					<editorArea:attribute qualifier="columnDefinitions"/>
+					<editorArea:attribute qualifier="active"/>
+					<editorArea:attribute qualifier="excludedTypes"/>
+				</editorArea:section>
+				<editorArea:section name="hmc.y2ysync.expressions" columns="1">
+					<editorArea:panel name="y2ysync_expressions_panel">
+						<editorArea:attribute qualifier="autoGenerateWhereClause"/>
+						<editorArea:attribute qualifier="whereClause">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>4</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:attribute qualifier="versionSelectClause">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>3</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:attribute qualifier="infoExpression">
+							<editorArea:editor-parameter>
+								<editorArea:name>rows</editorArea:name>
+								<editorArea:value>3</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+					</editorArea:panel>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+
+    <context merge-by="type" parent="StreamConfigurationContainer" type="Y2YStreamConfigurationContainer" component="editor-area" module="y2ysyncbackoffice">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea" xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch" xmlns:df="http://www.hybris.com/cockpitng/component/dynamicForms" xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree" xmlns:list-view="http://www.hybris.com/cockpitng/component/listView" xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch" xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" xmlns:y="http://www.hybris.com/cockpit/config/hybris" name="StreamConfigurationContainerEditorArea">
+            <editorArea:essentials>
+                <editorArea:essentialSection name="hmc.essential">
+                    <editorArea:attribute qualifier="id"/>
+                    <editorArea:attribute qualifier="catalogVersion"/>
+				</editorArea:essentialSection>
+			</editorArea:essentials>
+            <editorArea:tab xmlns="http://www.hybris.com/cockpitng/component/editorArea" name="hmc.tab.common">
+                <section name="hmc.y2ysync.streamcontainerconfiguration" columns="2">
+					<panel name="panel.configurations" colspan="2" rowspan="2">
+						<attribute editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor" qualifier="configurations">
+							<editor-parameter>
+								<name>listConfigContext</name>
+								<value>configurationsListView</value>
+							</editor-parameter>
+						</attribute>
+					</panel>
+				</section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+    </context>
+    
+    <context merge-by="type" parent="GenericItem" type="Y2YStreamConfiguration" component="configurationsListView">
+    	<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+    	    <list-view:column qualifier="streamId"/>
+	        <list-view:column qualifier="itemTypeForStream"/>
+    	    <list-view:column qualifier="active"/>
+	    </list-view:list-view>
+	</context>
+
+	<context merge-by="type" parent="CronJob" type="Y2YSyncCronJob" component="editor-area">
+		<editorArea:editorArea name="CronJobEditorArea">
+			<editorArea:essentials>
+				<editorArea:essentialSection name="hmc.essential">
+					<editorArea:attribute qualifier="code"/>
+				</editorArea:essentialSection>
+			</editorArea:essentials>
+			<editorArea:tab name="hmc.tab.cronjob.common">
+				<editorArea:section name="hmc.y2ysync.synccronjobconfiguration">
+					<editorArea:attribute qualifier="impexZip"/>
+					<editorArea:attribute qualifier="mediasZip"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+
+	<context merge-by="type" parent="CatalogUnawareMedia" type="SyncImpExMedia" component="editor-area">
+		<editorArea:editorArea name="CatalogUnawareMediaEditorArea">
+			<editorArea:essentials>
+				<editorArea:essentialSection name="hmc.essential">
+					<editorArea:attribute qualifier="code"/>
+					<editorArea:attribute qualifier="exportCronJob"/>
+				</editorArea:essentialSection>
+			</editorArea:essentials>
+			<editorArea:tab xmlns="http://www.hybris.com/cockpitng/component/editorArea" name="hmc.tab.common">
+				<section name="hmc.y2ysync.syncimpexconfiguration">
+					<attribute qualifier="syncType"/>
+					<attribute qualifier="impexHeader"/>
+					<attribute qualifier="dataHubColumns"/>
+					<attribute qualifier="mediaArchive"/>
+				</section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+
+	<context merge-by="type" parent="Item" type="ItemVersionMarker" component="editor-area">
+		<editorArea:editorArea name="ItemVersionMarkerEditorArea">
+			<editorArea:essentials>
+				<editorArea:essentialSection name="hmc.essential">
+					<editorArea:attribute qualifier="itemPK"/>
+					<editorArea:attribute qualifier="itemComposedType"/>
+				</editorArea:essentialSection>
+			</editorArea:essentials>
+			<editorArea:tab name="hmc.tab.common">
+				<editorArea:section name="hmc.y2ysync.syncimpexconfiguration">
+					<editorArea:attribute qualifier="streamId"/>
+					<editorArea:attribute qualifier="versionTS"/>
+					<editorArea:attribute qualifier="status"/>
+					<editorArea:attribute qualifier="versionValue"/>
+					<editorArea:attribute qualifier="info"/>
+					<editorArea:attribute qualifier="lastVersionValue"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+
+	<context merge-by="type" parent="Job" type="Y2YSyncJob" component="editor-area">
+		<editorArea:editorArea name="ItemVersionMarkerEditorArea">
+			<editorArea:essentials>
+				<editorArea:essentialSection name="hmc.essential">
+					<editorArea:attribute qualifier="code"/>
+					<editorArea:attribute qualifier="streamConfigurationContainer"/>
+				</editorArea:essentialSection>
+			</editorArea:essentials>
+			<editorArea:tab name="hmc.tab.common">
+				<editorArea:section name="hmc.y2ysync.syncimpexconfiguration">
+					<editorArea:attribute qualifier="syncType"/>
+					<editorArea:attribute qualifier="dataHubUrl"/>
+					<editorArea:attribute qualifier="triggers"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+
+	<context type="StreamConfiguration" component="create-wizard">
+		<wz:flow id="StreamConfigurationWizard"
+				 title="create.title(ctx.TYPE_CODE)">
+			<wz:prepare id="streamConfigurationPrepare">
+				<wz:initialize property="newStreamConfiguration" type="ctx.TYPE_CODE"/>
+                <wz:assign property="newStreamConfiguration.container" value="ctx.parentObject"/>
+            </wz:prepare>
+			<wz:step id="step1" label="create.streamconfiguration.essential.label">
+				<wz:content id="step1.content">
+					<wz:property-list root="newStreamConfiguration">
+                        <wz:property qualifier="container"/>
+						<wz:property qualifier="streamId"/>
+                        <wz:property qualifier="itemTypeForStream"/>
+                    </wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel/>
+					<wz:done visible="!#empty(newStreamConfiguration.streamId) and newStreamConfiguration.itemTypeForStream != null">
+						<wz:save property="newStreamConfiguration"/>
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+
+	<context type="SyncImpExMedia" component="create-wizard">
+		<wz:flow id="SyncImpExMediaWizard"
+				 title="create.title(ctx.TYPE_CODE)">
+			<wz:prepare id="syncImpExMediaPrepare">
+				<wz:initialize property="newSyncImpExMedia" type="ctx.TYPE_CODE"/>
+			</wz:prepare>
+			<wz:step id="step1" label="create.streamconfiguration.essential.label">
+				<wz:content id="step1.content">
+					<wz:property-list root="newSyncImpExMedia">
+						<wz:property qualifier="code"/>
+						<wz:property qualifier="impexHeader"/>
+						<wz:property qualifier="syncType"/>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel/>
+					<wz:done>
+						<wz:save property="newSyncImpExMedia"/>
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+
+	<context type="Y2YColumnDefinition" component="create-wizard">
+		<wz:flow id="Y2YColumnDefinitionWizard"
+				 title="create.title(ctx.TYPE_CODE)">
+			<wz:prepare id="Y2YColumnDefinitionPrepare">
+				<wz:initialize property="newY2YColumnDefinition" type="ctx.TYPE_CODE"/>
+				<wz:assign property="newY2YColumnDefinition.streamConfiguration" value="ctx.parentObject"/>
+			</wz:prepare>
+			<wz:step id="step1" label="create.y2ycolumndefinition.essential.label">
+				<wz:content id="step1.content">
+					<wz:property-list root="newY2YColumnDefinition">
+						<wz:property qualifier="streamConfiguration"/>
+						<wz:property qualifier="attributeDescriptor"/>
+						<wz:property qualifier="columnName"/>
+						<wz:property qualifier="impexHeader"/>
+						<wz:property qualifier="language"/>
+						<wz:property qualifier="position"/>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel/>
+					<wz:done>
+						<wz:save property="newY2YColumnDefinition"/>
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+
+    <context type="Y2YStreamConfiguration" component="create-wizard" merge-by="type" parent="StreamConfiguration">
+        <wz:flow id="StreamConfigurationWizard"
+                 title="create.title(ctx.TYPE_CODE)">
+            <wz:step id="step1" label="create.streamconfiguration.essential.label">
+				<wz:content id="step1.content">
+					<wz:property-list root="newStreamConfiguration">
+						<wz:property qualifier="container"/>
+						<wz:property qualifier="streamId"/>
+						<wz:property qualifier="itemTypeForStream"/>
+					</wz:property-list>
+				</wz:content>
+                <wz:navigation id="step1.navigation">
+                    <wz:next visible="!#empty(newStreamConfiguration.streamId) and newStreamConfiguration.itemTypeForStream != null"/>
+                </wz:navigation>
+            </wz:step>
+            <wz:step id="step2" label="create.streamconfiguration.references.label">
+                <wz:content id="step2.content">
+                    <wz:property-list root="newStreamConfiguration">
+                        <wz:property qualifier="columnDefinitions"/>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step2.navigation">
+                    <wz:cancel/>
+                    <wz:back/>
+                    <wz:done>
+                        <wz:save property="newStreamConfiguration"/>
+                    </wz:done>
+                </wz:navigation>
+            </wz:step>
+        </wz:flow>
+    </context>
+
+    <context type="Y2YStreamConfiguration" component="configurableFlowDynamicForms">
+        <df:dynamicForms modelProperty="newStreamConfiguration">
+            <df:attribute id="dynamicColumnDefinitions" computedValue=
+					"if (context.itemTypeForStream != null) {
+                     	columns = syncConfigService.createDefaultColumnDefinitions(context.itemTypeForStream);
+                     	columns.eachWithIndex { coldef, idx ->
+                        	coldef.streamConfiguration=context;
+                        	coldef.position=idx };
+					 }"
+                          qualifier="columnDefinitions" triggeredOn="itemTypeForStream">
+                <df:scriptingConfig computedValueLanguage="Groovy" computedValueScriptType="inline"/>
+            </df:attribute>
+        </df:dynamicForms>
+    </context>
+
+	<context type="StreamConfigurationContainer" component="create-wizard">
+		<wz:flow id="StreamConfigurationContainerWizard"
+				 title="create.title(ctx.TYPE_CODE)">
+			<wz:prepare id="streamConfigurationContainerPrepare">
+				<wz:initialize property="newStreamConfigurationContainer" type="ctx.TYPE_CODE"/>
+			</wz:prepare>
+			<wz:step id="step1" label="create.streamconfigurationcontainer.essential.label">
+				<wz:content id="step1.content">
+					<wz:property-list root="newStreamConfigurationContainer">
+						<wz:property qualifier="id"/>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel/>
+					<wz:done visible="!#empty(newStreamConfigurationContainer.id)">
+						<wz:save property="newStreamConfigurationContainer"/>
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+
+    <context type="Y2YStreamConfigurationContainer" component="create-wizard" merge-by="type" parent="StreamConfigurationContainer">
+        <wz:flow id="StreamConfigurationContainerWizard"
+                 title="create.title(ctx.TYPE_CODE)">
+           <wz:step id="step1" label="create.streamconfigurationcontainer.essential.label">
+                <wz:content id="step1.content">
+                    <wz:property-list root="newStreamConfigurationContainer">
+                        <wz:property qualifier="catalogVersion"/>
+                    </wz:property-list>
+                </wz:content>
+            </wz:step>
+        </wz:flow>
+    </context>
+
+
+	<context type="ItemVersionMarker" component="create-wizard">
+		<wz:flow id="ItemVersionMarkerWizard"
+				 title="create.title(ctx.TYPE_CODE)">
+			<wz:prepare id="ItemVersionMarkerPrepare">
+				<wz:initialize property="itemVersionMarker" type="ctx.TYPE_CODE"/>
+			</wz:prepare>
+			<wz:step id="step1" label="create.itemversionmarker.essential.label">
+				<wz:content id="step1.content">
+					<wz:property-list root="itemVersionMarker">
+						<wz:property qualifier="itemPK"/>
+						<wz:property qualifier="itemComposedType"/>
+						<wz:property qualifier="streamId"/>
+						<wz:property qualifier="status"/>
+						<wz:property qualifier="versionTS"/>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel/>
+					<wz:done>
+						<wz:save property="itemVersionMarker"/>
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+
+    <context type="de.hybris.platform.y2ysync.backoffice.data.Y2YCloneContainerForm" component="create-wizard">
+        <wz:flow id="y2yCloneStreamContainerWizard" title="Clone Stream container">
+            <wz:prepare id="clonePrepare">
+                <wz:assign property="cloneContainerForm" value="currentContext"/>
+            </wz:prepare>
+            <wz:step id="step1" label="create.y2ysync.clonecontainer.essential.label" sublabel="create.y2ysync.clonecontainer.essential.sublabel">
+                <wz:content id="step1.content">
+                    <wz:property qualifier="cloneContainerForm.targetContainerId" type="java.lang.String"/>
+                </wz:content>
+                <wz:navigation id="step1.navigation">
+                    <wz:cancel/>
+                    <wz:custom visible="cloneContainerForm.targetContainerId !=null" handler="y2ysyncCloneContainerWizardHandler" label="Clone"
+                               default-target="step2">
+                    </wz:custom>
+                </wz:navigation>
+            </wz:step>
+            <wz:step id="step2" label="create.y2ysync.clonecontainer.results.label" sublabel="create.y2ysync.clonecontainer.results.sublabel">
+                <wz:content id="step2.content">
+                    <wz:property qualifier="cloneContainerForm.targetContainer" type="Reference(Y2YStreamConfigurationContainer)" />
+                    </wz:content>
+                <wz:navigation id="step2.navigation">
+                    <wz:cancel/>
+                    <wz:back/>
+					<wz:custom label="Save" handler="y2ysyncSaveClonedContainerWizardHandler"/>
+                </wz:navigation>
+            </wz:step>
+        </wz:flow>
+    </context>
+
+
+	<context type="Y2YSyncJob" component="create-wizard">
+		<wz:flow id="Y2YSyncJobWizard"
+				 title="create.title(ctx.TYPE_CODE)">
+			<wz:prepare id="Y2YSyncJobPrepare">
+				<wz:initialize property="newY2YSyncJob" type="ctx.TYPE_CODE"/>
+			</wz:prepare>
+			<wz:step id="step1" label="create.itemversionmarker.essential.label">
+				<wz:content id="step1.content">
+					<wz:property-list root="newY2YSyncJob">
+						<wz:property qualifier="code"/>
+						<wz:property qualifier="streamConfigurationContainer"/>
+						<wz:property qualifier="syncType"/>
+						<wz:property qualifier="dataHubUrl"/>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel/>
+					<wz:done>
+						<wz:save property="newY2YSyncJob"/>
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+	<context type="Y2YSyncJob" component="configurableFlowDynamicForms">
+		<df:dynamicForms modelProperty="newY2YSyncJob">
+			<df:attribute id="dynamicDataHubUrl" triggeredOn="syncType" qualifier="dataHubUrl" visibleIf="syncType.equals(T(de.hybris.y2ysync.enums.Y2YSyncType).DATAHUB)" />
+		</df:dynamicForms>
+	</context>
+
+	<context type="de.hybris.platform.y2ysync.backoffice.data.Y2YSyncJobForm" component="create-wizard">
+		<wz:flow id="y2ySyncJobWizard" title="Y2YSyncJob Wizard">
+			<wz:prepare id="clonePrepare">
+				<wz:assign property="y2ySyncJobForm" value="currentContext"/>
+			</wz:prepare>
+			<wz:step id="step1" label="create.y2ysync.y2ysyncjob.essential.label" sublabel="create.y2ysync.y2ysyncjob.essential.sublabel">
+				<wz:content id="step1.content">
+					<wz:property qualifier="y2ySyncJobForm.async" editor="com.hybris.cockpitng.editor.boolean.checkbox"/>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel/>
+					<wz:custom handler="y2ySyncJobWizardHandler" label="Perform"
+							   default-target="step2">
+					</wz:custom>
+				</wz:navigation>
+			</wz:step>
+			<wz:step id="step2" label="create.y2ysync.y2ysyncjob.results.label" sublabel="create.y2ysync.y2ysyncjob.results.sublabel">
+				<wz:content id="step2.content">
+					<wz:property qualifier="y2ySyncJobForm.syncCronJob" type="Reference(Y2YSyncCronJob)" />
+				</wz:content>
+				<wz:navigation id="step2.navigation">
+					<wz:done/>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+
+
+	<!--EditorareaActions-->
+    <context component="editorareaactions" merge-by="type" type="Y2YStreamConfigurationContainer" parent="StreamConfigurationContainer">
+        <y:actions>
+            <y:group qualifier="common">
+                <y:label>actiongroup.common</y:label>
+                <y:action action-id="com.hybris.cockpitng.action.delete" property="currentObject"/>
+                <y:action action-id="com.hybris.cockpitng.action.clonecontainer" property="currentObject"/>
+            </y:group>
+        </y:actions>
+    </context>
+	<context type="Y2YStreamConfiguration" component="base" merge-by="type" parent="GenericItem">
+		<y:base>
+			<y:labels>
+				<y:label>container.id + ' : ' + itemTypeForStream.code + ' -> ' + streamId</y:label>
+			</y:labels>
+			<y:preview/>
+		</y:base>
+	</context>
+	
+	<context type="Y2YStreamConfigurationContainer" component="base" merge-by="type" parent="GenericItem">
+		<y:base>
+			<y:labels>
+				<y:label>id</y:label>
+			</y:labels>
+			<y:preview/>
+		</y:base>
+	</context>
+	<context type="Y2YColumnDefinition" component="base" merge-by="type" parent="GenericItem">
+		<y:base>
+			<y:labels>
+				<y:label>streamConfiguration.streamId + ' : ' + attributeDescriptor.qualifier + ( language != null ? ('['+language.isocode+']') : '' ) + ( columnName != null ? ('->'+columnName):'' ) </y:label>
+			</y:labels>
+			<y:preview/>
+		</y:base>
+	</context>
+
+	<context component="editorareaactions" merge-by="type" type="Y2YSyncJob" parent="GenericItem">
+		<y:actions>
+			<y:group qualifier="common">
+				<y:label>actiongroup.common</y:label>
+				<y:action action-id="com.hybris.cockpitng.action.delete" property="currentObject"/>
+				<y:action action-id="com.hybris.platform.y2ysync.syncjob.perform" property="currentObject"/>
+			</y:group>
+		</y:actions>
+	</context>
+
+	<context component="editorareaactions" type="StreamConfigurationContainer">
+		<y:actions>
+			<y:group qualifier="common">
+				<y:label>actiongroup.common</y:label>
+				<y:action action-id="com.hybris.cockpitng.action.delete" property="currentObject"/>
+				<y:action action-id="com.hybris.platform.y2ysync.deletestream" property="currentObject"/>
+				<y:action action-id="com.hybris.platform.y2ysync.resetstream" property="currentObject"/>
+				<y:action action-id="com.hybris.platform.y2ysync.datahub.config" property="currentObject"/>
+			</y:group>
+		</y:actions>
+	</context>
+
+	<context component="editorareaactions" type="Y2YSyncCronJob">
+		<y:actions>
+			<y:group qualifier="common">
+				<y:label>actiongroup.common</y:label>
+				<y:action action-id="com.hybris.cockpitng.action.delete" property="currentObject"/>
+				<y:action action-id="com.hybris.platform.y2ysync.datahub.resend" property="currentObject"/>
+			</y:group>
+		</y:actions>
+	</context>
+
+</config>

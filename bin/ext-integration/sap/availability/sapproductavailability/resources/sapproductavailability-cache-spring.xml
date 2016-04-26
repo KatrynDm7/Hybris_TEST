@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+		   
+    <!-- Plant Cache-->
+	<bean id="sapAtpCheckPlantCacheRegion" parent="sapCoreCacheRegion">
+		<constructor-arg name="name" value="sapAtpCheckPlantCacheRegion" />
+		<constructor-arg name="maxEntries" value="1000" />
+		<constructor-arg name="evictionPolicy" value="FIFO" />
+		<constructor-arg name="statsEnabled" value="true" />
+		<constructor-arg name="exclusiveComputation" value="false" />
+		<constructor-arg name="ttlSeconds" value="240" />
+	</bean>
+	
+	<!-- Plant Region-->
+	<bean
+		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetObject" ref="cacheRegionsList" />
+		<property name="targetMethod" value="add" />
+		<property name="arguments"> 
+		     <ref bean="sapAtpCheckPlantCacheRegion" />
+		</property>
+	</bean>
+    
+	<!-- Plant& Material Cache-->
+	<bean id="sapAtpCheckPlantMaterialCacheRegion" parent="sapCoreCacheRegion">
+		<constructor-arg name="name" value="sapAtpCheckPlantMaterialCacheRegion" />
+		<constructor-arg name="maxEntries" value="1000" />
+		<constructor-arg name="evictionPolicy" value="FIFO" />
+		<constructor-arg name="statsEnabled" value="true" />
+		<constructor-arg name="exclusiveComputation" value="false" />
+		<constructor-arg name="ttlSeconds" value="240" />
+	</bean>
+	
+	<!-- Plant& Material Region-->
+	<bean
+		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetObject" ref="cacheRegionsList" />
+		<property name="targetMethod" value="add" />
+		<property name="arguments"> 
+		     <ref bean="sapAtpCheckPlantMaterialCacheRegion" />
+		</property>
+	</bean>
+		
+    <!-- Plant& Customer Cache-->
+	<bean id="sapAtpCheckPlantCustomerCacheRegion" parent="sapCoreCacheRegion">
+		<constructor-arg name="name" value="sapAtpCheckPlantCustomerCacheRegion" />
+		<constructor-arg name="maxEntries" value="1000" />
+		<constructor-arg name="evictionPolicy" value="FIFO" />
+		<constructor-arg name="statsEnabled" value="true" />
+		<constructor-arg name="exclusiveComputation" value="false" />
+		<constructor-arg name="ttlSeconds" value="240" /> 
+	</bean>
+    
+	 <!-- Plant& Customer Region-->
+	<bean
+		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetObject" ref="cacheRegionsList" />
+		<property name="targetMethod" value="add" />
+		<property name="arguments"> 
+             <ref bean="sapAtpCheckPlantCustomerCacheRegion" />
+		</property>
+	</bean>
+    
+	 <!-- ATP Cache-->
+	<bean id="sapAtpCheckAvailabilityCacheRegion" parent="sapCoreCacheRegion">
+		<constructor-arg name="name"
+			value="sapAtpCheckAvailabilityCacheRegion" />
+		<constructor-arg name="maxEntries" value="1000" />
+		<constructor-arg name="evictionPolicy" value="FIFO" />
+		<constructor-arg name="statsEnabled" value="true" />
+		<constructor-arg name="exclusiveComputation" value="false" />
+		<constructor-arg name="ttlSeconds" value="240" /> 
+	</bean>
+	
+    <!-- ATP Region-->	
+	<bean
+		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetObject" ref="cacheRegionsList" />
+		<property name="targetMethod" value="add" />
+		<property name="arguments">
+			<ref bean="sapAtpCheckAvailabilityCacheRegion" />
+		</property>
+	</bean>
+	
+</beans>

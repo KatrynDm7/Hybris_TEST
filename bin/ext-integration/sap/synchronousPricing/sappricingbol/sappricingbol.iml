@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/resources/test/sapcorejco-test-spring.xml</file>
+          <file>file://$MODULE_DIR$/resources/test/sappricingbol-cache-test-spring.xml</file>
+          <file>file://$MODULE_DIR$/resources/test/sappricingbol-config-test-spring.xml</file>
+          <file>file://$MODULE_DIR$/resources/test/integration_test-sapcore-connection-spring.xml</file>
+          <file>file://$MODULE_DIR$/resources/sappricingbol-spring.xml</file>
+          <file>file://$MODULE_DIR$/resources/sappricingbol-cache-spring.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="sapjco3" level="project" />
+    <orderEntry type="library" name="bin1" level="project" />
+    <orderEntry type="library" name="lib33" level="project" />
+    <orderEntry type="library" name="lib40" level="project" />
+    <orderEntry type="library" name="lib54" level="project" />
+    <orderEntry type="library" name="europe1server" level="project" />
+    <orderEntry type="library" name="ext" level="project" />
+    <orderEntry type="library" name="lib26" level="project" />
+    <orderEntry type="library" name="coreserver" level="project" />
+    <orderEntry type="library" name="lib61" level="project" />
+    <orderEntry type="library" name="jetty-runner" level="project" />
+    <orderEntry type="library" name="commercesearchserver" level="project" />
+    <orderEntry type="library" name="sonar-ant-task-2.1" level="project" />
+    <orderEntry type="module" module-name="sapmodel" />
+    <orderEntry type="module" module-name="sapcore" />
+    <orderEntry type="module" module-name="financialacceleratorstorefront" />
+    <orderEntry type="module" module-name="europe1" />
+    <orderEntry type="module" module-name="sapcorejco" />
+    <orderEntry type="module" module-name="sapcoreconfiguration" />
+    <orderEntry type="module" module-name="sapcorebol" />
+    <orderEntry type="module" module-name="bootstrap" />
+    <orderEntry type="module" module-name="commercesearch" />
+    <orderEntry type="module" module-name="core" />
+  </component>
+</module>

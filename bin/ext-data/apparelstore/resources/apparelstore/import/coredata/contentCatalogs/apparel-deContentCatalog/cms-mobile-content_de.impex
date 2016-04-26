@@ -1,0 +1,33 @@
+#
+# Import the German CMS content for the Apparel Site DE
+#
+
+$contentCatalog=apparel-deContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+# Language
+$lang=de
+
+# Content Pages
+UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+ ;;mobile-account;"Mein Konto"
+ ;;mobile-add-edit-address;"Adresse hinzufügen/bearbeiten"
+ ;;mobile-address-book;"Adressbuch"
+ ;;mobile-cartPage;"Ihr Warenkorb"
+ ;;mobile-checkout-login;"Zur Kasse gehen"
+ ;;mobile-checkout-register;"Registrierung"
+ ;;mobile-faq;"Häufig gestellte Fragen"
+ ;;mobile-homepage;"Startseite"
+ ;;mobile-login;"Anmelden"
+ ;;mobile-multiStepCheckoutSummaryPage;"Bezahlen"
+ ;;mobile-notFound;"Nicht gefunden"
+ ;;mobile-order;"Bestellungsdetails"
+ ;;mobile-orderConfirmationPage;"Bestellbestätigung"
+ ;;mobile-orders;"Bestellverlauf"
+ ;;mobile-payment-details;"Zahlungsdetails"
+ ;;mobile-profile;"Profil"
+ ;;mobile-register;"Registrieren"
+ ;;mobile-searchEmpty;"Keine Ergebnisse"
+ ;;mobile-storefinderPage;"Standortsuche"
+ ;;mobile-termsAndConditions;"Allgemeine Geschäftsbedingungen"
+ ;;mobile-updatePassword;"Vergessenes Kennwort erneuern"

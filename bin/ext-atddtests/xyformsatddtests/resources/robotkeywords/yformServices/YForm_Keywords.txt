@@ -1,0 +1,99 @@
+*** Settings ***
+Library           de.hybris.platform.atddimpex.keywords.ImpexKeywordLibrary
+Library           de.hybris.platform.commerceservicesatddtests.keywords.CommerceServicesKeywordLibrary
+Library           de.hybris.platform.xyformsatddtests.yformfacade.keywords.YFormFacadeKeywordLibrary
+
+*** Keywords ***
+import sampledata
+    [Documentation]    Imports the yform test data
+    import impex from resource    /impex/testYForm.csv
+    [Documentation]    Imports the yform test data
+    import impex from resource    /impex/testAllYFormDefinitionsDynamicAttributes.csv 
+
+############
+### Get, Create, Update and Create or update YFormDefinition model
+############
+get y form definition from template with "${applicationId:[^"]+}" and "${formId:[^"]+}" and "${content:[^"]+}"
+    [Documentation]    Get a YFormDefinition based on a template
+    ${body}=    get y form definition from template    ${applicationId}    ${formId}    ${content}
+    [Return]    ${body}
+
+verify y form definition with "${applicationId:[^"]+}" and "${formId:[^"]+}" exists
+    [Documentation]    Verify the YFormDefinition model existed with given applicationId and formId
+    verify y form definition exists    ${applicationId}    ${formId}
+
+verify not existed y form definition "${applicationId:[^"]+}" and "${formId:[^"]+}" expect exception "${exception:[^"]+}"
+    [Documentation]    verify throws exception if y form definition not existed
+    verify y form definition not existed throws exception    ${applicationId}    ${formId}    ${exception}
+
+create y form definition by "${applicationId:[^"]+}" and "${formId:[^"]+}" and "${content:[^"]+}"
+    [Documentation]    Create a YFormDefinition model with given applicationId, formId and content
+    create y form definition    ${applicationId}    ${formId}    ${content}
+
+update y form definition by "${applicationId:[^"]+}" and "${formId:[^"]+}" and "${content:[^"]+}"
+    [Documentation]    Update the YFormDefinition model with given applicationId, formId and content
+    update y form definition    ${applicationId}    ${formId}    ${content}
+
+verify not existed on update y form definition "${applicationId:[^"]+}" and "${formId:[^"]+}" and "${content:[^"]+}" expect exception "${exception:[^"]+}"
+    [Documentation]    verify throws exception if y form definition not existed
+    verify y form definition not existed on update throws exception    ${applicationId}    ${formId}    ${content}    ${exception}
+
+verify y form definition "${applicationId:[^"]+}" and "${formId:[^"]+}" has updated the content to "${updatedContent:[^"]+}"
+    [Documentation]    Verify the YFormDefinition model has been updated with given applicationId, formId and content
+    verify y form definition updated    ${applicationId}    {$formId}    ${updatedContent}
+
+############
+### Get YFormDefinitionData
+############
+
+verify that all "@{formDefinitionIds}" y form definition data returned for product "${productCode:[^"]+}"
+    [Documentation]  Verify that all the YFormDefinitionData returned for product
+    verify returns all y form definition data for product    ${productCode}    @{formDefinitionIds}
+    
+verify that exception thrown when tries to return all y form definition data for non existing product "${productCode:[^"]+}"
+    [Documentation]  Verify that exception thrown when tries to return all y form definition data for non existing product
+    verify throws exception when product does not exist when get y form definition data for product    ${productCode}
+
+############
+### Get, Create, Update and Create or update YFormData model
+############
+
+verify get y form data with "${formDataId:[^"]+}" exists
+    [Documentation]    Get the YFormData model with given formDataId
+    verify y form data exists   ${formDataId}
+
+verify not existed y form data "${formDataId:[^"]+}" expect exception "${exception:[^"]+}"
+    [Documentation]    verify throws exception if y form data not existed
+    verify y form data not existed throws exception    ${formDataId}    ${exception}
+
+create y form data by "${applicationId:[^"]+}" and "${formId:[^"]+}" and "${formDataId:[^"]+}" and "${refId:[^"]+}" and "${formDataContent:[^"]+}"
+    [Documentation]    Create a YFormData model with given formDataId, refId and formDataContent, which is based on the YFormDefinition with given applicationId and formId
+    create y form data    ${applicationId}    ${formId}    ${formDataId}    ${refId}    ${formDataContent}
+
+update y form data by "${formDataId:[^"]+}" and "${formDataContent:[^"]+}"
+    [Documentation]    Update the YFormData model with given formDataId and formDataContent, which is based on the YFormDefinition with given applicationId and formId
+    update y form data by id   ${formDataId}    ${formDataContent}
+
+verify not existed on update y form data "${formDataId:[^"]+}" and "${formDataContent:[^"]+}" expect exception "${exception:[^"]+}"
+    [Documentation]    verify throws exception if y form data not existed
+    verify y form data not existed on update throws exception    ${formDataId}    ${formDataContent}    ${exception}
+
+verify y form data "${formDataId:[^"]+}" has updated the formDataContent to "${updatedContent:[^"]+}"
+    [Documentation]    Verify the YFormDefinition model has been updated with given applicationId, formId and content
+    verify y form data updated    ${formDataId}    ${updatedContent}
+
+create or update y form data by "${applicationId:[^"]+}" and "${formId:[^"]+}" and "${formDataId:[^"]+}" and "${refId:[^"]+}" and "${formDataContent:[^"]+}"
+    [Documentation]    Create or update a YFormData model with given formDataId and formDataContent, which is based on the YFormDefinition with given applicationId and formId
+    create or update y form data    ${applicationId}    ${formId}    ${formDataId}    ${refId}    ${formDataContent}
+    
+verify y form data history has been created for y form data "${formDataId:[^"]+}"
+    [Documentation]    Verify the YFormDataHistory model has been created for YFormData
+    verify y form data history created    ${formDataId}
+    
+verify y form data "${formDataId:[^"]+}" exists with given values "${refId:[^"]+}" and "${content:[^"]+}"
+    [Documentation]    Verify the YFormData model has got the right values
+    verify y form data exists    ${formDataId}    ${refId}    ${content}
+    
+verify y form data list "@{formDataIds}" is retrieved by "${refId:[^"]+}"
+    [Documentation]    Verify the YFormData models returned by refId
+    verify y form data retrieved by ref id    ${refId}    @{formDataIds}

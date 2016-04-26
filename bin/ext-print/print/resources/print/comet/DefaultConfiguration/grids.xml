@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<grids>
+	<grid>
+		<id>0</id>
+		<name></name>
+		<masterdocid></masterdocid>
+		<description></description>
+		<xpos>0.0</xpos>
+		<ypos>0.0</ypos>
+		<xsize>0.0</xsize>
+		<ysize>0.0</ysize>
+		<preview>
+			<src>grids\preview\0.gif</src>
+		</preview>
+		<type>
+			<id>0</id>
+			<name></name>
+		</type>
+		<domain>
+			<id>0</id>
+			<name></name>
+		</domain>
+		<spread>
+			<position>middle</position>
+			<leftitem>0</leftitem>
+			<middleitem>0</middleitem>
+			<rightitem>0</rightitem>
+		</spread>
+		<placeholders>
+			<placeholder>
+				<id>0</id>
+				<name></name>
+				<xpos>0.0</xpos>
+				<ypos>0.0</ypos>
+				<xsize>0.0</xsize>
+				<ysize>0.0</ysize>
+			</placeholder>
+		</placeholders>
+	</grid>
+</grids>

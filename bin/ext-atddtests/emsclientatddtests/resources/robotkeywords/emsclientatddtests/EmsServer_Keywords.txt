@@ -1,0 +1,12 @@
+*** Settings ***
+Library        	de.hybris.platform.emsclientatddtests.keywords.emsclient.EmsServerKeywordLibrary
+
+*** Keywords ***
+
+start emsserver
+	[Documentation]    Start ems server.
+	start server
+	
+stop emsserver
+	[Documentation]    Stop ems server.
+	stop server

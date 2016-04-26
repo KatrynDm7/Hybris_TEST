@@ -1,0 +1,39 @@
+*** Settings ***
+Test Setup        import sampledata
+Resource		  impex/Impex_Keywords.txt
+Resource          yformServices/DynamicAttribute_Keywords.txt
+
+*** Test Cases ***
+
+############
+### Collect YFormDefinition models from the Category hierarchy
+############
+
+Test_Categories_Have_All_The_YFormDefinitions_That_Assigned_To_It_And_Its_Supercategories
+    [Documentation]    Verify the Category has the references to all the YFormDefinitions that are assigned to itself and its supercategories
+    @{formDefinitionIds}=    Create List    applicationId:formId1
+    verify that category "Category1" has all "@{formDefinitionIds}" y form definitions
+    
+    @{formDefinitionIds}=    Create List    applicationId:formId2    applicationId:formId1
+    verify that category "Category2" has all "@{formDefinitionIds}" y form definitions
+
+    @{formDefinitionIds}=    Create List    applicationId:formId2    applicationId:formId1
+    verify that category "Category3" has all "@{formDefinitionIds}" y form definitions
+    
+    @{formDefinitionIds}=    Create List    applicationId:formId2    applicationId:formId3    applicationId:formId1
+    verify that category "Category4" has all "@{formDefinitionIds}" y form definitions
+    
+    @{formDefinitionIds}=    Create List    applicationId:formId4    applicationId:formId1
+    verify that category "Category5" has all "@{formDefinitionIds}" y form definitions
+    
+############
+### Collect YFormDefinition models from all the supercategories of the Product
+############
+
+Test_Products_Have_All_The_YFormDefinitions_That_Assigned_To_All_Of_Its_Supercategories
+    [Documentation]    Verify the Product has the references to all the YFormDefinitions that are assigned to all of its supercategories
+    @{formDefinitionIds}=    Create List    applicationId:formId2    applicationId:formId4    applicationId:formId3    applicationId:formId1
+    verify that product "Product1" has all "@{formDefinitionIds}" y form definitions
+    
+    @{formDefinitionIds}=    Create List    applicationId:formId2    applicationId:formId1
+    verify that product "Product2" has all "@{formDefinitionIds}" y form definitions

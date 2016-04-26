@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wizard-config showPrefilledValues="false" selectMode="true" createMode="true" createWithinPopup="false" createWithinEditor="false">
+	<displayed-properties>
+		<group qualifier="Hyend2PropertyGeneralWizard" visible="true" initially-opened="true">
+			<label key="cockpit.config.label.General" />
+			<property qualifier="Hyend2AbstractAttribute.attributeType" >
+				<parameter name="allowCreate" value="false"/>		
+				<parameter name="allowActivate" value="false"/>
+			</property>		
+			<property qualifier="Hyend2AbstractAttribute.attribute" >
+				<parameter name="allowCreate" value="false"/>		
+				<parameter name="allowActivate" value="false"/>
+			</property>	
+			<property qualifier="Hyend2AbstractAttribute.classificationAttribute" >
+				<parameter name="allowCreate" value="false"/>			
+				<parameter name="allowActivate" value="false"/>
+			</property>
+			<property qualifier="Hyend2AbstractAttribute.displayName" />
+			<property qualifier="Hyend2AbstractAttribute.exportId" />
+		</group>
+		
+		<group qualifier="Hyend2EndecaAttributeConfigurationWizard" visible="true" initially-opened="true">
+			<label key="hyend2.endecaattributeconfiguration" />
+			<property qualifier="Hyend2Property.endecaAttributeConfiguration" >
+				<parameter name="restrictToCreateTypes" value="Hyend2EndecaAttributeConfiguration"/>
+			</property>	
+		</group>
+		
+		<group qualifier="Hyend2PropertyIndexSchemasWizard" visible="true" initially-opened="true">
+			<label key="hyend2.indexelements" />
+			<property qualifier="Hyend2Property.indexElements" />		
+		</group>
+	
+	</displayed-properties>
+</wizard-config>

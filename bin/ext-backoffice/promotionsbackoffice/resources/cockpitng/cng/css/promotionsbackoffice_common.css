@@ -1,0 +1,78 @@
+/*Icons for explorer tree */
+div.yw-explorerTree .y-tree-icon-hmc_type_tree_abstractpromotion span.z-vfiletree-tee, div.yw-explorerTree .y-tree-icon-hmc.type_tree_abstractpromotion span.z-vfiletree-last {
+    background-image: url("images/089_promotions.png");
+}
+
+div.yw-explorerTree .y-tree-icon-hmc_type_tree_abstractpromotion .y-tree-icon {
+    background-image: url("images/089_promotions.png");
+}
+
+div.yw-explorerTree .y-tree-icon-hmc_type_tree_promotiongroup .y-tree-icon {
+    background-image: url("images/0130_Promotion-Group.png");
+}
+
+div.promo-detailedDescription
+{
+	color:#7D899C;
+}
+
+/*============================================================================
+    Messages help tables
+============================================================================ */
+
+table.promo-messageParams
+{
+	padding-bottom: 30px;
+}
+
+table.promo-messageParams th, table.promo-messageParams td
+{
+	border-bottom: 1px solid #eee;
+	padding: 3px 5px 3px;
+	text-align: left;
+	color:#7D899C;
+	background: #f8f8f8;
+}
+
+table.promo-messageParams th
+{
+	background: #eee;
+	border-bottom: 1px solid #ddd;
+	color:#7D899C;
+}
+
+/*============================================================================
+    Promotions Tab
+============================================================================ */
+.potentialproductpromotions dl.promo-productInfo
+{
+	border-right: 1px solid #bbb;
+	float:left;
+	padding: 4px 6px 4px;
+	width: 100%;
+}
+
+.potentialproductpromotions dl.promo-productInfo dt
+{
+	float: left;
+	width: 50%;
+	clear: left
+}
+
+.potentialproductpromotions dl.promo-productInfo dd
+{
+	float: left;
+	font-weight: bold;
+	width: 49%;
+   margin-left: 0;
+}
+
+.promo-productInfo-cell
+{
+	width:20%;
+}
+
+.potentialproductpromotions-listbox
+{
+	margin-top:2px
+}

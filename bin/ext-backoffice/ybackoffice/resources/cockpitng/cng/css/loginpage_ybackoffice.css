@@ -1,0 +1,22 @@
+/*
+ * [y] hybris Platform
+ *
+ * Copyright (c) 2000-2015 hybris AG
+ * All rights reserved.
+ *
+ * This software is the confidential and proprietary information of hybris
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * license agreement you entered into with hybris.
+ */
+
+@IMPORT url("login.css");
+
+body {
+		background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAALUlEQVQImWNYtHzHf2S8aceZ/wzoAouW70AIwgTggsgCi5bv+M+ALrBo+Y7/AIsfTAo95vSpAAAAAElFTkSuQmCC) repeat #A2A7B8;
+}
+
+.login_grid {
+	background: url("images/my_bg.png") no-repeat;
+	background-position: 60px 0;
+}

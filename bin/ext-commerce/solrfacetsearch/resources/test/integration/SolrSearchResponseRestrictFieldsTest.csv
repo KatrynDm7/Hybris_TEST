@@ -1,0 +1,20 @@
+$prices=europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+$catalogversion=catalogversion(catalog(id[default='hwcatalog']),version[default='Online'])[unique=true,default='hwcatalog:Online${testId}']
+$supercategories=supercategories(code,catalogversion(catalog(id[default='hwcatalog']),version[default='Online${testId}']))
+$normal=normal(code,catalogversion(catalog(id[default='hwcatalog']),version[default='Online${testId}']))
+
+INSERT_UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];languages(isocode);active
+;hwcatalog;Online${testId};en,de,fr;TRUE
+
+INSERT_UPDATE Category;code[unique=true];$catalogversion;name[lang=de];name[lang=en];name[lang=fr];$supercategories;;description[lang=de];description[lang=en];order
+;HW1000;;Peripherie_online_de;Peripheral equipment_online_en;Peripheral equipment_online_fr;;HW1000-24;Produkte rund um den Computer;products around the computer;0
+
+INSERT_UPDATE Product;code[unique=true];$catalogversion;name[lang=de];name[lang=en];name[lang=fr];unit(code);$supercategories;description[lang=de];description[lang=en];description[lang=fr];$prices;approvalStatus(code);onlineDate;offlineDate;;;ean;manufacturerName;;;;deliveryTime;$normal
+;HW2300-2356;;PNY Verto GF 6 6600GT 128DDR PCI Express_online_de;PNY Verto GF 6 6600GT 128DDR PCI Express_online_en;PNY Verto GF 6 6600GT 128DDR PCI Express_online_fr;pieces;HW1000;description1_de;description1_en;French description of online product HW2300-2356_online_fr;157,95 EUR;approved;;;HW2300-2356-01;HW2300-2356-00;HW2300-2356;PNY Technologies;;PNY_logo;;1;
+;HW2300-3843;;PNY Verto GF 7800GT 256MB PCI Express_online_de;PNY Verto GF 7800GT 256MB PCI Express_online_en;PNY Verto GF 7800GT 256MB PCI Express_online_fr;pieces;HW1000;description2_de;description2_en;French description of online product HW2300-3843_online_fr;282,50 EUR;approved;;;HW2300-3843-01;HW2300-3843-00;HW2300-3843;PNY Technologies;;PNY_logo;;1;
+
+INSERT_UPDATE SolrSearchConfig;description[unique=true];pageSize;legacyMode
+;testSearchConfig${testId};20;false
+
+INSERT_UPDATE SolrFacetSearchConfig;name[unique=true];catalogVersions(catalog(id),version);languages(isocode)
+;testFacetSearchConfig${testId};hwcatalog:Online${testId};en,de,fr

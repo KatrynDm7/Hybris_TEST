@@ -1,0 +1,12 @@
+INSERT_UPDATE SolrIndexedCoresRecord;coreName[unique=true];IndexName
+;testCoreName;ltestCoreName
+
+INSERT_UPDATE SolrIndexOperationRecord;threadId[unique=true];status(code);clusterId;mode(code);solrIndexCoreRecord(coreName);startTime[dateformat=dd.MM.yyyy HH:mm:ss]
+;${testId}1;ABORTED;0;full;testCoreName;${date}
+;${testId}2;FAILED;0;full;testCoreName;${date}
+;${testId}3;RUNNING;0;full;testCoreName;${date}
+;${testId}4;SUCCESS;0;full;testCoreName;${date}
+;${testId}5;FAILED;0;full;testCoreName;${date}
+;${testId}6;SUCCESS;0;full;testCoreName;${date}
+;${testId}7;ABORTED;0;full;testCoreName;${date}
+;${testId}8;FAILED;0;full;testCoreName;${date}

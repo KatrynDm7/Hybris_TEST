@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<context:annotation-config/>
+	
+	<!-- Consignment Process Actions -->
+	<bean id="redirectConsignmentByDeliveryModeAction" class="de.hybris.platform.yacceleratorordermanagement.actions.consignment.RedirectConsignmentByDeliveryModeAction" parent="abstractAction"/>
+	
+	<bean id="verifyConsignmentCompletionAction" class="de.hybris.platform.yacceleratorordermanagement.actions.consignment.VerifyConsignmentCompletionAction" parent="abstractAction"/>
+	
+	<bean id="confirmShipConsignmentAction" class="de.hybris.platform.yacceleratorordermanagement.actions.consignment.ConfirmShipConsignmentAction" parent="abstractAction"/>
+	
+	<bean id="confirmPickupConsignmentAction" class="de.hybris.platform.yacceleratorordermanagement.actions.consignment.ConfirmPickupConsignmentAction" parent="abstractAction"/>
+	
+	<bean id="makeReadyForPickupConsignmentAction" class="de.hybris.platform.yacceleratorordermanagement.actions.consignment.UpdateConsignmentAction" parent="abstractAction">
+		<property name="status"> 
+			<value type="de.hybris.platform.basecommerce.enums.ConsignmentStatus">READY_FOR_PICKUP</value>
+		</property>
+	</bean>
+	
+	<bean id="makeReadyForShipConsignmentAction" class="de.hybris.platform.yacceleratorordermanagement.actions.consignment.UpdateConsignmentAction" parent="abstractAction">
+		<property name="status"> 
+			<value type="de.hybris.platform.basecommerce.enums.ConsignmentStatus">READY_FOR_SHIPPING</value>
+		</property>
+	</bean>
+	
+	<bean id="consignmentProcessEndAction" class="de.hybris.platform.yacceleratorordermanagement.actions.consignment.ConsignmentProcessEndAction" parent="abstractAction">
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+	
+	<!-- Aspects -->
+	<bean id="consignmentCancellationAspect" class="de.hybris.platform.yacceleratorordermanagement.aspects.ConsignmentActionAspect">
+		<property name="choice" value="cancelConsignment"/>
+		<property name="consignmentBusinessProcessService" ref="consignmentBusinessProcessService"/>
+		<property name="exceptionsToRethrow">
+			<set>
+				<value type="java.lang.Class">de.hybris.platform.warehousing.cancellation.CancellationException</value>
+			</set>
+		</property>
+	</bean>
+	
+	<bean id="consignmentReallocationAspect" class="de.hybris.platform.yacceleratorordermanagement.aspects.ConsignmentReallocationAspect">
+		<property name="orderBusinessProcessService" ref="orderBusinessProcessService"/>
+		<property name="modelService" ref="modelService"/>
+	</bean>
+	
+	<!-- AOP Config -->
+	<aop:config>
+		<aop:aspect ref="consignmentCancellationAspect">
+			<aop:around pointcut="execution(* de.hybris.platform.warehousing.cancellation.ConsignmentCancellationService.cancelConsignment(..))" method="advise" />
+		</aop:aspect>
+	</aop:config>
+	
+	<aop:config>
+		<aop:aspect ref="consignmentReallocationAspect">
+			<aop:after-returning returning="result" pointcut="execution(* de.hybris.platform.warehousing.allocation.impl.DefaultAllocationService.reallocate(..))" method="advise" />
+		</aop:aspect>
+	</aop:config>
+	
+</beans>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<!-- WARNING: This is the Spring WEB configuration file. If you want to replace 
+	items or managers you have to do this from the extensions core configuration 
+	file (datahubadapter/resources/datahubadapter-spring.xml) -->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns="http://www.springframework.org/schema/beans"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:annotation-config />
+
+	<!-- Registering the hybris "tenant" scope This is the custom hybris scope
+		that manages the lifetime of a "tenant". If you do not deal with tenants 
+		("multimandantenf??higkeit"), then there is no need to understand what this 
+		is for. -->
+	<!-- Needed by Hybris. -->
+	<bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+		<property name="scopes">
+			<map>
+				<entry key="tenant" value="de.hybris.platform.spring.TenantScope" />
+			</map>
+		</property>
+	</bean>
+
+	<!-- Spring managed FilterChain for hybris Filter stack -->
+	<bean id="datahubadapterPlatformFilterChain" class="de.hybris.platform.servicelayer.web.PlatformFilterChain">
+		<constructor-arg>
+			<list>
+				<ref bean="log4jFilter"/>
+				<ref bean="dynamicTenantActivationFilter"/>
+				<ref bean="sessionFilter"/>
+				<ref bean="datahubadapterSecureMediaFilter"/>
+				<!-- Security -->
+				<ref bean="springSecurityFilterChain" />
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="datahubadapterSecureMediaFilter" class="de.hybris.platform.servicelayer.web.SecureMediaFilter">
+		<property name="mediaPermissionService" ref="mediaPermissionService"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="userService" ref="userService"/>
+		<property name="mediaService" ref="mediaService"/>
+		<!-- <property name="secureMediaToken" value="securemedias"/>  securemedias is default but you may overwrite it -->
+	</bean>
+
+	<import resource="datahubadapter-security-spring.xml" />
+</beans>

@@ -1,0 +1,726 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config xmlns="http://www.hybris.com/cockpit/config">
+    <context merge-by="module" parent="auto" component="explorer-tree">
+        <explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
+            <explorer-tree:navigation-node id="hmc.b2bcommercegroup">
+                <explorer-tree:type-node code="B2BUnit" id="B2BUnit"/>
+                <explorer-tree:type-node code="B2BCustomer" id="B2BCustomer"/>
+                <explorer-tree:type-node code="B2BCostCenter" id="B2BCostCenter"/>
+                <explorer-tree:type-node code="B2BBudget" id="B2BBudget"/>
+                <explorer-tree:type-node code="B2BUserGroup" id="B2BUserGroup"/>
+                <explorer-tree:type-node code="B2BReportingSet" id="B2BReportingSet"/>
+                <explorer-tree:type-node code="B2BMerchantCheck" id="B2BMerchantCheck"/>
+                <explorer-tree:type-node code="FutureStock" id="FutureStock"/>
+            </explorer-tree:navigation-node>
+            <explorer-tree:navigation-node id="hmc_treenode_order">
+                <explorer-tree:type-node code="B2BBookingLineEntry" id="B2BBookingLineEntry"/>
+            </explorer-tree:navigation-node>
+        </explorer-tree:explorer-tree>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="B2BCostCenter" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="code"/>
+            <list-view:column qualifier="Unit"/>
+            <list-view:column qualifier="Budgets"/>
+        </list-view:list-view>
+    </context>
+
+    <context merge-by="type" parent="GenericItem" type="B2BMerchantCheck" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="code"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="B2BBudget" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="code"/>
+            <list-view:column qualifier="Unit"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="B2BReportingSet" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="code"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="B2BBookingLineEntry" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="bookingStatus"/>
+            <list-view:column qualifier="costCenter"/>
+            <list-view:column qualifier="amount"/>
+            <list-view:column qualifier="product"/>
+            <list-view:column qualifier="quantity"/>
+            <list-view:column qualifier="orderID"/>
+            <list-view:column qualifier="orderEntryNr"/>
+            <list-view:column qualifier="bookingDate"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="UserGroup" type="B2BUserGroup" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="uid"/>
+            <list-view:column qualifier="Unit"/>
+            <list-view:column qualifier="displayName" merge-mode="remove"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="B2BMerchantCheck" type="B2BCreditLimit" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="code"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="FutureStock" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="productCode"/>
+            <list-view:column qualifier="date"/>
+            <list-view:column qualifier="quantity"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="Customer" type="B2BCustomer" component="referenceListViewApprovers">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="uid"/>
+            <list-view:column qualifier="active"/>
+        </list-view:list-view>
+    </context>
+	<context merge-by="type" parent="Customer" type="B2BCustomer" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="customerID"/>
+		</list-view:list-view>
+	</context>
+    <context merge-by="type" parent="UserGroup" type="B2BUserGroup" component="referenceListViewUserGroup">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="uid"/>
+            <list-view:column qualifier="unit"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="B2BPermission" component="referenceListViewPermission">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="code"/>
+            <list-view:column qualifier="active"/>
+        </list-view:list-view>
+    </context>
+    
+    <context component="create-wizard" type="B2BCreditLimit">
+        <wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="B2BCreditLimitWizard" title="create.title(ctx.TYPE_CODE)">
+            <wz:prepare id="groupPrepare">
+                <wz:initialize property="newGrp" type="ctx.TYPE_CODE"/>
+            </wz:prepare>
+            <wz:step id="step1" label="create.usergroup.general.label">
+                <wz:content id="step1.content">
+                    <wz:property-list root="newGrp">
+                        <wz:property qualifier="code" type="java.lang.String"/>
+                        <wz:property qualifier="active"/>
+                        <wz:property qualifier="amount"/>
+                        <wz:property qualifier="currency"/>
+                        <wz:property qualifier="datePeriod" type="de.hybris.platform.util.StandardDateRange"/>
+                        <wz:property qualifier="dateRange" type="B2BPeriodRange"/>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step1.navigation">
+                    <wz:cancel/>
+                    <wz:done visible="!#empty(newGrp.code) and newGrp.currency != null">
+                        <wz:save property="newGrp"/>
+                    </wz:done>
+                </wz:navigation>
+            </wz:step>
+        </wz:flow>
+    </context>
+    <context merge-by="type" parent="Customer" type="B2BCustomer" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.tab.b2bcustomer.approver" position="2">
+                <editorArea:section name="hmc.section.b2bcustomer.approver">
+                    <editorArea:attribute editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor" qualifier="ApproverGroups">
+	                	<editorArea:editor-parameter>
+			                <editorArea:name>listConfigContext</editorArea:name>
+			                <editorArea:value>referenceListViewUserGroup</editorArea:value>
+			            </editorArea:editor-parameter>
+		            </editorArea:attribute>
+                    <editorArea:attribute editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor" qualifier="Approvers">
+	                	<editorArea:editor-parameter>
+			                <editorArea:name>listConfigContext</editorArea:name>
+			                <editorArea:value>referenceListViewApprovers</editorArea:value>
+			            </editorArea:editor-parameter>
+		            </editorArea:attribute>
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab name="hmc.tab.b2bcustomer.permissions" position="6">
+                <editorArea:section name="hmc.section.b2bcustomer.permissions">
+                    <editorArea:attribute editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor" qualifier="PermissionGroups">
+	                	<editorArea:editor-parameter>
+			                <editorArea:name>listConfigContext</editorArea:name>
+			                <editorArea:value>referenceListViewUserGroup</editorArea:value>
+			            </editorArea:editor-parameter>
+		            </editorArea:attribute>
+                    <editorArea:attribute editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor" qualifier="Permissions">
+	                	<editorArea:editor-parameter>
+			                <editorArea:name>listConfigContext</editorArea:name>
+			                <editorArea:value>referenceListViewPermission</editorArea:value>
+			            </editorArea:editor-parameter>
+		            </editorArea:attribute>
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab name="hmc.addresses">
+                <editorArea:section name="hmc.addresses">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="email"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="B2BBudget" component="referenceListViewBudget">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+        	<list-view:column qualifier="code"/>
+            <list-view:column qualifier="name"/>
+            <list-view:column qualifier="budget"/>
+            <list-view:column qualifier="currency"/>
+            <list-view:column qualifier="Unit"/>
+            <list-view:column qualifier="active"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="FutureStock" component="referenceListViewFutureStock">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+        	<list-view:column qualifier="productCode"/>
+            <list-view:column qualifier="date"/>
+            <list-view:column qualifier="quantity"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="B2BCostCenter" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:essentials>
+                <editorArea:essentialSection name="hmc.essential">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="Unit"/>
+                </editorArea:essentialSection>
+            </editorArea:essentials>
+            <editorArea:tab name="hmc.tab.b2bcostcenter.general">
+                <editorArea:section name="hmc.section.b2bcostcenter.general.properties">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="code"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="name"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="active"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="currency"/>
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab name="hmc.tab.b2bcostcenter.hierarchy">
+                <editorArea:section name="hmc.section.b2bcostcenter.hierarchy.parent">
+                    <editorArea:attribute editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor" qualifier="Budgets">
+	                	<editorArea:editor-parameter>
+			                <editorArea:name>listConfigContext</editorArea:name>
+			                <editorArea:value>referenceListViewBudget</editorArea:value>
+			            </editorArea:editor-parameter>
+		            </editorArea:attribute>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="B2BMerchantCheck" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:essentials>
+                <editorArea:essentialSection name="hmc.essential">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="code"/>
+                </editorArea:essentialSection>
+            </editorArea:essentials>
+            <editorArea:tab name="hmc.tab.b2bmerchantcheck.general">
+                <editorArea:section name="hmc.section.b2bmerchantcheck.general.properties">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="active"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="B2BCostCenter" component="referenceListViewCostCenter">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+        	<list-view:column qualifier="code"/>
+            <list-view:column qualifier="name"/>
+            <list-view:column qualifier="currency"/>
+            <list-view:column qualifier="Unit"/>
+            <list-view:column qualifier="active"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="B2BBudget" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:essentials>
+                <editorArea:essentialSection name="hmc.essential">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="Unit"/>
+                </editorArea:essentialSection>
+            </editorArea:essentials>
+            <editorArea:tab name="hmc.tab.b2bbudget.general">
+                <editorArea:section name="hmc.section.b2bbudget.general.properties">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="code"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="name"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="budget">
+                    	<editorArea:editor-parameter>
+                        	<editorArea:name>numberFormat</editorArea:name>
+                        	<editorArea:value>###.00</editorArea:value>
+						</editorArea:editor-parameter>
+                    </editorArea:attribute>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="dateRange"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="currency"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="active"/>
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab name="hmc.tab.b2bbudget.hierarchy">
+                <editorArea:section name="hmc.section.b2bbudget.hierarchy.descendants">
+                    <editorArea:attribute editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor" qualifier="CostCenters">
+	                	<editorArea:editor-parameter>
+			                <editorArea:name>listConfigContext</editorArea:name>
+			                <editorArea:value>referenceListViewCostCenter</editorArea:value>
+			            </editorArea:editor-parameter>
+		            </editorArea:attribute>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="B2BReportingSet" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:essentials>
+                <editorArea:essentialSection name="hmc.essential">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="code"/>
+                </editorArea:essentialSection>
+            </editorArea:essentials>
+            <editorArea:tab name="hmc.tab.b2breportingset.main">
+                <editorArea:section name="hmc.section.b2breportingset.main.entries">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="ReportingEntries"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="Company" type="B2BUnit" component="collection-browser" tree-context="B2BUnit.members">
+    	<tree:tree-collection-nodes xmlns:tree="http://www.hybris.com/cockpitng/component/treeCollection">             
+            <tree:node attribute="uid"/>
+        </tree:tree-collection-nodes>        
+    </context>
+    <context merge-by="type" parent="Company" type="B2BUnit" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.tab.groups">
+                <editorArea:section name="hmc.section.b2bunit.hierarchy.descendents">
+                    <editorArea:attribute editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor" qualifier="UserGroups">
+	                    <editorArea:editor-parameter>
+			                <editorArea:name>listConfigContext</editorArea:name>
+			                <editorArea:value>referenceListViewUserGroup</editorArea:value>
+			            </editorArea:editor-parameter>
+		            </editorArea:attribute>
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab name="hmc.tab.b2bunit.approver">
+                <editorArea:section name="hmc.section.b2bunit.approver">
+                    <editorArea:attribute editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor" qualifier="ApproverGroups">
+	                	<editorArea:editor-parameter>
+			                <editorArea:name>listConfigContext</editorArea:name>
+			                <editorArea:value>referenceListViewUserGroup</editorArea:value>
+			            </editorArea:editor-parameter>
+		            </editorArea:attribute>
+                    <editorArea:attribute editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor" qualifier="Approvers">
+	                	<editorArea:editor-parameter>
+			                <editorArea:name>listConfigContext</editorArea:name>
+			                <editorArea:value>referenceListViewApprovers</editorArea:value>
+			            </editorArea:editor-parameter>
+		            </editorArea:attribute>
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab name="hmc.tab.b2bunit.costcenter">
+                <editorArea:section name="hmc.section.b2bunit.costcenter">
+                    <editorArea:attribute editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor" qualifier="Budgets">
+                    	<editorArea:editor-parameter>
+			                <editorArea:name>listConfigContext</editorArea:name>
+			                <editorArea:value>referenceListViewBudget</editorArea:value>
+			            </editorArea:editor-parameter>
+			        </editorArea:attribute>			    
+                    <editorArea:attribute editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor" qualifier="CostCenters">
+                    	<editorArea:editor-parameter>
+			                <editorArea:name>listConfigContext</editorArea:name>
+			                <editorArea:value>referenceListViewCostCenter</editorArea:value>
+			            </editorArea:editor-parameter>
+			        </editorArea:attribute>			    		      
+                    <editorArea:attribute editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor" qualifier="Orders">
+                    	<editorArea:editor-parameter>
+			                <editorArea:name>listConfigContext</editorArea:name>
+			                <editorArea:value>listview</editorArea:value>
+			            </editorArea:editor-parameter>
+			        </editorArea:attribute> 
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab name="hmc.administration">
+                <editorArea:section name="hmc.tab.b2bbudget.general">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="active" readonly="true"/>
+                </editorArea:section>
+            </editorArea:tab>          
+            <editorArea:tab name="hmc.tab.b2bunit.merchantcheck">
+                <editorArea:section name="hmc.section.b2bunit.merchantcheck.accountmanagers">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="accountManager"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="AccountManagerGroups"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.section.b2bunit.merchantcheck.creditlimit">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="CreditLimit"/>
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab name="hmc.tab.hmclayout">
+                <editorArea:section name="hmc.section.hmclayout">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="hmcXML"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="B2BBookingLineEntry" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.tab.common">
+                <editorArea:section name="hmc.section.bookinglineentry.general">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="bookingStatus"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="costCenter"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="amount"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="product"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="quantity"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="orderID"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="orderEntryNr"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="bookingDate"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="AbstractOrder" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.positions_and_prices">
+                <editorArea:section name="hmc.section.b2bcomment">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="b2bcomments"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.section.b2bquoteExpirationDate">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="quoteExpirationDate"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="UserGroup" type="B2BUserGroup" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:essentials>
+                <editorArea:essentialSection name="hmc.essential">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="Unit"/>
+                </editorArea:essentialSection>
+            </editorArea:essentials>
+            <editorArea:tab name="hmc.tab.common">
+                <editorArea:section name="hmc.properties">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="name"/>
+                    <editorArea:attribute editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor" qualifier="Permissions">
+	                	<editorArea:editor-parameter>
+			                <editorArea:name>listConfigContext</editorArea:name>
+			                <editorArea:value>referenceListViewPermission</editorArea:value>
+			            </editorArea:editor-parameter>
+		            </editorArea:attribute>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="B2BMerchantCheck" type="B2BCreditLimit" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:essentials>
+                <editorArea:essentialSection name="hmc.essential">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="code"/>
+                </editorArea:essentialSection>
+            </editorArea:essentials>
+            <editorArea:tab name="hmc.tab.b2bmerchantcheck.general">
+                <editorArea:section name="hmc.section.b2bmerchantcheck.general.properties">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="datePeriod"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="dateRange"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="currency"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="amount"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="active"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="Unit"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="alertThreshold"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="alertRateType"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="FutureStock" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:essentials>
+                <editorArea:essentialSection name="hmc.essential">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="productCode"/>
+                </editorArea:essentialSection>
+            </editorArea:essentials>
+            <editorArea:tab name="hmc.tab.b2bbudget.general">
+                <editorArea:section name="hmc.section.b2bbudget.general.properties">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="date"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="quantity"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="Customer" type="B2BCustomer" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list>
+            	<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="uid" selected="true" operator="startsWith" />
+            	<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="name" selected="true" operator="startsWith" />
+            	<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="customerID" selected="true" operator="startsWith" />
+            	<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="type" selected="true" operator="equals" />
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="module" parent="auto" type="Item" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list/>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="B2BCostCenter" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="Budgets" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="Unit" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="active" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="code" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="currency" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="name" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="assignedCockpitItemTemplates" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long" name="pk" selected="false"/>
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="Category" type="VariantValueCategory" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list/>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="B2BMerchantCheck" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="active" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="code" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="assignedCockpitItemTemplates" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long" name="pk" selected="false"/>
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="B2BBudget" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="CostCenters" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="Unit" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="active" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="budget" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="code" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="currency" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="dateRange" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="name" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="assignedCockpitItemTemplates" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long" name="pk" selected="false"/>
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="B2BReportingSet" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="ReportingEntries" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="code" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="assignedCockpitItemTemplates" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long" name="pk" selected="false"/>
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="Company" type="B2BUnit" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list/>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="B2BBookingLineEntry" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="amount" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="bookingDate" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="bookingStatus" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="bookingType" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="costCenter" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="currency" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="orderEntry" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="orderEntryNr" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="orderID" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="product" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="quantity" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="assignedCockpitItemTemplates" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long" name="pk" selected="false"/>
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="AbstractOrder" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list/>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="Category" type="VariantCategory" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list/>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="UserGroup" type="B2BUserGroup" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="Permissions" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="Unit" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="BTGAssignToGroup" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="CN" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="DN" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="accessibleCategories" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="assignedCockpitItemTemplates" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="description" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="groups" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="hmcLoginDisabled" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="ldapsearchbase" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="locName" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="members" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="name" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long" name="pk" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="profilePicture" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="readAbstractLinkEntry" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="readCollections" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="readSavedQueries" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="readableCatalogVersions" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="readableCockpitUIComponents" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="restrictions" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="syncJobs" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="uid" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="userDiscountGroup" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="userPriceGroup" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="userTaxGroup" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="visibleTemplates" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="watchedComments" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="writableCatalogVersions" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="writableCockpitUIComponents" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="writeCollections" selected="false"/>
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="B2BMerchantCheck" type="B2BCreditLimit" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="alertRateType" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="alertSentDate" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="alertThreshold" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="amount" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="currency" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="datePeriod" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="dateRange" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="active" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="assignedCockpitItemTemplates" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="code" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="comments" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="itemtype" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="modifiedtime" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="owner" selected="false"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" editor="java.lang.Long" name="pk" selected="false"/>
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="FutureStock" component="advanced-search">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <advanced-search:field-list>
+            	<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="productCode" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="date" selected="true"/>
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="B2BCostCenter" component="simple-search">
+        <simple-search:simple-search xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+            <simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="code"/>
+        </simple-search:simple-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="B2BMerchantCheck" component="simple-search">
+        <simple-search:simple-search xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+            <simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="code"/>
+        </simple-search:simple-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="B2BBudget" component="simple-search">
+        <simple-search:simple-search xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+            <simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="code"/>
+        </simple-search:simple-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="B2BReportingSet" component="simple-search">
+        <simple-search:simple-search xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+            <simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="code"/>
+        </simple-search:simple-search>
+    </context>
+    <context merge-by="type" parent="UserGroup" type="B2BUserGroup" component="simple-search">
+        <simple-search:simple-search xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+            <simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="uid"/>
+        </simple-search:simple-search>
+    </context>
+    <context merge-by="type" parent="B2BMerchantCheck" type="B2BCreditLimit" component="simple-search">
+        <simple-search:simple-search xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+            <simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="code"/>
+        </simple-search:simple-search>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="FutureStock" component="simple-search">
+        <simple-search:simple-search xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+            <simple-search:field xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="productCode"/>
+        </simple-search:simple-search>
+    </context>
+    <context type="B2BCostCenter" component="base" merge-by="type" parent="GenericItem">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>code+ ' ' +Unit.uid+ ' ' +Budgets</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="B2BMerchantCheck" component="base" merge-by="type" parent="GenericItem">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>code</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="B2BBudget" component="base" merge-by="type" parent="GenericItem">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>code+ ' - ' +Unit.uid</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="B2BReportingSet" component="base" merge-by="type" parent="GenericItem">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>code</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="B2BUserGroup" component="base" merge-by="type" parent="UserGroup">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>uid+ ' ' +Unit.uid</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="B2BCreditLimit" component="base" merge-by="type" parent="B2BMerchantCheck">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>code</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="FutureStock" component="base" merge-by="type" parent="GenericItem">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>productCode</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+</config>

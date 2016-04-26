@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config xmlns="http://www.hybris.com/cockpit/config">
+    
+    <context component="editorareaactions" type="SAPAdministration" >
+
+        <y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			
+            <y:group qualifier="common">
+           		<y:action action-id="com.hybris.cockpitng.action.delete"  property="currentObject" />
+                <y:action action-id="de.hybris.platform.sap.sapcoreconfigurationbackoffice.actions.SendToDataHubAction" property="currentObject" />
+            </y:group>
+    </y:actions>
+
+	</context>
+	
+	
+	<context component="editorareaactions" type="SAPRFCDestination" >
+        <y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:group qualifier="common">
+                <y:action action-id="com.hybris.cockpitng.action.delete"  property="currentObject" />
+                <y:action action-id="de.hybris.platform.sap.sapcoreconfigurationbackoffice.actions.PingDestinationAction" property="currentObject" />
+            </y:group>
+    </y:actions>
+	</context>
+	
+	
+    <context merge-by="module" parent="auto" component="explorer-tree">
+        <explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
+            <explorer-tree:navigation-node id="hmc.group.sapintegration.name">
+                <explorer-tree:type-node code="SAPConfiguration" id="SAPConfiguration"/>
+                <explorer-tree:type-node code="SAPRFCDestination" id="SAPRFCDestination"/>
+                <explorer-tree:type-node code="SAPHTTPDestination" id="SAPHTTPDestination"/>
+                <explorer-tree:type-node code="SAPGlobalConfiguration" id="SAPGlobalConfiguration"/>
+                <explorer-tree:type-node code="SAPAdministration" id="SAPAdministration"/>
+            </explorer-tree:navigation-node>
+        </explorer-tree:explorer-tree>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="SAPRFCDestination" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="rfcDestinationName"/>
+            <list-view:column qualifier="sid"/>
+            <list-view:column qualifier="client"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="SAPConfiguration" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="core_name"/>
+        </list-view:list-view>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="SAPHTTPDestination" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="httpDestinationName"/>
+            <list-view:column qualifier="targetURL"/>
+        </list-view:list-view>
+        
+    </context>
+   
+    <context merge-by="type" parent="GenericItem" type="SAPAdministration" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="core_lastDataHubInitialLoad"/>
+        </list-view:list-view>
+    </context>
+    
+    
+     <context merge-by="type" parent="GenericItem" type="SAPGlobalConfiguration" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="core_name"/>
+        </list-view:list-view>
+    </context>
+    
+    
+
+    
+    
+    <context type="SAPConfiguration" component="advanced-search" merge-by="type" parent="GenericItem">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch" xmlns="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <field-list>
+                   <field name="core_name" selected="true" operator="startsWith" />
+     </field-list>
+     </advanced-search:advanced-search>
+     </context>  
+       
+    <context type="SAPRFCDestination" component="advanced-search" merge-by="type" parent="GenericItem">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch" xmlns="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <field-list>
+                <field name="rfcDestinationName"  selected="true" operator="startsWith" />
+ 
+      </field-list>
+      </advanced-search:advanced-search>
+      </context>
+      
+      
+     <context type="SAPHTTPDestination" component="advanced-search" merge-by="type" parent="GenericItem">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch" xmlns="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <field-list>
+                  <field name="httpDestinationName" selected="true" operator="startsWith"/>
+            </field-list>
+        </advanced-search:advanced-search>
+    </context>
+    
+    <context type="SAPGlobalConfiguration" component="advanced-search" merge-by="type" parent="GenericItem">
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch" xmlns="http://www.hybris.com/cockpitng/config/advancedsearch">
+            <field-list>
+                   <field name="core_name" selected="true" operator="startsWith" />
+     </field-list>
+     </advanced-search:advanced-search>
+     </context>  
+
+    
+    <context merge-by="type" parent="GenericItem" type="SAPRFCDestination" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:essentials xmlns="http://www.hybris.com/cockpitng/component/editorArea">
+                <essentialSection name="hmc.essential">
+                    <attribute qualifier="rfcDestinationName"/>
+                    <attribute qualifier="offlineMode"/>
+                </essentialSection>
+            </editorArea:essentials>
+                       
+            <editorArea:tab xmlns="http://www.hybris.com/cockpitng/component/editorArea" name="hmc.tab.saprfcdestination.server">
+                <section name="hmc.section.saprfcdestination.serverdata.default">
+                    <attribute qualifier="jcoMsServ"/>
+                    <attribute qualifier="jcoSAPRouter"/>
+                    <attribute qualifier="backendType"/>
+                    <attribute qualifier="connectionType"/>
+                </section>
+                <section name="hmc.section.saprfcdest.server">
+                    <attribute qualifier="targetHost"/>
+                    <attribute qualifier="instance"/>
+                </section>
+                <section name="hmc.section.saprfcdest.group">
+                    <attribute qualifier="sid"/>
+                    <attribute qualifier="messageServer"/>
+                    <attribute qualifier="group"/>
+                </section>
+            </editorArea:tab>
+            <editorArea:tab xmlns="http://www.hybris.com/cockpitng/component/editorArea" name="hmc.tab.saprfcdestination.user">
+                <section name="hmc.section.saprfcdestination.userdata">
+                    <attribute qualifier="client"/>
+                    <attribute qualifier="userid"/>
+                    <attribute qualifier="password"  editor="de.hybris.platform.sap.sapcoreconfigurationbackoffice.simplepassword"/>
+                </section>
+            </editorArea:tab>
+            <editorArea:tab xmlns="http://www.hybris.com/cockpitng/component/editorArea" name="hmc.tab.saprfcdestination.specific">
+                <section name="hmc.section.saprfcdestination.pooling">
+                    <attribute qualifier="pooledConnectionMode"/>
+                    <attribute qualifier="maxConnections"/>
+                    <attribute qualifier="poolSize"/>
+                    <attribute qualifier="maxWaitTime"/>
+                </section>
+                <section name="hmc.section.saprfcdestination.performance">
+                    <attribute qualifier="jcoClientDelta"/>
+                </section>
+                <section name="hmc.section.saprfcdestination.addAttrs">
+                    <attribute qualifier="AdditionalAttributes"/>
+                </section>
+            </editorArea:tab>
+            <editorArea:tab xmlns="http://www.hybris.com/cockpitng/component/editorArea" name="hmc.tab.saprfcdestination.trace">
+                <section name="hmc.section.saprfcdestination.tracedata">
+                    <attribute qualifier="jcoTraceLevel"/>
+                    <attribute qualifier="jcoTracePath"/>
+                    <attribute qualifier="jcoCPICTrace"/>
+                    <attribute qualifier="jcoRFCTrace"/>
+                </section>
+            </editorArea:tab>
+            <editorArea:tab xmlns="http://www.hybris.com/cockpitng/component/editorArea" name="hmc.tab.saprfcdestination.snc">
+                <section name="hmc.section.rfcdestination.snc">
+                    <attribute qualifier="sncMode"/>
+                    <attribute qualifier="sncQoP"/>
+                    <attribute qualifier="sncPartnerName"/>
+                </section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="module" type="SAPConfiguration" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:essentials xmlns="http://www.hybris.com/cockpitng/component/editorArea">
+                <essentialSection name="hmc.essential">
+                    <attribute qualifier="core_name"/>
+                </essentialSection>
+            </editorArea:essentials>
+            <editorArea:tab xmlns="http://www.hybris.com/cockpitng/component/editorArea" name="hmc.tab.sapconfiguration">
+                <section name="hmc.section.sapconfiguration">
+                    <attribute qualifier="SAPRFCDestination"/>
+                </section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="BaseStore" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab xmlns="http://www.hybris.com/cockpitng/component/editorArea" name="hmc.properties">
+                <section name="hmc.section.sapconfiguration.reference">
+                    <attribute qualifier="SAPConfiguration"/>
+                </section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="SAPHTTPDestination" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab xmlns="http://www.hybris.com/cockpitng/component/editorArea" name="hmc.tab.sapcorehttp.connection">
+                <section name="hmc.section.sapcorehttp.default">
+                    <attribute qualifier="httpDestinationName"/>
+                    <attribute qualifier="targetURL"/>
+                </section>
+                <section name="hmc.section.sapcorehttp.logondata">
+                    <attribute qualifier="authenticationType"/> 
+                    <attribute qualifier="userid"/>
+				    <attribute qualifier="password" editor="de.hybris.platform.sap.sapcoreconfigurationbackoffice.simplepassword"/> 
+                </section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    
+    <context merge-by="type" parent="GenericItem" type="SAPAdministration" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab xmlns="http://www.hybris.com/cockpitng/component/editorArea" name="hmc.tab.sapadmin.datahub">
+                <section name="hmc.section.sapadmin.datahub.transfer">
+                    <attribute qualifier="core_lastDataHubInitialLoad"  readonly="true" />
+                </section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    
+    <context type="SAPRFCDestination" component="base" merge-by="type" parent="GenericItem">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>rfcDestinationName</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="SAPConfiguration" component="base" merge-by="type" parent="GenericItem">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>core_name</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    <context type="SAPHTTPDestination" component="base" merge-by="type" parent="GenericItem">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>httpDestinationName</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+    
+           
+  <context merge-by="type" parent="GenericItem" type="SAPGlobalConfiguration" component="base">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>core_name</y:label>
+			</y:labels>
+		</y:base>
+    </context>
+    
+    
+     <context merge-by="type" parent="GenericItem" type="SAPAdministration" component="base">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>itemtype</y:label>
+			</y:labels>
+		</y:base>
+    </context>
+    
+    
+    <context type="SAPHTTPDestination" component="create-wizard">
+	<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="httpWizard" title="create.httpdestination.title">
+ 
+	    <wz:prepare id="httpPrepare">
+	        <wz:initialize property="newHTTP" type="SAPHTTPDestination"/>
+	    </wz:prepare>
+	 
+	    <wz:step id="step1" label="create.httpdestination.essential.label" sublabel="create.httpdestination.essential.sublabel">
+	          <wz:content id="step1.content">
+	            <wz:property-list root="newHTTP">
+	                <wz:property qualifier="httpDestinationName" type="java.lang.String"/>
+	                <wz:property qualifier="targetURL"/>
+	            </wz:property-list>
+	        </wz:content>
+	        <wz:navigation id="step1.navigation">
+	            <wz:cancel/>
+ 	            <wz:done visible="!#empty(newHTTP.httpDestinationName) and !#empty(newHTTP.targetURL)">
+	                <wz:save property="newHTTP"/>
+	            </wz:done>
+	        </wz:navigation>
+	    </wz:step>
+ 
+	</wz:flow>
+	</context>
+	
+	
+	<context type="SAPConfiguration" component="create-wizard">
+	<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config"  id="baseStoreWizard" title="create.basestore.title">
+		<wz:prepare id="basestorePrepare">
+			<wz:initialize property="newBaseStore" type="SAPConfiguration" />
+		</wz:prepare>
+		
+		<wz:step id="step1" label="create.basestore.essential.label" sublabel="create.basestore.essential.sublabel">
+			<wz:content>
+				<wz:property-list root="newBaseStore">
+					<wz:property qualifier="core_name" />
+				</wz:property-list>
+			</wz:content>
+			<wz:navigation id="step1.navigation">
+			<wz:cancel />
+			<wz:done visible="!#empty(newBaseStore.core_name)">
+				<wz:save property="newBaseStore" />
+			</wz:done>
+			</wz:navigation>
+		</wz:step>
+	</wz:flow>
+	</context>
+	
+	<context type="SAPGlobalConfiguration" component="create-wizard">
+	<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config"  id="globalWizard" title="create.global.title">
+		<wz:prepare id="globalPrepare">
+			<wz:initialize property="newGlobalConfig" type="SAPGlobalConfiguration" />
+		</wz:prepare>
+		
+		<wz:step id="step1" label="create.global.essential.label" sublabel="create.global.essential.sublabel">
+			<wz:content>
+				<wz:property-list root="newGlobalConfig">
+					<wz:property qualifier="core_name" />
+					<wz:property qualifier="sapcommon_erpLogicalSystem" />
+				</wz:property-list>
+			</wz:content>
+			<wz:navigation id="step1.navigation">
+			<wz:cancel />
+			<wz:done visible="!#empty(newGlobalConfig.core_name) and !#empty(newGlobalConfig.sapcommon_erpLogicalSystem)">
+				<wz:save property="newGlobalConfig" />
+			</wz:done>
+			</wz:navigation>
+		</wz:step>
+	</wz:flow>
+	</context>
+	
+    <context type="SAPAdministration" component="create-wizard">
+	<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config"  id="adminWizard" title="create.admin.title">
+		<wz:prepare id="adminPrepare">
+			<wz:initialize property="newAdminConfig" type="SAPAdministration" />
+		</wz:prepare>
+		
+		<wz:step id="step1" label="create.admin.label" >
+			<wz:content>
+				<wz:property-list root="newAdminConfig"/>	 
+			</wz:content>
+			<wz:navigation id="step1.navigation">
+			<wz:cancel />
+			<wz:done>
+				<wz:save property="newAdminConfig" />
+			</wz:done>
+			</wz:navigation>
+		</wz:step>
+	</wz:flow>
+	</context>
+	
+	
+	<context type="SAPRFCDestination" component="create-wizard">
+	<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config"  id="rfcWizard" title="create.rfc.title">
+	
+	 <wz:prepare id="rfcPrepare" >
+	 	<wz:initialize property="newRFC" type="SAPRFCDestination" />
+	 </wz:prepare>
+	 
+	 <wz:step id="step1" label="create.rfc.essential.label" sublabel="create.rfc.essential.sublabel">>
+	 	<wz:content id="step1.content">
+	 		<wz:property-list root="newRFC">
+	 			<wz:property qualifier="rfcDestinationName" />
+	 		</wz:property-list>
+	 	</wz:content>
+	 	
+	 	<wz:navigation id="step1.navigation" >
+	            
+	 	<wz:cancel />
+	 	<wz:next visible="!#empty(newRFC.rfcDestinationName)" />
+	 	<wz:done visible="!#empty(newRFC.rfcDestinationName)">
+	 		<wz:save property="newRFC" />
+	 	</wz:done>
+	 	</wz:navigation>
+	 </wz:step>
+	 <wz:step id="step2" label="create.rfc.server.label" sublabel="create.rfc.server.sublabel">
+	 	<wz:content id="step2.content">
+	 		<wz:property-list root="newRFC">
+	 			<wz:property qualifier="connectionType" />
+	 			<wz:property qualifier="targetHost" />
+	 			<wz:property qualifier="instance" />
+	 			<wz:property qualifier="sid" />
+	 			<wz:property qualifier="messageServer" />
+	 			<wz:property qualifier="group" />
+	 		</wz:property-list>
+	 	</wz:content>
+	 	
+	 	<wz:navigation id="step2.navigation" >
+	 	<wz:cancel />
+	 	<wz:back />
+	 	<wz:next visible="!#empty(newRFC.rfcDestinationName)"/>
+	 	<wz:done visible="!#empty(newRFC.rfcDestinationName)" >
+	 		<wz:save property="newRFC" />
+	 	</wz:done>
+	 	</wz:navigation>
+	 </wz:step>
+	 
+	 <wz:step id="step3" label="create.rfc.logon.label" sublabel="create.rfc.logon.sublabel">
+	 	<wz:content id="step3.content">
+	 		<wz:property-list root="newRFC">
+	 			<wz:property qualifier="client" />
+	 			<wz:property qualifier="userid" />
+	 			<wz:property qualifier="password" editor="de.hybris.platform.sap.sapcoreconfigurationbackoffice.simplepassword" />	 		 
+	 		</wz:property-list>
+	 	</wz:content>
+	 	<wz:navigation id="step3.navigation" >
+		 	<wz:cancel />
+		 	<wz:back />
+		 	<wz:done>
+		 		<wz:save property="newRFC" />
+		 	</wz:done>
+	 	</wz:navigation>
+	 </wz:step>
+	</wz:flow>
+	</context>
+		
+	<context type="SAPRFCDestination"  component="configurableFlowDynamicForms">
+	
+	   <df:dynamicForms xmlns:df="http://www.hybris.com/cockpitng/component/dynamicForms" modelProperty="newRFC">
+	   
+	  	 <df:attribute id="a" visibleIf="connectionType" qualifier="targetHost" triggeredOn="*" />
+	   	 <df:attribute id="b" visibleIf="connectionType" qualifier="instance" triggeredOn="*" />
+	  	 <df:attribute id="c" visibleIf="!connectionType" qualifier="sid" triggeredOn="*" />
+	   	 <df:attribute id="d" visibleIf="!connectionType" qualifier="messageServer" triggeredOn="*" />
+ 	  	 <df:attribute id="e" visibleIf="!connectionType" qualifier="group" triggeredOn="*" />
+ 
+      </df:dynamicForms>
+</context>
+
+
+</config>

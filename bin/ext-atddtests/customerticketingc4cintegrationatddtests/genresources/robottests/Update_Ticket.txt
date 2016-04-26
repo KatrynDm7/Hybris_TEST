@@ -1,0 +1,46 @@
+*** Settings ***
+Resource          commerce/CommerceServices_Keywords.txt
+Resource          customerticketingc4cintegration/Customer_Ticketing_Keywords.txt
+
+Test Setup        import ct sample data
+
+*** Variables ***
+
+*** Test Cases ***
+
+# Status is not validated, so no TCs for that exist
+# Update retrieves the mock data, so it has nothing to do with data provided for ticket update, just retrieving proper mock data can be verified
+
+Test_Update_Ticket_Message_Empty_FAIL
+	[Documentation]    Testing updating ticket with empty Message - expected to fail
+	${ticket}=    create ticket with title "Subject1" and message "Message1"
+	Run Keyword And Expect Error    *Message can't be empty
+	...    update ticket by id with status and message    ${ticket.id}    OPEN    ${EMPTY}
+
+Test_Update_Ticket_VerifyTicketFieldValues
+	[Documentation]    Testing updating ticket and verifying the retrieved mock data
+	${ticketCreated}=    create ticket with title "Subject1" and message "Message1"
+	${ticketUpdated}=    update ticket with ticketId "${ticketCreated.id}" and set status "CLOSED" and message "Message2"
+	#
+	Log    ticketUpdated.id=${ticketUpdated.id}
+	Log    ticketUpdated.customerId=${ticketUpdated.customerId}
+	Log    ticketUpdated.cartId=${ticketUpdated.cartId}
+	Log    ticketUpdated.subject=${ticketUpdated.subject}
+	Log    ticketUpdated.message=${ticketUpdated.message}
+	Log    ticketUpdated.messageHistory=${ticketUpdated.messageHistory}
+	Log    ticketUpdated.creationDate=${ticketUpdated.creationDate}
+	Log    ticketUpdated.lastModificationDate=${ticketUpdated.lastModificationDate}
+	Log    ticketUpdated.status.id=${ticketUpdated.status.id}
+	Log    ticketUpdated.availableStatusTransitions=${ticketUpdated.availableStatusTransitions}
+	#
+	Should Not Be Empty    ${ticketUpdated.id}
+	Should Be Equal    ${ticketUpdated.id}    ${ticketCreated.id}
+	Should Be Equal    ${ticketUpdated.customerId}    ${EMPTY}
+	Should Be Equal As Strings    ${ticketUpdated.cartId}    None
+	Should Be Equal    ${ticketUpdated.subject}    Ticket subject
+	Should Be Equal As Strings    ${ticketUpdated.message}    None
+	Should Not Be Empty    ${ticketUpdated.messageHistory}
+	Should Not Be Equal    ${ticketUpdated.creationDate}    ${EMPTY}
+	Should Not Be Equal    ${ticketUpdated.lastModificationDate}    ${EMPTY}
+	Should Be Equal    ${ticketUpdated.status.id}    COMPLETED
+	Should Not Be Empty    ${ticketUpdated.availableStatusTransitions}

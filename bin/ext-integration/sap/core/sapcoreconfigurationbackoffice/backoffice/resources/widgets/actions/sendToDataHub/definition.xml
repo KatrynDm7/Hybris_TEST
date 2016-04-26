@@ -1,0 +1,17 @@
+<action-definition id="de.hybris.platform.sap.sapcoreconfigurationbackoffice.actions.SendToDataHubAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/action-definition.xsd">
+ 
+    <name>sapcoreconfigurationbackoffice.SendToDatahubButton</name>
+    <description>Send to Datahub</description>
+    <author>hybris</author>
+    <version>0.1</version> 
+ 
+    <actionClassName>de.hybris.platform.sap.sapcoreconfigurationbackoffice.actions.SendToDataHubAction</actionClassName>
+ 
+   <inputType>de.hybris.platform.sap.core.configuration.model.SAPAdministrationModel</inputType>
+     <outputType>java.lang.String</outputType>
+ 	<iconUri>icons/std_default.png</iconUri>
+ 	<iconHoverUri>icons/std_active.png</iconHoverUri>
+    <iconDisabledUri>icons/std_disabled.png</iconDisabledUri>
+  
+</action-definition>

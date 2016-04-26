@@ -1,0 +1,58 @@
+# Create flashbuyDetail page via New Page Template
+
+$contentCatalog=electronics-cnContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
+$jarResourceCms=jar:de.hybris.platform.chinaaccelerator.services.setup.CoreSystemSetup&/chinaacceleratorservices/import/cockpits/cmscockpit
+
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
+;;DefaultAddToCart;Default AddToCart for Flash Buy Detail;true
+
+
+INSERT_UPDATE ProductPurchaseComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;ProductPurchaseComponent;ProductPurchaseComponent;ProductPurchaseComponent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;DefaultAddToCart;ProductPurchaseComponent
+
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;FlashBuyDetailsPageTemplate;Flash Buy Details Page Template;product/productLayout2Page;ProductPage
+
+UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;;FlashBuyDetailsPageTemplate;$jarResourceCms/structure-view/structure_productDetails2PageTemplate.vm
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='FlashBuyDetailsPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;NavigationBar;;;navigation
+;Section1;;;wide
+;Section2;;;wide
+;Section3;;;wide
+;Section4;;;wide
+;VariantSelector;;ProductVariantSelectorComponent;narrow
+;AddToCart;;ProductPurchaseComponent;narrow
+;SocialWidget;;JiaThisComponent;narrow
+;CrossSelling;;ProductReferencesComponent;narrow
+;UpSelling;;ProductReferencesComponent;narrow
+;Footer;;;footer
+;Tabs;;CMSTabParagraphContainer
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='FlashBuyDetailsPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-FlashBuyDetails;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-FlashBuyDetails;HomepageNavLink;;HomepageNavLinkSlot;true
+;;MiniCart-FlashBuyDetails;MiniCart;;MiniCartSlot;true
+;;NavigationBar-FlashBuyDetails;NavigationBar;;NavigationBarSlot;true
+;;Tabs-FlashBuyDetails;Tabs;;TabsSlot;true
+;;Footer-FlashBuyDetails;Footer;;FooterSlot;true
+;;HeaderLinks-FlashBuyDetails;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-FlashBuyDetails;SearchBox;;SearchBoxSlot;true
+;;VariantSelector-FlashBuyDetails;VariantSelector;;VariantSelectorSlot;true
+;;DefaultAddToCart-FlashBuyDetails;AddToCart;;DefaultAddToCart;true
+;;SocialWidget-FlashBuyDetails;SocialWidget;;SocialWidgetSlot;true
+;;UpSelling-FlashBuyDetails;UpSelling;;UpSellingSlot;true
+;;CrossSelling-FlashBuyDetails;CrossSelling;;CrossSellingSlot;true
+
+INSERT_UPDATE ProductPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved']
+;;flashbuyDetail;Flash Buy Detail;FlashBuyDetailsPageTemplate;true

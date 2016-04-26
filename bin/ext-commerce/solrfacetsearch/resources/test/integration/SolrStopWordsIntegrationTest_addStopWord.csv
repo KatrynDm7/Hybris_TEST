@@ -1,0 +1,2 @@
+INSERT_UPDATE SolrStopWord;facetSearchConfig(name)[unique=true];language(isocode)[unique=true];stopWord[unique=true]
+;testFacetSearchConfig${testId};en;abcdef

@@ -1,0 +1,1086 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Repository>
+    <RepositoryVersion>1.0.0</RepositoryVersion>
+    <Functions>
+        <Function functionName="PIQ_CALCULATE" executionOrder="1">
+            <Import>
+                <Structure name="IS_CONTROL" description="Price Inquiry API calculate control parameter structure">
+                    <Element name="EXTERNAL_FORMAT" description="General Flag" fieldType="CHAR" maxLength="1"></Element>
+                    <Element name="GROUP_PROCESSING" description="General Flag" fieldType="CHAR" maxLength="1"></Element>
+                    <Element name="PRICE_DETAILS" description="General Flag" fieldType="CHAR" maxLength="1"></Element>
+                    <Structure name="PRICING_CONTROL">
+                        <Element name="GET_SCALE_LEVELS" description="Display Type of Scales" fieldType="CHAR" maxLength="1"></Element>
+                        <Element name="MAX_SCALE_LEVELS" description="Maximum number of selected entries" fieldType="NUM" maxLength="8">00000000</Element>
+                        <Element name="PRIC_DETAIL_VAR" description="Variant: Procedure Where Rows are Available for Display" fieldType="CHAR" maxLength="4"></Element>
+                    </Structure>
+                    <Element name="KALSM_VARIANT" description="Variant of a Pricing Procedure" fieldType="CHAR" maxLength="4"></Element>
+                </Structure>
+                <Structure name="IS_GLOBAL" description="Price Inquiry API calculate global parameter">
+                    <Element name="PRSDT" description="Date for pricing and exchange rate" fieldType="DATE"/>
+                    <Element name="AUART" description="Sales Document Type" fieldType="CHAR" maxLength="4"></Element>
+                    <Element name="VKORG" description="Sales Organization" fieldType="CHAR" maxLength="4"></Element>
+                    <Element name="VTWEG" description="Distribution Channel" fieldType="CHAR" maxLength="2"></Element>
+                    <Element name="SPART" description="Division" fieldType="CHAR" maxLength="2"></Element>
+                    <Table tableName="PIQT_NAME_VALUE" name="CALLER_DATA">
+                        <LineType name="PIQS_NAME_VALUE">
+                            <ElementMetaData name="NAME" description="Field Name" fieldType="CHAR" maxLength="30"/>
+                            <ElementMetaData name="VALUE" description="Comment" fieldType="CHAR" maxLength="50"/>
+                        </LineType>
+                    </Table>
+                </Structure>
+                <Table tableName="PIQT_CALCULATE_HEAD" name="IT_HEAD">
+                    <LineType name="PIQS_CALCULATE_HEAD">
+                        <ElementMetaData name="VBELN" description="Sales and Distribution Document Number" fieldType="CHAR" maxLength="10"/>
+                        <ElementMetaData name="KUNNR" description="Customer Number" fieldType="CHAR" maxLength="10"/>
+                        <ElementMetaData name="SPRAS" description="Language Key" fieldType="CHAR" maxLength="1"/>
+                        <TableMetaData name="CALLER_DATA">
+                            <LineType name="PIQS_NAME_VALUE">
+                                <ElementMetaData name="NAME" description="Field Name" fieldType="CHAR" maxLength="30"/>
+                                <ElementMetaData name="VALUE" description="Comment" fieldType="CHAR" maxLength="50"/>
+                            </LineType>
+                        </TableMetaData>
+                    </LineType>
+                </Table>
+                <Table tableName="PIQT_CALCULATE_ITEM" name="IT_ITEM">
+                    <LineType name="PIQS_CALCULATE_ITEM">
+                        <ElementMetaData name="KPOSN" description="Condition item number" fieldType="NUM" maxLength="6"/>
+                        <ElementMetaData name="MATNR" description="Material Number" fieldType="CHAR" maxLength="18"/>
+                        <ElementMetaData name="MGAME" description="Quantity" fieldType="BCD" maxLength="7" BCD-Decimals="3"/>
+                        <ElementMetaData name="VRKME" description="Sales unit" fieldType="CHAR" maxLength="3"/>
+                        <TableMetaData name="CALLER_DATA">
+                            <LineType name="PIQS_NAME_VALUE">
+                                <ElementMetaData name="NAME" description="Field Name" fieldType="CHAR" maxLength="30"/>
+                                <ElementMetaData name="VALUE" description="Comment" fieldType="CHAR" maxLength="50"/>
+                            </LineType>
+                        </TableMetaData>
+                    </LineType>
+                </Table>
+                <Element name="IV_CALLER_ID" description="Price Inquiry Caller ID" fieldType="CHAR" maxLength="3"></Element>
+            </Import>
+            <Export>
+                <Structure name="ES_DESCRIPTION" description="Price Inquiry API: Descriptions">
+                    <Table tableName="PIQT_CALCULATE_STEP_DESCR" name="STEP_DESCR">
+                        <LineType name="PIQS_CALCULATE_STEP_DESCR">
+                            <ElementMetaData name="SPRAS" description="Language Key" fieldType="CHAR" maxLength="1"/>
+                            <ElementMetaData name="KALSM" description="Procedure (Pricing, Output Control, Acct. Det., Costing,...)" fieldType="CHAR" maxLength="6"/>
+                            <ElementMetaData name="STUNR" description="Step number" fieldType="NUM" maxLength="3"/>
+                            <ElementMetaData name="ZAEHK" description="Condition counter" fieldType="NUM" maxLength="2"/>
+                            <ElementMetaData name="KSCHL" description="Condition Type" fieldType="CHAR" maxLength="4"/>
+                            <ElementMetaData name="VTEXT" description="Description" fieldType="CHAR" maxLength="30"/>
+                        </LineType>
+                    </Table>
+                </Structure>
+                <Table tableName="BAPIRETTAB" name="ET_MESSAGE">
+                    <LineType name="BAPIRET2">
+                        <ElementMetaData name="TYPE" description="Message type: S Success, E Error, W Warning, I Info, A Abort" fieldType="CHAR" maxLength="1"/>
+                        <ElementMetaData name="ID" description="Message Class" fieldType="CHAR" maxLength="20"/>
+                        <ElementMetaData name="NUMBER" description="Message Number" fieldType="NUM" maxLength="3"/>
+                        <ElementMetaData name="MESSAGE" description="Message Text" fieldType="CHAR" maxLength="220"/>
+                        <ElementMetaData name="LOG_NO" description="Application log: log number" fieldType="CHAR" maxLength="20"/>
+                        <ElementMetaData name="LOG_MSG_NO" description="Application log: Internal message serial number" fieldType="NUM" maxLength="6"/>
+                        <ElementMetaData name="MESSAGE_V1" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="MESSAGE_V2" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="MESSAGE_V3" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="MESSAGE_V4" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="PARAMETER" description="Parameter Name" fieldType="CHAR" maxLength="32"/>
+                        <ElementMetaData name="ROW" description="Lines in parameter" fieldType="INT" maxLength="4"/>
+                        <ElementMetaData name="FIELD" description="Field in parameter" fieldType="CHAR" maxLength="30"/>
+                        <ElementMetaData name="SYSTEM" description="Logical system from which message originates" fieldType="CHAR" maxLength="10"/>
+                    </LineType>
+                </Table>
+                <Table tableName="PIQT_CALCULATE_RESULT" name="ET_RESULT">
+                    <LineType name="PIQS_CALCULATE_RESULT">
+                        <ElementMetaData name="VBELN" description="Sales and Distribution Document Number" fieldType="CHAR" maxLength="10"/>
+                        <ElementMetaData name="KUNNR" description="Customer Number" fieldType="CHAR" maxLength="10"/>
+                        <ElementMetaData name="KALSM" description="Procedure (Pricing, Output Control, Acct. Det., Costing,...)" fieldType="CHAR" maxLength="6"/>
+                        <ElementMetaData name="WAERK" description="SD Document Currency" fieldType="CHAR" maxLength="5"/>
+                        <TableMetaData name="ITEM">
+                            <LineType name="PIQS_CALCULATE_ITEM_RESULT">
+                                <ElementMetaData name="KPOSN" description="Condition item number" fieldType="NUM" maxLength="6"/>
+                                <ElementMetaData name="MATNR" description="Material Number" fieldType="CHAR" maxLength="18"/>
+                                <ElementMetaData name="VRKME" description="Sales unit" fieldType="CHAR" maxLength="3"/>
+                                <ElementMetaData name="PRSOK" description="Pricing is OK" fieldType="CHAR" maxLength="1"/>
+                                <ElementMetaData name="PSTYV" description="Sales document item category" fieldType="CHAR" maxLength="4"/>
+                                <ElementMetaData name="WERKS" description="Plant" fieldType="CHAR" maxLength="4"/>
+                                <ElementMetaData name="KPEIN" description="Condition pricing unit" fieldType="BCD" maxLength="3"/>
+                                <ElementMetaData name="KMEIN" description="Condition unit" fieldType="CHAR" maxLength="3"/>
+                                <ElementMetaData name="GEWEI" description="Weight Unit" fieldType="CHAR" maxLength="3"/>
+                                <ElementMetaData name="VOLEH" description="Volume unit" fieldType="CHAR" maxLength="3"/>
+                                <ElementMetaData name="SCALEDET_STATUS" description="Status of Scale Level Determination" fieldType="CHAR" maxLength="1"/>
+                                <ElementMetaData name="MGAME" description="Quantity" fieldType="BCD" maxLength="7" BCD-Decimals="3"/>
+                                <ElementMetaData name="NETPR" description="Net price" fieldType="BCD" maxLength="6" BCD-Decimals="2"/>
+                                <ElementMetaData name="NETWR" description="Net Value in Document Currency" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                                <ElementMetaData name="BRTWR" description="Gross value of the billing item in document currency" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                                <ElementMetaData name="MWSBP" description="Tax amount in document currency" fieldType="BCD" maxLength="7" BCD-Decimals="2"/>
+                                <ElementMetaData name="KZWI1" description="Condition subtotal" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                                <ElementMetaData name="KZWI2" description="Condition subtotal" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                                <ElementMetaData name="KZWI3" description="Condition subtotal" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                                <ElementMetaData name="KZWI4" description="Condition subtotal" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                                <ElementMetaData name="KZWI5" description="Condition subtotal" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                                <ElementMetaData name="KZWI6" description="Condition subtotal" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                                <ElementMetaData name="BONBA" description="Rebate basis 1" fieldType="BCD" maxLength="7" BCD-Decimals="2"/>
+                                <ElementMetaData name="PREVA" description="Preference value" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                                <ElementMetaData name="CMPRE" description="Item credit price" fieldType="FLOAT" maxLength="8" BCD-Decimals="16"/>
+                                <ElementMetaData name="WAVWR" description="Cost in document currency" fieldType="BCD" maxLength="7" BCD-Decimals="2"/>
+                                <ElementMetaData name="BRGEW" description="Gross Weight of the Item" fieldType="BCD" maxLength="8" BCD-Decimals="3"/>
+                                <ElementMetaData name="NTGEW" description="Net Weight of the Item" fieldType="BCD" maxLength="8" BCD-Decimals="3"/>
+                                <ElementMetaData name="VOLUM" description="Volume of the item" fieldType="BCD" maxLength="8" BCD-Decimals="3"/>
+                                 <TableMetaData name="COND">
+                                    <LineType name="PIQS_CALCULATE_COND_RESULT">
+                                        <ElementMetaData name="STUNR" description="Step number" fieldType="NUM" maxLength="3"/>
+                                        <ElementMetaData name="ZAEHK" description="Condition counter" fieldType="NUM" maxLength="2"/>
+                                        <ElementMetaData name="KSCHL" description="Condition type" fieldType="CHAR" maxLength="4"/>
+                                        <ElementMetaData name="WAERS" description="Currency Key" fieldType="CHAR" maxLength="5"/>
+                                        <ElementMetaData name="KPEIN" description="Condition pricing unit" fieldType="BCD" maxLength="3"/>
+                                        <ElementMetaData name="KMEIN" description="Condition unit in the document" fieldType="CHAR" maxLength="3"/>
+                                        <ElementMetaData name="KRECH" description="Calculation type for condition" fieldType="CHAR" maxLength="1"/>
+                                        <ElementMetaData name="KBETR" description="Rate (condition amount or percentage)" fieldType="BCD" maxLength="6" BCD-Decimals="2"/>
+                                        <ElementMetaData name="KWERT" description="Condition value" fieldType="BCD" maxLength="7" BCD-Decimals="2"/>
+                                    </LineType>
+                                </TableMetaData>
+                            </LineType>
+                        </TableMetaData>
+                    </LineType>
+                </Table>
+                <Table tableName="PIQT_CALCULATE_RESULT_EXT" name="ET_RESULT_EXT">
+                    <LineType name="PIQS_CALCULATE_RESULT_EXT">
+                        <ElementMetaData name="VBELN" description="Sales and Distribution Document Number" fieldType="CHAR" maxLength="10"/>
+                        <ElementMetaData name="KUNNR" description="Customer Number" fieldType="CHAR" maxLength="10"/>
+                        <ElementMetaData name="KALSM" description="Procedure (Pricing, Output Control, Acct. Det., Costing,...)" fieldType="CHAR" maxLength="6"/>
+                        <ElementMetaData name="WAERK" description="SD Document Currency" fieldType="CHAR" maxLength="5"/>
+                        <TableMetaData name="ITEM">
+                            <LineType name="PIQS_CALCULATE_ITEM_RESULT_EXT">
+                                <ElementMetaData name="KPOSN" description="Condition item number" fieldType="NUM" maxLength="6"/>
+                                <ElementMetaData name="MATNR" description="Material Number" fieldType="CHAR" maxLength="18"/>
+                                <ElementMetaData name="VRKME" description="Sales unit" fieldType="CHAR" maxLength="3"/>
+                                <ElementMetaData name="PRSOK" description="Pricing is OK" fieldType="CHAR" maxLength="1"/>
+                                <ElementMetaData name="PSTYV" description="Sales document item category" fieldType="CHAR" maxLength="4"/>
+                                <ElementMetaData name="WERKS" description="Plant" fieldType="CHAR" maxLength="4"/>
+                                <ElementMetaData name="KPEIN" description="Condition pricing unit" fieldType="BCD" maxLength="3"/>
+                                <ElementMetaData name="KMEIN" description="Condition unit" fieldType="CHAR" maxLength="3"/>
+                                <ElementMetaData name="GEWEI" description="Weight Unit" fieldType="CHAR" maxLength="3"/>
+                                <ElementMetaData name="VOLEH" description="Volume unit" fieldType="CHAR" maxLength="3"/>
+                                <ElementMetaData name="SCALEDET_STATUS" description="Status of Scale Level Determination" fieldType="CHAR" maxLength="1"/>
+                                <ElementMetaData name="MGAME" description="Field of length 16" fieldType="CHAR" maxLength="16"/>
+                                <ElementMetaData name="NETPR" description="Text field length 14" fieldType="CHAR" maxLength="14"/>
+                                <ElementMetaData name="NETWR" description="Field length 18" fieldType="CHAR" maxLength="18"/>
+                                <ElementMetaData name="BRTWR" description="Field length 18" fieldType="CHAR" maxLength="18"/>
+                                <ElementMetaData name="MWSBP" description="Field of length 16" fieldType="CHAR" maxLength="16"/>
+                                <ElementMetaData name="KZWI1" description="Field length 18" fieldType="CHAR" maxLength="18"/>
+                                <ElementMetaData name="KZWI2" description="Field length 18" fieldType="CHAR" maxLength="18"/>
+                                <ElementMetaData name="KZWI3" description="Field length 18" fieldType="CHAR" maxLength="18"/>
+                                <ElementMetaData name="KZWI4" description="Field length 18" fieldType="CHAR" maxLength="18"/>
+                                <ElementMetaData name="KZWI5" description="Field length 18" fieldType="CHAR" maxLength="18"/>
+                                <ElementMetaData name="KZWI6" description="Field length 18" fieldType="CHAR" maxLength="18"/>
+                                <ElementMetaData name="BONBA" description="Field of length 16" fieldType="CHAR" maxLength="16"/>
+                                <ElementMetaData name="PREVA" description="Field length 18" fieldType="CHAR" maxLength="18"/>
+                                <ElementMetaData name="CMPRE" description="Field length 18" fieldType="CHAR" maxLength="18"/>
+                                <ElementMetaData name="WAVWR" description="Field of length 16" fieldType="CHAR" maxLength="16"/>
+                                <ElementMetaData name="BRGEW" description="Field length 18" fieldType="CHAR" maxLength="18"/>
+                                <ElementMetaData name="NTGEW" description="Field length 18" fieldType="CHAR" maxLength="18"/>
+                                <ElementMetaData name="VOLUM" description="Field length 18" fieldType="CHAR" maxLength="18"/>
+                            </LineType>
+                        </TableMetaData>
+                    </LineType>
+                </Table>
+            </Export>
+        </Function>
+        <Function functionName="PIQ_CALCULATE" executionOrder="2">
+            <Import>
+                <Structure name="IS_CONTROL" description="Price Inquiry API calculate control parameter structure">
+                    <Element name="EXTERNAL_FORMAT" description="General Flag" fieldType="CHAR" maxLength="1"></Element>
+                    <Element name="GROUP_PROCESSING" description="General Flag" fieldType="CHAR" maxLength="1">X</Element>
+                    <Element name="PRICE_DETAILS" description="General Flag" fieldType="CHAR" maxLength="1">X</Element>
+                    <Structure name="PRICING_CONTROL">
+                        <Element name="GET_SCALE_LEVELS" description="Display Type of Scales" fieldType="CHAR" maxLength="1"></Element>
+                        <Element name="MAX_SCALE_LEVELS" description="Maximum number of selected entries" fieldType="NUM" maxLength="8">00000000</Element>
+                        <Element name="PRIC_DETAIL_VAR" description="Variant: Procedure Where Rows are Available for Display" fieldType="CHAR" maxLength="4"></Element>
+                    </Structure>
+                    <Element name="KALSM_VARIANT" description="Variant of a Pricing Procedure" fieldType="CHAR" maxLength="4"></Element>
+                </Structure>
+                <Structure name="IS_GLOBAL" description="Price Inquiry API calculate global parameter">
+                    <Element name="PRSDT" description="Date for pricing and exchange rate" fieldType="DATE"/>
+                    <Element name="AUART" description="Sales Document Type" fieldType="CHAR" maxLength="4">TA</Element>
+                    <Element name="VKORG" description="Sales Organization" fieldType="CHAR" maxLength="4">1000</Element>
+                    <Element name="VTWEG" description="Distribution Channel" fieldType="CHAR" maxLength="2">10</Element>
+                    <Element name="SPART" description="Division" fieldType="CHAR" maxLength="2">00</Element>
+                    <Table tableName="PIQT_NAME_VALUE" name="CALLER_DATA">
+                        <LineType name="PIQS_NAME_VALUE">
+                            <ElementMetaData name="NAME" description="Field Name" fieldType="CHAR" maxLength="30"/>
+                            <ElementMetaData name="VALUE" description="Comment" fieldType="CHAR" maxLength="50"/>
+                        </LineType>
+                    </Table>
+                </Structure>
+                <Table tableName="PIQT_CALCULATE_HEAD" name="IT_HEAD">
+                    <LineType name="PIQS_CALCULATE_HEAD">
+                        <ElementMetaData name="VBELN" description="Sales and Distribution Document Number" fieldType="CHAR" maxLength="10"/>
+                        <ElementMetaData name="KUNNR" description="Customer Number" fieldType="CHAR" maxLength="10"/>
+                        <ElementMetaData name="SPRAS" description="Language Key" fieldType="CHAR" maxLength="1"/>
+                        <TableMetaData name="CALLER_DATA">
+                            <LineType name="PIQS_NAME_VALUE">
+                                <ElementMetaData name="NAME" description="Field Name" fieldType="CHAR" maxLength="30"/>
+                                <ElementMetaData name="VALUE" description="Comment" fieldType="CHAR" maxLength="50"/>
+                            </LineType>
+                        </TableMetaData>
+                    </LineType>
+                    <Row>
+                        <RowElement>$1</RowElement>
+                        <RowElement>JV01</RowElement>
+                        <RowElement>E</RowElement>
+                        <RowTable xsi:type="Table" tableName="PIQT_NAME_VALUE" name="CALLER_DATA" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                            <LineType name="PIQS_NAME_VALUE">
+                                <ElementMetaData name="NAME" description="Field Name" fieldType="CHAR" maxLength="30"/>
+                                <ElementMetaData name="VALUE" description="Comment" fieldType="CHAR" maxLength="50"/>
+                            </LineType>
+                            <Row>
+                                <RowElement>WAERK</RowElement>
+                                <RowElement>EUR</RowElement>
+                            </Row>
+                            <Row>
+                                <RowElement>VSBED</RowElement>
+                                <RowElement>01</RowElement>
+                            </Row>
+                            <Row>
+                                <RowElement>ZTERM</RowElement>
+                                <RowElement>0001</RowElement>
+                            </Row>
+                        </RowTable>
+                    </Row>
+                </Table>
+                <Table tableName="PIQT_CALCULATE_ITEM" name="IT_ITEM">
+                    <LineType name="PIQS_CALCULATE_ITEM">
+                        <ElementMetaData name="KPOSN" description="Condition item number" fieldType="NUM" maxLength="6"/>
+                        <ElementMetaData name="MATNR" description="Material Number" fieldType="CHAR" maxLength="18"/>
+                        <ElementMetaData name="MGAME" description="Quantity" fieldType="BCD" maxLength="7" BCD-Decimals="3"/>
+                        <ElementMetaData name="VRKME" description="Sales unit" fieldType="CHAR" maxLength="3"/>
+                        <TableMetaData name="CALLER_DATA">
+                            <LineType name="PIQS_NAME_VALUE">
+                                <ElementMetaData name="NAME" description="Field Name" fieldType="CHAR" maxLength="30"/>
+                                <ElementMetaData name="VALUE" description="Comment" fieldType="CHAR" maxLength="50"/>
+                            </LineType>
+                        </TableMetaData>
+                    </LineType>
+                    <Row>
+                        <RowElement>000002</RowElement>
+                        <RowElement>000000000003755211</RowElement>
+                        <RowElement>1.000</RowElement>
+                        <RowElement>ST</RowElement>
+                        <RowTable xsi:type="Table" tableName="PIQT_NAME_VALUE" name="CALLER_DATA" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                            <LineType name="PIQS_NAME_VALUE">
+                                <ElementMetaData name="NAME" description="Field Name" fieldType="CHAR" maxLength="30"/>
+                                <ElementMetaData name="VALUE" description="Comment" fieldType="CHAR" maxLength="50"/>
+                            </LineType>
+                        </RowTable>
+                    </Row>
+                </Table>
+                <Element name="IV_CALLER_ID" description="Price Inquiry Caller ID" fieldType="CHAR" maxLength="3">PL</Element>
+            </Import>
+            <Export>
+                <Structure name="ES_DESCRIPTION" description="Price Inquiry API: Descriptions">
+                    <Table tableName="PIQT_CALCULATE_STEP_DESCR" name="STEP_DESCR">
+                        <LineType name="PIQS_CALCULATE_STEP_DESCR">
+                            <ElementMetaData name="SPRAS" description="Language Key" fieldType="CHAR" maxLength="1"/>
+                            <ElementMetaData name="KALSM" description="Procedure (Pricing, Output Control, Acct. Det., Costing,...)" fieldType="CHAR" maxLength="6"/>
+                            <ElementMetaData name="STUNR" description="Step number" fieldType="NUM" maxLength="3"/>
+                            <ElementMetaData name="ZAEHK" description="Condition counter" fieldType="NUM" maxLength="2"/>
+                            <ElementMetaData name="KSCHL" description="Condition Type" fieldType="CHAR" maxLength="4"/>
+                            <ElementMetaData name="VTEXT" description="Description" fieldType="CHAR" maxLength="30"/>
+                        </LineType>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>010</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement>PR00</RowElement>
+                            <RowElement>Price</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>020</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement>PB00</RowElement>
+                            <RowElement>Price (Gross)</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>030</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement>VA00</RowElement>
+                            <RowElement>Variant Price</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>099</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement></RowElement>
+                            <RowElement>Price</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>110</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement>K005</RowElement>
+                            <RowElement>Customer/Material</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>111</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement>K004</RowElement>
+                            <RowElement>Material</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>112</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement>K020</RowElement>
+                            <RowElement>Price Group</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>113</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement>K029</RowElement>
+                            <RowElement>Material pricing grp</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>114</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement>K031</RowElement>
+                            <RowElement>Price Grp/Mat.Pr.Grp</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>115</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement>K032</RowElement>
+                            <RowElement>Price Group/Material</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>116</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement>K030</RowElement>
+                            <RowElement>Customer/Mat.Pr.Grp</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>190</RowElement>
+                            <RowElement>01</RowElement>
+                            <RowElement>RA01</RowElement>
+                            <RowElement>% Disc.from Gross</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>190</RowElement>
+                            <RowElement>02</RowElement>
+                            <RowElement>RA00</RowElement>
+                            <RowElement>% Discount from Net</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>190</RowElement>
+                            <RowElement>03</RowElement>
+                            <RowElement>RC00</RowElement>
+                            <RowElement>Quantity Discount</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>190</RowElement>
+                            <RowElement>04</RowElement>
+                            <RowElement>RB00</RowElement>
+                            <RowElement>Discount (Value)</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>199</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement></RowElement>
+                            <RowElement>Discount</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>200</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement></RowElement>
+                            <RowElement>Without shipping</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>205</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement>HD00</RowElement>
+                            <RowElement>Freight</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>207</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement>ZSHN</RowElement>
+                            <RowElement>Shipping Costs</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>280</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement></RowElement>
+                            <RowElement>Shipping</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>300</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement>PCVI</RowElement>
+                            <RowElement>Charge VISA</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>301</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement>ZPAY</RowElement>
+                            <RowElement>Payment terms hybris</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>350</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement></RowElement>
+                            <RowElement>Payment Charge</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>500</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement>MWST</RowElement>
+                            <RowElement>Output Tax</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>500</RowElement>
+                            <RowElement>01</RowElement>
+                            <RowElement>MWSI</RowElement>
+                            <RowElement>Output Tax</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>501</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement></RowElement>
+                            <RowElement>Taxes</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>801</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement></RowElement>
+                            <RowElement>Total</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>810</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement>EDI1</RowElement>
+                            <RowElement>Cust.expected price</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>811</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement>EDI2</RowElement>
+                            <RowElement>Cust.expected value</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>812</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement>NTPS</RowElement>
+                            <RowElement>Price Net Share</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>910</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement>UTXJ</RowElement>
+                            <RowElement>Tax Jurisdict.Code</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>911</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement>XR1</RowElement>
+                            <RowElement>Tax Jur Code Level 1</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>912</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement>XR2</RowElement>
+                            <RowElement>Tax Jur Code Level 2</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>913</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement>XR3</RowElement>
+                            <RowElement>Tax Jur Code Level 3</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>914</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement>XR4</RowElement>
+                            <RowElement>Tax Jur Code Level 4</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>915</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement>XR5</RowElement>
+                            <RowElement>Tax Jur Code Level 5</RowElement>
+                        </Row>
+                        <Row>
+                            <RowElement>E</RowElement>
+                            <RowElement>ZZZPP1</RowElement>
+                            <RowElement>916</RowElement>
+                            <RowElement>00</RowElement>
+                            <RowElement>XR6</RowElement>
+                            <RowElement>Tax Jur Code Level 6</RowElement>
+                        </Row>
+                    </Table>
+                </Structure>
+                <Table tableName="BAPIRETTAB" name="ET_MESSAGE">
+                    <LineType name="BAPIRET2">
+                        <ElementMetaData name="TYPE" description="Message type: S Success, E Error, W Warning, I Info, A Abort" fieldType="CHAR" maxLength="1"/>
+                        <ElementMetaData name="ID" description="Message Class" fieldType="CHAR" maxLength="20"/>
+                        <ElementMetaData name="NUMBER" description="Message Number" fieldType="NUM" maxLength="3"/>
+                        <ElementMetaData name="MESSAGE" description="Message Text" fieldType="CHAR" maxLength="220"/>
+                        <ElementMetaData name="LOG_NO" description="Application log: log number" fieldType="CHAR" maxLength="20"/>
+                        <ElementMetaData name="LOG_MSG_NO" description="Application log: Internal message serial number" fieldType="NUM" maxLength="6"/>
+                        <ElementMetaData name="MESSAGE_V1" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="MESSAGE_V2" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="MESSAGE_V3" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="MESSAGE_V4" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="PARAMETER" description="Parameter Name" fieldType="CHAR" maxLength="32"/>
+                        <ElementMetaData name="ROW" description="Lines in parameter" fieldType="INT" maxLength="4"/>
+                        <ElementMetaData name="FIELD" description="Field in parameter" fieldType="CHAR" maxLength="30"/>
+                        <ElementMetaData name="SYSTEM" description="Logical system from which message originates" fieldType="CHAR" maxLength="10"/>
+                    </LineType>
+                    <Row>
+                        <RowElement>W</RowElement>
+                        <RowElement>CM_PIQ_API</RowElement>
+                        <RowElement>120</RowElement>
+                        <RowElement>Relevant attributes of user exit KOFRM 301 not maintained</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement>000000</RowElement>
+                        <RowElement>KOFRM</RowElement>
+                        <RowElement>301</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                        <RowElement>0</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                    </Row>
+                    <Row>
+                        <RowElement>W</RowElement>
+                        <RowElement>CM_PIQ_API</RowElement>
+                        <RowElement>120</RowElement>
+                        <RowElement>Relevant attributes of user exit KOFRM 302 not maintained</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement>000000</RowElement>
+                        <RowElement>KOFRM</RowElement>
+                        <RowElement>302</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                        <RowElement>0</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                    </Row>
+                    <Row>
+                        <RowElement>W</RowElement>
+                        <RowElement>CM_PIQ_API</RowElement>
+                        <RowElement>120</RowElement>
+                        <RowElement>Relevant attributes of user exit KOFRM 303 not maintained</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement>000000</RowElement>
+                        <RowElement>KOFRM</RowElement>
+                        <RowElement>303</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                        <RowElement>0</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                    </Row>
+                    <Row>
+                        <RowElement>W</RowElement>
+                        <RowElement>CM_PIQ_API</RowElement>
+                        <RowElement>120</RowElement>
+                        <RowElement>Relevant attributes of user exit KOFRM 304 not maintained</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement>000000</RowElement>
+                        <RowElement>KOFRM</RowElement>
+                        <RowElement>304</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                        <RowElement>0</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                    </Row>
+                    <Row>
+                        <RowElement>W</RowElement>
+                        <RowElement>CM_PIQ_API</RowElement>
+                        <RowElement>120</RowElement>
+                        <RowElement>Relevant attributes of user exit KOFRM 305 not maintained</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement>000000</RowElement>
+                        <RowElement>KOFRM</RowElement>
+                        <RowElement>305</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                        <RowElement>0</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                    </Row>
+                    <Row>
+                        <RowElement>W</RowElement>
+                        <RowElement>CM_PIQ_API</RowElement>
+                        <RowElement>120</RowElement>
+                        <RowElement>Relevant attributes of user exit KOFRM 306 not maintained</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement>000000</RowElement>
+                        <RowElement>KOFRM</RowElement>
+                        <RowElement>306</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                        <RowElement>0</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                    </Row>
+                    <Row>
+                        <RowElement>W</RowElement>
+                        <RowElement>CM_PIQ_API</RowElement>
+                        <RowElement>120</RowElement>
+                        <RowElement>Relevant attributes of user exit GRLNR 002 not maintained</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement>000000</RowElement>
+                        <RowElement>GRLNR</RowElement>
+                        <RowElement>002</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                        <RowElement>0</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                    </Row>
+                    <Row>
+                        <RowElement>W</RowElement>
+                        <RowElement>CM_PIQ_API</RowElement>
+                        <RowElement>030</RowElement>
+                        <RowElement>No datasource found for field KOMK FKART</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement>000000</RowElement>
+                        <RowElement>KOMK</RowElement>
+                        <RowElement>FKART</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                        <RowElement>0</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                    </Row>
+                    <Row>
+                        <RowElement>W</RowElement>
+                        <RowElement>CM_PIQ_API</RowElement>
+                        <RowElement>030</RowElement>
+                        <RowElement>No datasource found for field KOMP TARGET_GROUP_ID</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement>000000</RowElement>
+                        <RowElement>KOMP</RowElement>
+                        <RowElement>TARGET_GROUP_ID</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                        <RowElement>0</RowElement>
+                        <RowElement></RowElement>
+                        <RowElement></RowElement>
+                    </Row>
+                </Table>
+                <Table tableName="PIQT_CALCULATE_RESULT" name="ET_RESULT">
+                    <LineType name="PIQS_CALCULATE_RESULT">
+                        <ElementMetaData name="VBELN" description="Sales and Distribution Document Number" fieldType="CHAR" maxLength="10"/>
+                        <ElementMetaData name="KUNNR" description="Customer Number" fieldType="CHAR" maxLength="10"/>
+                        <ElementMetaData name="KALSM" description="Procedure (Pricing, Output Control, Acct. Det., Costing,...)" fieldType="CHAR" maxLength="6"/>
+                        <ElementMetaData name="WAERK" description="SD Document Currency" fieldType="CHAR" maxLength="5"/>
+                        <TableMetaData name="ITEM">
+                            <LineType name="PIQS_CALCULATE_ITEM_RESULT">
+                                <ElementMetaData name="KPOSN" description="Condition item number" fieldType="NUM" maxLength="6"/>
+                                <ElementMetaData name="MATNR" description="Material Number" fieldType="CHAR" maxLength="18"/>
+                                <ElementMetaData name="VRKME" description="Sales unit" fieldType="CHAR" maxLength="3"/>
+                                <ElementMetaData name="PRSOK" description="Pricing is OK" fieldType="CHAR" maxLength="1"/>
+                                <ElementMetaData name="PSTYV" description="Sales document item category" fieldType="CHAR" maxLength="4"/>
+                                <ElementMetaData name="WERKS" description="Plant" fieldType="CHAR" maxLength="4"/>
+                                <ElementMetaData name="KPEIN" description="Condition pricing unit" fieldType="BCD" maxLength="3"/>
+                                <ElementMetaData name="KMEIN" description="Condition unit" fieldType="CHAR" maxLength="3"/>
+                                <ElementMetaData name="GEWEI" description="Weight Unit" fieldType="CHAR" maxLength="3"/>
+                                <ElementMetaData name="VOLEH" description="Volume unit" fieldType="CHAR" maxLength="3"/>
+                                <ElementMetaData name="SCALEDET_STATUS" description="Status of Scale Level Determination" fieldType="CHAR" maxLength="1"/>
+                                <ElementMetaData name="MGAME" description="Quantity" fieldType="BCD" maxLength="7" BCD-Decimals="3"/>
+                                <ElementMetaData name="NETPR" description="Net price" fieldType="BCD" maxLength="6" BCD-Decimals="2"/>
+                                <ElementMetaData name="NETWR" description="Net Value in Document Currency" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                                <ElementMetaData name="BRTWR" description="Gross value of the billing item in document currency" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                                <ElementMetaData name="MWSBP" description="Tax amount in document currency" fieldType="BCD" maxLength="7" BCD-Decimals="2"/>
+                                <ElementMetaData name="KZWI1" description="Condition subtotal" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                                <ElementMetaData name="KZWI2" description="Condition subtotal" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                                <ElementMetaData name="KZWI3" description="Condition subtotal" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                                <ElementMetaData name="KZWI4" description="Condition subtotal" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                                <ElementMetaData name="KZWI5" description="Condition subtotal" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                                <ElementMetaData name="KZWI6" description="Condition subtotal" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                                <ElementMetaData name="BONBA" description="Rebate basis 1" fieldType="BCD" maxLength="7" BCD-Decimals="2"/>
+                                <ElementMetaData name="PREVA" description="Preference value" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                                <ElementMetaData name="CMPRE" description="Item credit price" fieldType="FLOAT" maxLength="8" BCD-Decimals="16"/>
+                                <ElementMetaData name="WAVWR" description="Cost in document currency" fieldType="BCD" maxLength="7" BCD-Decimals="2"/>
+                                <ElementMetaData name="BRGEW" description="Gross Weight of the Item" fieldType="BCD" maxLength="8" BCD-Decimals="3"/>
+                                <ElementMetaData name="NTGEW" description="Net Weight of the Item" fieldType="BCD" maxLength="8" BCD-Decimals="3"/>
+                                <ElementMetaData name="VOLUM" description="Volume of the item" fieldType="BCD" maxLength="8" BCD-Decimals="3"/>
+                                 <TableMetaData name="COND">
+                                    <LineType name="PIQS_CALCULATE_COND_RESULT">
+                                        <ElementMetaData name="STUNR" description="Step number" fieldType="NUM" maxLength="3"/>
+                                        <ElementMetaData name="ZAEHK" description="Condition counter" fieldType="NUM" maxLength="2"/>
+                                        <ElementMetaData name="KSCHL" description="Condition type" fieldType="CHAR" maxLength="4"/>
+                                        <ElementMetaData name="WAERS" description="Currency Key" fieldType="CHAR" maxLength="5"/>
+                                        <ElementMetaData name="KPEIN" description="Condition pricing unit" fieldType="BCD" maxLength="3"/>
+                                        <ElementMetaData name="KMEIN" description="Condition unit in the document" fieldType="CHAR" maxLength="3"/>
+                                        <ElementMetaData name="KRECH" description="Calculation type for condition" fieldType="CHAR" maxLength="1"/>
+                                        <ElementMetaData name="KBETR" description="Rate (condition amount or percentage)" fieldType="BCD" maxLength="6" BCD-Decimals="2"/>
+                                        <ElementMetaData name="KWERT" description="Condition value" fieldType="BCD" maxLength="7" BCD-Decimals="2"/>
+                                    </LineType>
+                                </TableMetaData>
+                            </LineType>
+                        </TableMetaData>
+                    </LineType>
+                    <Row>
+                        <RowElement>$1</RowElement>
+                        <RowElement>JV01</RowElement>
+                        <RowElement>ZZZPP1</RowElement>
+                        <RowElement>EUR</RowElement>
+                        <RowTable xsi:type="Table" tableName="PIQT_CALCULATE_ITEM_RESULT" name="ITEM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                            <LineType name="PIQS_CALCULATE_ITEM_RESULT">
+                                <ElementMetaData name="KPOSN" description="Condition item number" fieldType="NUM" maxLength="6"/>
+                                <ElementMetaData name="MATNR" description="Material Number" fieldType="CHAR" maxLength="18"/>
+                                <ElementMetaData name="VRKME" description="Sales unit" fieldType="CHAR" maxLength="3"/>
+                                <ElementMetaData name="PRSOK" description="Pricing is OK" fieldType="CHAR" maxLength="1"/>
+                                <ElementMetaData name="PSTYV" description="Sales document item category" fieldType="CHAR" maxLength="4"/>
+                                <ElementMetaData name="WERKS" description="Plant" fieldType="CHAR" maxLength="4"/>
+                                <ElementMetaData name="KPEIN" description="Condition pricing unit" fieldType="BCD" maxLength="3"/>
+                                <ElementMetaData name="KMEIN" description="Condition unit" fieldType="CHAR" maxLength="3"/>
+                                <ElementMetaData name="GEWEI" description="Weight Unit" fieldType="CHAR" maxLength="3"/>
+                                <ElementMetaData name="VOLEH" description="Volume unit" fieldType="CHAR" maxLength="3"/>
+                                <ElementMetaData name="SCALEDET_STATUS" description="Status of Scale Level Determination" fieldType="CHAR" maxLength="1"/>
+                                <ElementMetaData name="MGAME" description="Quantity" fieldType="BCD" maxLength="7" BCD-Decimals="3"/>
+                                <ElementMetaData name="NETPR" description="Net price" fieldType="BCD" maxLength="6" BCD-Decimals="2"/>
+                                <ElementMetaData name="NETWR" description="Net Value in Document Currency" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                                <ElementMetaData name="BRTWR" description="Gross value of the billing item in document currency" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                                <ElementMetaData name="MWSBP" description="Tax amount in document currency" fieldType="BCD" maxLength="7" BCD-Decimals="2"/>
+                                <ElementMetaData name="KZWI1" description="Condition subtotal" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                                <ElementMetaData name="KZWI2" description="Condition subtotal" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                                <ElementMetaData name="KZWI3" description="Condition subtotal" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                                <ElementMetaData name="KZWI4" description="Condition subtotal" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                                <ElementMetaData name="KZWI5" description="Condition subtotal" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                                <ElementMetaData name="KZWI6" description="Condition subtotal" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                                <ElementMetaData name="BONBA" description="Rebate basis 1" fieldType="BCD" maxLength="7" BCD-Decimals="2"/>
+                                <ElementMetaData name="PREVA" description="Preference value" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                                <ElementMetaData name="CMPRE" description="Item credit price" fieldType="FLOAT" maxLength="8" BCD-Decimals="16"/>
+                                <ElementMetaData name="WAVWR" description="Cost in document currency" fieldType="BCD" maxLength="7" BCD-Decimals="2"/>
+                                <ElementMetaData name="BRGEW" description="Gross Weight of the Item" fieldType="BCD" maxLength="8" BCD-Decimals="3"/>
+                                <ElementMetaData name="NTGEW" description="Net Weight of the Item" fieldType="BCD" maxLength="8" BCD-Decimals="3"/>
+                                <ElementMetaData name="VOLUM" description="Volume of the item" fieldType="BCD" maxLength="8" BCD-Decimals="3"/>
+                                <TableMetaData name="COND">
+                                    <LineType name="PIQS_CALCULATE_COND_RESULT">
+                                        <ElementMetaData name="STUNR" description="Step number" fieldType="NUM" maxLength="3"/>
+                                        <ElementMetaData name="ZAEHK" description="Condition counter" fieldType="NUM" maxLength="2"/>
+                                        <ElementMetaData name="KSCHL" description="Condition type" fieldType="CHAR" maxLength="4"/>
+                                        <ElementMetaData name="WAERS" description="Currency Key" fieldType="CHAR" maxLength="5"/>
+                                        <ElementMetaData name="KPEIN" description="Condition pricing unit" fieldType="BCD" maxLength="3"/>
+                                        <ElementMetaData name="KMEIN" description="Condition unit in the document" fieldType="CHAR" maxLength="3"/>
+                                        <ElementMetaData name="KRECH" description="Calculation type for condition" fieldType="CHAR" maxLength="1"/>
+                                        <ElementMetaData name="KBETR" description="Rate (condition amount or percentage)" fieldType="BCD" maxLength="6" BCD-Decimals="2"/>
+                                        <ElementMetaData name="KWERT" description="Condition value" fieldType="BCD" maxLength="7" BCD-Decimals="2"/>
+                                    </LineType>
+                                </TableMetaData>
+                            </LineType>
+                            <Row>
+                                <RowElement>000002</RowElement>
+                                <RowElement>000000000003755211</RowElement>
+                                <RowElement>ST</RowElement>
+                                <RowElement>X</RowElement>
+                                <RowElement>TAN</RowElement>
+                                <RowElement></RowElement>
+                                <RowElement>1</RowElement>
+                                <RowElement>ST</RowElement>
+                                <RowElement>KG</RowElement>
+                                <RowElement></RowElement>
+                                <RowElement></RowElement>
+                                <RowElement>1.000</RowElement>
+                                <RowElement>65.39</RowElement>
+                                <RowElement>65.39</RowElement>
+                                <RowElement>0.00</RowElement>
+                                <RowElement>12.00</RowElement>
+                                <RowElement>120.50</RowElement>
+                                <RowElement>-55.11</RowElement>
+                                <RowElement>0.00</RowElement>
+                                <RowElement>12.00</RowElement>
+                                <RowElement>9.64</RowElement>
+                                <RowElement>65.39</RowElement>
+                                <RowElement>0.00</RowElement>
+                                <RowElement>0.00</RowElement>
+                                <RowElement>120.5</RowElement>
+                                <RowElement>0.00</RowElement>
+                                <RowElement>2.000</RowElement>
+                                <RowElement>2.000</RowElement>
+                                <RowElement>0.000</RowElement>
+                                <RowTable xsi:type="Table" tableName="PIQT_CALCULATE_COND_RESULT" name="COND">
+                                    <LineType name="PIQS_CALCULATE_COND_RESULT">
+                                        <ElementMetaData name="STUNR" description="Step number" fieldType="NUM" maxLength="3"/>
+                                        <ElementMetaData name="ZAEHK" description="Condition counter" fieldType="NUM" maxLength="2"/>
+                                        <ElementMetaData name="KSCHL" description="Condition type" fieldType="CHAR" maxLength="4"/>
+                                        <ElementMetaData name="WAERS" description="Currency Key" fieldType="CHAR" maxLength="5"/>
+                                        <ElementMetaData name="KPEIN" description="Condition pricing unit" fieldType="BCD" maxLength="3"/>
+                                        <ElementMetaData name="KMEIN" description="Condition unit in the document" fieldType="CHAR" maxLength="3"/>
+                                        <ElementMetaData name="KRECH" description="Calculation type for condition" fieldType="CHAR" maxLength="1"/>
+                                        <ElementMetaData name="KBETR" description="Rate (condition amount or percentage)" fieldType="BCD" maxLength="6" BCD-Decimals="2"/>
+                                        <ElementMetaData name="KWERT" description="Condition value" fieldType="BCD" maxLength="7" BCD-Decimals="2"/>
+                                    </LineType>
+                                    <Row>
+                                        <RowElement>010</RowElement>
+                                        <RowElement>01</RowElement>
+                                        <RowElement>PR00</RowElement>
+                                        <RowElement>EUR</RowElement>
+                                        <RowElement>1</RowElement>
+                                        <RowElement>ST</RowElement>
+                                        <RowElement>C</RowElement>
+                                        <RowElement>120.50</RowElement>
+                                        <RowElement>120.50</RowElement>
+                                    </Row>
+                                    <Row>
+                                        <RowElement>112</RowElement>
+                                        <RowElement>01</RowElement>
+                                        <RowElement>K020</RowElement>
+                                        <RowElement></RowElement>
+                                        <RowElement>0</RowElement>
+                                        <RowElement></RowElement>
+                                        <RowElement>A</RowElement>
+                                        <RowElement>-330.00</RowElement>
+                                        <RowElement>-39.77</RowElement>
+                                    </Row>
+                                    <Row>
+                                        <RowElement>114</RowElement>
+                                        <RowElement>01</RowElement>
+                                        <RowElement>K031</RowElement>
+                                        <RowElement></RowElement>
+                                        <RowElement>0</RowElement>
+                                        <RowElement></RowElement>
+                                        <RowElement>A</RowElement>
+                                        <RowElement>-100.00</RowElement>
+                                        <RowElement>-8.07</RowElement>
+                                    </Row>
+                                    <Row>
+                                        <RowElement>116</RowElement>
+                                        <RowElement>01</RowElement>
+                                        <RowElement>K030</RowElement>
+                                        <RowElement></RowElement>
+                                        <RowElement>0</RowElement>
+                                        <RowElement></RowElement>
+                                        <RowElement>A</RowElement>
+                                        <RowElement>-100.00</RowElement>
+                                        <RowElement>-7.27</RowElement>
+                                    </Row>
+                                    <Row>
+                                        <RowElement>205</RowElement>
+                                        <RowElement>01</RowElement>
+                                        <RowElement>HD00</RowElement>
+                                        <RowElement></RowElement>
+                                        <RowElement>0</RowElement>
+                                        <RowElement></RowElement>
+                                        <RowElement>A</RowElement>
+                                        <RowElement>0.00</RowElement>
+                                        <RowElement>0.00</RowElement>
+                                    </Row>
+                                    <Row>
+                                        <RowElement>301</RowElement>
+                                        <RowElement>01</RowElement>
+                                        <RowElement>ZPAY</RowElement>
+                                        <RowElement></RowElement>
+                                        <RowElement>0</RowElement>
+                                        <RowElement></RowElement>
+                                        <RowElement>A</RowElement>
+                                        <RowElement>80.00</RowElement>
+                                        <RowElement>9.64</RowElement>
+                                    </Row>
+                                    <Row>
+                                        <RowElement>500</RowElement>
+                                        <RowElement>01</RowElement>
+                                        <RowElement>MWST</RowElement>
+                                        <RowElement></RowElement>
+                                        <RowElement>0</RowElement>
+                                        <RowElement></RowElement>
+                                        <RowElement>A</RowElement>
+                                        <RowElement>160.00</RowElement>
+                                        <RowElement>12.00</RowElement>
+                                    </Row>
+                                    <Row>
+                                        <RowElement>911</RowElement>
+                                        <RowElement>01</RowElement>
+                                        <RowElement>XR1</RowElement>
+                                        <RowElement></RowElement>
+                                        <RowElement>0</RowElement>
+                                        <RowElement></RowElement>
+                                        <RowElement>A</RowElement>
+                                        <RowElement>0.00</RowElement>
+                                        <RowElement>0.00</RowElement>
+                                    </Row>
+                                    <Row>
+                                        <RowElement>912</RowElement>
+                                        <RowElement>01</RowElement>
+                                        <RowElement>XR2</RowElement>
+                                        <RowElement></RowElement>
+                                        <RowElement>0</RowElement>
+                                        <RowElement></RowElement>
+                                        <RowElement>A</RowElement>
+                                        <RowElement>0.00</RowElement>
+                                        <RowElement>0.00</RowElement>
+                                    </Row>
+                                    <Row>
+                                        <RowElement>913</RowElement>
+                                        <RowElement>01</RowElement>
+                                        <RowElement>XR3</RowElement>
+                                        <RowElement></RowElement>
+                                        <RowElement>0</RowElement>
+                                        <RowElement></RowElement>
+                                        <RowElement>A</RowElement>
+                                        <RowElement>0.00</RowElement>
+                                        <RowElement>0.00</RowElement>
+                                    </Row>
+                                    <Row>
+                                        <RowElement>914</RowElement>
+                                        <RowElement>01</RowElement>
+                                        <RowElement>XR4</RowElement>
+                                        <RowElement></RowElement>
+                                        <RowElement>0</RowElement>
+                                        <RowElement></RowElement>
+                                        <RowElement>A</RowElement>
+                                        <RowElement>0.00</RowElement>
+                                        <RowElement>0.00</RowElement>
+                                    </Row>
+                                    <Row>
+                                        <RowElement>915</RowElement>
+                                        <RowElement>01</RowElement>
+                                        <RowElement>XR5</RowElement>
+                                        <RowElement></RowElement>
+                                        <RowElement>0</RowElement>
+                                        <RowElement></RowElement>
+                                        <RowElement>A</RowElement>
+                                        <RowElement>0.00</RowElement>
+                                        <RowElement>0.00</RowElement>
+                                    </Row>
+                                    <Row>
+                                        <RowElement>916</RowElement>
+                                        <RowElement>01</RowElement>
+                                        <RowElement>XR6</RowElement>
+                                        <RowElement></RowElement>
+                                        <RowElement>0</RowElement>
+                                        <RowElement></RowElement>
+                                        <RowElement>A</RowElement>
+                                        <RowElement>0.00</RowElement>
+                                        <RowElement>0.00</RowElement>
+                                    </Row>
+                                </RowTable>
+                            </Row>
+                        </RowTable>
+                    </Row>
+                </Table>
+                <Table tableName="PIQT_CALCULATE_RESULT_EXT" name="ET_RESULT_EXT">
+                    <LineType name="PIQS_CALCULATE_RESULT_EXT">
+                        <ElementMetaData name="VBELN" description="Sales and Distribution Document Number" fieldType="CHAR" maxLength="10"/>
+                        <ElementMetaData name="KUNNR" description="Customer Number" fieldType="CHAR" maxLength="10"/>
+                        <ElementMetaData name="KALSM" description="Procedure (Pricing, Output Control, Acct. Det., Costing,...)" fieldType="CHAR" maxLength="6"/>
+                        <ElementMetaData name="WAERK" description="SD Document Currency" fieldType="CHAR" maxLength="5"/>
+                        <TableMetaData name="ITEM">
+                            <LineType name="PIQS_CALCULATE_ITEM_RESULT_EXT">
+                                <ElementMetaData name="KPOSN" description="Condition item number" fieldType="NUM" maxLength="6"/>
+                                <ElementMetaData name="MATNR" description="Material Number" fieldType="CHAR" maxLength="18"/>
+                                <ElementMetaData name="VRKME" description="Sales unit" fieldType="CHAR" maxLength="3"/>
+                                <ElementMetaData name="PRSOK" description="Pricing is OK" fieldType="CHAR" maxLength="1"/>
+                                <ElementMetaData name="PSTYV" description="Sales document item category" fieldType="CHAR" maxLength="4"/>
+                                <ElementMetaData name="WERKS" description="Plant" fieldType="CHAR" maxLength="4"/>
+                                <ElementMetaData name="KPEIN" description="Condition pricing unit" fieldType="BCD" maxLength="3"/>
+                                <ElementMetaData name="KMEIN" description="Condition unit" fieldType="CHAR" maxLength="3"/>
+                                <ElementMetaData name="GEWEI" description="Weight Unit" fieldType="CHAR" maxLength="3"/>
+                                <ElementMetaData name="VOLEH" description="Volume unit" fieldType="CHAR" maxLength="3"/>
+                                <ElementMetaData name="SCALEDET_STATUS" description="Status of Scale Level Determination" fieldType="CHAR" maxLength="1"/>
+                                <ElementMetaData name="MGAME" description="Field of length 16" fieldType="CHAR" maxLength="16"/>
+                                <ElementMetaData name="NETPR" description="Text field length 14" fieldType="CHAR" maxLength="14"/>
+                                <ElementMetaData name="NETWR" description="Field length 18" fieldType="CHAR" maxLength="18"/>
+                                <ElementMetaData name="BRTWR" description="Field length 18" fieldType="CHAR" maxLength="18"/>
+                                <ElementMetaData name="MWSBP" description="Field of length 16" fieldType="CHAR" maxLength="16"/>
+                                <ElementMetaData name="KZWI1" description="Field length 18" fieldType="CHAR" maxLength="18"/>
+                                <ElementMetaData name="KZWI2" description="Field length 18" fieldType="CHAR" maxLength="18"/>
+                                <ElementMetaData name="KZWI3" description="Field length 18" fieldType="CHAR" maxLength="18"/>
+                                <ElementMetaData name="KZWI4" description="Field length 18" fieldType="CHAR" maxLength="18"/>
+                                <ElementMetaData name="KZWI5" description="Field length 18" fieldType="CHAR" maxLength="18"/>
+                                <ElementMetaData name="KZWI6" description="Field length 18" fieldType="CHAR" maxLength="18"/>
+                                <ElementMetaData name="BONBA" description="Field of length 16" fieldType="CHAR" maxLength="16"/>
+                                <ElementMetaData name="PREVA" description="Field length 18" fieldType="CHAR" maxLength="18"/>
+                                <ElementMetaData name="CMPRE" description="Field length 18" fieldType="CHAR" maxLength="18"/>
+                                <ElementMetaData name="WAVWR" description="Field of length 16" fieldType="CHAR" maxLength="16"/>
+                                <ElementMetaData name="BRGEW" description="Field length 18" fieldType="CHAR" maxLength="18"/>
+                                <ElementMetaData name="NTGEW" description="Field length 18" fieldType="CHAR" maxLength="18"/>
+                                <ElementMetaData name="VOLUM" description="Field length 18" fieldType="CHAR" maxLength="18"/>
+                            </LineType>
+                        </TableMetaData>
+                    </LineType>
+                </Table>
+            </Export>
+        </Function>
+    </Functions>
+</Repository>

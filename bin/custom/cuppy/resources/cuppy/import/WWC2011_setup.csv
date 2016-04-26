@@ -1,0 +1,69 @@
+#http://de.wikipedia.org/wiki/ISO-3166-1-Kodierliste
+
+# set locale for the Match.date data
+#%impex.setLocale(Locale.GERMANY)
+
+$comp=wwc2011
+
+insert_update Competition;code[unique=true];name[lang=de];name[lang=en];type(code)
+;$comp;Frauen WM 2010 Deutschland;Women's WC 2011 Germany;tournament
+
+# INSERT_UPDATE News;content[lang=de];content[lang=en];competition(code)[unique=true]
+# ;Willkommen zur Frauen WM 2011;Welcome to Women's World Cup 2011;$comp;
+
+insert_update Group;competition(code)[unique=true,default=$comp];code[unique=true];name[lang=de];name[lang=en];name[lang=pl];multiplier;sequenceNumber
+;;A;Gruppe A;Group A;Grupa A;1;1
+;;B;Gruppe B;Group B;Grupa B;1;2
+;;C;Gruppe C;Group C;Grupa C;1;3
+;;D;Gruppe D;Group D;Grupa D;1;4
+;;QUARTER;Viertelfinale;Quarter Finals;Ćwierćfinał;2;5
+;;SEMI;Halbfinale;Semi Finals;Półfinał;2;6
+;;THIRD;Kleines Finale;Third Place;Mecz o trzecie miejsce;2;7
+;;FINAL;Finale;Final;Finał;2;8
+
+insert_update CountryFlag;code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];catalogVersion(catalog(id),version)[default=Default:Online]
+;DE;de.png;jar:/cuppy/flags/countries/de.png
+;CA;ca.png;jar:/cuppy/flags/countries/ca.png
+;NG;ng.png;jar:/cuppy/flags/countries/ng.png
+;FR;fr.png;jar:/cuppy/flags/countries/fr.png
+;JP;jp.png;jar:/cuppy/flags/countries/jp.png
+;MX;mx.png;jar:/cuppy/flags/countries/mx.png
+;EN;en.png;jar:/cuppy/flags/countries/england.png
+;NZ;nz.png;jar:/cuppy/flags/countries/nz.png
+;US;us.png;jar:/cuppy/flags/countries/us.png
+;CO;co.png;jar:/cuppy/flags/countries/co.png
+;KP;kp.png;jar:/cuppy/flags/countries/kp.png
+;SE;se.png;jar:/cuppy/flags/countries/se.png
+;BR;br.png;jar:/cuppy/flags/countries/br.png
+;NO;no.png;jar:/cuppy/flags/countries/no.png
+;AU;au.png;jar:/cuppy/flags/countries/au.png
+;GQ;gq.png;jar:/cuppy/flags/countries/gq.png
+
+insert_update Team;isocode[unique=true];name[lang=de];name[lang=en];name[lang=pl];flag(code)
+;GER;Deutschland;Germany;Niemcy;DE
+;CAN;Kanada;Canada;Kanada;CA
+;NGR;Nigeria;Nigeria;Nigeria;NG
+;FRA;Frankreich;France;Francja;FR
+;JPN;Japan;Japan;Japonia;JP
+;MEX;Mexiko;Mexico;Meksyk;MX
+;GBR;England;England;Anglia;EN
+;NZL;Neuseeland;New Zealand;Nowa Zelandia;NZ
+;USA;USA;USA;USA;US
+;COL;Kolumbien;Colombia;Kolumbia;CO
+;PRK;Nordkorea;North Korea;Korea Północna;KP
+;SWE;Schweden;Sweden;Szwecja;SE
+;BRA;Brasilien;Brazil;Brazylia;BR
+;NOR;Norwegen;Norway;Norwegia;NO
+;AUS;Australien;Australia;Australia;AU
+;GEQ;Äquatorial-Guinea;Equatorial Guinea;Gwinea Równikowa;GQ
+
+insert_update Match;id[unique=true];matchday;date[dateformat='dd.MM.yy HH.mm'];group(code,competition(code[default=$comp]))[unique=true];homeTeam(isocode);guestTeam(isocode);location
+# will be gathered by webservice
+
+INSERT_UPDATE UpdateCompetitionCronJob;code[unique=true];job(code);singleExecutable;sessionLanguage(isocode);competition(code)
+;automatedUpdateWWC2011;updateWWC2011Job;false;de;$comp
+;manualUpdateWWC2011;updateWWC2011Job;false;de;$comp
+
+INSERT_UPDATE Trigger;cronjob(code)[unique=true];second;minute;hour;day;month;year;relative;active;maxAcceptableDelay
+#% afterEach: impex.getLastImportedItem().setActivationTime(new Date());
+;automatedUpdateWWC2011;0;0;1;0;-1;-1;true;true;-1

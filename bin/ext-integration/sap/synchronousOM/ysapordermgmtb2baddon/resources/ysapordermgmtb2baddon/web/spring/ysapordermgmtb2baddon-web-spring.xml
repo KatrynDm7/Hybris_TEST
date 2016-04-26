@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+           
+           <import resource="multi-step-checkout-config.xml"/>
+
+    <!-- ===================================================== -->
+	<!-- ============ This bean is not implemented  ========== -->
+	<!-- ===================================================== -->
+   <!--
+	<alias alias="logoutSuccessHandler" name="sapOrdermgmtDefaultLogoutSuccessHandler"/>	
+	<bean id="sapOrdermgmtDefaultLogoutSuccessHandler"
+		  class="de.hybris.platform.sap.ysapordermgmtb2baddon.security.DefaultLogoutSuccessHandler">
+		<property name="cartService" ref="sapOrdermgmtCartService"/>		  
+		<property name="defaultTargetUrl" value="/?logout=true"/>
+		<property name="guidCookieStrategy" ref="guidCookieStrategy"/>
+		<property name="useReferer" value="true"/>
+		<property name="restrictedPages">
+			<list>
+				<value>/my-account</value>
+				<value>/checkout</value>
+			</list>
+		</property>
+		<aop:scoped-proxy/>
+	</bean>
+	-->
+	<!-- =========================================================== -->
+	<!-- ============ SOM-AOM Switch UI Components Aspect ========== -->
+	<!-- =========================================================== -->
+
+    <alias alias="sapOMSwitchUIComponentsAspect" name="sapOrderManagementSwitchUIComponentsAspect"/>
+	<bean id="sapOrderManagementSwitchUIComponentsAspect" class="de.hybris.platform.sap.ysapordermgmtb2baddon.aspect.SapOrderManagementSwitchUIComponentsAspect">
+		<property name="baseStoreService" ref="baseStoreService" />
+	</bean>	
+	
+	<!-- =========================================== -->
+	<!-- ============ AddToCartController ========== -->
+	<!-- =========================================== -->
+	<aop:config proxy-target-class="true">		
+		<aop:pointcut id="addGridToCartPointcut"  expression="execution(String *.addGridToCart(..))
+		                                                      and @annotation(org.springframework.web.bind.annotation.RequestMapping)  
+				                                              and @target(org.springframework.stereotype.Controller)" />
+		<aop:aspect ref="sapOMSwitchUIComponentsAspect">
+			<aop:around pointcut-ref="addGridToCartPointcut" method="applyUIChanges" />
+		</aop:aspect>					
+	</aop:config>
+	
+	<aop:config proxy-target-class="true">		
+		<aop:pointcut id="addToCartPointcut" expression="execution(String *.addToCart(..))
+		                                                 and @annotation(org.springframework.web.bind.annotation.RequestMapping)  
+				                                         and @target(org.springframework.stereotype.Controller)"/>
+		<aop:aspect ref="sapOMSwitchUIComponentsAspect">
+			<aop:around pointcut-ref="addToCartPointcut" method="applyUIChanges" />
+		</aop:aspect>					
+	</aop:config>
+	
+	<!-- =========================================== -->
+	<!-- ============ MiniCartController =========== -->
+	<!-- =========================================== -->
+	<aop:config proxy-target-class="true">		
+		<aop:pointcut id="rolloverMiniCartPopupPointcut" expression="execution(String *.rolloverMiniCartPopup(..))
+		 															 and @annotation(org.springframework.web.bind.annotation.RequestMapping)  
+				                                         			 and @target(org.springframework.stereotype.Controller)"/>
+		<aop:aspect ref="sapOMSwitchUIComponentsAspect">
+			<aop:around pointcut-ref="rolloverMiniCartPopupPointcut" method="applyUIChanges" />
+		</aop:aspect>					
+	</aop:config>
+	
+	<!-- ============================================= -->
+	<!-- ============ AccountPageController ========== -->
+	<!-- ============================================= -->
+   <aop:config proxy-target-class="true">		
+		<aop:pointcut id="orderPointcut"  expression="execution(String *.order(..))
+				                                      and @annotation(org.springframework.web.bind.annotation.RequestMapping)
+				                                      and @annotation(de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn)
+				                                      and @target(org.springframework.web.bind.annotation.RequestMapping)  
+		                                              and @target(org.springframework.stereotype.Controller)"/>
+		                                              
+		<aop:aspect ref="sapOMSwitchUIComponentsAspect">
+			<aop:around pointcut-ref="orderPointcut" method="switchOrderPage" />
+		</aop:aspect>					
+	</aop:config>
+	
+	<aop:config proxy-target-class="true">		
+		<aop:pointcut id="ordersPointcut" expression=" execution(String *.orders(..))
+ 		                                               and @annotation(org.springframework.web.bind.annotation.RequestMapping)
+ 		                                               and @annotation(de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn) 
+ 				                                       and @target(org.springframework.web.bind.annotation.RequestMapping)    
+ 		                                               and @target(org.springframework.stereotype.Controller)"/>	                                               
+		<aop:aspect ref="sapOMSwitchUIComponentsAspect">
+			<aop:around pointcut-ref="ordersPointcut" method="switchOrdersPage" />
+		</aop:aspect>					
+	</aop:config>
+	
+	<!-- =========================================== -->
+	<!-- ============ CartPageController =========== -->
+	<!-- =========================================== -->
+	<aop:config proxy-target-class="true">		
+		<aop:pointcut id="showCartPointcut" expression="execution(String *.showCart(..))
+		                                                and @annotation(org.springframework.web.bind.annotation.RequestMapping)
+							                            and @target(org.springframework.web.bind.annotation.RequestMapping)   
+							                            and @target(org.springframework.stereotype.Controller)"/>
+		<aop:aspect ref="sapOMSwitchUIComponentsAspect">
+			<aop:around pointcut-ref="showCartPointcut" method="applyUIChanges" />
+		</aop:aspect>					
+	</aop:config>
+	
+	<!-- ======================================================= -->
+	<!-- ============ Multi Step Checkout Controller =========== -->
+	<!-- =======================================================-->
+	<aop:config proxy-target-class="true">		
+		<aop:pointcut id="enterStepPointcut" expression="execution(String  de.hybris.platform.b2bacceleratoraddon.controllers.pages.checkout.steps.SummaryCheckoutStepController.enterStep(..))
+		                                                         and @annotation(org.springframework.web.bind.annotation.RequestMapping)
+					                                             and @annotation(de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn)
+					                                             and @annotation(de.hybris.platform.acceleratorstorefrontcommons.annotations.PreValidateCheckoutStep)
+							                                     and @target(org.springframework.web.bind.annotation.RequestMapping)   
+				                                                 and @target(org.springframework.stereotype.Controller)"/>
+		<aop:aspect ref="sapOMSwitchUIComponentsAspect">
+			<aop:around pointcut-ref="enterStepPointcut" method="switchAddonUIComponent" />
+		</aop:aspect>					
+	</aop:config>
+	
+	<aop:config proxy-target-class="true">		
+		<aop:pointcut id="placeOrderPointcut" expression="execution(String  de.hybris.platform.b2bacceleratoraddon.controllers.pages.checkout.steps.SummaryCheckoutStepController.placeOrder(..))
+		                                                         and @annotation(org.springframework.web.bind.annotation.RequestMapping)
+					                                             and @annotation(de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn)		                      
+							                                     and @target(org.springframework.web.bind.annotation.RequestMapping)   
+				                                                 and @target(org.springframework.stereotype.Controller)"/>
+		<aop:aspect ref="sapOMSwitchUIComponentsAspect">
+			<aop:around pointcut-ref="placeOrderPointcut" method="switchAddonUIComponent" />
+		</aop:aspect>					
+	</aop:config>
+	
+	<!-- ================================================================= -->
+	<!-- ============ Delivery Method Checkout Step Controller =========== -->
+	<!-- ================================================================= -->
+	<aop:config proxy-target-class="true">		
+		<aop:pointcut id="deliveryMethodPointcut" expression="execution(String  *..DeliveryMethodCheckoutStepController.enterStep(..))
+		                                                         and @annotation(org.springframework.web.bind.annotation.RequestMapping)
+					                                             and @annotation(de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn)
+					                                             and @annotation(de.hybris.platform.acceleratorstorefrontcommons.annotations.PreValidateCheckoutStep)
+							                                     and @target(org.springframework.web.bind.annotation.RequestMapping)   
+				                                                 and @target(org.springframework.stereotype.Controller)"/>
+		<aop:aspect ref="sapOMSwitchUIComponentsAspect">
+			<aop:around pointcut-ref="deliveryMethodPointcut" method="switchAddonUIComponent" />
+		</aop:aspect>					
+	</aop:config>
+</beans>

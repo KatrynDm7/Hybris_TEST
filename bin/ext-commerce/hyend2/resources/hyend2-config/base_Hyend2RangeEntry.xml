@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<label spring-bean="hyend2rangeEntryLabelProvider"/>
+	<initial-properties source-object-template="Hyend2Range">
+        <property-mapping source="src" target="Hyend2RangeEntry.range"/>
+ 	</initial-properties>
+</base>

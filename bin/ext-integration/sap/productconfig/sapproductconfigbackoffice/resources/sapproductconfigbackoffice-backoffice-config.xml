@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config xmlns="http://www.hybris.com/cockpit/config">
+ 
+    <context component="editorareaactions" type="SAPConfiguration" merge-by="module" parent="auto">
+        <y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:group qualifier="common">
+            	<y:action action-id="com.hybris.cockpitng.action.delete"  property="currentObject" />
+                <y:label>btn.sapproductconfig_dataloader_initial_load</y:label>
+                <y:action action-id="de.hybris.platform.sap.sapproductconfigbackoffice.actions.DataloaderInitialLoadItemAction" property="currentObject" />
+            </y:group>
+    </y:actions>
+	</context>
+                                	
+                                	
+   <context merge-by="module" type="SAPConfiguration" component="editor-area"
+	parent="auto">
+	<editorArea:editorArea
+		xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+		<editorArea:tab xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+			name="tab.sapproductconfiguration">
+			<editorArea:section name="section.sapproductconfiguration_pricingparameter">
+			<editorArea:panel>
+				<attribute qualifier="sapproductconfig_enable_pricing" />
+				<attribute qualifier="sapproductconfig_pricingprocedure" />
+				<attribute qualifier="sapproductconfig_condfunc_baseprice" />
+				<attribute qualifier="sapproductconfig_condfunc_selectedoptions" />
+				</editorArea:panel>
+			</editorArea:section>
+			<editorArea:section name="section.sapproductconfiguration_dataloader">
+			<editorArea:panel>
+				<editorArea:attribute qualifier="sapproductconfig_sapServer" />
+				<editorArea:attribute qualifier="sapproductconfig_sapRFCDestination" />
+				<editorArea:attribute qualifier="sapproductconfig_filterKnowledgeBase" />
+				<editorArea:attribute qualifier="sapproductconfig_filterCondition" />
+				<editorArea:attribute qualifier="sapproductconfig_filterMaterial" />
+				</editorArea:panel>
+			</editorArea:section>
+			<!-- 
+			<editorArea:section name="section.sapproductconfiguration_mediaupload">
+			        <editorArea:customPanel name="mediaSection" spring-bean="mediaItemUploadRenderer">
+                         <editorArea:render-parameter>
+                             <editorArea:name>dataModelProperty</editorArea:name>
+                             <editorArea:value>currentObject</editorArea:value>
+                         </editorArea:render-parameter>
+                         <editorArea:render-parameter>
+                             <editorArea:name>dataModelAttribute</editorArea:name>
+                             <editorArea:value>sapproductconfig_filterKnowledgeBase</editorArea:value>
+                         </editorArea:render-parameter>
+                     </editorArea:customPanel>
+			</editorArea:section>
+			 -->
+
+
+		</editorArea:tab>
+	</editorArea:editorArea>
+</context>
+
+</config>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>
+	
+	<group qualifier="Hyend2IndexSchemaGeneral" visible="true" initially-opened="true">
+		<label key="config.general.mandatorydata" />
+		<property qualifier="Hyend2IndexSchema.name" />		
+		<property qualifier="Hyend2IndexSchema.active" />	
+		<property qualifier="Hyend2IndexSchema.casConfiguration" />
+	</group>
+	
+	<group qualifier="Hyend2IndexSchemaIndexElements" visible="true" initially-opened="true">
+		<label key="hyend2.indexelements" />
+		<property qualifier="Hyend2IndexSchema.indexElements"  editor="advancedListViewReferenceUIEditor">
+					<parameter>
+				<name>allowCreate</name>
+				<value>true</value>
+			</parameter>
+		</property>		
+	</group>
+	
+	<group qualifier="Hyend2IndexSchemaLangCurr" visible="true" initially-opened="true">
+		<label key="hyend2.languagesandcurrencies" />
+		<property qualifier="Hyend2IndexSchema.languages" editor="advancedListViewReferenceUIEditor">
+			<parameter>
+				<name>allowCreate</name>
+				<value>false</value>
+			</parameter>
+		</property>		
+		<property qualifier="Hyend2IndexSchema.currencies" editor="advancedListViewReferenceUIEditor">
+			<parameter>
+				<name>allowCreate</name>
+				<value>false</value>
+			</parameter>
+		</property>	
+	</group>
+	
+	<group qualifier="Hyend2IndexSchemaCatalogVersions" visible="true" initially-opened="true">
+		<label key="hyend2.catalogversions" />
+		<property qualifier="Hyend2IndexSchema.catalogVersions" editor="advancedListViewReferenceUIEditor">
+			<parameter>
+				<name>allowCreate</name>
+				<value>false</value>
+			</parameter>
+		</property>		
+	</group>
+	
+	<group qualifier="Hyend2IndexSchemaPrecedenceRules" visible="true" initially-opened="true">
+		<label key="hyend2.editorArea.precedencerules" />
+		<property qualifier="Hyend2IndexSchema.precedenceRules" editor="advancedListViewReferenceUIEditor">
+		</property>		
+	</group>
+	
+	<group qualifier="Hyend2IndexSchemaLastIndexTime" visible="true" initially-opened="true">
+		<label key="hyend2.editorArea.lastindextime" />
+		<property qualifier="Hyend2IndexSchema.lastIndexTime" editor="readonly">
+		
+		</property>
+	</group>
+	
+	<custom-group 
+		class="de.hybris.platform.hyend2.ui.customgroups.ExportCustomGroup" 
+		qualifier="exportcustomgroup"
+		initially-opened="true"
+		visible="true">
+		<label key="hyend2.editorArea.export" />
+	</custom-group>
+	
+</editor>

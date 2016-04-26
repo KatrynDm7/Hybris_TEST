@@ -1,0 +1,8 @@
+# Search Restrictions
+
+# Frontend Search Restrictions apply for customergroup
+INSERT_UPDATE SearchRestriction;code[unique=true];query;principal(UID);restrictedType(code);active;generate[default=FALSE]
+;Frontend_DisableProductBundleRule;{catalogVersion} IN ( ?session.catalogversions );customergroup;DisableProductBundleRule;true;
+;Frontend_BundleTemplate;{catalogVersion} IN ( ?session.catalogversions );customergroup;BundleTemplate;true;
+;Frontend_BundleTemplateStatus;{catalogVersion} IN ( ?session.catalogversions );customergroup;BundleTemplateStatus;true;
+;Frontend_ChangeProductPriceBundleRule;{catalogVersion} IN ( ?session.catalogversions );customergroup;ChangeProductPriceBundleRule;true;

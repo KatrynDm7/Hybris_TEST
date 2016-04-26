@@ -1,0 +1,17 @@
+*** Settings ***
+Library           de.hybris.platform.atddimpex.keywords.ImpexKeywordLibrary
+Library			  de.hybris.platform.commerceservicesatddtests.keywords.CommerceServicesKeywordLibrary
+Library			  de.hybris.platform.configurablebundleatddtests.bundlecartfacade.keywords.BundleCartFacadeKeyWords
+Library			  de.hybris.platform.configurablebundleatddtests.commerceservices.keywords.BundleCommerceKeywordLibrary
+
+*** Keywords ***
+
+verify that bundles in cart are complete
+	[Documentation]    Checks if the session cart is valid 
+	...                Verifies that the cart does not contain any invalid or missing components for bundle(s)
+	verify session cart is valid
+	
+verify last modified entries is empty for cart "${clonedCartCode:[^"]+}"
+    [Documentation]    Verify that last modified entries list is empty
+    ...
+    verify last modified entries is empty    ${clonedCartCode}

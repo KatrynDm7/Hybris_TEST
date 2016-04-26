@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="mediaconversionspring" name="mediaconversionspring" removed="false">
+          <file>file://$MODULE_DIR$/../ext-platform-optional/mediaconversion/resources/mediaconversion-spring.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/../ext-platform-optional/mediaconversion/web/webroot/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/../ext-platform-optional/mediaconversion/web/webroot" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/../ext-platform-optional/mediaconversion/eclipsebin" />
+    <output-test url="file://$MODULE_DIR$/../ext-platform-optional/mediaconversion/eclipsebin" />
+    <exclude-output />
+    <javadoc-paths>
+      <root url="https://download.hybris.com/api/5.7.0/commercesuite" />
+    </javadoc-paths>
+    <content url="file://$MODULE_DIR$/../ext-platform-optional/mediaconversion">
+      <excludeFolder url="file://$MODULE_DIR$/../ext-platform-optional/mediaconversion/.externalToolBuilders" />
+      <excludeFolder url="file://$MODULE_DIR$/../ext-platform-optional/mediaconversion/.settings" />
+      <excludeFolder url="file://$MODULE_DIR$/../ext-platform-optional/mediaconversion/acceleratoraddon/hmc/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/../ext-platform-optional/mediaconversion/acceleratoraddon/web/addonsrc" />
+      <excludeFolder url="file://$MODULE_DIR$/../ext-platform-optional/mediaconversion/acceleratoraddon/web/commonwebsrc" />
+      <excludeFolder url="file://$MODULE_DIR$/../ext-platform-optional/mediaconversion/acceleratoraddon/web/testclasses" />
+      <excludeFolder url="file://$MODULE_DIR$/../ext-platform-optional/mediaconversion/backoffice/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/../ext-platform-optional/mediaconversion/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/../ext-platform-optional/mediaconversion/commonweb/addonsrc" />
+      <excludeFolder url="file://$MODULE_DIR$/../ext-platform-optional/mediaconversion/commonweb/commonwebsrc" />
+      <excludeFolder url="file://$MODULE_DIR$/../ext-platform-optional/mediaconversion/commonweb/testclasses" />
+      <excludeFolder url="file://$MODULE_DIR$/../ext-platform-optional/mediaconversion/eclipsebin" />
+      <excludeFolder url="file://$MODULE_DIR$/../ext-platform-optional/mediaconversion/hmc/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/../ext-platform-optional/mediaconversion/web/addonsrc" />
+      <excludeFolder url="file://$MODULE_DIR$/../ext-platform-optional/mediaconversion/web/commonwebsrc" />
+      <excludeFolder url="file://$MODULE_DIR$/../ext-platform-optional/mediaconversion/web/testclasses" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Common libs" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../ext-platform-optional/mediaconversion/web/webroot/WEB-INF/classes" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../ext-platform-optional/mediaconversion/resources" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../ext-platform-optional/mediaconversion/hmc/resources" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../ext-platform-optional/mediaconversion/bin" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/../ext-platform-optional/mediaconversion/bin" recursive="true" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../ext-platform-optional/mediaconversion/hmc/bin" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/../ext-platform-optional/mediaconversion/hmc/bin" recursive="true" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module" module-name="platform" exported="" />
+    <orderEntry type="module" module-name="hmc" exported="" />
+  </component>
+</module>

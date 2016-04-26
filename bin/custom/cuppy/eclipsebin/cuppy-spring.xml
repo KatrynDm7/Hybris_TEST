@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2009 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<context:component-scan
+		base-package="de.hybris.platform.cuppy.services.impl,de.hybris.platform.cuppy.daos.impl,de.hybris.platform.cuppy.jobs,de.hybris.platform.cuppy.web.facades.impl,de.hybris.platform.cuppy.web.converters" />
+
+	<bean id="playerConfirmedInterceptor"
+		class="de.hybris.platform.cuppy.interceptors.PlayerConfirmedInterceptor">
+		<property name="mailService" ref="mailService" />
+	</bean>
+ 
+	<bean id="playerConfirmedInterceptorMapping"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="playerConfirmedInterceptor" />
+		<property name="typeCode" value="Player" />
+	</bean>
+
+	<bean id="playerPreferencesInterceptor"
+		class="de.hybris.platform.cuppy.interceptors.PlayerPreferencesInterceptor">
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<bean id="playerPreferencesInterceptorMapping"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="playerPreferencesInterceptor" />
+		<property name="typeCode" value="Player" />
+	</bean>
+
+	<bean id="newsSendInterceptor"
+		class="de.hybris.platform.cuppy.interceptors.NewsSendInterceptor">
+		<property name="mailService" ref="mailService" />
+		<property name="playerService" ref="playerService" />
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<bean id="newsSendInterceptorMapping"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="newsSendInterceptor" />
+		<property name="typeCode" value="News" />
+	</bean>
+
+	<bean id="update1LGer2010Job" class="de.hybris.platform.cuppy.jobs.UpdateCompetitionJob">
+		<property name="updateService" ref="update1LGer2010Service" />
+	</bean>
+	<bean id="update1LGer2010Service"
+		class="de.hybris.platform.cuppy.ws.openligadb.UpdateOpenLigaDbService">
+		<property name="leagueId" value="bl1" />
+		<property name="leagueSeason" value="2010" />
+		<property name="matchIdOffset" value="9997" />
+		<property name="groupCalculationStrategy" ref="byMatchdayGroupCalculationStrategy" />
+		<property name="teamCalculationStrategy" ref="byNameTeamCalculationStrategy" />
+		<property name="matchdayCalculationStrategy" ref="byIdMatchdayCalculationStrategy" />
+	</bean>
+
+	<bean id="update2LGer2010Job" class="de.hybris.platform.cuppy.jobs.UpdateCompetitionJob">
+		<property name="updateService" ref="update2LGer2010Service" />
+	</bean>
+	<bean id="update2LGer2010Service"
+		class="de.hybris.platform.cuppy.ws.openligadb.UpdateOpenLigaDbService">
+		<property name="leagueId" value="bl2" />
+		<property name="leagueSeason" value="2010" />
+		<property name="matchIdOffset" value="10390" />
+		<property name="groupCalculationStrategy" ref="byMatchdayGroupCalculationStrategy" />
+		<property name="teamCalculationStrategy" ref="byNameTeamCalculationStrategy" />
+		<property name="matchdayCalculationStrategy" ref="byIdMatchdayCalculationStrategy" />
+	</bean>
+
+	<bean id="updateCl2010Job" class="de.hybris.platform.cuppy.jobs.UpdateCompetitionJob">
+		<property name="updateService" ref="updateCl2010Service" />
+	</bean>
+	<bean id="updateCl2010Service"
+		class="de.hybris.platform.cuppy.ws.openligadb.UpdateOpenLigaDbService">
+		<property name="leagueId" value="cl1011" />
+		<property name="leagueSeason" value="2010" />
+		<property name="matchIdOffset" value="12263" />
+		<property name="groupCalculationStrategy" ref="byNameGroupCalculationStrategy" />
+		<property name="teamCalculationStrategy" ref="byNameTeamCalculationStrategy" />
+		<property name="matchdayCalculationStrategy" ref="byDateMatchdayCalculationStrategy" />
+	</bean>
+
+	<bean id="updateCl2011Job" class="de.hybris.platform.cuppy.jobs.UpdateCompetitionJob">
+		<property name="updateService" ref="updateCl2011Service" />
+	</bean>
+	<bean id="updateCl2011Service"
+		class="de.hybris.platform.cuppy.ws.openligadb.UpdateOpenLigaDbService">
+		<property name="leagueId" value="cl1112" />
+		<property name="leagueSeason" value="2011" />
+		<property name="matchIdOffset" value="17207" />
+		<property name="groupCalculationStrategy" ref="byNameGroupCalculationStrategy" />
+		<property name="teamCalculationStrategy" ref="byNameTeamCalculationStrategy" />
+		<property name="matchdayCalculationStrategy" ref="byDateMatchdayCalculationStrategy" />
+	</bean>
+
+	<bean id="updateCl2012Job" class="de.hybris.platform.cuppy.jobs.UpdateCompetitionJob">
+		<property name="updateService" ref="updateCl2012Service" />
+	</bean>
+	<bean id="updateCl2012Service"
+		class="de.hybris.platform.cuppy.ws.openligadb.UpdateOpenLigaDbService">
+		<property name="leagueId" value="cl" />
+		<property name="leagueSeason" value="2012" />
+		<property name="matchIdOffset" value="22297" />
+		<property name="groupCalculationStrategy" ref="byNameGroupCalculationStrategy" />
+		<property name="teamCalculationStrategy" ref="byNameTeamCalculationStrategy" />
+		<property name="matchdayCalculationStrategy" ref="byDateMatchdayCalculationStrategy" />
+	</bean>
+
+	<bean id="update1LGer2011Job" class="de.hybris.platform.cuppy.jobs.UpdateCompetitionJob">
+		<property name="updateService" ref="update1LGer2011Service" />
+	</bean>
+
+	<bean id="update1LGer2011Service"
+		class="de.hybris.platform.cuppy.ws.openligadb.UpdateOpenLigaDbService">
+		<property name="leagueId" value="bl1" />
+		<property name="leagueSeason" value="2011" />
+		<property name="matchIdOffset" value="14007" />
+		<property name="resultIds">
+			<array>
+				<value>0</value>
+			</array>
+		</property>
+		<property name="groupCalculationStrategy" ref="byMatchdayGroupCalculationStrategy" />
+		<property name="teamCalculationStrategy" ref="byNameTeamCalculationStrategy" />
+		<property name="matchdayCalculationStrategy" ref="byIdMatchdayCalculationStrategy" />
+	</bean>
+
+	<bean id="updateWWC2011Job" class="de.hybris.platform.cuppy.jobs.UpdateCompetitionJob">
+		<property name="updateService" ref="updateWWC2011Service" />
+	</bean>
+	<bean id="updateWWC2011Service"
+		class="de.hybris.platform.cuppy.ws.openligadb.UpdateOpenLigaDbService">
+		<property name="leagueId" value="FWM2011" />
+		<property name="leagueSeason" value="2011" />
+		<property name="matchIdOffset" value="13552" />
+		<property name="resultIds">
+			<array>
+				<value>2</value>
+				<value>1</value>
+			</array>
+		</property>
+		<property name="groupCalculationStrategy" ref="byNameGroupCalculationStrategy" />
+		<property name="teamCalculationStrategy" ref="byNameTeamCalculationStrategy" />
+		<property name="matchdayCalculationStrategy" ref="byDateMatchdayCalculationStrategy" />
+	</bean>
+
+	<bean id="updateEC2012Job" class="de.hybris.platform.cuppy.jobs.UpdateCompetitionJob">
+		<property name="updateService" ref="updateEC2012Service" />
+	</bean>
+	<bean id="updateEC2012Service"
+		class="de.hybris.platform.cuppy.ws.openligadb.UpdateOpenLigaDbService">
+		<property name="leagueId" value="em12" />
+		<property name="leagueSeason" value="2012" />
+		<property name="matchIdOffset" value="18794" />
+		<property name="groupCalculationStrategy" ref="byNameGroupCalculationStrategy" />
+		<property name="teamCalculationStrategy" ref="byNameTeamCalculationStrategy" />
+		<property name="matchdayCalculationStrategy" ref="byDateMatchdayCalculationStrategy" />
+	</bean>
+
+	<bean id="update1LGer2012Job" class="de.hybris.platform.cuppy.jobs.UpdateCompetitionJob">
+		<property name="updateService" ref="update1LGer2012Service" />
+	</bean>
+	<bean id="update1LGer2012Service"
+		class="de.hybris.platform.cuppy.ws.openligadb.UpdateOpenLigaDbService">
+		<property name="leagueId" value="bl1" />
+		<property name="leagueSeason" value="2012" />
+		<property name="matchIdOffset" value="19701" />
+		<property name="resultIds">
+			<array>
+				<value>0</value>
+			</array>
+		</property>
+		<property name="groupCalculationStrategy" ref="byMatchdayGroupCalculationStrategy" />
+		<property name="teamCalculationStrategy" ref="byNameTeamCalculationStrategy" />
+		<property name="matchdayCalculationStrategy" ref="byIdMatchdayCalculationStrategy" />
+	</bean>
+
+	<bean id="byNameTeamCalculationStrategy"
+		class="de.hybris.platform.cuppy.services.impl.ByNameTeamCalculationStrategy">
+		<property name="language" value="de" />
+	</bean>
+
+	<bean id="byNameGroupCalculationStrategy"
+		class="de.hybris.platform.cuppy.services.impl.ByNameGroupCalculationStrategy">
+		<property name="language" value="de" />
+	</bean>
+
+	<bean id="byMatchdayGroupCalculationStrategy"
+		class="de.hybris.platform.cuppy.services.impl.ByMatchdayGroupCalculationStrategy">
+		<property name="matchday2groupMappings">
+			<list value-type="de.hybris.platform.cuppy.services.impl.Matchday2GroupMapping">
+				<bean class="de.hybris.platform.cuppy.services.impl.Matchday2GroupMapping">
+					<property name="matchday" value="1" />
+					<property name="group" value="round1" />
+				</bean>
+				<bean class="de.hybris.platform.cuppy.services.impl.Matchday2GroupMapping">
+					<property name="matchday" value="18" />
+					<property name="group" value="round2" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="byIdMatchdayCalculationStrategy"
+		class="de.hybris.platform.cuppy.services.impl.ByIdMatchdayCalculationStrategy">
+	</bean>
+
+	<bean id="byDateMatchdayCalculationStrategy"
+		class="de.hybris.platform.cuppy.services.impl.ByDateMatchdayCalculationStrategy">
+	</bean>
+
+	<bean name="genericCompetitionDao"
+		class="de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao">
+		<constructor-arg name="typecode" value="Competition" />
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+
+	<bean name="genericGroupDao"
+		class="de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao">
+		<constructor-arg name="typecode" value="Group" />
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+
+	<bean id="cuppySystemSetup" class="de.hybris.platform.cuppy.systemsetup.CuppySystemSetup">
+		<property name="importService" ref="importService" />
+	</bean>
+
+</beans>

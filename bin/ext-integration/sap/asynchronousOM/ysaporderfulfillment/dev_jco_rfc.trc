@@ -1,0 +1,150 @@
+
+**** Error file opened at 20140830 204541 Central European Summer Time Rel 3.1.0 Beta (2011-08-23) [720.95]
+Error:  >Sat Aug 30 20:45:41,179<    RfcException: [null]
+    message: Connect to message server host failed
+Connection parameters: TYPE=B DEST=IDEST0 MSHOST=ldcib0y.wdf.sap.corp GROUP=PUBLIC R3NAME=B0Y MSSERV=6825 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host veHYBRISTrans with Unicode
+ERROR       partner 'ldcib0y.wdf.sap.corp:6825' not reached
+TIME        Sat Aug 30 20:45:41 2014
+RELEASE     720
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      nixxi.cpp
+LINE        3286
+DETAIL      NiPConnect2: 10.68.22.162:6825
+SYSTEM CALL connect
+ERRNO       10061
+ERRNO TEXT  WSAECONNREFUSED: Connection refused
+COUNTER     1
+
+    Return code: RFC_FAILURE(1)
+    error group: 102
+    key: RFC_ERROR_COMMUNICATION
+
+
+**** Error file opened at 20150128 020823 Central European Time Rel 3.1.0 Beta (2011-08-23) [720.95]
+Error:  >Wed Jan 28 02:08:23,726<    RfcException: [null]
+    message: Connect to message server host failed
+Connection parameters: TYPE=B DEST=IDEST0 MSHOST=ldcib0y.wdf.sap.corp GROUP=PUBLIC R3NAME=B0Y MSSERV=64389 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host veHYBRISTrans with Unicode
+ERROR       partner 'ldcib0y.wdf.sap.corp:64389' not reached
+TIME        Wed Jan 28 02:08:23 2015
+RELEASE     720
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      nixxi.cpp
+LINE        3286
+DETAIL      NiPConnect2: 10.68.22.162:64389
+SYSTEM CALL connect
+ERRNO       10061
+ERRNO TEXT  WSAECONNREFUSED: Connection refused
+COUNTER     1
+
+    Return code: RFC_FAILURE(1)
+    error group: 102
+    key: RFC_ERROR_COMMUNICATION
+
+
+**** Error file opened at 20150211 020903 Central European Time Rel 3.1.0 Beta (2011-08-23) [720.95]
+Error:  >Wed Feb 11 02:09:03,028<    RfcException: [null]
+    message: Connect to message server host failed
+Connection parameters: TYPE=B DEST=IDEST0 MSHOST=ldcib0y.wdf.sap.corp GROUP=PUBLIC R3NAME=B0Y MSSERV=64389 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host veHYBRISTrans with Unicode
+ERROR       partner 'ldcib0y.wdf.sap.corp:64389' not reached
+TIME        Wed Feb 11 02:09:03 2015
+RELEASE     720
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      nixxi.cpp
+LINE        3286
+DETAIL      NiPConnect2: 10.68.22.162:64389
+SYSTEM CALL connect
+ERRNO       10061
+ERRNO TEXT  WSAECONNREFUSED: Connection refused
+COUNTER     1
+
+    Return code: RFC_FAILURE(1)
+    error group: 102
+    key: RFC_ERROR_COMMUNICATION
+
+
+**** Error file opened at 20150218 020851 Central European Time Rel 3.1.0 Beta (2011-08-23) [720.95]
+Error:  >Wed Feb 18 02:08:51,125<    RfcException: [null]
+    message: Connect to message server host failed
+Connection parameters: TYPE=B DEST=IDEST0 MSHOST=ldcib0y.wdf.sap.corp GROUP=PUBLIC R3NAME=B0Y MSSERV=64389 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host veHYBRISTrans with Unicode
+ERROR       partner 'ldcib0y.wdf.sap.corp:64389' not reached
+TIME        Wed Feb 18 02:08:51 2015
+RELEASE     720
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      nixxi.cpp
+LINE        3286
+DETAIL      NiPConnect2: 10.68.22.162:64389
+SYSTEM CALL connect
+ERRNO       10061
+ERRNO TEXT  WSAECONNREFUSED: Connection refused
+COUNTER     1
+
+    Return code: RFC_FAILURE(1)
+    error group: 102
+    key: RFC_ERROR_COMMUNICATION
+
+
+**** Error file opened at 20150225 020832 Central European Time Rel 3.1.0 Beta (2011-08-23) [720.95]
+Error:  >Wed Feb 25 02:08:32,321<    RfcException: [null]
+    message: Connect to message server host failed
+Connection parameters: TYPE=B DEST=IDEST0 MSHOST=ldcib0y.wdf.sap.corp GROUP=PUBLIC R3NAME=B0Y MSSERV=64389 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host veHYBRISTrans with Unicode
+ERROR       partner 'ldcib0y.wdf.sap.corp:64389' not reached
+TIME        Wed Feb 25 02:08:32 2015
+RELEASE     720
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      nixxi.cpp
+LINE        3286
+DETAIL      NiPConnect2: 10.68.22.162:64389
+SYSTEM CALL connect
+ERRNO       10061
+ERRNO TEXT  WSAECONNREFUSED: Connection refused
+COUNTER     1
+
+    Return code: RFC_FAILURE(1)
+    error group: 102
+    key: RFC_ERROR_COMMUNICATION
+
+
+**** Error file opened at 20150304 020945 Central European Time Rel 3.1.0 Beta (2011-08-23) [720.95]
+Error:  >Wed Mar 04 02:09:45,315<    RfcException: [null]
+    message: Connect to message server host failed
+Connection parameters: TYPE=B DEST=IDEST0 MSHOST=ldcib0y.wdf.sap.corp GROUP=PUBLIC R3NAME=B0Y MSSERV=64389 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host veHYBRISTrans with Unicode
+ERROR       partner 'ldcib0y.wdf.sap.corp:64389' not reached
+TIME        Wed Mar 04 02:09:45 2015
+RELEASE     720
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      nixxi.cpp
+LINE        3286
+DETAIL      NiPConnect2: 10.68.22.162:64389
+SYSTEM CALL connect
+ERRNO       10061
+ERRNO TEXT  WSAECONNREFUSED: Connection refused
+COUNTER     1
+
+    Return code: RFC_FAILURE(1)
+    error group: 102
+    key: RFC_ERROR_COMMUNICATION
+

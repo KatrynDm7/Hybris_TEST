@@ -1,0 +1,55 @@
+*** Settings ***
+Resource          commerce/CommerceServices_Keywords.txt
+Resource          customerticketingc4cintegration/Customer_Ticketing_Keywords.txt
+
+Test Setup        import ct sample data
+
+*** Variables ***
+
+${messageHistory}=    29-07-15 04:26:41 created by CRM OPS Hello, Just wanted to know more info about : https://localhost:9002/yacceleratorstorefront/electronics/en/Open-Catalogue/Cameras/Digital-Cameras/Digital-Compacts/EASYSHARE-Z730-Zoom-Digital-Camera/p/325414 Thanks, Ahmed 29-07-15 04:26:42 created by CRM OPS Hello, my second message Thanks, Ahmed 29-07-15 04:26:43 created by CRM OPS Hello, my third message Thanks, Ahmed 29-07-15 04:26:45 created by CRM OPS Dear Ahmed, Let me take a look at this product and i will call you within an hour. Thanks, C4C 29-07-15 04:26:46 created by CRM OPS Cool, can you contact me within 10 minutes?
+
+*** Test Cases ***
+
+###################
+# Validation for incorrect ticketId provided in Get Ticket request cannot be tested, because it retrieves the mocked data anyway
+# and response with 'none' result can not be retrieved
+###################
+
+Test_Get_Ticket_PASS
+	[Documentation]    Testing getting ticket with correct ticketId - expected to pass
+	${ticket}=    create ticket with title "Subject1" and message "Message1"
+	get ticket details for ticketId "${ticket.id}"
+
+Test_Get_Ticket_VerifyTicketFieldValues
+	[Documentation]    Testing getting ticket and verifying the retrieved mock data
+	${ticket}=    create ticket with title "Subject1" and message "Message1"
+	${ticket}=    get ticket details for ticketId "${ticket.id}"
+	#
+	Log    ticket.id=${ticket.id}
+	Log    ticket.customerId=${ticket.customerId}
+	Log    ticket.cartId=${ticket.cartId}
+	Log    ticket.subject=${ticket.subject}
+	Log    ticket.message=${ticket.message}
+	Log    ticket.messageHistory=${ticket.messageHistory}
+	Log    ticket.creationDate=${ticket.creationDate}
+	Log    ticket.lastModificationDate=${ticket.lastModificationDate}
+	Log    ticket.status.id=${ticket.status.id}
+	Log    ticket.availableStatusTransitions=${ticket.availableStatusTransitions}
+	#
+	${ticketMessageHistoryTrimmed}=    Replace String Using Regexp    ${ticket.messageHistory}    (^[ ]+|[ ]+$|\n|\r|${SPACE})    \
+    ${ticketMessageHistoryTrimmedWithTimestamp}=    Replace String Using Regexp    ${ticketMessageHistoryTrimmed}    (\\d{2}-\\d{2}-\\d{2}\\d{2}:\\d{2}:\\d{2})     \
+	Log    ticketMessageHistoryTrimmed=${ticketMessageHistoryTrimmedWithTimestamp}
+	${messageHistoryTrimmed}=    Replace String Using Regexp    ${messageHistory}    (^[ ]+|[ ]+$|\n|\r|${SPACE})    \
+	${messageHistoryTrimmedWithTimestamp}=    Replace String Using Regexp    ${messageHistoryTrimmed}    (\\d{2}-\\d{2}-\\d{2}\\d{2}:\\d{2}:\\d{2})     \
+	Log    messageHistoryTrimmedWithTimestamp=${messageHistoryTrimmedWithTimestamp}
+	#
+	Should Not Be Empty    ${ticket.id}
+	Should Be Equal    ${ticket.customerId}    ${EMPTY}
+	Should Be Equal As Strings    ${ticket.cartId}    None
+	Should Be Equal    ${ticket.subject}    Ticket subject
+	Should Be Equal As Strings    ${ticket.message}    None
+	Should Not Be Equal    ${ticket.messageHistory}    ${EMPTY}
+    Should Not Be Equal    ${ticket.creationDate}    ${EMPTY}
+    Should Not Be Equal    ${ticket.lastModificationDate}    ${EMPTY}
+	Should Be Equal    ${ticket.status.id}    COMPLETED
+	Should Not Be Empty    ${ticket.availableStatusTransitions}

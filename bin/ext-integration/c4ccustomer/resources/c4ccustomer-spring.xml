@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xmlns:aop="http://www.springframework.org/schema/aop"
+		 xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/aop
+			http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<bean id="c4ccustomerDataSetup" class="de.hybris.platform.c4ccustomer.datasetup.DataSetup" parent="abstractCoreSystemSetup">
+		<property name="modelService" ref="modelService"/>
+	</bean>
+
+	<bean id="c4cSyncMasterJobPerformable" class="de.hybris.platform.c4ccustomer.job.C4CSyncJobPerformable"
+			parent="abstractJobPerformable">
+		<property name="changeDetectionService" ref="changeDetectionService"/>
+		<property name="mediaService" ref="mediaService"/>
+		<property name="syncTaskFactory" ref="syncTaskFactory"/>
+		<property name="typeService" ref="typeService"/>
+		<lookup-method name="getAggregatingCollector" bean="c4cAggregatingCollector"/>
+		<property name="batchSize" value="100"/>
+	</bean>
+
+	<alias name="defaultC4CAggregatingCollector" alias="c4cAggregatingCollector"/>
+	<bean id="defaultC4CAggregatingCollector"
+			class="de.hybris.platform.c4ccustomer.deltadetection.impl.DefaultC4CAggregatingCollector"
+			scope="prototype">
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+		<property name="changeDetectionService" ref="changeDetectionService"/>
+	</bean>
+
+</beans>

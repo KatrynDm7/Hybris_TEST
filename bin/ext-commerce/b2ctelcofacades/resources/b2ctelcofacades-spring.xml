@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config />	
+	
+	<alias name="accProductFacade" alias="productFacade"/>
+	<alias name="defaultTelcoProductfacade" alias="telcoProductFacade"/>
+	<alias name="defaultTelcoSubscriptionFacade" alias="telcoSubscriptionFacade"/>
+
+	<bean id="defaultTelcoProductfacade" class="de.hybris.platform.b2ctelcofacades.product.impl.DefaultTelcoProductFacade">
+	    <property name="compatibilityService" ref="compatibilityService" />
+	    <property name="bundleRuleService" ref="bundleRuleService" />
+	    <property name="productFacade" ref="productFacade"/>
+	</bean>
+	
+
+    <alias name="defaultSearchProductReviewPopulator" alias="searchProductReviewPopulator"/>
+    <bean id="defaultSearchProductReviewPopulator" class="de.hybris.platform.b2ctelcofacades.converters.populator.SearchProductReviewPopulator"  />
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="commerceSearchResultProductConverter"/>
+		<property name="add" ref="searchProductReviewPopulator"/>
+	</bean>
+
+	<alias name="defaultProductBundleTabsPopulator" alias="productBundleTabsPopulator" />
+	<bean id="defaultProductBundleTabsPopulator" abstract="true" class="de.hybris.platform.b2ctelcofacades.converters.populator.AbstractProductBundleTabsPopulator" parent="baseProductPopulator" scope="prototype">
+	     <property name="commonI18NService" ref="commonI18NService"/>	 
+	     <property name="bundleTemplateService" ref="bundleTemplateService"/>	 
+	     <property name="bundleRuleService" ref="bundleRuleService"/>	 
+	     <property name="bundleTemplateConverter" ref="bundleTemplateConverter"/>	 
+	     <property name="productConverter" ref="productConverter"/>	 	
+	     <property name="priceDataFactory" ref="priceDataFactory"/>	 	
+	     <property name="productPricePopulator" ref="productPricePopulator"/>	
+	     <property name="termOfServiceFrequencyConverter" ref="termOfServiceFrequencyConverter" />     	
+	     <property name="productDescriptionPopulator" ref="productDescriptionPopulator" />   	
+	     <property name="productClassificationPopulator" ref="productClassificationPopulator" />      
+	     <property name="subscriptionProductBasicPopulator" ref="subscriptionProductBasicPopulator" />
+	     <property name="subscriptionProductEntitlementPopulator" ref="productEntitlementCollectionPopulator" />
+	     <property name="commercePriceService" ref="subscriptionCommercePriceService"/>
+	     <property name="subscriptionProductPricePopulator" ref="subscriptionProductPricePlanPopulator"/>
+         <property name="productStockPopulator" ref="productStockPopulator"/>
+	</bean>
+	
+	<alias name="defaultDeviceBundleTabsPopulator" alias="deviceBundleTabsPopulator" />
+	<bean id="defaultDeviceBundleTabsPopulator" class="de.hybris.platform.b2ctelcofacades.converters.populator.DeviceBundleTabsPopulator" parent="productBundleTabsPopulator" scope="prototype"/>
+	
+	<alias name="defaultSubscriptionProductBundleTabsPopulator" alias="subscriptionProductBundleTabsPopulator" />
+	<bean id="defaultSubscriptionProductBundleTabsPopulator" class="de.hybris.platform.b2ctelcofacades.converters.populator.SubscriptionProductBundleTabsPopulator" parent="productBundleTabsPopulator" scope="prototype"/>
+	
+	<alias name="defaultPlanBundleTabsPopulator" alias="planBundleTabsPopulator" />
+	<bean id="defaultPlanBundleTabsPopulator" parent="subscriptionProductBundleTabsPopulator" scope="prototype">
+		 <property name="typeClassName" value="de.hybris.platform.b2ctelcoservices.model.ServicePlanModel" />
+	</bean>
+	
+	<alias name="defaultAddOnBundleTabsPopulator" alias="addOnBundleTabsPopulator" />
+	<bean id="defaultAddOnBundleTabsPopulator" parent="subscriptionProductBundleTabsPopulator" scope="prototype">
+		 <property name="typeClassName" value="de.hybris.platform.b2ctelcoservices.model.ServiceAddOnModel" />
+	</bean>
+
+	<alias name="defaultTelcoProductConfiguredPopulator" alias="accProductConfiguredPopulator" />
+	<bean id="defaultTelcoProductConfiguredPopulator"  parent="defaultBundleConfiguredPopulator">
+		<property name="populators">
+			<map key-type="de.hybris.platform.commercefacades.product.ProductOption" merge="true">
+				<entry key="DEVICE_BUNDLE_TABS" value-ref="deviceBundleTabsPopulator" />
+				<entry key="SERVICE_PLAN_BUNDLE_TABS" value-ref="planBundleTabsPopulator" />
+				<entry key="SERVICE_ADDON_BUNDLE_TABS" value-ref="addOnBundleTabsPopulator" />
+				<entry key="VOLUME_PRICES" value-ref="productVolumePricesPopulator"/> <!-- it is a workaround and should be removed as it is already in the core acc. -->
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="bundleBoxData" class="de.hybris.platform.b2ctelcofacades.data.BundleBoxData" scope="prototype"/>
+	
+	<alias name="defaultBundleBoxConverter"	alias="bundleBoxConverter"/>
+	<bean id="defaultBundleBoxConverter" parent="abstractPopulatingConverter" >
+		<lookup-method name="createTarget" bean="bundleBoxData"/>
+		<property name="populators">
+			<list>
+				<ref bean="bundleBoxPopulator"/>
+			</list>
+		</property>
+	</bean>	
+
+	<alias name="defaultBundleBoxPopulator"	alias="bundleBoxPopulator"/>
+	<bean id="defaultBundleBoxPopulator" class="de.hybris.platform.b2ctelcofacades.converters.populator.BundleBoxPopulator"  >
+		<property name="bundleBoxEntryConverter" ref="bundleBoxEntryConverter"/>
+		<property name="bundleTemplateConverter" ref="bundleTemplateConverter"/>
+	</bean>
+	
+	<bean id="bundleBoxEntryData" class="de.hybris.platform.b2ctelcofacades.data.BundleBoxEntryData" scope="prototype"/>
+	
+	<alias name="defaultBundleBoxEntryConverter" alias="bundleBoxEntryConverter"/>
+	<bean id="defaultBundleBoxEntryConverter" parent="abstractPopulatingConverter" >
+		<lookup-method name="createTarget" bean="bundleBoxEntryData"/>
+		<property name="populators">
+			<list>
+				<ref bean="bundleBoxEntryPopulator"/>
+			</list>
+		</property>
+	</bean>	
+
+	<alias name="defaultBundleBoxEntryPopulator" alias="bundleBoxEntryPopulator"/>
+	<bean id="defaultBundleBoxEntryPopulator" class="de.hybris.platform.b2ctelcofacades.converters.populator.BundleBoxEntryPopulator"  >
+		<property name="productConverter" ref="productConverter"/>
+		<property name="productConfiguredPopulator"	ref="accProductConfiguredPopulator"/>		
+	</bean>
+	
+	<alias name="defaultBundleTemplateAddOnsPopulator" alias="bundleTemplateAddOnsPopulator" />
+	<bean id="defaultBundleTemplateAddOnsPopulator" class="de.hybris.platform.b2ctelcofacades.converters.populator.BundleTemplateServiceAddOnsBundleBoxesPopulator" >
+		<property name="bundleBoxConverter" ref="bundleBoxConverter"/>
+		<property name="bundleTemplateConverter" ref="bundleTemplateConverter"/>
+		<property name="bundleCommerceCartService" ref="bundleCommerceCartService"/>
+		<property name="bundleTemplateService" ref="bundleTemplateService"/>
+		<property name="productService" ref="productService"/>
+		<property name="bundleRuleService" ref="bundleRuleService"/>	
+		<property name="commonI18NService" ref="commonI18NService"/>
+		<property name="priceDataFactory" ref="priceDataFactory"/>	 	
+		<property name="telcoOrderEntryConverter" ref="orderEntryConverter"/>	
+		<property name="guidedSellingService" ref="guidedSellingService"/>
+	</bean> 
+	
+	<alias name="defaultDashboardPopulator" alias="dashboardPopulator" />
+	<bean id="defaultDashboardPopulator" class="de.hybris.platform.b2ctelcofacades.converters.populator.DashboardPopulator" >
+		<property name="bundleCommerceCartService" ref="bundleCommerceCartService"/>
+		<property name="bundleTemplateConverter" ref="bundleTemplateConverter"/>
+	    <property name="telcoOrderEntryConverter" ref="orderEntryConverter" />
+	</bean> 
+	
+	<alias alias="guidedSellingFacade" name="defaultGuidedSellingFacade"/>
+	<bean id="defaultGuidedSellingFacade" class="de.hybris.platform.b2ctelcofacades.bundle.impl.DefaultGuidedSellingFacade" >
+		<property name="bundleTemplateService" ref="bundleTemplateService"/>
+		<property name="bundleRuleService" ref="bundleRuleService"/>		
+		<property name="productService" ref="productService"/>
+		<property name="priceDataFactory" ref="priceDataFactory"/>	 	
+		<property name="bundleTemplateAddOnsPopulator" ref="bundleTemplateAddOnsPopulator"/>
+		<property name="dashboardPopulator" ref="dashboardPopulator"/>
+		<property name="bundleCommerceCartService" ref="bundleCommerceCartService"/>
+		<property name="cartService" ref="cartService"/>
+		<property name="productSearchFacade" ref="productSearchFacade"/>
+		<property name="guidedSellingService" ref="guidedSellingService" />		
+		<property name="commercePriceService" ref="subscriptionCommercePriceService" />
+	</bean>
+
+	<!-- append telco specific populator to the default commerceSearchQueryPageableConverter-->
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="commerceSearchQueryPageableConverter"/>
+		<property name="add" ref="commerceTelcoSearchSolrQueryPopulator"/>
+	</bean>
+
+	<alias name="defaultCommerceTelcoSearchSolrQueryPopulator" alias="commerceTelcoSearchSolrQueryPopulator"/>
+	<bean id="defaultCommerceTelcoSearchSolrQueryPopulator" class="de.hybris.platform.b2ctelcofacades.search.solrfacetsearch.populators.GuidedSellingSearchSolrQueryPopulator" />
+
+	<alias name="defaultTelcoProductTypePopulator" alias="telcoProductTypePopulator" />
+	<bean id="defaultTelcoProductTypePopulator" class="de.hybris.platform.b2ctelcofacades.product.converters.populator.TelcoProductTypePopulator" />
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="productBasicPopulatorList"/>
+		<property name="add" ref="telcoProductTypePopulator"/>
+	</bean>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="productBasicPopulatorList"/>
+        <property name="add" ref="productStockPopulator"/>
+    </bean>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="productBasicPopulatorList"/>
+        <property name="add" ref="productDeliveryModeAvailabilityPopulator"/>
+    </bean>
+    
+  	<alias name="defaultTelcoCheckoutFacade" alias="acceleratorCheckoutFacade"/>
+	<bean id="defaultTelcoCheckoutFacade" class="de.hybris.platform.b2ctelcofacades.bundle.impl.DefaultTelcoCheckoutFacade"
+			parent="defaultAcceleratorCheckoutFacade">
+		<property name="subscriptionFacade" ref="subscriptionFacade"/>
+	</bean>
+	
+	<alias name="b2ctelcoAddressReversePopulator" alias="addressReversePopulator"/>
+	<bean id="b2ctelcoAddressReversePopulator" parent="defaultAddressReversePopulator" class="de.hybris.platform.b2ctelcofacades.user.converters.populator.B2ctelcoAddressReversePopulator"/>
+</beans>

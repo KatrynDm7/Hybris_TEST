@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="Hyend2SearchInterface.name"  />
+		</search-properties>
+		<sort-properties>
+			<property qualifier="Hyend2SearchInterface.name"  />
+		</sort-properties>
+	</search>
+	
+	<label spring-bean="hyend2searchinterfaceLabelProvider"/>
+</base>

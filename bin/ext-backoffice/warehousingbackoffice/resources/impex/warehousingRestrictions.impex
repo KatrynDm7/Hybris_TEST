@@ -1,0 +1,3 @@
+# StoreEmployeeGroup Filter for PointOfService
+INSERT_UPDATE SearchRestriction;code[unique=true];name[lang=de];name[lang=en];query;principal(UID);restrictedType(code);active;generate
+;PoS2StoreGroup_Visibility;PoS2StoreGroup_Visibility;PoS2StoreGroup_Visibility;{pk} in ({{SELECT {pos:pk} FROM {PointOfService as pos JOIN StoreEmployeeGroup AS empgroup ON {empgroup:store} = {pos:PK} } WHERE {empgroup:PK} in (?session.user.allGroups)}});instoreEmployeeGroup;PointOfService;true;true

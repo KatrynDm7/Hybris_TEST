@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list-view unassigned-group-name="Other">
+	<group name="General">
+		<property qualifier="Hyend2CategoryDimension.attributeType" visible="true" />
+		<property qualifier="Hyend2CategoryDimension.rootCategory" visible="true" />
+		<property qualifier="Hyend2CategoryDimension.exportId" visible="true" />
+		<property qualifier="Hyend2CategoryDimension.resolver" visible="true"/>
+		<property qualifier="Hyend2CategoryDimension.searchInterfaces" visible="true"/>
+	</group>
+</list-view>

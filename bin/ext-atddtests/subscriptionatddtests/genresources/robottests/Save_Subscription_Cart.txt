@@ -1,0 +1,165 @@
+*** Settings ***
+Test Setup    import commercecart sampledata
+Test Teardown    reset system
+Resource    commerce/CommerceServices_Keywords.txt
+Resource    commerce/SubscriptionCommerce_Keywords.txt
+Resource    subscriptionservices/SubscriptionProduct_Keywords.txt
+Resource    subscriptionservices/SubscriptionPricePlan_Keywords.txt
+
+*** Variables ***
+${customerId}=    testuser@saved-carts.com
+${saveCartName1}=    Saved Cart 1
+${saveCartDescription1}=    This is a saved cart.
+
+*** Test Cases ***
+
+### SAVE MASTER CARTS
+
+Test_Save_Subscription_Cart_SaveMasterCart_OneTimeCharge_Oncancellation_NoChildCart
+	[Documentation]    Tests: saves a customer cart with a subscription product which has entries in the master cart and the monthly cart
+	create subscription product "SP1"
+	for product "SP1" add subscription priceplan "SPP1" with currency "USD"
+	for subscription priceplan "SPP1" add "oncancellation" one time price of "10"    
+	create customer "${customerId}" with currency "USD"
+	login customer with id "${customerId}"
+	${sessionCart}=    get session cart
+	add product "SP1" to cart
+	verify that number of child carts is "0"
+	${savedCart}=    save cart with name "${saveCartName1}" and description "${saveCartDescription1}"
+	Should Be Equal   ${savedCart.name}   ${saveCartName1}
+	Should Be Equal    ${savedCart.description}   ${saveCartDescription1}
+	Should Be Equal    ${savedCart.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${savedCart.saveTime}    ${null}
+	Should Not Be Equal    ${savedCart.expirationTime}    ${null}
+
+Test_Save_Subscription_Cart_SaveMasterCart_OneTimeCharge_Paynow_NoChildCart
+	[Documentation]    Tests: saves a customer cart with a subscription product which has entries in the master cart and the monthly cart
+	create subscription product "SP1"
+	for product "SP1" add subscription priceplan "SPP1" with currency "USD"
+	for subscription priceplan "SPP1" add "paynow" one time price of "10"
+	create customer "${customerId}" with currency "USD"
+	login customer with id "${customerId}"
+	${sessionCart}=    get session cart
+	add product "SP1" to cart
+	verify that number of child carts is "0"
+	${savedCart}=    save cart with name "${saveCartName1}" and description "${saveCartDescription1}"
+	Should Be Equal   ${savedCart.name}   ${saveCartName1}
+	Should Be Equal    ${savedCart.description}   ${saveCartDescription1}
+	Should Be Equal    ${savedCart.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${savedCart.saveTime}    ${null}
+	Should Not Be Equal    ${savedCart.expirationTime}    ${null}
+
+Test_Save_Subscription_Cart_SaveMasterCart_OneTimeCharge_Onfirstbill_1xChildCart
+	[Documentation]    Tests: saves a customer cart with a subscription product which has entries in the master cart and the monthly cart
+	create subscription product "SP1"
+	for product "SP1" add subscription priceplan "SPP1" with currency "USD"
+	for subscription priceplan "SPP1" add "onfirstbill" one time price of "10"
+	create customer "${customerId}" with currency "USD"
+	login customer with id "${customerId}"
+	${sessionCart}=    get session cart
+	add product "SP1" to cart
+	verify that number of child carts is "1"
+	${savedCart}=    save cart with name "${saveCartName1}" and description "${saveCartDescription1}"
+	Should Be Equal   ${savedCart.name}   ${saveCartName1}
+	Should Be Equal    ${savedCart.description}   ${saveCartDescription1}
+	Should Be Equal    ${savedCart.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${savedCart.saveTime}    ${null}
+	Should Not Be Equal    ${savedCart.expirationTime}    ${null}
+	# onfirstbillCart:
+	${onfirstbillCart}=    get cart data for billing time "onfirstbill" and master cart "${savedCart}"
+	Should be Equal    ${onfirstbillCart.saveTime}   ${savedCart.saveTime}
+	Should be Equal    ${onfirstbillCart.expirationTime}   ${savedCart.expirationTime}
+
+Test_Save_Subscription_Cart_SaveMasterCart_RecurringCharge_1xChildCart
+	[Documentation]    Tests: saves a customer cart with a subscription product which has entries in the master cart and the monthly cart
+	create subscription product "SP1"
+	for product "SP1" add subscription priceplan "SPP1" with currency "USD"
+	for subscription priceplan "SPP1" add recurring charge of "20" with cycle start "0"
+	create customer "${customerId}" with currency "USD"
+	login customer with id "${customerId}"
+	${sessionCart}=    get session cart
+	add product "SP1" to cart
+	verify that number of child carts is "1"
+	${savedCart}=    save cart with name "${saveCartName1}" and description "${saveCartDescription1}"
+	Should Be Equal   ${savedCart.name}   ${saveCartName1}
+	Should Be Equal    ${savedCart.description}   ${saveCartDescription1}
+	Should Be Equal    ${savedCart.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${savedCart.saveTime}    ${null}
+	Should Not Be Equal    ${savedCart.expirationTime}    ${null}
+	# monthlyCart:
+	${monthlyCart}=    get cart data for billing time "monthly" and master cart "${savedCart}"
+	Should be Equal    ${monthlyCart.saveTime}   ${savedCart.saveTime}
+	Should be Equal    ${monthlyCart.expirationTime}   ${savedCart.expirationTime}
+
+Test_Save_Subscription_Cart_SaveMasterCart_OneTimeCharge_Onfirstbill_And_RecurringCharge_2xChildCart
+	[Documentation]    Tests: saves a customer master cart with a subscription product which has entries in the master cart and the monthly cart
+	create subscription product "SP1"
+	for product "SP1" add subscription priceplan "SPP1" with currency "USD"
+	for subscription priceplan "SPP1" add "onfirstbill" one time price of "10"
+	for subscription priceplan "SPP1" add recurring charge of "20" with cycle start "0"
+	create customer "${customerId}" with currency "USD"
+	login customer with id "${customerId}"
+	${sessionCart}=    get session cart
+	add product "SP1" to cart
+	verify that number of child carts is "2"
+	${savedCart}=    save cart with name "${saveCartName1}" and description "${saveCartDescription1}"
+	Should Be Equal   ${savedCart.name}   ${saveCartName1}
+	Should Be Equal    ${savedCart.description}   ${saveCartDescription1}
+	Should Be Equal    ${savedCart.savedBy.uid}   ${customerId}
+	Should Not Be Equal    ${savedCart.saveTime}    ${null}
+	Should Not Be Equal    ${savedCart.expirationTime}    ${null}
+	# onfirstbillCart:
+	${onfirstbillCart}=    get cart data for billing time "onfirstbill" and master cart "${savedCart}"
+	Should be Equal    ${onfirstbillCart.saveTime}   ${savedCart.saveTime}
+	Should be Equal    ${onfirstbillCart.expirationTime}   ${savedCart.expirationTime}
+	# monthlyCart:
+	${monthlyCart}=    get cart data for billing time "monthly" and master cart "${savedCart}"
+	Should be Equal    ${monthlyCart.saveTime}   ${savedCart.saveTime}
+	Should be Equal    ${monthlyCart.expirationTime}   ${savedCart.expirationTime}
+
+Test_Save_Subscription_Cart_SaveMasterCart_ByCartCode
+	[Documentation]    This test case saves a customer cart with a subscription product which has entries in the master cart and the monthly cart
+	create subscription product "SP1"
+	for product "SP1" add subscription priceplan "SPP1" with currency "USD"
+	for subscription priceplan "SPP1" add recurring charge of "20" with cycle start "0"
+	create customer "${customerId}" with currency "USD"
+	login customer with id "${customerId}"
+	${sessionCart}=    get session cart
+	add product "SP1" to cart
+	verify that number of child carts is "1"
+	${savedCart}=    save given cart "${sessionCart.code}" with name "${saveCartName1}" and description "${saveCartDescription1}"
+	Should be Equal    ${savedCart.name}   ${saveCartName1}
+	Should be Equal    ${savedCart.description}   ${saveCartDescription1}
+	${monthlyCart}=    get cart data for billing time "monthly" and master cart "${savedCart}"
+	Should be Equal    ${monthlyCart.saveTime}   ${savedCart.saveTime}
+	Should be Equal    ${monthlyCart.expirationTime}   ${savedCart.expirationTime}
+
+### SAVE CHILD CARTS - EXCEPTIONS:
+
+Test_Save_Subscription_Cart_SaveChildCart_OneTimeCharge_Onfirstbill_Exception
+	[Documentation]    This test case saves a child cart that is expected to fail
+	create subscription product "SP1"
+	for product "SP1" add subscription priceplan "SPP1" with currency "USD"
+	for subscription priceplan "SPP1" add "onfirstbill" one time price of "10"
+	create customer "${customerId}" with currency "USD"
+	login customer with id "${customerId}"
+	${sessionCart}=    get session cart
+	add product "SP1" to cart
+	verify that number of child carts is "1"
+	${onfirstbillCart}=    get cart for billing time "onfirstbill" and master cart "${sessionCart}"
+	Run Keyword And Expect Error    CommerceSaveCartException: *is a child cart. Only master carts can be saved.
+	...    save given cart "${onfirstbillCart.code}" with name "${saveCartName1}" and description "${saveCartDescription1}"
+
+Test_Save_Subscription_Cart_SaveChildCart_RecurringCharge_Exception
+	[Documentation]    This test case saves a child cart that is expected to fail
+	create subscription product "SP1"
+	for product "SP1" add subscription priceplan "SPP1" with currency "USD"
+	for subscription priceplan "SPP1" add recurring charge of "20" with cycle start "0"
+	create customer "${customerId}" with currency "USD"
+	login customer with id "${customerId}"
+	${sessionCart}=    get session cart
+	add product "SP1" to cart
+	verify that number of child carts is "1"
+	${monthlyCart}=    get cart for billing time "monthly" and master cart "${sessionCart}"
+	Run Keyword And Expect Error    CommerceSaveCartException: *is a child cart. Only master carts can be saved.
+	...    save given cart "${monthlyCart.code}" with name "${saveCartName1}" and description "${saveCartDescription1}"

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="indexSchemaValidateInterceptor"
+		class="de.hybris.platform.hyend2.ui.validation.Hyend2IndexSchemaValidationInterceptor"
+		scope="tenant">
+		<property name="indexSchemaService" ref="indexSchemaService"></property>
+	</bean>
+
+	<bean id="indexSchemaInterceptorMapping" scope="tenant"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="indexSchemaValidateInterceptor" />
+		<property name="typeCode" value="Hyend2IndexSchema" />
+
+		<!-- The order property is only effective with 4.1.1 and later -->
+		<property name="order" value="5000" />
+	</bean>
+	
+	<bean id="indexElementValidateInterceptor"
+		class="de.hybris.platform.hyend2.ui.validation.Hyend2IndexElementValidationInterceptor"
+		scope="tenant">
+		<property name="indexSchemaService" ref="indexSchemaService"></property>
+	</bean>
+
+	<bean id="indexElementInterceptorMapping" scope="tenant"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="indexElementValidateInterceptor" />
+		<property name="typeCode" value="Hyend2IndexElement" />
+
+		<!-- The order property is only effective with 4.1.1 and later -->
+		<property name="order" value="5000" />
+	</bean>
+
+	<bean id="casEacConfigValidateInterceptor"
+		class="de.hybris.platform.hyend2.ui.validation.Hyend2CasEacConfigurationValidationInterceptor"
+		scope="tenant">
+		<property name="indexSchemaService" ref="indexSchemaService"></property>
+	</bean>
+
+	<bean id="casEacConfigInterceptorMapping" scope="tenant"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="casEacConfigValidateInterceptor" />
+		<property name="typeCode" value="Hyend2CasEacConfiguration" />
+
+		<!-- The order property is only effective with 4.1.1 and later -->
+		<property name="order" value="5000" />
+	</bean>
+
+	<bean id="hyend2PropertyInterceptor"
+		class="de.hybris.platform.hyend2.ui.validation.Hyend2PropertyModelInterceptor"
+		scope="tenant">
+		<property name="hyendAttributesService" ref="hyendAttributesService"></property>
+	</bean>
+
+	<bean id="hyend2PropertyInterceptorMapping" scope="tenant"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="hyend2PropertyInterceptor" />
+		<property name="typeCode" value="Hyend2Property" />
+
+		<!-- The order property is only effective with 4.1.1 and later -->
+		<property name="order" value="5000" />
+	</bean>
+
+	<bean id="hyend2DimensionInterceptor"
+		class="de.hybris.platform.hyend2.ui.validation.Hyend2DimensionModelInterceptor"
+		scope="tenant">
+		<property name="hyendAttributesService" ref="hyendAttributesService"></property>
+	</bean>
+
+	<bean id="hyend2DimensionInterceptorMapping" scope="tenant"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="hyend2DimensionInterceptor" />
+		<property name="typeCode" value="Hyend2Dimension" />
+
+		<!-- The order property is only effective with 4.1.1 and later -->
+		<property name="order" value="5000" />
+	</bean>
+	
+	<bean id="hyend2RangeInterceptor"
+		class="de.hybris.platform.hyend2.ui.validation.Hyend2RangeModelInterceptor"
+		scope="tenant">
+		<property name="hyendAttributesService" ref="hyendAttributesService"></property>
+	</bean>
+
+	<bean id="hyend2RangeInterceptorMapping" scope="tenant"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="hyend2RangeInterceptor" />
+		<property name="typeCode" value="Hyend2Range" />
+
+		<!-- The order property is only effective with 4.1.1 and later -->
+		<property name="order" value="5000" />
+	</bean>
+
+
+	<bean id="hyend2PropertyValidator"
+		class="de.hybris.platform.hyend2.ui.validation.Hyend2PropertyValidator"
+		scope="tenant">
+	</bean>
+
+	<bean id="hyend2PropertyValidatorMapping" scope="tenant"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="hyend2PropertyValidator" />
+		<property name="typeCode" value="Hyend2Property" />
+		<property name="order" value="5000" />
+	</bean>
+
+	<bean id="hyend2DimensionValidator"
+		class="de.hybris.platform.hyend2.ui.validation.Hyend2DimensionValidator"
+		scope="tenant">
+	</bean>
+
+	<bean id="hyend2DimensionValidatorMapping" scope="tenant"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="hyend2DimensionValidator" />
+		<property name="typeCode" value="Hyend2Dimension" />
+		<property name="order" value="5000" />
+	</bean>
+
+	<bean id="hyend2CategoryDimensionValidator"
+		class="de.hybris.platform.hyend2.ui.validation.Hyend2CategoryDimensionValidator"
+		scope="tenant">
+	</bean>
+
+	<bean id="hyend2CategoryDimensionValidatorMapping" scope="tenant"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="hyend2CategoryDimensionValidator" />
+		<property name="typeCode" value="Hyend2CategoryDimension" />
+		<property name="order" value="5000" />
+	</bean>
+
+	<bean id="hyend2CategoryDimensionInitDefaults"
+		class="de.hybris.platform.hyend2.ui.validation.Hyend2CategoryDimensionInitDefaults"
+		scope="tenant">
+	</bean>
+
+	<bean id="hyend2CategoryDimensionInitDefaultsMapping" scope="tenant"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="hyend2CategoryDimensionInitDefaults" />
+		<property name="typeCode" value="Hyend2CategoryDimension" />
+
+		<!-- The order property is only effective with 4.1.1 and later -->
+		<property name="order" value="5000" />
+	</bean>
+
+	<bean id="hyend2PrecedenceRuleValidator"
+		class="de.hybris.platform.hyend2.ui.validation.Hyend2PrecedenceRuleValidator"
+		scope="tenant">
+	</bean>
+
+	<bean id="hyend2PrecedenceRuleValidatorMapping" scope="tenant"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="hyend2PrecedenceRuleValidator" />
+		<property name="typeCode" value="Hyend2PrecedenceRule" />
+		<property name="order" value="5000" />
+	</bean>
+	
+	<alias name="hyend2DefaultDimensionRemoveInterceptor" alias="hyend2DimensionRemoveInterceptor"/>
+	<bean id="hyend2DefaultDimensionRemoveInterceptor"
+		class="de.hybris.platform.hyend2.ui.validation.Hyend2DimensionRemoveInterceptor"
+		scope="tenant">
+		<property name="flexibleSearchService" ref="flexibleSearchService"></property>
+		<property name="modelService" ref="modelService"></property>
+	</bean>
+
+	<bean id="hyend2DimensionRemoveInterceptorMapping" scope="tenant"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="hyend2DimensionRemoveInterceptor" />
+		<property name="typeCode" value="Hyend2Dimension" />
+		<property name="order" value="5000" />
+	</bean>
+	
+	<alias name="hyend2DefaultRangeRemoveInterceptor" alias="hyend2RangeRemoveInterceptor"/>
+	<bean id="hyend2DefaultRangeRemoveInterceptor"
+		class="de.hybris.platform.hyend2.ui.interceptors.Hyend2RangeRemoveInterceptor"
+		scope="tenant">
+		<property name="flexibleSearchService" ref="flexibleSearchService"></property>
+		<property name="modelService" ref="modelService"></property>
+	</bean>
+
+	<bean id="hyend2RangeRemoveInterceptorMapping" scope="tenant"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="hyend2RangeRemoveInterceptor" />
+		<property name="typeCode" value="Hyend2Range" />
+		<property name="order" value="5000" />
+	</bean>
+	
+	<bean id="hyend2RangeValidator"
+		class="de.hybris.platform.hyend2.ui.validation.Hyend2RangeValidator"
+		scope="tenant">
+	</bean>
+
+	<bean id="hyend2RangeValidatorMapping" scope="tenant"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="hyend2RangeValidator" />
+		<property name="typeCode" value="Hyend2Range" />
+	</bean>
+
+</beans>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="mediaconversionspring" name="mediaconversionspring" removed="false">
+          <file>file://$MODULE_DIR$/../bin/ext-platform-optional/mediaconversion/resources/mediaconversion-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/comments/resources/comments-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/interceptor-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/global-statistics-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/event-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/core-filter-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/user-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/global-servicelayer-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/core-profiling-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/security-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/global-core-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/servicelayer-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/core-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/media-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/core-cache.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/global-core-jmx-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/i18n-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/core-jmx-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/persistence-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/core-media-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/europe1/resources/europe1-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/platformservices/resources/product-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/europe1/resources/europe1-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/global-statistics-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/event-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/processing/resources/processengine-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/platformservices/resources/category-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/core-profiling-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/validation/resources/validation-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/processing/resources/task-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/global-core-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/servicelayer-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/platformservices/resources/order-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/processing/resources/processing-jmx-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/media-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/processing/resources/processing-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/i18n-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/impex/resources/impex-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/core-jmx-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/platformservices/resources/catalog-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/scripting/resources/scripting-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/interceptor-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/platformservices/resources/converters-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/core-filter-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/platformservices/resources/jobs-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/user-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/comments/resources/comments-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/global-servicelayer-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/security-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/core-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/processing/resources/cronjob-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/workflow/resources/workflow-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/core-cache.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/platformservices/resources/classification-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/global-core-jmx-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/persistence-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/core/resources/core-media-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/impex/resources/impex-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/platformservices/resources/product-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/platformservices/resources/converters-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/platformservices/resources/order-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/platformservices/resources/jobs-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/platformservices/resources/classification-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/platformservices/resources/category-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/platformservices/resources/catalog-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/processing/resources/processing-jmx-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/processing/resources/cronjob-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/processing/resources/processengine-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/processing/resources/processing-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/processing/resources/task-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/scripting/resources/scripting-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/validation/resources/validation-spring.xml</file>
+          <file>file://$MODULE_DIR$/../bin/platform/ext/workflow/resources/workflow-spring.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/../bin/ext-platform-optional/mediaconversion/web/webroot/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/../bin/ext-platform-optional/mediaconversion/web/webroot" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/../bin/ext-platform-optional/mediaconversion/eclipsebin" />
+    <output-test url="file://$MODULE_DIR$/../bin/ext-platform-optional/mediaconversion/eclipsebin" />
+    <exclude-output />
+    <javadoc-paths>
+      <root url="https://download.hybris.com/api/5.7.0/commercesuite" />
+    </javadoc-paths>
+    <content url="file://$MODULE_DIR$/../bin/ext-platform-optional/mediaconversion">
+      <excludeFolder url="file://$MODULE_DIR$/../bin/ext-platform-optional/mediaconversion/.externalToolBuilders" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/ext-platform-optional/mediaconversion/.settings" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/ext-platform-optional/mediaconversion/acceleratoraddon/hmc/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/ext-platform-optional/mediaconversion/acceleratoraddon/web/addonsrc" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/ext-platform-optional/mediaconversion/acceleratoraddon/web/commonwebsrc" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/ext-platform-optional/mediaconversion/acceleratoraddon/web/testclasses" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/ext-platform-optional/mediaconversion/backoffice/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/ext-platform-optional/mediaconversion/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/ext-platform-optional/mediaconversion/commonweb/addonsrc" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/ext-platform-optional/mediaconversion/commonweb/commonwebsrc" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/ext-platform-optional/mediaconversion/commonweb/testclasses" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/ext-platform-optional/mediaconversion/eclipsebin" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/ext-platform-optional/mediaconversion/hmc/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/ext-platform-optional/mediaconversion/web/addonsrc" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/ext-platform-optional/mediaconversion/web/commonwebsrc" />
+      <excludeFolder url="file://$MODULE_DIR$/../bin/ext-platform-optional/mediaconversion/web/testclasses" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Common libs" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../bin/ext-platform-optional/mediaconversion/web/webroot/WEB-INF/classes" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../bin/ext-platform-optional/mediaconversion/resources" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../bin/ext-platform-optional/mediaconversion/hmc/resources" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../bin/ext-platform-optional/mediaconversion/bin" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/../bin/ext-platform-optional/mediaconversion/bin" recursive="true" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../bin/ext-platform-optional/mediaconversion/hmc/bin" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/../bin/ext-platform-optional/mediaconversion/hmc/bin" recursive="true" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module" module-name="platform" exported="" />
+    <orderEntry type="module" module-name="hmc" exported="" />
+  </component>
+</module>

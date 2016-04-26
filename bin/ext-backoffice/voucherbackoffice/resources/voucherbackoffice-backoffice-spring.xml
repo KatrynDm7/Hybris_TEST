@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="voucherbackofficeLabelLocator" class="com.hybris.cockpitng.util.labels.ResourcesLabelLocator" scope="singleton" init-method="init" lazy-init="false">
+  		<property name="location" value="/voucherbackoffice-backoffice-labels/"/>
+  		<property name="name" value="labels"/>
+  	</bean>
+
+	<bean id="voucherCodeGeneratorInset" class="de.hybris.platform.voucher.backoffice.cockpitng.editor.insets.VoucherCodeGeneratorInset">
+		<property name="voucherModelService" ref="voucherModelService"/>
+		<property name="modelService" ref="modelService"/>
+	</bean>
+
+	<bean id="voucherApplierInset" class="de.hybris.platform.voucher.backoffice.cockpitng.editor.insets.VoucherApplierInset">
+		<property name="voucherService" ref="voucherService"/>
+		<property name="voucherModelService" ref="voucherModelService"/>
+		<property name="objectFacade" ref="objectFacade"/>
+	</bean>
+
+	<bean id="serialVoucherCodesGeneratorInset" class="de.hybris.platform.voucher.backoffice.cockpitng.editor.insets.SerialVoucherCodesGeneratorInset">
+		<property name="modelService" ref="modelService"/>
+		<property name="voucherModelService" ref="voucherModelService"/>
+		<property name="mediaService" ref="mediaService"/>
+	</bean>
+</beans>

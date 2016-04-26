@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="propertyResolverService" class="de.hybris.platform.hyend2.services.impl.DefaultPropertyResolverService" scope="tenant">
+		<property name="mandatoryPropertyResolversMappingFactory" ref="mandatoryPropertyResolversMappingFactory"></property>
+		<property name="typeService" ref="typeService"></property>
+	</bean>
+	
+	<bean id="exportQueryService" class="de.hybris.platform.hyend2.services.impl.DefaultExportQueryService" scope="tenant">
+		<property name="flexibleSearchService" ref="flexibleSearchService"></property>
+		<property name="jdbcTemplate">
+			<bean class="org.springframework.jdbc.core.JdbcTemplate">
+				<constructor-arg value="#{T(de.hybris.platform.core.Registry).getCurrentTenant().getDataSource()}"></constructor-arg>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="endecaRecordStoreService" class="de.hybris.platform.hyend2.services.endeca.impl.DefaultEndecaRecordStoreService" scope="tenant">
+				<property name="recordStoreFactory" ref="recordStoreFactory"></property>
+				<property name="recordsPerTransfer" value="${hyend2.export.recordsPerTransfer}"></property>
+	</bean>
+	
+	<bean id="endecaEacClientService" class="de.hybris.platform.hyend2.services.endeca.impl.DefaultEndecaEacClientService" scope="tenant">
+		<property name="synchrServiceLocBaseline">
+			<bean class="com.endeca.eac.client.SynchronizationServiceLocator"></bean>
+		</property>
+		<property name="synchrServiceLocPartial">
+			<bean class="com.endeca.eac.client.SynchronizationServiceLocator"></bean>
+		</property>
+		<property name="scriptContrServiceLocator">
+			<bean class="com.endeca.eac.client.ScriptControlServiceLocator"></bean>
+		</property>
+	</bean>
+		
+	<bean id="indexSchemaService" class="de.hybris.platform.hyend2.services.impl.DefaultIndexSchemaService">
+		<property name="indexSchemaDao" ref="indexSchemaDao"/>
+		<property name="propertyResolverService" ref="propertyResolverService"/>
+		<property name="useTypePrefix" value="true"/>
+	</bean>	
+	
+	<bean id="hyendAttributesService" class="de.hybris.platform.hyend2.services.impl.DefaultHyendAttributesService">
+		<property name="hyendAttributesDao" ref="hyendAttributesDao"/>
+	</bean>	
+	
+	<bean id="hyend2exportService" class="de.hybris.platform.hyend2.services.impl.DefaultExportService">
+		<property name="commonI18NService" ref="commonI18NService"></property>
+		<property name="endecaEacClientService" ref="endecaEacClientService"></property>
+		<property name="indexSchemaService" ref="indexSchemaService"></property>
+		<property name="recordStoreFactory" ref="recordStoreFactory"></property>
+		<property name="modelService" ref="modelService"></property>
+		<property name="endecaRecordStoreService" ref="endecaRecordStoreService"></property>
+		<property name="propertyResolverService" ref="propertyResolverService"></property>
+		<property name="exportQueryService" ref="exportQueryService"></property>
+		<property name="noOfThreads" value="${hyend2.export.executor.poolSize}"></property>
+		<property name="recordsPerPage" value="${hyend2.export.noRecordsToSend}"></property>
+	</bean>
+
+	<bean id="hyend2exportPerformable" class="de.hybris.platform.hyend2.jobs.ExportJob"
+		parent="abstractJobPerformable" scope="tenant">
+		<property name="exportService" ref="hyend2exportService"></property>
+		<property name="flexibleSearchService" ref="flexibleSearchService"></property>
+	</bean>
+	
+	<bean id="hyendDataSetup" class="de.hybris.platform.hyend2.impex.HyendDataSetup" scope="tenant">
+		<property name="importService" ref="importService"></property>
+		<property name="validationService" ref="validationService"></property>
+	</bean>
+		
+</beans>

@@ -1,0 +1,16 @@
+
+INSERT_UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];languages(isocode);active
+;hwcatalog;Online${testId};de,en;TRUE
+
+INSERT_UPDATE Product;code[unique=true];catalogversion(catalog(id),version)[unique=true];name[lang=en];manufacturerName;approvalStatus(code)
+;product1_1;hwcatalog:Online${testId};product1;manA;approved
+;product1_2;hwcatalog:Online${testId};product1;manA;approved
+;product1_3;hwcatalog:Online${testId};product1;manA;approved
+;product2_1;hwcatalog:Online${testId};product2;manB;approved
+;product2_3;hwcatalog:Online${testId};product2;manB;approved
+
+INSERT_UPDATE SolrSearchConfig;description[unique=true];legacyMode
+;testSearchConfig${testId};false
+
+INSERT_UPDATE SolrFacetSearchConfig;name[unique=true];catalogVersions(catalog(id),version)
+;testFacetSearchConfig${testId};hwcatalog:Online${testId}

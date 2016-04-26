@@ -1,0 +1,29 @@
+$comp=wc2002
+
+#last16
+update Match;id[unique=true];homeGoals;guestGoals;homeTeam(isocode);guestTeam(isocode);group(code,competition(code[default=$comp]))[unique=true]
+;49;1;0;GER;PAR;LAST16
+;50;0;3;DEN;ENG;LAST16
+;51;1;2;SWE;SEN;LAST16
+;52;3;2;ESP;IRL;LAST16
+;53;0;2;MEX;USA;LAST16
+;54;2;0;BRA;BEL;LAST16
+;55;0;1;JPN;TUR;LAST16
+;56;2;1;KOR;ITA;LAST16
+
+#quarters
+update Match;id[unique=true];homeGoals;guestGoals;homeTeam(isocode);guestTeam(isocode);group(code,competition(code[default=$comp]))[unique=true]
+;57;1;2;ENG;BRA;QUARTER
+;58;1;0;GER;USA;QUARTER
+;59;3;5;ESP;KOR;QUARTER
+;60;0;1;SEN;TUR;QUARTER
+
+#semi
+update Match;id[unique=true];homeGoals;guestGoals;homeTeam(isocode);guestTeam(isocode);group(code,competition(code[default=$comp]))[unique=true]
+;61;1;0;GER;KOR;SEMI
+;62;1;0;BRA;TUR;SEMI
+
+#finals
+update Match;id[unique=true];homeGoals;guestGoals;homeTeam(isocode);guestTeam(isocode);group(code,competition(code[default=$comp]))[unique=true]
+;63;2;3;KOR;TUR;THIRD
+;64;0;2;GER;BRA;FINAL

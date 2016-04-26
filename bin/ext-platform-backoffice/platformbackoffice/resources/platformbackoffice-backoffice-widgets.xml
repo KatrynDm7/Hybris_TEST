@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2015 hybris AG All rights reserved. This software is the confidential and proprietary information 
+	of hybris ("Confidential Information"). You shall not disclose such Confidential Information and shall use it only in accordance with the terms 
+	of the license agreement you entered into with hybris. -->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widgets.xsd">
+
+    <widget-extension widgetId="advancedSearch">
+        <setting key="forceSearchForCode" value="WorkflowAction,Principal"/>
+    </widget-extension>
+
+	<widget-extension widgetId="explorerTree">
+		<widget id="b642638a-3e78-438a-a815-7b3d52bec0a3" widgetDefinitionId="com.hybris.cockpitng.conditionevaluator" slotId="cockpitWidgetChildrenInvisible" template="false">
+			<widget id="9304f8eb-1267-4416-86ac-88e915fe4c0f" widgetDefinitionId="com.hybris.cockpitng.workflowactionadapter" slotId="cockpitWidgetChildrenInvisible" template="false">
+				<setting key="widgetStyleAttribute" type="String"></setting>
+				<setting key="widgetStyleClass" type="String"></setting>
+				<virtual-sockets/>
+			</widget>
+			<setting key="expression" type="String">#root.id EQ 'hmc_backoffice-workflow-inbox'</setting>
+			<setting key="socketDataType_$T" type="String">com.hybris.backoffice.navigation.NavigationNode</setting>
+			<setting key="widgetStyleAttribute" type="String"></setting>
+			<setting key="widgetStyleClass" type="String"></setting>
+			<virtual-sockets/>
+		</widget>
+	</widget-extension>
+
+	<widget-extension widgetId="backofficePerspectiveChooser">
+		<widget id="duplicateIDsReport" widgetDefinitionId="org.platformbackoffice.widgets.duplicatereport" slotId="cockpitWidgetChildrenInvisible" template="true">
+			<setting key="widgetStyleClass" type="String"></setting>
+			<setting key="__externalLocationPath" type="String">extension://platformbackoffice</setting>
+			<setting key="widgetStyleAttribute" type="String"></setting>
+			<virtual-sockets/>
+		</widget>
+	</widget-extension>
+
+	<widget-extension widgetId="mainSlot">
+		<widget id="impex_import_conditionevaluator" widgetDefinitionId="com.hybris.cockpitng.conditionevaluator" slotId="cockpitWidgetChildrenInvisible"
+			template="false">
+			<widget id="impex_import_propertyextractor" widgetDefinitionId="com.hybris.cockpitng.widgets.common.propextractor" slotId="cockpitWidgetChildrenInvisible"
+				template="false">
+				<setting key="expression" type="String" value="id"></setting>
+				<setting key="socketDataType_$T" type="String" value="java.lang.String"></setting>
+				<setting key="widgetStyleAttribute" type="String" value=""></setting>
+				<setting key="widgetStyleClass" type="String" value=""></setting>
+				<virtual-sockets />
+			</widget>
+			<setting key="expression" type="String" value="#root.id EQ 'hmc_treenode_impex_import_wizard'"></setting>
+			<setting key="socketDataType_$T" type="String" value="com.hybris.backoffice.navigation.NavigationNode"></setting>
+			<setting key="widgetStyleAttribute" type="String" value=""></setting>
+			<setting key="widgetStyleClass" type="String" value=""></setting>
+			<virtual-sockets />
+		</widget>
+
+        <widget id="impex_export_conditionevaluator" widgetDefinitionId="com.hybris.cockpitng.conditionevaluator" slotId="cockpitWidgetChildrenInvisible"
+                template="false">
+            <widget id="impex_export_propertyextractor" widgetDefinitionId="com.hybris.cockpitng.widgets.common.propextractor" slotId="cockpitWidgetChildrenInvisible"
+                    template="false">
+                <setting key="expression" type="String" value="id"></setting>
+                <setting key="socketDataType_$T" type="String" value="java.lang.String"></setting>
+                <setting key="widgetStyleAttribute" type="String" value=""></setting>
+                <setting key="widgetStyleClass" type="String" value=""></setting>
+                <virtual-sockets />
+            </widget>
+            <setting key="expression" type="String" value="#root.id EQ 'hmc_treenode_impex_export_wizard'"></setting>
+            <setting key="socketDataType_$T" type="String" value="com.hybris.backoffice.navigation.NavigationNode"></setting>
+            <setting key="widgetStyleAttribute" type="String" value=""></setting>
+            <setting key="widgetStyleClass" type="String" value=""></setting>
+            <virtual-sockets />
+        </widget>
+
+
+		<widget id="script_generator_conditionevaluator" widgetDefinitionId="com.hybris.cockpitng.conditionevaluator" slotId="cockpitWidgetChildrenInvisible"
+				template="false">
+			<widget id="script_generator_propertyextractor" widgetDefinitionId="com.hybris.cockpitng.widgets.common.propextractor" slotId="cockpitWidgetChildrenInvisible"
+					template="false">
+				<setting key="expression" type="String" value="id"></setting>
+				<setting key="socketDataType_$T" type="String" value="java.lang.String"></setting>
+				<setting key="widgetStyleAttribute" type="String" value=""></setting>
+				<setting key="widgetStyleClass" type="String" value=""></setting>
+				<virtual-sockets />
+			</widget>
+			<setting key="expression" type="String" value="#root.id EQ 'hmc_treenode_script_generator_wizard'"></setting>
+			<setting key="socketDataType_$T" type="String" value="com.hybris.backoffice.navigation.NavigationNode"></setting>
+			<setting key="widgetStyleAttribute" type="String" value=""></setting>
+			<setting key="widgetStyleClass" type="String" value=""></setting>
+			<virtual-sockets />
+		</widget>
+
+        <widget id="catalogversionreport" widgetDefinitionId="de.hybris.platform.platformbackoffice.widgets.catalogversionreport" slotId="cockpitWidgetChildrenInvisible"
+                title="Catalog Version Report" template="true">
+            <instance-settings socketEventRoutingMode="LAST_USED">
+                <create onInit="false" reuseExisting="false">
+                    <incoming-events>
+                        <socket-event id="catalogversionreport" />
+                    </incoming-events>
+                    <all-incoming-events />
+                </create>
+                <close />
+                <select onInit="false" />
+            </instance-settings>
+            <setting key="widgetStyleClass" type="String"></setting>
+            <setting key="__externalLocationPath" type="String">extension://platformbackoffice</setting>
+            <setting key="widgetStyleAttribute" type="String"></setting>
+            <setting key="_height" type="String">600px</setting>
+            <virtual-sockets />
+        </widget>
+
+        <widget id="catalogversiondiff" widgetDefinitionId="de.hybris.platform.platformbackoffice.widgets.catalogversiondiff" slotId="cockpitWidgetChildrenInvisible"
+                title="Catalog Version Diff" template="true">
+            <instance-settings socketEventRoutingMode="LAST_USED">
+                <create onInit="false" reuseExisting="false">
+                    <incoming-events>
+                        <socket-event id="catalogversiondiff" />
+                    </incoming-events>
+                    <all-incoming-events />
+                </create>
+                <close />
+                <select onInit="false" />
+            </instance-settings>
+            <setting key="widgetStyleClass" type="String"></setting>
+            <setting key="__externalLocationPath" type="String">extension://platformbackoffice</setting>
+            <setting key="widgetStyleAttribute" type="String"></setting>
+            <setting key="_height" type="String">80%</setting>
+            <setting key="_width" type="String">70%</setting>
+            <virtual-sockets />
+        </widget>
+
+        <widget id="syncActionAdapter" widgetDefinitionId="com.hybris.cockpitng.syncactionadapter" slotId="cockpitWidgetChildrenInvisible" template="false">
+            <setting key="widgetStyleClass" type="String"></setting>
+            <setting key="__externalLocationPath" type="String">extension://platformbackoffice</setting>
+            <setting key="widgetStyleAttribute" type="String"></setting>
+            <virtual-sockets/>
+        </widget>
+
+		<widget id="repairProcessActionAdapter" widgetDefinitionId="com.hybris.cockpitng.repairprocadapter" slotId="cockpitWidgetChildrenInvisible" template="false">
+			<setting key="widgetStyleClass" type="String"></setting>
+			<setting key="__externalLocationPath" type="String">extension://platformbackoffice</setting>
+			<setting key="widgetStyleAttribute" type="String"></setting>
+			<virtual-sockets/>
+		</widget>
+
+		<widget id="createWorkflowActionAdapter" widgetDefinitionId="com.hybris.cockpitng.workflow.create" slotId="cockpitWidgetChildrenInvisible" template="false">
+			<setting key="widgetStyleClass" type="String"></setting>
+			<setting key="__externalLocationPath" type="String">extension://platformbackoffice</setting>
+			<setting key="widgetStyleAttribute" type="String"></setting>
+			<virtual-sockets/>
+		</widget>
+
+        <setting key="widgetStyleClass" type="String"></setting>
+        <setting key="widgetStyleAttribute" type="String"></setting>
+        <virtual-sockets />
+
+    </widget-extension>
+
+	<widget-connection sourceWidgetId="STUB_com.hybris.cockpitng.action.duplicatecatalogids" outputId="duplicatedIdentifiersReport" targetWidgetId="duplicateIDsReport" inputId="createContext"/>
+    <widget-connection sourceWidgetId="explorerTree" outputId="nodeSelected" targetWidgetId="impex_import_conditionevaluator"
+                       inputId="input" />
+    <widget-connection sourceWidgetId="impex_import_conditionevaluator" outputId="true" targetWidgetId="impex_import_propertyextractor"
+                       inputId="genericInput" />
+    <widget-connection sourceWidgetId="impex_import_propertyextractor" outputId="genericOutput" targetWidgetId="configurableFlow"
+                       inputId="contextType" />
+    <widget-connection sourceWidgetId="explorerTree" outputId="nodeSelected" targetWidgetId="impex_export_conditionevaluator"
+                       inputId="input" />
+    <widget-connection sourceWidgetId="impex_export_conditionevaluator" outputId="true" targetWidgetId="impex_export_propertyextractor"
+                       inputId="genericInput" />
+
+	<widget-connection sourceWidgetId="script_generator_conditionevaluator" outputId="true" targetWidgetId="script_generator_propertyextractor"
+					   inputId="genericInput" />
+	<widget-connection sourceWidgetId="script_generator_propertyextractor" outputId="genericOutput" targetWidgetId="configurableFlow"
+					   inputId="contextType" />
+
+    <widget-connection sourceWidgetId="STUB_com.hybris.cockpitng.action.catalogversionreport" outputId="catalogversionreport"
+                       targetWidgetId="catalogversionreport" inputId="catalogversionreport" />
+
+    <widget-connection sourceWidgetId="STUB_com.hybris.cockpitng.action.catalogversiondiff" outputId="catalogversiondiff"
+                       targetWidgetId="catalogversiondiff" inputId="catalogversiondiff" />
+    <widget-connection sourceWidgetId="impex_export_propertyextractor" outputId="genericOutput" targetWidgetId="configurableFlow"
+                       inputId="contextType" />
+
+	<widget-connection sourceWidgetId="syncActionAdapter" outputId="contextMap" targetWidgetId="configurableFlow" inputId="context"/>
+    <widget-connection sourceWidgetId="STUB_com.hybris.cockpitng.action.catalogsynchronization" outputId="startSyncForm" targetWidgetId="syncActionAdapter" inputId="startSyncForm"/>
+
+
+	<widget-connection sourceWidgetId="repairProcessActionAdapter" outputId="contextMap" targetWidgetId="configurableFlow" inputId="context"/>
+	<widget-connection sourceWidgetId="STUB_com.hybris.cockpitng.action.repairprocess" outputId="repairProcessForm" targetWidgetId="repairProcessActionAdapter" inputId="repairProcessForm"/>
+
+
+	<widget-connection sourceWidgetId="createWorkflowActionAdapter" outputId="contextMap" targetWidgetId="configurableFlow" inputId="context"/>
+	<widget-connection sourceWidgetId="STUB_com.hybris.cockpitng.action.workflow.create" outputId="createWorkflowForm" targetWidgetId="createWorkflowActionAdapter" inputId="createWorkflowForm"/>
+
+    <widget-extension widgetId="explorerTree">
+        <widget id="scriptingTypeEvaluator" widgetDefinitionId="com.hybris.cockpitng.conditionevaluator" slotId="cockpitWidgetChildrenInvisible" template="false">
+            <widget id="initScriptingAdvancedSearch" widgetDefinitionId="com.hybris.cockpitng.initScriptingAdvancedSearch" slotId="cockpitWidgetChildrenInvisible" template="false">
+                <setting key="widgetStyleAttribute" type="String"></setting>
+                <setting key="widgetStyleClass" type="String"></setting>
+                <virtual-sockets/>
+            </widget>
+            <setting key="expression" type="String">#root.id EQ 'hmc_typenode_scripting'</setting>
+            <setting key="socketDataType_$T" type="String">com.hybris.backoffice.navigation.NavigationNode</setting>
+            <setting key="widgetStyleAttribute" type="String"></setting>
+            <setting key="widgetStyleClass" type="String"></setting>
+            <virtual-sockets/>
+        </widget>
+
+        <widget id="dpdTypeEvaluator" widgetDefinitionId="com.hybris.cockpitng.conditionevaluator" slotId="cockpitWidgetChildrenInvisible" template="false">
+            <widget id="initDpdAdvancedSearch" widgetDefinitionId="com.hybris.cockpitng.initDpdAdvancedSearch" slotId="cockpitWidgetChildrenInvisible" template="false">
+                <setting key="widgetStyleAttribute" type="String"></setting>
+                <setting key="widgetStyleClass" type="String"></setting>
+                <virtual-sockets/>
+            </widget>
+            <setting key="expression" type="String">#root.id EQ 'hmc_typenode_dynamic_process_definition'</setting>
+            <setting key="socketDataType_$T" type="String">com.hybris.backoffice.navigation.NavigationNode</setting>
+            <setting key="widgetStyleAttribute" type="String"></setting>
+            <setting key="widgetStyleClass" type="String"></setting>
+            <virtual-sockets/>
+        </widget>
+    </widget-extension>
+
+    <widget-connection sourceWidgetId="explorerTree" outputId="nodeSelected" targetWidgetId="scriptingTypeEvaluator" inputId="input"/>
+    <widget-connection sourceWidgetId="scriptingTypeEvaluator" outputId="true" targetWidgetId="initScriptingAdvancedSearch" inputId="nodeSelected"/>
+    <widget-connection sourceWidgetId="initScriptingAdvancedSearch" outputId="outContext" targetWidgetId="advancedSearch" inputId="initContext"/>
+	<widget-connection sourceWidgetId="explorerTree" outputId="nodeSelected" targetWidgetId="script_generator_conditionevaluator" inputId="input"/>
+
+    <widget-connection sourceWidgetId="explorerTree" outputId="nodeSelected" targetWidgetId="dpdTypeEvaluator" inputId="input"/>
+    <widget-connection sourceWidgetId="dpdTypeEvaluator" outputId="true" targetWidgetId="initDpdAdvancedSearch" inputId="nodeSelected"/>
+    <widget-connection sourceWidgetId="initDpdAdvancedSearch" outputId="outContext" targetWidgetId="advancedSearch" inputId="initContext"/>
+
+    <widget-connection sourceWidgetId="STUB_de.hybris.platform.platformbackoffice.editors.joblogfindereditor.joblogfindereditor" outputId="finderOutput" targetWidgetId="collapsibleContainer" inputId="activate"/>
+    <widget-connection sourceWidgetId="STUB_de.hybris.platform.platformbackoffice.editors.joblogfindereditor.joblogfindereditor" outputId="finderOutput" targetWidgetId="advancedSearch" inputId="initContext"/>
+
+    <widget-connection sourceWidgetId="STUB_de.hybris.platform.platformbackoffice.editors.joblogfindereditor.joblogfindereditor" outputId="nodeOutput" targetWidgetId="explorerTree" inputId="nodeIdSelected"/>
+
+	<widget-connection sourceWidgetId="b642638a-3e78-438a-a815-7b3d52bec0a3" outputId="true" targetWidgetId="9304f8eb-1267-4416-86ac-88e915fe4c0f" inputId="nodeSelected"/>
+    <widget-connection sourceWidgetId="9304f8eb-1267-4416-86ac-88e915fe4c0f" outputId="context" targetWidgetId="advancedSearch" inputId="initContext"/>
+
+    <widget-connection sourceWidgetId="STUB_de.hybris.platform.platformbackoffice.editors.membersfindereditor.MembersFinderEditor" outputId="finderOutput" targetWidgetId="collapsibleContainer" inputId="activate"/>
+    <widget-connection sourceWidgetId="STUB_de.hybris.platform.platformbackoffice.editors.membersfindereditor.MembersFinderEditor" outputId="finderOutput" targetWidgetId="advancedSearch" inputId="initContext"/>
+
+</widgets>

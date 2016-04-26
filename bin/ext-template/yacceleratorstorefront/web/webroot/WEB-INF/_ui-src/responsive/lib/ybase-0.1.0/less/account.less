@@ -1,0 +1,623 @@
+.account-navigation{
+	margin-bottom: (@grid-gutter-width/2);
+	.account-navigation-header{
+		//background: @grayblue;
+		padding: (@grid-gutter-width/2);
+		text-transform: uppercase;
+
+		a{
+			display: block;
+		}
+
+	}
+
+	.account-navigation-list{
+		margin: (@grid-gutter-width/2);
+		.list-unstyled;
+		.hidden-sm;
+		.hidden-xs;
+		li{
+			&.title{
+				margin-top: (@grid-gutter-width/2);
+				font-weight: bold;
+			}
+
+			&.active{
+				font-weight: bold;
+			}
+			a{
+				//color: @text-color;
+
+
+				&:hover, &focus{
+					color: @brand-primary;
+				}
+
+			}
+		}
+	}
+}
+
+.account-home{
+	.account-home-section{
+		margin-bottom: @grid-gutter-width;
+		.account-home-section-header{
+			background: @grayblue;
+			padding: (@grid-gutter-width/2);
+			text-transform: uppercase;
+		}
+
+		.account-home-section-content{
+			height: 100px;
+			padding: (@grid-gutter-width/2);
+			border:1px solid @grayblue;
+			border-top:0;
+
+			ul{
+				.list-unstyled;
+				margin: 0;
+				li{
+					// a{
+					// 	color: @text-color;
+
+					// 	&:hover, &:focus{
+					// 		color: @brand-primary;
+					// 	}
+					// }
+				}
+			}
+		}
+	}
+}
+
+
+
+
+@media (max-width: @screen-sm-max) {
+
+	.account-home{
+		.account-home-section{
+			margin-bottom: (@grid-gutter-width/2);
+
+			.account-home-section-header{
+
+			}
+
+			.account-home-section-content{
+				height: auto;
+				padding: 0;
+
+				ul{
+					li{
+						a{
+							padding: (@grid-gutter-width/2);
+							display: block;
+						}
+
+						+ li{
+							border-top:1px solid #eee;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.account-section{
+  	.addressBackBtn,
+  	.orderTopBackBtn{
+	  	background-color: transparent;
+	  	border: none;
+	  	box-shadow: none;
+	}
+	.account-section-header{
+		background: @grayblue;
+		padding: (@grid-gutter-width/2);
+		text-transform: uppercase;
+
+	}
+
+	.account-section-content{
+		padding: @grid-gutter-width (@grid-gutter-width/2) (@grid-gutter-width/2) (@grid-gutter-width/2);
+		&.account-section-content-small{
+
+			max-width: 600px;
+		    .container{
+			  	max-width: 600px;
+			}
+
+		  	@media (min-width: @screen-md-min){
+			  	.account-addressbook,
+				.account-paymentdetails{
+					max-width: 900px;
+					.container {
+					  	max-width: 900px;
+					}
+					.accountAddressItem:nth-child(even),
+					.accountPaymentDetailsItem:nth-child(even){
+					  	padding-left:(@grid-gutter-width*1.5) ;
+					}
+					.accountAddressItem:nth-child(odd),
+					.accountPaymentDetailsItem:nth-child(odd){
+					  	padding-right: (@grid-gutter-width*1.5);
+					}
+				}
+			}
+			@media (min-width: @screen-lg-min){
+				.account-addressbook,
+				.account-paymentdetails{
+					max-width: 1200px;
+					.container {
+					  	max-width: 1200px;
+					}
+				}
+			}
+		}
+
+	  	.accountActions{
+		  	padding-left: 0px;
+		  	padding-right: 0px;
+		  	padding-top: @grid-gutter-width;
+			@media (max-width: @screen-xs-max){
+				.accountButtons:first-child {
+				  	padding-bottom: @grid-gutter-width;
+				}
+			}
+		  	@media (min-width: @screen-sm-min){
+				.accountButtons:first-child{
+				  	padding-left: (@grid-gutter-width/2);
+				}
+				.accountButtons:last-child{
+				  	padding-right: (@grid-gutter-width/2);
+				}
+			}
+		  	@media (min-width: @screen-md-min){
+			  	padding-right: 20px;
+			}
+			.accountButtons{
+				padding-left: 0px;
+				padding-right: 0px;
+			}
+		}
+
+	}
+
+    .cancel-panel{
+        float: right;
+        @media (min-width: @screen-sm-min) {
+            padding-left: 0px;
+        }
+    }
+
+	.btn.btn-block + .btn.btn-block{
+		margin-top: (@grid-gutter-width/2);
+	}
+}
+
+
+
+.account-profil{
+	.account-profil-info{
+		margin:  0 0 (@grid-gutter-width/2);
+		.account-profil-info-line{
+			line-height: 2em;
+			span{
+				display: inline-block;
+				width: 100px;
+			}
+		}
+	}
+
+	a.btn{
+		margin-top: (@grid-gutter-width/2);
+	}
+
+	.btn + .btn{
+		margin-left: (@grid-gutter-width/2) ;
+	}
+
+
+}
+
+
+
+
+.account-addressbook,
+.account-paymentdetails{
+	.account-addressbook-list,
+	.account-paymentdetails-list{
+		.list-unstyled;
+
+		.accountAddressItem{
+		  	padding: (@grid-gutter-width/2);
+		  	border-bottom: 1px solid @grayblue;
+		  	.actions{
+			  	.btn{
+			  		margin-top: (@grid-gutter-width/2) ;
+
+			  		& + .btn{
+						margin-left: (@grid-gutter-width/2) ;
+			  		}
+				}
+
+		  	}
+
+		  	.remove{
+				float: right;
+		  	}
+
+		  	+ .accountAddressItem{
+				border-top:1px solid @grayblue;
+		  	}
+		}
+
+	  	.accountPaymentDetailsItem{
+			padding: (@grid-gutter-width/2) 0;
+		  	border-top:1px solid @grayblue;
+			.actions{
+				.btn{
+					margin-top: (@grid-gutter-width/2) ;
+
+					& + .btn{
+						margin-left: (@grid-gutter-width/2) ;
+					}
+				}
+
+			}
+
+			.remove{
+				float: right;
+			}
+
+			+ .accountPaymentDetailsItem{
+				border-top:1px solid @grayblue;
+			}
+		}
+
+	}
+}
+
+
+.account-addressbook{
+  	.accountAddAddress{
+	  padding-left: 0;
+	}
+	.remove{
+		float: right;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+.account-orderhistory{
+	.account-orderhistory-pagination{
+		padding-bottom: (@grid-gutter-width/2);
+		padding-top: (@grid-gutter-width/2);
+
+		.account-orderhistory-pagination-text{
+			line-height: 32px;
+		}
+
+
+		.pager{
+			margin: 0;
+		}
+
+
+	}
+
+	.account-orderhistory-sort{
+		background: @grayblue;
+		padding: (@grid-gutter-width/2);
+	}
+
+
+	.account-orderhistory-list{
+		border:1px solid #eee;
+		ul{
+			.list-unstyled;
+			margin: 0;
+		}
+		.account-orderhistory-list-item{
+			padding: (@grid-gutter-width/2);
+            .order-list-id{
+                font-weight: bold;
+            }
+
+			a{
+				color: @text-color;
+				&:hover, &:focus{
+					color: @brand-primary;
+				}
+			}
+			@media (max-width: @screen-xs-max) {
+				.status strong{
+					display: block;
+				}
+			}
+
+		}
+	  	.account-orderhistory-list-item:nth-child(2n){
+			background: none repeat scroll 0 0 #F2F4F7;
+	  	}
+
+		li+li{
+			border-top:1px solid #eee;
+		}
+	}
+}
+
+
+
+
+.account-orderdetail{
+
+    @media (min-width: @screen-md-min) {
+        .text-right-md {
+            .text-right;
+        }
+    }
+
+	.account-orderdetail-overview{
+        .account-order-header_data{
+		  	font-weight: bold;
+
+            @media (max-width: @screen-sm-max) {
+                .uppercase-sm{
+                    .text-uppercase;
+                }
+            }
+        }
+        padding-bottom: @grid-gutter-width;
+        padding-top: @grid-gutter-width;
+		.clearfix;
+
+	}
+
+    .account-orderdetail-item-section-header .account-orderdetail-orderPromotion-section{
+        color: #33cc33;
+    }
+
+    .account-orderdetail-orderPromotion-section{
+        border-top: 1px solid #eee;
+        padding-top: @grid-gutter-width;
+        .orderPromotion{
+            padding-right: (@grid-gutter-width/2);
+        }
+    }
+
+    .account-orderdetail-item-section-header.item-box{
+        background: #afb2b5;
+        padding: (@grid-gutter-width/2);
+        margin-bottom: (@grid-gutter-width/4);
+        margin-top: (@grid-gutter-width/4);
+        .clearfix;
+    }
+
+    .account-orderdetail-item-section-header.order-data{
+        background-color: #F2F4F7;
+        padding: (@grid-gutter-width/2);
+    }
+
+	.account-orderdetail-item-section{
+		.account-orderdetail-item-section-header{
+
+            .orderDetail_itemHeader{
+                background-color: black;
+                color: white;
+                padding: (@grid-gutter-width/2) @grid-gutter-width (@grid-gutter-width/2) (@grid-gutter-width/2);
+                height: (@grid-gutter-width*2);
+            }
+            .orderDetail_itemHeader.orderPending{
+                height: (2*@grid-gutter-width);
+            }
+			background: @grayblue;
+			.clearfix;
+
+			.button-panel{
+				float: right;
+				max-width: 200px;
+
+			}
+		}
+
+		.account-orderdetail-item-section-body{
+
+
+			ul{
+				.list-unstyled;
+				margin: 0;
+				li{
+					padding-top: (@grid-gutter-width/2);
+                    padding-bottom: (@grid-gutter-width/2);
+                    border-bottom:1px solid #eee;
+					.clearfix;
+				}
+
+				li+li{
+					border-top:1px solid #eee;
+				}
+
+
+				.thumb{
+					float: left;
+					margin-right: (@grid-gutter-width/2);
+				  	max-width: 100px;
+				}
+
+				.price-total{
+					float: right;
+				  padding-right: (@grid-gutter-width/2);
+				}
+
+				.details{
+                    .name{
+                        font-weight: bold;
+                    }
+
+				}
+                .promo{
+
+                    @media (min-width: @screen-md-min) and (max-width: @screen-md-max){
+                        padding-left: 22px;
+                    }
+                    @media (min-width: @screen-lg-min) {
+                        padding-left: 0px;
+                    }
+                    color: #33cc33;
+                    li{
+                      border-bottom: 0;
+                    }
+                }
+
+
+			}
+
+
+
+		}
+
+		.account-orderdetail-item-section-footer{
+            .total-headline{
+                font-size: @font-size-large;
+                font-weight: bold;
+                margin-bottom: (@grid-gutter-width/2) ;
+            }
+
+			.subtotals{
+				padding: (@grid-gutter-width/2);
+
+				text-align: right;
+				border-top:1px solid #eee;
+				div{
+					span{
+						display: inline-block;
+						width: 100px;
+					}
+				}
+
+				.totals{
+					font-weight: bold;
+				}
+			}
+		}
+	}
+
+    .account-orderdetail-item-section-header {
+
+        .order-ship-to,
+        .order-shipping-method,
+        .order-tracking-no,
+        .order-store-address,
+        .order-store-hours{
+            padding-bottom: @grid-gutter-width;
+            padding-top: @grid-gutter-width;
+            .order-track-number{
+                color: #ff4444;
+            }
+        }
+
+        .order-payment-data,
+        .order-billing-address{
+            padding-top: (@grid-gutter-width/2);
+            padding-bottom: (@grid-gutter-width/2);
+        }
+
+        .order-billing-address,
+        .order-payment-data,
+        .order-ship-to,
+        .order-shipping-method,
+        .order-tracking-no,
+        .order-store-address,
+        .order-store-hours{
+            .label-order {
+                .text-uppercase;
+                font-weight: bold;
+            }
+        }
+
+        .order-ship-to,
+        .order-store-address,
+        .order-billing-address{
+            padding-left: @grid-gutter-width ;
+        }
+
+        @media (max-width: @screen-sm-max) {
+            .order-shipping-method,
+            .order-tracking-no,
+            .order-payment-data,
+            .order-store-hours{
+                padding-left: @grid-gutter-width ;
+            }
+        }
+        .account-orderdetail-item-section-footer{
+            padding-top: @grid-gutter-width;
+
+            .total-headline{
+                font-weight: bold;
+                margin-bottom: (@grid-gutter-width/2) ;
+            }
+
+            .subtotals{
+                padding: (@grid-gutter-width/2);
+                text-align: right;
+                border-top:1px solid #eee;
+                div{
+                    span{
+                        display: inline-block;
+                        width: 100px;
+                    }
+                }
+            }
+
+            .totals div{
+                font-weight: bold;
+                line-height: 300%;
+            }
+          .clearfix;
+        }
+        .account-orderdetail-orderTotalDiscount-section{
+
+            padding: @grid-gutter-width 0;
+            .order-total-savings{
+                .text-right;
+                color: #33cc33;
+                font-weight: bold;
+                padding-right: (@grid-gutter-width/2);
+            }
+            .order-total-taxes{
+                .text-right;
+                padding-right: (@grid-gutter-width/2);
+            }
+            @media (max-width: @screen-sm-max) {
+                margin-bottom: @grid-gutter-width;
+            }
+        }
+    }
+
+}
+.order-separator{
+    border-bottom: 1px solid #eee;
+    margin-bottom: @grid-gutter-width;
+}
+
+.paymentsDeleteActions{
+  	padding-left:0px;
+  	padding-right: 0px;
+    width: 300px;
+  	:first-child{
+	  	margin-bottom: (@grid-gutter-width/2);
+	}
+  	.paymentsDeleteBtn{
+	  	padding-right: 0px;
+	  	padding-left: 0px;
+	}
+}

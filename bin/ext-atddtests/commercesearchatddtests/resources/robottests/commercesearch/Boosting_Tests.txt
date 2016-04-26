@@ -1,0 +1,158 @@
+*** Settings ***
+Library           de.hybris.platform.atddimpex.keywords.ImpexKeywordLibrary
+Library           de.hybris.platform.commerceservicesatddtests.keywords.CommerceServicesKeywordLibrary
+Library           de.hybris.platform.commercesearch.atdd.keywords.CommerceSearchKeywordLibrary
+Resource		  impex/Impex_Keywords.txt
+Resource		  commerce/CommerceServices_Keywords.txt
+Resource		  commercesearch/CommerceSearch_Keywords.txt
+Test Setup		  commercesearch suite setup
+Test Teardown	  commercesearch suite teardown
+
+
+*** Test Cases ***
+Test_Boosting_By_InStock
+	[Documentation]		Check that products in stock are boosted to higher positions
+	prepare session	electronics
+    create product "P1" in category "575" with price "99,99 USD" which is out of stock
+    create product "P2" in category "575" with price "109,99 USD" which is in stock
+    create product "P3" in category "575" with price "119,99 USD" which is out of stock
+    update solr index
+    check that product "P2" is not first in category "575" with default order
+    create a boost rule for field "inStockFlag" for value "true" with strength 100 and operator EQUAL_TO in category "575"
+    check that product "P2" is first in category "575" with default order
+    
+    
+Test_Boosting_By_Name
+	[Documentation]		Check that products in stock are boosted to higher positions
+	prepare session	electronics
+    create product "P1" in category "575" with price "99,99 USD"
+    create product "P2" in category "575" with price "109,99 USD"
+    create product "P3" in category "575" with price "119,99 USD"
+    update solr index
+    check that product "P2" is not first in category "575" with default order
+    create a boost rule for field "code" for value "P2" with strength 50 and operator EQUAL_TO in category "575"
+    check that product "P2" is first in category "575" with default order
+        
+        
+Test_Boosting_By_Name_Via_Global
+	[Documentation]		Check that products in stock are boosted to higher positions via a global rule
+	prepare session	electronics
+    create product "P1" in category "575" with price "99,99 USD"
+    create product "P2" in category "575" with price "109,99 USD"
+    create product "P3" in category "575" with price "119,99 USD"
+    update solr index
+    check that product "P2" is not first in category "575" with default order
+    create a global boost rule for field "code" for value "P2" with strength 50 and operator EQUAL_TO
+    check that product "P2" is first in category "575" with default order
+        
+
+Test_Boosting_By_Name_Via_Global_With_Overrides
+	[Documentation]		Check that products in stock are boosted to higher positions
+	prepare session	electronics
+    create product "P1" in category "575" with price "99,99 USD"
+    create product "P2" in category "575" with price "109,99 USD"
+    create product "P3" in category "575" with price "119,99 USD"
+    update solr index
+    check that product "P2" is not first in category "575" with default order
+    create a global boost rule for field "code" for value "P3" with strength 100 and operator EQUAL_TO
+    create a boost rule for field "code" for value "P2" with strength 10 and operator EQUAL_TO in category "575"
+    check that product "P2" is first in category "575" with default order
+    create a boost rule for field "code" for value "P3" with strength 100 and operator EQUAL_TO in category "575"
+    check that product "P3" is first in category "575" with default order
+
+
+Test_Boosting_Double_Type_Value_By_Average_Rating_And_Greater_Than_Or_Equal_To_Operator
+	[Documentation] 	Check that products with rating higher or equal to 3.5 are boosted to higher positions
+	prepare session	electronics
+	create product "P1" in category "575" with price "99,99 USD"
+   create product "P2" in category "575" with price "109,99 USD"
+   create product "P3" in category "575" with price "119,99 USD"
+   create review for product "P3" with rating "3.5"
+   create review for product "P2" with rating "3.4"
+   create review for product "P1" with rating "3.2"
+   update solr index
+   check that product "P1" is first in category "575" with default order
+
+   create a boost rule for field "reviewAvgRating" for value "3.5" with strength 10 and operator GREATER_THAN_OR_EQUAL_TO in category "575"
+
+	check that product "P3" is first in category "575" with default order
+
+
+Test_Boosting_Double_Type_Value_By_Average_Rating_And_Greater_Than_Operator
+	[Documentation] 	Check that products with rating higher than 3.5 are boosted to higher positions
+	prepare session	electronics
+	create product "P1" in category "575" with price "99,99 USD"
+   create product "P2" in category "575" with price "109,99 USD"
+   create product "P3" in category "575" with price "119,99 USD"
+   create review for product "P3" with rating "3.5"
+   create review for product "P2" with rating "3.6"
+   create review for product "P1" with rating "3.2"
+   update solr index
+   check that product "P1" is first in category "575" with default order
+
+   create a boost rule for field "reviewAvgRating" for value "3.5" with strength 10 and operator GREATER_THAN in category "575"
+
+	check that product "P2" is first in category "575" with default order
+
+
+Test_Boosting_Double_Type_Value_By_Average_Rating_And_Equal_To_Operator
+	[Documentation] 	Check that products with rating equal to 3.5 are boosted to higher positions
+	prepare session	electronics
+	create product "P1" in category "575" with price "99,99 USD"
+   create product "P2" in category "575" with price "109,99 USD"
+   create product "P3" in category "575" with price "119,99 USD"
+   create review for product "P3" with rating "3.5"
+   create review for product "P2" with rating "3.6"
+   create review for product "P1" with rating "3.2"
+   update solr index
+   check that product "P1" is first in category "575" with default order
+
+   create a boost rule for field "reviewAvgRating" for value "3.5" with strength 10 and operator EQUAL_TO in category "575"
+
+	check that product "P3" is first in category "575" with default order
+
+
+Test_Boosting_Double_Type_Value_By_Average_Rating_And_Less_Or_Equal_To_Operator
+	[Documentation] 	Check that products with rating less than or equal to 1.5 are boosted to higher positions
+	prepare session	electronics
+	create product "P1" in category "575" with price "99,99 USD"
+   create product "P2" in category "575" with price "109,99 USD"
+   create product "P3" in category "575" with price "119,99 USD"
+   create review for product "P3" with rating "1.5"
+   create review for product "P2" with rating "3.6"
+   create review for product "P1" with rating "3.2"
+   update solr index
+   check that product "P1" is first in category "575" with default order
+
+   create a boost rule for field "reviewAvgRating" for value "1.5" with strength 10 and operator LESS_THAN_OR_EQUAL_TO in category "575"
+
+	check that product "P3" is first in category "575" with default order
+
+
+Test_Boosting_Double_Type_Value_By_Average_Rating_And_Less_Than_Operator
+	[Documentation] 	Check that products with rating less than 1.5 are boosted to higher positions
+	prepare session	electronics
+	create product "P1" in category "575" with price "99,99 USD"
+   create product "P2" in category "575" with price "109,99 USD"
+   create product "P3" in category "575" with price "119,99 USD"
+   create review for product "P3" with rating "1.5"
+   create review for product "P2" with rating "1.4"
+   create review for product "P1" with rating "3.2"
+   update solr index
+   check that product "P1" is first in category "575" with default order
+
+   create a boost rule for field "reviewAvgRating" for value "1.5" with strength 10 and operator LESS_THAN in category "575"
+
+	check that product "P2" is first in category "575" with default order
+
+Test_Boosting_By_Contains_Operator
+	[Documentation]		Check that products the description of which contains a certain string is boosted to higher positions
+	prepare session	electronics
+    create product "P1_average_product" in category "575" with price "0,00 USD"
+    create product "P2_awesome_product" in category "575" with price "0,00 USD"
+    create product "P3_belowAverage_product" in category "575" with price "0,00 USD"
+    update solr index
+    check that product "P2_awesome_product" is not first in category "575" with default order
+    create a boost rule for field "code" for value "awesome" with strength 100 and operator CONTAINS in category "575"
+    check that product "P2_awesome_product" is first in category "575" with default order
+

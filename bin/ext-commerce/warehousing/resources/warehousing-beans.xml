@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<enum class="de.hybris.platform.warehousing.data.sourcing.SourcingFactorIdentifiersEnum"
+		template="/resources/string-enum.vm">
+		<value>Distance("warehousing.factor.distance.weight")</value>
+		<value>Allocation("warehousing.factor.allocation.weight")</value>
+		<value>Priority("warehousing.factor.priority.weight")</value>
+	</enum>
+	
+	<enum class="de.hybris.platform.warehousing.data.comment.WarehousingCommentEventType" template="/resources/comment-enum.vm">
+		<value>CANCEL_ORDER_COMMENT("orderCancellationComment", "Order Cancellation Comment", "orderCancellationEvent", "Order Cancellation Event")</value>
+		<value>CANCEL_CONSIGNMENT_COMMENT("consignmentCancellationComment", "Consignment Cancellation Comment", "consignmentCancellationEvent", "Consignment Cancellation Event")</value>
+		<value>REALLOCATE_CONSIGNMENT_COMMENT("consignmentReallocationComment", "Consignment Reallocation Comment", "consignmentReallocationEvent", "Consignment Reallocation Event")</value>
+	</enum>
+	
+	<bean class="de.hybris.platform.warehousing.data.cancellation.CancellationEntry">
+		<property name="orderEntry" type="de.hybris.platform.core.model.order.AbstractOrderEntryModel" />
+		<property name="quantity" type="Long"/>
+		<property name="reason" type="String"/>
+		<property name="notes" type="String"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.warehousing.data.shipping.ShippedEntry">
+		<property name="consignmentEntry" type="de.hybris.platform.ordersplitting.model.ConsignmentEntryModel" />
+		<property name="quantity" type="Long" />
+	</bean>
+
+	<bean class="de.hybris.platform.warehousing.data.allocation.DeclineEntry">
+		<property name="consignmentEntry" type="de.hybris.platform.ordersplitting.model.ConsignmentEntryModel" />
+		<property name="quantity" type="Long"/>
+		<property name="reason" type="de.hybris.platform.warehousing.enums.DeclineReason"/>
+		<property name="notes" type="String"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.warehousing.data.allocation.DeclineEntries">
+		<property name="reallocationWarehouse" type="de.hybris.platform.ordersplitting.model.WarehouseModel" />
+		<property name="entries" type="java.util.Collection&lt;DeclineEntry&gt;" />
+	</bean>
+	
+	<bean class="de.hybris.platform.warehousing.data.sourcing.SourcingFactor">
+		<property name="factorId" type="de.hybris.platform.warehousing.data.sourcing.SourcingFactorIdentifiersEnum"/>
+		<property name="weight" type="int"/>
+	</bean>
+
+	<bean class="de.hybris.platform.warehousing.data.sourcing.SourcingLocation">
+		<property name="warehouse" type="de.hybris.platform.ordersplitting.model.WarehouseModel" />
+		<property name="availability" type="java.util.Map&lt;de.hybris.platform.core.model.product.ProductModel, Long>" />
+		<property name="distance" type="Double" />
+		<property name="context" type="SourcingContext" />
+		<property name="priority" type="Integer" />
+	</bean>
+	
+	<bean class="de.hybris.platform.warehousing.data.sourcing.FitSourcingLocation" extends="SourcingLocation">
+		<property name="fitness" type="Double" />
+	</bean>
+	
+	<bean class="de.hybris.platform.warehousing.data.sourcing.SourcingContext">
+		<property name="orderEntries" type="java.util.Collection&lt;de.hybris.platform.core.model.order.AbstractOrderEntryModel>" />
+		<property name="sourcingLocations" type="java.util.Collection&lt;SourcingLocation>" />
+		<property name="result" type="de.hybris.platform.warehousing.data.sourcing.SourcingResults" />
+	</bean>
+	
+	<bean class="de.hybris.platform.warehousing.data.sourcing.SourcingResult">
+		<property name="allocation" type="java.util.Map&lt;de.hybris.platform.core.model.order.AbstractOrderEntryModel, Long&gt;"></property>
+		<property name="warehouse" type="de.hybris.platform.ordersplitting.model.WarehouseModel" />
+	</bean>
+	
+	<bean class="de.hybris.platform.warehousing.data.sourcing.SourcingResults">
+		<property name="results" type="java.util.Set&lt;de.hybris.platform.warehousing.data.sourcing.SourcingResult>" />
+		<property name="complete" type="boolean" />
+	</bean>
+
+	
+	<bean class="de.hybris.platform.warehousing.data.comment.WarehousingCommentContext">
+		<property name="commentType" type="de.hybris.platform.warehousing.data.comment.WarehousingCommentEventType" />
+		<property name="item" type="de.hybris.platform.core.model.ItemModel" />
+		<property name="subject" type="java.lang.String" />
+		<property name="text" type="java.lang.String" />
+	</bean>
+
+    <!--
+	  - Events: Return
+	-->
+    <bean class="de.hybris.platform.order.events.CreateReturnEvent" type="event"
+          template="resources/pojo/CreateReturnEvent-template.vm">
+        <property name="returnRequest" type="de.hybris.platform.returns.model.ReturnRequestModel"/>
+    </bean>
+	
+</beans>

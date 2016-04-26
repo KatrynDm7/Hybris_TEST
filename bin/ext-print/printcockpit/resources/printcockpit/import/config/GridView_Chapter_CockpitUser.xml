@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<grid-view>
+	<imageslot>
+		<property qualifier="Chapter.picture.URL"/>
+	</imageslot>
+	<labelslot>
+		<property qualifier="Chapter.title" />
+	</labelslot>
+	<descriptionslot>
+		<property qualifier="Chapter.code" prefix="" />
+	</descriptionslot>
+	<shortinfoslot>
+		<property qualifier="Chapter.code"/>
+	</shortinfoslot>
+	<actionslot spring-bean="printChapterListActionColumn"/>
+<!--	<specialactionslot>-->
+<!--	</specialactionslot>-->
+
+</grid-view>
