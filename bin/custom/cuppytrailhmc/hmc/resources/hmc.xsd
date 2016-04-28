@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
-<xsd:schema targetNamespace="hybris.de/schemas/hmc/generic"
-	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-	xmlns="hybris.de/schemas/hmc/generic"
+<xsd:schema targetNamespace="hybris.de/schemas/hmc/generic" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns="hybris.de/schemas/hmc/generic" 
 	elementFormDefault="qualified">
-
+	
 	<xsd:annotation>
 		<xsd:documentation>
 			 Generic editor configuration schema.
@@ -50,7 +50,7 @@
 			<xsd:enumeration value="delete"/>
 		</xsd:restriction>
 	</xsd:simpleType>
-
+	
 <!-- defaultmappings -->
 
 	<xsd:complexType name="ClassMappingsType">
@@ -78,13 +78,13 @@
 
 <!-- defaultattributechips -->
 
-	<xsd:complexType name="DefaultAttributeChipsType">
+	<xsd:complexType name="DefaultAttributeChipsType">								
 		<xsd:choice minOccurs="0" maxOccurs="unbounded">
 			<xsd:element name="attributetype" type="AttributeTypeType">
 				<xsd:annotation>
 					<xsd:documentation>Contains descriptions of default editor and/or display chips for a given attribute type.</xsd:documentation>
 				</xsd:annotation>
-			</xsd:element>
+			</xsd:element>			
 		</xsd:choice>
 	</xsd:complexType>
 
@@ -94,12 +94,12 @@
 				<xsd:annotation>
 					<xsd:documentation>Configuration of the attribute display chip which is to use for the attributetype (specified in the classname attribute).</xsd:documentation>
 				</xsd:annotation>
-			</xsd:element>
+			</xsd:element>			
 			<xsd:element name="editor" type="ClassConfigType" minOccurs="0" maxOccurs="1">
 				<xsd:annotation>
 					<xsd:documentation>Configuration of the attribute editor chip which is to use for the attributetype (specified in the classname attribute).</xsd:documentation>
 				</xsd:annotation>
-			</xsd:element>
+			</xsd:element>			
 		</xsd:choice>
 		<xsd:attribute name="classname" type="xsd:string" use="required">
 			<xsd:annotation>
@@ -114,7 +114,7 @@
 				<xsd:annotation>
 					<xsd:documentation>Parameter which will be provided to the class.</xsd:documentation>
 				</xsd:annotation>
-			</xsd:element>
+			</xsd:element>						
 		</xsd:choice>
 		<xsd:attribute name="classname" type="xsd:string" use="required">
 			<xsd:annotation>
@@ -305,7 +305,7 @@
 				<xsd:annotation>
 					<xsd:documentation>Add a node to the explorer tree representing a type.</xsd:documentation>
 				</xsd:annotation>
-			</xsd:element>
+			</xsd:element>			
 			<xsd:element name="group" type="GroupType">
 				<xsd:annotation>
 					<xsd:documentation>Adds a group node to the explorer tree which in turn can contain other nodes.</xsd:documentation>
@@ -330,7 +330,7 @@
 		<xsd:attribute name="description" type="xsd:string" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>
-					A description for the group node (appears in the icon tree view).
+					A description for the group node (appears in the icon tree view). 
 					It will be used as a key to look up a localized string.
 				</xsd:documentation>
 			</xsd:annotation>
@@ -349,7 +349,7 @@
 			<xsd:annotation>
 				<xsd:documentation>The position of this group within the explorer tree.</xsd:documentation>
 			</xsd:annotation>
-		</xsd:attribute>
+		</xsd:attribute>		
 	</xsd:complexType>
 
 	<xsd:complexType name="TypeReferenceType">
@@ -361,7 +361,7 @@
 		<xsd:attribute name="description" type="xsd:string" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>
-					A description for the type reference node (appears in the icon tree view).
+					A description for the type reference node (appears in the icon tree view). 
 					It will be used as a key to look up a localized string.
 				</xsd:documentation>
 			</xsd:annotation>
@@ -370,7 +370,7 @@
 			<xsd:annotation>
 				<xsd:documentation>The position of this node in the group.</xsd:documentation>
 			</xsd:annotation>
-		</xsd:attribute>
+		</xsd:attribute>		
 		<xsd:attribute name="mode" type="modeType" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>Mode can be one of 'append', 'replace' or 'delete'. Default is 'append'.</xsd:documentation>
@@ -397,7 +397,7 @@
 		<xsd:attribute name="description" type="xsd:string" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>
-					A description for this node (appears in the icon tree view).
+					A description for this node (appears in the icon tree view). 
 					It will be used as a key to look up a localized string.
 				</xsd:documentation>
 			</xsd:annotation>
@@ -406,7 +406,7 @@
 			<xsd:annotation>
 				<xsd:documentation>The position of this node in the group.</xsd:documentation>
 			</xsd:annotation>
-		</xsd:attribute>
+		</xsd:attribute>		
 	</xsd:complexType>
 
 	<xsd:complexType name="ExternalNodeType">
@@ -418,7 +418,7 @@
 		<xsd:attribute name="description" type="xsd:string" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>
-					A description for this node (appears in the icon tree view).
+					A description for this node (appears in the icon tree view). 
 					It will be used as a key to look up a localized string.
 				</xsd:documentation>
 			</xsd:annotation>
@@ -476,7 +476,7 @@
 			</xsd:annotation>
 		</xsd:attribute>
 	</xsd:complexType>
-
+	
 	<!-- type - organizer -->
 	<xsd:complexType name="OrganizerType">
 		<xsd:sequence>
@@ -502,7 +502,7 @@
 			</xsd:annotation>
 		</xsd:attribute>
 	</xsd:complexType>
-
+	
 	<!-- type - organizer - search -->
 	<xsd:complexType name="SearchType">
 		<xsd:sequence>
@@ -517,7 +517,7 @@
 				<xsd:documentation>Mode can be one of 'append', 'replace' or 'delete'. Default is 'append'.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute name="autoperform" type="xsd:boolean" use="optional"/>
+		<xsd:attribute name="autoperform" type="xsd:boolean" use="optional"/>		
 		<xsd:attribute name="savedquery" type="xsd:string" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>
@@ -572,7 +572,7 @@
 			<xsd:annotation>
 				<xsd:documentation>
 					Comma-separated list of allowed operators for this condition.
-					If this attribute is omitted or empty then a default set of operators appropriate
+					If this attribute is omitted or empty then a default set of operators appropriate 
 					for the condition's type is used.
 					Since: 3.1-u5.
 				</xsd:documentation>
@@ -597,7 +597,7 @@
 			<xsd:annotation>
 				<xsd:documentation>The position of this condition within the search.</xsd:documentation>
 			</xsd:annotation>
-		</xsd:attribute>
+		</xsd:attribute>		
 	</xsd:complexType>
 
 	<!-- type - organizer - result -->
@@ -627,7 +627,7 @@
 		<xsd:attribute name="defaultview" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>
-					Sets the default view mode (list, edit, tree) for the organizer result section.
+					Sets the default view mode (list, edit, tree) for the organizer result section. 
 					If no default view is explicitly set, the list view will used.
 				</xsd:documentation>
 			</xsd:annotation>
@@ -644,7 +644,7 @@
 				<xsd:documentation>Mode can be one of 'append', 'replace' or 'delete'. Default is 'append'.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-
+		
 	</xsd:complexType>
 
 	<xsd:complexType name="ListViewType">
@@ -791,7 +791,7 @@
 				<xsd:annotation>
 					<xsd:documentation>Attribute which should be explorable, i.e. which will be shown below an item node in the tree view result list.</xsd:documentation>
 				</xsd:annotation>
-			</xsd:element>
+			</xsd:element>			
 		</xsd:choice>
 		<xsd:attribute name="mode" type="modeType" use="optional">
 			<xsd:annotation>
@@ -806,7 +806,7 @@
 				<xsd:attribute name="suppressroot" type="xsd:boolean" use="optional">
 					<xsd:annotation>
 						<xsd:documentation>
-							If set to 'true' the appropriate attribute itself will not appear as a node,
+							If set to 'true' the appropriate attribute itself will not appear as a node, 
 							but all its explorable subnodes will be shown directly (i.e. one node level will be skipped).
 						</xsd:documentation>
 					</xsd:annotation>
@@ -821,7 +821,7 @@
 			<xsd:element name="exclude" type="ExcludeType" minOccurs="0" maxOccurs="1">
 				<xsd:annotation>
 					<xsd:documentation>
-						Contains the attributes which should be excluded (omitted) in the editor of this type.
+						Contains the attributes which should be excluded (omitted) in the editor of this type. 
 						Be sure you don't explicitly add these attributes in any of the other sections!
 					</xsd:documentation>
 				</xsd:annotation>
@@ -829,7 +829,7 @@
 			<xsd:element name="essentials" type="EssentialsType" minOccurs="0" maxOccurs="1">
 				<xsd:annotation>
 					<xsd:documentation>
-						Contains the attributes which are 'essential' for this type.
+						Contains the attributes which are 'essential' for this type. 
 						These attributes will be shown on top of every tab in the editor.
 					</xsd:documentation>
 				</xsd:annotation>
@@ -843,7 +843,7 @@
 				<xsd:element name="customtab" type="CustomTabType" maxOccurs="unbounded">
 					<xsd:annotation>
 						<xsd:documentation>
-							Describes a custom tab of the editor which is not using the generic editor approach, but
+							Describes a custom tab of the editor which is not using the generic editor approach, but 
 							which design is totally controllable by the developer.
 						</xsd:documentation>
 					</xsd:annotation>
@@ -863,7 +863,7 @@
 		<xsd:attribute name="wizard" type="xsd:boolean" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>
-					If set to 'true' the editor will include wizard-like 'next' and 'previous' buttons to switch between
+					If set to 'true' the editor will include wizard-like 'next' and 'previous' buttons to switch between 
 					the different tabs.
 				</xsd:documentation>
 			</xsd:annotation>
@@ -893,7 +893,7 @@
 			<xsd:element name="table" type="TableType">
 				<xsd:annotation>
 					<xsd:documentation>
-						Configure the layout of the type's attributes using a table layout. This layout mimics
+						Configure the layout of the type's attributes using a table layout. This layout mimics 
 						the html table element, so you can use a few well known features of that element.
 					</xsd:documentation>
 				</xsd:annotation>
@@ -906,7 +906,7 @@
 			<xsd:element name="columnlayout" type="ColumnLayoutType">
 				<xsd:annotation>
 					<xsd:documentation>
-						Configure the layout of the type's attributes using a column layout.
+						Configure the layout of the type's attributes using a column layout. 
 						A column layout is just a convenient way to configure a table with only two columns.
 						So each row inside a columnlayout may only contain up to 2 elements.
 					</xsd:documentation>
@@ -970,7 +970,7 @@
 					<xsd:element name="customchip" type="CustomChipType">
 						<xsd:annotation>
 							<xsd:documentation>
-								Configures a custom attribute editor which is not necessarily an attribute chip
+								Configures a custom attribute editor which is not necessarily an attribute chip 
 								This way you could provide you own class (with own parameters) and/or your own jsp.
 							</xsd:documentation>
 						</xsd:annotation>
@@ -984,7 +984,7 @@
 						<xsd:annotation>
 							<xsd:documentation>Describes a (nested) list layout of the type's attributes.</xsd:documentation>
 						</xsd:annotation>
-					</xsd:element>
+					</xsd:element>					
 					<xsd:element name="inlineshortcut" type="InlineShortcutType">
 						<xsd:annotation>
 							<xsd:documentation>
@@ -992,7 +992,7 @@
 								of its attributes) within other types/items.
 							</xsd:documentation>
 						</xsd:annotation>
-					</xsd:element>
+					</xsd:element>										
 					<xsd:element name="shortcut" type="ShortcutType">
 						<xsd:annotation>
 							<xsd:documentation>
@@ -1005,12 +1005,12 @@
 						<xsd:annotation>
 							<xsd:documentation>Adds an item action to this type's editor.</xsd:documentation>
 						</xsd:annotation>
-					</xsd:element>
+					</xsd:element>					
 					<xsd:element name="text" type="TextChipType">
 						<xsd:annotation>
 							<xsd:documentation>Describes an attribute editor.</xsd:documentation>
 						</xsd:annotation>
-					</xsd:element>
+					</xsd:element>				
 				</xsd:choice>
 				<xsd:attribute name="colspan" type="xsd:positiveInteger" use="optional" default="1">
 					<xsd:annotation>
@@ -1103,7 +1103,7 @@
 					<xsd:annotation>
 						<xsd:documentation>@since 2.00 Advanced editor for boolean values</xsd:documentation>
 					</xsd:annotation>
-				</xsd:element>
+				</xsd:element>				
 				<xsd:element name="dateeditor" type="AtomicEditorType">
 					<xsd:annotation>
 						<xsd:documentation>Default editor for date values.</xsd:documentation>
@@ -1211,13 +1211,13 @@
 		<xsd:attribute name="labelwidth" type="xsd:nonNegativeInteger" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>Width of the attribute label</xsd:documentation>
-			</xsd:annotation>
-		</xsd:attribute>
+			</xsd:annotation>						
+		</xsd:attribute>		
 		<xsd:attribute name="maxlength" type="xsd:positiveInteger" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>With maxlength you can restrict the entry length in some text editors (e.g. in stringeditor and textareaeditor)</xsd:documentation>
-			</xsd:annotation>
-		</xsd:attribute>
+			</xsd:annotation>						
+		</xsd:attribute>	
 		<xsd:attribute name="hidelabel" type="xsd:boolean" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>If 'true' the label of the attribute will not be shown.</xsd:documentation>
@@ -1228,7 +1228,7 @@
 				<xsd:documentation>If 'false' the attribute editor will not be editable despite of any restrictions or other settings, so it works independently from the access rights and the 'writable' state of the attribute itself.
 				If 'true' (default) nothing will happen. The purpose of this tag is: even if the user has the right to edit the respective attribute and the attribute is writable, he may want to provide a non-editable editor in the hmc. To configure this, you can set the 'editable tag' to 'false'.</xsd:documentation>
 			</xsd:annotation>
-		</xsd:attribute>
+		</xsd:attribute>		
 		<xsd:attribute name="descriptionattribute" type="xsd:string" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>Name of description attribute.</xsd:documentation>
@@ -1243,7 +1243,7 @@
 					<xsd:annotation>
 						<xsd:documentation>The position of this attribute within the editor.</xsd:documentation>
 					</xsd:annotation>
-				</xsd:attribute>
+				</xsd:attribute>		
 	</xsd:complexType>
 
 	<xsd:complexType name="AtomicEditorType">
@@ -1267,7 +1267,7 @@
 				<xsd:attribute name="wrapvalues" type="xsd:boolean" use="optional">
 					<xsd:annotation>
 						<xsd:documentation>
-							If 'true' the date and time editor will be shown one below the other rather
+							If 'true' the date and time editor will be shown one below the other rather 
 							than next to each other.
 						</xsd:documentation>
 					</xsd:annotation>
@@ -1275,7 +1275,7 @@
 			<xsd:attribute name="timewidth" type="xsd:positiveInteger" use="optional">
 				<xsd:annotation>
 					<xsd:documentation>
-						DEPRECATED! The width of the time editor field will be calculated
+						DEPRECATED! The width of the time editor field will be calculated 
 						based on the width of the whole datetime editor!
 					</xsd:documentation>
 				</xsd:annotation>
@@ -1291,7 +1291,7 @@
 					<xsd:element name="restriction" type="ConditionType">
 						<xsd:annotation>
 							<xsd:documentation>
-								Set this to refine the search conditions which will be used when opening
+								Set this to refine the search conditions which will be used when opening 
 								the search for an item which this attribute references.
 							</xsd:documentation>
 						</xsd:annotation>
@@ -1341,7 +1341,7 @@
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
-
+	
 	<xsd:complexType name="MapEditorType">
 		<xsd:complexContent>
 			<xsd:extension base="AtomicEditorType">
@@ -1350,12 +1350,12 @@
 						<xsd:annotation>
 							<xsd:documentation>Configuration of the attribute editor chip which is to use for the key editor (specified in the classname attribute).</xsd:documentation>
 						</xsd:annotation>
-					</xsd:element>
+					</xsd:element>			
 					<xsd:element name="valueeditor" type="ClassConfigType" minOccurs="0" maxOccurs="1">
 						<xsd:annotation>
 							<xsd:documentation>Configuration of the attribute editor chip which is to use for the value editor (specified in the classname attribute).</xsd:documentation>
 						</xsd:annotation>
-					</xsd:element>
+					</xsd:element>			
 				</xsd:sequence>
 				<xsd:attribute name="add" type="xsd:boolean" use="optional">
 					<xsd:annotation>
@@ -1492,7 +1492,7 @@
 					<xsd:element name="restriction" type="ConditionType">
 						<xsd:annotation>
 							<xsd:documentation>
-								Set this to refine the search conditions which will be used when opening
+								Set this to refine the search conditions which will be used when opening 
 								the search for an item which this attribute references.
 							</xsd:documentation>
 						</xsd:annotation>
@@ -1506,7 +1506,7 @@
 				<xsd:attribute name="presetsearchtype" type="xsd:string" use="optional">
 					<xsd:annotation>
 						<xsd:documentation>
-							Set this to refine the searchtype which will be used when opening
+							Set this to refine the searchtype which will be used when opening 
 							the search for an item which this attribute references.
 						</xsd:documentation>
 					</xsd:annotation>
@@ -1613,7 +1613,7 @@
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
-
+	
 	<xsd:complexType name="AdvancedBooleanEditorType">
 		<xsd:complexContent>
 			<xsd:extension base="AtomicEditorType">
@@ -1648,16 +1648,16 @@
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
-
+	
 	<xsd:complexType name="WysiwygEditorType">
 		<xsd:complexContent>
 			<xsd:extension base="AtomicEditorType">
 				<xsd:attribute name="config" type="xsd:string" use="optional">
 					<xsd:annotation>
 						<xsd:documentation>
-							WYSIWYG editor configuration string. The specified value will be inserted (as is) into the argument list of the tinyMCE.init function.
-							Please copy, paste and edit the provided example below.
-							EXAMPLE:
+							WYSIWYG editor configuration string. The specified value will be inserted (as is) into the argument list of the tinyMCE.init function. 
+							Please copy, paste and edit the provided example below.  
+							EXAMPLE:						
 								theme : 'advanced',
  								convert_urls : false,
 								plugins : 'table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,searchreplace,print,contextmenu,hybris,safari,charcount',
@@ -1694,7 +1694,7 @@
 						<xsd:annotation>
 							<xsd:documentation>Configuration of the attribute editor chip which is to use for the elements of the collection (specified in the classname attribute).</xsd:documentation>
 						</xsd:annotation>
-					</xsd:element>
+					</xsd:element>			
 				</xsd:sequence>
 				<xsd:attribute name="resortable" type="xsd:boolean" use="optional">
 					<xsd:annotation>
@@ -1734,7 +1734,7 @@
 					<xsd:element name="restriction" type="ConditionType">
 						<xsd:annotation>
 							<xsd:documentation>
-								Set this to refine the search conditions which will be used when opening
+								Set this to refine the search conditions which will be used when opening 
 								the search for an item which this attribute references.
 							</xsd:documentation>
 						</xsd:annotation>
@@ -1758,7 +1758,7 @@
 				<xsd:attribute name="presetsearchtype" type="xsd:string" use="optional">
 					<xsd:annotation>
 						<xsd:documentation>
-							Set this to refine the searchtype which will be used when opening
+							Set this to refine the searchtype which will be used when opening 
 							the search for an item which this attribute references.
 						</xsd:documentation>
 					</xsd:annotation>
@@ -1898,7 +1898,7 @@
 				<xsd:attribute name="size" type="xsd:positiveInteger" use="optional">
 					<xsd:annotation>
 						<xsd:documentation>
-							This is the vertical size (= number of visible rows) of the selectbox.
+							This is the vertical size (= number of visible rows) of the selectbox. 
 						</xsd:documentation>
 					</xsd:annotation>
 				</xsd:attribute>
@@ -1945,7 +1945,7 @@
 			<xsd:annotation>
 				<xsd:documentation>The position of this text within the columlayout.</xsd:documentation>
 			</xsd:annotation>
-		</xsd:attribute>
+		</xsd:attribute>		
 	</xsd:complexType>
 
 	<xsd:complexType name="VoidType"/>
@@ -1966,7 +1966,7 @@
 		<xsd:attribute name="jsp" type="xsd:string" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>
-					The file name of a jsp that is used to render this chip (this allows you to use
+					The file name of a jsp that is used to render this chip (this allows you to use 
 					different jsp's to provide different views for the same chip class).
 				</xsd:documentation>
 			</xsd:annotation>
@@ -2000,7 +2000,7 @@
 			</xsd:annotation>
 		</xsd:attribute>
 	</xsd:complexType>
-
+	
 	<xsd:complexType name="LabelType">
 		<xsd:choice minOccurs="0" maxOccurs="unbounded">
 			<xsd:element name="parameter" type="ParameterType">
@@ -2043,7 +2043,7 @@
 						described elsewhere in this editor will be displayed in this section.
 					</xsd:documentation>
 				</xsd:annotation>
-			</xsd:element>
+			</xsd:element>			
 		</xsd:choice>
 		<xsd:attribute name="name" type="xsd:string" use="required">
 			<xsd:annotation>
@@ -2067,7 +2067,7 @@
 			<xsd:annotation>
 				<xsd:documentation>The position of this tab within the editor.</xsd:documentation>
 			</xsd:annotation>
-		</xsd:attribute>
+		</xsd:attribute>		
 	</xsd:complexType>
 
 	<xsd:complexType name="SectionType">
@@ -2075,7 +2075,7 @@
 			<xsd:element name="table" type="TableType">
 				<xsd:annotation>
 					<xsd:documentation>
-						Configure the layout of the type's attributes using a table layout. This layout mimics
+						Configure the layout of the type's attributes using a table layout. This layout mimics 
 						the html table element, so you can use a few well known features of that element.
 					</xsd:documentation>
 				</xsd:annotation>
@@ -2088,7 +2088,7 @@
 			<xsd:element name="columnlayout" type="ColumnLayoutType">
 				<xsd:annotation>
 					<xsd:documentation>
-						Configure the layout of the type's attributes using a column layout.
+						Configure the layout of the type's attributes using a column layout. 
 						A column layout is just a convenient way to configure a table with only two columns.
 						So each row inside a columnlayout may only contain up to 2 elements.
 					</xsd:documentation>
@@ -2109,7 +2109,7 @@
 			<xsd:annotation>
 				<xsd:documentation>The position of this section within the tab.</xsd:documentation>
 			</xsd:annotation>
-		</xsd:attribute>
+		</xsd:attribute>		
 	</xsd:complexType>
 
 	<xsd:complexType name="DefaultSectionType">
@@ -2160,7 +2160,7 @@
 			<xsd:annotation>
 				<xsd:documentation>The id of the tab which should be used here.</xsd:documentation>
 			</xsd:annotation>
-		</xsd:attribute>
+		</xsd:attribute>		
 	</xsd:complexType>
 
 	<xsd:complexType name="ListLayoutType">
@@ -2180,7 +2180,7 @@
 					<xsd:element name="customchip" type="CustomChipType">
 						<xsd:annotation>
 							<xsd:documentation>
-								Configures a custom attribute editor which is not necessarily an attribute chip
+								Configures a custom attribute editor which is not necessarily an attribute chip 
 								This way you could provide you own class (with own parameters) and/or your own jsp.
 							</xsd:documentation>
 						</xsd:annotation>
@@ -2202,7 +2202,7 @@
 								of its attributes) within other types/items.
 							</xsd:documentation>
 						</xsd:annotation>
-					</xsd:element>
+					</xsd:element>										
 					<xsd:element name="shortcut" type="ShortcutType">
 						<xsd:annotation>
 							<xsd:documentation>
@@ -2215,7 +2215,7 @@
 						<xsd:annotation>
 							<xsd:documentation>Adds an item action to this type's editor.</xsd:documentation>
 						</xsd:annotation>
-					</xsd:element>
+					</xsd:element>					
 					<xsd:element name="text" type="TextChipType">
 						<xsd:annotation>
 							<xsd:documentation>Describes an attribute editor.</xsd:documentation>
@@ -2287,7 +2287,7 @@
 					<xsd:element name="customchip" type="CustomChipType">
 						<xsd:annotation>
 							<xsd:documentation>
-								Configures a custom attribute editor which is not necessarily an attribute chip
+								Configures a custom attribute editor which is not necessarily an attribute chip 
 								This way you could provide you own class (with own parameters) and/or your own jsp.
 							</xsd:documentation>
 						</xsd:annotation>
@@ -2299,7 +2299,7 @@
 								of its attributes) within other types/items.
 							</xsd:documentation>
 						</xsd:annotation>
-					</xsd:element>
+					</xsd:element>										
 					<xsd:element name="shortcut" type="ShortcutType">
 						<xsd:annotation>
 							<xsd:documentation>
@@ -2312,7 +2312,7 @@
 						<xsd:annotation>
 							<xsd:documentation>Adds an item action to this type's editor.</xsd:documentation>
 						</xsd:annotation>
-					</xsd:element>
+					</xsd:element>					
 					<xsd:element name="text" type="TextChipType">
 						<xsd:annotation>
 							<xsd:documentation>Describes an attribute editor.</xsd:documentation>
@@ -2333,7 +2333,7 @@
 					<xsd:annotation>
 						<xsd:documentation>The position of this row within the columlayout.</xsd:documentation>
 					</xsd:annotation>
-				</xsd:attribute>
+				</xsd:attribute>		
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
@@ -2345,7 +2345,7 @@
 			<xsd:element name="itemlayout" type="DefaultReferenceAttributeCollectionType" maxOccurs="1" minOccurs="1">
 				<xsd:annotation>
 					<xsd:documentation>
-						Lists a number of attributes which are shown when items of
+						Lists a number of attributes which are shown when items of 
 						this type are referenced in other editors etc.
 					</xsd:documentation>
 				</xsd:annotation>
@@ -2359,7 +2359,7 @@
 		<xsd:attribute name="sortattribute" type="xsd:string" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>
-					Defines which attribute is used to sort search results
+					Defines which attribute is used to sort search results 
 					(if you sort by the row containing an attribute of the enclosing type).
 					Since 3.1-u3.
 				</xsd:documentation>
@@ -2372,7 +2372,7 @@
 					instead of simply obmitting the appropriate attribute.
 				</xsd:documentation>
 			</xsd:annotation>
-		</xsd:attribute>
+		</xsd:attribute>		
 		<xsd:attribute name="mode" type="modeType" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>Mode can be one of 'append', 'replace' or 'delete'. Default is 'append'.</xsd:documentation>
@@ -2398,7 +2398,7 @@
 	<xsd:attribute name="mode" type="modeType" use="optional"/>
 	<xsd:attribute name="position" type="xsd:integer" use="optional"/>
 	</xsd:complexType>
-
+	
 	<xsd:complexType name="DefaultReferenceAttributeType">
 		<xsd:complexContent>
 			<xsd:extension base="AttributeType">
@@ -2522,7 +2522,7 @@
 		<xsd:attribute name="sourceattribute" type="xsd:string" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>
-					Sets the sourceattribute, meaning the attribute of the source type where the search is started
+					Sets the sourceattribute, meaning the attribute of the source type where the search is started 
 					and which should match the content of the targetattribute.
 				</xsd:documentation>
 			</xsd:annotation>
@@ -2559,27 +2559,27 @@
 			<xsd:annotation>
 				<xsd:documentation>The type of the items to search for. Default is Item.</xsd:documentation>
 			</xsd:annotation>
-		</xsd:attribute>
+		</xsd:attribute>		
 		<xsd:attribute name="maxcount" type="xsd:string" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>The maximum number of items to be shown. Default is 5.</xsd:documentation>
 			</xsd:annotation>
-		</xsd:attribute>
+		</xsd:attribute>		
 		<xsd:attribute name="width" type="xsd:positiveInteger" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>Width of the inlineshortcut list.</xsd:documentation>
-			</xsd:annotation>
-		</xsd:attribute>
+			</xsd:annotation>						
+		</xsd:attribute>		
 		<xsd:attribute name="labelwidth" type="xsd:nonNegativeInteger" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>Width of the attribute label</xsd:documentation>
-			</xsd:annotation>
-		</xsd:attribute>
+			</xsd:annotation>						
+		</xsd:attribute>		
 		<xsd:attribute name="hidelabel" type="xsd:boolean" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>If 'true' the label of the attribute will not be shown. Default is false.</xsd:documentation>
 			</xsd:annotation>
-		</xsd:attribute>
+		</xsd:attribute>		
 		<xsd:attribute name="mode" type="modeType" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>Mode can be one of 'append', 'replace' or 'delete'. Default is 'append'.</xsd:documentation>
@@ -2596,7 +2596,7 @@
 			</xsd:annotation>
 		</xsd:attribute>
 	</xsd:complexType>
-
+		
 	<xsd:complexType name="AttributeType">
 		<xsd:attribute name="name" type="xsd:string" use="required"/>
 		<xsd:attribute name="mode" type="modeType" use="optional">
@@ -2606,7 +2606,7 @@
 		</xsd:attribute>
 		<xsd:attribute name="position" type="xsd:integer" use="optional"/>
 	</xsd:complexType>
-
+	
 	<xsd:complexType name="AttributeLayoutType">
 		<xsd:complexContent>
 			<xsd:extension base="AttributeType">

@@ -25,5 +25,21 @@
 		<property name="flag" type="boolean"/>
 	</bean>
 	-->
+	<bean class="de.hybris.platform.cuppytrail.data.MatchSummaryData">
+		<description>Data object for MatchSummary which has no equivalent on the type system</description>
+		<property name="guestTeam" type="String"/>
+		<property name="homeTeam" type="String"/>
+		<property name="homeGoals" type="String"/>
+		<property name="guestGoals" type="String"/>
+		<property name="date" type="java.util.Date"/>
+		<property name="matchSummaryFormatted" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.cuppytrail.data.StadiumData">
+		<description>Data object representing a Stadium</description>
+		<property name="name" type="String"/>
+		<property name="capacity" type="String"/>
+		<property name="matches" type="java.util.List&lt;de.hybris.platform.cuppytrail.data.MatchSummaryData>"/>
+	</bean>
 
 </beans>
